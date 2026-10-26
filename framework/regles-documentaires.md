@@ -15,7 +15,7 @@ flowchart TD
 
 1. **Aperçu d'abord** : chaque document commence par un résumé de 5 lignes maximum (but, périmètre, état) et un diagramme de vue d'ensemble.
 2. **Un gabarit par phase**, toujours identique (`framework/templates/`).
-3. **Référence = ID + titre**, partout : `REQ-012 « Titre »`. Le titre doit être identique à celui de la définition.
+3. **Référence = ID + titre**, partout : `REQ-012 « Titre »`. Le titre doit être identique à celui de la définition et ne doit pas contenir de guillemets « ».
 4. **Définition d'un élément** : `### REQ-012 — Titre`, puis `**Réfs amont :**`, puis le contenu. Les exemples dans un bloc de code ne sont pas analysés.
 5. **Un glossaire unique** (`00-glossaire.md`) ; un terme = un sens ; pas de synonymes.
 6. **Une idée = un diagramme.** Mermaid par défaut (flowchart, sequenceDiagram, stateDiagram-v2, classDiagram, gantt). SVG seulement quand Mermaid ne suffit pas (schéma de carte, chronogramme précis). Toujours un titre et, si utile, une légende.
