@@ -29,8 +29,8 @@ sequenceDiagram
 ## Besoins
 
 ### BES-001 — Lancer à la main
-**Réfs amont :** Utilisateur (description initiale), DEC-005 « Armement par bouton-poussoir maintenu, lancer détecté au relâchement »
-**Énoncé :** L'utilisateur arme le drone en maintenant un bouton-poussoir appuyé, puis le lance à la main vers l'avant et vers le haut. Le relâchement du bouton signale le lancer ; les moteurs démarrent 200 ms plus tard.
+**Réfs amont :** Utilisateur (description initiale), DEC-005 « Armement par bouton-poussoir maintenu, lancer détecté au relâchement », DEC-012 « Armement par maintien du bouton de 2 à 10 secondes »
+**Énoncé :** L'utilisateur arme le drone en maintenant un bouton-poussoir appuyé 2 secondes, puis le lance à la main vers l'avant et vers le haut. Le relâchement du bouton signale le lancer ; les moteurs démarrent 200 ms plus tard. Si le bouton reste appuyé plus de 10 secondes, le drone se désarme.
 **Priorité :** Essentiel
 **Statut :** Proposé
 
@@ -89,8 +89,8 @@ sequenceDiagram
 **Statut :** Proposé
 
 ### BES-011 — Couper les moteurs en cas d'échec
-**Réfs amont :** DEC-007 « En cas d'échec, couper les moteurs », DEC-006 « Public : adultes seulement »
-**Énoncé :** En cas d'échec ou d'anomalie, le drone coupe ses moteurs. Les scénarios concernés sont à définir (DOU-007 « Que fait le drone si ça se passe mal ? », dans le registre).
+**Réfs amont :** DEC-007 « En cas d'échec, couper les moteurs », DEC-006 « Public : adultes seulement », DEC-013 « Cas de coupure des moteurs »
+**Énoncé :** Le drone coupe ses moteurs si le rétablissement n'est pas obtenu dans un délai maximal et si la batterie est faible. Les autres scénarios sont à définir (DOU-007 « Que fait le drone si ça se passe mal ? », dans le registre).
 **Priorité :** Essentiel
 **Statut :** Proposé
 

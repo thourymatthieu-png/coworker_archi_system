@@ -39,8 +39,24 @@
 **Concerne :** BES-001 « Lancer à la main »
 **Décision :** Un bouton-poussoir est maintenu appuyé pour armer le drone. Quand l'utilisateur le lance, le bouton passe de « appuyé » à « relâché ». Les moteurs démarrent 200 ms après ce relâchement.
 **Alternatives écartées :** détection du lancer par accélération puis chute libre ; moteurs déjà en rotation dans la main.
-**Raison :** choix de l'utilisateur ; sécurité (moteurs arrêtés tant que le bouton est appuyé).
+**Raison :** choix de l'utilisateur ; sécurité (moteurs arrêtés tant que le bouton est appuyé). Complétée par DEC-012 « Armement par maintien du bouton de 2 à 10 secondes ».
 **Doutes levés :** DOU-005 « Comment le drone sait-il qu'il est lancé, et quand les moteurs démarrent-ils ? » — mais ouvre DOU-012 « Que se passe-t-il si le bouton est relâché sans vrai lancer ? » et DOU-013 « Le délai de 200 ms est-il compatible avec le rétablissement ? »
+
+### DEC-012 — Armement par maintien du bouton de 2 à 10 secondes
+**Date :** 2026-10-26
+**Concerne :** BES-001 « Lancer à la main »
+**Décision :** Le drone s'arme quand le bouton est maintenu 2 secondes. Le relâchement du bouton signale le lancer : les moteurs démarrent 200 ms plus tard et le drone se stabilise. Si le bouton reste appuyé plus de 10 secondes, le drone se désarme. Un relâchement avant 2 secondes ne démarre pas les moteurs.
+**Alternatives écartées :** confirmation du lancer par la centrale inertielle avant démarrage des moteurs.
+**Raison :** choix de l'utilisateur. Risque résiduel accepté : un relâchement volontaire après 2 s démarre les moteurs même si le drone n'est pas lancé.
+**Doutes levés :** DOU-012 « Que se passe-t-il si le bouton est relâché sans vrai lancer ? » — mais ouvre DOU-017 « Comment l'utilisateur sait-il que le drone est armé ? »
+
+### DEC-013 — Cas de coupure des moteurs
+**Date :** 2026-10-26
+**Concerne :** BES-011 « Couper les moteurs en cas d'échec »
+**Décision :** Le drone coupe ses moteurs si le rétablissement n'est pas obtenu dans un délai maximal, et si la batterie est faible. Délai et seuil restent à définir. Retournement et choc n'ont pas été retenus pour l'instant (à confirmer, voir DOU-007 « Que fait le drone si ça se passe mal ? »).
+**Alternatives écartées :** coupure sur retournement ou choc (non retenue à ce stade).
+**Raison :** choix de l'utilisateur.
+**Doutes levés :** (aucun, DOU-007 « Que fait le drone si ça se passe mal ? » reste ouvert)
 
 ### DEC-006 — Public : adultes seulement
 **Date :** 2026-10-26

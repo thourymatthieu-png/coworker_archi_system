@@ -1,7 +1,7 @@
 # Registre de doutes — Boomrone
 
 > **Aperçu** : tout doute, ambiguïté ou hypothèse est inscrit ici. Un doute **bloquant ouvert** empêche de franchir la porte de validation.
-> **État** : 8 doutes levés, 6 ouverts (dont 2 bloquants : DOU-007 « Que fait le drone si ça se passe mal ? » et DOU-012 « Que se passe-t-il si le bouton est relâché sans vrai lancer ? »).
+> **État** : 9 doutes levés, 8 ouverts (dont 1 bloquant : DOU-007 « Que fait le drone si ça se passe mal ? »).
 
 ### DOU-001 — Que veut dire se rétablir en vol stationnaire ?
 **Statut :** Levé
@@ -55,9 +55,9 @@
 **Statut :** Ouvert
 **Bloquant :** Oui
 **Concerne :** BES-011 « Couper les moteurs en cas d'échec »
-**Question :** Principe retenu : couper les moteurs. Reste à lister les scénarios d'échec (rétablissement impossible, batterie faible, choc, retournement, lancer trop faible, bouton relâché trop tôt, perte du lien radio) et, pour chacun, ce que le drone fait et quand.
-**Réponse :**
-**Décision liée :** DEC-007 « En cas d'échec, couper les moteurs » (principe seulement)
+**Question :** Principe retenu : couper les moteurs. Cas retenus : absence de rétablissement dans un délai, batterie faible (DEC-013 « Cas de coupure des moteurs »). Reste à préciser : (a) le délai maximal de rétablissement ; (b) le seuil de batterie faible ; (c) retournement et choc : l'utilisateur ne les a pas retenus alors que DEC-006 « Public : adultes seulement » impose la coupure en cas d'anomalie — faut-il les ajouter ? (d) perte du lien radio : le drone continue-t-il normalement, puisque le réglage est possible en vol ? (e) le bouton rappuyé en vol doit-il couper les moteurs ?
+**Réponse :** Partielle : voir DEC-013 « Cas de coupure des moteurs ».
+**Décision liée :** DEC-007 « En cas d'échec, couper les moteurs »
 
 ### DOU-008 — Que doit-on régler et lire sans fil, et avec quoi ?
 **Statut :** Levé
@@ -92,12 +92,12 @@
 **Décision liée :** DEC-011 « Prototypes, quelques exemplaires »
 
 ### DOU-012 — Que se passe-t-il si le bouton est relâché sans vrai lancer ?
-**Statut :** Ouvert
+**Statut :** Levé
 **Bloquant :** Oui
 **Concerne :** BES-001 « Lancer à la main »
-**Question :** Si l'utilisateur lâche le bouton alors que le drone est posé, tenu en main ou tombe sur la table, les moteurs démarrent 200 ms après. Comment éviter un démarrage dangereux ? Faut-il confirmer le lancer par un signal du capteur (accélération, chute libre) avant de démarrer ? Où est placé le bouton, et que se passe-t-il s'il est appuyé par erreur ?
-**Réponse :**
-**Décision liée :**
+**Question :** Si l'utilisateur lâche le bouton alors que le drone est posé ou tenu en main, les moteurs démarrent 200 ms après. Comment éviter un démarrage dangereux ?
+**Réponse :** Le relâchement seul suffit, mais le drone n'est armé qu'après 2 s de maintien du bouton, et se désarme si le bouton reste appuyé plus de 10 s. Risque résiduel accepté par l'utilisateur : un relâchement volontaire après 2 s démarre les moteurs, même si le drone n'est pas lancé. Retour visuel/sonore de l'armement : voir DOU-017 « Comment l'utilisateur sait-il que le drone est armé ? »
+**Décision liée :** DEC-012 « Armement par maintien du bouton de 2 à 10 secondes »
 
 ### DOU-013 — Le délai de 200 ms est-il compatible avec le rétablissement ?
 **Statut :** Ouvert
@@ -130,5 +130,13 @@
 **Question :** Les seuils proposés (vitesse < 0,3 m/s, inclinaison < 10°, tenue 0,5 s, vitesse au contact < 0,5 m/s) sont provisoires. Quelle tolérance d'altitude pendant les 10 s ? À lever avant la porte « exigences », car les exigences doivent être chiffrées.
 **Réponse :**
 **Décision liée :** DEC-001 « Critère de rétablissement : vitesse et inclinaison »
+
+### DOU-017 — Comment l'utilisateur sait-il que le drone est armé ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** BES-001 « Lancer à la main »
+**Question :** Après 2 s de maintien, l'utilisateur doit savoir que le drone est armé (LED, buzzer, vibration des moteurs ?). Même question pour le désarmement après 10 s. Le drone peut-il être réarmé sans relâcher puis rappuyer ?
+**Réponse :**
+**Décision liée :** DEC-012 « Armement par maintien du bouton de 2 à 10 secondes »
 
 <!-- Ajouter les doutes ci-dessous, au même format, en dehors des blocs de code. -->
