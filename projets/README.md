@@ -1,4 +1,4 @@
-﻿# Projets
+# Projets
 
 Un dossier par projet : `projets/<nom>/`.
 
