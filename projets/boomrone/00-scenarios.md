@@ -25,7 +25,7 @@ sequenceDiagram
     D->>U: Signal Lancé
     Note over D: Juste après, les moteurs démarrent
     D->>U: Signal Stabilisation
-    Note over D: Au plus 2 s plus tard, stationnaire
+    Note over D: Au plus 2 s plus tard, stationnaire (en l'air, au-dessus de la hauteur minimale, DEC-049)
     D->>U: Signal En vol stationnaire
     Note over D: 10 s de stationnaire
     D->>U: Signal Atterrissage
@@ -53,7 +53,7 @@ stateDiagram-v2
         state "Vol stationnaire" as Stat
         state "Atterrissage" as Atterr
         [*] --> Stab
-        Stab --> Stat : Signal En vol stationnaire
+        Stab --> Stat : En l'air, au-dessus de la hauteur minimale (DEC-049) - Signal En vol stationnaire
         Stat --> Atterr : Après 10 s - Signal Atterrissage
     }
     [*] --> Eteint
@@ -76,8 +76,8 @@ stateDiagram-v2
     Atterr --> Coupe : Basculement - Signal Basculement
     Atterr --> Coupe : 15 s de descente écoulées - Signal Délai de descente dépassé
     Vol --> Eteint : Coupure d'alimentation - moteurs arrêtés
-    Pose --> Attente : Verrouillé, même état (DEC-047)
-    Coupe --> Attente : Verrouillé, même état (DEC-047)
+    Pose --> Attente : Verrouillé, même état (DEC-047) ; appui déjà en cours ignoré jusqu'au relâchement (DEC-050)
+    Coupe --> Attente : Verrouillé, même état (DEC-047) ; appui déjà en cours ignoré jusqu'au relâchement (DEC-050)
     Reglage --> VolReg : Commande Décoller par le sans fil - signaux à définir (DOU-053)
     VolReg --> Reglage : Posé après 3 s de stationnaire - signaux à définir (DOU-053)
     VolReg --> Reglage : Bouton, arrêt sans fil, échec ou basculement - moteurs coupés, pas de verrouillage
@@ -158,7 +158,7 @@ sequenceDiagram
     D->>U: Signal Lancé
     Note over D: Juste après, les moteurs démarrent
     D->>U: Signal Stabilisation
-    Note over D: Au plus 2 s plus tard, stationnaire
+    Note over D: Au plus 2 s plus tard, stationnaire (en l'air, au-dessus de la hauteur minimale, DEC-049)
     D->>U: Signal En vol stationnaire
     Note over D: 10 s de stationnaire
     D->>U: Signal Atterrissage
@@ -192,9 +192,10 @@ title: "SCN-002 Stationnaire non atteint"
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
-    U->>D: Lance le drone, ou relâche le bouton sans lancer
+    U->>D: Lance le drone (mal orienté, trop faible ou trop rapide), ou relâche le bouton sans lancer
+    Note over D: Drone posé, tenu immobile en main, ou qui touche le sol pendant la stabilisation
     Note over D: Moteurs démarrés, stabilisation
-    Note over D: 2 s écoulées, stationnaire non atteint
+    Note over D: 2 s écoulées, pas en l'air au-dessus de la hauteur minimale (DEC-049) : stationnaire non atteint
     Note over D: Moteurs coupés
     D->>U: Signal Échec de stabilisation
 ```
@@ -304,7 +305,7 @@ sequenceDiagram
     participant D as Boomrone
     Note over D: Stationnaire ou descente
     Note over D: Perturbation, le drone bascule ou se retourne
-    Note over D: Moteurs coupés
+    Note over D: Moteurs coupés (seuil réglable dans ses bornes, DEC-051)
     D->>U: Signal Basculement
 ```
 
@@ -333,6 +334,7 @@ sequenceDiagram
         U->>D: Appuie sur le bouton
         Note over D: Moteurs coupés immédiatement
         D->>U: Signal Arrêt par le bouton
+        Note over D: Si l'appui est encore maintenu, ignoré jusqu'au relâchement (DEC-050)
     else Arrêt sans fil (appareil de suivi relié)
         U->>A: Commande d'arrêt
         A->>D: Arrêt
