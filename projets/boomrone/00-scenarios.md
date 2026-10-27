@@ -76,8 +76,8 @@ stateDiagram-v2
     Atterr --> Coupe : Basculement - Signal Basculement
     Atterr --> Coupe : 15 s de descente écoulées - Signal Délai de descente dépassé
     Vol --> Eteint : Coupure d'alimentation - moteurs arrêtés
-    Pose --> Attente : Verrouillé, même état (DEC-047) ; appui déjà en cours ignoré jusqu'au relâchement (DEC-050)
-    Coupe --> Attente : Verrouillé, même état (DEC-047) ; appui déjà en cours ignoré jusqu'au relâchement (DEC-050)
+    Pose --> Attente : Verrouillé, même état (DEC-047), appui déjà en cours ignoré jusqu'au relâchement (DEC-050)
+    Coupe --> Attente : Verrouillé, même état (DEC-047), appui déjà en cours ignoré jusqu'au relâchement (DEC-050)
     Reglage --> VolReg : Commande Décoller par le sans fil - signaux à définir (DOU-053)
     VolReg --> Reglage : Posé après 3 s de stationnaire - signaux à définir (DOU-053)
     VolReg --> Reglage : Bouton, arrêt sans fil, échec ou basculement - moteurs coupés, pas de verrouillage
