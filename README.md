@@ -1,4 +1,4 @@
-﻿# coworker_archi_system
+# coworker_archi_system
 
 Équipe d'agents IA experts (architecte système, exigences, logiciel, hardware, critique, cohérence) pour mener des projets embarqués en cycle en V.
 

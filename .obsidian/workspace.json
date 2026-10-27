@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "projets/boomrone/00-scenarios.md",
+                "file": "projets/boomrone/registre-doutes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-scenarios"
+              "title": "registre-doutes"
             }
           }
         ]
@@ -190,11 +190,20 @@
   },
   "active": "b2ee19d3f5954978",
   "lastOpenFiles": [
+    "projets/boomrone/sed4nvbex",
+    "projets/boomrone/sednOMOgH",
+    "projets/boomrone/sedh53Flp",
+    "projets/boomrone/sed4oVfUs",
+    "projets/boomrone/sedDkndWR",
+    "projets/boomrone/sedCmbYaG",
+    "projets/boomrone/sedYjhaWf",
+    "projets/boomrone/00-scenarios.md",
+    "projets/boomrone/01-besoins.md",
+    "CLAUDE.md",
+    "README.md",
     "projets/boomrone/notes-architecture.md",
     "projets/boomrone/journal-decisions.md",
     "projets/boomrone/registre-doutes.md",
-    "projets/boomrone/00-scenarios.md",
-    "projets/boomrone/01-besoins.md",
     "projets/boomrone/journal-decisions.md.tmp.16552.054312a536c6",
     "projets/boomrone/02-exigences.md",
     "projets/boomrone/00-glossaire.md",
