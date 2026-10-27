@@ -1,32 +1,41 @@
 # Scénarios d'utilisation
 
 > **Aperçu** : Boomrone est un drone de poche, destiné aux adultes, qu'on lance à la main vers le haut et vers l'avant, dans une pièce d'appartement, un gymnase ou un jardin sans vent. Il se stabilise seul en vol stationnaire, attend 10 secondes, puis atterrit doucement. À chaque étape il informe l'utilisateur.
-> **État de la phase** : SCN-001 « Vol nominal : de la batterie au posé », SCN-002 « Échec : stationnaire non atteint dans le délai » et SCN-003 « Échec : batterie faible à l'armement » proposés, ainsi que SCN-004 « Dégradé : bouton relâché avant 2 secondes » et SCN-005 « Dégradé : bouton maintenu plus de 10 secondes », à valider. SCN-006 « Échec : inclinaison excessive après le stationnaire » et SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol » sont proposés aussi. SCN-008 « Mise en service : programmation du drone », SCN-009 « Réglage : réglage du vol par le sans fil », SCN-010 « Échec : initialisation impossible au démarrage » et SCN-011 « Dégradé : coupure d'alimentation en vol » proposés ; SCN-009 « Réglage : réglage du vol par le sans fil » reste à compléter (DOU-034 « Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ? » ouvert).
+> **État de la phase** :
+> - SCN-001 « Vol nominal : de la batterie au posé » à SCN-011 « Dégradé : coupure d'alimentation en vol » : statut Proposé, à valider à la porte « scénarios ».
+> - Aucun doute bloquant ouvert au moment de la rédaction ; la relecture critique du 2026-10-27 en a ouvert de nouveaux (voir `registre-doutes.md`).
+> - SCN-009 « Réglage : réglage du vol par le sans fil » : voir DOU-034 « Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ? ».
 
 ## Vue d'ensemble
 
 ```mermaid
+---
+title: "Vue d'ensemble : vol nominal"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
     U->>D: Branche la batterie
-    D->>U: Allumé, en attente d'un appui
+    D->>U: Signal Allumé
     U->>D: Appuie sur le bouton (2 s)
-    D->>U: Prêt à être lancé
+    D->>U: Signal Prêt
     U->>D: Lance et relâche le bouton
-    D->>U: Lancé
+    D->>U: Signal Lancé
     Note over D: Juste après, les moteurs démarrent
-    D->>U: Stabilisation en cours
-    Note over D: 2 s plus tard, stationnaire
-    D->>U: En vol stationnaire
+    D->>U: Signal Stabilisation
+    Note over D: Au plus 2 s plus tard, stationnaire
+    D->>U: Signal En vol stationnaire
     Note over D: 10 s de stationnaire
-    D->>U: Atterrissage
-    D->>U: Posé, moteurs coupés
+    D->>U: Signal Atterrissage
+    D->>U: Signal Posé
 ```
 
 Ce premier diagramme montre le vol nominal. Le suivant montre tous les états du drone et chaque signal donné à l'utilisateur, y compris pour les échecs et les cas dégradés.
 
 ```mermaid
+---
+title: "Vue d'ensemble : états du drone et signaux"
+---
 stateDiagram-v2
     state "Éteint" as Eteint
     state "Échec d'initialisation" as EchecInit
@@ -56,14 +65,36 @@ stateDiagram-v2
     Arme --> Attente : Appui de plus de 10 s - Signal Désarmement
     Arme --> Lance : Lancer et relâchement - Signal Lancé
     Lance --> Vol : Moteurs démarrent - Signal Stabilisation
-    Vol --> Pose : Posé - Signal Posé
-    Vol --> Coupe : Stationnaire non atteint à temps - Signal Échec de stabilisation
+    Atterr --> Pose : Moins de 2 à 3 cm du sol - Signal Posé
+    Stab --> Coupe : Stationnaire non atteint à temps - Signal Échec de stabilisation
     Vol --> Coupe : Bouton appuyé - Signal Arrêt par le bouton
-    Vol --> Coupe : Basculement après le stationnaire - Signal Basculement
+    Stat --> Coupe : Basculement - Signal Basculement
+    Atterr --> Coupe : Basculement - Signal Basculement
+    Atterr --> Coupe : 15 s de descente écoulées - Signal à définir
     Vol --> Eteint : Coupure d'alimentation - moteurs arrêtés
 ```
 
-Quinze signaux : Allumé, Échec d'initialisation, Mode réglage, Appui trop court, Batterie faible, Prêt, Désarmement, Lancé, Stabilisation, En vol stationnaire, Atterrissage, Posé, Échec de stabilisation, Arrêt par le bouton, Basculement. Leur forme (lumière, son, suivi) reste à définir : voir DOU-027 « Un signal distinct par information, ou par catégorie ? ».
+Légende du diagramme d'états : chaque transition indique l'événement puis le signal donné à l'utilisateur. « Signal à définir » : voir DOU-043 « Quel signal et quel état pour un délai de descente dépassé ? ». Les états « Posé » et « Moteurs coupés en vol » n'ont pas encore de sortie : voir DOU-051 « L'état verrouillé est-il le même que l'état allumé, en attente d'un appui ? ».
+
+Quinze signaux (référence unique ; leur forme, lumière, son ou suivi, reste à définir : voir DOU-027 « Un signal distinct par information, ou par catégorie ? ») :
+
+| N° | Signal | Déclencheur | Scénario |
+|---|---|---|---|
+| 1 | Allumé | Batterie branchée, drone en attente d'un appui | SCN-001 « Vol nominal : de la batterie au posé » |
+| 2 | Échec d'initialisation | Le drone n'est pas en état de voler au démarrage | SCN-010 « Échec : initialisation impossible au démarrage » |
+| 3 | Mode réglage | Trois appuis sur le bouton au sol | SCN-009 « Réglage : réglage du vol par le sans fil » |
+| 4 | Appui trop court | Bouton relâché avant 2 secondes | SCN-004 « Dégradé : bouton relâché avant 2 secondes » |
+| 5 | Batterie faible | Batterie sous le seuil à l'armement | SCN-003 « Échec : batterie faible à l'armement » |
+| 6 | Prêt | Bouton appuyé 2 secondes, drone armé | SCN-001 « Vol nominal : de la batterie au posé » |
+| 7 | Désarmement | Bouton appuyé plus de 10 secondes | SCN-005 « Dégradé : bouton maintenu plus de 10 secondes » |
+| 8 | Lancé | Bouton relâché après armement | SCN-001 « Vol nominal : de la batterie au posé » |
+| 9 | Stabilisation | Moteurs démarrés | SCN-001 « Vol nominal : de la batterie au posé » |
+| 10 | En vol stationnaire | Stationnaire atteint | SCN-001 « Vol nominal : de la batterie au posé » |
+| 11 | Atterrissage | 10 secondes de stationnaire écoulées | SCN-001 « Vol nominal : de la batterie au posé » |
+| 12 | Posé | Moins de 2 à 3 cm du sol | SCN-001 « Vol nominal : de la batterie au posé » |
+| 13 | Échec de stabilisation | Stationnaire non atteint dans le délai | SCN-002 « Échec : stationnaire non atteint dans le délai » |
+| 14 | Arrêt par le bouton | Bouton appuyé en vol | SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol » |
+| 15 | Basculement | Drone très incliné ou retourné après le stationnaire | SCN-006 « Échec : inclinaison excessive après le stationnaire » |
 
 ## Scénarios
 
@@ -86,26 +117,29 @@ Format d'un scénario (exemple, non analysé) :
 ### SCN-001 — Vol nominal : de la batterie au posé
 
 ```mermaid
+---
+title: "SCN-001 Vol nominal"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
     U->>D: Pose le drone immobile et branche la batterie
-    D->>U: Allumé, en attente d'un appui
+    D->>U: Signal Allumé
     U->>D: Appuie sur le bouton (2 s)
-    D->>U: Prêt à être lancé
+    D->>U: Signal Prêt
     U->>D: Lance et relâche le bouton
     D->>U: Lancé
     Note over D: Juste après, les moteurs démarrent
     D->>U: Stabilisation en cours
     Note over D: Au plus 2 s plus tard, stationnaire
-    D->>U: En vol stationnaire
+    D->>U: Signal En vol stationnaire
     Note over D: 10 s de stationnaire
-    D->>U: Atterrissage
+    D->>U: Signal Atterrissage
     Note over D: Moins de 2 à 3 cm du sol, moteurs coupés
-    D->>U: Posé
+    D->>U: Signal Posé
 ```
 
-**Réfs amont :** Utilisateur (description initiale, entretien du 2026-10-27), DEC-016 « Public adulte, protège-hélices obligatoires », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue »
+**Réfs amont :** Utilisateur (description initiale, entretien du 2026-10-27), DEC-016 « Public adulte, protège-hélices obligatoires », DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-005 « Un signal distinct pour chaque information », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue »
 **Type :** Nominal
 **Acteurs :** Utilisateur.
 **Situation de départ :** drone hors tension, muni de ses protège-hélices, batterie chargée, dans une pièce d'appartement, un gymnase ou un jardin, sans vent.
@@ -125,6 +159,9 @@ sequenceDiagram
 ### SCN-002 — Échec : stationnaire non atteint dans le délai
 
 ```mermaid
+---
+title: "SCN-002 Stationnaire non atteint"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -149,6 +186,9 @@ sequenceDiagram
 ### SCN-003 — Échec : batterie faible à l'armement
 
 ```mermaid
+---
+title: "SCN-003 Batterie faible"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -173,6 +213,9 @@ sequenceDiagram
 ### SCN-004 — Dégradé : bouton relâché avant 2 secondes
 
 ```mermaid
+---
+title: "SCN-004 Bouton relâché trop tôt"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -196,6 +239,9 @@ sequenceDiagram
 ### SCN-005 — Dégradé : bouton maintenu plus de 10 secondes
 
 ```mermaid
+---
+title: "SCN-005 Bouton maintenu trop longtemps"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -205,7 +251,7 @@ sequenceDiagram
     U->>D: Relâche le bouton
     Note over D: Moteurs arrêtés
     U->>D: Appuie de nouveau 2 s
-    D->>U: Prêt à être lancé
+    D->>U: Signal Prêt
 ```
 
 **Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes », DEC-005 « Un signal distinct pour chaque information »
@@ -223,6 +269,9 @@ sequenceDiagram
 ### SCN-006 — Échec : inclinaison excessive après le stationnaire
 
 ```mermaid
+---
+title: "SCN-006 Inclinaison excessive"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -245,6 +294,9 @@ sequenceDiagram
 ### SCN-007 — Dégradé : arrêt d'urgence par le bouton en vol
 
 ```mermaid
+---
+title: "SCN-007 Arrêt d'urgence par le bouton"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -267,25 +319,28 @@ sequenceDiagram
 ### SCN-008 — Mise en service : programmation du drone
 
 ```mermaid
+---
+title: "SCN-008 Programmation du drone"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant P as Programmateur ST-LINK
     participant D as Boomrone
     U->>P: Relie le programmateur à la carte
     U->>P: Lance la programmation
-    P->>D: Programme les microcontrôleurs
+    P->>D: Programme le logiciel du drone
     U->>P: Débranche le programmateur
     U->>D: Branche la batterie
-    D->>U: Allumé, en attente d'un appui
+    D->>U: Signal Allumé
 ```
 
 **Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-024 « Mise en service par programmation avec un programmateur ST-LINK », DEC-026 « Mise en service : calibrage éventuel renvoyé à l'architecture, réglage du vol par un scénario dédié »
 **Type :** Mise en service / maintenance
-**Acteurs :** Utilisateur.
+**Acteurs :** Utilisateur, programmateur ST-LINK (outil imposé par l'utilisateur).
 **Situation de départ :** carte neuve, jamais programmée, batterie chargée ; l'utilisateur dispose d'un ordinateur et d'un programmateur ST-LINK (seul outil de programmation).
 **Déroulé :**
 1. L'utilisateur relie le programmateur à la carte du drone.
-2. Il programme le ou les microcontrôleurs du drone depuis l'ordinateur.
+2. Il programme le logiciel du drone depuis l'ordinateur.
 3. Il débranche le programmateur.
 4. Il branche la batterie : le drone démarre et informe qu'il est allumé et en attente d'un appui (étape 2 de SCN-001 « Vol nominal : de la batterie au posé »).
 **Résultat attendu :** le drone est programmé et se comporte comme au début de SCN-001 « Vol nominal : de la batterie au posé ». Le vol se règle ensuite avec SCN-009 « Réglage : réglage du vol par le sans fil » ; un éventuel calibrage est renvoyé à l'architecture (DEC-026 « Mise en service : calibrage éventuel renvoyé à l'architecture, réglage du vol par un scénario dédié »).
@@ -294,6 +349,9 @@ sequenceDiagram
 ### SCN-009 — Réglage : réglage du vol par le sans fil
 
 ```mermaid
+---
+title: "SCN-009 Réglage du vol"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant A as Appareil de suivi
@@ -305,11 +363,11 @@ sequenceDiagram
     D->>A: Variables du vol
     U->>A: Modifie un paramètre de vol
     A->>D: Nouvelle valeur
-    Note over D: 3 s de stationnaire, puis pose, moteurs coupés 15 s après le décollage
+    Note over D: 3 s de stationnaire, puis pose, moteurs coupés au plus 15 s après le décollage
     U->>D: Coupe la batterie, retour au mode normal
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol », DEC-028 « Mode réglage : décollage depuis le sol sur commande sans fil », DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu », DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol », DEC-028 « Mode réglage : décollage depuis le sol sur commande sans fil », DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu », DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie », DEC-015 « Bouton appuyé en vol : arrêt d'urgence »
 **Type :** Mise en service / maintenance
 **Acteurs :** Utilisateur, appareil de suivi.
 **Situation de départ :** drone programmé (SCN-008 « Mise en service : programmation du drone »), batterie branchée, posé sur un sol plat et dégagé, protège-hélices en place, appareil de suivi relié au drone sans fil.
@@ -328,6 +386,9 @@ sequenceDiagram
 ### SCN-010 — Échec : initialisation impossible au démarrage
 
 ```mermaid
+---
+title: "SCN-010 Initialisation impossible"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -337,7 +398,7 @@ sequenceDiagram
     U->>D: Débranche puis rebranche la batterie
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-005 « Un signal distinct pour chaque information »
 **Type :** Échec
 **Acteurs :** Utilisateur.
 **Situation de départ :** drone hors tension, batterie chargée ; le drone est déplacé pendant son démarrage, ou n'est pas en état de voler.
@@ -352,6 +413,9 @@ sequenceDiagram
 ### SCN-011 — Dégradé : coupure d'alimentation en vol
 
 ```mermaid
+---
+title: "SCN-011 Coupure d'alimentation en vol"
+---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
@@ -362,10 +426,10 @@ sequenceDiagram
     D->>U: Signal Échec d'initialisation, car le drone est en mouvement
     Note over D: Jamais de reprise du vol seul, drone verrouillé
     U->>D: Pose le drone immobile, rebranche la batterie
-    D->>U: Allumé, en attente d'un appui
+    D->>U: Signal Allumé
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler »
 **Type :** Dégradé
 **Acteurs :** Utilisateur.
 **Situation de départ :** drone en vol (stabilisation, stationnaire ou descente). Un lancer vigoureux, un choc ou une batterie trop faible coupent l'alimentation ou la font chuter.

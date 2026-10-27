@@ -84,7 +84,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 
 ### DOU-024 — Comment arrêter un drone en vol sans le saisir ?
 **Statut :** Ouvert
-**Bloquant :** Non
+**Bloquant :** Oui
 **Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
 **Question :** Atteindre le bouton d'un drone en vol revient à l'attraper, hélices tournantes. Faut-il un arrêt d'urgence par le sans fil (voir DOU-008 « L'utilisateur veut-il suivre le vol depuis un autre appareil ? »), des protège-hélices, ou accepte-t-on que seul le bouton existe ?
 **Réponse :**
@@ -92,7 +92,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 
 ### DOU-025 — Le drone vole-t-il sans appareil de suivi ?
 **Statut :** Ouvert
-**Bloquant :** Non
+**Bloquant :** Oui
 **Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
 **Question :** Le drone arme-t-il et vole-t-il sans téléphone ni ordinateur ? Perdre le suivi en vol change-t-il quelque chose ? Lié à DOU-008 « L'utilisateur veut-il suivre le vol depuis un autre appareil ? ».
 **Réponse :**
@@ -102,7 +102,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** DEC-005 « Un signal distinct pour chaque information » conduit à 13 signaux ou plus, alors qu'en vol l'utilisateur ne perçoit pas toujours les signaux (bruit des moteurs, drone qui s'éloigne). Faut-il un signal par catégorie (prêt, lancé, échec, posé), avec le détail réservé au suivi sur un autre appareil ?
+**Question :** DEC-005 « Un signal distinct pour chaque information » conduit à 15 signaux, alors qu'en vol l'utilisateur ne perçoit pas toujours les signaux (bruit des moteurs, drone qui s'éloigne). Faut-il un signal par catégorie (prêt, lancé, échec, posé), avec le détail réservé au suivi sur un autre appareil ?
 **Réponse :**
 **Décision liée :** DEC-005 « Un signal distinct pour chaque information »
 
@@ -132,7 +132,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 
 ### DOU-034 — Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ?
 **Statut :** Ouvert
-**Bloquant :** Non
+**Bloquant :** Oui
 **Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
 **Question :** Un mauvais réglage peut rendre le drone instable. Existe-t-il un retour aux valeurs d'origine ? Les réglages sont-ils conservés après coupure de la batterie, et que fait le drone au démarrage s'il n'a jamais été réglé ?
 **Réponse :**
@@ -154,7 +154,151 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :**
 **Décision liée :**
 
-<!-- Ajouter les doutes ci-dessous, au même format, en dehors des blocs de code. -->
+### DOU-037 — Faut-il un arrêt d'urgence sans fil et un décollage protégé en mode réglage ?
+**Statut :** Ouvert
+**Bloquant :** Oui
+**Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
+**Question :** Une commande d'arrêt d'urgence sans fil existe-t-elle ? La commande « Décoller » exige-t-elle un appairage, une confirmation, ou la vérification que le drone est posé, immobile et à plat ? Que fait le drone s'il est tenu en main ? Le seul arrêt est aujourd'hui le bouton (DEC-015 « Bouton appuyé en vol : arrêt d'urgence »), donc il faut attraper le drone hélices tournantes. Complète DOU-024 « Comment arrêter un drone en vol sans le saisir ? ». Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-038 — Réglages en vol : valeurs d'origine, bornes, coupures en vol de réglage ?
+**Statut :** Ouvert
+**Bloquant :** Oui
+**Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
+**Question :** Que fait un drone neuf non réglé ? Les coupures de stabilisation et de basculement (DEC-002 « Couper les moteurs si le stationnaire n'est pas atteint dans le délai », DEC-012 « Couper les moteurs si le drone bascule après le stationnaire ») valent-elles en vol de réglage ? Le réglage est-il limité au mode réglage ? Une valeur hors plage est-elle refusée ? Complète DOU-034 « Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ? ». Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-039 — La batterie est-elle vérifiée à chaque décollage de réglage ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
+**Question :** Quel contrôle de batterie et de chauffe entre deux vols de réglage ? Y a-t-il une limite du nombre de vols ? DEC-004 « Batterie vérifiée à l'armement : pas d'armement si batterie faible » ne couvre que l'armement. Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-040 — Quel périmètre d'emploi et quelle zone libre minimale ?
+**Statut :** Ouvert
+**Bloquant :** Oui
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Intérieur seulement, ou jardin, avec quelles conditions (soleil, sol, herbe) ? Quelle zone libre minimale et quelle distance aux personnes pour un lancer à 4 m/s ? Un lancer à 4 m/s parcourt jusqu'à 8 m en 2 s, ce qui est incompatible avec une pièce d'appartement et avec la dérive de DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais ». Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-041 — Que fait le drone si on l'attrape ou s'il descend sur un obstacle ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Coupure, poursuite, signal ? Une main, une table ou une personne sous le drone en descente : que se passe-t-il ? Qui peut arrêter le drone sans saisir les hélices ? Scénario manquant proposé : drone récupéré à la main ou posé sur un obstacle. Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-042 — Quel autotest avant réarmement après un vol raté ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** L'armement exige-t-il l'immobilité du drone ou un autotest (hélices, mesures) ? DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » dit « drone au sol et immobile » alors que SCN-001 « Vol nominal : de la batterie au posé » arme le drone dans la main. Après un vol raté, un drone abîmé peut être réarmé sans vérification. Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-043 — Quel signal et quel état pour un délai de descente dépassé ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Si les 15 secondes de descente s'écoulent sans être à moins de 2 à 3 cm du sol, les moteurs sont coupés (DEC-021 « Atterrissage lent, 15 secondes maximum, puis coupure des moteurs ») et SCN-001 « Vol nominal : de la batterie au posé » dit que le drone informe qu'il est posé, alors qu'il peut être en l'air. Même signal « Posé », signal d'échec distinct (DEC-005 « Un signal distinct pour chaque information »), ou cas impossible ? Relevé par les deux relectures.
+**Réponse :**
+**Décision liée :**
+
+### DOU-044 — Séquence de trois appuis : fenêtre et signal ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
+**Question :** Les deux premiers appuis des trois donnent-ils le signal « Appui trop court » (SCN-004 « Dégradé : bouton relâché avant 2 secondes ») ? Quel délai entre appuis ? Que fait un appui long en mode réglage ? Le drone peut-il être tenu en main (DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » impose un drone posé) ? Relevé par les deux relectures.
+**Réponse :**
+**Décision liée :**
+
+### DOU-045 — Bouton enfoncé au branchement ou maintenu après désarmement
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
+**Question :** Après le désarmement à 10 s, l'appui en cours est-il ignoré jusqu'au relâchement ? Que fait un bouton déjà enfoncé à la mise sous tension (poche, sac) ou pendant l'initialisation ? Précise DOU-022 « À partir de quand compte le chrono des 10 secondes, et que fait un lancer avec le bouton encore appuyé ? ». Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-046 — Capteur ou moteur défaillant en vol : quel comportement ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Mesure de hauteur perdue (sol non réfléchissant, escalier, vitre), hélice bloquée, protège-hélice détaché, moteur qui chauffe : quelle coupure, quel signal ? Scénario manquant proposé : mesure ou moteur défaillant en vol. Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-047 — Appareil de suivi : appairage, absence, plusieurs drones
+**Statut :** Ouvert
+**Bloquant :** Oui
+**Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
+**Question :** Comment l'appareil de suivi est-il relié au drone ? Le vol normal fonctionne-t-il sans lui ? Une perte de lien en vol normal change-t-elle quelque chose ? Que se passe-t-il avec deux drones dans la même salle ? Recoupe DOU-025 « Le drone vole-t-il sans appareil de suivi ? ». Scénario manquant proposé : appareil de suivi absent ou lien perdu hors mode réglage. Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-048 — Batterie : charge, remplacement, drone laissé allumé
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-008 « Mise en service : programmation du drone »
+**Question :** Comment la batterie est-elle chargée, remplacée, rangée ? Que fait un drone « allumé, en attente d'un appui » laissé branché des heures ? Y a-t-il un signal de batterie faible hors armement ? Scénario manquant proposé : maintenance de la batterie. Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-049 — Programmation : cas d'échec, hélices démontées, essai des moteurs avant le premier vol
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-008 « Mise en service : programmation du drone »
+**Question :** Que se passe-t-il si la programmation échoue ? La batterie est-elle branchée pendant la programmation, les hélices démontées (consigne de sécurité) ? Faut-il un essai des moteurs avant le premier vol ? Y a-t-il une reprogrammation ou un contrôle de version ? Reprend la partie oubliée de DOU-031 « Quelles opérations suivent la programmation à la mise en service ? ». Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-050 — Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Le critère de DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs » est-il mesurable et réaliste ? Lancé à l'envers depuis 1,5 m, une chute libre dure 0,55 s ; le drone peut toucher le sol avant la fin de la stabilisation, hélices tournantes. À lever avant la porte « exigences », avec DOU-030 « Les valeurs provisoires sont-elles à confirmer avant les exigences ? ». Relevé par la relecture critique.
+**Réponse :**
+**Décision liée :**
+
+### DOU-051 — L'état verrouillé est-il le même que l'état allumé, en attente d'un appui ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Après un posé ou une coupure, DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler » prévoit un nouvel appui de 2 s sans débrancher la batterie. Cet état « verrouillé » est-il le même que « Allumé, en attente d'un appui » (mêmes vérifications, mêmes signaux) ? Dans le diagramme d'états, « Posé » et « Moteurs coupés en vol » n'ont aujourd'hui aucune sortie. Relevé par la relecture de cohérence.
+**Réponse :**
+**Décision liée :**
+
+### DOU-052 — Que fait le drone qui redémarre immobile au sol après une coupure en vol ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-011 « Dégradé : coupure d'alimentation en vol »
+**Question :** SCN-011 « Dégradé : coupure d'alimentation en vol » suppose que le drone redémarre en mouvement et donne l'échec d'initialisation. Si l'alimentation revient quand le drone est déjà immobile au sol, l'initialisation réussit : annonce-t-il « Allumé » sans que l'utilisateur ait touché la batterie ? Faut-il toujours rebrancher la batterie ? Harmoniser DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » et DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue ». Relevé par les deux relectures.
+**Réponse :**
+**Décision liée :**
+
+### DOU-053 — Quels signaux pour les vols de réglage et pour le lien perdu ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
+**Question :** Les signaux de vol (Lancé, Stabilisation, En vol stationnaire, Atterrissage, Posé) valent-ils pour les vols de réglage ? Quel signal pour un lien perdu et l'atterrissage sur place qui en résulte ? Relevé par la relecture de cohérence.
+**Réponse :**
+**Décision liée :**
+
+### DOU-054 — Les décisions de solution technique restent-elles dans le journal ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais », DEC-019 « Hauteur au-dessus du sol mesurée en vol » et DEC-024 « Mise en service par programmation avec un programmateur ST-LINK » fixent des solutions (LED et buzzer, centrale inertielle seule, capteur de distance, programmateur ST-LINK), alors que les scénarios ne doivent pas en décrire. Deux options : (a) les garder avec le statut « contrainte posée par l'utilisateur, à confirmer en architecture » ; (b) ne garder dans le journal que l'intention et déplacer la solution dans `notes-architecture.md`. Relevé par la relecture de cohérence.
+**Réponse :**
+**Décision liée :**
+
+<!-- Ajouter les nouveaux doutes ci-dessus, avant ce marqueur, au même format, en dehors des blocs de code. -->
 
 ## Archive — doutes levés
 
@@ -162,7 +306,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Statut :** Levé
 **Bloquant :** Oui
 **Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** Le drone « informe » à 7 moments (initialisé, prêt, lancé, stabilisation, stationnaire, atterrissage, posé). Par LED, buzzer, vibration, ou sans fil (téléphone) ? Combien de signaux distincts, sachant que le drone vole (la LED est-elle visible, le buzzer audible) ?
+**Question :** Le drone « informe » à 7 moments (allumé, prêt, lancé, stabilisation, stationnaire, atterrissage, posé). Par LED, buzzer, vibration, ou sans fil (téléphone) ? Combien de signaux distincts, sachant que le drone vole (la LED est-elle visible, le buzzer audible) ?
 **Réponse :** LED RGB, buzzer et communication sans fil, combinés. Motifs précis à définir en architecture ; contenu de la liaison sans fil : voir DOU-008 « L'utilisateur veut-il suivre le vol depuis un autre appareil ? ».
 **Décision liée :** DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil »
 
@@ -225,10 +369,18 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 ### DOU-014 — Quel scénario de mise en service faut-il écrire ?
 **Statut :** Levé
 **Bloquant :** Oui
-**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Concerne :** SCN-008 « Mise en service : programmation du drone »
 **Question :** Premier montage : flash du micrologiciel avec le ST-LINK, première mise sous tension, calibrage de la centrale inertielle, test des moteurs hélices démontées, sens de rotation, réglage des seuils (batterie, angle). Que doit pouvoir faire l'utilisateur, dans quel ordre, et que se passe-t-il si le calibrage échoue ? Relevé par la relecture du critique à la porte « scénarios ».
 **Réponse :** La mise en service est la programmation du ou des microcontrôleurs avec un programmateur ST-LINK (seul outil de programmation disponible), via JTAG ou SWD ; scénario SCN-008 « Mise en service : programmation du drone » écrit. Les opérations suivantes (calibrage, essais des moteurs) font l'objet de DOU-031 « Quelles opérations suivent la programmation à la mise en service ? ».
 **Décision liée :** DEC-024 « Mise en service par programmation avec un programmateur ST-LINK »
+
+### DOU-015 — Que se passe-t-il si l'initialisation échoue ?
+**Statut :** Levé
+**Bloquant :** Oui
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Si le drone n'est pas en état de voler au démarrage (mesure absente, drone déplacé au démarrage), annonce-t-il « allumé » à tort ? Faut-il exiger un drone immobile à la mise sous tension et un signal distinct d'échec ?
+**Réponse :** L'utilisateur pose le drone immobile avant de brancher la batterie. Si le drone n'est pas en état de voler au démarrage, il refuse de s'armer, ignore le bouton et donne un signal d'échec d'initialisation distinct ; on en sort en débranchant puis rebranchant la batterie. Durée d'immobilité : à fixer en exigences.
+**Décision liée :** DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue »
 
 ### DOU-016 — Comment limiter le risque d'hélices en rotation sans lancer ?
 **Statut :** Levé
@@ -250,7 +402,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Statut :** Levé
 **Bloquant :** Oui
 **Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** Quel critère détecte « posé » (arrêt de la descente, choc) avec une centrale inertielle seule ? Que se passe-t-il en cas de rebond, d'atterrissage de travers ou sur sol incliné ? La détection de basculement de DEC-012 « Couper les moteurs si le drone bascule après le stationnaire » est-elle désactivée une fois posé ? Quel est l'état du drone après un posé ou une coupure (verrouillé, initialisé), et comment le réarme-t-on, jamais automatiquement ? À traiter avec DOU-007 « Quelles contraintes d'atterrissage ? ».
+**Question :** Quel critère détecte « posé » (arrêt de la descente, choc) sans capteur supplémentaire ? Que se passe-t-il en cas de rebond, d'atterrissage de travers ou sur sol incliné ? La détection de basculement de DEC-012 « Couper les moteurs si le drone bascule après le stationnaire » est-elle désactivée une fois posé ? Quel est l'état du drone après un posé ou une coupure (verrouillé, initialisé), et comment le réarme-t-on, jamais automatiquement ? À traiter avec DOU-007 « Quelles contraintes d'atterrissage ? ».
 **Réponse :** Le drone se déclare posé et coupe ses moteurs à moins de 2 à 3 cm du sol (rebond couvert). Après le posé ou toute coupure, il est verrouillé ; un nouvel appui de 2 secondes sur le bouton le réarme, jamais automatiquement.
 **Décision liée :** DEC-022 « Moteurs coupés à moins de 2 à 3 cm du sol », DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler »
 
@@ -273,7 +425,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 ### DOU-026 — L'utilisateur veut-il régler le drone depuis un autre appareil ?
 **Statut :** Levé
 **Bloquant :** Non
-**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Concerne :** SCN-009 « Réglage : réglage du vol par le sans fil »
 **Question :** Veut-il seulement être informé, ou aussi régler le drone (seuils, valeurs) ? Si oui, dans quels états (au sol, désarmé seulement) ? Les réglages sont-ils conservés après coupure ?
 **Réponse :** Oui : le drone doit être paramétrable sans fil, y compris en vol. États autorisés, entrée dans le mode réglage et conservation des réglages : voir DOU-032 « Comment entre-t-on dans le mode réglage et comment en sort-on ? », DOU-033 « Que fait le drone pendant les vols de réglage répétés ? » et DOU-034 « Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ? ».
 **Décision liée :** DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol »
@@ -301,11 +453,3 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Question :** En mode réglage, le drone décolle, se pose, décolle, se pose, un certain nombre de fois sur un temps bref. Combien de cycles, quelle durée, quelle hauteur ? Décolle-t-il seul depuis le sol (exception au lancer à la main de DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs ») ou sur commande de l'utilisateur à chaque fois ? Que se passe-t-il si le lien sans fil est perdu, si l'utilisateur appuie sur le bouton (DEC-015 « Bouton appuyé en vol : arrêt d'urgence ») ou si les réglages rendent le vol instable ?
 **Réponse :** Sur commande sans fil, le drone décolle depuis le sol, reste 3 secondes en stationnaire, puis se pose ; il coupe ses moteurs 15 secondes au plus après le décollage, stationnaire de 3 secondes fixe (voir DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu »). Si le lien sans fil est perdu en vol, il atterrit doucement sur place. Le bouton appuyé en vol reste un arrêt d'urgence. Hauteur et délai de lien perdu : DOU-035 « Quelle hauteur de stationnaire vise-t-on ? » et DOU-036 « Après quel délai le lien sans fil est-il considéré comme perdu ? ».
 **Décision liée :** DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu »
-
-### DOU-015 — Que se passe-t-il si l'initialisation échoue ?
-**Statut :** Levé
-**Bloquant :** Oui
-**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** Si le drone n'est pas en état de voler au démarrage (mesure absente, drone déplacé au démarrage), annonce-t-il « allumé » à tort ? Faut-il exiger un drone immobile à la mise sous tension et un signal distinct d'échec ?
-**Réponse :** L'utilisateur pose le drone immobile avant de brancher la batterie. Si le drone n'est pas en état de voler au démarrage, il refuse de s'armer, ignore le bouton et donne un signal d'échec d'initialisation distinct ; on en sort en débranchant puis rebranchant la batterie. Durée d'immobilité : à fixer en exigences.
-**Décision liée :** DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue »
