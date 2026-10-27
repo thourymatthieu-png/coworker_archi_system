@@ -22,6 +22,7 @@ Format d'un scénario (exemple, non analysé) :
 
 ```
 ### SCN-001 — Titre court du scénario
+(diagramme de séquence Mermaid : acteurs, messages, signaux)
 **Réfs amont :** Utilisateur (description initiale, entretien du jj/mm)
 **Type :** Nominal | Dégradé | Échec | Mise en service / maintenance
 **Acteurs :** qui intervient.

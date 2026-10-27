@@ -1,0 +1,15 @@
+# Notes pour l'architecture
+
+> **Aperçu** : points techniques apparus pendant la phase scénarios. Ce ne sont pas des doutes sur les scénarios : ils sont à traiter à la phase « Architecture », avec les décisions DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais » et DEC-019 « Hauteur au-dessus du sol mesurée en vol », qui sont des intentions de l'utilisateur à reprendre.
+
+- **Capteur de hauteur ToF** (DEC-019 « Hauteur au-dessus du sol mesurée en vol ») : portée utile souvent 2 à 4 m, moins en plein soleil ; hauteur fausse tant que le drone n'est pas redressé après un lancer dans toute orientation ; sol non réfléchissant, vitre, escalier. À confronter à DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol ».
+- **Dérive horizontale** (DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais ») : si l'objectif n'est pas tenu, ajouter un capteur de flux optique ; prévoir dès la carte JLCPCB une empreinte ou un connecteur pour l'éviter une nouvelle carte.
+- **Rotation au lancer** : dimensionne le gyroscope, à partir de la valeur de DOU-010 « Quelle rotation au lancer le drone doit-il rattraper ? ».
+- **Seuil de batterie** : tension d'armement à marge large (mesure à vide, DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement »), dépend de la batterie choisie ; à partir de DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? ».
+- **Bouton** : antirebond et fenêtre de garde après le lancer, à partir de DOU-023 « Quel appui sur le bouton juste après le lancer est ignoré ? ».
+- **Liaison sans fil** : technologie (Bluetooth ou Wi-Fi), appairage, contenu transmis, à partir de DOU-008 « L'utilisateur veut-il suivre le vol depuis un autre appareil ? ».
+- **LED RGB et buzzer** : motifs et nombre de signaux, à partir de DOU-027 « Un signal distinct par information, ou par catégorie ? ».
+- **Protège-hélices** (DEC-016 « Public adulte, protège-hélices obligatoires ») : masse et poussée à compter dans le dimensionnement des moteurs et de la batterie.
+- **Programmation** (DEC-024 « Mise en service par programmation avec un programmateur ST-LINK ») : seul programmateur disponible, donc tout microcontrôleur du drone doit être programmable en JTAG ou SWD avec lui. À vérifier pour un éventuel module sans fil, et prévoir l'accès à ces broches sur la carte.
+- **Calibrage** (DEC-026 « Mise en service : calibrage éventuel renvoyé à l'architecture, réglage du vol par un scénario dédié ») : à décider selon les capteurs choisis ; s'il existe, il se place dans la mise en service (SCN-008 « Mise en service : programmation du drone »).
+- **Réglage en vol par le sans fil** (DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol ») : débit et latence suffisants pour renvoyer commandes des moteurs, hauteur et données de position ; paramètres modifiables en vol ; décollage depuis le sol en mode réglage (poussée supérieure au poids, avec les protège-hélices de DEC-016 « Public adulte, protège-hélices obligatoires »).
