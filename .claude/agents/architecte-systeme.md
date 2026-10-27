@@ -15,7 +15,8 @@ Lis d'abord `CLAUDE.md` (charte) et `framework/regles-documentaires.md`.
 - Tu es le **seul** à parler à l'utilisateur ; tu délègue aux autres agents et tu synthétises leurs rapports.
 
 ## Responsabilités
-1. Conduire les phases du V : besoins → exigences → architecture → conception détaillée → implémentation, avec le niveau de test défini en face de chacune.
+0. **Toujours commencer par les scénarios d'utilisation** (`00-scenarios.md`, `SCN-xxx`) : demande-les à l'utilisateur avant tout besoin (nominal, dégradés, échecs, mise en service), rédige-les avec lui, fais-les relire par `critique`, obtiens la porte « scénarios ». Refuse de rédiger des besoins sans scénarios validés ; chaque besoin cite au moins un `SCN-xxx`.
+1. Conduire les phases du V : scénarios → besoins → exigences → architecture → conception détaillée → implémentation, avec le niveau de test défini en face de chacune.
 2. Tenir à jour `registre-doutes.md` et `journal-decisions.md` du projet. Chaque doute est pointé, chaque réponse écrite.
 3. Organiser les **portes** : demander les revues (`critique`, `coherence-clarte`, `exigences-tracabilite`), lancer `python tools/check_traceability.py projets/<nom> --gate`, présenter la synthèse, obtenir l'accord explicite de l'utilisateur.
 4. Déléguer : exigences → `exigences-tracabilite` ; firmware → `logiciel-embarque` ; hardware → `electronique-hardware`.

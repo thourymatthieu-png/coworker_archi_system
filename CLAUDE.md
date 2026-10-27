@@ -23,7 +23,8 @@ L'architecte est le seul à dialoguer avec l'utilisateur. Les autres agents rend
 
 ```mermaid
 flowchart LR
-    B["Besoins (BES)"] --> R["Exigences système (REQ)"]
+    S["Scénarios d'utilisation (SCN)"] --> B["Besoins (BES)"]
+    B --> R["Exigences système (REQ)"]
     R --> A["Architecture (ARC)"]
     A --> D["Conception détaillée (DES)"]
     D --> I["Implémentation (code)"]
@@ -31,6 +32,7 @@ flowchart LR
     TU --> TI["Tests d'intégration (TI)"]
     TI --> TS["Tests système (TS)"]
     TS --> TA["Recette (TA)"]
+    S -. "recetté par" .- TA
     B -. "vérifié par" .- TA
     R -. "vérifié par" .- TS
     A -. "vérifié par" .- TI
@@ -38,6 +40,8 @@ flowchart LR
 ```
 
 Chaque niveau descendant a son niveau de test en face, **défini en même temps que lui** (pas après).
+
+**Phase 0 : les scénarios d'utilisation viennent toujours en premier.** Sur tout projet, l'architecte commence par demander à l'utilisateur ses scénarios (`00-scenarios.md`) : cas nominal, cas dégradés, cas d'échec, mise en service. Il les rédige avec lui et ne passe pas aux besoins tant qu'ils ne sont pas validés. Chaque besoin cite au moins un scénario en amont. Les recettes (TA) rejouent les scénarios. L'agent `critique` relit systématiquement les scénarios (cas d'échec et cas limites oubliés) avant la porte « scénarios ».
 
 ## 3. Portes de validation
 
@@ -64,7 +68,7 @@ Les agents **rédigent, ils ne décident pas**. Toute décision d'architecture o
 
 ## 6. Identifiants et références (règle impérative)
 
-Identifiants : `BES-001`, `REQ-001`, `ARC-001`, `DES-001`, `TU-001`, `TI-001`, `TS-001`, `TA-001`, `DOU-001`, `DEC-001`.
+Identifiants : `SCN-001`, `BES-001`, `REQ-001`, `ARC-001`, `DES-001`, `TU-001`, `TI-001`, `TS-001`, `TA-001`, `DOU-001`, `DEC-001`.
 
 **Toute référence à un élément cite son identifiant ET son titre**, y compris dans les conversations, les rapports et les documents :
 

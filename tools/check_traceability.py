@@ -14,11 +14,11 @@ import re
 import sys
 from pathlib import Path
 
-PREFIXES = ("BES", "REQ", "ARC", "DES", "TU", "TI", "TS", "TA", "DOU", "DEC")
+PREFIXES = ("SCN", "BES", "REQ", "ARC", "DES", "TU", "TI", "TS", "TA", "DOU", "DEC")
 # type de l'élément -> type attendu en amont
 UPSTREAM = {"REQ": "BES", "ARC": "REQ", "DES": "ARC", "TA": "BES", "TS": "REQ", "TI": "ARC", "TU": "DES"}
 # type de l'élément -> types qui doivent le référencer en aval
-COVERAGE = {"BES": ("REQ", "TA"), "REQ": ("ARC", "TS"), "ARC": ("DES", "TI"), "DES": ("TU",)}
+COVERAGE = {"SCN": ("BES",), "BES": ("REQ", "TA"), "REQ": ("ARC", "TS"), "ARC": ("DES", "TI"), "DES": ("TU",)}
 
 ID = r"(?:%s)-\d{3}" % "|".join(PREFIXES)
 DEF_RE = re.compile(r"^###\s+(%s)\s+[—-]\s+(.+?)\s*$" % ID)
@@ -107,6 +107,10 @@ def main():
         refs = [m.group(1) for m in REF_RE.finditer(field(el["block"], "Réfs amont"))]
         ups[eid] = refs
         etype = eid.split("-")[0]
+        # un besoin peut aussi citer des décisions : il doit citer au moins un scénario
+        if etype == "BES" and "Abandonné" not in field(el["block"], "Statut") \
+                and not any(r.startswith("SCN-") for r in refs):
+            gaps.append("%s « %s » : aucun scénario d'utilisation (SCN) en amont" % (eid, el["title"]))
         if etype in UPSTREAM and "Abandonné" not in field(el["block"], "Statut"):
             if not refs:
                 gaps.append("%s « %s » : aucune référence amont" % (eid, el["title"]))

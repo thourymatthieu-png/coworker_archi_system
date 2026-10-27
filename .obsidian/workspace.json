@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "projets/boomrone/journal-decisions.md",
+                "file": "projets/boomrone/registre-doutes.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "journal-decisions"
+              "title": "registre-doutes"
             }
           }
         ]
@@ -190,14 +190,15 @@
   },
   "active": "b2ee19d3f5954978",
   "lastOpenFiles": [
-    "projets/boomrone/registre-doutes.md",
+    "projets/boomrone/00-scenarios.md",
+    "projets/boomrone/00-glossaire.md",
     "projets/boomrone/journal-decisions.md",
+    "projets/boomrone/registre-doutes.md",
     "projets/boomrone/05-plans-de-test.md",
     "projets/boomrone/04-conception-detaillee.md",
     "projets/boomrone/03-architecture.md",
     "projets/boomrone/02-exigences.md",
     "projets/boomrone/01-besoins.md",
-    "projets/boomrone/00-glossaire.md",
     "projets/README.md"
   ]
 }

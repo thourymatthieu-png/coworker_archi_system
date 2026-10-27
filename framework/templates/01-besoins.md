@@ -17,7 +17,7 @@ Format d'un besoin (exemple, non analysé) :
 
 ```
 ### BES-001 — Titre court du besoin
-**Réfs amont :** (source : personne, document, normative)
+**Réfs amont :** SCN-001 « Titre du scénario » (au moins un scénario ; on peut y ajouter décisions, normes, documents)
 **Énoncé :** Ce dont l'utilisateur a besoin, en langage métier.
 **Priorité :** Essentiel | Important | Souhaitable
 **Statut :** Proposé | Validé | Abandonné
