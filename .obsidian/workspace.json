@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "projets/boomrone/registre-doutes.md",
+                "file": "projets/boomrone/00-scenarios.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "registre-doutes"
+              "title": "00-scenarios"
             }
           }
         ]
@@ -190,6 +190,7 @@
   },
   "active": "b2ee19d3f5954978",
   "lastOpenFiles": [
+    "projets/boomrone/registre-doutes.md",
     "projets/boomrone/sedXaEp0h",
     "projets/boomrone/risques-acceptes.md",
     "projets/boomrone/00-scenarios.md",
@@ -198,12 +199,10 @@
     "projets/boomrone/sedSAwHRT",
     "projets/boomrone/sedIirWqq",
     "projets/boomrone/sedMlINsl",
-    "projets/boomrone/registre-doutes.md",
     "projets/boomrone/sedrgr2gI",
     "projets/boomrone/sedLYzqKx",
     "projets/boomrone/sed1caLlS",
     "projets/boomrone/sedoWM4Oy",
-    "projets/boomrone/sedlFWpYY",
     "projets/boomrone/00-glossaire.md",
     "projets/boomrone/reprise.md",
     "projets/boomrone/01-besoins.md",
