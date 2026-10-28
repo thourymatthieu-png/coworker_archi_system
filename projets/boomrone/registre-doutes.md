@@ -66,21 +66,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :**
 **Décision liée :**
 
-### DOU-022 — À partir de quand compte le chrono des 10 secondes, et que fait un lancer avec le bouton encore appuyé ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
-**Question :** Les 10 secondes de DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes » courent-elles depuis l'appui initial ou depuis l'armement (2 s plus tard) ? L'utilisateur qui lance à 9,9 s et relâche à 10,1 s désarme-t-il le drone ?
-**Réponse :**
-**Décision liée :** DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes »
 
-### DOU-023 — Quel appui sur le bouton juste après le lancer est ignoré ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
-**Question :** Un appui ou un relâchement parasite juste après le lancer ne doit pas déclencher l'arrêt d'urgence de DEC-015 « Bouton appuyé en vol : arrêt d'urgence » avec un signal trompeur. Pendant combien de temps après le lancer le bouton est-il ignoré, et quel appui volontaire reste pris en compte ?
-**Réponse :**
-**Décision liée :** DEC-015 « Bouton appuyé en vol : arrêt d'urgence »
 
 ### DOU-027 — Un signal distinct par information, ou par catégorie ?
 **Statut :** Ouvert
@@ -130,45 +116,9 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :**
 **Décision liée :**
 
-### DOU-041 — Que fait le drone si on l'attrape ou s'il descend sur un obstacle ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** Coupure, poursuite, signal ? Une main, une table ou une personne sous le drone en descente : que se passe-t-il ? Qui peut arrêter le drone sans saisir les hélices ? Scénario manquant proposé : drone récupéré à la main ou posé sur un obstacle. Relevé par la relecture critique.
-**Réponse :**
-**Décision liée :**
 
-### DOU-042 — Quel autotest avant réarmement après un vol raté ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** L'armement exige-t-il l'immobilité du drone ou un autotest (hélices, mesures) ? DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » dit « drone au sol et immobile » alors que SCN-001 « Vol nominal : de la batterie au posé » arme le drone dans la main. Après un vol raté, un drone abîmé peut être réarmé sans vérification. Relevé par la relecture critique. Complément de la relecture de la porte : DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » parle d'un drone « au sol et immobile », alors que SCN-001 « Vol nominal : de la batterie au posé » arme le drone dans la main : quelle condition vaut vraiment ?
-**Réponse :**
-**Décision liée :**
 
-### DOU-044 — Séquence de trois appuis : fenêtre et signal ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
-**Question :** Les deux premiers appuis des trois donnent-ils le signal « Appui trop court » (SCN-004 « Dégradé : bouton relâché avant 2 secondes ») ? Quel délai entre appuis ? Que fait un appui long en mode réglage ? Le drone peut-il être tenu en main (DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » impose un drone posé) ? Relevé par les deux relectures.
-**Réponse :**
-**Décision liée :**
 
-### DOU-045 — Que fait un bouton enfoncé au branchement ou maintenu après désarmement ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
-**Question :** Après le désarmement à 10 s, l'appui en cours est-il ignoré jusqu'au relâchement ? Que fait un bouton déjà enfoncé à la mise sous tension (poche, sac) ou pendant l'initialisation ? Précise DOU-022 « À partir de quand compte le chrono des 10 secondes, et que fait un lancer avec le bouton encore appuyé ? ». Relevé par la relecture critique.
-**Réponse :**
-**Décision liée :**
-
-### DOU-046 — Capteur ou moteur défaillant en vol : quel comportement ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** Mesure de hauteur perdue (sol non réfléchissant, escalier, vitre), hélice bloquée, protège-hélice détaché, moteur qui chauffe : quelle coupure, quel signal ? Scénario manquant proposé : mesure ou moteur défaillant en vol. Relevé par la relecture critique.
-**Réponse :**
-**Décision liée :**
 
 ### DOU-048 — Batterie : charge, remplacement, drone laissé allumé
 **Statut :** Ouvert
@@ -194,13 +144,6 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :**
 **Décision liée :**
 
-### DOU-052 — Que fait le drone qui redémarre immobile au sol après une coupure en vol ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-011 « Dégradé : coupure d'alimentation en vol »
-**Question :** SCN-011 « Dégradé : coupure d'alimentation en vol » suppose que le drone redémarre en mouvement et donne l'échec d'initialisation. Si l'alimentation revient quand le drone est déjà immobile au sol, l'initialisation réussit : annonce-t-il « Allumé » sans que l'utilisateur ait touché la batterie ? Faut-il toujours rebrancher la batterie ? Harmoniser DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » et DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue ». Relevé par les deux relectures.
-**Réponse :**
-**Décision liée :**
 
 ### DOU-053 — Quels signaux pour les vols de réglage et pour le lien perdu ?
 **Statut :** Ouvert
@@ -234,13 +177,6 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :**
 **Décision liée :**
 
-### DOU-061 — Quelle priorité entre le bouton et l'arrêt sans fil, et l'arrêt est-il pris en compte pendant la phase Lancé ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
-**Question :** Quelle priorité entre le bouton et l'arrêt sans fil si les deux arrivent ensemble ? L'arrêt (bouton ou sans fil) est-il pris en compte pendant la phase « Lancé » avant le démarrage des moteurs (voir DOU-023 « Quel appui sur le bouton juste après le lancer est ignoré ? ») ? Complément de la relecture de porte (critique) : la table de DEC-043 « Commandes sans fil acceptées selon l'état du drone » n'a pas de ligne « Lancé, avant démarrage des moteurs » (200 ms, DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs ») ; le sort des commandes Décoller, Modifier et Sauvegarder dans cet intervalle n'est pas dit non plus.
-**Réponse :**
-**Décision liée :**
 
 ### DOU-062 — Où l'utilisateur est-il informé des limites d'emploi ?
 **Statut :** Ouvert
@@ -250,51 +186,58 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :**
 **Décision liée :**
 
-### DOU-063 — Que se passe-t-il lors d'un choc contre un obstacle ou un plafond à 4 m/s ?
+
+
+
+
+
+
+
+### DOU-073 — Que veut dire « immobile » pour armer un drone tenu en main, et quel signal si l'armement est refusé ?
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
-**Question :** Que se passe-t-il lors d'un choc contre un obstacle ou un plafond en vol, notamment à 4 m/s (DEC-014 « Pas de coupure sur choc en vol ») ? Étend DOU-041 « Que fait le drone si on l'attrape ou s'il descend sur un obstacle ? » et se rattache à DOU-029 « Quelle altitude maximale et quel plafond le drone doit-il tolérer ? ».
+**Question :** DEC-056 « Armement : drone immobile, sans autotest » exige un drone immobile, au sol ou dans la main. Un drone tenu en main n'est jamais strictement immobile : quelle tolérance de mouvement (vitesse, rotation) l'armement accepte-t-il ? Si l'appui de 2 s a lieu sur un drone en mouvement, quel signal et quel comportement (armement refusé comme dans SCN-003 « Échec : batterie faible à l'armement », ou attente de l'immobilité) ? Relevé en alignant les scénarios sur DEC-056 « Armement : drone immobile, sans autotest ». À lever avant la porte « exigences ». Compléments de la relecture critique du 2026-10-28 : dans quel ordre le drone teste-t-il l'immobilité et la batterie (SCN-003 « Échec : batterie faible à l'armement ») ? Si l'appui dépasse 10 s sans armement, y a-t-il un signal de désarmement (SCN-005 « Dégradé : bouton maintenu plus de 10 secondes » ne traite que le drone armé) ? Après un refus, le bouton est-il ignoré jusqu'au relâchement ?
 **Réponse :**
 **Décision liée :**
 
-### DOU-064 — Drone tenu en main, trois appuis et commande Décoller : quel risque pour la main ?
+### DOU-074 — Une initialisation en échec est-elle définitive jusqu'au débranchement, et « à plat » vaut-il aussi après une coupure en vol ?
 **Statut :** Ouvert
 **Bloquant :** Non
-**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
-**Question :** Drone tenu en main, trois appuis puis commande « Décoller » : le drone décolle (DEC-038 « Mode réglage : décollage sans protection supplémentaire ») alors que la main est proche des hélices. Quel risque accepte-t-on ? Voir DOU-044 « Séquence de trois appuis : fenêtre et signal ? ».
+**Concerne :** SCN-011 « Dégradé : coupure d'alimentation en vol » et SCN-010 « Échec : initialisation impossible au démarrage »
+**Question :** DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé » dit que le drone qui revient immobile au sol s'initialise, sans la condition « à plat » de DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal » : un drone tombé sur la tranche ou retourné est immobile mais pas à plat. Le diagramme d'états fait de « Échec d'initialisation » un état dont on ne sort que par débranchement : or un redémarrage en l'air échoue, puis le drone se pose, et l'utilisateur voit « Échec d'initialisation » sur un drone déjà au sol. L'initialisation est-elle refaite en continu, ou définitive jusqu'au débranchement ? Relevé par la relecture critique du 2026-10-28. À lever avant la porte « exigences ».
 **Réponse :**
 **Décision liée :**
 
-### DOU-068 — Que se passe-t-il si le logiciel se bloque en vol ?
+### DOU-075 — Le chien de garde couvre-t-il la phase « Lancé », et cette phase a-t-elle une durée maximale ?
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
-**Question :** Le bouton (DEC-015 « Bouton appuyé en vol : arrêt d'urgence »), l'arrêt sans fil (DEC-031 « Arrêt du drone lancé : bouton et commande d'arrêt sans fil ») et toutes les coupures dépendent du même logiciel. Si le logiciel se bloque avec des commandes des moteurs figées, le drone monte ou dérive ; le seul recours est d'arracher la batterie, hélices tournantes. Quel comportement attend-on (par exemple moteurs coupés en cas de blocage), et quel signal ? Non couvert par DOU-046 « Capteur ou moteur défaillant en vol : quel comportement ? » ni par DOU-060 « Que font les moteurs pendant un redémarrage ou une chute de tension, et la coupure de la batterie dans chaque état ? ». À lever avant la porte « exigences ». Relevé par la relecture critique de la porte « scénarios ».
+**Question :** DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde » n'est représenté dans le diagramme que pour « En vol » et « Vol de réglage ». Pendant « Lancé » (DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs »), le bouton, l'arrêt sans fil et les commandes sont ignorés : si le démarrage des moteurs ne se termine pas, le drone reste sourd à tout. Le chien de garde couvre-t-il tout état où les moteurs peuvent être alimentés ? La phase « Lancé » a-t-elle une durée maximale ? Relevé par la relecture critique du 2026-10-28.
 **Réponse :**
 **Décision liée :**
 
-### DOU-069 — Une commande sans fil corrompue est-elle rejetée ?
+### DOU-076 — Garde du bouton après le lancer : front ou niveau, et quelle origine par rapport à la phase « Lancé » ?
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
+**Question :** DEC-055 « Bouton ignoré pendant une courte garde après le lancer » ignore « tout appui ou relâchement » pendant la garde. Si l'utilisateur appuie pendant la garde et maintient le bouton après sa fin, l'arrêt d'urgence de DEC-015 « Bouton appuyé en vol : arrêt d'urgence » est-il déclenché, tardivement au relâchement, ou jamais ? La garde (de l'ordre de 0,5 s) est plus longue que la phase « Lancé » (200 ms) : son origine (le relâchement du lancer ?) et sa durée minimale par rapport à « Lancé » sont à écrire. Dans SCN-002 « Échec : stationnaire non atteint dans le délai » (relâché sans lancer, hélices tournantes), le réflexe de ré-appuyer tombe dans la garde. Relevé par la relecture critique du 2026-10-28. À lever avant la porte « exigences ».
+**Réponse :**
+**Décision liée :**
+
+### DOU-077 — Séquence de trois appuis : cas incomplets et ambigus
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
-**Question :** Une trame sans fil tronquée ou bruitée peut produire une commande « Modifier » à valeur aberrante, appliquée sans borne (DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal », DEC-045 « Seuils de sécurité réglables comme le reste, sans borne ») puis rendue permanente par « Sauvegarder » (DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée »). Le drone rejette-t-il une commande corrompue ? Ce risque technique est distinct du risque « commandes d'un tiers » déjà accepté par DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée ». À lever avant la porte « exigences ». Relevé par la relecture critique de la porte « scénarios ». Note du 2026-10-27 : avec DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel », une valeur aberrante sur un seuil de sécurité est refusée si elle sort des bornes ; le risque reste entier pour les autres réglages et pour les valeurs aberrantes situées dans les bornes.
+**Question :** DEC-058 « Trois appuis : fenêtre courte, sans signal parasite » ne traite pas : (a) deux appuis seulement, puis rien (le signal « Appui trop court » est-il donné après coup, sinon l'utilisateur n'a aucun retour) ; (b) un troisième appui maintenu 2 s (mode réglage ou armement) ; (c) le signal « Mode réglage » donné au troisième appui ou à son relâchement. Relevé par la relecture critique du 2026-10-28.
 **Réponse :**
 **Décision liée :**
 
-### DOU-070 — Le drone doit-il démarrer posé à plat, ou tolérer une surface inclinée ?
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** SCN-001 « Vol nominal : de la batterie au posé » et SCN-010 « Échec : initialisation impossible au démarrage »
-**Question :** DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue » et SCN-001 « Vol nominal : de la batterie au posé » demandent un drone « posé immobile », jamais « à plat ». Démarré à 8° sur un accoudoir, le drone peut prendre une horizontale de référence faussée : dérive, ou critère d'inclinaison < 10° de DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs » jamais rempli. Le scénario doit-il exiger un drone à plat, ou le drone doit-il tolérer une surface inclinée ? Le choix technique (calibrage, référence) est renvoyé à l'architecture (DEC-026 « Mise en service : calibrage éventuel renvoyé à l'architecture, réglage du vol par un scénario dédié »). À lever avant la porte « exigences ». Relevé par la relecture critique de la porte « scénarios ».
-**Réponse :**
-**Décision liée :**
-
-### DOU-071 — Que fait le drone quand il reçoit une valeur de seuil hors bornes ?
+### DOU-078 — La commande « Sauvegarder » est-elle acceptée à l'état armé, alors que l'écriture en mémoire peut retarder le lancer ?
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
-**Question :** DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » décide qu'une valeur de seuil de sécurité hors bornes est refusée, sans dire comment. Le refus est-il silencieux, donne-t-il un signal sur le drone, ou un retour vers l'appareil de suivi ? La valeur précédente est-elle conservée ? Lien avec DOU-027 « Un signal distinct par information, ou par catégorie ? » (nombre de signaux) et DOU-053 « Quels signaux pour les vols de réglage et pour le lien perdu ? » (acquittement des commandes sans fil). À lever avant la porte « exigences ».
+**Question :** La table de DEC-043 « Commandes sans fil acceptées selon l'état du drone » accepte « Sauvegarder » à l'état « Armé, avant le lancer ». Une écriture en mémoire non volatile peut bloquer le processeur juste avant ou pendant le relâchement du bouton, donc le lancer. DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite » traite le vol, pas cet état. Faut-il ignorer « Sauvegarder » à l'état armé ? La table n'a pas non plus de ligne « Échec d'initialisation » : toutes les commandes y sont-elles ignorées ? Relevé par la relecture critique du 2026-10-28.
 **Réponse :**
 **Décision liée :**
 
@@ -589,3 +532,131 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Question :** DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais », DEC-019 « Hauteur au-dessus du sol mesurée en vol » et DEC-024 « Mise en service par programmation avec un programmateur ST-LINK » fixent des solutions (LED et buzzer, centrale inertielle seule, capteur de distance, programmateur ST-LINK), alors que les scénarios ne doivent pas en décrire. Deux options : (a) les garder avec le statut « contrainte posée par l'utilisateur, à confirmer en architecture » ; (b) ne garder dans le journal que l'intention et déplacer la solution dans `notes-architecture.md`. Relevé par la relecture de cohérence.
 **Réponse :** Option (b) : le journal ne garde que l'intention ; la solution (LED et buzzer de DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », centrale inertielle seule de DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais », capteur de distance de type ToF de DEC-019 « Hauteur au-dessus du sol mesurée en vol », programmateur ST-LINK de DEC-024 « Mise en service par programmation avec un programmateur ST-LINK ») est déplacée comme proposition dans « Notes pour l'architecture » — `notes-architecture.md`, à arbitrer en architecture. Aucune n'est une contrainte imposée par l'utilisateur. Les quatre décisions portent une mention « Depuis » ; les scénarios ne nomment plus que l'intention. Alternative écartée : (a) les garder comme contraintes. Source : décision de l'utilisateur en chat, au sujet de DOU-054 « Les décisions de solution technique restent-elles dans le journal ? » : « option (b), aucune contrainte imposée. »
 **Décision liée :** DEC-053 « Solutions techniques déplacées en propositions d'architecture, seule l'intention reste décidée »
+
+### DOU-022 — À partir de quand compte le chrono des 10 secondes, et que fait un lancer avec le bouton encore appuyé ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
+**Question :** Les 10 secondes de DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes » courent-elles depuis l'appui initial ou depuis l'armement (2 s plus tard) ? L'utilisateur qui lance à 9,9 s et relâche à 10,1 s désarme-t-il le drone ?
+**Réponse :** Depuis l'appui initial. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-054 « Chrono de 10 secondes compté depuis l'appui initial »
+
+### DOU-023 — Quel appui sur le bouton juste après le lancer est ignoré ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
+**Question :** Un appui ou un relâchement parasite juste après le lancer ne doit pas déclencher l'arrêt d'urgence de DEC-015 « Bouton appuyé en vol : arrêt d'urgence » avec un signal trompeur. Pendant combien de temps après le lancer le bouton est-il ignoré, et quel appui volontaire reste pris en compte ?
+**Réponse :** Appui et relâchement ignorés pendant une courte garde après le lancer (durée à fixer en architecture), puis arrêt d'urgence. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-055 « Bouton ignoré pendant une courte garde après le lancer »
+
+### DOU-042 — Quel autotest avant réarmement après un vol raté ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** L'armement exige-t-il l'immobilité du drone ou un autotest (hélices, mesures) ? DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » dit « drone au sol et immobile » alors que SCN-001 « Vol nominal : de la batterie au posé » arme le drone dans la main. Après un vol raté, un drone abîmé peut être réarmé sans vérification. Relevé par la relecture critique. Complément de la relecture de la porte : DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » parle d'un drone « au sol et immobile », alors que SCN-001 « Vol nominal : de la batterie au posé » arme le drone dans la main : quelle condition vaut vraiment ?
+**Réponse :** Armement exigeant un drone immobile (au sol ou dans la main), sans autotest. Source : choix de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-056 « Armement : drone immobile, sans autotest »
+
+### DOU-041 — Que fait le drone si on l'attrape ou s'il descend sur un obstacle ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Coupure, poursuite, signal ? Une main, une table ou une personne sous le drone en descente : que se passe-t-il ? Qui peut arrêter le drone sans saisir les hélices ? Scénario manquant proposé : drone récupéré à la main ou posé sur un obstacle. Relevé par la relecture critique.
+**Réponse :** Aucune détection dédiée ; seules les coupures existantes s'appliquent, risque résiduel accepté. Source : choix de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-057 « Pas de détection dédiée d'un drone attrapé ou posé sur un obstacle »
+
+### DOU-044 — Séquence de trois appuis : fenêtre et signal ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Question :** Les deux premiers appuis des trois donnent-ils le signal « Appui trop court » (SCN-004 « Dégradé : bouton relâché avant 2 secondes ») ? Quel délai entre appuis ? Que fait un appui long en mode réglage ? Le drone peut-il être tenu en main (DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » impose un drone posé) ? Relevé par les deux relectures.
+**Réponse :** Fenêtre courte (durée en architecture), sans signal « Appui trop court » sur les deux premiers appuis, appui long inchangé. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-058 « Trois appuis : fenêtre courte, sans signal parasite »
+
+### DOU-045 — Que fait un bouton enfoncé au branchement ou maintenu après désarmement ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
+**Question :** Après le désarmement à 10 s, l'appui en cours est-il ignoré jusqu'au relâchement ? Que fait un bouton déjà enfoncé à la mise sous tension (poche, sac) ou pendant l'initialisation ? Précise DOU-022 « À partir de quand compte le chrono des 10 secondes, et que fait un lancer avec le bouton encore appuyé ? ». Relevé par la relecture critique.
+**Réponse :** Ignoré jusqu'au premier relâchement. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement »
+
+### DOU-046 — Capteur ou moteur défaillant en vol : quel comportement ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Mesure de hauteur perdue (sol non réfléchissant, escalier, vitre), hélice bloquée, protège-hélice détaché, moteur qui chauffe : quelle coupure, quel signal ? Scénario manquant proposé : mesure ou moteur défaillant en vol. Relevé par la relecture critique.
+**Réponse :** Hors périmètre : aucune détection dédiée, risque résiduel accepté. Source : choix de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-060 « Défaillance d'un capteur ou d'un moteur en vol : hors périmètre »
+
+### DOU-052 — Que fait le drone qui redémarre immobile au sol après une coupure en vol ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-011 « Dégradé : coupure d'alimentation en vol »
+**Question :** SCN-011 « Dégradé : coupure d'alimentation en vol » suppose que le drone redémarre en mouvement et donne l'échec d'initialisation. Si l'alimentation revient quand le drone est déjà immobile au sol, l'initialisation réussit : annonce-t-il « Allumé » sans que l'utilisateur ait touché la batterie ? Faut-il toujours rebrancher la batterie ? Harmoniser DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » et DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue ». Relevé par les deux relectures.
+**Réponse :** Le drone annonce « Allumé », sans armement automatique, sans débranchement obligatoire. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé »
+
+### DOU-061 — Quelle priorité entre le bouton et l'arrêt sans fil, et l'arrêt est-il pris en compte pendant la phase Lancé ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
+**Question :** Quelle priorité entre le bouton et l'arrêt sans fil si les deux arrivent ensemble ? L'arrêt (bouton ou sans fil) est-il pris en compte pendant la phase « Lancé » avant le démarrage des moteurs (voir DOU-023 « Quel appui sur le bouton juste après le lancer est ignoré ? ») ? Complément de la relecture de porte (critique) : la table de DEC-043 « Commandes sans fil acceptées selon l'état du drone » n'a pas de ligne « Lancé, avant démarrage des moteurs » (200 ms, DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs ») ; le sort des commandes Décoller, Modifier et Sauvegarder dans cet intervalle n'est pas dit non plus.
+**Réponse :** Arrêt (bouton ou sans fil) ignoré pendant Lancé, avant le démarrage des moteurs ; priorité bouton / sans fil sans objet (même effet). Sort des autres commandes : DOU-072 « Commandes sans fil reçues pendant la phase Lancé : ignorées ou refusées ? ». Source : choix de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs »
+
+### DOU-063 — Que se passe-t-il lors d'un choc contre un obstacle ou un plafond à 4 m/s ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Question :** Que se passe-t-il lors d'un choc contre un obstacle ou un plafond en vol, notamment à 4 m/s (DEC-014 « Pas de coupure sur choc en vol ») ? Étend DOU-041 « Que fait le drone si on l'attrape ou s'il descend sur un obstacle ? » et se rattache à DOU-029 « Quelle altitude maximale et quel plafond le drone doit-il tolérer ? ».
+**Réponse :** Aucune réaction dédiée, dans la ligne de DEC-014 « Pas de coupure sur choc en vol ». Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-063 « Choc contre un obstacle ou un plafond : aucune réaction dédiée »
+
+### DOU-064 — Drone tenu en main, trois appuis et commande Décoller : quel risque pour la main ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Question :** Drone tenu en main, trois appuis puis commande « Décoller » : le drone décolle (DEC-038 « Mode réglage : décollage sans protection supplémentaire ») alors que la main est proche des hélices. Quel risque accepte-t-on ? Voir DOU-044 « Séquence de trois appuis : fenêtre et signal ? ».
+**Réponse :** Risque accepté et documenté dans les limites d'emploi. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté »
+
+### DOU-068 — Que se passe-t-il si le logiciel se bloque en vol ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
+**Question :** Le bouton (DEC-015 « Bouton appuyé en vol : arrêt d'urgence »), l'arrêt sans fil (DEC-031 « Arrêt du drone lancé : bouton et commande d'arrêt sans fil ») et toutes les coupures dépendent du même logiciel. Si le logiciel se bloque avec des commandes des moteurs figées, le drone monte ou dérive ; le seul recours est d'arracher la batterie, hélices tournantes. Quel comportement attend-on (par exemple moteurs coupés en cas de blocage), et quel signal ? Non couvert par DOU-046 « Capteur ou moteur défaillant en vol : quel comportement ? » ni par DOU-060 « Que font les moteurs pendant un redémarrage ou une chute de tension, et la coupure de la batterie dans chaque état ? ». À lever avant la porte « exigences ». Relevé par la relecture critique de la porte « scénarios ».
+**Réponse :** Coupure des moteurs par un mécanisme indépendant du logiciel. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde »
+
+### DOU-069 — Une commande sans fil corrompue est-elle rejetée ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Question :** Une trame sans fil tronquée ou bruitée peut produire une commande « Modifier » à valeur aberrante, appliquée sans borne (DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal », DEC-045 « Seuils de sécurité réglables comme le reste, sans borne ») puis rendue permanente par « Sauvegarder » (DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée »). Le drone rejette-t-il une commande corrompue ? Ce risque technique est distinct du risque « commandes d'un tiers » déjà accepté par DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée ». À lever avant la porte « exigences ». Relevé par la relecture critique de la porte « scénarios ». Note du 2026-10-27 : avec DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel », une valeur aberrante sur un seuil de sécurité est refusée si elle sort des bornes ; le risque reste entier pour les autres réglages et pour les valeurs aberrantes situées dans les bornes.
+**Réponse :** Aucun contrôle d'intégrité, risque résiduel accepté. Source : choix de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-066 « Commande sans fil corrompue : aucun contrôle d'intégrité »
+
+### DOU-070 — Le drone doit-il démarrer posé à plat, ou tolérer une surface inclinée ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé » et SCN-010 « Échec : initialisation impossible au démarrage »
+**Question :** DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue » et SCN-001 « Vol nominal : de la batterie au posé » demandent un drone « posé immobile », jamais « à plat ». Démarré à 8° sur un accoudoir, le drone peut prendre une horizontale de référence faussée : dérive, ou critère d'inclinaison < 10° de DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs » jamais rempli. Le scénario doit-il exiger un drone à plat, ou le drone doit-il tolérer une surface inclinée ? Le choix technique (calibrage, référence) est renvoyé à l'architecture (DEC-026 « Mise en service : calibrage éventuel renvoyé à l'architecture, réglage du vol par un scénario dédié »). À lever avant la porte « exigences ». Relevé par la relecture critique de la porte « scénarios ».
+**Réponse :** Drone posé à plat exigé ; au-delà d'une inclinaison limite, échec de l'initialisation. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal »
+
+### DOU-071 — Que fait le drone quand il reçoit une valeur de seuil hors bornes ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Question :** DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » décide qu'une valeur de seuil de sécurité hors bornes est refusée, sans dire comment. Le refus est-il silencieux, donne-t-il un signal sur le drone, ou un retour vers l'appareil de suivi ? La valeur précédente est-elle conservée ? Lien avec DOU-027 « Un signal distinct par information, ou par catégorie ? » (nombre de signaux) et DOU-053 « Quels signaux pour les vols de réglage et pour le lien perdu ? » (acquittement des commandes sans fil). À lever avant la porte « exigences ».
+**Réponse :** Refus silencieux, valeur précédente conservée, valeur relue sur l'appareil de suivi. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-068 « Seuil hors bornes : refus silencieux, valeur relue sur l'appareil de suivi »
+
+### DOU-072 — Commandes sans fil reçues pendant la phase Lancé : ignorées ou refusées ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Question :** DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs » ne dit rien des commandes Décoller, Modifier et Sauvegarder reçues pendant cet intervalle de 200 ms. La table de DEC-043 « Commandes sans fil acceptées selon l'état du drone » n'a pas de ligne « Lancé ». Sont-elles ignorées, refusées avec retour vers l'appareil de suivi, ou prises en compte à la fin de l'intervalle ? Issu de DOU-061 « Quelle priorité entre le bouton et l'arrêt sans fil, et l'arrêt est-il pris en compte pendant la phase Lancé ? ».
+**Réponse :** Ignorées, comme l'arrêt. Source : réponse de l'utilisateur en chat, 2026-10-28.
+**Décision liée :** DEC-069 « Commandes sans fil reçues pendant la phase Lancé : ignorées »

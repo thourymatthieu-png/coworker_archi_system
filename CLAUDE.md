@@ -66,6 +66,8 @@ Les relecteurs interviennent aussi à la demande de l'utilisateur entre deux por
 
 Les agents **rédigent, ils ne décident pas**. Toute décision d'architecture ou d'exigence est prise par l'utilisateur, après que l'architecte a exposé les options, leurs avantages et inconvénients, et sa recommandation. Chaque décision est consignée dans `journal-decisions.md` (`DEC-xxx` : décision, alternatives, raison).
 
+**Contradiction entre décisions :** quand une réponse de l'utilisateur contredit une décision ou une réponse antérieure, l'architecte ne tranche pas seul : il repose la question, rappelle ce que l'utilisateur avait répondu, dit précisément ce qui est en contradiction (DEC/DOU/SCN avec ID et titre) et demande s'il veut changer sa réponse.
+
 ## 6. Identifiants et références (règle impérative)
 
 Identifiants : `SCN-001`, `BES-001`, `REQ-001`, `ARC-001`, `DES-001`, `TU-001`, `TI-001`, `TS-001`, `TA-001`, `DOU-001`, `DEC-001`.
