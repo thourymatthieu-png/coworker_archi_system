@@ -45,6 +45,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** atterrir doucement dès que la batterie devient faible en vol ; couper les moteurs en vol.
 **Raison :** choix de l'utilisateur ; évite le cas de la batterie faible en vol, puisque le vol dure environ 15 secondes (depuis : jusqu'à environ 27 secondes, voir DEC-021 « Atterrissage lent, 15 secondes maximum, puis coupure des moteurs »). Reste à définir : le seuil, et la marge qui garantit un vol complet (voir DOU-005 « Que se passe-t-il si le drone n'y arrive pas ? »). Depuis : DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone » — la décision reste valable sur le fond (pas d'armement si batterie faible), mais le signal « Batterie faible » local est remplacé par le signal « Armement refusé ».
 **Doutes levés :** (aucun)
+**Précisée par :** DEC-134 « Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension » le 2026-10-28 (le seuil d'armement doit rester au-dessus du seuil de sous-tension, valeur à fixer en architecture : DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture » ; rapport à qualifier : DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs »).
 
 ### DEC-005 — Un signal distinct pour chaque information
 **Date :** 2026-10-27
@@ -123,6 +124,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** atterrir doucement si la batterie baisse en vol ; couper les moteurs en vol.
 **Raison :** choix de l'utilisateur ; simplicité, le vol dure environ 15 secondes (depuis : jusqu'à environ 27 secondes, voir DEC-021 « Atterrissage lent, 15 secondes maximum, puis coupure des moteurs »). Risque résiduel accepté : si le seuil est mal choisi, la batterie peut lâcher en vol. À valider par essais.
 **Doutes levés :** DOU-005 « Que se passe-t-il si le drone n'y arrive pas ? » — mais ouvre DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? »
+**Modifiée par :** DEC-134 « Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension » le 2026-10-28 (la coupure des moteurs sur sous-tension en vol est assumée par le logiciel : l'alternative écartée « couper les moteurs en vol » est de fait adoptée pour la sous-tension seulement ; le titre est conservé, il n'y a toujours ni atterrissage ni signal sur batterie faible en vol ; DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? » est relié à SCN-012 « Dégradé : sous-tension de la batterie »).
 
 ### DEC-014 — Pas de coupure sur choc en vol
 **Date :** 2026-10-27
@@ -938,6 +940,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-093 « Dépassement de la durée maximale de la phase Lancé : que fait le drone ? »
 **Précise :** DEC-096 « Chien de garde sur tout état où les moteurs peuvent être alimentés, phase Lancé de durée maximale ».
+**Précisée par :** DEC-136 « Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté » le 2026-10-28 (une écriture de réglages encore en cours au relâchement du lancer peut dépasser la durée maximale de la phase Lancé : coupure et redémarrage par le chien de garde, risque accepté).
 
 ### DEC-104 — Cause d'une coupure en vol : signal local non conservé, Allumé prend le relais, cause conservée sur le statut sans fil
 **Date :** 2026-10-28
@@ -1016,6 +1019,7 @@ Format (exemple, non analysé) :
 **Précise :** DEC-024 « Mise en service par programmation avec un programmateur ST-LINK ».
 **Précisée par :** DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien » le 2026-10-28 (les limites d'emploi sont informées par une notice écrite à la phase besoins).
 **Modifiée par :** DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » le 2026-10-28 (la protection matérielle de sous-tension de la batterie devient le scénario SCN-012 « Dégradé : sous-tension de la batterie » ; la phrase « il n'y a donc pas de douzième scénario » et la conséquence « aucun besoin sur la gestion de la batterie » ne valent plus pour cette protection seule ; charge, remplacement, stockage, drone laissé allumé et programmation restent hors périmètre ; le titre est conservé).
+**Modifiée par (suite) :** DEC-133 « SCN-012 inclut le drone laissé allumé en attente d'un appui : sous-tension dans le périmètre » le 2026-10-28 (le drone laissé allumé en attente d'un appui n'est plus hors périmètre : sa sous-tension est décrite par SCN-012 « Dégradé : sous-tension de la batterie » et un besoin pourra citer SCN-012 « Dégradé : sous-tension de la batterie » pour ce cas ; charge, remplacement, stockage et programmation restent hors périmètre ; le titre est conservé).
 
 ### DEC-112 — Sauvegarder ignorée à l'état armé, avant le lancer
 **Date :** 2026-10-28
@@ -1158,6 +1162,8 @@ Format (exemple, non analysé) :
 **Doutes levés :** DOU-107 « Exigences sans scénario amont : protections de la batterie, sous-tension, brown-out, CEM »
 **Modifie :** DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter » (protection matérielle de sous-tension seulement).
 **Précise :** DEC-097 « Redémarrage ou chute de tension, même en phase Lancé : moteurs arrêtés, drone verrouillé ».
+**Modifiée par :** DEC-133 « SCN-012 inclut le drone laissé allumé en attente d'un appui : sous-tension dans le périmètre » le 2026-10-28 (la phrase « drone laissé allumé ... restent hors périmètre » ne vaut plus pour le drone laissé allumé, inclus dans SCN-012 « Dégradé : sous-tension de la batterie »).
+**Précisée par :** DEC-134 « Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension » le 2026-10-28 (la coupure est assumée par le logiciel : la tension (1) nommée avec DEC-013 « Pas de contrôle de la batterie en vol » est tranchée par l'utilisateur) ; DEC-135 « Chute en vol sur sous-tension, sans signal, avec des personnes dessous : risque accepté » le 2026-10-28 (la chute en vol sur sous-tension est un risque accepté).
 
 ### DEC-127 — Sauvegarder acceptée à l'état Échec d'initialisation : écrasement des réglages par un tiers, risque accepté
 **Date :** 2026-10-28
@@ -1186,6 +1192,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite » (point (b) ; les autres points sont répondus par les décisions de la même série)
 **Précise :** DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage » et DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée ».
+**Précisée par :** DEC-136 « Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté » le 2026-10-28 (une écriture commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté, documenté).
 
 ### DEC-130 — Mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté
 **Date :** 2026-10-28
@@ -1213,5 +1220,42 @@ Format (exemple, non analysé) :
 **Raison :** réponses de l'utilisateur en chat, 2026-10-28, après une vue d'ensemble de la commande ; la dernière réponse sur l'état d'échec prévaut.
 **Doutes levés :** (aucun)
 **Confirme :** DEC-127 « Sauvegarder acceptée à l'état Échec d'initialisation : écrasement des réglages par un tiers, risque accepté » et DEC-107 « Vol de réglage : signaux des phases du vol normal, acquittement des commandes par le statut sans fil seulement ».
+
+### DEC-133 — SCN-012 inclut le drone laissé allumé en attente d'un appui : sous-tension dans le périmètre
+**Date :** 2026-10-28
+**Concerne :** SCN-012 « Dégradé : sous-tension de la batterie »
+**Décision :** SCN-012 « Dégradé : sous-tension de la batterie » INCLUT le drone laissé allumé en attente d'un appui : la sous-tension (décharge profonde) d'un drone allumé est dans le périmètre, comme celle d'un drone en vol. Les états couverts sont ceux où le drone est sous tension : en attente d'un appui, Série d'appuis en cours, Premier appui validé, armé, phase « Lancé », en vol, vol de réglage, mode réglage et initialisation. Un besoin pourra donc citer SCN-012 « Dégradé : sous-tension de la batterie » pour un drone laissé allumé. Charge, remplacement, stockage de la batterie et programmation restent hors périmètre (limites d'emploi, DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien »). **Contradictions nommées :** cette décision **modifie** DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter » (« drone laissé allumé » n'est plus hors périmètre) et DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » (sa phrase « drone laissé allumé ... restent hors périmètre ») ; les titres ne sont pas réécrits. L'utilisateur avait vu l'option « Non, retirer ce cas (recommandée) » et a choisi « Oui, l'inclure ». Points nommés sans être tranchés : (1) le rapport entre le seuil d'armement et le seuil de sous-tension : DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs » ; (2) un drone coupé sur sous-tension puis rebranché sur une batterie encore déchargée : DOU-109 « Batterie déjà déchargée : redémarrages répétés, décharge profonde et état après une coupure logicielle ».
+**Alternatives écartées :** « Non, retirer ce cas (recommandée) » : le drone laissé allumé reste hors périmètre, limite d'emploi seule.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun)
+**Modifie :** DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter » (drone laissé allumé) et DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre ».
+
+### DEC-134 — Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension
+**Date :** 2026-10-28
+**Concerne :** SCN-012 « Dégradé : sous-tension de la batterie » et SCN-003 « Échec : batterie faible à l'armement »
+**Décision :** La coupure des moteurs sur sous-tension, y compris en vol, est assumée PAR LE LOGICIEL : le drone surveille la tension de la batterie et coupe les moteurs sous le seuil de sous-tension. Le seuil d'armement doit rester au-dessus du seuil de sous-tension (valeur en architecture : DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture »). **Contradictions nommées :** cette décision **modifie** DEC-013 « Pas de contrôle de la batterie en vol » (l'alternative écartée « couper les moteurs en vol » est de fait adoptée pour la sous-tension ; le titre est conservé) et **précise** DEC-004 « Batterie vérifiée à l'armement : pas d'armement si batterie faible » (relation des deux seuils) ; elle tranche la tension (1) nommée dans DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » (protection matérielle hors logiciel de vol, ou contrôle en vol). Elle précise DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? » en le reliant à SCN-012 « Dégradé : sous-tension de la batterie ». L'utilisateur avait vu « Protection matérielle hors logiciel (recommandée) » et a choisi « Coupure assumée en vol par le logiciel ». Points nommés sans être tranchés : (1) DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » et SCN-012 « Dégradé : sous-tension de la batterie » décrivent la sous-tension « comme une coupure d'alimentation » (moteurs arrêtés, drone verrouillé, état « Éteint » des diagrammes) alors qu'une coupure par le logiciel laisse le microcontrôleur alimenté : le drone reste-t-il sous tension (verrouillé) ou s'éteint-il ? À fixer : DOU-109 « Batterie déjà déchargée : redémarrages répétés, décharge profonde et état après une coupure logicielle » ; (2) l'affaissement de tension au démarrage des moteurs peut franchir le seuil de sous-tension à l'armement ou au lancer : DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs » ; (3) la surveillance logicielle ne protège pas un logiciel bloqué, que le chien de garde traite déjà (DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde »).
+**Alternatives écartées :** protection matérielle hors logiciel, sans contrôle de la batterie par le logiciel (recommandée par l'architecte, non retenue).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun)
+**Modifie :** DEC-013 « Pas de contrôle de la batterie en vol ».
+**Précise :** DEC-004 « Batterie vérifiée à l'armement : pas d'armement si batterie faible » et DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre ».
+
+### DEC-135 — Chute en vol sur sous-tension, sans signal, avec des personnes dessous : risque accepté
+**Date :** 2026-10-28
+**Concerne :** SCN-012 « Dégradé : sous-tension de la batterie »
+**Décision :** Le risque qu'un drone en vol chute sur sous-tension, sans signal, avec des personnes dessous, y compris pendant le lancer (phase « Lancé », moteurs non encore démarrés, drone dans la main ou lâché), est ACCEPTÉ et documenté : consigné dans « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (ligne 35), dans les limites d'emploi de la notice (DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien ») et dans SCN-012 « Dégradé : sous-tension de la batterie ». Aucun signal propre, par cohérence avec DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » et DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté ». Cumul nommé sans être tranché : DEC-134 « Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension » fait de la chute une conséquence voulue de la coupure sous le seuil, donc d'un seuil mal placé (DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs »).
+**Alternatives écartées :** (non précisées dans la réponse) ; un atterrissage doux sur batterie faible avait été écarté par DEC-004 « Batterie vérifiée à l'armement : pas d'armement si batterie faible » et DEC-013 « Pas de contrôle de la batterie en vol ».
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun)
+**Précise :** DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre ».
+
+### DEC-136 — Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-001 « Vol nominal : de la batterie au posé »
+**Décision :** Une écriture de réglages commencée à l'état « Allumé, en attente d'un appui » (par exemple pendant un appui de moins de 1 s, non encore validé) et encore en cours au relâchement du lancer est un risque ACCEPTÉ et documenté : elle peut dépasser la durée maximale de la phase « Lancé » et être coupée par le chien de garde (DEC-103 « Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal »), sans que les moteurs aient démarré, avec une mémoire possiblement interrompue (DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture »). Consigné dans « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (ligne 36), limite d'emploi de la notice (DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien »). Les textes des scénarios qui disaient « aucune écriture en mémoire pendant l'armement ni le lancer » sont corrigés (règle complémentaire du tableau, légende du diagramme a, SCN-009 « Réglage et suivi du drone par le sans fil » étape 7) : « Sauvegarder n'est pas acceptée à partir de l'appui validé ; une écriture déjà commencée reste un risque accepté (DEC-136 « Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté ») ». **Contradiction nommée :** la raison de DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer » (ne pas retarder le lancer) n'est pas atteinte pour une écriture commencée avant l'appui validé ; DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer » est conservée, le résiduel est accepté ici. Point nommé sans être tranché : la durée d'une écriture dépend de la mémoire choisie en architecture (DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture »), donc la fenêtre du risque est inconnue.
+**Alternatives écartées :** (non précisées dans la réponse).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun)
+**Précise :** DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture », DEC-128 « Sauvegarder ignorée aussi à l'état Série d'appuis en cours » et DEC-103 « Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal ».
 
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
