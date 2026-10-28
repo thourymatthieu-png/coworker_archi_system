@@ -156,6 +156,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** coupure rapide des moteurs si aucun lancer n'est détecté (recommandée par l'architecte) ; confirmation du lancer avant démarrage.
 **Raison :** choix de l'utilisateur, après avertissement de l'architecte. Risque accepté : hélices en rotation si le bouton est relâché en main ou drone posé ; limité seulement par les protège-hélices de DEC-016 « Public adulte, protège-hélices obligatoires ». À réexaminer si les essais montrent des démarrages involontaires. Pas de scénario dédié (décision du 2026-10-27) : le cas est couvert par le vol normal, puis par SCN-002 « Échec : stationnaire non atteint dans le délai » si le drone n'est pas lancé. Depuis : cette couverture par SCN-002 « Échec : stationnaire non atteint dans le délai » est assurée par la condition « en l'air » de DEC-049 « Stationnaire déclaré seulement en l'air, au-dessus d'une hauteur minimale » ; la présente décision reste valable avec cette condition.
 **Doutes levés :** DOU-016 « Comment limiter le risque d'hélices en rotation sans lancer ? »
+**Précisée par :** DEC-119 « Appui bref pendant la garde du bouton, relâché avant la fin : risque accepté et documenté » le 2026-10-28 (risque cumulé : appui bref pendant la garde, hélices tournantes en main).
 
 ### DEC-018 — Jamais de réarmement automatique ; batterie mesurée à vide à l'armement
 **Date :** 2026-10-27
@@ -307,6 +308,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** commande sans fil de retour aux valeurs d'origine, retour automatique après un vol raté, geste sur le bouton au démarrage ; détection de la corruption avec valeurs d'origine ou refus de s'armer.
 **Raison :** choix de l'utilisateur, relayé à l'architecte à partir de sa réponse en chat : la personne qui règle le drone est expérimentée et assume ses réglages. Risques acceptés : un mauvais réglage sauvegardé impose la reprogrammation ; une mémoire corrompue peut donner un drone instable ou imprévisible, sans signal. Le comportement du drone neuf (mémoire jamais écrite) n'est pas décidé : voir DOU-034 « Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ? ». Depuis : il est décidé par DEC-036 « Drone neuf : valeurs d'origine fixes du logiciel, sans signal ».
 **Doutes levés :** partiellement DOU-034 « Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ? » (retour aux valeurs d'origine et mémoire corrompue). Reste ouvert : le comportement à la première mise sous tension. Depuis : DOU-034 « Comment revenir à des réglages sûrs, et les réglages sont-ils conservés ? » est levé par DEC-036 « Drone neuf : valeurs d'origine fixes du logiciel, sans signal ».
+**Précisée par :** DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule » le 2026-10-28 (paramètres aberrants sauvegardés par un tiers : risque accepté, seule la reprogrammation rétablit les valeurs).
 
 ### DEC-036 — Drone neuf : valeurs d'origine fixes du logiciel, sans signal
 **Date :** 2026-10-27
@@ -323,6 +325,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** A, appairage persistant enregistré dans le drone ; B, appairage à chaque mise sous tension.
 **Raison :** choix de l'utilisateur (option C), relayé à l'architecte à partir de sa réponse en chat ; simplicité. **Risques acceptés :** un tiers ou l'appareil d'un autre drone peut envoyer un arrêt, un décollage de réglage ou une sauvegarde de réglages ; une commande peut atteindre plusieurs drones à portée ; le suivi peut être mélangé si plusieurs drones sont à portée. Le risque d'une commande « Décoller » parasite n'est plus couvert par l'appairage : il renforce DOU-037 « Faut-il un arrêt d'urgence sans fil et un décollage protégé en mode réglage ? ». Depuis : DOU-037 « Faut-il un arrêt d'urgence sans fil et un décollage protégé en mode réglage ? » est levé par DEC-038 « Mode réglage : décollage sans protection supplémentaire ».
 **Doutes levés :** DOU-047 « Appareil de suivi : appairage, absence, plusieurs drones »
+**Précisée par :** DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule » le 2026-10-28 (paramètres aberrants sauvegardés par un tiers : risque accepté).
 
 ### DEC-038 — Mode réglage : décollage sans protection supplémentaire
 **Date :** 2026-10-27
@@ -341,6 +344,7 @@ Format (exemple, non analysé) :
 **Raison :** choix de l'utilisateur, relayé à l'architecte à partir de ses réponses en chat. **Point à noter, Q3(b) :** elle élargit la portée de DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie ». Le mode réglage reste nécessaire pour le décollage commandé par le sans fil (DEC-028 « Mode réglage : décollage depuis le sol sur commande sans fil »), mais plus pour modifier des valeurs. **Conséquence sans appairage (DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée ») :** un tiers à portée peut modifier ou sauvegarder des paramètres, y compris en vol normal. Risque accepté tel quel (sans borne, un réglage absurde est possible).
 **Nuance :** les coupures de la question Q1 ne valent que tant que leurs seuils ne sont pas modifiés : voir DEC-045 « Seuils de sécurité réglables comme le reste, sans borne ». Depuis : DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » remplace DEC-045 « Seuils de sécurité réglables comme le reste, sans borne » — les seuils de sécurité sont bornés ; une valeur ne peut plus désactiver une coupure. « Aucune borne » (Q2) ne vaut plus pour les seuils de sécurité ; il reste valable pour les autres réglages.
 **Doutes levés :** DOU-038 « Réglages en vol : valeurs d'origine, bornes, coupures en vol de réglage ? »
+**Précisée par :** DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule » le 2026-10-28 (paramètres aberrants sauvegardés par un tiers : risque accepté).
 
 ### DEC-040 — Périmètre d'emploi visé : l'appartement ; gymnase et jardin en essais complémentaires
 **Date :** 2026-10-27
@@ -387,6 +391,7 @@ Format (exemple, non analysé) :
 **Précisée par :** DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque » le 2026-10-28 (Sauvegarder reste acceptée à l'état armé).
 **Complétée par :** DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » le 2026-10-28 (deux lignes ajoutées au tableau : initialisation en cours, échec d'initialisation)
 **Modifiée par :** DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer » le 2026-10-28 (ligne « Armé, avant le lancer » : Sauvegarder devient ignorée ; les autres cases sont inchangées).
+**Modifiée par (suite) :** DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché » le 2026-10-28 (ligne « Initialisation en cours » : Sauvegarder ignorée) ; DEC-123 « Sauvegarder ignorée aussi à l'état Premier appui validé » le 2026-10-28 (nouvelle ligne « Premier appui validé » : Sauvegarder ignorée ; l'état « Série d'appuis en cours » n'est pas tranché).
 
 ### DEC-044 — Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage
 **Date :** 2026-10-27
@@ -525,6 +530,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, le 2026-10-28 : option recommandée par l'architecte.
 **Doutes levés :** DOU-045 « Que fait un bouton enfoncé au branchement ou maintenu après désarmement ? »
 **Précisée par :** DEC-081 « Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite » le 2026-10-28. ; DEC-088 « Bouton coincé ou maintenu en permanence au démarrage : statut sans fil seulement, aucun signal local » le 2026-10-28.
+**Précisée par (suite) :** DEC-115 « Troisième appui encore maintenu à l'entrée en mode réglage : maintien ignoré jusqu'au premier relâchement » le 2026-10-28 (3e appui encore maintenu à l'entrée en mode réglage : ignoré jusqu'au premier relâchement) ; DEC-117 « Bouton en échec d'initialisation : ignoré pour toujours après le premier relâchement, aucun effet ni signal » le 2026-10-28 (en échec d'initialisation, le bouton est ignoré pour toujours après le premier relâchement : le titre de la présente décision ne vaut que pour l'initialisation en cours et les autres cas).
 
 ### DEC-060 — Défaillance d'un capteur ou d'un moteur en vol : hors périmètre
 **Date :** 2026-10-28
@@ -585,6 +591,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** rejet de toute commande dont le contrôle d'intégrité échoue, valeur précédente conservée (option recommandée par l'architecte).
 **Raison :** choix de l'utilisateur en chat, le 2026-10-28 (option différente de la recommandation de l'architecte). Risque résiduel accepté.
 **Doutes levés :** DOU-069 « Une commande sans fil corrompue est-elle rejetée ? »
+**Précisée par :** DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule » le 2026-10-28 (paramètres aberrants sauvegardés par un tiers : risque accepté).
 
 ### DEC-067 — Démarrage à plat exigé, sinon échec de l'initialisation avec signal
 **Date :** 2026-10-28
@@ -627,6 +634,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28 : modèle du bouton validé, et réponse selon laquelle le bouton n'arme pas en mode réglage, ce qui contredisait DEC-058 « Trois appuis : fenêtre courte, sans signal parasite » (règle de contradiction de `CLAUDE.md` §5 : la réponse de l'utilisateur donne raison à DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »).
 **Doutes levés :** DOU-077 « Séquence de trois appuis : cas incomplets et ambigus » ; la réponse de DOU-044 « Séquence de trois appuis : fenêtre et signal ? » (issue de DEC-058 « Trois appuis : fenêtre courte, sans signal parasite ») est remplacée
 **Précisée par :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série » le 2026-10-28 ; DEC-085 « Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé » le 2026-10-28. ; DEC-089 « Appui de moins de 1 s au milieu d'une série d'appuis : compteur remis à zéro » et DEC-090 « Troisième appui validé sur un drone non immobile ou pas à plat : mode réglage refusé avec le signal Refus » le 2026-10-28.
+**Précisée par :** DEC-116 « Bouton en mode réglage, moteurs coupés : aucun effet et aucun signal, il ne sert qu'en vol de réglage » le 2026-10-28 (en mode réglage au sol, le bouton n'a aucun effet et ne donne aucun signal ; il ne sert qu'en vol de réglage).
 
 ### DEC-072 — Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone
 **Date :** 2026-10-28
@@ -661,6 +669,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** initialisation refaite en continu, avec passage à « Allumé » dès que le drone est immobile et à plat.
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28, à la première partie de DOU-074 « Une initialisation en échec est-elle définitive jusqu'au débranchement, et la condition à plat vaut-elle aussi après une coupure en vol ? ».
 **Doutes levés :** DOU-074 « Une initialisation en échec est-elle définitive jusqu'au débranchement, et la condition à plat vaut-elle aussi après une coupure en vol ? » en partie ; reste ouvert : la condition « à plat » au redémarrage après une coupure en vol
+**Précisée par :** DEC-117 « Bouton en échec d'initialisation : ignoré pour toujours après le premier relâchement, aucun effet ni signal » le 2026-10-28 (bouton ignoré pour toujours en échec d'initialisation, sans effet ni signal).
 
 ### DEC-076 — Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série
 **Date :** 2026-10-28
@@ -679,6 +688,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28. Aucune contradiction : confirme DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu » telle qu'écrite.
 **Doutes levés :** DOU-081 « Bouton appuyé en vol de réglage : arrêt d'urgence ou non ? »
 **Précisée par :** DEC-094 « Bouton appuyé après un décollage de réglage : pris en compte tout de suite, sans garde » et DEC-100 « Issues du vol de réglage : signaux du vol normal réutilisés, signal du lien perdu à définir » le 2026-10-28.
+**Précisée par :** DEC-116 « Bouton en mode réglage, moteurs coupés : aucun effet et aucun signal, il ne sert qu'en vol de réglage » le 2026-10-28 (en mode réglage au sol, le bouton n'a aucun effet ; l'arrêt d'urgence ne vaut qu'en vol de réglage) ; DEC-115 « Troisième appui encore maintenu à l'entrée en mode réglage : maintien ignoré jusqu'au premier relâchement » le 2026-10-28 (un maintien hérité de l'entrée en mode réglage ne peut pas déclencher d'arrêt).
 
 ### DEC-078 — Garde du bouton après le lancer : attachée au lancer au relâchement, pas décidée pour le décollage de réglage
 **Date :** 2026-10-28
@@ -705,6 +715,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** appui long compté à 1 dans la série (le prochain appui serait un 2e appui, qui ne peut pas armer).
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** (aucun) ; répond en partie à DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites » (appui long après refus ou désarmement)
+**Précisée par :** DEC-118 « Signal Allumé au retour à l'attente après un posé, un refus ou un désarmement » le 2026-10-28 (signal « Allumé » au retour à l'attente après un refus ou un désarmement).
 
 ### DEC-081 — Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite
 **Date :** 2026-10-28
@@ -721,6 +732,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** aucune exposée.
 **Raison :** déduction de l'architecte à partir des décisions existantes, validée explicitement par l'utilisateur en chat, 2026-10-28 ; aucune décision existante n'est contredite.
 **Doutes levés :** (aucun) ; répond en partie à DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites »
+**Précisée par :** DEC-118 « Signal Allumé au retour à l'attente après un posé, un refus ou un désarmement » le 2026-10-28 (signal « Allumé » au retour à l'attente après un posé).
 
 ### DEC-083 — Annulation d'un armement : le maintien jusqu'au désarmement à 10 s reste la seule annulation
 **Date :** 2026-10-28
@@ -748,6 +760,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** DOU-085 « Entrée en mode réglage : exiger drone immobile seulement, ou aussi à plat ? »
 **Précise :** DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage » et DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » (« posé » devient « immobile et à plat »). La raison de DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté » (« trois appuis exigeant un drone posé ») est précisée de même, sans réécrire l'historique.
 **Précisée par :** DEC-090 « Troisième appui validé sur un drone non immobile ou pas à plat : mode réglage refusé avec le signal Refus » le 2026-10-28.
+**Précisée par :** DEC-115 « Troisième appui encore maintenu à l'entrée en mode réglage : maintien ignoré jusqu'au premier relâchement » le 2026-10-28 (bouton encore maintenu à l'entrée en mode réglage : ignoré jusqu'au premier relâchement).
 
 ### DEC-086 — Décollage de réglage : batterie seulement, risque cumulé avec les décisions sans appairage et sans verrouillage accepté
 **Date :** 2026-10-28
@@ -812,6 +825,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-076 « Garde du bouton après le lancer : front ou niveau, et quelle origine par rapport à la phase Lancé ? »
 **Précise :** DEC-055 « Bouton ignoré pendant une courte garde après le lancer » et DEC-078 « Garde du bouton après le lancer : attachée au lancer au relâchement, pas décidée pour le décollage de réglage » (la garde du décollage de réglage reste dans DOU-084 « Garde du bouton après le décollage de réglage ? »).
+**Précisée par :** DEC-119 « Appui bref pendant la garde du bouton, relâché avant la fin : risque accepté et documenté » le 2026-10-28 (appui bref relâché avant la fin de la garde : sans effet, risque accepté ; la présente décision reste inchangée).
 
 ### DEC-093 — Mode réglage refusé : retour à l'attente, compteur à zéro, bouton encore enfoncé ignoré
 **Date :** 2026-10-28
@@ -860,6 +874,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-060 « Coupure de la batterie dans chaque état du drone, et alimentation des moteurs à valider en architecture matérielle » en partie (état des moteurs pendant un redémarrage ou une chute de tension, coupure en phase « Lancé ») ; reste ouvert : la coupure de la batterie dans chaque état, et la validation matérielle
 **Précise :** DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé » et DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard ».
+**Précisée par :** DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » le 2026-10-28 (la sous-tension de la batterie est une cause de coupure d'alimentation sans signal propre : SCN-012 « Dégradé : sous-tension de la batterie »).
 
 ### DEC-098 — Redémarrage après une coupure en vol : Allumé seulement si immobile et à plat, sinon échec d'initialisation
 **Date :** 2026-10-28
@@ -928,6 +943,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** DOU-094 « Signal de la cause d'une coupure : combien de temps persiste-t-il après le retour à l'attente ? »
 **Précise :** DEC-099 « Un statut sans fil distinct par état, effets locaux regroupables par catégorie ».
 **Confirmée et précisée par :** DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté » le 2026-10-28 (confirmée telle quelle ; les tensions nommées ci-dessus sont assumées par l'utilisateur).
+**Précisée par (suite) :** DEC-118 « Signal Allumé au retour à l'attente après un posé, un refus ou un désarmement » le 2026-10-28 (même logique de relais du signal « Allumé » après un posé, un refus et un désarmement).
 
 ### DEC-105 — Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées
 **Date :** 2026-10-28
@@ -937,6 +953,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-078 « Initialisation en cours et échec d'initialisation : quelles commandes sans fil sont acceptées ? »
 **Précise :** DEC-043 « Commandes sans fil acceptées selon l'état du drone » et DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque ».
+**Modifiée par :** DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché » le 2026-10-28 (état « Initialisation en cours » : Sauvegarder devient ignorée, Modifier reste acceptée ; l'état « Échec d'initialisation » est inchangé, sa question reste dans DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée » ; le titre est conservé).
 
 ### DEC-106 — Lien sans fil perdu en vol de réglage : aucune action particulière
 **Date :** 2026-10-28
@@ -991,15 +1008,18 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28. Après explication de l'intérêt d'un scénario dédié à la batterie, l'utilisateur a choisi l'option « hors périmètre, limite d'emploi ».
 **Doutes levés :** DOU-048 « Batterie : charge, remplacement, drone laissé allumé » ; DOU-049 « Programmation : cas d'échec, hélices démontées, essai des moteurs avant le premier vol »
 **Précise :** DEC-024 « Mise en service par programmation avec un programmateur ST-LINK ».
+**Précisée par :** DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien » le 2026-10-28 (les limites d'emploi sont informées par une notice écrite à la phase besoins).
+**Modifiée par :** DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » le 2026-10-28 (la protection matérielle de sous-tension de la batterie devient le scénario SCN-012 « Dégradé : sous-tension de la batterie » ; la phrase « il n'y a donc pas de douzième scénario » et la conséquence « aucun besoin sur la gestion de la batterie » ne valent plus pour cette protection seule ; charge, remplacement, stockage, drone laissé allumé et programmation restent hors périmètre ; le titre est conservé).
 
 ### DEC-112 — Sauvegarder ignorée à l'état armé, avant le lancer
 **Date :** 2026-10-28
 **Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
-**Décision :** La commande sans fil « Sauvegarder » est ignorée à l'état « Armé, avant le lancer » : aucune écriture en mémoire non volatile, aucun effet. Les autres cases du tableau de DEC-043 « Commandes sans fil acceptées selon l'état du drone » sont inchangées (Modifier reste acceptée à l'état armé ; Sauvegarder reste acceptée en attente d'un appui, en mode réglage, pendant l'initialisation et après un échec d'initialisation, ignorée en vol et en phase « Lancé »). Raison technique rappelée à l'utilisateur : une écriture longue pendant le lancer peut dépasser la durée maximale de la phase « Lancé » et provoquer, par le chien de garde, une coupure puis un redémarrage en l'air (DEC-096 « Chien de garde sur tout état où les moteurs peuvent être alimentés, phase Lancé de durée maximale » ; DEC-103 « Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal »). Le risque de retard du lancer par une écriture, accepté dans DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque », disparaît pour l'état armé. Contradiction nommée : l'utilisateur avait répondu « acceptée comme aujourd'hui » (DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque »), puis, après rappel de l'interaction avec le chien de garde, il a changé sa réponse ; cette décision **modifie** DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque » (son alternative écartée « ignorer Sauvegarder à l'état armé » est de fait adoptée) et la ligne « Armé, avant le lancer » de DEC-043 « Commandes sans fil acceptées selon l'état du drone ». Points nommés sans être tranchés : (1) une écriture commencée avant l'armement (état « Allumé ») et encore en cours au relâchement n'est pas traitée ici, reportée dans DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite » ; (2) la commande ignorée n'a pas de signal local et son acquittement ne passe que par le statut sans fil (DEC-107 « Vol de réglage : signaux des phases du vol normal, acquittement des commandes par le statut sans fil seulement ») : l'utilisateur qui envoie Sauvegarder pendant l'armement doit relire le statut, limite d'emploi (DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? ») ; (3) la dernière phrase de DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » (sa mention de cohérence avec la décision sur Sauvegarder à l'état armé) n'est plus exacte pour l'état armé ; cette décision n'est pas réécrite. DOU-098 « Commande Sauvegarder pendant l'initialisation ou après un échec d'initialisation : réglages enregistrés écrasés » reste ouvert.
+**Décision :** La commande sans fil « Sauvegarder » est ignorée à l'état « Armé, avant le lancer » : aucune écriture en mémoire non volatile, aucun effet. Les autres cases du tableau de DEC-043 « Commandes sans fil acceptées selon l'état du drone » sont inchangées (Modifier reste acceptée à l'état armé ; Sauvegarder reste acceptée en attente d'un appui, en mode réglage, pendant l'initialisation et après un échec d'initialisation, ignorée en vol et en phase « Lancé »). Raison technique rappelée à l'utilisateur : une écriture longue pendant le lancer peut dépasser la durée maximale de la phase « Lancé » et provoquer, par le chien de garde, une coupure puis un redémarrage en l'air (DEC-096 « Chien de garde sur tout état où les moteurs peuvent être alimentés, phase Lancé de durée maximale » ; DEC-103 « Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal »). Le risque de retard du lancer par une écriture, accepté dans DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque », disparaît pour l'état armé. Contradiction nommée : l'utilisateur avait répondu « acceptée comme aujourd'hui » (DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque »), puis, après rappel de l'interaction avec le chien de garde, il a changé sa réponse ; cette décision **modifie** DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque » (son alternative écartée « ignorer Sauvegarder à l'état armé » est de fait adoptée) et la ligne « Armé, avant le lancer » de DEC-043 « Commandes sans fil acceptées selon l'état du drone ». Points nommés sans être tranchés : (1) une écriture commencée avant l'armement (état « Allumé ») et encore en cours au relâchement n'est pas traitée ici, reportée dans DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite » ; (2) la commande ignorée n'a pas de signal local et son acquittement ne passe que par le statut sans fil (DEC-107 « Vol de réglage : signaux des phases du vol normal, acquittement des commandes par le statut sans fil seulement ») : l'utilisateur qui envoie Sauvegarder pendant l'armement doit relire le statut, limite d'emploi (DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? ») ; (3) la dernière phrase de DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » (sa mention de cohérence avec la décision sur Sauvegarder à l'état armé) n'est plus exacte pour l'état armé ; cette décision n'est pas réécrite. DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée » reste ouvert.
 **Alternatives écartées :** Sauvegarder acceptée à l'état armé, comme dans DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque » (risque de retard du lancer et de coupure par le chien de garde en l'air).
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28, après rappel de l'interaction avec le chien de garde de DEC-096 « Chien de garde sur tout état où les moteurs peuvent être alimentés, phase Lancé de durée maximale » et de DEC-103 « Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal ».
 **Doutes levés :** DOU-095 « Commande Sauvegarder à l'état armé : écriture en mémoire non volatile et durée maximale de la phase Lancé »
 **Modifie :** DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque » et DEC-043 « Commandes sans fil acceptées selon l'état du drone » (ligne « Armé, avant le lancer »).
+**Étendue par :** DEC-123 « Sauvegarder ignorée aussi à l'état Premier appui validé » le 2026-10-28 (Sauvegarder est aussi ignorée à l'état « Premier appui validé »).
 
 ### DEC-113 — Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté
 **Date :** 2026-10-28
@@ -1009,6 +1029,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28 (confirmation de DEC-104 « Cause d'une coupure en vol : signal local non conservé, Allumé prend le relais, cause conservée sur le statut sans fil »).
 **Doutes levés :** DOU-096 « Durée minimale perceptible du signal de cause d'une coupure en vol »
 **Précise :** DEC-104 « Cause d'une coupure en vol : signal local non conservé, Allumé prend le relais, cause conservée sur le statut sans fil », DEC-033 « Signal Arrêt sans fil distinct du signal Arrêt par le bouton », DEC-046 « Délai de descente dépassé : signal distinct, moteurs coupés, drone verrouillé » et DEC-005 « Un signal distinct pour chaque information ».
+**Précisée par :** DEC-118 « Signal Allumé au retour à l'attente après un posé, un refus ou un désarmement » le 2026-10-28 (le relais immédiat du signal « Allumé » vaut aussi après un posé, un refus et un désarmement).
 
 ### DEC-114 — Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir
 **Date :** 2026-10-28
@@ -1018,5 +1039,115 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** (aucun) ; échéance « avant les besoins » fixée pour DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m », DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture » (en partie) et DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal »
 **Précise :** DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences » et DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol ».
+**Précisée par :** DEC-122 « Jalon avant les besoins : promesse de l'architecte, sans modification de l'outil de porte » le 2026-10-28 (le jalon reste une promesse de l'architecte, sans modification de l'outil de porte).
+
+### DEC-115 — Troisième appui encore maintenu à l'entrée en mode réglage : maintien ignoré jusqu'au premier relâchement
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** Si le bouton est encore enfoncé quand le 3e appui est validé (entrée en mode réglage), le maintien est ignoré jusqu'au premier relâchement, comme pour un bouton déjà enfoncé (DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement »). Ce maintien ne peut ni armer (le bouton n'arme jamais en mode réglage : DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage »), ni déclencher d'arrêt d'urgence si une commande Décoller arrive avant le relâchement (DEC-077 « Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage » ; DEC-094 « Bouton appuyé après un décollage de réglage : pris en compte tout de suite, sans garde »). Seul un nouvel appui, après le premier relâchement, peut ensuite couper les moteurs en vol de réglage. Cas voisin traité pour un refus : DEC-093 « Mode réglage refusé : retour à l'attente, compteur à zéro, bouton encore enfoncé ignoré ».
+**Alternatives écartées :** maintien pris en compte tout de suite (une commande Décoller reçue avant le relâchement aurait coupé les moteurs aussitôt).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-097 « Bouton encore maintenu à l'entrée en mode réglage (3e appui) »
+**Précise :** DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement » et DEC-085 « Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé ».
+
+### DEC-116 — Bouton en mode réglage, moteurs coupés : aucun effet et aucun signal, il ne sert qu'en vol de réglage
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** Dans l'état « Mode réglage, moteurs coupés » (au sol), le bouton n'a aucun effet et ne donne aucun signal : pas de signal « Appui validé » à 1 s, aucun signal à 2 s ni à 10 s, aucun 4e appui compté, aucun maintien pris en compte. Le bouton ne sert plus, en mode réglage, qu'en vol de réglage, où il est l'arrêt d'urgence (DEC-077 « Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage »). Points nommés sans être tranchés : (1) cette décision précise DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage », qui ne disait que « le bouton n'arme jamais » ; (2) le compteur d'appuis ne s'applique plus une fois le mode réglage atteint ; (3) au retour d'un vol de réglage, un bouton encore enfoncé reste sans effet puisqu'au sol il n'en a aucun (DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »).
+**Alternatives écartées :** appui validé et signal « Appui validé » en mode réglage ; signal à 2 s ou à 10 s ; 4e appui compté.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-105 « Bouton en mode réglage, moteurs coupés : comportement autre que ne jamais armer »
+**Précise :** DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage » et DEC-077 « Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage ».
+
+### DEC-117 — Bouton en échec d'initialisation : ignoré pour toujours après le premier relâchement, aucun effet ni signal
+**Date :** 2026-10-28
+**Concerne :** SCN-010 « Échec : initialisation impossible au démarrage » et SCN-011 « Dégradé : coupure d'alimentation en vol »
+**Décision :** À l'état « Échec d'initialisation », après un premier relâchement, le bouton est ignoré pour toujours : aucun effet, aucun signal (pas de signal « Refus » à 2 s d'appui). L'échec est définitif jusqu'au débranchement de la batterie (DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie »). Pendant « Initialisation en cours », le bouton enfoncé reste ignoré jusqu'au premier relâchement seulement (DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement »), puisque l'initialisation peut réussir. Cette décision lève l'écart entre la note du diagramme a de `00-scenarios.md` (ignoré jusqu'au premier relâchement) et SCN-010 « Échec : initialisation impossible au démarrage » et SCN-011 « Dégradé : coupure d'alimentation en vol » (le drone « ignore le bouton »).
+**Alternatives écartées :** bouton ignoré seulement jusqu'au premier relâchement, puis pris en compte ; signal « Refus » à 2 s d'appui en échec d'initialisation.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-106 « Bouton en échec d'initialisation après un premier relâchement »
+**Précise :** DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie » et DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement ».
+
+### DEC-118 — Signal Allumé au retour à l'attente après un posé, un refus ou un désarmement
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé », SCN-003 « Échec : batterie faible à l'armement » et SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
+**Décision :** Au retour à l'état « Allumé, en attente d'un appui » après un posé, un refus ou un désarmement, le drone donne le signal « Allumé » : il prend le relais après le signal de l'événement (« Posé », « Refus », « Désarmement »). C'est la même logique que pour une coupure en vol (DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté »). Les diagrammes a et b, le tableau des signaux et SCN-001 « Vol nominal : de la batterie au posé », SCN-003 « Échec : batterie faible à l'armement » et SCN-005 « Dégradé : bouton maintenu plus de 10 secondes » sont alignés. Points nommés sans être tranchés : (1) un refus du mode réglage au 3e appui revient aussi à l'attente (DEC-093 « Mode réglage refusé : retour à l'attente, compteur à zéro, bouton encore enfoncé ignoré ») : lecture de l'architecte, il donne aussi « Allumé » ; (2) un décollage de réglage refusé ne revient pas à l'attente (le drone reste en « Mode réglage, moteurs coupés ») : lecture de l'architecte, pas de signal « Allumé » ; (3) le signal « Allumé » est donné même si le bouton est encore enfoncé (appui ignoré jusqu'au premier relâchement : DEC-081 « Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite ») ; (4) la durée du signal de l'événement avant le relais d'« Allumé », et l'enchaînement perceptible, ne sont pas fixés par les scénarios (effets locaux à définir en architecture, DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture »).
+**Alternatives écartées :** drone silencieux au retour à l'attente après un posé, un refus ou un désarmement.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-103 « Signal Allumé après Posé, Refus et Désarmement : donné au retour à l'attente ou silencieux ? »
+**Précise :** DEC-104 « Cause d'une coupure en vol : signal local non conservé, Allumé prend le relais, cause conservée sur le statut sans fil », DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté », DEC-080 « Armement refusé ou désarmement : retour à l'attente, compteur à zéro, l'appui long n'est pas compté » et DEC-082 « Retours à l'attente après le posé ou une coupure des moteurs : compteur à zéro, appui en cours ni pris en compte ni compté ».
+
+### DEC-119 — Appui bref pendant la garde du bouton, relâché avant la fin : risque accepté et documenté
+**Date :** 2026-10-28
+**Concerne :** SCN-002 « Échec : stationnaire non atteint dans le délai »
+**Décision :** Un utilisateur qui relâche le bouton sans lancer, hélices tournantes en main, puis appuie brièvement et relâche avant la fin de la garde, n'obtient aucun effet : les hélices continuent de tourner. Ce risque est accepté et documenté. DEC-092 « Garde du bouton après le lancer : fronts ignorés, niveau pris en compte, démarrage au relâchement » reste inchangée. Limite d'emploi à documenter : tenir le bouton jusqu'à la fin de la garde pour obtenir l'arrêt d'urgence. Risque cumulé avec DEC-017 « Pas de protection supplémentaire contre les hélices en rotation sans lancer ».
+**Alternatives écartées :** modifier DEC-092 « Garde du bouton après le lancer : fronts ignorés, niveau pris en compte, démarrage au relâchement » pour mémoriser un appui bref pendant la garde.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-100 « Appui bref pendant la garde du bouton, relâché avant la fin, hélices tournantes en main »
+**Précise :** DEC-092 « Garde du bouton après le lancer : fronts ignorés, niveau pris en compte, démarrage au relâchement » et DEC-017 « Pas de protection supplémentaire contre les hélices en rotation sans lancer ».
+
+### DEC-120 — Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché
+**Date :** 2026-10-28
+**Concerne :** SCN-010 « Échec : initialisation impossible au démarrage » et SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** Tant que les réglages enregistrés ne sont pas chargés (état « Initialisation en cours »), la commande sans fil « Sauvegarder » est ignorée : elle ne peut plus écraser des réglages enregistrés non encore chargés. « Modifier » reste acceptée. Cette décision **modifie** DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » pour l'état « Initialisation en cours » seulement. **Non tranché :** pour l'état « Échec d'initialisation », Sauvegarder reste acceptée à ce jour (DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées », inchangée pour cet état), sans qu'il soit dit si les réglages sont alors chargés : la question reste dans DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée », retitré. Points nommés sans être tranchés : (1) Sauvegarder est désormais ignorée à trois états sans vol (« Initialisation en cours » ici, « Premier appui validé » : DEC-123 « Sauvegarder ignorée aussi à l'état Premier appui validé », et « Armé » : DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer ») ; (2) la commande ignorée n'a pas de signal local, l'acquittement se lit sur le statut sans fil (DEC-107 « Vol de réglage : signaux des phases du vol normal, acquittement des commandes par le statut sans fil seulement ») ; (3) la perte persistante de réglages n'est écartée que pour l'initialisation en cours : un risque subsiste après un échec d'initialisation si les réglages ne sont pas chargés.
+**Alternatives écartées :** Sauvegarder acceptée pendant l'initialisation en cours, comme dans DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » (risque d'écraser des réglages non chargés).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée » en partie (initialisation en cours) ; reste ouvert : l'état « Échec d'initialisation »
+**Modifie :** DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » (état « Initialisation en cours » seulement) et DEC-043 « Commandes sans fil acceptées selon l'état du drone » (ligne « Initialisation en cours »).
+
+### DEC-121 — Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** Le risque qu'un tiers à portée envoie des paramètres de vol aberrants, puis les sauvegarde, est accepté et documenté. Il découle de DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée », DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal », DEC-066 « Commande sans fil corrompue : aucun contrôle d'intégrité » et DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée ». Les réglages sauvegardés sont rechargés à chaque démarrage (DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage ») : seule la reprogrammation du drone (SCN-008 « Mise en service : programmation du drone ») rétablit les valeurs d'origine. Limite d'emploi à inscrire dans « Risques acceptés » — `projets/boomrone/risques-acceptes.md`. Précision du tableau de DEC-043 « Commandes sans fil acceptées selon l'état du drone » : Modifier est acceptée en vol, Sauvegarder est ignorée en vol et acceptée au sol. Point nommé sans être tranché : il reste à vérifier en architecture que la reprogrammation efface bien la zone des réglages sauvegardés ; sinon elle ne rétablirait pas les valeurs d'origine.
+**Alternatives écartées :** borner ou limiter les paramètres de vol ; ajouter une commande de retour aux valeurs d'origine (déjà écartée dans DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée »).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-099 « Paramètres de vol sans borne : modification en vol et sauvegarde par un tiers »
+**Précise :** DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée », DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal », DEC-066 « Commande sans fil corrompue : aucun contrôle d'intégrité » et DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée ».
+
+### DEC-122 — Jalon avant les besoins : promesse de l'architecte, sans modification de l'outil de porte
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Décision :** Le jalon de DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir » (lever DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m » et DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal » avant les besoins) reste une promesse de l'architecte, inscrite ici : l'architecte n'ouvre pas la phase « besoins » tant que ces deux doutes sont ouverts. L'outil `tools/check_traceability.py` n'est pas modifié ; ces doutes restent non bloquants pour la porte « scénarios ». Point nommé sans être tranché : aucun contrôle outillé ne retient l'architecte, la promesse repose sur sa seule discipline et sur la relecture de l'utilisateur.
+**Alternatives écartées :** marquer ces doutes bloquants (ils bloqueraient la porte « scénarios », ce que l'utilisateur ne veut pas) ; ajouter à l'outil une option de phase ou une échéance par doute.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-104 « Jalon avant les besoins non contrôlé par l'outil de porte »
+**Précise :** DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir ».
+
+### DEC-123 — Sauvegarder ignorée aussi à l'état Premier appui validé
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** La commande sans fil « Sauvegarder » est aussi ignorée à l'état « Premier appui validé » (bouton maintenu de 1 à 2 s, seul état d'où l'armement est possible : DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série »), comme à l'état armé (DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer »). Cette décision **étend** DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer » et modifie la ligne « Allumé, en attente d'un appui » du tableau de DEC-043 « Commandes sans fil acceptées selon l'état du drone » (le tableau de `00-scenarios.md` a désormais une ligne « Premier appui validé »). Points nommés sans être tranchés : (1) l'état « Série d'appuis en cours » n'est pas tranché : Sauvegarder y reste acceptée à ce jour (noté dans DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite ») ; (2) une écriture commencée à l'état « Allumé » et encore en cours à l'armement ou au relâchement reste à traiter en architecture (DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite ») ; (3) DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite » reste ouvert pour ses autres aspects (écriture en vol, coupure pendant l'écriture, mémoire jamais écrite).
+**Alternatives écartées :** Sauvegarder acceptée à l'état « Premier appui validé » avec traitement de l'écriture en cours en architecture seulement.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun) ; répond à la question complémentaire de DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite », qui reste ouvert
+**Étend :** DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer ».
+**Modifie :** DEC-043 « Commandes sans fil acceptées selon l'état du drone » (état « Premier appui validé »).
+
+### DEC-124 — Registre consolidé des risques acceptés dans un fichier dédié
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Décision :** Les risques acceptés sont consolidés dans un fichier dédié, « Risques acceptés » — `projets/boomrone/risques-acceptes.md` : un risque par ligne, avec son numéro, sa décision ou son doute d'origine (ID « titre »), son scénario et la limite d'emploi à documenter. Le fichier reprend les quinze risques de `reprise.md` et les risques acceptés du journal qui n'y figuraient pas (vol libre, mémoire corrompue, valeurs d'origine fixes, armement sans autotest, réglages sans borne, drone attrapé ou posé sur un obstacle, défaillance d'un capteur ou d'un moteur, choc, absence de contrôle de la batterie en vol, absence de coupure sur choc, commande corrompue, lancer hors plage, lieu inconnu du drone), plus l'appui bref pendant la garde (DEC-119 « Appui bref pendant la garde du bouton, relâché avant la fin : risque accepté et documenté ») et les paramètres aberrants (DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule »). Chaque décision d'origine y est citée avec son ID et son titre. `reprise.md` y renvoie au lieu de les lister. Point nommé sans être tranché : DEC-045 « Seuils de sécurité réglables comme le reste, sans borne » est remplacée par DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » : elle n'est pas un risque en vigueur ; ne reste sans borne que ce que DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal » laisse sans borne (réglages hors seuils de sécurité).
+**Alternatives écartées :** liste maintenue dans `reprise.md` ; registre dans le journal des décisions.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-102 « Registre consolidé des risques acceptés »
+
+### DEC-125 — Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Décision :** Les limites d'emploi sont portées à la connaissance de l'utilisateur par une notice, écrite à la phase « besoins », qui reprend « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (DEC-124 « Registre consolidé des risques acceptés dans un fichier dédié »). Le drone n'affiche rien lui-même, hors statut sans fil (ni étiquette sur le drone, ni signal dédié). Points nommés sans être tranchés : (1) la notice est un livrable documentaire ; si elle donne lieu à des besoins, leur scénario amont reste à choisir (règle de la phase 0 : chaque besoin cite au moins un scénario ; DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter ») ; (2) la plage de lancer et le lieu (DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol » ; DEC-040 « Périmètre d'emploi visé : l'appartement ; gymnase et jardin en essais complémentaires » ; DEC-041 « Lancer hors plage ou trop rapide pour la zone : responsabilité de l'utilisateur » ; DEC-042 « Plage de lancer inchangée, aucune zone libre ni distance aux personnes, le drone ne connaît pas le lieu ») relèvent de la notice, la plage de lancer pouvant changer après DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir ».
+**Alternatives écartées :** étiquette sur le drone ; aucune information de l'utilisateur ; affichage de l'information par le drone lui-même.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? »
+**Précise :** DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter ».
+
+### DEC-126 — Protection de sous-tension de la batterie : scénario court, coupure sans signal propre
+**Date :** 2026-10-28
+**Concerne :** SCN-012 « Dégradé : sous-tension de la batterie »
+**Décision :** Un scénario court est créé pour la protection de sous-tension (décharge profonde) de la batterie : SCN-012 « Dégradé : sous-tension de la batterie ». En cas de sous-tension, le drone se coupe sans signal propre, comme pour une coupure d'alimentation : moteurs arrêtés, drone verrouillé (DEC-097 « Redémarrage ou chute de tension, même en phase Lancé : moteurs arrêtés, drone verrouillé »), redémarrage selon DEC-098 « Redémarrage après une coupure en vol : Allumé seulement si immobile et à plat, sinon échec d'initialisation ». Aucun nouveau signal (le tableau reste à dix-sept signaux). Le seuil de sous-tension est une valeur à fixer en architecture (ajouté à DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture »). Cette décision **modifie** DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter » pour la seule protection matérielle de sous-tension (titre inchangé) : charge, remplacement, stockage, drone laissé allumé et programmation restent hors périmètre. **Contradiction nommée :** l'utilisateur avait d'abord proposé « contraintes hors scénario » ; après rappel de la règle « chaque besoin cite au moins un scénario » (`CLAUDE.md` §2), il a choisi « Non, un scénario court ». **Non couvertes, à voir en architecture, non traitées ici :** surintensité, inversion de polarité, surchauffe de la batterie ; la CEM n'est pas non plus traitée par cette décision, et le brown-out du microcontrôleur n'est couvert que par la chute de tension de DEC-097 « Redémarrage ou chute de tension, même en phase Lancé : moteurs arrêtés, drone verrouillé » (lecture de l'architecte). **Tensions nommées sans être tranchées :** (1) DEC-013 « Pas de contrôle de la batterie en vol » : une coupure sur sous-tension en vol est soit un contrôle de la batterie en vol, soit une protection matérielle hors logiciel de vol, à qualifier en architecture ; (2) DEC-004 « Batterie vérifiée à l'armement : pas d'armement si batterie faible » : le seuil d'armement garantit un vol complet avec marge, alors que le seuil de sous-tension coupe en vol ; leur relation (le seuil d'armement doit rester au-dessus du seuil de sous-tension) est à fixer en architecture ; (3) un drone qui tombe sur sous-tension en vol ne signale rien, par cohérence avec DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté » ; (4) le « douzième scénario » écarté dans le texte de DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter » concernait un scénario de maintenance de la batterie ; SCN-012 « Dégradé : sous-tension de la batterie » est un scénario de protection, d'un autre objet, et des besoins sur la sous-tension pourront le citer ; (5) un redémarrage avec une batterie encore déchargée (tension remontée à vide) n'est pas décrit : risque de redémarrages répétés et de décharge profonde, à traiter en architecture matérielle ; le risque « drone laissé allumé » de « Risques acceptés » — `projets/boomrone/risques-acceptes.md` reste documenté, la protection n'étant pas garantie suffisante.
+**Alternatives écartées :** « contraintes hors scénario » (première proposition de l'utilisateur) ; exception de méthode consignée ; protections de surintensité, d'inversion de polarité et de surchauffe (non retenues).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-107 « Exigences sans scénario amont : protections de la batterie, sous-tension, brown-out, CEM »
+**Modifie :** DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter » (protection matérielle de sous-tension seulement).
+**Précise :** DEC-097 « Redémarrage ou chute de tension, même en phase Lancé : moteurs arrêtés, drone verrouillé ».
 
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
