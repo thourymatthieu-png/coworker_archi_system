@@ -63,9 +63,6 @@ flowchart TD
         Atterr("Atterrissage")
     end
     Pose("Posé, moteurs coupés")
-    NoteInit["Initialisation en cours : bouton enfoncé ignoré jusqu'au premier relâchement, Modifier acceptée, Sauvegarder ignorée, Décoller et Arrêt ignorées. Échec d'initialisation : bouton ignoré pour toujours, sans effet ni signal, Modifier et Sauvegarder acceptées (DEC-127), Décoller et Arrêt ignorées"]
-    NoteEteint["Toute coupure d'alimentation, y compris la sous-tension de la batterie (SCN-012), mène à Éteint, moteurs arrêtés"]
-    NoteArme["Série d'appuis en cours, Premier appui validé et Armé : la commande sans fil Sauvegarder est ignorée"]
     DepuisB{{"Depuis diagramme b : mise sous tension"}}
     DepuisC{{"Depuis diagramme c : mise sous tension"}}
     ARelA("Bouton à relâcher")
@@ -89,28 +86,21 @@ flowchart TD
     Serie -->|"2e appui, signal Appui validé"| Serie
     Serie -->|"2 s sans appui, compteur à zéro"| Attente
     Serie -->|"Appui de moins de 1 s, compteur à zéro"| Attente
-    Serie -->|"3e appui, signal Mode réglage"| VersC
+    Serie -->|"3e appui OK, signal Mode réglage"| VersC
     Serie -->|"3e appui refusé, signal Refus"| B1
     Premier -->|"2 s, conditions OK, signal Prêt"| Arme
     Premier -->|"2 s, conditions KO, signal Refus"| B1
     Arme -->|"Relâché entre 2 et 10 s, signal Lancé"| Lance
-    Arme -->|"Plus de 10 s, signal Désarmement"| B1
+    Arme -->|"Plus de 10 s, Désarmement"| B1
     Lance -->|"200 ms, signal Stabilisation"| Stab
     Lance -->|"Coupure d'alimentation ou chien de garde"| B3
     Stab -->|"En l'air, signal En vol stationnaire"| Stat
     Stat -->|"Après 10 s, signal Atterrissage"| Atterr
     Atterr -->|"Moins de 2 à 3 cm, signal Posé"| Pose
-    Vol -->|"Coupure des moteurs ou d'alimentation"| B4
+    Vol -->|"Coupure"| B4
     Pose -->|"Verrouillé, compteur à zéro"| B5
-    NoteInit -.- Init
-    NoteInit -.- EchecInit
-    NoteEteint -.- Eteint
-    NoteArme -.- Arme
-    NoteArme -.- Premier
     classDef renvoi stroke-dasharray: 5 4
-    classDef note fill:#fff8dc,stroke:#999
     class DepuisB,DepuisC,VersC,B1,B3,B4,B5,DepuisB2 renvoi
-    class NoteInit,NoteEteint,NoteArme note
 ```
 
 Légende du diagramme a :
@@ -126,6 +116,7 @@ Légende du diagramme a :
 - Sauvegarder n'est pas acceptée à partir de l'appui validé ; une écriture déjà commencée reste un risque accepté (DEC-136 « Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté »). Elle est ignorée aux états « Série d'appuis en cours » (DEC-128 « Sauvegarder ignorée aussi à l'état Série d'appuis en cours »), « Premier appui validé » et « Armé, prêt à être lancé » (« Modifier » reste acceptée), et en vol (DEC-131 « Sauvegarder ignorée en vol : confirmation du tableau des commandes »).
 - Si le bouton est encore enfoncé à la fin de l'initialisation, il est ignoré jusqu'au premier relâchement (DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement ») ; le signal « Allumé » à ce moment n'est pas décidé (DOU-112 « Bouton enfoncé jusqu'à la fin de l'initialisation : état et signal »).
 - À l'état « Échec d'initialisation », Sauvegarder reste acceptée : un tiers à portée peut écraser les réglages enregistrés, risque accepté (DEC-127 « Sauvegarder acceptée à l'état Échec d'initialisation : écrasement des réglages par un tiers, risque accepté »).
+- « Décoller » et « Arrêt » (commandes sans fil) sont ignorées pendant « Initialisation en cours » et à « Échec d'initialisation » (DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées »).
 - Pendant « Initialisation en cours », Sauvegarder est ignorée (réglages enregistrés pas encore chargés) et Modifier reste acceptée (DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché »).
 
 Décisions citées (dont l'effet figure dans ce diagramme ou sa légende) :
@@ -237,17 +228,26 @@ flowchart TD
     VolReg("Vol de réglage")
     Eteint("Éteint")
     VersA{{"Vers diagramme a : mise sous tension"}}
+    subgraph Issues["Six issues d'un vol de réglage"]
+        I1("3 s de stationnaire : signaux Atterrissage puis Posé")
+        I2("Bouton : signal Arrêt par le bouton")
+        I3("Commande Arrêt : signal Arrêt sans fil")
+        I4("Signal Échec de stabilisation")
+        I5("Signal Basculement")
+        I6("15 s écoulées : signal Délai de descente dépassé")
+    end
     NoteBouton["Au sol, le bouton n'a aucun effet et ne donne aucun signal, le maintien du 3e appui est ignoré jusqu'au premier relâchement, en vol de réglage il est l'arrêt d'urgence"]
     RCA -->|"3e appui, signal Mode réglage"| Reglage
     Reglage -->|"Décoller, batterie suffisante"| VolReg
     Reglage -->|"Batterie insuffisante, signal Refus"| Reglage
-    VolReg -->|"3 s stationnaire, Atterrissage, Posé"| Reglage
-    VolReg -->|"Bouton, signal Arrêt par le bouton"| Reglage
-    VolReg -->|"Arrêt sans fil, signal Arrêt sans fil"| Reglage
-    VolReg -->|"Signal Échec de stabilisation"| Reglage
-    VolReg -->|"Signal Basculement"| Reglage
-    VolReg -->|"15 s, signal Délai de descente dépassé"| Reglage
     VolReg -->|"Coupure d'alimentation, moteurs arrêtés"| Eteint
+    VolReg --> I1
+    VolReg --> I2
+    VolReg --> I3
+    VolReg --> I4
+    VolReg --> I5
+    VolReg --> I6
+    Issues -->|"Retour au mode réglage, moteurs coupés"| Reglage
     Reglage -->|"Batterie enlevée, seule sortie"| Eteint
     Eteint -->|"Batterie rebranchée"| VersA
     NoteBouton -.- Reglage

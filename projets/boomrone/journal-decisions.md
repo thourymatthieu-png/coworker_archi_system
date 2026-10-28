@@ -1258,4 +1258,32 @@ Format (exemple, non analysé) :
 **Doutes levés :** (aucun)
 **Précise :** DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture », DEC-128 « Sauvegarder ignorée aussi à l'état Série d'appuis en cours » et DEC-103 « Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal ».
 
+### DEC-137 — Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé » et SCN-002 « Échec : stationnaire non atteint dans le délai »
+**Décision :** La plage de lancer de DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol » n'est pas resserrée maintenant : elle reste provisoire et sera validée par essais sur prototype. Le jalon « analyse de faisabilité avant les besoins » de DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir » est abandonné pour DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m » : le doute reste ouvert jusqu'aux essais et n'empêche plus d'ouvrir la phase « besoins ». Réponse donnée d'abord (« ne rien changer, valider par essais »), puis confirmée après rappel de la contradiction avec DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir » et DEC-122 « Jalon avant les besoins : promesse de l'architecte, sans modification de l'outil de porte ». Risque nommé : besoins et exigences écrits sur une plage peut-être infaisable (le bas de la plage, drone lancé à l'envers depuis 1,5 m, laisse environ 0,4 s avant le sol selon le calcul de la relecture critique), à reprendre après les essais. Portée : DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m » seulement ; le sort de DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal », de la part de DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture » liée à DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir » et de DOU-110 « La reprogrammation efface-t-elle la zone des réglages sauvegardés ? » n'est pas encore tranché.
+**Alternatives écartées :** vitesse minimale plus haute (recommandée) ; hauteur minimale plus haute ; orientation restreinte ; calcul rapide puis essais.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun)
+**Modifie :** DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir » et DEC-122 « Jalon avant les besoins : promesse de l'architecte, sans modification de l'outil de porte ».
+
+### DEC-138 — Tolérance d'immobile et part de DOU-058 liée à la faisabilité : jalon déplacé aux essais
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé »
+**Décision :** Même report aux essais que DEC-137 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée » : DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal » et la part de DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture » liée à DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir » (tolérance de « immobile », plage de lancer) restent ouverts jusqu'aux essais sur prototype et n'empêchent plus d'ouvrir la phase « besoins ». Les valeurs restent provisoires dans les scénarios. Risque nommé : un besoin d'armement écrit avant de connaître la tolérance réaliste d'un drone tenu en main peut devoir être repris après les essais. Non tranché : DOU-110 « La reprogrammation efface-t-elle la zone des réglages sauvegardés ? » (question de fait sur la reprogrammation, à poser séparément).
+**Alternatives écartées :** garder l'échéance « avant les besoins » pour ces deux doutes.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun)
+**Modifie :** DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir » et DEC-122 « Jalon avant les besoins : promesse de l'architecte, sans modification de l'outil de porte ».
+**Précise :** DEC-137 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée ».
+
+### DEC-139 — Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine
+**Date :** 2026-10-28
+**Concerne :** SCN-008 « Mise en service : programmation du drone » et SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** La reprogrammation du drone réécrit la zone des réglages sauvegardés avec les valeurs d'origine du logiciel. Elle reste ainsi le recours des quatre risques de « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (réglages aberrants envoyés par un tiers, mémoire corrompue, écriture interrompue par une coupure, mémoire jamais écrite), selon DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule » et DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée ». Conséquence acceptée : les réglages sauvegardés sont perdus à chaque reprogrammation. Les valeurs d'origine sont fixes et propres au logiciel (DEC-130 « Mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté »). Le mécanisme de réécriture est à traiter en architecture (`notes-architecture.md`).
+**Alternatives écartées :** zone non touchée (les quatre risques perdent leur recours) ; effacement sans valeurs d'origine (demande de reconnaître une zone vide, écarté par DEC-130 « Mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté »).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28 (option recommandée par l'architecte).
+**Doutes levés :** DOU-110 « La reprogrammation efface-t-elle la zone des réglages sauvegardés ? »
+**Précise :** DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule ».
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
