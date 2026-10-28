@@ -4,11 +4,13 @@
 
 | Terme | Définition | Document de première apparition |
 |---|---|---|
-| Armé / armement / désarmement | État où le drone est prêt à voler : le bouton a été appuyé 2 secondes et la batterie est suffisante. L'armement est le passage à cet état, le désarmement le retour à « allumé, en attente d'un appui ». | `00-scenarios.md` |
+| Armé / armement / désarmement | État où le drone est prêt à être lancé : le bouton est maintenu depuis 2 secondes au moins et 10 secondes au plus depuis l'appui initial, la batterie est suffisante, et le drone est immobile et à plat (DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone »). L'armement est le passage à cet état (signal Prêt), le désarmement le retour à « allumé, en attente d'un appui » après plus de 10 secondes d'appui (signal Désarmement). | `00-scenarios.md` |
+| Appui validé | Bouton maintenu 1 seconde, avec le signal visuel et sonore « Appui validé » à la validation ; moins de 1 seconde ne fait rien (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court »). Les appuis validés comptent « d'affilée » si l'écart entre deux est d'environ 2 secondes au plus (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage »). | `journal-decisions.md` |
+| Armement refusé | Signal unique donné à 2 secondes d'appui quand l'armement est impossible (batterie faible, drone en mouvement, drone pas à plat) ; la cause est transmise par l'état envoyé sur le sans fil (DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone »). Remplace l'ancien signal « Batterie faible ». | `journal-decisions.md` |
 | Allumé, en attente d'un appui | État du drone après la mise sous tension réussie, avant tout appui sur le bouton (anciennement « initialisé »). | `00-scenarios.md` |
 | Verrouillé | État du drone après un posé ou une coupure des moteurs : il ne reprend jamais le vol seul ; un nouvel appui de 2 secondes est nécessaire (identique à l'état « Allumé, en attente d'un appui » : DEC-047 « L'état verrouillé est le même que l'état allumé, en attente d'un appui »). | `journal-decisions.md` |
-| Prêt | Signal donné quand le drone est armé et peut être lancé. | `00-scenarios.md` |
-| Lancé | Le bouton est relâché après l'armement ; les moteurs démarrent peu après. | `00-scenarios.md` |
+| Prêt | Signal donné quand le drone est armé et peut être lancé ; distinct du signal « Appui validé ». | `00-scenarios.md` |
+| Lancé | Signal donné au relâchement du bouton armé, et phase qui court de ce relâchement au démarrage des moteurs, 200 ms plus tard, même sans vrai lancer (DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »). Pendant cette phase, l'arrêt et les commandes sans fil sont ignorés. À distinguer de « Armé », qui est l'état avant le relâchement. | `00-scenarios.md` |
 | Stabilisation | Phase qui suit le lancer, où le drone cherche à se redresser ; être retourné ou très incliné y est normal. | `00-scenarios.md` |
 | Vol stationnaire (stationnaire) | Le drone est immobile en l'air et à plat ; critère chiffré dans DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs », complété par une condition « en l'air » : hauteur mesurée sous le drone supérieure à une hauteur minimale (DEC-049 « Stationnaire déclaré seulement en l'air, au-dessus d'une hauteur minimale »). Un drone posé ou tenu en main n'est jamais en stationnaire. | `00-scenarios.md` |
 | Atterrissage | Descente lente après les 10 secondes de stationnaire. | `00-scenarios.md` |
@@ -17,12 +19,13 @@
 | Moteurs coupés | Les moteurs sont arrêtés ; le drone tombe s'il est en l'air. | `00-scenarios.md` |
 | Basculement | Le drone s'incline fortement ou se retourne après le stationnaire (SCN-006 « Échec : inclinaison excessive après le stationnaire »). | `00-scenarios.md` |
 | Arrêt d'urgence | Coupure immédiate des moteurs en vol, par l'un de deux moyens : un appui sur le bouton (signal « Arrêt par le bouton ») ou une commande d'arrêt sans fil (signal « Arrêt sans fil »), voir DEC-031 « Arrêt du drone lancé : bouton et commande d'arrêt sans fil ». | `00-scenarios.md` |
-| Échec d'initialisation | Le drone n'est pas en état de voler au démarrage ; il refuse de s'armer et donne un signal distinct. | `00-scenarios.md` |
+| Échec d'initialisation | Le drone n'est pas en état de voler au démarrage ; il refuse de s'armer et donne un signal distinct. L'échec est définitif jusqu'au débranchement de la batterie (DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie »). | `00-scenarios.md` |
 | Signal | Information donnée à l'utilisateur ; la forme (lumière, son, suivi) est à définir. Dix-sept signaux sont listés dans `00-scenarios.md`. | `00-scenarios.md` |
+| Drone | Désigne toujours Boomrone, le drone de ce projet. Aucun autre drone n'est désigné dans les documents. | `00-scenarios.md` |
 | Appareil de suivi | Téléphone ou ordinateur relié sans fil au drone, qui affiche les variables du vol et permet de le régler. Synonymes écartés : « un autre appareil » (utilisé dans des titres de décisions). | `00-scenarios.md` |
 | Lien sans fil | Liaison entre le drone et l'appareil de suivi. | `00-scenarios.md` |
 | Lien perdu | Le drone ne reçoit plus l'appareil de suivi ; délai à définir (DOU-036 « Après quel délai le lien sans fil est-il considéré comme perdu ? »). | `00-scenarios.md` |
-| Mode réglage | Mode atteint par trois appuis sur le bouton, drone au sol, où l'on règle le vol par le sans fil ; on en sort par coupure de la batterie. | `00-scenarios.md` |
+| Mode réglage | Mode atteint par trois appuis validés d'affilée, drone posé et immobile, où l'on règle le vol par le sans fil ; le bouton n'y arme jamais (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage ») ; on en sort par coupure de la batterie. | `00-scenarios.md` |
 | Vol de réglage | Vol court déclenché par commande sans fil en mode réglage : décollage du sol, 3 secondes de stationnaire, pose. | `00-scenarios.md` |
 | Variables du vol | Données renvoyées à l'appareil de suivi : commandes des moteurs, hauteur, données de position. | `00-scenarios.md` |
 | Protège-hélices | Protection des hélices, obligatoire (DEC-016 « Public adulte, protège-hélices obligatoires »). | `journal-decisions.md` |

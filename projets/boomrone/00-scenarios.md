@@ -3,9 +3,9 @@
 > **Aperçu** : Boomrone est un drone de poche pour adultes, lancé à la main dans un appartement (gymnase et jardin en essais complémentaires) ; il se stabilise, reste 10 s en stationnaire, atterrit doucement et informe l'utilisateur à chaque étape.
 > **État de la phase** :
 > - SCN-001 « Vol nominal : de la batterie au posé » à SCN-011 « Dégradé : coupure d'alimentation en vol » : statut Proposé, à valider à la porte « scénarios ».
-> - 0 doute bloquant ouvert, 26 non bloquants (voir `registre-doutes.md`).
-> - Comportements alignés sur DEC-054 « Chrono de 10 secondes compté depuis l'appui initial » à DEC-069 « Commandes sans fil reçues pendant la phase Lancé : ignorées » (décisions du 2026-10-28) ; les relectures de porte sont à refaire sur cette version.
-> - Valeurs chiffrées provisoires (délai de 2 s, plage de lancer, angle limite de 60°) : à confirmer avant la porte « exigences », voir DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences ».
+> - 0 doute bloquant ouvert, 30 non bloquants (voir `registre-doutes.md`).
+> - Comportements alignés sur DEC-054 « Chrono de 10 secondes compté depuis l'appui initial » à DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie » (décisions du 2026-10-28), dont le nouveau modèle du bouton (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court », DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage », DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone », DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard ») ; les relectures de porte sont à refaire sur cette version.
+> - Valeurs chiffrées provisoires (seuils du bouton de 1 s, 2 s et 10 s et délai d'environ 2 s entre appuis, voir DOU-080 « Seuils de temps du bouton : 1 s, 2 s, 10 s et délai entre appuis » ; délai de 2 s pour le stationnaire, plage de lancer, angle limite de 60°) : à confirmer avant la porte « exigences », voir DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences ».
 > - Les scénarios décrivent l'intention, sans solution technique : les solutions évoquées sont des propositions d'architecture, voir DEC-053 « Solutions techniques déplacées en propositions d'architecture, seule l'intention reste décidée ».
 > - Valeurs d'origine et bornes numériques des réglages : à fixer en architecture, voir DOU-058 « Valeurs d'origine et bornes numériques à fixer en architecture ».
 
@@ -20,11 +20,12 @@ sequenceDiagram
     participant D as Boomrone
     U->>D: Branche la batterie
     D->>U: Signal Allumé
-    U->>D: Appuie sur le bouton (2 s)
-    D->>U: Signal Prêt
-    U->>D: Lance et relâche le bouton
+    U->>D: Appuie sur le bouton et le maintient
+    D->>U: Signal Appui validé (après 1 s)
+    D->>U: Signal Prêt (après 2 s au total, drone immobile et à plat, batterie suffisante)
+    U->>D: Lance et relâche le bouton (entre 2 s et 10 s d'appui)
     D->>U: Signal Lancé
-    Note over D: Juste après, les moteurs démarrent
+    Note over D: 200 ms plus tard, les moteurs démarrent
     D->>U: Signal Stabilisation
     Note over D: Au plus 2 s plus tard, stationnaire (en l'air, au-dessus de la hauteur minimale, DEC-049)
     D->>U: Signal En vol stationnaire
@@ -60,14 +61,14 @@ stateDiagram-v2
     [*] --> Eteint
     Eteint --> Attente : Batterie branchée - Signal Allumé
     Eteint --> EchecInit : Initialisation impossible, dont drone trop incliné (DEC-067) - Signal Échec d'initialisation
-    EchecInit --> Eteint : Batterie débranchée puis rebranchée
-    Attente --> Reglage : Trois appuis rapides, drone posé (DEC-058) - Signal Mode réglage
-    Reglage --> Eteint : Batterie coupée
-    Attente --> Attente : Appui de moins de 2 s - Signal Appui trop court
-    Attente --> Attente : Batterie faible - Signal Batterie faible
-    Attente --> Arme : Appui de 2 s, drone immobile (DEC-056) - Signal Prêt
+    EchecInit --> Eteint : Définitif jusqu'au débranchement puis rebranchement de la batterie (DEC-075)
+    Attente --> Attente : Appui maintenu 1 s, moins de 1 s sans effet (DEC-070) - Signal Appui validé
+    Attente --> Reglage : Trois appuis validés d'affilée, drone posé et immobile, sans armement (DEC-071) - Signal Mode réglage
+    Reglage --> Eteint : Batterie coupée, le bouton n'arme jamais en mode réglage (DEC-027, DEC-071)
+    Attente --> Attente : Appui de 2 s, batterie faible ou drone en mouvement ou pas à plat (DEC-072) - Signal Armement refusé
+    Attente --> Arme : Appui de 2 s, batterie suffisante, drone immobile et à plat (DEC-072) - Signal Prêt
     Arme --> Attente : Appui de plus de 10 s depuis l'appui initial (DEC-054) - Signal Désarmement
-    Arme --> Lance : Lancer et relâchement - Signal Lancé
+    Arme --> Lance : Relâchement entre 2 s et 10 s d'appui (DEC-073) - Signal Lancé
     Lance --> Vol : Moteurs démarrent, arrêt et commandes sans fil ignorés jusque-là (DEC-062, DEC-069) - Signal Stabilisation
     Atterr --> Pose : Moins de 2 à 3 cm du sol - Signal Posé
     Stab --> Coupe : Stationnaire non atteint à temps - Signal Échec de stabilisation
@@ -91,25 +92,26 @@ Précisions des décisions du 2026-10-28 (DEC-054 « Chrono de 10 secondes compt
 
 - Le chrono de 10 secondes du désarmement compte depuis l'appui initial (DEC-054 « Chrono de 10 secondes compté depuis l'appui initial »).
 - Après le lancer, tout appui ou relâchement du bouton est ignoré pendant une courte garde (DEC-055 « Bouton ignoré pendant une courte garde après le lancer »).
-- L'armement exige un drone immobile, au sol ou dans la main, sans autotest (DEC-056 « Armement : drone immobile, sans autotest »).
+- L'armement exige un drone immobile et à plat, au sol ou dans la main, sans autotest (DEC-056 « Armement : drone immobile, sans autotest » ; DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone »).
 - Un bouton déjà enfoncé à la mise sous tension, pendant l'initialisation ou après le désarmement est ignoré jusqu'au premier relâchement (DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement »).
 - Un drone qui redémarre immobile au sol après une coupure en vol est « Allumé », jamais armé (DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé »).
 - Pendant la phase « Lancé », avant le démarrage des moteurs, l'arrêt et toutes les commandes sans fil sont ignorés (DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs » ; DEC-069 « Commandes sans fil reçues pendant la phase Lancé : ignorées »).
 - Un logiciel bloqué en vol est coupé par un mécanisme indépendant, puis le drone redémarre (DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde »).
-- Le démarrage exige un drone à plat (DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal »).
+- Le démarrage exige un drone à plat (DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal »), et une initialisation en échec est définitive jusqu'au débranchement de la batterie (DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie »).
+- Modèle du bouton (décisions du 2026-10-28) : un appui maintenu 1 s est un appui validé, avec son signal, et moins de 1 s ne fait rien (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court ») ; les appuis validés comptent d'affilée si l'écart entre deux est d'environ 2 s au plus, et trois appuis entrent en mode réglage sans armer (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage ») ; à 2 s d'appui au total, le drone s'arme (signal Prêt) ou refuse (signal Armement refusé) (DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone ») ; relâché entre 2 s et 10 s, le drone donne le signal Lancé, puis les moteurs démarrent 200 ms plus tard, même sans vrai lancer (DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »).
 
-Dix-sept signaux (référence unique ; leur forme, lumière, son ou suivi, reste à définir : voir DOU-027 « Un signal distinct par information, ou par catégorie ? ») :
+Dix-sept signaux, après la refonte du bouton : signal « Appui trop court » supprimé, signal « Batterie faible » remplacé par « Armement refusé », signal « Appui validé » ajouté (référence unique ; leur forme, lumière, son ou suivi, reste à définir : voir DOU-027 « Un signal distinct par information, ou par catégorie ? ») :
 
 | N° | Signal | Déclencheur | Scénario |
 |---|---|---|---|
 | 1 | Allumé | Batterie branchée, drone en attente d'un appui | SCN-001 « Vol nominal : de la batterie au posé » |
 | 2 | Échec d'initialisation | Le drone n'est pas en état de voler au démarrage (en mouvement, trop incliné : DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal ») | SCN-010 « Échec : initialisation impossible au démarrage » |
-| 3 | Mode réglage | Trois appuis rapides sur le bouton au sol, sans signal pour les deux premiers (DEC-058 « Trois appuis : fenêtre courte, sans signal parasite ») | SCN-009 « Réglage et suivi du drone par le sans fil » |
-| 4 | Appui trop court | Bouton relâché avant 2 secondes | SCN-004 « Dégradé : bouton relâché avant 2 secondes » |
-| 5 | Batterie faible | Batterie sous le seuil à l'armement | SCN-003 « Échec : batterie faible à l'armement » |
-| 6 | Prêt | Bouton appuyé 2 secondes, drone armé | SCN-001 « Vol nominal : de la batterie au posé » |
+| 3 | Appui validé | Bouton maintenu 1 seconde, donné à la validation de chaque appui, y compris les deux premiers d'une série de trois (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court ») | SCN-004 « Dégradé : appui de moins de 2 secondes sur le bouton » |
+| 4 | Mode réglage | Troisième appui validé d'affilée, drone posé et immobile, sans armement (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage ») | SCN-009 « Réglage et suivi du drone par le sans fil » |
+| 5 | Armement refusé | Bouton maintenu 2 secondes, batterie faible, drone en mouvement ou pas à plat : un seul signal pour toutes les causes, la cause étant transmise par l'état envoyé sur le sans fil (DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone ») | SCN-003 « Échec : batterie faible à l'armement » |
+| 6 | Prêt | Bouton maintenu 2 secondes, batterie suffisante, drone immobile et à plat : drone armé | SCN-001 « Vol nominal : de la batterie au posé » |
 | 7 | Désarmement | Bouton appuyé plus de 10 secondes depuis l'appui initial (DEC-054 « Chrono de 10 secondes compté depuis l'appui initial ») | SCN-005 « Dégradé : bouton maintenu plus de 10 secondes » |
-| 8 | Lancé | Bouton relâché après armement | SCN-001 « Vol nominal : de la batterie au posé » |
+| 8 | Lancé | Bouton relâché entre 2 s et 10 s d'appui, drone armé (DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard ») | SCN-001 « Vol nominal : de la batterie au posé » |
 | 9 | Stabilisation | Moteurs démarrés | SCN-001 « Vol nominal : de la batterie au posé » |
 | 10 | En vol stationnaire | Stationnaire atteint | SCN-001 « Vol nominal : de la batterie au posé » |
 | 11 | Atterrissage | 10 secondes de stationnaire écoulées | SCN-001 « Vol nominal : de la batterie au posé » |
@@ -165,11 +167,12 @@ sequenceDiagram
     participant D as Boomrone
     U->>D: Pose le drone immobile et à plat, puis branche la batterie
     D->>U: Signal Allumé
-    U->>D: Appuie sur le bouton (2 s)
-    D->>U: Signal Prêt
-    U->>D: Lance et relâche le bouton
+    U->>D: Appuie sur le bouton et le maintient
+    D->>U: Signal Appui validé (après 1 s)
+    D->>U: Signal Prêt (après 2 s au total, drone immobile et à plat, batterie suffisante)
+    U->>D: Lance et relâche le bouton (entre 2 s et 10 s d'appui)
     D->>U: Signal Lancé
-    Note over D: Juste après, les moteurs démarrent
+    Note over D: 200 ms plus tard, les moteurs démarrent
     D->>U: Signal Stabilisation
     Note over D: Au plus 2 s plus tard, stationnaire (en l'air, au-dessus de la hauteur minimale, DEC-049)
     D->>U: Signal En vol stationnaire
@@ -179,17 +182,17 @@ sequenceDiagram
     D->>U: Signal Posé
 ```
 
-**Réfs amont :** Utilisateur (description initiale, entretien du 2026-10-27), DEC-016 « Public adulte, protège-hélices obligatoires », DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-005 « Un signal distinct pour chaque information », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-032 « Vol libre : le drone vole sans appareil de suivi », DEC-040 « Périmètre d'emploi visé : l'appartement ; gymnase et jardin en essais complémentaires », DEC-042 « Plage de lancer inchangée, aucune zone libre ni distance aux personnes, le drone ne connaît pas le lieu », DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage », DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol », DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs », DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs », DEC-020 « Atterrissage sur place », DEC-021 « Atterrissage lent, 15 secondes maximum, puis coupure des moteurs », DEC-022 « Moteurs coupés à moins de 2 à 3 cm du sol », DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler », DEC-017 « Pas de protection supplémentaire contre les hélices en rotation sans lancer », DEC-046 « Délai de descente dépassé : signal distinct, moteurs coupés, drone verrouillé », DEC-047 « L'état verrouillé est le même que l'état allumé, en attente d'un appui », DEC-049 « Stationnaire déclaré seulement en l'air, au-dessus d'une hauteur minimale », DEC-012 « Couper les moteurs si le drone bascule après le stationnaire », DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences », DEC-055 « Bouton ignoré pendant une courte garde après le lancer », DEC-056 « Armement : drone immobile, sans autotest », DEC-057 « Pas de détection dédiée d'un drone attrapé ou posé sur un obstacle », DEC-060 « Défaillance d'un capteur ou d'un moteur en vol : hors périmètre », DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs », DEC-063 « Choc contre un obstacle ou un plafond : aucune réaction dédiée », DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal »
+**Réfs amont :** Utilisateur (description initiale, entretien du 2026-10-27), DEC-016 « Public adulte, protège-hélices obligatoires », DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-005 « Un signal distinct pour chaque information », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-032 « Vol libre : le drone vole sans appareil de suivi », DEC-040 « Périmètre d'emploi visé : l'appartement ; gymnase et jardin en essais complémentaires », DEC-042 « Plage de lancer inchangée, aucune zone libre ni distance aux personnes, le drone ne connaît pas le lieu », DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage », DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol », DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs », DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs », DEC-020 « Atterrissage sur place », DEC-021 « Atterrissage lent, 15 secondes maximum, puis coupure des moteurs », DEC-022 « Moteurs coupés à moins de 2 à 3 cm du sol », DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler », DEC-017 « Pas de protection supplémentaire contre les hélices en rotation sans lancer », DEC-046 « Délai de descente dépassé : signal distinct, moteurs coupés, drone verrouillé », DEC-047 « L'état verrouillé est le même que l'état allumé, en attente d'un appui », DEC-049 « Stationnaire déclaré seulement en l'air, au-dessus d'une hauteur minimale », DEC-012 « Couper les moteurs si le drone bascule après le stationnaire », DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences », DEC-055 « Bouton ignoré pendant une courte garde après le lancer », DEC-056 « Armement : drone immobile, sans autotest », DEC-057 « Pas de détection dédiée d'un drone attrapé ou posé sur un obstacle », DEC-060 « Défaillance d'un capteur ou d'un moteur en vol : hors périmètre », DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs », DEC-063 « Choc contre un obstacle ou un plafond : aucune réaction dédiée », DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal », DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court », DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone », DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »
 **Type :** Nominal
 **Acteurs :** Utilisateur. Un appareil de suivi peut être relié au drone, mais n'est pas nécessaire (DEC-032 « Vol libre : le drone vole sans appareil de suivi »).
 **Situation de départ :** drone hors tension, muni de ses protège-hélices, batterie chargée, dans un appartement (périmètre visé : DEC-040 « Périmètre d'emploi visé : l'appartement ; gymnase et jardin en essais complémentaires »), sans vent, avec ou sans appareil de suivi. Gymnase et jardin : essais complémentaires, non garantis. Le drone ne connaît pas le lieu ; un lieu trop petit pour la plage de lancer relève de l'utilisateur (DEC-042 « Plage de lancer inchangée, aucune zone libre ni distance aux personnes, le drone ne connaît pas le lieu »). Valeurs provisoires : le délai de 2 s pour atteindre le stationnaire (DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs »), la plage de lancer de 0,5 à 4 m/s depuis au moins 1,5 m du sol, limites de la plage comprises (DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol »), et l'angle limite de 60° (DEC-012 « Couper les moteurs si le drone bascule après le stationnaire ») valent pour la porte « scénarios » ; ils sont à confirmer par analyse ou par essais avant la porte « exigences » (DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences »).
 **Déroulé :**
 1. L'utilisateur pose le drone immobile et à plat, et branche la batterie, sans y toucher pendant quelques secondes (DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue »). Un drone trop incliné ne s'initialise pas : voir SCN-010 « Échec : initialisation impossible au démarrage » et DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal ».
 2. Le drone démarre en chargeant ses derniers réglages enregistrés depuis sa mémoire non volatile, sans aucun échange sans fil (DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage »), puis informe l'utilisateur qu'il est allumé et en attente d'un appui sur le bouton.
-3. L'utilisateur prend le drone et appuie sur le bouton.
-4. Après 2 secondes d'appui, si la batterie est suffisante (SCN-003 « Échec : batterie faible à l'armement ») et le drone immobile, au sol ou dans la main, sans autotest (DEC-056 « Armement : drone immobile, sans autotest »), le drone informe qu'il est prêt à être lancé.
-5. L'utilisateur lance le drone à la main, vers le haut et vers l'avant, dans n'importe quelle orientation, à 0,5 à 4 m/s et depuis au moins 1,5 m du sol (DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol »), et arrête d'appuyer sur le bouton. Le drone informe qu'il est lancé. Tout appui ou relâchement parasite du bouton est ignoré pendant une courte garde qui suit le lancer (DEC-055 « Bouton ignoré pendant une courte garde après le lancer »).
-6. Juste après (DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs »), le drone démarre ses moteurs et cherche à se stabiliser. Pendant cet intervalle, avant le démarrage des moteurs, l'arrêt et les commandes sans fil sont ignorés (DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs »). Il informe qu'il est dans cette phase de stabilisation.
+3. L'utilisateur prend le drone et appuie sur le bouton, qu'il maintient. Après 1 s d'appui, le drone donne le signal « Appui validé » (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court »).
+4. Après 2 secondes d'appui au total depuis l'appui initial, si la batterie est suffisante et le drone immobile et à plat, au sol ou dans la main, sans autotest, le drone informe qu'il est prêt à être lancé : il est armé (DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone » ; DEC-056 « Armement : drone immobile, sans autotest »). Sinon, il donne le signal « Armement refusé » (SCN-003 « Échec : batterie faible à l'armement »).
+5. L'utilisateur lance le drone à la main, vers le haut et vers l'avant, dans n'importe quelle orientation, à 0,5 à 4 m/s et depuis au moins 1,5 m du sol (DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol »), et arrête d'appuyer sur le bouton, entre 2 s et 10 s d'appui (DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »). Le drone informe qu'il est lancé. Tout appui ou relâchement parasite du bouton est ignoré pendant une courte garde qui suit le lancer (DEC-055 « Bouton ignoré pendant une courte garde après le lancer »).
+6. 200 ms après le relâchement (DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs »), le drone démarre ses moteurs, même si le drone n'a pas été réellement lancé (risque accepté) et cherche à se stabiliser. Pendant cet intervalle, avant le démarrage des moteurs, l'arrêt et les commandes sans fil sont ignorés (DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs »). Il informe qu'il est dans cette phase de stabilisation.
 7. 2 secondes plus tard au plus (DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs »), le drone est en vol stationnaire : il maintient son altitude et dérive horizontalement d'au plus 30 cm sur 10 s (objectif à valider par essais, non garanti). Il est alors immobile en l'air et à plat, au-dessus d'une hauteur minimale mesurée sous lui (valeur à fixer en architecture) : un drone posé ou tenu immobile en main n'est jamais déclaré en vol stationnaire (DEC-049 « Stationnaire déclaré seulement en l'air, au-dessus d'une hauteur minimale »). Il informe qu'il est en vol stationnaire.
 8. Après 10 secondes de vol stationnaire, le drone descend et se pose à l'endroit où il est (DEC-020 « Atterrissage sur place »), à 0,5 m/s au plus au contact du sol, en 15 secondes au plus (DEC-021 « Atterrissage lent, 15 secondes maximum, puis coupure des moteurs »). Il informe qu'il atterrit.
 9. Dès qu'il est à moins de 2 à 3 cm du sol (DEC-022 « Moteurs coupés à moins de 2 à 3 cm du sol »), le drone coupe les moteurs et informe qu'il est posé. Si les 15 secondes de descente s'écoulent avant, il coupe aussi les moteurs, ne donne pas le signal « Posé » mais le signal « Délai de descente dépassé », et est verrouillé (DEC-046 « Délai de descente dépassé : signal distinct, moteurs coupés, drone verrouillé »).
@@ -233,48 +236,54 @@ title: "SCN-003 Batterie faible"
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
-    U->>D: Appuie sur le bouton
-    Note over D: 2 s plus tard, batterie faible
-    D->>U: Signal Batterie faible
+    U->>D: Appuie sur le bouton et le maintient
+    D->>U: Signal Appui validé (après 1 s)
+    Note over D: À 2 s d'appui au total, batterie faible
+    D->>U: Signal Armement refusé
+    Note over D: Cause transmise par l'état envoyé sur le sans fil
     U->>D: Relâche le bouton
     Note over D: Pas armé, moteurs arrêtés
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-004 « Batterie vérifiée à l'armement : pas d'armement si batterie faible », DEC-005 « Un signal distinct pour chaque information »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-004 « Batterie vérifiée à l'armement : pas d'armement si batterie faible », DEC-005 « Un signal distinct pour chaque information », DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court », DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone »
 **Type :** Échec
 **Acteurs :** Utilisateur.
 **Situation de départ :** drone allumé et en attente d'un appui (étape 2 de SCN-001 « Vol nominal : de la batterie au posé »), batterie en dessous du seuil.
 **Déroulé :**
-1. L'utilisateur appuie sur le bouton.
-2. Après 2 secondes, le drone constate que la batterie est faible.
-3. Il ne s'arme pas et informe l'utilisateur avec un signal « batterie faible » distinct des autres.
-**Résultat attendu :** le drone n'est pas armé ; relâcher le bouton ne démarre pas les moteurs ; l'utilisateur sait qu'il doit changer ou recharger la batterie.
+1. L'utilisateur appuie sur le bouton et le maintient ; à 1 s, le drone donne le signal « Appui validé ».
+2. Après 2 secondes d'appui au total, le drone constate que la batterie est faible.
+3. Il ne s'arme pas et donne le signal « Armement refusé » (DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone »), le même signal que pour un drone en mouvement ou pas à plat ; la cause (batterie faible) est transmise par l'état envoyé sur le sans fil (contenu à définir : DOU-083 « Contenu du statut sans fil d'un armement ou d'un décollage refusé »). Sans appareil de suivi, l'utilisateur ne connaît pas la cause.
+**Résultat attendu :** le drone n'est pas armé ; relâcher le bouton ne démarre pas les moteurs ; l'utilisateur sait que l'armement est refusé et, avec un appareil de suivi, que la batterie est faible et doit être changée ou rechargée.
 **Statut :** Proposé
 
-### SCN-004 — Dégradé : bouton relâché avant 2 secondes
+### SCN-004 — Dégradé : appui de moins de 2 secondes sur le bouton
 
 ```mermaid
 ---
-title: "SCN-004 Bouton relâché trop tôt"
+title: "SCN-004 Appui de moins de 2 secondes"
 ---
 sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
     U->>D: Appuie sur le bouton
-    U->>D: Relâche avant 2 s
-    D->>U: Signal Appui trop court
+    alt Relâché avant 1 s
+        Note over D: Rien, ni effet ni signal
+    else Relâché entre 1 s et 2 s
+        D->>U: Signal Appui validé (à 1 s)
+        Note over D: Un appui compté, jamais de lancer
+    end
     Note over D: Pas armé, retour en attente d'un appui
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-007 « Bouton relâché avant 2 secondes : retour en attente », DEC-005 « Un signal distinct pour chaque information », DEC-058 « Trois appuis : fenêtre courte, sans signal parasite »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27, refonte du bouton du 2026-10-28), DEC-005 « Un signal distinct pour chaque information », DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court », DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage »
 **Type :** Dégradé
 **Acteurs :** Utilisateur.
 **Situation de départ :** drone allumé et en attente d'un appui, tenu en main ou posé.
 **Déroulé :**
 1. L'utilisateur appuie sur le bouton.
-2. Il le relâche avant 2 secondes.
-3. Le drone n'est pas armé, revient en attente d'un appui et signale l'appui trop court avec un signal distinct. Ce signal n'est pas donné pour les deux premiers appuis d'une séquence de trois appuis rapides, qui entre en mode réglage (DEC-058 « Trois appuis : fenêtre courte, sans signal parasite » ; SCN-009 « Réglage et suivi du drone par le sans fil »).
-**Résultat attendu :** les moteurs ne démarrent pas ; un nouvel appui est possible.
+2. Il le relâche avant 1 s : rien ne se passe, ni effet ni signal (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court »).
+3. Ou il le relâche entre 1 s et 2 s : le drone donne le signal « Appui validé » à 1 s, l'appui est compté, et le drone n'arme ni ne lance jamais. Les appuis validés comptent d'affilée si l'écart entre deux est d'environ 2 s au plus ; trois appuis validés d'affilée, drone posé et immobile, entrent en mode réglage (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage » ; SCN-009 « Réglage et suivi du drone par le sans fil »). Un appui de moins de 1 s remet le compteur à zéro (hypothèse à confirmer : DOU-079 « Compteur d'appuis validés : remise à zéro par un appui court, cas limites »). Les seuils de 1 s et 2 s et le délai entre appuis sont provisoires (DOU-080 « Seuils de temps du bouton : 1 s, 2 s, 10 s et délai entre appuis »).
+**Résultat attendu :** le drone n'est pas armé, les moteurs ne démarrent pas ; un nouvel appui est possible.
 **Statut :** Proposé
 
 ### SCN-005 — Dégradé : bouton maintenu plus de 10 secondes
@@ -295,10 +304,10 @@ sequenceDiagram
     D->>U: Signal Prêt
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes », DEC-005 « Un signal distinct pour chaque information », DEC-054 « Chrono de 10 secondes compté depuis l'appui initial », DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes », DEC-005 « Un signal distinct pour chaque information », DEC-054 « Chrono de 10 secondes compté depuis l'appui initial », DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement », DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »
 **Type :** Dégradé
 **Acteurs :** Utilisateur.
-**Situation de départ :** drone armé (bouton appuyé depuis plus de 2 secondes), pas encore lancé.
+**Situation de départ :** drone armé (bouton appuyé depuis 2 à 10 secondes, DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »), pas encore lancé.
 **Déroulé :**
 1. L'utilisateur garde le bouton appuyé au-delà de 10 secondes, comptées depuis l'appui initial (DEC-054 « Chrono de 10 secondes compté depuis l'appui initial »).
 2. Le drone se désarme et le signale avec un signal distinct.
@@ -342,8 +351,9 @@ sequenceDiagram
     actor U as Utilisateur
     participant D as Boomrone
     participant A as Appareil de suivi
-    Note over D: En vol, après la garde qui suit le lancer (DEC-055)
+    Note over D: En vol
     alt Arrêt par le bouton
+        Note over D: Après la garde qui suit le lancer (DEC-055)
         U->>D: Appuie sur le bouton
         Note over D: Moteurs coupés immédiatement
         D->>U: Signal Arrêt par le bouton
@@ -363,7 +373,7 @@ sequenceDiagram
 **Déroulé :**
 1. L'utilisateur arrête le drone par l'un des deux moyens (la commande d'arrêt sans fil n'agit qu'en vol, et est ignorée au sol : DEC-043 « Commandes sans fil acceptées selon l'état du drone ») : il appuie sur le bouton, ou il envoie la commande d'arrêt depuis l'appareil de suivi s'il est relié au drone (DEC-031 « Arrêt du drone lancé : bouton et commande d'arrêt sans fil »). Le bouton est ignoré pendant la courte garde qui suit le lancer (DEC-055 « Bouton ignoré pendant une courte garde après le lancer »), et l'arrêt, par le bouton comme par le sans fil, est ignoré pendant la phase « Lancé » avant le démarrage des moteurs (DEC-062 « Arrêt ignoré pendant la phase Lancé, avant le démarrage des moteurs »). Le bouton et l'arrêt sans fil ont le même effet : aucune priorité n'est à définir entre eux.
 2. Le drone coupe ses moteurs immédiatement et informe l'utilisateur avec un signal distinct selon le moyen utilisé. Si l'appui sur le bouton qui a arrêté le drone est encore maintenu, il est ignoré jusqu'au relâchement : il ne peut pas réarmer le drone, et seul un nouvel appui distinct l'arme (DEC-050 « Appui en cours lors d'une coupure des moteurs ignoré jusqu'au relâchement »).
-3. En vol de réglage, le drone reste ensuite en mode réglage, posé, sans verrouillage (DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage », confirmé par l'utilisateur le 2026-10-27 : prêt à redécoller tout de suite sur commande sans fil). Sans appareil de suivi relié, seul le bouton arrête le drone (risque accepté ; DEC-032 « Vol libre : le drone vole sans appareil de suivi »). Sans appairage, tout appareil de suivi à portée peut envoyer l'arrêt, et une commande peut atteindre plusieurs drones (DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée »). Le signal « Arrêt sans fil » est distinct du signal « Arrêt par le bouton » (DEC-033 « Signal Arrêt sans fil distinct du signal Arrêt par le bouton »). Si le logiciel se bloque, ces deux moyens n'ont plus d'effet : un mécanisme indépendant du logiciel coupe les moteurs (SCN-011 « Dégradé : coupure d'alimentation en vol », DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde »).
+3. En vol de réglage, le drone reste ensuite en mode réglage, posé, sans verrouillage (DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage », confirmé par l'utilisateur le 2026-10-27 : prêt à redécoller tout de suite sur commande sans fil). Pendant un vol de réglage, le bouton reste un arrêt d'urgence tant que DOU-081 « Bouton appuyé en vol de réglage : arrêt d'urgence ou non ? » n'est pas tranché. Sans appareil de suivi relié, seul le bouton arrête le drone (risque accepté ; DEC-032 « Vol libre : le drone vole sans appareil de suivi »). Sans appairage, tout appareil de suivi à portée peut envoyer l'arrêt, et une commande peut atteindre plusieurs drones (DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée »). Le signal « Arrêt sans fil » est distinct du signal « Arrêt par le bouton » (DEC-033 « Signal Arrêt sans fil distinct du signal Arrêt par le bouton »). Si le logiciel se bloque, ces deux moyens n'ont plus d'effet : un mécanisme indépendant du logiciel coupe les moteurs (SCN-011 « Dégradé : coupure d'alimentation en vol », DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde »).
 **Résultat attendu :** moteurs arrêtés ; le drone tombe ; l'utilisateur sait que l'arrêt vient du bouton ou de la commande sans fil. Le drone est alors verrouillé (sauf en vol de réglage, où il reste en mode réglage : DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage ») : un nouvel appui de 2 secondes est nécessaire pour revoler (DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler »).
 **Statut :** Proposé
 
@@ -407,7 +417,7 @@ sequenceDiagram
     actor U as Utilisateur
     participant A as Appareil de suivi
     participant D as Boomrone
-    U->>D: Trois appuis rapides sur le bouton, drone au sol
+    U->>D: Trois appuis validés d'affilée, drone posé et immobile
     D->>U: Signal Mode réglage
     U->>A: Commande de décollage
     A->>D: Décoller
@@ -422,14 +432,14 @@ sequenceDiagram
     Note over D: Au redémarrage, charge seul ses valeurs enregistrées (mémoire non volatile)
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol », DEC-028 « Mode réglage : décollage depuis le sol sur commande sans fil », DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu », DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie », DEC-015 « Bouton appuyé en vol : arrêt d'urgence », DEC-038 « Mode réglage : décollage sans protection supplémentaire », DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal », DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage », DEC-031 « Arrêt du drone lancé : bouton et commande d'arrêt sans fil », DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée », DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée », DEC-036 « Drone neuf : valeurs d'origine fixes du logiciel, sans signal », DEC-005 « Un signal distinct pour chaque information », DEC-043 « Commandes sans fil acceptées selon l'état du drone », DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage », DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel », DEC-058 « Trois appuis : fenêtre courte, sans signal parasite », DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté », DEC-066 « Commande sans fil corrompue : aucun contrôle d'intégrité », DEC-068 « Seuil hors bornes : refus silencieux, valeur relue sur l'appareil de suivi », DEC-069 « Commandes sans fil reçues pendant la phase Lancé : ignorées »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol », DEC-028 « Mode réglage : décollage depuis le sol sur commande sans fil », DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu », DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie », DEC-015 « Bouton appuyé en vol : arrêt d'urgence », DEC-038 « Mode réglage : décollage sans protection supplémentaire », DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal », DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage », DEC-031 « Arrêt du drone lancé : bouton et commande d'arrêt sans fil », DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée », DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée », DEC-036 « Drone neuf : valeurs d'origine fixes du logiciel, sans signal », DEC-005 « Un signal distinct pour chaque information », DEC-043 « Commandes sans fil acceptées selon l'état du drone », DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage », DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel », DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage », DEC-074 « Décollage en mode réglage : la batterie est vérifiée, rien d'autre », DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté », DEC-066 « Commande sans fil corrompue : aucun contrôle d'intégrité », DEC-068 « Seuil hors bornes : refus silencieux, valeur relue sur l'appareil de suivi », DEC-069 « Commandes sans fil reçues pendant la phase Lancé : ignorées »
 **Type :** Mise en service / maintenance
 **Acteurs :** Utilisateur, appareil de suivi.
 **Situation de départ :** drone programmé (SCN-008 « Mise en service : programmation du drone »), batterie branchée, posé sur un sol plat et dégagé, protège-hélices en place, appareil de suivi relié au drone sans fil.
 **Déroulé :**
-1. L'utilisateur appuie trois fois rapidement sur le bouton, drone posé, immobile et non armé (DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie »), dans une fenêtre courte (durée à fixer en architecture). Les deux premiers appuis ne donnent pas le signal « Appui trop court » (DEC-058 « Trois appuis : fenêtre courte, sans signal parasite »).
-2. Le drone informe qu'il est en mode réglage.
-3. À chaque commande sans fil de l'utilisateur, le drone décolle depuis le sol, se stabilise, reste 3 secondes en stationnaire, puis se pose ; il coupe ses moteurs 15 secondes au plus après le décollage (DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu »). L'utilisateur peut recommencer autant de fois que nécessaire : après chaque vol, le drone reste en mode réglage, posé, prêt à une nouvelle commande « Décoller », sans verrouillage, le bouton n'armant pas en mode réglage (DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »). La commande de décollage n'a aucune protection supplémentaire (DEC-038 « Mode réglage : décollage sans protection supplémentaire »). Le risque pour une main proche des hélices est accepté : le drone doit être posé pour entrer en mode réglage et porte ses protège-hélices, et la consigne de sécurité est à écrire dans les limites d'emploi (DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté » ; DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? »). Les coupures sur stationnaire non atteint et sur basculement valent aussi en vol de réglage, pour toute valeur de leurs seuils dans les bornes fixées par le logiciel (DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » ; DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal »).
+1. L'utilisateur fait trois appuis validés d'affilée sur le bouton (chacun maintenu 1 s, avec un écart d'environ 2 s au plus entre deux, durée exacte à fixer en architecture), drone posé, immobile et non armé (DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » ; DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage »). Chacun des deux premiers appuis donne le signal « Appui validé ».
+2. Dès la 3e validation, le drone informe qu'il est en mode réglage, sans s'armer même si le 3e appui est maintenu. En mode réglage, le bouton n'arme jamais.
+3. À chaque commande sans fil de l'utilisateur, le drone décolle depuis le sol, se stabilise, reste 3 secondes en stationnaire, puis se pose ; il coupe ses moteurs 15 secondes au plus après le décollage (DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu »). L'utilisateur peut recommencer autant de fois que nécessaire : après chaque vol, le drone reste en mode réglage, posé, prêt à une nouvelle commande « Décoller », sans verrouillage, le bouton n'armant pas en mode réglage (DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »). La commande de décollage n'a aucune protection supplémentaire, sauf la vérification de la batterie (DEC-074 « Décollage en mode réglage : la batterie est vérifiée, rien d'autre » ; DEC-038 « Mode réglage : décollage sans protection supplémentaire »). Le risque pour une main proche des hélices est accepté : le drone doit être posé pour entrer en mode réglage et porte ses protège-hélices, et la consigne de sécurité est à écrire dans les limites d'emploi (DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté » ; DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? »). Les coupures sur stationnaire non atteint et sur basculement valent aussi en vol de réglage, pour toute valeur de leurs seuils dans les bornes fixées par le logiciel (DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » ; DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal »).
 4. Pendant ces vols, le drone envoie à l'appareil de suivi les variables du vol : commandes des moteurs, hauteur, autres données de position.
 5. L'utilisateur modifie les paramètres de vol depuis l'appareil de suivi, y compris pendant un vol, sans fil. Les paramètres sont modifiables aussi en vol normal, sans entrer dans le mode réglage ; les seuils de sécurité restent dans leurs bornes fixées par le logiciel, une valeur hors bornes est refusée (DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel »), les autres paramètres sont sans borne ; sans appairage, un tiers à portée peut aussi les modifier ou les sauvegarder, sans pouvoir supprimer une coupure (DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal »). Une valeur de seuil hors bornes est refusée sans signal, le drone garde sa valeur précédente, et l'appareil de suivi, en relisant la valeur détenue par le drone, montre qu'elle n'a pas été prise en compte (DEC-068 « Seuil hors bornes : refus silencieux, valeur relue sur l'appareil de suivi »). Le drone ne contrôle pas l'intégrité des commandes reçues : une trame corrompue peut fixer une valeur aberrante, risque accepté, limité pour les seuils de sécurité par leurs bornes (DEC-066 « Commande sans fil corrompue : aucun contrôle d'intégrité »).
 6. Le drone applique les nouvelles valeurs.
@@ -454,7 +464,7 @@ sequenceDiagram
     U->>D: Débranche puis rebranche la batterie
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-005 « Un signal distinct pour chaque information », DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement », DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-005 « Un signal distinct pour chaque information », DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement », DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal », DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie »
 **Type :** Échec
 **Acteurs :** Utilisateur.
 **Situation de départ :** drone hors tension, batterie chargée ; le drone est déplacé pendant son démarrage, posé sur une surface trop inclinée (inclinaison limite à chiffrer en exigences : DEC-067 « Démarrage à plat exigé, sinon échec de l'initialisation avec signal »), ou n'est pas en état de voler.
@@ -462,7 +472,7 @@ sequenceDiagram
 1. L'utilisateur branche la batterie.
 2. Le drone n'arrive pas à s'initialiser.
 3. Il ne se déclare pas « allumé, en attente d'un appui », ignore le bouton et informe l'utilisateur avec un signal d'échec d'initialisation distinct des autres. Un bouton enfoncé pendant l'initialisation est ignoré jusqu'à son premier relâchement (DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement »).
-4. L'utilisateur débranche puis rebranche la batterie, drone posé immobile et à plat.
+4. L'échec est définitif jusqu'au débranchement de la batterie, même si le drone se pose ensuite immobile (DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie »). L'utilisateur débranche puis rebranche la batterie, drone posé immobile et à plat.
 **Résultat attendu :** le drone ne peut pas être armé tant que l'initialisation échoue ; l'utilisateur sait qu'il s'agit d'un échec d'initialisation ; un nouveau démarrage est possible.
 **Statut :** Proposé
 
@@ -479,20 +489,25 @@ sequenceDiagram
     Note over D: Alimentation coupée ou tension qui chute
     Note over D: Moteurs arrêtés, le drone tombe (même issue si le logiciel se bloque, DEC-065)
     Note over D: L'alimentation revient, le drone redémarre
-    D->>U: Signal Échec d'initialisation, car le drone est en mouvement
-    Note over D: Jamais de reprise du vol seul, bouton ignoré
-    U->>D: Pose le drone immobile, rebranche la batterie
-    D->>U: Signal Allumé
+    alt Drone encore en mouvement
+        D->>U: Signal Échec d'initialisation, car le drone est en mouvement
+        Note over D: Définitif jusqu'au débranchement (DEC-075), jamais de reprise du vol seul, bouton ignoré
+        U->>D: Pose le drone immobile, rebranche la batterie
+        D->>U: Signal Allumé
+    else Drone déjà immobile au sol (DEC-061)
+        D->>U: Signal Allumé
+        Note over D: Jamais armé, un appui est nécessaire
+    end
 ```
 
-**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé », DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde », DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler », DEC-005 « Un signal distinct pour chaque information »
+**Réfs amont :** Utilisateur (entretien du 2026-10-27), DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement », DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue », DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé », DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde », DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie », DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler », DEC-005 « Un signal distinct pour chaque information »
 **Type :** Dégradé
 **Acteurs :** Utilisateur.
 **Situation de départ :** drone en vol (stabilisation, stationnaire ou descente). Un lancer vigoureux, un choc ou une batterie trop faible coupent l'alimentation ou la font chuter. Le logiciel peut aussi se bloquer en vol (DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde »).
 **Déroulé :**
 1. L'alimentation du drone est coupée ou sa tension chute : les moteurs s'arrêtent et le drone tombe.
 2. Si l'alimentation revient, le drone redémarre. Il ne reprend jamais le vol seul, même si le bouton est appuyé. Un logiciel bloqué est traité de la même façon : un mécanisme indépendant du logiciel coupe les moteurs, puis le drone redémarre (DEC-065 « Logiciel bloqué en vol : coupure des moteurs par un chien de garde »).
-3. Comme il est en mouvement, il ne peut pas s'initialiser (DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue ») : il donne le signal d'échec d'initialisation et ignore le bouton. S'il revient immobile au sol, l'initialisation réussit : il donne le signal « Allumé », n'est pas armé, et il n'est pas nécessaire de débrancher la batterie (DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé »).
+3. Comme il est en mouvement, il ne peut pas s'initialiser (DEC-030 « Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue ») : il donne le signal d'échec d'initialisation et ignore le bouton ; cet échec est définitif jusqu'au débranchement de la batterie (DEC-075 « Initialisation en échec : définitive jusqu'au débranchement de la batterie »). S'il revient immobile au sol, l'initialisation réussit : il donne le signal « Allumé », n'est pas armé, et il n'est pas nécessaire de débrancher la batterie (DEC-061 « Redémarrage immobile au sol : allumé mais jamais armé »).
 4. L'utilisateur pose le drone immobile et rebranche la batterie ; le drone est alors allumé et en attente d'un appui, et un appui de 2 secondes est nécessaire pour l'armer.
 **Résultat attendu :** moteurs arrêtés ; le drone n'a jamais repris le vol seul ; l'utilisateur sait que le drone doit être redémarré posé et immobile, ou, s'il a redémarré immobile au sol, qu'il est simplement allumé.
 **Statut :** Proposé
