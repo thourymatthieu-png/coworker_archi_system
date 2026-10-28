@@ -65,7 +65,7 @@ Format (exemple, non analysé) :
 ### DEC-007 — Bouton relâché avant 2 secondes : retour en attente
 **Date :** 2026-10-27
 **Remplacée par :** DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court » le 2026-10-28, après la refonte du bouton demandée par l'utilisateur. Cette décision n'est plus en vigueur ; elle est conservée pour l'historique.
-**Concerne :** SCN-004 « Dégradé : appui de moins de 2 secondes sur le bouton »
+**Concerne :** SCN-004 « Appui normal : bouton relâché avant 2 secondes »
 **Décision :** Si le bouton est relâché avant 2 secondes, le drone n'est pas armé : les moteurs ne démarrent pas et il revient à l'état « allumé, en attente d'un appui », prêt pour un nouvel appui. Le drone signale cet appui trop court avec un signal distinct (voir DEC-005 « Un signal distinct pour chaque information »).
 **Alternatives écartées :** aucun signal à l'utilisateur.
 **Raison :** choix de l'utilisateur ; l'utilisateur ne doit pas croire que le drone est armé.
@@ -230,6 +230,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** commande sans fil seulement ; trois appuis ou commande sans fil ; sortie par appui sur le bouton, commande sans fil ou fin d'un délai.
 **Raison :** choix de l'utilisateur ; simplicité. Risque accepté : on peut oublier d'être en mode réglage, et un appui parasite peut l'activer au sol.
 **Doutes levés :** DOU-032 « Comment entre-t-on dans le mode réglage et comment en sort-on ? »
+**Précisée par :** DEC-079 « Sortie du mode réglage : uniquement en enlevant la batterie » le 2026-10-28 (confirmée).
 
 ### DEC-028 — Mode réglage : décollage depuis le sol sur commande sans fil
 **Date :** 2026-10-27
@@ -246,6 +247,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** stationnaire jusqu'à la commande de pose (recommandé par l'architecte) ; coupure des moteurs ou poursuite du vol si le lien est perdu ; bouton ignoré en mode réglage.
 **Raison :** choix de l'utilisateur ; vol court et borné. Conséquence : peu de temps pour régler un paramètre pendant un seul vol de 3 secondes ; il faut enchaîner les vols.
 **Doutes levés :** DOU-033 « Que fait le drone pendant les vols de réglage répétés ? » — mais ouvre DOU-035 « Quelle hauteur de stationnaire vise-t-on ? » et DOU-036 « Après quel délai le lien sans fil est-il considéré comme perdu ? »
+**Précisée par :** DEC-077 « Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage » le 2026-10-28.
 
 ### DEC-030 — Drone posé immobile à la mise sous tension ; refus de s'armer si l'initialisation échoue
 **Date :** 2026-10-27
@@ -380,6 +382,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** A, verrouillé après tout vol de réglage (rend le cycle de réglage impraticable) ; B, verrouillé après un arrêt ou un échec ; D, déverrouillage par un appui de 2 s.
 **Raison :** interprétation de la réponse de l'utilisateur en chat, relayée à l'architecte : « pour sortir du mode réglage, il faut déconnecter la batterie. Donc une fois en réglage, on ne peut que faire des décollages via commande sans fil pour régler. » Cohérent avec DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement » : aucun réarmement automatique, chaque décollage de réglage est commandé.
 **Doutes levés :** DOU-056 « Commande sans fil et état du drone : que fait chaque commande dans chaque état ? »
+**Précisée par :** DEC-077 « Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage » le 2026-10-28.
 
 ### DEC-045 — Seuils de sécurité réglables comme le reste, sans borne
 **Date :** 2026-10-27
@@ -429,6 +432,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** compter l'appui en cours pour l'armement (aucun bénéfice d'usage ; risque de redémarrage des moteurs dans la main : l'appui maintenu 2 s armerait le drone, et le relâchement démarrerait les moteurs selon DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs »).
 **Raison :** décision de l'utilisateur en chat, au sujet de DOU-067 « L'appui qui arrête le drone peut-il le réarmer ? » : « appui en cours ignoré jusqu'au relâchement. » Empêche qu'un utilisateur qui a saisi le drone et maintient le bouton le réarme sans le vouloir, cohérent avec DEC-018 « Jamais de réarmement automatique ; batterie mesurée à vide à l'armement ».
 **Doutes levés :** DOU-067 « L'appui qui arrête le drone peut-il le réarmer ? »
+**Précisée par :** DEC-082 « Retours à l'attente après le posé ou une coupure des moteurs : compteur à zéro, appui en cours ni pris en compte ni compté » le 2026-10-28.
 
 ### DEC-051 — Seuils de sécurité réglables dans des bornes fixées par le logiciel
 **Date :** 2026-10-27
@@ -469,6 +473,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** ignorer seulement le relâchement, sans limite de durée.
 **Raison :** réponse de l'utilisateur en chat, le 2026-10-28 : option recommandée par l'architecte. Un appui ou relâchement parasite dû au geste du lancer ne doit pas couper les moteurs avec un signal trompeur.
 **Doutes levés :** DOU-023 « Quel appui sur le bouton juste après le lancer est ignoré ? »
+**Précisée par :** DEC-078 « Garde du bouton après le lancer : attachée au lancer au relâchement, pas décidée pour le décollage de réglage » le 2026-10-28.
 
 ### DEC-056 — Armement : drone immobile, sans autotest
 **Date :** 2026-10-28
@@ -490,7 +495,7 @@ Format (exemple, non analysé) :
 **Date :** 2026-10-28
 **Remplacée par :** DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage » le 2026-10-28, après la refonte du bouton. Cette décision n'est plus en vigueur ; elle est conservée pour l'historique. Elle écrivait qu'un appui long en mode réglage gardait son sens d'armement, ce que l'utilisateur a corrigé en chat le 2026-10-28 (contradiction avec DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »).
 **Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
-**Décision :** L'entrée en mode réglage de DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » se fait par trois appuis rapides dans une fenêtre courte, drone posé et immobile (la durée de la fenêtre est à fixer en architecture). Les deux premiers appuis n'émettent pas le signal « Appui trop court » de SCN-004 « Dégradé : appui de moins de 2 secondes sur le bouton ». Un appui long en mode réglage garde son sens normal (armement, DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes »). Le drone tenu en main n'entre pas en mode réglage (conséquence de DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie »).
+**Décision :** L'entrée en mode réglage de DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » se fait par trois appuis rapides dans une fenêtre courte, drone posé et immobile (la durée de la fenêtre est à fixer en architecture). Les deux premiers appuis n'émettent pas le signal « Appui trop court » de SCN-004 « Appui normal : bouton relâché avant 2 secondes ». Un appui long en mode réglage garde son sens normal (armement, DEC-008 « Désarmement si le bouton reste appuyé plus de 10 secondes »). Le drone tenu en main n'entre pas en mode réglage (conséquence de DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie »).
 **Alternatives écartées :** signaler chaque appui court (signal trompeur pour les deux premiers appuis).
 **Raison :** réponse de l'utilisateur en chat, le 2026-10-28 : option recommandée par l'architecte.
 **Doutes levés :** DOU-044 « Séquence de trois appuis : fenêtre et signal ? »
@@ -502,6 +507,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** prendre l'appui en compte normalement (le chrono d'armement démarrerait dès le branchement, avec un risque d'armement involontaire, par exemple dans une poche ou un sac).
 **Raison :** réponse de l'utilisateur en chat, le 2026-10-28 : option recommandée par l'architecte.
 **Doutes levés :** DOU-045 « Que fait un bouton enfoncé au branchement ou maintenu après désarmement ? »
+**Précisée par :** DEC-081 « Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite » le 2026-10-28.
 
 ### DEC-060 — Défaillance d'un capteur ou d'un moteur en vol : hors périmètre
 **Date :** 2026-10-28
@@ -585,19 +591,20 @@ Format (exemple, non analysé) :
 
 ### DEC-070 — Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court
 **Date :** 2026-10-28
-**Concerne :** SCN-004 « Dégradé : appui de moins de 2 secondes sur le bouton »
-**Décision :** L'« appui validé » est la brique unique du bouton : le bouton maintenu 1 s. Au moment de la validation, le drone donne un signal visuel et sonore « Appui validé ». Un appui de moins de 1 s n'a aucun effet et ne donne aucun signal. Le signal 4 « Appui trop court » est supprimé. SCN-004 « Dégradé : appui de moins de 2 secondes sur le bouton » (même identifiant, ancien titre « Dégradé : bouton relâché avant 2 secondes ») est refondu : moins de 1 s, rien ; relâché entre 1 s et 2 s, un appui validé est compté et le drone n'arme ni ne lance jamais. Les valeurs de 1 s et 2 s sont provisoires (DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences »). Remplace DEC-007 « Bouton relâché avant 2 secondes : retour en attente ».
+**Concerne :** SCN-004 « Appui normal : bouton relâché avant 2 secondes »
+**Décision :** L'« appui validé » est la brique unique du bouton : le bouton maintenu 1 s. Au moment de la validation, le drone donne un signal visuel et sonore « Appui validé ». Un appui de moins de 1 s n'a aucun effet et ne donne aucun signal. Le signal 4 « Appui trop court » est supprimé. SCN-004 « Appui normal : bouton relâché avant 2 secondes » (même identifiant, ancien titre « Dégradé : bouton relâché avant 2 secondes ») est refondu : moins de 1 s, rien ; relâché entre 1 s et 2 s, un appui validé est compté et le drone n'arme ni ne lance jamais. Les valeurs de 1 s et 2 s sont provisoires (DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences »). Remplace DEC-007 « Bouton relâché avant 2 secondes : retour en attente ».
 **Alternatives écartées :** conserver le signal « Appui trop court » donné à chaque relâchement avant 2 s, immédiat ou retardé après la fenêtre des trois appuis (signal trompeur pour les appuis d'une séquence, question restée non tranchée).
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28 : modèle du bouton validé explicitement.
-**Doutes levés :** (aucun) ; ouvre DOU-079 « Compteur d'appuis validés : remise à zéro par un appui court, cas limites » et DOU-080 « Seuils de temps du bouton : 1 s, 2 s, 10 s et délai entre appuis »
+**Doutes levés :** (aucun) ; ouvre DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites » et DOU-080 « Seuils de temps du bouton : 1 s, 2 s, 10 s et délai entre appuis »
 
 ### DEC-071 — Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage
 **Date :** 2026-10-28
-**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-004 « Dégradé : appui de moins de 2 secondes sur le bouton »
-**Décision :** Après un appui validé (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court »), l'utilisateur relâche ou reste appuyé. S'il relâche, l'appui est compté et il peut refaire un appui validé. Les appuis comptent « d'affilée » si l'écart entre deux est d'environ 2 s au plus (durée exacte à fixer en architecture) ; au-delà, le compteur repart à zéro. Un appui de moins de 1 s remet le compteur à zéro (hypothèse du modèle, à confirmer : DOU-079 « Compteur d'appuis validés : remise à zéro par un appui court, cas limites »). Trois appuis validés d'affilée, drone posé et immobile (non armé) : entrée en mode réglage dès la 3e validation, signal « Mode réglage », sans armement même si le 3e appui est maintenu. En mode réglage, le bouton n'arme jamais (DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage » confirmée). Précise DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » ; la sortie par coupure de la batterie n'est pas rediscutée (DOU-082 « Sortie du mode réglage : coupure de la batterie seulement, non rediscutée »). Remplace DEC-058 « Trois appuis : fenêtre courte, sans signal parasite ».
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-004 « Appui normal : bouton relâché avant 2 secondes »
+**Décision :** Après un appui validé (DEC-070 « Appui validé : bouton maintenu 1 seconde, rien en dessous, plus de signal Appui trop court »), l'utilisateur relâche ou reste appuyé. S'il relâche, l'appui est compté et il peut refaire un appui validé. Les appuis comptent « d'affilée » si l'écart entre deux est d'environ 2 s au plus (durée exacte à fixer en architecture) ; au-delà, le compteur repart à zéro. Un appui de moins de 1 s remet le compteur à zéro (hypothèse du modèle, à confirmer : DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites »). Trois appuis validés d'affilée, drone posé et immobile (non armé) : entrée en mode réglage dès la 3e validation, signal « Mode réglage », sans armement même si le 3e appui est maintenu. En mode réglage, le bouton n'arme jamais (DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage » confirmée). Précise DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » ; la sortie par coupure de la batterie n'est pas rediscutée (DOU-082 « Sortie du mode réglage : coupure de la batterie seulement, non rediscutée »). Remplace DEC-058 « Trois appuis : fenêtre courte, sans signal parasite ».
 **Alternatives écartées :** conserver DEC-058 « Trois appuis : fenêtre courte, sans signal parasite », qui laissait un appui long armer en mode réglage (contradiction avec DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage ») ; entrée en mode réglage au relâchement du 3e appui (le 3e appui maintenu aurait pu armer).
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28 : modèle du bouton validé, et réponse selon laquelle le bouton n'arme pas en mode réglage, ce qui contredisait DEC-058 « Trois appuis : fenêtre courte, sans signal parasite » (règle de contradiction de `CLAUDE.md` §5 : la réponse de l'utilisateur donne raison à DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »).
 **Doutes levés :** DOU-077 « Séquence de trois appuis : cas incomplets et ambigus » ; la réponse de DOU-044 « Séquence de trois appuis : fenêtre et signal ? » (issue de DEC-058 « Trois appuis : fenêtre courte, sans signal parasite ») est remplacée
+**Précisée par :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série » le 2026-10-28.
 
 ### DEC-072 — Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone
 **Date :** 2026-10-28
@@ -606,6 +613,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** un signal par cause de refus (batterie faible, mouvement, pas à plat), qui aurait gardé le signal « Batterie faible » et ajouté deux signaux ; refus sans signal.
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28 : modèle du bouton validé. Conséquence : un utilisateur sans appareil de suivi ne connaît pas la cause du refus (DEC-032 « Vol libre : le drone vole sans appareil de suivi »).
 **Doutes levés :** DOU-073 « Que veut dire immobile pour armer un drone tenu en main, et quel signal si l'armement est refusé ? » en partie (signal et comportement en cas de refus) ; reste ouvert : la tolérance de mouvement
+**Précisée par :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série » le 2026-10-28 ; DEC-080 « Armement refusé ou désarmement : retour à l'attente, compteur à zéro, l'appui long n'est pas compté » et DEC-081 « Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite » le 2026-10-28.
 
 ### DEC-073 — Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard
 **Date :** 2026-10-28
@@ -630,5 +638,61 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** initialisation refaite en continu, avec passage à « Allumé » dès que le drone est immobile et à plat.
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28, à la première partie de DOU-074 « Une initialisation en échec est-elle définitive jusqu'au débranchement, et la condition à plat vaut-elle aussi après une coupure en vol ? ».
 **Doutes levés :** DOU-074 « Une initialisation en échec est-elle définitive jusqu'au débranchement, et la condition à plat vaut-elle aussi après une coupure en vol ? » en partie ; reste ouvert : la condition « à plat » au redémarrage après une coupure en vol
+
+### DEC-076 — Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série
+**Date :** 2026-10-28
+**Concerne :** SCN-004 « Appui normal : bouton relâché avant 2 secondes », SCN-001 « Vol nominal : de la batterie au posé » et SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** L'armement (maintien de 2 s au total, DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone ») n'est possible que depuis le premier appui d'une série (compteur d'appuis validés à 1). Si le premier appui est relâché avant 2 s (appui normal, compté), le drone est dans la série de trois appuis (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage ») : aucun appui suivant ne peut armer. Pendant la série (2e appui), maintenir le bouton au-delà de 2 s ne fait rien : ni armement, ni signal, ni annulation de la série ; l'appui reste compté à 1 s. Le 3e appui validé entre en mode réglage dès sa validation (inchangé). Si 2 s s'écoulent sans nouvel appui, le compteur repart à zéro et l'armement redevient possible au prochain appui (inchangé). Le désarmement à 10 s et le lancer au relâchement ne concernent qu'un drone armé, donc armé depuis le premier appui : la question « 10 s depuis quel appui » ne se pose plus (DEC-054 « Chrono de 10 secondes compté depuis l'appui initial » et DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard » inchangées).
+**Alternatives écartées :** (aucune exposée)
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun) ; précise une partie de DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites » (le 3e appui, et tout appui de la série, n'arme pas)
+
+### DEC-077 — Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
+**Décision :** Un appui sur le bouton pendant un vol de réglage est un arrêt d'urgence : les moteurs sont coupés et le drone reste en mode réglage, posé, sans verrouillage. Le bouton n'arme pas en mode réglage (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage »). Précise DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu » (qui renvoyait à DEC-015 « Bouton appuyé en vol : arrêt d'urgence ») et DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage ». Le signal donné n'est pas défini : voir DOU-053 « Quels signaux pour les vols de réglage et pour le lien perdu ? ».
+**Alternatives écartées :** bouton ignoré en vol de réglage ; appui sans effet sur les moteurs.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28. Aucune contradiction : confirme DEC-029 « Vol de réglage : stationnaire de 3 secondes, atterrissage sur place si le lien est perdu » telle qu'écrite.
+**Doutes levés :** DOU-081 « Bouton appuyé en vol de réglage : arrêt d'urgence ou non ? »
+
+### DEC-078 — Garde du bouton après le lancer : attachée au lancer au relâchement, pas décidée pour le décollage de réglage
+**Date :** 2026-10-28
+**Concerne :** SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol » et SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** La courte garde pendant laquelle le bouton est ignoré (DEC-055 « Bouton ignoré pendant une courte garde après le lancer ») ne s'applique qu'après un lancer au relâchement du bouton. Pour le vol de réglage, décollage sur commande sans fil (DEC-028 « Mode réglage : décollage depuis le sol sur commande sans fil »), l'existence d'une garde après le décollage n'est pas décidée : voir DOU-084 « Garde du bouton après le décollage de réglage ? ».
+**Alternatives écartées :** aucune exposée.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28 : la garde de DEC-055 « Bouton ignoré pendant une courte garde après le lancer » ne concerne que le lancer au relâchement.
+**Doutes levés :** (aucun) ; ouvre DOU-084 « Garde du bouton après le décollage de réglage ? »
+
+### DEC-079 — Sortie du mode réglage : uniquement en enlevant la batterie
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** La seule façon de sortir du mode réglage est d'enlever la batterie ; ni le bouton, ni le sans fil, ni un délai ne font sortir du mode. Confirme DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » après le nouveau modèle du bouton (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage »).
+**Alternatives écartées :** aucune exposée.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-082 « Sortie du mode réglage : coupure de la batterie seulement, non rediscutée »
+
+### DEC-080 — Armement refusé ou désarmement : retour à l'attente, compteur à zéro, l'appui long n'est pas compté
+**Date :** 2026-10-28
+**Concerne :** SCN-003 « Échec : batterie faible à l'armement », SCN-004 « Appui normal : bouton relâché avant 2 secondes » et SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
+**Décision :** Après un armement refusé (DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone ») ou un désarmement par appui de plus de 10 s (DEC-054 « Chrono de 10 secondes compté depuis l'appui initial »), le drone revient à l'état « Allumé, en attente d'un appui », le compteur d'appuis de la série est à zéro, et l'appui long (2 s ou plus) ne compte pas comme appui de la série. Précise DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone » et DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série ».
+**Alternatives écartées :** appui long compté à 1 dans la série (le prochain appui serait un 2e appui, qui ne peut pas armer).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** (aucun) ; répond en partie à DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites » (appui long après refus ou désarmement)
+
+### DEC-081 — Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite
+**Date :** 2026-10-28
+**Concerne :** SCN-003 « Échec : batterie faible à l'armement » et SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
+**Décision :** Après un armement refusé ou un désarmement, le bouton encore enfoncé est ignoré jusqu'à son premier relâchement (DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement », étendue au cas de l'armement refusé). Après ce relâchement, un nouvel appui peut armer immédiatement, car le compteur est à zéro (DEC-080 « Armement refusé ou désarmement : retour à l'attente, compteur à zéro, l'appui long n'est pas compté »). Conséquence : un appui maintenu plus de 10 s après un armement refusé n'a aucun effet de plus (pas de désarmement, pas de signal), le bouton étant ignoré.
+**Alternatives écartées :** aucune exposée.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28 ; la conséquence sur l'appui de plus de 10 s sans armement est tirée par l'architecte de cette réponse.
+**Doutes levés :** (aucun) ; répond en partie à DOU-073 « Que veut dire immobile pour armer un drone tenu en main, et quel signal si l'armement est refusé ? » (bouton après refus ; appui de plus de 10 s sans armement)
+
+### DEC-082 — Retours à l'attente après le posé ou une coupure des moteurs : compteur à zéro, appui en cours ni pris en compte ni compté
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé » et SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
+**Décision :** La logique de DEC-080 « Armement refusé ou désarmement : retour à l'attente, compteur à zéro, l'appui long n'est pas compté » et DEC-081 « Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite » s'applique aux autres retours à l'attente : après le posé ou une coupure des moteurs, le drone est dans le même état que « Allumé, en attente d'un appui » (DEC-047 « L'état verrouillé est le même que l'état allumé, en attente d'un appui »), compteur à zéro, et un appui déjà en cours est ignoré jusqu'au relâchement (DEC-050 « Appui en cours lors d'une coupure des moteurs ignoré jusqu'au relâchement »), donc non compté. Un nouvel appui, commencé après ce relâchement, peut armer. Le lancer n'est pas un retour à l'attente : le drone vole, et n'y revient que par le posé ou une coupure, compteur à zéro. Déduction de l'architecte à partir de DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler », des deux décisions rappelées ci-dessus, soumise à l'utilisateur dans le rapport.
+**Alternatives écartées :** aucune exposée.
+**Raison :** consigne de l'utilisateur en chat, 2026-10-28 (appliquer la logique aux autres retours à l'attente si elle découle des décisions existantes) ; aucune décision existante n'est contredite.
+**Doutes levés :** (aucun) ; répond en partie à DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites »
 
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
