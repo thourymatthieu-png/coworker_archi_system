@@ -684,7 +684,7 @@ Format (exemple, non analysé) :
 **Concerne :** SCN-003 « Échec : batterie faible à l'armement » et SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
 **Décision :** Après un armement refusé ou un désarmement, le bouton encore enfoncé est ignoré jusqu'à son premier relâchement (DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement », étendue au cas de l'armement refusé). Après ce relâchement, un nouvel appui peut armer immédiatement, car le compteur est à zéro (DEC-080 « Armement refusé ou désarmement : retour à l'attente, compteur à zéro, l'appui long n'est pas compté »). Conséquence : un appui maintenu plus de 10 s après un armement refusé n'a aucun effet de plus (pas de désarmement, pas de signal), le bouton étant ignoré.
 **Alternatives écartées :** aucune exposée.
-**Raison :** réponse de l'utilisateur en chat, 2026-10-28 ; la conséquence sur l'appui de plus de 10 s sans armement est tirée par l'architecte de cette réponse.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28 ; la conséquence sur l'appui de plus de 10 s sans armement, tirée par l'architecte de cette réponse, a été validée explicitement par l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** (aucun) ; répond en partie à DOU-073 « Que veut dire immobile pour armer un drone tenu en main, et quel signal si l'armement est refusé ? » (bouton après refus ; appui de plus de 10 s sans armement)
 
 ### DEC-082 — Retours à l'attente après le posé ou une coupure des moteurs : compteur à zéro, appui en cours ni pris en compte ni compté
@@ -692,7 +692,7 @@ Format (exemple, non analysé) :
 **Concerne :** SCN-001 « Vol nominal : de la batterie au posé » et SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
 **Décision :** La logique de DEC-080 « Armement refusé ou désarmement : retour à l'attente, compteur à zéro, l'appui long n'est pas compté » et DEC-081 « Bouton encore enfoncé après un refus ou un désarmement : ignoré jusqu'au premier relâchement, puis nouvel appui possible tout de suite » s'applique aux autres retours à l'attente : après le posé ou une coupure des moteurs, le drone est dans le même état que « Allumé, en attente d'un appui » (DEC-047 « L'état verrouillé est le même que l'état allumé, en attente d'un appui »), compteur à zéro, et un appui déjà en cours est ignoré jusqu'au relâchement (DEC-050 « Appui en cours lors d'une coupure des moteurs ignoré jusqu'au relâchement »), donc non compté. Un nouvel appui, commencé après ce relâchement, peut armer. Le lancer n'est pas un retour à l'attente : le drone vole, et n'y revient que par le posé ou une coupure, compteur à zéro. Déduction de l'architecte à partir de DEC-023 « Après le posé ou une coupure : drone verrouillé, nouvel appui pour revoler », des deux décisions rappelées ci-dessus, soumise à l'utilisateur dans le rapport.
 **Alternatives écartées :** aucune exposée.
-**Raison :** consigne de l'utilisateur en chat, 2026-10-28 (appliquer la logique aux autres retours à l'attente si elle découle des décisions existantes) ; aucune décision existante n'est contredite.
+**Raison :** déduction de l'architecte à partir des décisions existantes, validée explicitement par l'utilisateur en chat, 2026-10-28 ; aucune décision existante n'est contredite.
 **Doutes levés :** (aucun) ; répond en partie à DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites »
 
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
