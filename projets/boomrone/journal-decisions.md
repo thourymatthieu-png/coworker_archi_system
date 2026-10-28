@@ -61,6 +61,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** confirmer le lancer par la mesure du mouvement (accélération puis chute libre) avant de démarrer les moteurs.
 **Raison :** choix de l'utilisateur ; simplicité. Risque résiduel accepté : un relâchement du bouton sans lancer démarre les moteurs, drone en main ou posé. Depuis : confirmée par l'utilisateur le 2026-10-28, signal « Lancé » possible sans lancer, risque accepté (DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »).
 **Doutes levés :** DOU-006 « Comment éviter un départ des moteurs sans vrai lancer ? »
+**Précisée par :** DEC-083 « Annulation d'un armement : le maintien jusqu'au désarmement à 10 s reste la seule annulation » le 2026-10-28 (confirmée, risque à documenter).
 
 ### DEC-007 — Bouton relâché avant 2 secondes : retour en attente
 **Date :** 2026-10-27
@@ -230,7 +231,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** commande sans fil seulement ; trois appuis ou commande sans fil ; sortie par appui sur le bouton, commande sans fil ou fin d'un délai.
 **Raison :** choix de l'utilisateur ; simplicité. Risque accepté : on peut oublier d'être en mode réglage, et un appui parasite peut l'activer au sol.
 **Doutes levés :** DOU-032 « Comment entre-t-on dans le mode réglage et comment en sort-on ? »
-**Précisée par :** DEC-079 « Sortie du mode réglage : uniquement en enlevant la batterie » le 2026-10-28 (confirmée).
+**Précisée par :** DEC-079 « Sortie du mode réglage : uniquement en enlevant la batterie » le 2026-10-28 (confirmée) ; DEC-085 « Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé » le 2026-10-28 (« posé » devient « immobile et à plat »).
 
 ### DEC-028 — Mode réglage : décollage depuis le sol sur commande sans fil
 **Date :** 2026-10-27
@@ -548,6 +549,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** refuser la commande Décoller si le drone est porté (condition de sécurité ajoutée à DEC-038 « Mode réglage : décollage sans protection supplémentaire »).
 **Raison :** réponse de l'utilisateur en chat, le 2026-10-28 : option recommandée par l'architecte, dans la ligne de DEC-057 « Pas de détection dédiée d'un drone attrapé ou posé sur un obstacle ».
 **Doutes levés :** DOU-064 « Drone tenu en main, trois appuis et commande Décoller : quel risque pour la main ? »
+**Précisée par :** DEC-085 « Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé » le 2026-10-28 (la prémisse « trois appuis exigeant un drone posé » devient « immobile et à plat ») ; DEC-086 « Décollage de réglage : batterie seulement, risque cumulé avec les décisions sans appairage et sans verrouillage accepté » le 2026-10-28 (risque cumulé).
 
 ### DEC-065 — Logiciel bloqué en vol : coupure des moteurs par un chien de garde
 **Date :** 2026-10-28
@@ -604,7 +606,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** conserver DEC-058 « Trois appuis : fenêtre courte, sans signal parasite », qui laissait un appui long armer en mode réglage (contradiction avec DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage ») ; entrée en mode réglage au relâchement du 3e appui (le 3e appui maintenu aurait pu armer).
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28 : modèle du bouton validé, et réponse selon laquelle le bouton n'arme pas en mode réglage, ce qui contredisait DEC-058 « Trois appuis : fenêtre courte, sans signal parasite » (règle de contradiction de `CLAUDE.md` §5 : la réponse de l'utilisateur donne raison à DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »).
 **Doutes levés :** DOU-077 « Séquence de trois appuis : cas incomplets et ambigus » ; la réponse de DOU-044 « Séquence de trois appuis : fenêtre et signal ? » (issue de DEC-058 « Trois appuis : fenêtre courte, sans signal parasite ») est remplacée
-**Précisée par :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série » le 2026-10-28.
+**Précisée par :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série » le 2026-10-28 ; DEC-085 « Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé » le 2026-10-28.
 
 ### DEC-072 — Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone
 **Date :** 2026-10-28
@@ -630,6 +632,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** aucune vérification de la batterie (DEC-038 « Mode réglage : décollage sans protection supplémentaire » telle qu'écrite à l'origine) ; vérification complète posé, immobile et à plat.
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-039 « La batterie est-elle vérifiée à chaque décollage de réglage ? » en partie (la batterie est vérifiée) ; reste ouvert : chauffe, limite du nombre de vols
+**Précisée par :** DEC-086 « Décollage de réglage : batterie seulement, risque cumulé avec les décisions sans appairage et sans verrouillage accepté » le 2026-10-28 (confirmée).
 
 ### DEC-075 — Initialisation en échec : définitive jusqu'au débranchement de la batterie
 **Date :** 2026-10-28
@@ -646,6 +649,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** (aucune exposée)
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** (aucun) ; précise une partie de DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites » (le 3e appui, et tout appui de la série, n'arme pas)
+**Précisée par :** DEC-084 « Appui ignoré pendant une série d'appuis : aucun signal, risque accepté et documenté » le 2026-10-28.
 
 ### DEC-077 — Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage
 **Date :** 2026-10-28
@@ -694,5 +698,40 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** aucune exposée.
 **Raison :** déduction de l'architecte à partir des décisions existantes, validée explicitement par l'utilisateur en chat, 2026-10-28 ; aucune décision existante n'est contredite.
 **Doutes levés :** (aucun) ; répond en partie à DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites »
+
+### DEC-083 — Annulation d'un armement : le maintien jusqu'au désarmement à 10 s reste la seule annulation
+**Date :** 2026-10-28
+**Concerne :** SCN-001 « Vol nominal : de la batterie au posé » et SCN-005 « Dégradé : bouton maintenu plus de 10 secondes »
+**Décision :** Le seul moyen de renoncer à un armement est de rester appuyé jusqu'au désarmement à 10 s d'appui (DEC-054 « Chrono de 10 secondes compté depuis l'appui initial »), soit environ 8 s après le signal « Prêt ». Aucune fenêtre d'annulation, aucun seuil plus court, aucun autre geste. Risque accepté, à documenter dans les limites d'emploi (DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? ») : relâcher le bouton armé démarre les moteurs 200 ms plus tard, y compris dans la main ; renoncer demande de rester appuyé jusqu'à 10 s. Confirme DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs » et DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard » ; DEC-017 « Pas de protection supplémentaire contre les hélices en rotation sans lancer » inchangée.
+**Alternatives écartées :** fenêtre d'annulation après le signal Prêt ; seuil de désarmement plus court ; commande sans fil d'annulation.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-088 « Annulation d'un armement : comment renoncer après le signal Prêt ? »
+
+### DEC-084 — Appui ignoré pendant une série d'appuis : aucun signal, risque accepté et documenté
+**Date :** 2026-10-28
+**Concerne :** SCN-004 « Appui normal : bouton relâché avant 2 secondes »
+**Décision :** Le 2e appui maintenu au-delà de 2 s pendant une série d'appuis (DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série ») ne donne aucun signal, comme décidé jusqu'ici. Risque accepté, à documenter dans les limites d'emploi (DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? ») : l'utilisateur peut ne pas comprendre pourquoi rien ne se passe, et retaper jusqu'à entrer en mode réglage par erreur (DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage »), dont la seule sortie est d'enlever la batterie (DEC-079 « Sortie du mode réglage : uniquement en enlevant la batterie »).
+**Alternatives écartées :** signal pour l'appui ignoré dans la série (existant ou nouveau), en lien avec DEC-005 « Un signal distinct pour chaque information ».
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-087 « Appui ignoré en silence pendant une série d'appuis : faut-il un signal ? »
+**Précise :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série ».
+
+### DEC-085 — Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-004 « Appui normal : bouton relâché avant 2 secondes »
+**Décision :** Les trois appuis validés n'entrent en mode réglage que si le drone est immobile et à plat, et non armé. Le mot « posé » n'est plus une condition : le drone ne sait pas s'il est posé (DEC-057 « Pas de détection dédiée d'un drone attrapé ou posé sur un obstacle »). Même condition que l'armement (DEC-056 « Armement : drone immobile, sans autotest » ; DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone »). Un drone tenu en main, immobile et à plat, peut donc entrer en mode réglage. La tolérance d'« immobile » reste dans DOU-073 « Que veut dire immobile pour armer un drone tenu en main, et quel signal si l'armement est refusé ? ». Le comportement de la 3e validation quand la condition n'est pas remplie n'est pas décidé : DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites » (3e appui sur un drone en mouvement).
+**Alternatives écartées :** aucune condition ; « immobile » seulement.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-085 « Entrée en mode réglage : exiger drone immobile seulement, ou aussi à plat ? »
+**Précise :** DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage » et DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie » (« posé » devient « immobile et à plat »). La raison de DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté » (« trois appuis exigeant un drone posé ») est précisée de même, sans réécrire l'historique.
+
+### DEC-086 — Décollage de réglage : batterie seulement, risque cumulé avec les décisions sans appairage et sans verrouillage accepté
+**Date :** 2026-10-28
+**Concerne :** SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol »
+**Décision :** La commande Décoller en mode réglage ne vérifie que la batterie, sans condition de position (DEC-074 « Décollage en mode réglage : la batterie est vérifiée, rien d'autre » confirmée). Le risque cumulé de DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée », DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage » et DEC-074 « Décollage en mode réglage : la batterie est vérifiée, rien d'autre » est explicitement accepté : un appareil à portée peut faire décoller un drone retourné ou tenu en main en mode réglage, hélices contre le sol ou dans une main. À documenter dans les limites d'emploi, avec DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté » (DOU-062 « Où l'utilisateur est-il informé des limites d'emploi ? »).
+**Alternatives écartées :** condition supplémentaire (drone à plat ou immobile, délai après un arrêt).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-28.
+**Doutes levés :** DOU-086 « Décollage de réglage commandé par un tiers, drone en main ou retourné : risque cumulé accepté ? »
+**Précise :** DEC-074 « Décollage en mode réglage : la batterie est vérifiée, rien d'autre » et DEC-064 « Main près des hélices en mode réglage : risque accepté et documenté ».
 
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
