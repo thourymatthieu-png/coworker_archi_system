@@ -609,7 +609,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 
 ### REQ-044 — Assemblage à la main
 **Réfs amont :** BES-011 « Fabriquer et programmer le drone soi-même »
-**Décisions liées :** DEC-144 « Ligne directrice : simplicité, un seul utilisateur qui accepte les risques » ; DEC-208 « Fabrication : approvisionnement et assemblage séparés » ; DEC-234 « JLCPCB, fabricant de la carte : contrainte de début de projet » ; DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté » ; DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main »
+**Décisions liées :** DEC-144 « Ligne directrice : simplicité, un seul utilisateur qui accepte les risques » ; DEC-208 « Fabrication : approvisionnement et assemblage séparés » ; DEC-234 « JLCPCB, fabricant de la carte : contrainte de début de projet » ; DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté » ; DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main » ; DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB » ; DEC-248 « Flux optique : lentille collée à la main et repli sur carte achetée »
 **Énoncé :** La carte électronique est fabriquée et assemblée par JLCPCB (contrainte de début de projet). Le reste du drone est monté à la main avec l'outillage courant d'un amateur (fer à souder, pinces, tournevis) :
 - les moteurs, le connecteur de la batterie, l'en-tête de programmation et toute carte de capteur achetée toute faite sont raccordés à la carte au fer à souder, sans four ni outil spécial ;
 - aucun composant à souder à la main n'est un boîtier à billes (BGA) ni n'a un pas de broches de moins de 0,5 mm ;

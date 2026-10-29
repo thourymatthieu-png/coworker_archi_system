@@ -123,8 +123,8 @@ stateDiagram-v2
 | Moteurs 1 à 4 | PA8, PA9, PA10, PA11 | TIM1 CH1 à CH4, 24 kHz | rappel 100 kΩ, grille via 47 Ω ; PA11 a une fonction USB selon la référence (à vérifier), non utilisée |
 | IMU : SCK, MISO, MOSI | PA5, PA6, PA7 | SPI1, 5,3125 MHz (diviseur 32 sur 170 MHz) | mode 0 ou 3 selon la fiche |
 | IMU : CS, INT1 | PA4, PB0 | sortie, entrée | INT1 sans timer : PB0 n'est donc pas pris par TIM3 |
-| Flux : SCK, MISO, MOSI | PB13, PB14, PB15 | SPI2, 1,328 MHz (diviseur 128) | mode 3 pour le PMW3901 |
-| Flux : CS | PB12 | sortie | MOTION non câblée (DOU-146 « Broches d'état du module Bluetooth et de mouvement du capteur de flux ») |
+| Flux : SCK, MISO, MOSI | PB13, PB14, PB15 | SPI2, 1,328 MHz (diviseur 128) | mode 3 pour le PMW3901 (de mémoire, à vérifier) ; niveaux de 3,0 V (VDDIO de la puce au rail de 3,0 V, aucun décalage de niveau : DEC-247 « Flux optique : alimentation en 2,0 V par un régulateur dédié, signaux en 3,0 V ») |
+| Flux : CS | PB12 | sortie | MOTION non câblée, NRESET tirée au 3,0 V par 10 kΩ (DOU-146 « Broches d'état du module Bluetooth et de mouvement du capteur de flux ») |
 | I2C du capteur de hauteur | PA15 (SCL), PB7 (SDA) | I2C1, 400 kHz | rappels de 4,7 kΩ au 3,0 V ; PA15 est JTDI (rappel haut au reset), sans conséquence ici |
 | Capteur de hauteur : GPIO1, XSHUT | PB6, PB9 | entrée avec interruption externe, sortie | GPIO1 (drain ouvert, de mémoire) et XSHUT rappelés au 3,0 V par 10 kΩ |
 | Radio | PA2 (TX), PA3 (RX) | USART2, DMA circulaire | pas de TIM15 : PA2 et PA3 en sont les canaux, d'où le choix de ne pas l'utiliser |
@@ -159,9 +159,13 @@ Le bit de lecture (0x80) s'ajoute à l'adresse en SPI. Le pas de temps du filtre
 - Horodatage : valeur de TIM2 relevée dans le gestionnaire de GPIO1 ; le recalage de l'observateur utilise l'estimation de hauteur gardée pour les 64 derniers cycles.
 - Initialisation : au plus 2 tentatives de 300 ms avec remise à zéro par XSHUT entre elles ; échec = échec d'initialisation (déclaré avant 1 s).
 
-### Flux optique PMW3901 sur sa carte (de mémoire, à vérifier)
+### Flux optique PMW3901MB en puce (fiche lue en partie, le reste de mémoire)
 
-Identifiant 0x00 = 0x49 et son complément 0x5F = 0xB6 ; remise à zéro par 0x3A = 0x5A ; lecture en rafale du mouvement par le registre 0x16 ; SPI en mode 3 ; temporisations d'environ 35 µs entre l'adresse et la donnée, découpées en pas de tâche de fond de moins de 200 µs. La suite de réglages d'initialisation (une cinquantaine d'écritures) vient d'un pilote publié (Bitcraze ou PixArt) et se joue au sol.
+**Lu dans la fiche PixArt version 1.00 du 2017-03-20 (téléchargée le 2026-10-29) :** VDD 1,8 à 2,1 V (2,0 V typique), VDDIO 1,8 à 3,6 V, environ 9 mA, SPI à 2 MHz au plus, montée de l'alimentation de 0,15 à 20 ms avec une pointe de 70 mA au plus, 50 ms de la remise à zéro à la première mesure valide, temporisations SPI minimales de 45 µs (deux écritures ou écriture puis lecture), 20 µs (lecture puis commande suivante) et 35 µs (entre l'octet d'adresse et la donnée lue), NCS au repos au moins 500 ns après une rafale, MISO et MOTION de 100 pF au plus, température de 0 à 40 °C, plot central de masse obligatoire, MOTION active à l'état bas. Le registre de rafale (0x16) et le registre de mouvement (0x02) sont dans la liste de registres de la fiche.
+
+**De mémoire, à vérifier dans la fiche :** identifiant 0x00 = 0x49 et son complément 0x5F = 0xB6 ; remise à zéro par 0x3A = 0x5A ; SPI en mode 3 ; temporisations découpées en pas de tâche de fond de moins de 200 µs. La suite de réglages d'initialisation (une cinquantaine d'écritures) ne figure pas dans la fiche lue : elle vient d'un pilote publié (Bitcraze ou PixArt) et se joue au sol.
+
+**Valeurs des composants autour de la puce :** les condensateurs de la figure 8 de la fiche (VDD, VDDIO, VREG) et les trois résistances de 10 kΩ sont à relever sur le dessin avant le routage (le texte extrait de la fiche est ambigu : DOU-165 « Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension »). La lentille LN03-ZSZ est une pièce séparée (DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce »).
 
 ### Mémoire et reset
 
@@ -175,5 +179,6 @@ Identifiant 0x00 = 0x49 et son complément 0x5F = 0xB6 ; remise à zéro par 0x3
 ### Voyant, buzzer, régulateur
 
 - Voyant : 120 Ω pour le rouge, 68 Ω pour le vert et le bleu (courant à 4,2 V d'environ 18 mA avec les tensions directes supposées 2,0 V et 3,0 V ; si les tensions du catalogue sont vraies, 15 mA et 12 mA) ; à confirmer aux mesures de TI-009 « Bouton, voyant RGB et avertisseur ».
+- Régulateur du flux optique : XC6206P202MR-G (2,0 V fixe, C2891260) alimenté par le rail de 3,0 V, environ 9 mA, environ 9 mW ; chute à 9 mA, tolérance de sortie et capacité de sortie à relever dans la fiche du XC6206 (DOU-165 « Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension »).
 - Régulateur : 130 mA, 0,16 W à 4,2 V ; ferrite 120 Ω + 22 µF 1206 en entrée ; surtension à la connexion mesurée à TI-008 « Batterie, connecteur, chute de tension et mesure de tension ».
 - Découplage du microcontrôleur de mémoire : 100 nF par broche VDD, 4,7 µF commun, VDDA 100 nF + 1 µF, NRST 100 nF (à confirmer dans DS12589).

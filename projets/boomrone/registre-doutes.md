@@ -110,9 +110,9 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », ARC-004 « Capteur de hauteur à temps de vol », ARC-005 « Capteur de flux optique » et ARC-012 « Module radio Bluetooth à basse consommation »
-**Question :** le rail descend à environ 2,9 V (2,82 V avec une batterie à 3,0 V). Le capteur de hauteur (2,6 V minimum), le module E104-BT02 (2,5 V minimum), la centrale (1,71 V) conviennent d'après le catalogue ; la carte du flux optique achetée est à vérifier (puce à 1,8 à 2,1 V selon le catalogue). Ces plages viennent du catalogue, pas des fiches.
+**Question :** le rail descend à environ 2,9 V (2,82 V avec une batterie à 3,0 V). Le capteur de hauteur (2,6 V minimum), le module E104-BT02 (2,5 V minimum), la centrale (1,71 V) conviennent d'après le catalogue ; le flux optique (puce PMW3901MB posée par JLCPCB) n'est plus sur le rail de 3,0 V pour VDD : la fiche PixArt, lue le 2026-10-29, donne VDD de 1,8 à 2,1 V (alimenté en 2,0 V par un régulateur dédié, DEC-247 « Flux optique : alimentation en 2,0 V par un régulateur dédié, signaux en 3,0 V ») et VDDIO de 1,8 à 3,6 V (au rail de 3,0 V), tolérée. Les autres plages viennent du catalogue, pas des fiches.
 **Réponse :** (aucune) ; relever les plages dans les fiches avant la commande de la carte. Non bloquant.
-**Décision liée :** {DEC-242 « Alimentation de la logique à 130 mA et masse recalculée à 62 g »}
+**Décision liée :** {DEC-242 « Alimentation de la logique à 130 mA et masse recalculée à 62 g »} ; {DEC-247 « Flux optique : alimentation en 2,0 V par un régulateur dédié, signaux en 3,0 V »}
 
 ### DOU-144 — Courant du buzzer, diode et tensions directes du voyant RGB
 **Statut :** Ouvert
@@ -169,14 +169,6 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Question :** le catalogue ne donne ni le débit par défaut, ni l'identifiant du service et de la caractéristique, ni l'absence de commande AT du E104-BT02, ni sa version Bluetooth (4.2 selon Ebyte, 5.1 selon le catalogue).
 **Réponse :** (aucune) ; essai d'un module seul avec un adaptateur USB-UART avant la commande de la carte (TI-010 « Liaison Bluetooth à basse consommation »). Non bloquant pour la porte, à lever avant la commande de la carte. Plan B : pastilles pour un autre module.
 **Décision liée :** {DEC-243 « Latence de l'arrêt sans fil et module Bluetooth : mesure avant la commande de la carte »}
-
-### DOU-152 — PMW3901 : puce nue ou carte achetée, alimentation et refusion
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** ARC-005 « Capteur de flux optique » et ARC-013 « Carte électronique JLCPCB, câblage et assemblage »
-**Question :** la puce nue PMW3901MB-TXQT (C43496881, 182 en stock) annonce une alimentation de 1,8 à 2,1 V, un boîtier COB de 6 × 6 × 2,28 mm et une plage de 0 à 40 °C au catalogue ; son profil de refusion et sa lentille sont inconnus. La carte achetée est retenue pour cette version ; l'alimentation de cette carte est à relever.
-**Réponse :** (aucune) ; relever la fiche de PixArt et celle de la carte achetée ; la puce nue avec un régulateur de 1,8 V (ME6211C18M5G-N, C236671) reste un repli futur. Non bloquant.
-**Décision liée :** {DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté »}
 
 ### DOU-153 — Carte double face, assemblage Standard, frais d'extension et délais
 **Statut :** Ouvert
@@ -254,7 +246,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** ARC-013 « Carte électronique JLCPCB, câblage et assemblage », ARC-008 « Batterie et connecteur débranchable » et ARC-004 « Capteur de hauteur à temps de vol »
-**Question :** la carte de 40 × 35 mm est au centre, entre des moteurs à 49 mm d'entraxe ; l'accès au connecteur au bord, la place de la batterie, le cône du capteur de hauteur avec le flux collé dessous et le flux d'air des hélices ne sont pas dessinés.
+**Question :** la carte de 40 × 35 mm est au centre, entre des moteurs à 49 mm d'entraxe ; l'accès au connecteur au bord, la place de la batterie, le cône du capteur de hauteur avec la puce et la lentille du flux optique sur la même face basse (cônes de 27° et de 42°) et le flux d'air des hélices ne sont pas dessinés.
 **Réponse :** (aucune) ; croquis coté (dessus et côté) avant le routage. Non bloquant.
 **Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
 
@@ -265,6 +257,30 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Question :** GPIO1 serait en drain ouvert (rappel externe prévu) ; la résistance de l'AO3400A à 2,5 V est peut-être plus élevée que 33 mΩ (pertes de 0,2 W optimistes) ; la fonction USB de PA11 sur le G431 est incertaine ; le courant de calage d'un moteur 8520 bloqué n'est pas écrit.
 **Réponse :** (aucune) ; relever dans les fiches avant le routage. Non bloquant.
 **Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-164 — PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-005 « Capteur de flux optique », ARC-013 « Carte électronique JLCPCB, câblage et assemblage » et REQ-044 « Assemblage à la main »
+**Question :** (1) JLCPCB assemble-t-il la puce COB-28 C43496881 (« expand », 182 en stock le 2026-10-29, lot de 80 par tube) ? Le catalogue ne l'indique pas ; l'empreinte du catalogue est « COB-28_6.0X6.0X0.65P ». (2) La lentille LN03-ZSZ, pièce séparée d'après la fiche, est-elle fournie avec la puce ? La photo du catalogue montre une puce et une petite lentille, le nom interne est « lot de 2 pièces », le poids du lot est de 0,357 g ; la lentille n'est pas commandable seule chez JLCPCB (recherche du 2026-10-29). JLCPCB ne la pose probablement pas : collage à la main, colle et alignement non définis. (3) Profil de refusion de la puce : non indiqué dans la fiche lue (soudure sans plomb 260 °C au plus, seule donnée), niveau de sensibilité à l'humidité non connu. (4) Le stock de 182 suffit pour 5 cartes, mais baisse chaque jour ; l'unité du stock et du prix (pièce ou lot de 2), le minimum de commande et les frais d'extension sont à lire sur le devis. (5) Ordre des faces et nombre de passages au four de la carte double face : la puce est sur la face basse, qui peut subir deux refusions ; sensibilité à l'humidité non connue. (6) Collage de la lentille : colle sans effet sur l'optique, alignement, propreté, critère d'acceptation à définir (TA-015 « Inspection de la fabrication à la main »).
+**Réponse :** (aucune) ; avant la commande de la carte : relire le devis et l'aperçu de fabrication (DFM) de JLCPCB avec la référence C43496881, et demander au service client si la lentille est dans le lot, si la puce est posée au four standard et comment est livrée la lentille. Repli décidé : carte achetée Pimoroni PMW3901 soudée par 6 fils si JLCPCB refuse la puce ou si la lentille manque (DEC-248 « Flux optique : lentille collée à la main et repli sur carte achetée »). Non bloquant.
+**Décision liée :** {DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB »} ; {DEC-248 « Flux optique : lentille collée à la main et repli sur carte achetée »}
+
+### DOU-165 — Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », ARC-005 « Capteur de flux optique » et ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Question :** le XC6206P202MR-G (2,0 V fixe, C2891260) n'a pas été lu dans sa fiche : tolérance de la sortie (la puce n'accepte que 1,8 à 2,1 V, bruit compris), chute de tension à 9 mA (le catalogue donne 780 mV à 100 mA), capacité de sortie pour la stabilité et réponse à la pointe de 70 mA de la mise sous tension. Valeurs des condensateurs et des résistances de la figure 8 de la fiche de la puce (texte extrait ambigu). Niveau d'entrée haut du STM32G431 face à la sortie MISO de la puce (au moins VDDIO − 0,45 V, soit 2,55 V à 1 mA), à relever dans DS12589 (à lire dans DS12589, hors du périmètre de DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 »). Ordre de mise sous tension : VDDIO (rail de 3,0 V) est présent avant VDD (2,0 V), conforme à VDDIO ≥ VDD de la fiche, séquence non écrite dans la fiche lue : hypothèse, non démontrée ; à l'extinction VDDIO peut tomber avant VDD (capacité de sortie du régulateur) et un creux du rail en vol peut faire décrocher la puce sans reset du microcontrôleur, NRESET n'étant pas câblée : prévoir la détection logicielle d'une puce muette ou figée et sa ré-initialisation par registre (au sol), et l'essai de coupure rapide de TI-001 « Alimentation, programmation SWD et octets d'option ». La tolérance totale du XC6206 (tension, température, charge) doit tenir dans 1,8 à 2,1 V avant la commande : sinon régulateur de précision ±1 %. À lever avant le gel de la nomenclature.
+**Réponse :** (aucune) ; relever dans les fiches avant le routage ; mesurer à TI-001 « Alimentation, programmation SWD et octets d'option » (rail de 2,0 V entre 1,8 et 2,1 V) et TI-002 « Bus SPI, I2C et capteurs ». Non bloquant.
+**Décision liée :** {DEC-247 « Flux optique : alimentation en 2,0 V par un régulateur dédié, signaux en 3,0 V »}
+
+### DOU-166 — PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-005 « Capteur de flux optique » et ARC-013 « Carte électronique JLCPCB, câblage et assemblage »
+**Question :** la fiche donne une température de fonctionnement de 0 à 40 °C : la face basse de la carte, proche des moteurs, de la batterie et du régulateur MCP1700T-3002E/TT (échauffement estimé de 40 à 55 °C en SOT-23, ARC-009 « Alimentation de la logique et mesure de la tension »), et un vol dans un gymnase ou un jardin chaud, restent-ils dans cette plage ? Le boîtier fait 2,28 mm de haut, sans doute lentille comprise (non confirmé) : la hauteur de la lentille au-dessus de la carte, la distance au sol avec le capteur de hauteur monté à 20 mm du plan de contact (DOU-139 « Capteurs de hauteur et de flux : hauteur de montage et sols sans texture ») et les cônes de 42° et 27° sont à dessiner (DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie »).
+**Réponse :** (aucune) ; mesure de la température de la puce à TI-004 « Flux optique et vitesse horizontale » (moteurs en marche 30 s) ; hauteur à dessiner avec le croquis coté avant le routage. Aucune exigence ne fixe la température ambiante de vol : à demander à l'utilisateur avant la commande (jardin d'été). Distance entre le régulateur et la puce, cuivre et comportement du logiciel si la qualité du flux chute (vitesse déclarée invalide) à fixer au routage. Non bloquant.
+**Décision liée :** {DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB »}
 
 <!-- Ajouter les nouveaux doutes ci-dessus, avant ce marqueur, au même format, en dehors des blocs de code. -->
 
@@ -1334,3 +1350,11 @@ Complément du 2026-10-28 (3e relecture de porte) : des paramètres de vol aberr
 **Question :** l'architecture fait poser les composants CMS par JLCPCB, ce qui contredit REQ-044 « Assemblage à la main » telle que rédigée. La nouvelle rédaction proposée est dans DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider ».
 **Réponse :** REQ-044 « Assemblage à la main » réécrite sur accord de l'utilisateur le 2026-10-29 : la carte est fabriquée et assemblée par JLCPCB, les raccordements restent à la main.
 **Décision liée :** DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main » ; DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider »
+
+### DOU-152 — PMW3901 : puce nue ou carte achetée, alimentation et refusion
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** ARC-005 « Capteur de flux optique », ARC-013 « Carte électronique JLCPCB, câblage et assemblage », ARC-014 « Bilan de masse, de poussée et d'autonomie » et REQ-044 « Assemblage à la main »
+**Question :** la puce nue PMW3901MB-TXQT (C43496881, 182 en stock) annonce une alimentation de 1,8 à 2,1 V, un boîtier COB de 6 × 6 × 2,28 mm et une plage de 0 à 40 °C au catalogue ; son profil de refusion et sa lentille sont inconnus. La carte achetée est retenue pour cette version ; l'alimentation de cette carte est à relever (état avant DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB »).
+**Réponse :** instruction de l'utilisateur en chat, 2026-10-29 : le capteur de flux est acheté et posé par JLCPCB (puce PMW3901MB-TXQT, C43496881, COB-28), tout ce qui peut être pris chez JLCPCB l'est. Fiche PixArt version 1.00 lue : VDD 1,8 à 2,1 V (2,0 V typique), VDDIO 1,8 à 3,6 V ; VDD alimenté en 2,0 V par un régulateur XC6206P202MR-G (C2891260, en stock) depuis le rail de 3,0 V, VDDIO et SPI2 à 3,0 V sans décalage de niveau. Les points restants (lentille, assemblage par JLCPCB, refusion, valeurs de fiche, température, hauteur de montage) sont suivis par DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce », DOU-165 « Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension » et DOU-166 « PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille ». Repli : carte achetée Pimoroni (DEC-248 « Flux optique : lentille collée à la main et repli sur carte achetée »).
+**Décision liée :** DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB » ; DEC-247 « Flux optique : alimentation en 2,0 V par un régulateur dédié, signaux en 3,0 V » ; DEC-248 « Flux optique : lentille collée à la main et repli sur carte achetée » ; DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté »
