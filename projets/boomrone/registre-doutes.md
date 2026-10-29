@@ -98,6 +98,182 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :** par décision provisoire de l'architecte, la coupure est rattachée à la cause « échec de stabilisation » (état 13) ; à confirmer à la prochaine révision des exigences. Non bloquant.
 **Décision liée :** {DEC-233 « Relecture de porte architecture : corrections décidées par délégation »}
 
+### DOU-142 — Fuite d'entrée de l'ADC et marge de ±50 mV de la mesure de tension
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension » et REQ-003 « Conditions de départ du drone »
+**Question :** la fuite d'entrée de l'ADC du STM32G431 n'est pas relevée ; avec une source d'environ 60 kΩ, 100 nA de fuite donnent 6 mV à la broche, soit environ 10 mV sur la batterie. Le budget estimé (pont à 0,1 % 3 mV, VREFINT 6 mV, décalage 5 mV, fuite 10 mV, soit environ ±25 mV) tient-il dans les ±50 mV ?
+**Réponse :** (aucune) ; à relever dans la fiche DS12589 et à mesurer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension » ; étalonnage de gain au multimètre en repli. Non bloquant.
+**Décision liée :** {DEC-242 « Alimentation de la logique à 130 mA et masse recalculée à 62 g »}
+
+### DOU-143 — Tensions d'alimentation acceptées par les capteurs et le module à 3,0 V
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », ARC-004 « Capteur de hauteur à temps de vol », ARC-005 « Capteur de flux optique » et ARC-012 « Module radio Bluetooth à basse consommation »
+**Question :** le rail descend à environ 2,9 V (2,82 V avec une batterie à 3,0 V). Le capteur de hauteur (2,6 V minimum), le module E104-BT02 (2,5 V minimum), la centrale (1,71 V) conviennent d'après le catalogue ; la carte du flux optique achetée est à vérifier (puce à 1,8 à 2,1 V selon le catalogue). Ces plages viennent du catalogue, pas des fiches.
+**Réponse :** (aucune) ; relever les plages dans les fiches avant la commande de la carte. Non bloquant.
+**Décision liée :** {DEC-242 « Alimentation de la logique à 130 mA et masse recalculée à 62 g »}
+
+### DOU-144 — Courant du buzzer, diode et tensions directes du voyant RGB
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-011 « Voyant RGB et avertisseur sonore »
+**Question :** le buzzer actif tire environ 30 mA à 3,3 V (plus sous 4,2 V, non vérifié) et le niveau sonore à 1 m (environ 60 dB estimé) est inférieur à l'ancienne estimation de 65 dB ; une diode de précaution est prévue. Les tensions directes du voyant (rouge 2,4 V, vert et bleu 3,4 V selon le catalogue) sont à confirmer : le vert et le bleu peuvent s'éteindre vers 3,3 à 3,4 V de batterie.
+**Réponse :** (aucune) ; mesure à TI-009 « Bouton, voyant RGB et avertisseur » et TS-014 « Perceptibilité et distinction des effets ». Non bloquant.
+**Décision liée :** {DEC-235 « Catalogue JLCPCB/LCSC vérifié : composants retenus »}
+
+### DOU-145 — Vol entre la dernière mesure de hauteur et la coupure à 200 ms
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-004 « Capteur de hauteur à temps de vol », ARC-016 « Pilotes des capteurs et des sorties » et REQ-011 « Coupures automatiques en vol »
+**Question :** que fait la commande de hauteur entre la dernière mesure valide et la coupure à 200 ms ? Tenir la dernière poussée peut faire monter ou descendre le drone pendant 0,2 s.
+**Réponse :** (aucune) ; décision provisoire : la hauteur est extrapolée par l'observateur de ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse » (accélération verticale) sans recalage ; à confirmer en conception détaillée et à TI-028 « Pilote du capteur de hauteur : durée d'appel, bus bloqué, capteur muet ». Non bloquant.
+**Décision liée :** {DEC-239 « Capteur de hauteur : pilote non bloquant, reprise, échec d'initialisation, mesure horodatée »}
+
+### DOU-146 — Broches d'état du module Bluetooth et de mouvement du capteur de flux
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-012 « Module radio Bluetooth à basse consommation » et ARC-005 « Capteur de flux optique »
+**Question :** la broche d'état (connexion) du module Bluetooth et la broche de mouvement (MOTION) du capteur de flux ne sont pas câblées au microcontrôleur : choix de simplicité (le statut radio est lu par trames, le flux par interrogation). À reconsidérer si l'essai montre un besoin.
+**Réponse :** (aucune) ; décision provisoire : non câblées, plots de test seulement. Non bloquant.
+**Décision liée :** {DEC-240 « Brochage, timers, voyant et bouton »}
+
+### DOU-147 — Compatibilité de l'empreinte avec le STM32G474
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Question :** le STM32G474CBT6 (LQFP-48, C730123, en stock) peut servir de repli : les deux tableaux de brochage doivent être comparés (PA11 et PA12 sont l'USB sur le G474, non utilisées).
+**Réponse :** (aucune) ; comparaison à faire dans les fiches avant le routage. Non bloquant.
+**Décision liée :** {DEC-240 « Brochage, timers, voyant et bouton »}
+
+### DOU-148 — Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Question :** le brochage de l'architecture est donné par les noms PAx et PBx, sans les numéros de broches physiques ni la vérification des fonctions alternatives (fiche DS12589 non téléchargeable à la rédaction).
+**Réponse :** (aucune) ; à relever en conception détaillée avant le schéma. Non bloquant.
+**Décision liée :** {DEC-240 « Brochage, timers, voyant et bouton »}
+
+### DOU-149 — Valeurs de registres du VL53L1X à vérifier dans la bibliothèque ST (ULD)
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-004 « Capteur de hauteur à temps de vol »
+**Question :** les registres de lecture du résultat, d'acquittement de l'interruption, de polarité de GPIO1 et de budget de mesure sont donnés de mémoire dans les notes d'architecture.
+**Réponse :** (aucune) ; à vérifier dans l'ULD de ST et la fiche DS12093 en conception détaillée. Non bloquant.
+**Décision liée :** {DEC-239 « Capteur de hauteur : pilote non bloquant, reprise, échec d'initialisation, mesure horodatée »}
+
+### DOU-150 — Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** REQ-044 « Assemblage à la main », REQ-029 « Composants disponibles à l'unité » et ARC-013 « Carte électronique JLCPCB, câblage et assemblage »
+**Question :** l'architecture fait poser les composants CMS par JLCPCB, ce qui contredit REQ-044 « Assemblage à la main » telle que rédigée. La nouvelle rédaction proposée est dans DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider ».
+**Réponse :** (aucune) ; à valider par l'utilisateur à la prochaine révision des exigences. Non bloquant.
+**Décision liée :** {DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider »}
+
+### DOU-151 — Module E104-BT02 : débit par défaut, service, absence de commande AT
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-012 « Module radio Bluetooth à basse consommation » et ARC-028 « Logiciel d'essai de l'appareil de suivi »
+**Question :** le catalogue ne donne ni le débit par défaut, ni l'identifiant du service et de la caractéristique, ni l'absence de commande AT du E104-BT02, ni sa version Bluetooth (4.2 selon Ebyte, 5.1 selon le catalogue).
+**Réponse :** (aucune) ; essai d'un module seul avec un adaptateur USB-UART avant la commande de la carte (TI-010 « Liaison Bluetooth à basse consommation »). Non bloquant pour la porte, à lever avant la commande de la carte. Plan B : pastilles pour un autre module.
+**Décision liée :** {DEC-243 « Latence de l'arrêt sans fil et module Bluetooth : mesure avant la commande de la carte »}
+
+### DOU-152 — PMW3901 : puce nue ou carte achetée, alimentation et refusion
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-005 « Capteur de flux optique » et ARC-013 « Carte électronique JLCPCB, câblage et assemblage »
+**Question :** la puce nue PMW3901MB-TXQT (C43496881, 182 en stock) annonce une alimentation de 1,8 à 2,1 V, un boîtier COB de 6 × 6 × 2,28 mm et une plage de 0 à 40 °C au catalogue ; son profil de refusion et sa lentille sont inconnus. La carte achetée est retenue pour cette version ; l'alimentation de cette carte est à relever.
+**Réponse :** (aucune) ; relever la fiche de PixArt et celle de la carte achetée ; la puce nue avec un régulateur de 1,8 V (ME6211C18M5G-N, C236671) reste un repli futur. Non bloquant.
+**Décision liée :** {DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté »}
+
+### DOU-153 — Carte double face, assemblage Standard, frais d'extension et délais
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-013 « Carte électronique JLCPCB, câblage et assemblage »
+**Question :** l'assemblage « Standard » (double face, panneau de 70 × 70 mm, fiduciaires) coûte plus cher que « Économique » (simple face) ; les frais d'extension de chaque référence « expand » (environ 9 à 11 références), le cuivre de 2 oz, la distance composant-bord et le délai de fabrication du circuit n'ont pas été vérifiés.
+**Réponse :** (aucune) ; à lire sur le devis de JLCPCB avant la commande. Non bloquant ; repli : carte simple face « Économique ».
+**Décision liée :** {DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté »}
+
+### DOU-154 — Vibrations des moteurs sur la centrale inertielle posée sur la carte rigide
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-003 « Centrale inertielle »
+**Question :** la centrale n'est plus sur une petite carte collée sur de la mousse : elle est sur la carte principale, fixée au cadre. Les vibrations des moteurs à balais peuvent bruiter les mesures.
+**Réponse :** (aucune) ; fixer la carte sur de la mousse ou des plots souples et mesurer le bruit à TI-013 « Boucle de contrôle sur potence ». Non bloquant.
+**Décision liée :** {DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté »}
+
+### DOU-155 — Connecteur XT30 : genre côté carte et surtension à la connexion
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-008 « Batterie et connecteur débranchable » et ARC-009 « Alimentation de la logique et mesure de la tension »
+**Question :** le XT30PW retenu est mâle (C431092) ; la batterie achetée peut avoir un connecteur du même genre. De plus, la mise sous tension de la batterie peut produire un dépassement de tension sur l'entrée du régulateur (maximum absolu d'environ 6 V, dépassement calculé d'environ 4,7 V, valeurs à vérifier).
+**Réponse :** (aucune) ; choisir le genre à l'achat de la batterie ; mesure du dépassement à TI-008 « Batterie, connecteur, chute de tension et mesure de tension ». Non bloquant ; à lever avant la commande de la carte.
+**Décision liée :** {DEC-243 « Latence de l'arrêt sans fil et module Bluetooth : mesure avant la commande de la carte »}
+
+### DOU-156 — Vérifications avant la commande de la carte
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-013 « Carte électronique JLCPCB, câblage et assemblage », ARC-012 « Module radio Bluetooth à basse consommation » et ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Question :** les essais TI-001 « Alimentation, programmation SWD et octets d'option », TI-008 « Batterie, connecteur, chute de tension et mesure de tension » et TI-013 « Boucle de contrôle sur potence » demandent la carte livrée : ils ne peuvent pas précéder la commande. Quelles vérifications se font avant ?
+**Réponse :** décision provisoire : avant la commande, tester le module BLE seul (TI-010 « Liaison Bluetooth à basse consommation »), le brochage, les fonctions alternatives et les registres sur une carte Nucleo STM32G431 et dans les fiches, la poussée et la résistance interne au banc (TI-007 « Moteurs, poussée, masse et dimensions »), le genre du XT30 et le devis ; le dépassement de tension, les vibrations et la consommation restent mesurés sur la première carte (5 cartes commandées, risque accepté). Non bloquant.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-157 — VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-004 « Capteur de hauteur à temps de vol »
+**Question :** la référence en stock VL53L1CXV0FY/1 est présentée comme la référence ST du VL53L1X ; elle pourrait être une variante (VL53L1CX) avec un identifiant et une bibliothèque différents de ceux supposés (0xEACC, ULD du VL53L1X).
+**Réponse :** (aucune) ; vérifier dans la fiche ST avant la commande, sinon changer de référence ; essai possible sur une carte du commerce. Non bloquant, à lever avant la commande de la carte.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-158 — Initialisation du capteur de hauteur plus longue que le chien de garde
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-023 « Initialisation et échec d'initialisation », ARC-022 « Chien de garde » et ARC-004 « Capteur de hauteur à temps de vol »
+**Question :** le chien de garde matériel dure 100 ms dès le reset alors que l'initialisation par la bibliothèque ST est estimée à 110 à 170 ms avec ses attentes.
+**Réponse :** décision provisoire : les attentes de la bibliothèque sont découpées ou rappellent la fonction unique de rafraîchissement ; à vérifier à TI-018 « Initialisation et échec d'initialisation » et TI-028 « Pilote du capteur de hauteur : durée d'appel, bus bloqué, capteur muet ». Non bloquant.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-159 — Ordonnancement des tâches de fond : flux à 100 Hz, pilote de hauteur et latence de l'arrêt sans fil
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-015 « Structure logicielle et ordonnancement », ARC-005 « Capteur de flux optique » et ARC-025 « Protocole et service du statut sans fil »
+**Question :** avec une seule tâche de fond par cycle, le flux à 100 Hz en plusieurs pas, le pilote de hauteur et le traitement de l'arrêt sans fil peuvent se gêner ; le pire cas (300 µs + 200 µs) égale l'ancien seuil d'alarme de 500 µs.
+**Réponse :** décision provisoire : tâches choisies par priorité (arrêt radio, hauteur, flux, statut, effets), seuil d'alarme porté à 800 µs ; à confirmer par la mesure du temps de calcul à TI-011 « Cadence du cycle et temps de réponse de l'arrêt d'urgence ». Non bloquant.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-160 — Mesure de hauteur valide et sols sombres ou brillants
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-016 « Pilotes des capteurs et des sorties », ARC-021 « Surveillance et coupures automatiques » et ARC-004 « Capteur de hauteur à temps de vol »
+**Question :** la coupure à 200 ms sans mesure de hauteur valide ne dit pas ce qu'est une mesure valide ; un sol noir mat ou brillant, une vitre ou le soleil peuvent invalider la mesure plus de 200 ms.
+**Réponse :** décision provisoire : valide = statut de portée sans erreur et taux de signal au-dessus du seuil de la bibliothèque ; sinon la coupure à 200 ms intervient (choix prudent) ; sols difficiles essayés à TI-028 « Pilote du capteur de hauteur : durée d'appel, bus bloqué, capteur muet ». Non bloquant.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-161 — Tensions directes du voyant RGB : visibilité du vert et du bleu entre 3,4 et 3,7 V
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-011 « Voyant RGB et avertisseur sonore » et REQ-019 « Perceptibilité et distinction des effets »
+**Question :** si le vert et le bleu ont 3,4 V de tension directe, ils sont très faibles autour de 3,7 V (environ 4 mA) et éteints sous 3,4 V, alors que l'effet 1 « Allumé » est vert et l'effet 4 « Lancé et vol » est blanc.
+**Réponse :** (aucune) ; mesurer la LED retenue, changer de LED ou de résistances avant la commande si besoin. Non bloquant.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-162 — Implantation mécanique de la carte, du connecteur et de la batterie
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-013 « Carte électronique JLCPCB, câblage et assemblage », ARC-008 « Batterie et connecteur débranchable » et ARC-004 « Capteur de hauteur à temps de vol »
+**Question :** la carte de 40 × 35 mm est au centre, entre des moteurs à 49 mm d'entraxe ; l'accès au connecteur au bord, la place de la batterie, le cône du capteur de hauteur avec le flux collé dessous et le flux d'air des hélices ne sont pas dessinés.
+**Réponse :** (aucune) ; croquis coté (dessus et côté) avant le routage. Non bloquant.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
+### DOU-163 — Valeurs de fiche à relever : rappel de GPIO1, résistance de l'AO3400A, USB du G431
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-004 « Capteur de hauteur à temps de vol », ARC-007 « Étage de puissance des moteurs coupés par défaut » et ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Question :** GPIO1 serait en drain ouvert (rappel externe prévu) ; la résistance de l'AO3400A à 2,5 V est peut-être plus élevée que 33 mΩ (pertes de 0,2 W optimistes) ; la fonction USB de PA11 sur le G431 est incertaine ; le courant de calage d'un moteur 8520 bloqué n'est pas écrit.
+**Réponse :** (aucune) ; relever dans les fiches avant le routage. Non bloquant.
+**Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
+
 <!-- Ajouter les nouveaux doutes ci-dessus, avant ce marqueur, au même format, en dehors des blocs de code. -->
 
 ## Archive — doutes levés
@@ -1151,3 +1327,10 @@ Complément du 2026-10-28 (3e relecture de porte) : des paramètres de vol aberr
 **Réponse :** Non : l'utilisateur est seul et accepte les risques ; seule la protection de sous-tension reste un besoin, dans BES-005 « Couper les moteurs quand le vol ne peut pas continuer ». Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29.
 **Décision liée :** DEC-153 « Pas de besoin de sécurité des tiers, de conformité, de durée de vie ni de gestion de la batterie »
 
+### DOU-141 — Assemblage de la carte : à la main ou composants posés par JLCPCB, et disponibilité des pièces chez LCSC
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** ARC-013 « Carte électronique JLCPCB, câblage et assemblage », REQ-044 « Assemblage à la main » et REQ-029 « Composants disponibles à l'unité »
+**Question :** JLCPCB peut souder les composants de la carte à l'usine. REQ-044 « Assemblage à la main » demande un assemblage à la main ; le LQFP-48 à 0,5 mm est le point le plus risqué. Faut-il tout souder à la main, ou faire poser les composants CMS par JLCPCB (capteurs, moteurs et connecteurs restant à la main) ? Et le STM32G431CBT6, l'AO3400A et les autres pièces sont-ils en stock chez JLCPCB (catalogue LCSC), sachant que la contrainte est d'en prendre le plus possible ? Les cartes de capteurs (LSM6DSO, VL53L1X, PMW3901) et le module HM-10 n'y sont probablement pas : faut-il les remplacer par les puces nues en stock, ou les acheter ailleurs ? Ouvert le 2026-10-29.
+**Réponse :** composants CMS posés par JLCPCB (assemblage Standard), puces nues pour la centrale et le capteur de hauteur, carte achetée pour le flux optique, module Bluetooth Ebyte E104-BT02 ; stocks relevés le 2026-10-29 (HM-10 à stock 0). Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29. L'écart avec REQ-044 « Assemblage à la main » est suivi par DOU-150 « Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB ».
+**Décision liée :** DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté » ; DEC-235 « Catalogue JLCPCB/LCSC vérifié : composants retenus » ; DEC-234 « JLCPCB, fabricant de la carte : contrainte de début de projet »

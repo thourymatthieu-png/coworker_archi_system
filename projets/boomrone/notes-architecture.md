@@ -1,6 +1,6 @@
 # Notes pour l'architecture
 
-> **Aperçu** : points techniques apparus pendant la phase scénarios. Ce ne sont pas des doutes sur les scénarios : ils sont à traiter à la phase « Architecture », avec les décisions DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais » et DEC-019 « Hauteur au-dessus du sol mesurée en vol », qui sont des intentions de l'utilisateur à reprendre.
+> **Aperçu** : points techniques apparus pendant la phase scénarios ; la section « Révision JLCPCB du 2026-10-29 », en bas, porte les détails de conception détaillée de la révision de l'architecture. Ce ne sont pas des doutes sur les scénarios : ils sont à traiter à la phase « Architecture », avec les décisions DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil », DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais » et DEC-019 « Hauteur au-dessus du sol mesurée en vol », qui sont des intentions de l'utilisateur à reprendre.
 
 ```mermaid
 ---
@@ -91,3 +91,89 @@ Ces solutions avaient été écrites dans des décisions de la phase scénarios.
 | Centrale inertielle seule, sans capteur de position (flux optique écarté à l'époque) | DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais » | Dérive horizontale de 30 cm au plus sur 10 s, objectif à valider par essais, sans préjuger du moyen de mesure | Proposition, à arbitrer en architecture |
 | Capteur de distance de type ToF orienté vers le bas (baromètre écarté à l'époque) | DEC-019 « Hauteur au-dessus du sol mesurée en vol » | La hauteur au-dessus du sol est mesurée en vol | Proposition, à arbitrer en architecture |
 | Programmateur ST-LINK, via JTAG ou SWD (seul programmateur que possède l'utilisateur) | DEC-024 « Mise en service par programmation avec un programmateur ST-LINK » | La mise en service commence par la programmation du drone | Proposition, à arbitrer en architecture |
+
+## Révision JLCPCB du 2026-10-29 : détails pour la conception détaillée
+
+> **Aperçu** : cette section reçoit les détails que « Architecture » — `projets/boomrone/03-architecture.md` ne porte pas (brochage broche par broche, machine d'états du pilote du capteur de hauteur, registres à vérifier, mémoire). Tout ce qui est écrit ici « de mémoire » doit être confirmé dans les fiches techniques (DS12589 pour le STM32G431, DS12093 pour le VL53L1X, fiche PixArt pour le PMW3901, fiche ST du LSM6DSO) avant d'être codé : DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 », DOU-149 « Valeurs de registres du VL53L1X à vérifier dans la bibliothèque ST (ULD) ». Décisions : DEC-238 « Fréquences SPI et lecture de la centrale inertielle », DEC-239 « Capteur de hauteur : pilote non bloquant, reprise, échec d'initialisation, mesure horodatée », DEC-240 « Brochage, timers, voyant et bouton », DEC-241 « Mémoire et ordonnancement : règles de robustesse ».
+
+```mermaid
+---
+title: "Pilote du capteur de hauteur : niveaux de reprise"
+---
+stateDiagram-v2
+    [*] --> Attente
+    Attente --> Lecture: front de GPIO1 (horodaté TIM2)
+    Lecture --> Acquittement: fin du DMA I2C
+    Acquittement --> Attente: mesure publiée
+    Lecture --> Niveau1: NACK ou dépassement
+    Niveau1 --> Attente: relance réussie
+    Niveau1 --> Niveau2: échec
+    Niveau2 --> Attente: 9 impulsions SCL, bus libre
+    Niveau2 --> Niveau3: bus toujours bloqué
+    Niveau3 --> Attente: XSHUT + ULD, au sol seulement
+    Attente --> Coupure: aucune mesure pendant 200 ms (en vol)
+```
+
+*Légende : en vol, seuls les niveaux 1 et 2 sont tentés ; le niveau 3 (110 à 170 ms estimés) est réservé au sol et à l'initialisation. Chaque pas de la machine est une tâche de fond d'au plus 200 µs, jamais une attente.*
+
+### Brochage proposé, broche par broche (à confirmer, DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 »)
+
+| Fonction | Broche | Mode | Remarque |
+|---|---|---|---|
+| Moteurs 1 à 4 | PA8, PA9, PA10, PA11 | TIM1 CH1 à CH4, 24 kHz | rappel 100 kΩ, grille via 47 Ω ; PA11 a une fonction USB selon la référence (à vérifier), non utilisée |
+| IMU : SCK, MISO, MOSI | PA5, PA6, PA7 | SPI1, 5,3125 MHz (diviseur 32 sur 170 MHz) | mode 0 ou 3 selon la fiche |
+| IMU : CS, INT1 | PA4, PB0 | sortie, entrée | INT1 sans timer : PB0 n'est donc pas pris par TIM3 |
+| Flux : SCK, MISO, MOSI | PB13, PB14, PB15 | SPI2, 1,328 MHz (diviseur 128) | mode 3 pour le PMW3901 |
+| Flux : CS | PB12 | sortie | MOTION non câblée (DOU-146 « Broches d'état du module Bluetooth et de mouvement du capteur de flux ») |
+| I2C du capteur de hauteur | PA15 (SCL), PB7 (SDA) | I2C1, 400 kHz | rappels de 4,7 kΩ au 3,0 V ; PA15 est JTDI (rappel haut au reset), sans conséquence ici |
+| Capteur de hauteur : GPIO1, XSHUT | PB6, PB9 | entrée avec interruption externe, sortie | GPIO1 (drain ouvert, de mémoire) et XSHUT rappelés au 3,0 V par 10 kΩ |
+| Radio | PA2 (TX), PA3 (RX) | USART2, DMA circulaire | pas de TIM15 : PA2 et PA3 en sont les canaux, d'où le choix de ne pas l'utiliser |
+| Voyant R, V, B | PB1, PB2, PB10 | sorties, modulation logicielle au tick | grilles via 100 Ω, rappel 100 kΩ |
+| Buzzer | PB11 | sortie | grille via 100 Ω, rappel 100 kΩ ; diode SS34 en parallèle |
+| Bouton | PB5 | entrée | rappel externe 10 kΩ au 3,0 V, 1 kΩ en série, 10 nF |
+| Mesure de la batterie | PA0 | ADC1 IN1 | pont 100 kΩ / 150 kΩ à 0,1 %, 100 nF, échantillonnage d'au moins 6 µs |
+| SWD | PA13, PA14 | SWDIO, SWCLK | PB3 (SWO) et PB4 (NJTRST) inutilisées ; PA15 et PB4 jamais sur une grille |
+| BOOT0 | PB8 | entrée | 10 kΩ à la masse, jamais utilisée pour un bus |
+
+Conflits résolus : TIM3 (PB0 est TIM3 CH3, mais PB0 sert d'entrée INT1) ; TIM15 (PA2 et PA3, déjà USART2) ; le voyant n'a donc aucun timer. Timers utilisés : TIM1 (moteurs), TIM2 (compteur libre de 32 bits, prescaler 169 pour 1 MHz, chronomètres de tout le logiciel), TIM6 (tick de 1 kHz). Repli STM32G474 : même empreinte LQFP-48, à confirmer (DOU-147 « Compatibilité de l'empreinte avec le STM32G474 »).
+
+### Centrale inertielle LSM6DSO (registres de mémoire, à vérifier)
+
+| Registre | Adresse | Valeur visée | Rôle |
+|---|---|---|---|
+| WHO_AM_I | 0x0F | 0x6C | identification |
+| CTRL3_C | 0x12 | BDU = 1, IF_INC = 1 | lecture cohérente et adresse incrémentale |
+| CTRL1_XL | 0x10 | 0x9C | 3,33 kHz, ±8 g |
+| CTRL2_G | 0x11 | 0x9C | 3,33 kHz, ±2000 °/s |
+| INT1_CTRL | 0x0D | bits donnée prête accéléromètre et gyroscope | INT1 sur PB0 |
+| Lecture | 0x20 à 0x2D | 14 octets : température, gyroscope, accéléromètre | un transfert DMA de 15 octets par tick, environ 23 µs |
+
+Le bit de lecture (0x80) s'ajoute à l'adresse en SPI. Le pas de temps du filtre est la différence de deux lectures de TIM2, non la constante de 1 ms.
+
+### Capteur de hauteur VL53L1X (de mémoire, à vérifier dans l'ULD, DOU-149 « Valeurs de registres du VL53L1X à vérifier dans la bibliothèque ST (ULD) »)
+
+- Identification : registre 0x010F, valeur attendue 0xEACC.
+- Interruption : polarité et masque de GPIO1 (registres 0x0030 et 0x0031), acquittement par écriture de 1 dans 0x0086 après chaque lecture.
+- Résultat : bloc de 17 octets à partir de 0x0089 (état, distance, taux de signal) lu par un seul DMA I2C ; le statut de mesure est testé avant de publier.
+- Mode LONG, budget 33 ms, intervalle entre mesures 33 à 40 ms ; ces réglages sont ceux de la fonction d'initialisation de l'ULD, copiés sans modification.
+- Horodatage : valeur de TIM2 relevée dans le gestionnaire de GPIO1 ; le recalage de l'observateur utilise l'estimation de hauteur gardée pour les 64 derniers cycles.
+- Initialisation : au plus 2 tentatives de 300 ms avec remise à zéro par XSHUT entre elles ; échec = échec d'initialisation (déclaré avant 1 s).
+
+### Flux optique PMW3901 sur sa carte (de mémoire, à vérifier)
+
+Identifiant 0x00 = 0x49 et son complément 0x5F = 0xB6 ; remise à zéro par 0x3A = 0x5A ; lecture en rafale du mouvement par le registre 0x16 ; SPI en mode 3 ; temporisations d'environ 35 µs entre l'adresse et la donnée, découpées en pas de tâche de fond de moins de 200 µs. La suite de réglages d'initialisation (une cinquantaine d'écritures) vient d'un pilote publié (Bitcraze ou PixArt) et se joue au sol.
+
+### Mémoire et reset
+
+- STM32G431 : 32 kio de RAM répartis en SRAM1, SRAM2 et CCM SRAM (tailles à vérifier dans le manuel de référence). `.noinit` et tampons DMA en SRAM1 ; la CCM SRAM n'est pas accessible au DMA.
+- SRAM2 : son contenu est effacé par un reset système si l'option SRAM2_RST est à 0 (valeur par défaut, à vérifier) ; elle ne sert donc pas aux causes conservées.
+- Chronomètres : TIM2 pour tous ; le tick de TIM6 ne sert qu'au rythme du cycle (un gel de flash de 22 à 40 ms fait perdre des ticks).
+- HardFault : `motors_cut()` puis boucle sans rafraîchir le chien de garde.
+- `motors_cut()` : MOE = 0 (OSSI = 0), arrêt de TIM1, PA8 à PA11 reconfigurées en sortie à l'état bas.
+- Une tâche de fond par cycle, tournante : effets, radio, hauteur, flux, statut, variables.
+
+### Voyant, buzzer, régulateur
+
+- Voyant : 120 Ω pour le rouge, 68 Ω pour le vert et le bleu (courant à 4,2 V d'environ 18 mA avec les tensions directes supposées 2,0 V et 3,0 V ; si les tensions du catalogue sont vraies, 15 mA et 12 mA) ; à confirmer aux mesures de TI-009 « Bouton, voyant RGB et avertisseur ».
+- Régulateur : 130 mA, 0,16 W à 4,2 V ; ferrite 120 Ω + 22 µF 1206 en entrée ; surtension à la connexion mesurée à TI-008 « Batterie, connecteur, chute de tension et mesure de tension ».
+- Découplage du microcontrôleur de mémoire : 100 nF par broche VDD, 4,7 µF commun, VDDA 100 nF + 1 µF, NRST 100 nF (à confirmer dans DS12589).
