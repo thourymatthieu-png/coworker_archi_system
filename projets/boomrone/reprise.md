@@ -1,9 +1,9 @@
 # Reprise du projet Boomrone — état au 2026-10-29
 
 > **Aperçu**
-> - Phase « besoins » rédigée : treize besoins (7 essentiels, 3 importants, 3 souhaitables), statut « Proposé », dans « Besoins » — `projets/boomrone/01-besoins.md`.
+> - Phase « besoins » terminée, porte franchie le 2026-10-29 (DEC-171 « Porte besoins franchie : accord explicite de l'utilisateur ») : treize besoins (7 essentiels, 3 importants, 3 souhaitables), statut « Validé », dans « Besoins » — `projets/boomrone/01-besoins.md`.
 > - Rédigée par délégation (DEC-143 « Délégation de la phase besoins à l'architecte »), ligne « simplicité » (DEC-144 « Ligne directrice : simplicité, un seul utilisateur qui accepte les risques »).
-> - Reste : l'accord explicite de l'utilisateur pour la porte « besoins » et son choix sur les six simplifications restantes (DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur », n°1 écartée par DEC-163 « Communication sans fil conservée : simplification n°1 écartée ») ; 0 doute bloquant, 29 non bloquants ouverts. Dossier définitif, prêt pour la porte ; accord explicite de l'utilisateur requis.
+> - Prochaine phase : exigences. Reste le choix de l'utilisateur sur les six simplifications (DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur », n°1 écartée par DEC-163 « Communication sans fil conservée : simplification n°1 écartée »), à trancher avant les exigences concernées ; 0 doute bloquant, 29 non bloquants ouverts.
 
 ```mermaid
 ---
@@ -11,9 +11,9 @@ title: "Avancement du cycle en V"
 ---
 flowchart LR
     S["Scénarios : validés"] --> PS{{"Porte scénarios : franchie"}}
-    PS --> B["Besoins : rédigés"]
-    B --> PB{{"Porte besoins : accord à donner"}}
-    PB --> R["Exigences"]
+    PS --> B["Besoins : validés"]
+    B --> PB{{"Porte besoins : franchie"}}
+    PB --> R["Exigences : à ouvrir"]
     R --> PR{{"Porte exigences"}}
     PR --> A["Architecture"]
     A --> PA{{"Porte architecture"}}
@@ -21,8 +21,8 @@ flowchart LR
     D --> I["Implémentation et tests"]
     classDef fait fill:#c8e6c9,stroke:#2e7d32
     classDef cours fill:#ffe9a8,stroke:#c90
-    class S,PS fait
-    class B,PB cours
+    class S,PS,B,PB fait
+    class R cours
 ```
 
 ## Où on en est
@@ -68,6 +68,6 @@ flowchart LR
 Consolidés dans « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (DEC-124 « Registre consolidé des risques acceptés dans un fichier dédié ») ; leur essentiel est repris dans « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`.
 
 ## À faire ensuite
-1. Accord explicite de l'utilisateur pour la porte « besoins » (relectures `critique`, `coherence-clarte`, `exigences-tracabilite` à lancer avant), inscrit au journal de décisions.
+1. Porte « besoins » franchie (DEC-171 « Porte besoins franchie : accord explicite de l'utilisateur »). Prochain pas : ouvrir la phase « exigences » ; à l'ouverture, reposer la question du lien recette (TA) vers scénario, que l'outil ne compte pas.
 2. Phase « exigences » : exigences chiffrées dérivées des treize besoins, avec leur niveau de test système en face ; lever les doutes de valeurs.
 3. Historique détaillé de la phase « scénarios » : `journal-decisions.md` (de DEC-001 « Information de l'utilisateur par signaux lumineux, sonores et suivi sur un autre appareil » à DEC-142 « Porte scénarios franchie : accord explicite de l'utilisateur ») et l'historique git.

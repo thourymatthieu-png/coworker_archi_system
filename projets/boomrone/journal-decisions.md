@@ -1546,4 +1546,12 @@ Format (exemple, non analysé) :
 **Raison :** délégation explicite de l'utilisateur, 2026-10-29 : simplicité, utilisateur qui accepte les risques.
 **Doutes levés :** (aucun) ; DOU-130 « Arrêt d'un drone en vol par le bouton sans le toucher » ouvert
 
+### DEC-171 — Porte besoins franchie : accord explicite de l'utilisateur
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md` (BES-001 « Lancer le drone à la main » à BES-013 « Voler en appartement avec un drone de poche protégé »)
+**Décision :** la porte « besoins » est franchie ; les treize besoins passent à « Validé » ; la phase « exigences » peut s'ouvrir. État au franchissement : tag `gate-2-besoins-ready-v0`, aucun doute bloquant ouvert, 29 doutes non bloquants (liste dans `registre-doutes.md`), deux passes de relecture de porte (`critique`, `coherence-clarte`, `exigences-tracabilite`) plus une vérification ciblée.
+**Alternatives écartées :** continuer la phase « besoins » (aucun doute bloquant, toutes les décisions demandées sont prises).
+**Raison :** accord explicite de l'utilisateur en chat, 2026-10-29 : « passons la porte ». Rappels : `check_traceability --gate` échoue pour les douze « SCN sans BES » (défaut connu de l'outil, DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé » ; couverture vérifiée à la main) et pour les « BES sans REQ » et « BES sans TA » (phases suivantes) ; DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur » (six simplifications) reste ouvert, à trancher avant les exigences concernées ; si les essais contredisent la plage de lancer, les besoins seront à reprendre (DOU-116 « Échéance et circularité du report aux essais, comportement de SCN-002 sur la partie infaisable de la plage », DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m », DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal »).
+**Doutes levés :** (aucun)
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
