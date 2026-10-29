@@ -27,7 +27,15 @@ Format (exemple, non analysé) :
 **Réfs amont :** REQ-001 « Titre de l'exigence »
 **Préconditions :** état initial, moyens.
 **Procédure :** étapes.
-**Résultat attendu / critère de réussite :** valeur mesurable.
+**Résultat attendu :** valeur mesurable (celle de l'exigence).
+**Statut :** À écrire | Écrit | Exécuté OK | Exécuté KO
+
+### TA-001 — Titre de la recette
+**Réfs amont :** BES-001 « Titre du besoin » (jamais un scénario ni une décision : l'outil n'accepte que des besoins)
+**Scénario rejoué :** SCN-001 « Titre du scénario » (champ texte ; « aucun, inspection » pour un besoin sans scénario propre)
+**Préconditions :** état initial, moyens.
+**Procédure :** étapes du scénario.
+**Résultat attendu :** observations attendues.
 **Statut :** À écrire | Écrit | Exécuté OK | Exécuté KO
 ```
 

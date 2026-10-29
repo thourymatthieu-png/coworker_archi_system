@@ -20,9 +20,12 @@ Format d'une exigence (exemple, non analysé) :
 ```
 ### REQ-001 — Titre court de l'exigence
 **Réfs amont :** BES-001 « Titre du besoin »
-**Énoncé :** Le système doit … (verbe d'action, valeur mesurable, condition).
-**Critère de vérification :** comment on prouve qu'elle est satisfaite.
-**Statut :** Proposé | Validé | Abandonné
+**Décisions liées :** DEC-001 « Titre de la décision » (jamais dans les Réfs amont)
+**Doutes liés :** DOU-001 « Titre du doute » (optionnel, hors de l'énoncé)
+**Énoncé :** Le système doit … (verbe d'action, valeur mesurable, condition ; toute valeur non décidée par l'utilisateur est marquée « provisoire »).
+**Priorité :** Essentiel | Important | Souhaitable (la plus haute des priorités des besoins cités)
+**Vérification :** méthode (essai, mesure, inspection), test système TS-001 « Titre du test », moyen.
+**Statut :** Proposé | Validé | Abandonné (renvoi vers l'exigence qui la remplace)
 ```
 
 <!-- Ajouter les exigences ci-dessous, au même format, en dehors des blocs de code. -->

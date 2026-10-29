@@ -241,6 +241,7 @@ Format (exemple, non analysé) :
 **Raison :** choix de l'utilisateur ; simplicité. Risque accepté : on peut oublier d'être en mode réglage, et un appui parasite peut l'activer au sol.
 **Doutes levés :** DOU-032 « Comment entre-t-on dans le mode réglage et comment en sort-on ? »
 **Précisée par :** DEC-079 « Sortie du mode réglage : uniquement en enlevant la batterie » le 2026-10-28 (confirmée) ; DEC-085 « Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé » le 2026-10-28 (« posé » devient « immobile et à plat »).
+**Modifiée par :** DEC-175 « Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension » le 2026-10-29 (les trois appuis sont remplacés par le bouton tenu à la mise sous tension)
 
 ### DEC-028 — Mode réglage : décollage depuis le sol sur commande sans fil
 **Date :** 2026-10-27
@@ -351,6 +352,7 @@ Format (exemple, non analysé) :
 **Nuance :** les coupures de la question Q1 ne valent que tant que leurs seuils ne sont pas modifiés : voir DEC-045 « Seuils de sécurité réglables comme le reste, sans borne ». Depuis : DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » remplace DEC-045 « Seuils de sécurité réglables comme le reste, sans borne » — les seuils de sécurité sont bornés ; une valeur ne peut plus désactiver une coupure. « Aucune borne » (Q2) ne vaut plus pour les seuils de sécurité ; il reste valable pour les autres réglages.
 **Doutes levés :** DOU-038 « Réglages en vol : valeurs d'origine, bornes, coupures en vol de réglage ? »
 **Précisée par :** DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule » le 2026-10-28 (paramètres aberrants sauvegardés par un tiers : risque accepté).
+**Modifiée par :** DEC-177 « Simplification n°4 adoptée : commandes sans fil acceptées seulement en mode réglage » le 2026-10-29 (Modifier n'est plus acceptée en vol normal) ; DEC-180 « Simplification n°7 adoptée : valeurs de sécurité fixes dans le logiciel » le 2026-10-29 (valeurs de sécurité fixes) ; DEC-198 « Modifier retiré du vol normal : DEC-177 confirmée contre DEC-039 » le 2026-10-29 (suppression de Modifier en vol normal confirmée, malgré la réponse Q3 de l'utilisateur)
 
 ### DEC-040 — Périmètre d'emploi visé : l'appartement ; gymnase et jardin en essais complémentaires
 **Date :** 2026-10-27
@@ -396,7 +398,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** partiellement DOU-056 « Commande sans fil et état du drone : que fait chaque commande dans chaque état ? » (table des commandes). Reste ouvert : l'état du drone après un vol ou un arrêt de réglage. Depuis : cet état est fixé par DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage », qui lève DOU-056 « Commande sans fil et état du drone : que fait chaque commande dans chaque état ? » (cas de l'arrêt ou de l'échec en vol de réglage à confirmer : DOU-065 « Quelles décisions relayées ou interprétées sont à confirmer explicitement à la porte ? »).
 **Précisée par :** DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque » le 2026-10-28 (Sauvegarder reste acceptée à l'état armé).
 **Complétée par :** DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » le 2026-10-28 (deux lignes ajoutées au tableau : initialisation en cours, échec d'initialisation)
-**Modifiée par :** DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer » le 2026-10-28 (ligne « Armé, avant le lancer » : Sauvegarder devient ignorée ; les autres cases sont inchangées).
+**Modifiée par :** DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer » le 2026-10-28 (ligne « Armé, avant le lancer » : Sauvegarder devient ignorée ; les autres cases sont inchangées). ; DEC-177 « Simplification n°4 adoptée : commandes sans fil acceptées seulement en mode réglage » le 2026-10-29 (tableau réduit à quatre lignes) ; DEC-178 « Simplification n°5 adoptée : échec d'initialisation, toutes les commandes sans fil ignorées » le 2026-10-29 (échec d'initialisation : tout ignoré)
 **Modifiée par (suite) :** DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché » le 2026-10-28 (ligne « Initialisation en cours » : Sauvegarder ignorée) ; DEC-123 « Sauvegarder ignorée aussi à l'état Premier appui validé » le 2026-10-28 (nouvelle ligne « Premier appui validé » : Sauvegarder ignorée ; l'état « Série d'appuis en cours » n'est pas tranché).
 **Modifiée par (suite 2) :** DEC-128 « Sauvegarder ignorée aussi à l'état Série d'appuis en cours » le 2026-10-28 (nouvelle ligne « Série d'appuis en cours » : Sauvegarder ignorée ; la ligne « Allumé, en attente d'un appui » n'accepte plus Sauvegarder pendant la série) ; confirmée par DEC-131 « Sauvegarder ignorée en vol : confirmation du tableau des commandes » le 2026-10-28 (Sauvegarder ignorée en vol, aucune case modifiée) ; DEC-127 « Sauvegarder acceptée à l'état Échec d'initialisation : écrasement des réglages par un tiers, risque accepté » le 2026-10-28 (ligne « Échec d'initialisation » : Sauvegarder acceptée, confirmée).
 
@@ -469,6 +471,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** A, seuils figés, modifiables seulement par reprogrammation (perd le réglage par le sans fil prévu par DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol ») ; B, seuils réglables sans borne, ancienne décision DEC-045 « Seuils de sécurité réglables comme le reste, sans borne » (une valeur, même envoyée par un tiers sans appairage, peut désactiver une coupure).
 **Raison :** réponse de l'utilisateur en chat, le 2026-10-27, après revue de DEC-045 « Seuils de sécurité réglables comme le reste, sans borne » à la porte « scénarios » via DOU-065 « Quelles décisions relayées ou interprétées sont à confirmer explicitement à la porte ? » : « C. Réglables mais bornés ». Option recommandée par l'architecte, hauteur minimale incluse. Avec une sécurité très ouverte (pas d'appairage, DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée » ; décollage sans protection, DEC-038 « Mode réglage : décollage sans protection supplémentaire » ; redécollage immédiat, DEC-044 « Mode réglage persistant : retour au mode réglage après un vol de réglage, sans verrouillage »), les coupures automatiques sont la dernière protection : les bornes garantissent qu'elles existent toujours, quel que soit l'auteur du réglage.
 **Doutes levés :** DOU-057 « Les seuils de sécurité sont-ils des paramètres réglables sans borne ? » (réponse révisée) ; partiellement DOU-065 « Quelles décisions relayées ou interprétées sont à confirmer explicitement à la porte ? » (partie DEC-045 « Seuils de sécurité réglables comme le reste, sans borne »).
+**Modifiée par :** DEC-180 « Simplification n°7 adoptée : valeurs de sécurité fixes dans le logiciel » le 2026-10-29 (les bornes sont remplacées par des valeurs de sécurité fixes)
 
 ### DEC-052 — Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences
 **Date :** 2026-10-27
@@ -616,6 +619,7 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** refus avec retour explicite vers l'appareil de suivi (option recommandée par l'architecte) ; signal lumineux ou sonore sur le drone.
 **Raison :** réponse de l'utilisateur en chat, le 2026-10-28 : « refus silencieux, la valeur relue par l'appareil de suivi sera la valeur conservée par le drone ». Le suivi de DEC-025 « Suivi et réglage du drone par le sans fil, y compris en vol » doit donc permettre de relire les réglages.
 **Doutes levés :** DOU-071 « Que fait le drone quand il reçoit une valeur de seuil hors bornes ? »
+**Modifiée par :** DEC-180 « Simplification n°7 adoptée : valeurs de sécurité fixes dans le logiciel » le 2026-10-29 (plus de valeur hors bornes à refuser)
 
 ### DEC-069 — Commandes sans fil reçues pendant la phase Lancé : ignorées
 **Date :** 2026-10-28
@@ -642,6 +646,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** DOU-077 « Séquence de trois appuis : cas incomplets et ambigus » ; la réponse de DOU-044 « Séquence de trois appuis : fenêtre et signal ? » (issue de DEC-058 « Trois appuis : fenêtre courte, sans signal parasite ») est remplacée
 **Précisée par :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série » le 2026-10-28 ; DEC-085 « Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé » le 2026-10-28. ; DEC-089 « Appui de moins de 1 s au milieu d'une série d'appuis : compteur remis à zéro » et DEC-090 « Troisième appui validé sur un drone non immobile ou pas à plat : mode réglage refusé avec le signal Refus » le 2026-10-28.
 **Précisée par :** DEC-116 « Bouton en mode réglage, moteurs coupés : aucun effet et aucun signal, il ne sert qu'en vol de réglage » le 2026-10-28 (en mode réglage au sol, le bouton n'a aucun effet et ne donne aucun signal ; il ne sert qu'en vol de réglage).
+**Modifiée par :** DEC-175 « Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension » le 2026-10-29 (plus de série de trois appuis)
 
 ### DEC-072 — Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone
 **Date :** 2026-10-28
@@ -686,6 +691,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** (aucun) ; précise une partie de DOU-079 « Compteur d'appuis validés : remise à zéro par un appui de moins de 1 s, cas limites » (le 3e appui, et tout appui de la série, n'arme pas)
 **Précisée par :** DEC-084 « Appui ignoré pendant une série d'appuis : aucun signal, risque accepté et documenté » le 2026-10-28.
+**Modifiée par :** DEC-175 « Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension » le 2026-10-29 (plus de premier appui d'une série)
 
 ### DEC-077 — Bouton appuyé en vol de réglage : arrêt d'urgence, moteurs coupés, le drone reste en mode réglage
 **Date :** 2026-10-28
@@ -757,6 +763,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-087 « Appui ignoré en silence pendant une série d'appuis : faut-il un signal ? »
 **Précise :** DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série ».
+**Modifiée par :** DEC-175 « Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension » le 2026-10-29 (plus de série d'appuis)
 
 ### DEC-085 — Entrée en mode réglage : drone immobile et à plat, non armé, sans condition de posé
 **Date :** 2026-10-28
@@ -795,6 +802,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-090 « Bouton coincé ou maintenu en permanence au démarrage : faut-il un signal ? »
 **Précise :** DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement ». Écart de forme avec DEC-005 « Un signal distinct pour chaque information » (une information sans signal local) : même logique que DEC-084 « Appui ignoré pendant une série d'appuis : aucun signal, risque accepté et documenté », et DOU-027 « Un signal distinct par information, ou par catégorie ? » reste ouvert.
+**Modifiée par :** DEC-175 « Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension » le 2026-10-29 (un bouton coincé au démarrage mène au mode réglage)
 
 ### DEC-089 — Appui de moins de 1 s au milieu d'une série d'appuis : compteur remis à zéro
 **Date :** 2026-10-28
@@ -922,6 +930,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** DOU-083 « Contenu du statut sans fil d'un armement ou d'un décollage refusé » ; hors de la réponse, repris dans DOU-092 « Décollage de réglage refusé : quel signal local, et combien de temps le statut de refus est-il conservé ? » : le signal local du décollage refusé et la durée de conservation du statut
 **Précise :** DEC-072 « Armement à 2 secondes d'appui : signal Prêt, ou signal unique Armement refusé selon l'état du drone », DEC-090 « Troisième appui validé sur un drone non immobile ou pas à plat : mode réglage refusé avec le signal Refus », DEC-074 « Décollage en mode réglage : la batterie est vérifiée, rien d'autre » et DEC-088 « Bouton coincé ou maintenu en permanence au démarrage : statut sans fil seulement, aucun signal local ».
 **Précisée par :** DEC-102 « Décollage de réglage refusé : signal Refus, statut de refus lisible jusqu'à la commande suivante » le 2026-10-28 (signal local et conservation du statut du décollage refusé) ; DEC-110 « Armement refusé à 2 secondes d'appui : tous les tests faits, un seul signal Refus, sans attente de l'immobilité » le 2026-10-28 (causes listées pour l'armement refusé)
+**Modifiée par :** DEC-179 « Simplification n°6 adoptée : statut sans fil par code d'état et dernières causes » le 2026-10-29 (trois causes de refus fixes sur le statut sans fil)
 
 ### DEC-102 — Décollage de réglage refusé : signal Refus, statut de refus lisible jusqu'à la commande suivante
 **Date :** 2026-10-28
@@ -931,6 +940,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-092 « Décollage de réglage refusé : quel signal local, et combien de temps le statut de refus est-il conservé ? »
 **Précise :** DEC-091 « Un seul signal Refus pour tout refus, armement ou mode réglage » et DEC-101 « Statut sans fil d'un refus : cause précise, liste exacte à fixer en architecture ».
+**Modifiée par :** DEC-179 « Simplification n°6 adoptée : statut sans fil par code d'état et dernières causes » le 2026-10-29 (dernière cause de refus conservée jusqu'à la mise hors tension)
 
 ### DEC-103 — Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal
 **Date :** 2026-10-28
@@ -961,7 +971,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-078 « Initialisation en cours et échec d'initialisation : quelles commandes sans fil sont acceptées ? »
 **Précise :** DEC-043 « Commandes sans fil acceptées selon l'état du drone » et DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque ».
-**Modifiée par :** DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché » le 2026-10-28 (état « Initialisation en cours » : Sauvegarder devient ignorée, Modifier reste acceptée ; l'état « Échec d'initialisation » est inchangé, sa question reste dans DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée » ; le titre est conservé).
+**Modifiée par :** DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché » le 2026-10-28 (état « Initialisation en cours » : Sauvegarder devient ignorée, Modifier reste acceptée ; l'état « Échec d'initialisation » est inchangé, sa question reste dans DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée » ; le titre est conservé). ; DEC-178 « Simplification n°5 adoptée : échec d'initialisation, toutes les commandes sans fil ignorées » le 2026-10-29 (Modifier et Sauvegarder ignorées en échec d'initialisation)
 **Précisée par :** DEC-127 « Sauvegarder acceptée à l'état Échec d'initialisation : écrasement des réglages par un tiers, risque accepté » le 2026-10-28 (état « Échec d'initialisation » : Modifier et Sauvegarder acceptées confirmées, la question de DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée » est tranchée).
 
 ### DEC-106 — Lien sans fil perdu en vol de réglage : aucune action particulière
@@ -1041,6 +1051,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** DOU-096 « Durée minimale perceptible du signal de cause d'une coupure en vol »
 **Précise :** DEC-104 « Cause d'une coupure en vol : signal local non conservé, Allumé prend le relais, cause conservée sur le statut sans fil », DEC-033 « Signal Arrêt sans fil distinct du signal Arrêt par le bouton », DEC-046 « Délai de descente dépassé : signal distinct, moteurs coupés, drone verrouillé » et DEC-005 « Un signal distinct pour chaque information ».
 **Précisée par :** DEC-118 « Signal Allumé au retour à l'attente après un posé, un refus ou un désarmement » le 2026-10-28 (le relais immédiat du signal « Allumé » vaut aussi après un posé, un refus et un désarmement).
+**Modifiée par :** DEC-176 « Simplification n°3 adoptée : dix effets locaux au lieu de dix-sept signaux » le 2026-10-29 (l'effet de la coupure dure au moins 0,5 s)
 
 ### DEC-114 — Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir
 **Date :** 2026-10-28
@@ -1176,6 +1187,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-098 « Commande Sauvegarder après un échec d'initialisation : acceptée ou ignorée »
 **Précise :** DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » (état « Échec d'initialisation » confirmé) et DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché » (cas de l'échec d'initialisation tranché).
+**Modifiée par :** DEC-178 « Simplification n°5 adoptée : échec d'initialisation, toutes les commandes sans fil ignorées » le 2026-10-29 (Sauvegarder ignorée en échec d'initialisation)
 
 ### DEC-128 — Sauvegarder ignorée aussi à l'état Série d'appuis en cours
 **Date :** 2026-10-28
@@ -1553,5 +1565,385 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** continuer la phase « besoins » (aucun doute bloquant, toutes les décisions demandées sont prises).
 **Raison :** accord explicite de l'utilisateur en chat, 2026-10-29 : « passons la porte ». Rappels : `check_traceability --gate` échoue pour les douze « SCN sans BES » (défaut connu de l'outil, DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé » ; couverture vérifiée à la main) et pour les « BES sans REQ » et « BES sans TA » (phases suivantes) ; DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur » (six simplifications) reste ouvert, à trancher avant les exigences concernées ; si les essais contredisent la plage de lancer, les besoins seront à reprendre (DOU-116 « Échéance et circularité du report aux essais, comportement de SCN-002 sur la partie infaisable de la plage », DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m », DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal »).
 **Doutes levés :** (aucun)
+
+### DEC-172 — Délégation de la phase exigences à l'architecte
+**Date :** 2026-10-29
+**Concerne :** « Exigences système » — `projets/boomrone/02-exigences.md` et « Plans de test » — `projets/boomrone/05-plans-de-test.md`
+**Décision :** pour la phase « exigences » seulement, l'utilisateur ne veut aucune question : l'architecte décide seul, consigne chaque choix en DEC et prépare un dossier fini. Cette délégation remplace pour cette phase la règle « l'utilisateur décide » ; la porte « exigences » n'est pas franchie par l'architecte, l'accord explicite de l'utilisateur reste requis. Elle couvre aussi le choix des six simplifications de DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur ».
+**Alternatives écartées :** poser les questions une à une (refusé par l'utilisateur) ; franchir aussi la porte (l'accord explicite de l'utilisateur reste obligatoire, charte §3).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité. Même régime que DEC-143 « Délégation de la phase besoins à l'architecte ».
+**Doutes levés :** (aucun)
+
+### DEC-173 — Ligne directrice de la phase exigences : simplicité, valeurs chiffrées, aucune solution
+**Date :** 2026-10-29
+**Concerne :** « Exigences système » — `projets/boomrone/02-exigences.md`
+**Décision :** reprise de DEC-144 « Ligne directrice : simplicité, un seul utilisateur qui accepte les risques » : premier drone, jeu, un seul utilisateur qui accepte les risques, fabrique et programme lui-même. En cas de choix, l'option la plus simple à utiliser, à spécifier, à fabriquer et à programmer. Une exigence énonce un comportement mesurable (valeur, tolérance, méthode de vérification) et ne nomme aucun composant, broche, bus ni langage : cela reste à l'architecture. Les valeurs sont reprises des scénarios et des décisions ; à défaut, une valeur simple est posée et marquée « provisoire, à valider aux essais sur prototype ».
+**Alternatives écartées :** exigences à solution imposée (composants, protocoles : c'est l'architecture) ; exigences qualitatives sans valeur (non testables).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-174 — Trente-quatre exigences : regroupements, champs et priorités
+**Date :** 2026-10-29
+**Concerne :** REQ-001 « Anti-rebond du bouton » à REQ-034 « Page de consignes d'emploi »
+**Décision :** 34 exigences en 10 groupes (bouton et départ, vol normal, coupures et arrêt, initialisation, information, sans fil, réglage, fabrication, cadre d'emploi, consignes), au lieu des 45 à 55 estimées. Les règles transversales sont factorisées en une exigence qui cite plusieurs besoins : chronologie du bouton (REQ-002 « Chronologie d'un appui sur le bouton »), invariant de démarrage (REQ-005 « Démarrage des moteurs sur geste volontaire seulement »), verrouillage (REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage »), coupures automatiques (REQ-011 « Coupures automatiques en vol »), effets locaux (REQ-018 « Effets locaux par situation »), commandes sans fil par état (REQ-023 « Commandes sans fil selon l'état du drone »), valeurs de sécurité (REQ-026 « Paramètres de vol réglables »). Champs d'une exigence du projet : `Réfs amont` (besoins seulement, le principal en premier), `Décisions liées` (3 au plus), `Énoncé`, `Priorité`, `Vérification`, `Statut`. La priorité est la plus haute des besoins cités. Les 13 besoins ont au moins une exigence (annexe A de « Exigences système »).
+**Alternatives écartées :** une exigence par signal, par cas de bouton ou par ligne des tableaux (45 à 55 exigences, doublons) ; une exigence par besoin (13 exigences trop larges pour être testables).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Modifiée par :** DEC-195 « Relecture de porte exigences : corrections décidées par délégation, identifiants conservés » (le total devient 45 exigences après la relecture de porte) le 2026-10-29
+
+### DEC-175 — Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension
+**Date :** 2026-10-29
+**Concerne :** REQ-024 « Entrée en mode réglage par le bouton », REQ-002 « Chronologie d'un appui sur le bouton »
+**Décision :** le mode réglage s'entre en maintenant le bouton enfoncé de la mise sous tension jusqu'à la fin d'une initialisation réussie (drone immobile et à plat) ; le drone donne l'effet Mode réglage. La série de trois appuis, le compteur d'appuis, l'écart de 2 s entre appuis et la règle « armement seulement depuis le premier appui d'une série » disparaissent : tout appui suit la chronologie de REQ-002 « Chronologie d'un appui sur le bouton ». L'effet « Appui validé » à 1 s est conservé (BES-007 « Savoir où en est le drone sans autre appareil » le liste). Un bouton coincé au démarrage mène donc au mode réglage, avec son effet. Modifie SCN-004 « Appui normal : bouton relâché avant 2 secondes », SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-010 « Échec : initialisation impossible au démarrage » ; remplace DEC-071 « Appuis validés d'affilée : trois appuis entrent en mode réglage sans armer, le bouton n'arme jamais en mode réglage » (trois appuis), DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série » (premier appui d'une série), DEC-084 « Appui ignoré pendant une série d'appuis : aucun signal, risque accepté et documenté » (appui ignoré dans une série), DEC-089 « Appui de moins de 1 s au milieu d'une série d'appuis : compteur remis à zéro », DEC-090 « Troisième appui validé sur un drone non immobile ou pas à plat : mode réglage refusé avec le signal Refus », DEC-093 « Mode réglage refusé : retour à l'attente, compteur à zéro, bouton encore enfoncé ignoré » et DEC-115 « Troisième appui encore maintenu à l'entrée en mode réglage : maintien ignoré jusqu'au premier relâchement » pour l'entrée (le maintien du bouton à l'entrée reste ignoré jusqu'au premier relâchement) ; précise DEC-059 « Bouton déjà enfoncé : ignoré jusqu'au premier relâchement » et DEC-088 « Bouton coincé ou maintenu en permanence au démarrage : statut sans fil seulement, aucun signal local ». Signalé : les énoncés de BES-007 « Savoir où en est le drone sans autre appareil » (exception du bouton coincé) et de BES-008 « Entrer en mode réglage et faire des vols de réglage » (référence à DEC-027 « Mode réglage : trois appuis sur le bouton au sol, sortie par coupure de la batterie ») sont partiellement périmés ; les besoins ne sont pas modifiés.
+**Alternatives écartées :** garder les trois appuis (compteur, état de série, appui ignoré sans signal, un risque accepté de plus) ; entrée par commande sans fil (aggrave le risque sans appairage, déjà écartée à l'annexe B des besoins) ; appui long dédié (se confond avec la fenêtre d'armement de 2 s à 10 s).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité (moins d'états à écrire et à tester).
+**Doutes levés :** DOU-112 « Bouton enfoncé jusqu'à la fin de l'initialisation : état et signal »
+
+### DEC-176 — Simplification n°3 adoptée : dix effets locaux au lieu de dix-sept signaux
+**Date :** 2026-10-29
+**Concerne :** REQ-018 « Effets locaux par situation », REQ-019 « Perceptibilité et distinction des effets » ; modifie SCN-001 « Vol nominal : de la batterie au posé » (liste des signaux)
+**Décision :** les dix-sept états de « Scénarios d'utilisation » restent des statuts sans fil distincts (REQ-020 « Statut sans fil »), mais sur le drone ils se regroupent en dix effets locaux distincts : Allumé, Appui validé, Prêt, Vol (Lancé, Stabilisation, En vol stationnaire, Atterrissage), Posé, Refus, Désarmement, Coupure en vol (les cinq causes), Échec d'initialisation, Mode réglage. Chaque situation de BES-007 « Savoir où en est le drone sans autre appareil » reste distincte. Effets d'événement (Appui validé, Posé, Refus, Désarmement, Coupure en vol) : durée d'au moins 0,5 s, même si l'état suivant est déjà atteint ; effets d'état : tant que l'état dure. Perceptibilité : à 1 m, lumière dans une pièce éclairée (300 lux environ), son moteurs arrêtés. Précise DEC-099 « Un statut sans fil distinct par état, effets locaux regroupables par catégorie » et DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté » : « Allumé » prend toujours le relais tout de suite pour l'état et le statut sans fil, mais l'effet de la coupure reste perçu 0,5 s (la durée « aucune » de DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté » est remplacée par 0,5 s, sans mémoire de la cause sur le drone).
+**Alternatives écartées :** dix-sept effets distincts (plus de motifs à écrire, à régler et à distinguer) ; moins de dix effets (fusionner Refus et Désarmement ou Posé et Allumé rendrait BES-007 « Savoir où en est le drone sans autre appareil » non testable) ; durée nulle pour la coupure (non testable, DOU-128 « Durée minimale perceptible des signaux »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-128 « Durée minimale perceptible des signaux »
+**Modifiée par :** DEC-197 « Effet Lancé et vol : pas d'onzième effet » (l'effet n°4 s'appelle Lancé et vol) ; DEC-212 « Effets locaux : lumière ou son, distinction en une passe » (lumière ou son, distinction en une passe) le 2026-10-29
+
+### DEC-177 — Simplification n°4 adoptée : commandes sans fil acceptées seulement en mode réglage
+**Date :** 2026-10-29
+**Concerne :** REQ-023 « Commandes sans fil selon l'état du drone », REQ-026 « Paramètres de vol réglables », REQ-027 « Sauvegarde et chargement des réglages » ; modifie SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-010 « Échec : initialisation impossible au démarrage »
+**Décision :** Décoller, Modifier et Sauvegarder ne sont acceptées qu'en mode réglage (Décoller et Sauvegarder au sol, moteurs coupés ; Modifier au sol et en vol de réglage) ; Arrêt n'agit qu'en vol (normal ou de réglage). Toute autre combinaison est ignorée sans effet. Le tableau des commandes passe de dix lignes à quatre ; Modifier en vol normal (DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal ») est retirée en même temps (plus de réglage par un tiers pendant un vol normal). Remplace le tableau de DEC-043 « Commandes sans fil acceptées selon l'état du drone » et les règles de Sauvegarder de DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer », DEC-120 « Sauvegarder ignorée pendant l'initialisation en cours, Modifier acceptée ; cas de l'échec d'initialisation non tranché », DEC-123 « Sauvegarder ignorée aussi à l'état Premier appui validé », DEC-128 « Sauvegarder ignorée aussi à l'état Série d'appuis en cours », DEC-131 « Sauvegarder ignorée en vol : confirmation du tableau des commandes », DEC-136 « Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté » ; lève trois risques acceptés (lignes 4, 9 et 36 de « Risques acceptés »).
+**Alternatives écartées :** garder le tableau de dix lignes (états à coder et à tester un par un) ; garder Modifier en vol normal (réglage à distance d'un drone en vol, par un tiers sans appairage).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-113 « Ordre entre Modifier pendant l'initialisation et chargement des réglages enregistrés »
+
+### DEC-178 — Simplification n°5 adoptée : échec d'initialisation, toutes les commandes sans fil ignorées
+**Date :** 2026-10-29
+**Concerne :** REQ-017 « Initialisation en 3 secondes », REQ-023 « Commandes sans fil selon l'état du drone » ; modifie SCN-010 « Échec : initialisation impossible au démarrage »
+**Décision :** à l'état « Échec d'initialisation » (et pendant « Initialisation en cours »), les quatre commandes sans fil sont ignorées ; le statut sans fil reste émis. Remplace DEC-105 « Initialisation en cours et échec d'initialisation : Modifier et Sauvegarder acceptées, Décoller et Arrêt ignorées » (Modifier et Sauvegarder acceptées) et DEC-127 « Sauvegarder acceptée à l'état Échec d'initialisation : écrasement des réglages par un tiers, risque accepté » (écrasement des réglages par un tiers) ; lève le risque accepté de la ligne 11 de « Risques acceptés ».
+**Alternatives écartées :** Modifier acceptée en échec d'initialisation (cas à tester et risque d'écrasement).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-114 « Réglages enregistrés chargés ou non à l'état d'échec d'initialisation »
+
+### DEC-179 — Simplification n°6 adoptée : statut sans fil par code d'état et dernières causes
+**Date :** 2026-10-29
+**Concerne :** REQ-020 « Statut sans fil » ; modifie SCN-009 « Réglage et suivi du drone par le sans fil » et SCN-003 « Échec : batterie faible à l'armement »
+**Décision :** le statut sans fil porte trois champs : l'état courant (un des dix-sept codes), la dernière cause de refus (batterie faible, drone en mouvement, drone pas à plat ; plusieurs possibles) et la dernière cause de coupure en vol (six valeurs : les cinq causes et la sous-tension), conservées jusqu'à la mise hors tension. Plus de liste de causes précises à fixer (précise DEC-101 « Statut sans fil d'un refus : cause précise, liste exacte à fixer en architecture »), plus de statut « bouton maintenu », plus de statut de refus « lisible jusqu'à la commande suivante » (DEC-102 « Décollage de réglage refusé : signal Refus, statut de refus lisible jusqu'à la commande suivante » remplacée). La cause de sous-tension y figure quand le drone reste alimenté.
+**Alternatives écartées :** une liste détaillée de causes (plus de cas à coder et à tester) ; un seul code d'état sans cause (BES-010 « Suivre le drone sur un appareil de suivi » perdrait « causes de refus et de coupure »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-117 « Cause de sous-tension sur le statut sans fil »
+
+### DEC-180 — Simplification n°7 adoptée : valeurs de sécurité fixes dans le logiciel
+**Date :** 2026-10-29
+**Concerne :** REQ-026 « Paramètres de vol réglables », REQ-011 « Coupures automatiques en vol » ; modifie SCN-002 « Échec : stationnaire non atteint dans le délai », SCN-006 « Échec : inclinaison excessive après le stationnaire » et SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** les valeurs de sécurité (délai de stationnaire 2 s, angle de basculement 60° et sa durée, délai d'atterrissage 15 s, seuils de batterie, hauteur minimale, durées des chiens de garde) sont fixes dans le logiciel : seule la reprogrammation les change. Les autres paramètres de vol sont réglables sans borne. Plus de bornes numériques à définir ni de refus silencieux d'une valeur hors bornes. Remplace DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » (bornes) et DEC-068 « Seuil hors bornes : refus silencieux, valeur relue sur l'appareil de suivi » (refus silencieux hors bornes) ; BES-009 « Régler et sauvegarder les paramètres de vol » reste satisfait (aucun réglage ne désactive les coupures).
+**Alternatives écartées :** seuils réglables dans des bornes (bornes à fixer, refus à coder, et la coupure de sécurité reste atteignable par un tiers sans appairage).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture » (bornes devenues sans objet ; valeurs et durées fixées par DEC-182 « Valeurs du bouton : 1 s, 2 s, 10 s, anti-rebond, garde, délai des moteurs » à DEC-187 « Valeurs du cadre d'emploi : poche, protège-hélices, pièce d'essai » ; tolérance d'immobile renvoyée à DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal » ; liste des paramètres réglables renvoyée à l'architecture)
+
+### DEC-181 — Simplifications de l'annexe B tranchées : DOU-126 levé
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, annexe B ; « Scénarios d'utilisation » — `projets/boomrone/00-scenarios.md`
+**Décision :** bilan : n°1 écartée par l'utilisateur (DEC-163 « Communication sans fil conservée : simplification n°1 écartée ») ; n°2 à n°7 adoptées, toutes recommandées (DEC-175 « Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension », DEC-176 « Simplification n°3 adoptée : dix effets locaux au lieu de dix-sept signaux », DEC-177 « Simplification n°4 adoptée : commandes sans fil acceptées seulement en mode réglage », DEC-178 « Simplification n°5 adoptée : échec d'initialisation, toutes les commandes sans fil ignorées », DEC-179 « Simplification n°6 adoptée : statut sans fil par code d'état et dernières causes », DEC-180 « Simplification n°7 adoptée : valeurs de sécurité fixes dans le logiciel »). Les scénarios sont mis à jour de façon minimale : un encart au début de « Scénarios d'utilisation » liste les six modifications, les phrases et tableaux contradictoires sont corrigés, les mots devenus vides (série d'appuis, compteur) sont déclarés sans objet. Aucun besoin n'est modifié ; les écarts à signaler sont dans le rapport de phase (BES-007 « Savoir où en est le drone sans autre appareil », BES-008 « Entrer en mode réglage et faire des vols de réglage », BES-009 « Régler et sauvegarder les paramètres de vol »).
+**Alternatives écartées :** n'en adopter que quelques-unes (chacune retire de la logique à coder, l'utilisateur veut peu de fonctions) ; réécrire les scénarios (hors de la consigne « minimal »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur »
+
+### DEC-182 — Valeurs du bouton : 1 s, 2 s, 10 s, anti-rebond, garde, délai des moteurs
+**Date :** 2026-10-29
+**Concerne :** REQ-001 « Anti-rebond du bouton », REQ-002 « Chronologie d'un appui sur le bouton », REQ-004 « Démarrage des moteurs 200 ms après le relâchement », REQ-015 « Garde du bouton après le lancer »
+**Décision :** valeurs des scénarios reprises, provisoires, à valider aux essais : appui validé à 1,0 s (±0,1 s) ; contrôle d'armement à 2,0 s (±0,1 s) ; désarmement au-delà de 10,0 s (±0,2 s) depuis l'appui initial ; moteurs 200 ms (±50 ms) après le relâchement, effet Lancé au plus 50 ms après ; garde de 0,5 s (±0,1 s) ; anti-rebond unique de 10 ms (±2 ms) pour tout le bouton. Plus de délai entre appuis (série supprimée par DEC-175 « Simplification n°2 adoptée : mode réglage par le bouton tenu à la mise sous tension »).
+**Alternatives écartées :** deux anti-rebonds (un au sol, un en vol : deux réglages) ; garde plus longue (retarde l'arrêt par réflexe) ; anti-rebond de 5 ms (rebonds d'un bouton ordinaire).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-080 « Seuils de temps du bouton : 1 s, 2 s, 10 s et délai entre appuis »
+
+### DEC-183 — Valeurs de départ : immobile, à plat, batterie à l'armement
+**Date :** 2026-10-29
+**Concerne :** REQ-003 « Conditions de départ du drone », REQ-017 « Initialisation en 3 secondes »
+**Décision :** valeurs provisoires, à valider aux essais : « immobile » = vitesse de rotation ≤ 30 °/s et norme de l'accélération mesurée entre 9,3 et 10,3 m/s² pendant 0,5 s ; « à plat » = inclinaison ≤ 15° (une seule valeur pour l'initialisation, l'armement, le mode réglage et le critère de stationnaire) ; initialisation terminée en 3 s au plus. Un seuil unique de batterie sert à l'armement et à Décoller (DEC-186 « Valeurs de batterie : seuils par élément, confirmation, vol complet »). La tolérance d'immobile reste un doute d'essai (DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal »).
+**Alternatives écartées :** deux inclinaisons (10° au vol, 15° au sol) ; tolérance d'immobile plus serrée (armement dans la main impossible : DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun) ; DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal » reste ouvert, valeur provisoire écrite
+
+### DEC-184 — Valeurs du vol : lancer, stationnaire, hauteur, dérive, atterrissage
+**Date :** 2026-10-29
+**Concerne :** REQ-006 « Stabilisation après le lancer », REQ-007 « Critère de vol stationnaire », REQ-008 « Tenue du vol stationnaire », REQ-009 « Atterrissage doux »
+**Décision :** plage de lancer de DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol » inchangée (toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol) avec une rotation d'au plus 1 tour/s (360 °/s) au relâchement (provisoire, DOU-010 « Quelle rotation au lancer le drone doit-il rattraper ? ») ; stationnaire en 2,0 s dans au moins 90 % de 20 lancers (provisoire, DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m ») ; critère de stationnaire : inclinaison ≤ 15°, vitesse ≤ 0,3 m/s, hauteur ≥ 0,3 m ; hauteur de stationnaire visée 1,0 m (tolérance ±0,2 m, de la 3e à la 10e seconde) ; dérive horizontale ≤ 1,0 m exigée, 0,3 m en objectif mesuré (DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais ») ; atterrissage à 0,5 m/s au plus, moteurs coupés à 2 à 3 cm du sol, en 15 s au plus. Hauteur fixe de 1,0 m : prévisible, compatible avec un plafond d'appartement et avec la durée d'atterrissage de 15 s.
+**Alternatives écartées :** tenir la hauteur atteinte au lancer (dépend du lancer, peut frôler le plafond) ; altitude à ±10 cm (précision de mesure incertaine pour un premier drone) ; exigence de dérive 0,3 m (non garantie : DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-009 « Quelle tolérance d'altitude pendant les 10 secondes de stationnaire ? », DOU-010 « Quelle rotation au lancer le drone doit-il rattraper ? », DOU-011 « Quelle dérive horizontale reste acceptable si 30 cm n'est pas tenu ? », DOU-035 « Quelle hauteur de stationnaire vise-t-on ? »
+**Modifiée par :** DEC-200 « Hauteur visée 1,0 m, dérive 0,5 m, pièce d'essai 4 m × 4 m × 2,5 m » (dérive exigée de 0,5 m au lieu de 1,0 m) le 2026-10-29
+
+### DEC-185 — Valeurs de coupure : basculement, pas de limite de dérive ni d'altitude
+**Date :** 2026-10-29
+**Concerne :** REQ-011 « Coupures automatiques en vol », REQ-033 « Vol dans une pièce d'appartement »
+**Décision :** basculement : inclinaison > 60° (±5°) pendant plus de 0,1 s après le stationnaire, coupure ≤ 100 ms après la détection. Aucune coupure sur dérive entre 15° et 60° (DOU-028 « Faut-il une limite de dérive avant la coupure, entre 10° et 60° d'inclinaison ? »), aucune limite d'altitude ni réaction au plafond (DOU-029 « Quelle altitude maximale et quel plafond le drone doit-il tolérer ? ») : risque accepté, ajouté à « Risques acceptés » (ligne 37), rappelé aux consignes. La compatibilité plage de lancer et plafond (DOU-129 « Plage de lancer et hauteur d'un appartement (plafond) ») relève de l'utilisateur, qui adapte le lancer au lieu (DEC-042 « Plage de lancer inchangée, aucune zone libre ni distance aux personnes, le drone ne connaît pas le lieu », ligne 30 des risques) ; l'essai d'appartement se fait en lancer doux dans une pièce de 3 m × 3 m × 2,5 m.
+**Alternatives écartées :** coupure sur dérive ou sur altitude (capteurs et seuils de plus, fausses coupures) ; limiter la plage de lancer pour l'appartement (contredit DEC-137 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée », plage inchangée).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-012 « Quel angle limite et quelles autres valeurs de coupure retenir ? », DOU-028 « Faut-il une limite de dérive avant la coupure, entre 10° et 60° d'inclinaison ? », DOU-029 « Quelle altitude maximale et quel plafond le drone doit-il tolérer ? », DOU-129 « Plage de lancer et hauteur d'un appartement (plafond) »
+
+### DEC-186 — Valeurs de batterie : seuils par élément, confirmation, vol complet
+**Date :** 2026-10-29
+**Concerne :** REQ-003 « Conditions de départ du drone », REQ-012 « Coupure sur sous-tension de la batterie », REQ-013 « Marge de batterie pour un vol complet »
+**Décision :** valeurs provisoires par élément de batterie lithium, à valider aux essais : seuil d'armement 3,7 V à vide (±0,05 V) ; seuil de sous-tension 3,3 V sous charge, confirmé 100 ms (±20 ms) avant la coupure, sans hystérésis (la coupure dure jusqu'au débranchement) ; vol complet de 30 s (27,2 s de vol maximal plus une marge) garanti à partir d'une batterie juste acceptée à 3,7 V. Le même seuil sert à Décoller en mode réglage. La tension est lue en continu, moteurs en marche.
+**Alternatives écartées :** marge ×2 sur la durée (60 s : seuil d'armement trop haut, batterie refusée trop tôt) ; hystérésis et seuil d'alerte (fonctions de plus, DEC-140 « Chute brutale sur sous-tension maintenue en connaissance de cause, sans seuil d'alerte »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? », DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs », DOU-119 « Filtrage, hystérésis et mesure sous charge de la tension »
+**Modifiée par :** DEC-210 « Délais uniques : atterrissage 15,0 s ±0,5 s, sous-tension 250 ms, vol de réglage scindé » (délai unique de 250 ms pour la sous-tension) le 2026-10-29
+
+### DEC-187 — Valeurs du cadre d'emploi : poche, protège-hélices, pièce d'essai
+**Date :** 2026-10-29
+**Concerne :** REQ-031 « Drone de poche », REQ-032 « Protège-hélices », REQ-033 « Vol dans une pièce d'appartement »
+**Décision :** valeurs provisoires : drone de poche = au plus 100 mm × 100 mm × 50 mm, protège-hélices compris, et 100 g batterie comprise ; protège-hélices : un calibre de 12 mm de diamètre ne touche aucune hélice depuis l'extérieur ; pièce d'essai d'appartement : 3 m × 3 m × 2,5 m, lancer doux de 0,5 à 1 m/s depuis le centre, tout le vol dans la pièce, 9 vols sur 10.
+**Alternatives écartées :** dimensions plus petites (impose des composants plus chers à braser) ; pièce plus grande (n'est plus un appartement type).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Modifiée par :** DEC-200 « Hauteur visée 1,0 m, dérive 0,5 m, pièce d'essai 4 m × 4 m × 2,5 m » (pièce d'essai de 4 m × 4 m × 2,5 m au lieu de 3 m × 3 m × 2,5 m) le 2026-10-29
+
+### DEC-188 — Bouton : un appui commencé avant une coupure ou un décollage est ignoré jusqu'au relâchement
+**Date :** 2026-10-29
+**Concerne :** REQ-016 « Arrêt d'urgence par le bouton », REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage »
+**Décision :** règle unique : tout appui déjà en cours à un changement d'état (retour à l'attente, coupure des moteurs, décollage de réglage, entrée en mode réglage) est ignoré jusqu'à son premier relâchement ; seul un nouvel appui compte (front). Pour Décoller, un bouton déjà enfoncé n'est donc pas un arrêt d'urgence immédiat.
+**Alternatives écartées :** niveau pris en compte à l'acceptation de Décoller (arrêt immédiat parasite, deux règles différentes).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité (une seule règle pour tous les cas).
+**Doutes levés :** DOU-111 « Niveau ou front du bouton à l'acceptation de Décoller »
+**Modifiée par :** DEC-205 « Bouton : règle unique de l'appui en cours, garde du lancer, Décoller refusé si le bouton est enfoncé » (pour Décoller, un bouton déjà enfoncé est refusé ; règle écrite dans une seule exigence) le 2026-10-29
+
+### DEC-189 — Arrêt d'un drone en vol : bouton ou arrêt sans fil, pas d'autre option
+**Date :** 2026-10-29
+**Concerne :** REQ-016 « Arrêt d'urgence par le bouton », REQ-022 « Arrêt sans fil », REQ-034 « Page de consignes d'emploi »
+**Décision :** l'arrêt sans fil existe déjà (REQ-022 « Arrêt sans fil », Souhaitable) pour qui n'a pas à toucher le drone ; sans appareil de suivi, seul le bouton arrête, et la consigne dit d'appuyer avec prudence (DEC-170 « Consigne d'arrêt en vol par le bouton : formulation prudente »). Aucune autre option n'est ajoutée.
+**Alternatives écartées :** deuxième bouton ou télécommande dédiée (matériel de plus) ; interdire de toucher le drone (rend l'arrêt par le bouton impossible).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-130 « Arrêt d'un drone en vol par le bouton sans le toucher »
+
+### DEC-190 — Recettes : un TA par scénario et trois TA par inspection
+**Date :** 2026-10-29
+**Concerne :** TA-001 « Recette du vol nominal » à TA-015 « Inspection de la fabrication à la main »
+**Décision :** 15 recettes : une par scénario (douze, TA-001 « Recette du vol nominal » à TA-012 « Recette de la sous-tension de la batterie », qui rejouent le scénario) et trois par inspection pour les besoins sans scénario propre (TA-013 « Inspection des consignes d'emploi » pour BES-012 « Disposer d'une page de consignes d'emploi », TA-014 « Inspection du drone de poche protégé » pour BES-013 « Voler en appartement avec un drone de poche protégé », TA-015 « Inspection de la fabrication à la main » pour BES-011 « Fabriquer et programmer le drone soi-même »). Un TA cite les besoins couverts par le scénario en `Réfs amont` ; le scénario rejoué est écrit dans le champ texte `Scénario rejoué`.
+**Alternatives écartées :** une recette par besoin (13 recettes qui ne rejouent pas les scénarios) ; pas de recette par inspection (BES-012 « Disposer d'une page de consignes d'emploi », BES-013 « Voler en appartement avec un drone de poche protégé » et BES-011 « Fabriquer et programmer le drone soi-même » resteraient sans recette propre).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-191 — Tests système : vingt-quatre TS, un par exigence ou groupe
+**Date :** 2026-10-29
+**Concerne :** TS-001 « Anti-rebond et chronologie d'un appui » à TS-024 « Page de consignes d'emploi »
+**Décision :** 24 tests système couvrent les 34 exigences (chaque exigence a au moins un test) ; une exigence voisine d'une autre partage leur test quand l'essai est le même. Moyens simples : banc maison, alimentation de laboratoire, chronomètre ou caméra, oscilloscope ou analyseur logique, appareil de suivi, pièce d'essai. Pas encore de TI ni de TU : ils viennent avec l'architecture et la conception détaillée.
+**Alternatives écartées :** un test par exigence (34 tests, essais répétés) ; un test par groupe (trop gros pour un verdict net).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Modifiée par :** DEC-195 « Relecture de porte exigences : corrections décidées par délégation, identifiants conservés » (26 tests système au lieu de 24) le 2026-10-29
+
+### DEC-192 — Outil de traçabilité inchangé : TA vers BES, scénario en champ texte, DEC en champ séparé
+**Date :** 2026-10-29
+**Concerne :** `tools/check_traceability.py`
+**Décision :** l'outil n'est pas modifié. Il impose TA vers BES (un TA qui cite un scénario en `Réfs amont` est une erreur) et REQ vers BES, TS vers REQ : le scénario rejoué est donc écrit dans le champ `Scénario rejoué` des TA, et les décisions liées d'une exigence sont écrites dans le champ `Décisions liées`, jamais dans `Réfs amont` (une décision y serait signalée comme erreur). Les trous attendus avant l'architecture restent : les exigences sans ARC, et les 12 « SCN sans BES » (défaut connu, DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé »).
+**Alternatives écartées :** modifier l'outil (interdit pour cette phase) ; citer les décisions dans `Réfs amont` (erreur de l'outil).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-193 — Documents liés mis à jour : scénarios, glossaire, consignes, risques acceptés
+**Date :** 2026-10-29
+**Concerne :** « Scénarios d'utilisation » — `projets/boomrone/00-scenarios.md`, « Glossaire » — `projets/boomrone/00-glossaire.md`, « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`, « Risques acceptés » — `projets/boomrone/risques-acceptes.md`
+**Décision :** mises à jour minimales pour qu'aucun texte ne contredise une exigence : encart et corrections dans les scénarios (voir DEC-181 « Simplifications de l'annexe B tranchées : DOU-126 levé ») ; glossaire : termes de la série d'appuis marqués sans objet, définitions de « Mode réglage » et de « Appui validé » corrigées, termes ajoutés (immobile, à plat, valeur de sécurité, valeur d'origine, paramètre de vol, effet d'événement) ; consignes : cinq lignes corrigées, une ligne ajoutée (dérive) ; risques acceptés : lignes 4, 9, 11 et 36 levées, ligne 8 et ligne 23 modifiées, ligne 37 ajoutée. « Besoins » : une seule note en annexe B, aucun besoin modifié.
+**Alternatives écartées :** réécrire les scénarios et le glossaire (hors de la consigne « minimal ») ; laisser les textes périmés (contradiction avec les exigences).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-194 — Doutes de la phase exigences : levés, conservés et ouverts
+**Date :** 2026-10-29
+**Concerne :** « Registre de doutes » — `projets/boomrone/registre-doutes.md`
+**Décision :** 21 doutes levés par une valeur écrite ou une simplification : DOU-009 « Quelle tolérance d'altitude pendant les 10 secondes de stationnaire ? », DOU-010 « Quelle rotation au lancer le drone doit-il rattraper ? », DOU-011 « Quelle dérive horizontale reste acceptable si 30 cm n'est pas tenu ? », DOU-012 « Quel angle limite et quelles autres valeurs de coupure retenir ? », DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? », DOU-028 « Faut-il une limite de dérive avant la coupure, entre 10° et 60° d'inclinaison ? », DOU-029 « Quelle altitude maximale et quel plafond le drone doit-il tolérer ? », DOU-035 « Quelle hauteur de stationnaire vise-t-on ? », DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture », DOU-080 « Seuils de temps du bouton : 1 s, 2 s, 10 s et délai entre appuis », DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs », DOU-111 « Niveau ou front du bouton à l'acceptation de Décoller », DOU-112 « Bouton enfoncé jusqu'à la fin de l'initialisation : état et signal », DOU-113 « Ordre entre Modifier pendant l'initialisation et chargement des réglages enregistrés », DOU-114 « Réglages enregistrés chargés ou non à l'état d'échec d'initialisation », DOU-117 « Cause de sous-tension sur le statut sans fil », DOU-119 « Filtrage, hystérésis et mesure sous charge de la tension », DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur », DOU-128 « Durée minimale perceptible des signaux », DOU-129 « Plage de lancer et hauteur d'un appartement (plafond) », DOU-130 « Arrêt d'un drone en vol par le bouton sans le toucher ». Restent ouverts, non bloquants : DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m », DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal », DOU-116 « Échéance et circularité du report aux essais, comportement de SCN-002 sur la partie infaisable de la plage » (essais, valeur provisoire écrite) ; DOU-060 « Coupure de la batterie dans chaque état du drone, et alimentation des moteurs à valider en architecture matérielle », DOU-109 « Batterie déjà déchargée : redémarrages répétés, décharge profonde et état après une coupure logicielle », DOU-115 « Contenu et interruption de la réécriture de la zone des réglages par la reprogrammation », DOU-118 « Seuil de protection et consommation résiduelle du drone laissé allumé », DOU-120 « Écriture en mémoire sous tension basse ou pendant une phase de vol » (architecture). Quatre doutes sont ouverts : DOU-131 « Valeurs provisoires des exigences, à valider aux essais sur prototype » (valeurs provisoires, essais), DOU-132 « Liste des paramètres de vol réglables et leurs valeurs d'origine » (liste des paramètres réglables, architecture), DOU-133 « Forme des dix effets locaux : lumière, son, distinction mesurable » (forme des effets locaux, architecture), DOU-134 « Drone tenu en main au-dessus de la hauteur minimale et critère de stationnaire » (drone tenu en main et stationnaire, architecture et essais). Aucun doute bloquant.
+**Alternatives écartées :** garder les doutes de valeurs ouverts (la délégation demande de trancher) ; lever les doutes d'essai (seul un essai les tranche).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** voir la décision (21 doutes) ; ouvre DOU-131 « Valeurs provisoires des exigences, à valider aux essais sur prototype », DOU-132 « Liste des paramètres de vol réglables et leurs valeurs d'origine », DOU-133 « Forme des dix effets locaux : lumière, son, distinction mesurable » et DOU-134 « Drone tenu en main au-dessus de la hauteur minimale et critère de stationnaire »
+**Modifiée par :** DEC-215 « Doutes de la relecture de porte : levés, ouverts et déplacés » (DOU-132 « Liste des paramètres de vol réglables et leurs valeurs d'origine » et DOU-134 « Drone tenu en main au-dessus de la hauteur minimale et critère de stationnaire » levés ; DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » et DOU-136 « Ordre de livraison : exigence essentielle dépendant du mode réglage souhaitable » ouverts) le 2026-10-29
+
+### DEC-195 — Relecture de porte exigences : corrections décidées par délégation, identifiants conservés
+**Date :** 2026-10-29
+**Concerne :** « Exigences système » — `projets/boomrone/02-exigences.md`, « Plans de test » — `projets/boomrone/05-plans-de-test.md`
+**Décision :** les trois relectures de la porte « exigences » (`critique` : non franchissable, deux bloquants de cohérence ; `coherence-clarte` : non tant que des majeurs de forme subsistent ; `exigences-tracabilite` : oui avec 14 majeurs de rédaction) sont traitées par les décisions de DEC-196 « Drone tenu en main à plus de 0,3 m : limite assumée, DOU-134 levé » à DEC-215 « Doutes de la relecture de porte : levés, ouverts et déplacés ». Règles : aucun identifiant n'est réutilisé ni renuméroté ; une exigence scindée garde son identifiant et les parties nouvelles prennent les identifiants à la suite (REQ-035 « Appui en cours à un changement d'état » à REQ-045 « Batterie débranchable à la main ») ; aucune exigence n'est abandonnée ; tous les REQ, TS et TA restent « Proposé » ou « Écrit » ; les besoins ne sont pas modifiés ; l'outil de traçabilité n'est pas modifié ; la porte n'est pas franchie.
+**Alternatives écartées :** rouvrir les besoins (déjà validés) ; renuméroter pour garder l'ordre des groupes (casserait les renvois du journal).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité, un seul utilisateur qui accepte les risques et fabrique et programme le drone lui-même.
+**Doutes levés :** (aucun, voir DEC-215 « Doutes de la relecture de porte : levés, ouverts et déplacés »)
+**Modifie :** DEC-174 « Trente-quatre exigences : regroupements, champs et priorités » et DEC-191 « Tests système : vingt-quatre TS, un par exigence ou groupe » pour les nombres (45 exigences, 26 tests système).
+
+### DEC-196 — Drone tenu en main à plus de 0,3 m : limite assumée, DOU-134 levé
+**Date :** 2026-10-29
+**Concerne :** REQ-007 « Critère de vol stationnaire », TA-002 « Recette de l'échec de stationnaire », TS-008 « Coupures automatiques en vol »
+**Décision :** le critère de REQ-007 « Critère de vol stationnaire » reste inchangé. Un drone tenu en main à plus de 0,3 m, immobile et à plat, peut se croire en vol stationnaire : c'est une limite d'emploi assumée (ligne 38 de « Risques acceptés » — `projets/boomrone/risques-acceptes.md`, une ligne dans « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`). Les essais de coupure sur stationnaire non atteint se font drone posé sur une table, hélices démontées, ou drone posé au sol (hauteur de moins de 0,3 m) : TA-002 « Recette de l'échec de stationnaire » et TS-008 « Coupures automatiques en vol » sont corrigés.
+**Alternatives écartées :** condition de poussée ou de variation de hauteur en plus du critère (capteurs et réglages de plus, hors simplicité) ; interdire l'essai en main (le cas reste possible pour l'utilisateur, seulement non garanti).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-134 « Drone tenu en main au-dessus de la hauteur minimale et critère de stationnaire »
+**Précise :** DEC-049 « Stationnaire déclaré seulement en l'air, au-dessus d'une hauteur minimale ».
+
+### DEC-197 — Effet Lancé et vol : pas d'onzième effet
+**Date :** 2026-10-29
+**Concerne :** REQ-018 « Effets locaux par situation », REQ-004 « Démarrage des moteurs 200 ms après le relâchement », TS-003 « Démarrage des moteurs : délai et geste volontaire », TA-001 « Recette du vol nominal »
+**Décision :** l'effet n°4 de REQ-018 « Effets locaux par situation » s'appelle « Lancé et vol » et démarre au relâchement du bouton armé ; il n'y a pas d'onzième effet pour la phase Lancé. REQ-004 « Démarrage des moteurs 200 ms après le relâchement » exige l'effet Lancé et vol au plus 50 ms après le relâchement ; TS-003 « Démarrage des moteurs : délai et geste volontaire » et TA-001 « Recette du vol nominal » sont alignés. L'état Lancé reste un état distinct sur le statut sans fil (REQ-020 « Statut sans fil »).
+**Alternatives écartées :** onzième effet « Lancé » (un motif de plus, l'effet ne dure que 200 ms).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Précise :** DEC-176 « Simplification n°3 adoptée : dix effets locaux au lieu de dix-sept signaux », dont la liste des dix effets plaçait Lancé dans l'effet « Vol » alors que REQ-004 « Démarrage des moteurs 200 ms après le relâchement » et TS-003 « Démarrage des moteurs : délai et geste volontaire » le traitaient comme un effet propre.
+
+### DEC-198 — Modifier retiré du vol normal : DEC-177 confirmée contre DEC-039
+**Date :** 2026-10-29
+**Concerne :** REQ-023 « Commandes sans fil selon l'état du drone », REQ-026 « Paramètres de vol réglables », « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (ligne 23), SCN-009 « Réglage et suivi du drone par le sans fil »
+**Décision :** la simplification de DEC-177 « Simplification n°4 adoptée : commandes sans fil acceptées seulement en mode réglage » est gardée : Modifier, Décoller et Sauvegarder ne sont acceptées qu'en mode réglage. Elle contredit la réponse Q3 de l'utilisateur dans DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal » (2026-10-27 : paramètres modifiables aussi en vol normal). DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal » est annotée « Modifiée par DEC-177 « Simplification n°4 adoptée : commandes sans fil acceptées seulement en mode réglage » » ; la ligne 23 de « Risques acceptés » et les références amont de SCN-009 « Réglage et suivi du drone par le sans fil » sont corrigées.
+**Alternatives écartées :** rétablir Modifier en vol normal (réglage à distance d'un drone en vol par un tiers sans appairage, tableau des commandes plus long).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité ; la contradiction avec sa réponse antérieure est signalée en tête du rapport de l'architecte.
+**Doutes levés :** (aucun)
+**Confirme :** DEC-177 « Simplification n°4 adoptée : commandes sans fil acceptées seulement en mode réglage » ; **modifie :** DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal ».
+
+### DEC-199 — Sous-tension : verrouillage dans tous les états, mode réglage compris
+**Date :** 2026-10-29
+**Concerne :** REQ-012 « Coupure sur sous-tension de la batterie », REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage », REQ-023 « Commandes sans fil selon l'état du drone », TS-009 « Coupure sur sous-tension et marge de batterie », TS-007 « Verrouillage après un posé, une coupure ou un redémarrage », SCN-012 « Dégradé : sous-tension de la batterie »
+**Décision :** la coupure sur sous-tension verrouille le drone dans tous les états, mode réglage compris ; la sécurité de la batterie passe avant le confort du réglage. L'exception « retour au mode réglage sans verrouillage » de REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage » exclut explicitement la sous-tension. En mode réglage, « verrouillé » veut dire : moteurs arrêtés et commande Décoller ignorée jusqu'à la mise hors tension. SCN-012 « Dégradé : sous-tension de la batterie » (« verrouillé, jamais armé tout seul », tous états dont le mode réglage) est déjà d'accord.
+**Alternatives écartées :** retour au mode réglage après une sous-tension (la batterie remontée en tension à vide pourrait faire accepter un nouveau décollage).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-200 — Hauteur visée 1,0 m, dérive 0,5 m, pièce d'essai 4 m × 4 m × 2,5 m
+**Date :** 2026-10-29
+**Concerne :** REQ-006 « Stabilisation après le lancer », REQ-008 « Tenue du vol stationnaire », REQ-033 « Vol dans une pièce d'appartement », TS-004 « Stabilisation après le lancer », TS-005 « Critère et tenue du vol stationnaire », TS-023 « Vol dans une pièce d'appartement »
+**Décision :** hauteur visée du stationnaire 1,0 m, fenêtre 0,8 m à 1,2 m de la 3e à la 10e seconde, le drone convergeant vers 1,0 m depuis la hauteur du lancer (REQ-006 « Stabilisation après le lancer », REQ-008 « Tenue du vol stationnaire ») ; dérive exigée d'au plus 0,5 m, objectif de 0,3 m inchangé en note ; pièce d'essai de 4 m × 4 m × 2,5 m, lancers à vitesse horizontale d'au plus 1 m/s, critère « aucune partie du drone ne sort du volume de la pièce », 9 vols sur 10 ; les lancers à 2 et 4 m/s de TS-004 « Stabilisation après le lancer » se font dans un lieu plus grand (gymnase ou jardin).
+**Alternatives écartées :** garder 3 m × 3 m (trop petit pour un stationnaire à 1,0 m avec des fenêtres de 1 m de dérive) ; dérive de 1,0 m (laisse le drone toucher un mur d'une petite pièce).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun : le doute sur la pièce d'essai évoqué par la relecture n'a pas d'entrée dans le registre ; la question est tranchée ici, et DOU-129 « Plage de lancer et hauteur d'un appartement (plafond) » est déjà levé)
+**Modifie :** DEC-184 « Valeurs du vol : lancer, stationnaire, hauteur, dérive, atterrissage » (dérive 1,0 m devenue 0,5 m) ; DEC-187 « Valeurs du cadre d'emploi : poche, protège-hélices, pièce d'essai » (pièce de 3 m × 3 m × 2,5 m devenue 4 m × 4 m × 2,5 m).
+
+### DEC-201 — Quatre paramètres de vol réglables, valeurs d'origine provisoires : DOU-132 levé
+**Date :** 2026-10-29
+**Concerne :** REQ-026 « Paramètres de vol réglables », REQ-043 « Valeurs de sécurité fixes », REQ-038 « Causes et paramètres dans le statut sans fil », REQ-020 « Statut sans fil », REQ-023 « Commandes sans fil selon l'état du drone », TS-019 « Paramètres, sauvegarde et valeurs d'origine »
+**Décision :** REQ-026 « Paramètres de vol réglables » est scindée : (a) modification et relecture des paramètres réglables ; (b) valeurs de sécurité fixes, listées une seule fois dans REQ-043 « Valeurs de sécurité fixes ». Liste minimale provisoire de quatre paramètres : gain d'inclinaison (1,0), gain de hauteur (1,0), hauteur visée du stationnaire (1,0 m), vitesse de descente (0,2 m/s) ; valeurs à valider aux essais. « Relecture » : la valeur courante de chaque paramètre figure dans le statut sans fil (REQ-038 « Causes et paramètres dans le statut sans fil »), sans cinquième commande ; l'acquittement d'une commande Modifier est la valeur relue.
+**Alternatives écartées :** liste renvoyée à l'architecture (laisse REQ-026 « Paramètres de vol réglables » non testable) ; commande de relecture dédiée (cinquième commande, tableau de REQ-023 « Commandes sans fil selon l'état du drone » plus long).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-132 « Liste des paramètres de vol réglables et leurs valeurs d'origine »
+
+### DEC-202 — Statut sans fil en trois exigences
+**Date :** 2026-10-29
+**Concerne :** REQ-020 « Statut sans fil », REQ-038 « Causes et paramètres dans le statut sans fil », REQ-039 « Cadence et portée du statut sans fil », REQ-011 « Coupures automatiques en vol », REQ-012 « Coupure sur sous-tension de la batterie », REQ-022 « Arrêt sans fil »
+**Décision :** REQ-020 « Statut sans fil » est scindée : l'état (tableau des dix-sept états) reste dans REQ-020 « Statut sans fil » ; les causes de refus, les causes de coupure et les paramètres relus passent dans REQ-038 « Causes et paramètres dans le statut sans fil » ; la cadence (2 fois par seconde et à chaque changement d'état) et la portée (5 m) dans REQ-039 « Cadence et portée du statut sans fil ». REQ-011 « Coupures automatiques en vol », REQ-012 « Coupure sur sous-tension de la batterie » et REQ-022 « Arrêt sans fil » n'écrivent plus « enregistre la cause sur le statut » : c'est REQ-038 « Causes et paramètres dans le statut sans fil » qui la porte. TS-008 « Coupures automatiques en vol » et TS-009 « Coupure sur sous-tension et marge de batterie » sont adaptés. Un envoi à chaque changement d'état rend testables les états qui ne durent qu'un instant.
+**Alternatives écartées :** une seule exigence de huit lignes (non atomique).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-203 — Coupure sur logiciel bloqué et coupure sur phase Lancé : deux exigences
+**Date :** 2026-10-29
+**Concerne :** REQ-014 « Coupure sur logiciel bloqué », REQ-036 « Coupure sur phase Lancé trop longue », TS-010 « Coupure sur logiciel bloqué ou phase Lancé trop longue »
+**Décision :** REQ-014 « Coupure sur logiciel bloqué » est scindée : (a) logiciel bloqué, moteurs coupés au plus 200 ms après la dernière exécution correcte du logiciel ; (b) phase Lancé de plus de 500 ms, dans la nouvelle REQ-036 « Coupure sur phase Lancé trop longue ». « Puis redémarrer » et tout nom de moyen sont retirés des énoncés ; l'indépendance vis-à-vis du logiciel bloqué reste une contrainte d'exigence.
+**Alternatives écartées :** garder « puis redémarrer » (impose une solution).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Précise :** DEC-096 « Chien de garde sur tout état où les moteurs peuvent être alimentés, phase Lancé de durée maximale » et DEC-103 « Phase Lancé trop longue : coupure et redémarrage par le chien de garde, sans nouvel état ni signal » pour les exigences (leurs solutions restent à l'architecture).
+
+### DEC-204 — Protège-hélices : calibre sur les côtés, dessus et dessous en limite assumée
+**Date :** 2026-10-29
+**Concerne :** REQ-032 « Protège-hélices », TS-022 « Dimensions, masse et protège-hélices »
+**Décision :** le calibre de 12 mm s'applique dans le plan des hélices (par les côtés) seulement ; le dessus et le dessous ne sont pas couverts : limite assumée (ligne 39 de « Risques acceptés » — `projets/boomrone/risques-acceptes.md`, une ligne dans « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`).
+**Alternatives écartées :** calibre dans toutes les directions (impose un carénage complet, plus lourd que 100 g).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Précise :** DEC-017 « Pas de protection supplémentaire contre les hélices en rotation sans lancer ».
+
+### DEC-205 — Bouton : règle unique de l'appui en cours, garde du lancer, Décoller refusé si le bouton est enfoncé
+**Date :** 2026-10-29
+**Concerne :** REQ-035 « Appui en cours à un changement d'état », REQ-015 « Garde du bouton après le lancer », REQ-016 « Arrêt d'urgence par le bouton », REQ-041 « Conditions d'acceptation de la commande Décoller », REQ-002 « Chronologie d'un appui sur le bouton », REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage », REQ-024 « Entrée en mode réglage par le bouton »
+**Décision :** la règle « un appui déjà en cours à un changement d'état est ignoré jusqu'à son relâchement » est écrite dans une seule exigence, REQ-035 « Appui en cours à un changement d'état » ; les autres exigences y renvoient. Elle ne s'applique pas à la garde du lancer : un appui encore enfoncé à la fin de la garde de 0,5 s arrête les moteurs (REQ-015 « Garde du bouton après le lancer »). La commande Décoller est refusée (effet Refus) si le bouton est enfoncé (REQ-041 « Conditions d'acceptation de la commande Décoller ») ; un appui après le décollage de réglage coupe aussitôt, sans garde (REQ-016 « Arrêt d'urgence par le bouton »). Les mots « décollage » seul sont remplacés par « démarrage des moteurs » ou « décollage de réglage ».
+**Alternatives écartées :** règle répétée dans chaque exigence (contradictions entre REQ-015 « Garde du bouton après le lancer » et REQ-016 « Arrêt d'urgence par le bouton »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Précise :** DEC-188 « Bouton : un appui commencé avant une coupure ou un décollage est ignoré jusqu'au relâchement » (pour Décoller, le bouton déjà enfoncé est maintenant un refus, non un appui ignoré).
+
+### DEC-206 — Conditions de départ : immobilité mesurée en relatif, cas Décoller séparé
+**Date :** 2026-10-29
+**Concerne :** REQ-003 « Conditions de départ du drone », REQ-041 « Conditions d'acceptation de la commande Décoller », REQ-017 « Initialisation en 3 secondes », TS-002 « Conditions de départ et refus d'armement »
+**Décision :** REQ-003 « Conditions de départ du drone » est scindée : (a) conditions de départ (immobile, à plat, batterie) ; (b) cas de la commande Décoller en mode réglage, dans REQ-041 « Conditions d'acceptation de la commande Décoller ». Immobile = vitesse de rotation d'au plus 30 °/s et norme de l'accélération qui reste à ±0,5 m/s² de sa moyenne sur 0,5 s (mesure relative : la valeur absolue de 9,3 à 10,3 m/s² est abandonnée, car elle dépend du calibrage). La condition « aucun échec d'initialisation » est retirée de REQ-003 « Conditions de départ du drone » : elle créait un cycle avec REQ-017 « Initialisation en 3 secondes ». TS-002 « Conditions de départ et refus d'armement » reçoit des cas chiffrés.
+**Alternatives écartées :** garder la valeur absolue de la norme (dépend du calibrage de l'accéléromètre).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun ; le calibrage reste dans DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal »)
+**Précise :** DEC-183 « Valeurs de départ : immobile, à plat, batterie à l'armement ».
+
+### DEC-207 — Appareil de suivi et batterie débranchable : deux exigences ajoutées
+**Date :** 2026-10-29
+**Concerne :** REQ-040 « Appareil de suivi », REQ-045 « Batterie débranchable à la main », TS-025 « Appareil de suivi et logiciel d'essai », TS-026 « Batterie débranchable à la main »
+**Décision :** REQ-040 « Appareil de suivi » (Souhaitable, BES-010 « Suivre le drone sur un appareil de suivi ») : l'appareil de suivi est un ordinateur ou un téléphone relié au drone par la liaison sans fil, avec un logiciel d'essai écrit par l'utilisateur, livrable du projet ; le protocole relève de l'architecture. REQ-045 « Batterie débranchable à la main » (Essentiel, BES-004 « Ne pas voler quand le drone n'est pas prêt » et BES-011 « Fabriquer et programmer le drone soi-même ») : la batterie se débranche à la main, drone moteurs arrêtés, le connecteur restant accessible malgré les protège-hélices (c'est le dernier recours des consignes d'emploi).
+**Alternatives écartées :** laisser l'appareil de suivi hors exigences (les tests sans fil n'auraient pas d'outil) ; interrupteur sur le drone (masse et composant de plus).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-208 — Fabrication : approvisionnement et assemblage séparés
+**Date :** 2026-10-29
+**Concerne :** REQ-029 « Composants disponibles à l'unité », REQ-044 « Assemblage à la main », TS-020 « Fabrication à la main », TA-015 « Inspection de la fabrication à la main »
+**Décision :** REQ-029 « Composants disponibles à l'unité » devient l'approvisionnement : chaque composant s'achète à l'unité, sans commande minimale, chez au moins un revendeur en ligne grand public (« au moins 2 » devient « au moins un »). REQ-044 « Assemblage à la main » porte l'assemblage à la main : pas de broches d'au moins 0,5 mm, pas de BGA, pas de brasage en four ; câblage sur modules, carte à trous et circuit imprimé sur mesure commandé en ligne permis. TS-020 « Fabrication à la main » inspecte la nomenclature ; le montage d'une carte est fait dans TA-015 « Inspection de la fabrication à la main ».
+**Alternatives écartées :** deux revendeurs minimum (contrainte de plus pour un seul utilisateur).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-209 — Batterie de référence choisie à l'architecture, faisabilité conjointe en doute
+**Date :** 2026-10-29
+**Concerne :** REQ-013 « Marge de batterie pour un vol complet », REQ-031 « Drone de poche », REQ-006 « Stabilisation après le lancer »
+**Décision :** la batterie de référence de REQ-013 « Marge de batterie pour un vol complet » est la batterie réellement choisie à l'architecture ; essais sur banc. Le mot « lithium » est retiré des énoncés (on dit « par élément »). La faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie est ouverte en doute non bloquant : DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie ».
+**Alternatives écartées :** fixer une batterie type dans l'exigence (c'est une solution).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-210 — Délais uniques : atterrissage 15,0 s ±0,5 s, sous-tension 250 ms, vol de réglage scindé
+**Date :** 2026-10-29
+**Concerne :** REQ-009 « Atterrissage doux », REQ-011 « Coupures automatiques en vol », REQ-012 « Coupure sur sous-tension de la batterie », REQ-025 « Vol de réglage », REQ-042 « Vol de réglage indépendant du lien sans fil »
+**Décision :** le délai d'atterrissage de 15 s n'est défini que dans REQ-011 « Coupures automatiques en vol », comme seuil de coupure « 15,0 s (±0,5 s) » ; REQ-009 « Atterrissage doux » dit « avant la coupure de REQ-011 « Coupures automatiques en vol » » et s'écrit « à la fin du stationnaire (10 s, ou 3 s en vol de réglage) ». Le délai de REQ-012 « Coupure sur sous-tension de la batterie » est une durée unique : coupure au plus 250 ms après le passage sous 3,3 V par élément, la tension y restant 100 ms ±20 ms ou plus. REQ-025 « Vol de réglage » est scindée : décollage et stationnaire dans REQ-025 « Vol de réglage », indépendance du lien sans fil dans REQ-042 « Vol de réglage indépendant du lien sans fil ».
+**Alternatives écartées :** deux tolérances empilées sur 15 s.
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-211 — Initialisation en deux exigences, démarrage des moteurs sans chevauchement
+**Date :** 2026-10-29
+**Concerne :** REQ-017 « Initialisation en 3 secondes », REQ-037 « Comportement en échec d'initialisation », REQ-005 « Démarrage des moteurs sur geste volontaire seulement », REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage », TS-003 « Démarrage des moteurs : délai et geste volontaire », TS-012 « Initialisation et échec d'initialisation »
+**Décision :** REQ-017 « Initialisation en 3 secondes » est scindée : initialisation en 3 s au plus (REQ-017 « Initialisation en 3 secondes ») ; comportement en échec (REQ-037 « Comportement en échec d'initialisation »). Un appui commencé pendant l'initialisation et encore enfoncé à la fin est ignoré jusqu'au relâchement (règle de REQ-035 « Appui en cours à un changement d'état »). REQ-005 « Démarrage des moteurs sur geste volontaire seulement » ne dit plus que les deux seuls cas de démarrage des moteurs ; REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage » dit l'état après une coupure ; le chevauchement disparaît. Le compte de TS-003 « Démarrage des moteurs : délai et geste volontaire » est « 0 sur 31 » (10 + 10 + 10 + 1).
+**Alternatives écartées :** garder la liste des cas interdits dans REQ-005 « Démarrage des moteurs sur geste volontaire seulement » (doublon de REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-212 — Effets locaux : lumière ou son, distinction en une passe
+**Date :** 2026-10-29
+**Concerne :** REQ-019 « Perceptibilité et distinction des effets », REQ-018 « Effets locaux par situation », TS-014 « Perceptibilité et distinction des effets »
+**Décision :** chaque effet est donné par la lumière, par le son ou par les deux ; aucun buzzer n'est imposé ; moteurs en marche, l'effet passe par la lumière. Critère de distinction : un observateur identifie les dix effets présentés dans un ordre aléatoire, 10 sur 10 en une passe.
+**Alternatives écartées :** deux passes de dix (plus long, même information) ; imposer lumière et son (une solution).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun ; la forme reste dans DOU-133 « Forme des dix effets locaux : lumière, son, distinction mesurable »)
+**Précise :** DEC-176 « Simplification n°3 adoptée : dix effets locaux au lieu de dix-sept signaux ».
+
+### DEC-213 — Valeurs provisoires : règle unique de marquage, annexe B complète, page de 60 lignes
+**Date :** 2026-10-29
+**Concerne :** « Exigences système » — `projets/boomrone/02-exigences.md` (annexe B), REQ-034 « Page de consignes d'emploi », TS-024 « Page de consignes d'emploi », TA-013 « Inspection des consignes d'emploi »
+**Décision :** toute valeur ou tolérance qui ne vient pas d'une décision de l'utilisateur est marquée « provisoire » dans l'énoncé et dans le tableau récapitulatif, et l'annexe B les liste toutes (le texte des valeurs de sécurité y renvoie à REQ-043 « Valeurs de sécurité fixes » au lieu de les répéter). Les valeurs décidées par l'utilisateur ne sont pas provisoires. La page de consignes tient sur une face A4 : au plus 60 lignes de 15 mots au plus, une consigne à l'infinitif par ligne (REQ-034 « Page de consignes d'emploi », TS-024 « Page de consignes d'emploi », TA-013 « Inspection des consignes d'emploi » alignés).
+**Alternatives écartées :** 50 lignes (la page compte déjà plus de consignes utiles) ; supprimer la limite d'une face (BES-012 « Disposer d'une page de consignes d'emploi » demande une page).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-214 — Documents liés recomptés et alignés après les corrections de la porte exigences
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, « Scénarios d'utilisation » — `projets/boomrone/00-scenarios.md`, « Glossaire » — `projets/boomrone/00-glossaire.md`, « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`, « Risques acceptés » — `projets/boomrone/risques-acceptes.md`, « Reprise du projet Boomrone » — `projets/boomrone/reprise.md`, les gabarits `framework/templates/02-exigences.md` et `framework/templates/05-plans-de-test.md`
+**Décision :** aperçus et décomptes recomptés depuis le registre par script ; aucun besoin modifié (BES-001 « Lancer le drone à la main » à BES-013 « Voler en appartement avec un drone de poche protégé » restent « Validé »), une note dans l'annexe B de « Besoins » signale les énoncés périmés de BES-007 « Savoir où en est le drone sans autre appareil », BES-008 « Entrer en mode réglage et faire des vols de réglage » et BES-009 « Régler et sauvegarder les paramètres de vol » (à reprendre à la prochaine révision) ; le glossaire précise « Variables du vol », « signal / état / effet local », « Prêt » (effet) et « prêt » (conditions de départ), « décollage de réglage », « appareil de suivi », « stationnaire déclaré » ; les consignes sont coupées à 15 mots par ligne, à l'infinitif, avec les deux lignes nouvelles ; les gabarits reprennent les champs Priorité, Décisions liées, Vérification, Scénario rejoué, Résultat attendu.
+**Alternatives écartées :** réécrire les besoins (validés).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-215 — Doutes de la relecture de porte : levés, ouverts et déplacés
+**Date :** 2026-10-29
+**Concerne :** « Registre de doutes » — `projets/boomrone/registre-doutes.md`
+**Décision :** levés : DOU-134 « Drone tenu en main au-dessus de la hauteur minimale et critère de stationnaire » (limite assumée, DEC-196 « Drone tenu en main à plus de 0,3 m : limite assumée, DOU-134 levé ») et DOU-132 « Liste des paramètres de vol réglables et leurs valeurs d'origine » (liste fixée, DEC-201 « Quatre paramètres de vol réglables, valeurs d'origine provisoires : DOU-132 levé »). Ouverts, non bloquants : DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » (architecture : faisabilité conjointe) et DOU-136 « Ordre de livraison : exigence essentielle dépendant du mode réglage souhaitable » (livraison : REQ-005 « Démarrage des moteurs sur geste volontaire seulement » dépend du mode réglage). Complétés : DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal » (calibrage de l'accéléromètre) et DOU-120 « Écriture en mémoire sous tension basse ou pendant une phase de vol » (écriture en mémoire et blocage du logiciel de 200 ms). DOU-127 « Couverture ligne à ligne des risques acceptés par les consignes d'emploi », déjà levé, est déplacé dans l'archive.
+**Alternatives écartées :** garder DOU-134 « Drone tenu en main au-dessus de la hauteur minimale et critère de stationnaire » et DOU-132 « Liste des paramètres de vol réglables et leurs valeurs d'origine » ouverts (la délégation demande de trancher).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-134 « Drone tenu en main au-dessus de la hauteur minimale et critère de stationnaire » ; DOU-132 « Liste des paramètres de vol réglables et leurs valeurs d'origine » ; ouvre DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » et DOU-136 « Ordre de livraison : exigence essentielle dépendant du mode réglage souhaitable »
+**Modifie :** DEC-194 « Doutes de la phase exigences : levés, conservés et ouverts » (listes de doutes).
+
+### DEC-216 — Fusions de simplicité et sous-tension en échec d'initialisation : retouches finales de la porte exigences
+**Date :** 2026-10-29
+**Concerne :** « Exigences système » — `projets/boomrone/02-exigences.md`, « Plans de test » — `projets/boomrone/05-plans-de-test.md`, REQ-012 « Coupure sur sous-tension de la batterie », REQ-037 « Comportement en échec d'initialisation »
+**Décision :** (1) quatre fusions, identifiants conservés en « Abandonné » avec renvoi, TS réattachés : REQ-001 « Anti-rebond du bouton » dans REQ-002 « Chronologie d'un appui sur le bouton » ; REQ-039 « Cadence et portée du statut sans fil » dans REQ-020 « Statut sans fil » ; REQ-042 « Vol de réglage indépendant du lien sans fil » dans REQ-025 « Vol de réglage » ; REQ-043 « Valeurs de sécurité fixes » dans REQ-026 « Paramètres de vol réglables » (seuls 4 paramètres modifiables, 29 valeurs fixes listées une fois, priorité Essentiel). 41 exigences actives : 27 Essentielles, 10 Souhaitables, 4 Importantes. (2) Retouches : REQ-009 « Atterrissage doux » avec les valeurs d'origine ; REQ-006 « Stabilisation après le lancer » sans convergence vers 1,0 m (laissée à REQ-008 « Tenue du vol stationnaire ») ; REQ-003 « Conditions de départ du drone » sans « fin de l'initialisation » et batterie contrôlée à l'armement seulement (REQ-017 « Initialisation en 3 secondes ») ; REQ-015 « Garde du bouton après le lancer » : arrêt 50 ms après la fin de la garde ; TS-017 « Commandes sans fil selon l'état » : état Lancé forcé par un logiciel d'essai ou inspection ; note dans DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m ». (3) Sous-tension sans redémarrage, drone encore alimenté : il reste verrouillé et donne l'effet Échec d'initialisation, état inutilisable jusqu'à la mise hors tension (bouton sans effet, il faut débrancher) ; écrit dans REQ-012 « Coupure sur sous-tension de la batterie », REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage », REQ-037 « Comportement en échec d'initialisation », REQ-018 « Effets locaux par situation », REQ-020 « Statut sans fil », REQ-023 « Commandes sans fil selon l'état du drone », TS-009 « Coupure sur sous-tension et marge de batterie », TA-012 « Recette de la sous-tension de la batterie ». (4) Colonne « Valeur clé » et annexe B alignées (300 lux, 80 ms, valeurs provisoires marquées une à une ; le délai de 2,0 s de REQ-006 « Stabilisation après le lancer » reste « décidé », DEC-009 « Stationnaire atteint en 2 secondes maximum après le démarrage des moteurs »).
+**Alternatives écartées :** garder les quatre exigences séparées (plus de numéros, aucun gain de précision) ; laisser le drone sans effet après une sous-tension (l'utilisateur ne saurait pas qu'il faut débrancher) ; ouvrir un nouveau doute (la consommation résiduelle relève de DOU-118 « Seuil de protection et consommation résiduelle du drone laissé allumé », note ajoutée).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Modifie :** DEC-195 « Relecture de porte exigences : corrections décidées par délégation, identifiants conservés » (« aucune exigence n'est abandonnée » ne vaut plus), DEC-199 « Sous-tension : verrouillage dans tous les états, mode réglage compris » (le verrouillage est l'état d'échec d'initialisation) et DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » (l'effet Échec d'initialisation est donné).
 
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
