@@ -162,14 +162,6 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :** (aucune) ; à vérifier dans l'ULD de ST et la fiche DS12093 en conception détaillée. Non bloquant.
 **Décision liée :** {DEC-239 « Capteur de hauteur : pilote non bloquant, reprise, échec d'initialisation, mesure horodatée »}
 
-### DOU-150 — Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** REQ-044 « Assemblage à la main », REQ-029 « Composants disponibles à l'unité » et ARC-013 « Carte électronique JLCPCB, câblage et assemblage »
-**Question :** l'architecture fait poser les composants CMS par JLCPCB, ce qui contredit REQ-044 « Assemblage à la main » telle que rédigée. La nouvelle rédaction proposée est dans DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider ».
-**Réponse :** (aucune) ; à valider par l'utilisateur à la prochaine révision des exigences. Non bloquant.
-**Décision liée :** {DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider »}
-
 ### DOU-151 — Module E104-BT02 : débit par défaut, service, absence de commande AT
 **Statut :** Ouvert
 **Bloquant :** Non
@@ -1334,3 +1326,11 @@ Complément du 2026-10-28 (3e relecture de porte) : des paramètres de vol aberr
 **Question :** JLCPCB peut souder les composants de la carte à l'usine. REQ-044 « Assemblage à la main » demande un assemblage à la main ; le LQFP-48 à 0,5 mm est le point le plus risqué. Faut-il tout souder à la main, ou faire poser les composants CMS par JLCPCB (capteurs, moteurs et connecteurs restant à la main) ? Et le STM32G431CBT6, l'AO3400A et les autres pièces sont-ils en stock chez JLCPCB (catalogue LCSC), sachant que la contrainte est d'en prendre le plus possible ? Les cartes de capteurs (LSM6DSO, VL53L1X, PMW3901) et le module HM-10 n'y sont probablement pas : faut-il les remplacer par les puces nues en stock, ou les acheter ailleurs ? Ouvert le 2026-10-29.
 **Réponse :** composants CMS posés par JLCPCB (assemblage Standard), puces nues pour la centrale et le capteur de hauteur, carte achetée pour le flux optique, module Bluetooth Ebyte E104-BT02 ; stocks relevés le 2026-10-29 (HM-10 à stock 0). Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29. L'écart avec REQ-044 « Assemblage à la main » est suivi par DOU-150 « Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB ».
 **Décision liée :** DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté » ; DEC-235 « Catalogue JLCPCB/LCSC vérifié : composants retenus » ; DEC-234 « JLCPCB, fabricant de la carte : contrainte de début de projet »
+
+### DOU-150 — Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** REQ-044 « Assemblage à la main », REQ-029 « Composants disponibles à l'unité » et ARC-013 « Carte électronique JLCPCB, câblage et assemblage »
+**Question :** l'architecture fait poser les composants CMS par JLCPCB, ce qui contredit REQ-044 « Assemblage à la main » telle que rédigée. La nouvelle rédaction proposée est dans DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider ».
+**Réponse :** REQ-044 « Assemblage à la main » réécrite sur accord de l'utilisateur le 2026-10-29 : la carte est fabriquée et assemblée par JLCPCB, les raccordements restent à la main.
+**Décision liée :** DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main » ; DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider »

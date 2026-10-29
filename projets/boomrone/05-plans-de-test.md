@@ -294,9 +294,9 @@ Chaque recette vérifie des besoins en rejouant un scénario complet, avec un dr
 ### TA-015 — Inspection de la fabrication à la main
 **Réfs amont :** BES-011 « Fabriquer et programmer le drone soi-même »
 **Scénario rejoué :** SCN-008 « Mise en service : programmation du drone » (partie fabrication ; la partie programmation et reprogrammation est rejouée par TA-008 « Recette de la mise en service par programmation »)
-**Préconditions :** nomenclature complète, outillage courant de l'utilisateur, sans appareil de suivi. Écart connu : la carte est livrée assemblée par JLCPCB, la partie « à la main » se limite aux moteurs, au XT30, à l'en-tête SWD et à la carte du flux (DOU-150 « Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB »).
-**Procédure :** monter une carte à la main d'après la nomenclature ; la programmer ; la mettre sous tension.
-**Résultat attendu :** montage terminé avec l'outillage courant seulement (REQ-044 « Assemblage à la main »), chaque composant trouvé à l'unité chez au moins un revendeur (REQ-029 « Composants disponibles à l'unité »), le drone démarre normalement (effet Allumé).
+**Préconditions :** nomenclature complète, outillage courant de l'utilisateur, sans appareil de suivi. la carte est livrée fabriquée et assemblée par JLCPCB ; la partie « à la main » est limitée aux moteurs, au XT30, à l'en-tête SWD et à la carte du flux (DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main »).
+**Procédure :** raccorder à la main, d'après la nomenclature, les moteurs, le XT30, l'en-tête SWD et la carte du flux sur la carte livrée ; la programmer ; la mettre sous tension.
+**Résultat attendu :** raccordements terminés avec l'outillage courant seulement (REQ-044 « Assemblage à la main »), chaque composant trouvé à l'unité chez au moins un revendeur ou en stock chez JLCPCB (REQ-029 « Composants disponibles à l'unité »), le drone démarre normalement (effet Allumé).
 **Statut :** Écrit
 
 ## Tests système (TS)
@@ -436,9 +436,9 @@ Chaque recette vérifie des besoins en rejouant un scénario complet, avec un dr
 
 ### TS-020 — Fabrication à la main
 **Réfs amont :** REQ-029 « Composants disponibles à l'unité » ; REQ-044 « Assemblage à la main »
-**Préconditions :** nomenclature du prototype ; la recette TA-015 « Inspection de la fabrication à la main » porte le montage d'une carte à la main. Écart connu : carte assemblée par JLCPCB, voir DOU-150 « Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB ».
-**Procédure :** pour chaque ligne, relever le boîtier, le revendeur en ligne grand public et la quantité minimale de commande.
-**Résultat attendu :** chaque composant a au moins un revendeur sans commande minimale ; aucun BGA, brasage en four ni pas de moins de 0,5 mm (hors modules).
+**Préconditions :** nomenclature du prototype ; la recette TA-015 « Inspection de la fabrication à la main » porte le montage d'une carte à la main. carte fabriquée et assemblée par JLCPCB (DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main »).
+**Procédure :** pour chaque ligne, relever le boîtier, le stock chez JLCPCB (numéro LCSC) ou, pour les exceptions (moteurs, hélices, batterie, pièces mécaniques, cartes achetées), le revendeur en ligne grand public et la quantité minimale de commande.
+**Résultat attendu :** chaque composant est en stock chez JLCPCB ou a au moins un revendeur sans commande minimale ; aucun composant à souder à la main n'est un BGA ni n'a un pas de moins de 0,5 mm.
 **Statut :** Écrit
 
 ### TS-021 — Programmation depuis l'ordinateur

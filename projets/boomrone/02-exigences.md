@@ -156,7 +156,7 @@ Priorité = la plus haute des priorités des besoins cités par l'exigence (Esse
 | REQ-027 « Sauvegarde et chargement des réglages » | Souhaitable | 1 s (prov.) | BES-009 « Régler et sauvegarder les paramètres de vol » | TS-019 « Paramètres, sauvegarde et valeurs d'origine » |
 | REQ-028 « Valeurs d'origine après la programmation » | Essentiel | valeurs d'origine | BES-011 « Fabriquer et programmer le drone soi-même » | TS-019 « Paramètres, sauvegarde et valeurs d'origine » |
 | REQ-029 « Composants disponibles à l'unité » | Essentiel | 1 revendeur grand public, sans minimum | BES-011 « Fabriquer et programmer le drone soi-même » | TS-020 « Fabrication à la main » |
-| REQ-044 « Assemblage à la main » | Essentiel | pas ≥ 0,5 mm ; pas de BGA | BES-011 « Fabriquer et programmer le drone soi-même » | TS-020 « Fabrication à la main » |
+| REQ-044 « Assemblage à la main » | Essentiel | carte JLCPCB ; raccords à la main ; pas ≥ 0,5 mm ; pas de BGA | BES-011 « Fabriquer et programmer le drone soi-même » | TS-020 « Fabrication à la main » |
 | REQ-030 « Programmation depuis l'ordinateur » | Essentiel | 5 min (prov.) | BES-011 « Fabriquer et programmer le drone soi-même » | TS-021 « Programmation depuis l'ordinateur » |
 | REQ-045 « Batterie débranchable à la main » | Essentiel | 10 s, sans outil (prov.) | BES-004 « Ne pas voler quand le drone n'est pas prêt » | TS-026 « Batterie débranchable à la main » |
 | REQ-031 « Drone de poche » | Important | 100 × 100 × 50 mm ; 100 g (prov.) | BES-013 « Voler en appartement avec un drone de poche protégé » | TS-022 « Dimensions, masse et protège-hélices » |
@@ -609,12 +609,13 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 
 ### REQ-044 — Assemblage à la main
 **Réfs amont :** BES-011 « Fabriquer et programmer le drone soi-même »
-**Décisions liées :** DEC-144 « Ligne directrice : simplicité, un seul utilisateur qui accepte les risques » ; DEC-208 « Fabrication : approvisionnement et assemblage séparés »
-**Énoncé :** Le drone doit pouvoir être assemblé à la main avec l'outillage courant d'un amateur (fer à souder, pinces, tournevis) :
-- aucun composant n'exige un brasage en four, un boîtier à billes (BGA) ni un pas de broches de moins de 0,5 mm ;
-- le câblage sur modules, la carte à trous et le circuit imprimé sur mesure commandé en ligne sont permis.
+**Décisions liées :** DEC-144 « Ligne directrice : simplicité, un seul utilisateur qui accepte les risques » ; DEC-208 « Fabrication : approvisionnement et assemblage séparés » ; DEC-234 « JLCPCB, fabricant de la carte : contrainte de début de projet » ; DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté » ; DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main »
+**Énoncé :** La carte électronique est fabriquée et assemblée par JLCPCB (contrainte de début de projet). Le reste du drone est monté à la main avec l'outillage courant d'un amateur (fer à souder, pinces, tournevis) :
+- les moteurs, le connecteur de la batterie, l'en-tête de programmation et toute carte de capteur achetée toute faite sont raccordés à la carte au fer à souder, sans four ni outil spécial ;
+- aucun composant à souder à la main n'est un boîtier à billes (BGA) ni n'a un pas de broches de moins de 0,5 mm ;
+- les composants de la carte sont pris le plus possible parmi les pièces en stock chez JLCPCB, sauf les moteurs, les hélices, la batterie et les pièces mécaniques.
 **Priorité :** Essentiel
-**Vérification :** Inspection (TS-020 « Fabrication à la main ») du boîtier de chaque ligne de la nomenclature ; montage d'une carte à la main dans la recette TA-015 « Inspection de la fabrication à la main ».
+**Vérification :** Inspection (TS-020 « Fabrication à la main ») de chaque ligne de la nomenclature : pièce en stock chez JLCPCB, ou exception listée ; montage des raccordements à la main dans la recette TA-015 « Inspection de la fabrication à la main ».
 **Statut :** Validé
 
 ### REQ-030 — Programmation depuis l'ordinateur

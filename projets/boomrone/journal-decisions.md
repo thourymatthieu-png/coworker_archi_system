@@ -2170,4 +2170,13 @@ Format (exemple, non analysé) :
 **Raison :** délégation explicite de l'utilisateur, 2026-10-29 ({DEC-218 « Délégation totale de la phase architecture à l'architecte »}).
 **Doutes levés :** (aucun)
 
+### DEC-245 — REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main
+**Date :** 2026-10-29
+**Concerne :** REQ-044 « Assemblage à la main », TS-020 « Fabrication à la main », TA-015 « Inspection de la fabrication à la main »
+**Décision :** REQ-044 « Assemblage à la main » est réécrite sur la proposition de DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider » : la carte est fabriquée et assemblée par JLCPCB ; les moteurs, le connecteur de batterie, l'en-tête de programmation et les cartes de capteurs achetées sont raccordés à la main sans four ni outil spécial ; aucun composant à souder à la main n'est un BGA ni n'a un pas de moins de 0,5 mm ; les composants de la carte sont pris le plus possible parmi les pièces en stock chez JLCPCB, sauf moteurs, hélices, batterie et pièces mécaniques (DEC-234 « JLCPCB, fabricant de la carte : contrainte de début de projet »). Les titres de REQ-044 « Assemblage à la main », TS-020 « Fabrication à la main » et TA-015 « Inspection de la fabrication à la main » sont conservés (les raccordements restent à la main) ; TS-020 « Fabrication à la main » vérifie le stock JLCPCB ou l'exception de chaque ligne et TA-015 « Inspection de la fabrication à la main » rejoue le raccordement à la main. Le statut de REQ-044 « Assemblage à la main » reste « Validé » sur accord de l'utilisateur.
+**Alternatives écartées :** garder l'énoncé d'origine (il contredit l'assemblage par JLCPCB) ; renommer REQ-044 « Assemblage à la main » (les raccordements restent à la main, les renvois seraient à refaire).
+**Raison :** accord explicite de l'utilisateur en chat, 2026-10-29 : « Oui, réécris ».
+**Doutes levés :** DOU-150 « Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB »
+**Modifie :** DEC-237 « Écart avec REQ-044 : assemblage par JLCPCB, proposition à valider » (la proposition est appliquée).
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
