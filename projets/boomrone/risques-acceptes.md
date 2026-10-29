@@ -2,18 +2,18 @@
 
 > **Aperçu** : registre unique des risques acceptés du projet Boomrone, consolidé le 2026-10-28 (DEC-124 « Registre consolidé des risques acceptés dans un fichier dédié »).
 > - Un risque par ligne : numéro, décision ou doute d'origine, scénario, limite d'emploi à documenter.
-> - Les limites d'emploi sont informées par une notice écrite à la phase « besoins », qui reprend ce registre ; le drone n'affiche rien lui-même, hors statut sans fil (DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien »).
+> - Les limites d'emploi sont informées par les consignes d'emploi écrites à la phase « besoins », qui reprennent l'essentiel de ce registre ; le drone n'affiche rien lui-même, hors statut sans fil (DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien »).
 > - Reprend les quinze risques historiques (listés à l'origine dans `reprise.md`, regroupés et complétés) et les risques acceptés du journal qui n'y figuraient pas.
 > - État : 35 risques (36 numéros, la ligne 34 étant fusionnée dans la ligne 21), chacun est une décision de l'utilisateur ; aucune levée (ajouts du 2026-10-28 : voir les Notes).
 
 ```mermaid
 ---
-title: "Du risque accepté à la notice"
+title: "Du risque accepté aux consignes d'emploi"
 ---
 flowchart LR
     DEC["Décisions du journal (risque accepté)"] --> REG["Risques acceptés (ce fichier)"]
     DOU["Doutes restés ouverts"] --> REG
-    REG --> NOT["Notice écrite à la phase besoins"]
+    REG --> NOT["Consignes d'emploi écrites à la phase besoins"]
     NOT --> USR["Utilisateur informé des limites d'emploi"]
 ```
 

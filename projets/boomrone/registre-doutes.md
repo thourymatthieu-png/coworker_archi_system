@@ -181,7 +181,7 @@ Complément du 2026-10-28 (rapport de la 4e relecture de porte, rattaché ici) :
 **Réponse :**
 **Décision liée :**
 
-### DOU-117 — Cause « sous-tension » sur le statut sans fil
+### DOU-117 — Cause de sous-tension sur le statut sans fil
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** SCN-012 « Dégradé : sous-tension de la batterie »
@@ -212,6 +212,46 @@ Complément du 2026-10-28 (rapport de la 4e relecture de porte, rattaché ici) :
 **Question :** Sous le seuil de sous-tension, le microcontrôleur peut rester alimenté à l'état Allumé, où Sauvegarder est acceptée : une écriture à tension limite risque de corrompre la mémoire (DEC-134 « Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension » avec DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture »). Une écriture déjà en cours au franchissement du seuil, ou au relâchement du lancer (DEC-136 « Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté »), est-elle évitée par une règle d'architecture (garde de tension avant toute écriture, verrou d'appui tant qu'une écriture est en cours) ? Ouvert le 2026-10-29 (5e relecture de porte, `critique`).
 **Réponse :**
 **Décision liée :**
+
+### DOU-126 — Simplifications possibles des scénarios : choix de l'utilisateur
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, section « Annexe B — Simplifications possibles »
+**Question :** Six complexités des scénarios validés restent proposées au retrait pour un drone plus simple (n°2 à n°7 de « Annexe B — Simplifications possibles ») : série de trois appuis, dix-sept signaux, états de Sauvegarder, commandes après échec d'initialisation, cause précise sur le sans fil, bornes des seuils. La n°1 (retirer tout le sans fil de réglage et de suivi) est écartée, ce qui rend recommandées les cinq lignes qu'elle aurait fait disparaître. Elles sont toutes recommandées. L'utilisateur en retient-il certaines ? Échéance : avant la porte « exigences » ; chaque retrait passerait par une décision et une modification explicite du scénario concerné.
+**Réponse :** partielle, utilisateur, chat, 2026-10-29 : « on garde la communication sans fils » ; simplification n°1 écartée (SCN-009 « Réglage et suivi du drone par le sans fil », BES-008 « Entrer en mode réglage et faire des vols de réglage », BES-009 « Régler et sauvegarder les paramètres de vol », BES-010 « Suivre le drone sur un appareil de suivi » conservés). Les six autres restent à décider.
+**Décision liée :** DEC-155 « Scénarios inchangés : les complexités inutiles sont notées en simplifications possibles » ; DEC-160 « Cadrage des besoins : contraintes du projet et simplification n°1 recommandée » ; DEC-163 « Communication sans fil conservée : simplification n°1 écartée » ; DEC-168 « Annexe B des besoins : quatre colonnes, simplifications n°2 à n°7 recommandées »
+
+### DOU-127 — Couverture ligne à ligne des risques acceptés par les consignes d'emploi
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** BES-012 « Disposer d'une page de consignes d'emploi »
+**Question :** BES-012 « Disposer d'une page de consignes d'emploi » exige que la page rappelle chacun des risques de la liste « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (35 risques), alors que la page « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md` est courte (une consigne par ligne, regroupée par moment). La vérification par inspection ligne à ligne reste à faire ; tout risque sans consigne est à ajouter ou à retirer du besoin. Échéance : phase « exigences » (exigence et recette de BES-012 « Disposer d'une page de consignes d'emploi »). Ouvert le 2026-10-29 (reformulation de BES-012 « Disposer d'une page de consignes d'emploi », DEC-158 « Énoncés des besoins resserrés : une intention, testable, sans solution »).
+**Réponse :** La page n'a pas à reprendre chaque ligne : elle rappelle les risques majeurs et ceux qui demandent un geste de l'utilisateur, l'inspection est un contrôle croisé avec la liste des risques acceptés. Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29.
+**Décision liée :** DEC-167 « BES-012 : contrôle croisé, consignes complétées, DOU-127 levé » ; DEC-162 « Consignes d'emploi : une consigne par ligne, les dangers en tête »
+
+### DOU-128 — Durée minimale perceptible des signaux
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** BES-007 « Savoir où en est le drone sans autre appareil »
+**Question :** BES-007 « Savoir où en est le drone sans autre appareil » exige que chaque signal soit perceptible par l'utilisateur. Sans durée minimale par signal (lumière, son), l'exigence n'est pas testable, d'autant que le signal « Allumé » prend le relais tout de suite après une coupure en vol (DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté »). Quelle durée minimale, pour quels signaux ? Échéance : phase « exigences ». Ouvert le 2026-10-29 (seconde relecture de porte, DEC-164 « Seconde relecture de porte : énoncés des besoins repris »).
+**Réponse :**
+**Décision liée :**
+
+### DOU-129 — Plage de lancer et hauteur d'un appartement (plafond)
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** BES-013 « Voler en appartement avec un drone de poche protégé »
+**Question :** La plage de lancer (de 0,5 à 4 m/s depuis au moins 1,5 m du sol) et la hauteur d'un plafond d'appartement sont-elles compatibles, compte tenu de la hauteur de stationnaire visée ? Voir aussi DOU-029 « Quelle altitude maximale et quel plafond le drone doit-il tolérer ? » et DOU-035 « Quelle hauteur de stationnaire vise-t-on ? ». Échéance : phase « exigences » et essais sur prototype. Ouvert le 2026-10-29 (seconde relecture de porte, DEC-164 « Seconde relecture de porte : énoncés des besoins repris »).
+**Réponse :**
+**Décision liée :**
+
+### DOU-130 — Arrêt d'un drone en vol par le bouton sans le toucher
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** BES-006 « Arrêter le drone en vol d'un geste » et « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`
+**Question :** Le bouton est sur le drone : l'arrêt en vol par le bouton oblige à toucher un drone aux hélices en rotation. Faut-il une option d'arrêt sans fil (BES-010 « Suivre le drone sur un appareil de suivi ») ? Échéance : exigences. En attendant, la consigne dit d'appuyer avec prudence (DEC-170 « Consigne d'arrêt en vol par le bouton : formulation prudente »).
+**Réponse :**
+**Décision liée :** DEC-170 « Consigne d'arrêt en vol par le bouton : formulation prudente »
 
 <!-- Ajouter les nouveaux doutes ci-dessus, avant ce marqueur, au même format, en dehors des blocs de code. -->
 
@@ -989,3 +1029,44 @@ Complément du 2026-10-28 (3e relecture de porte) : des paramètres de vol aberr
 **Question :** Sauvegarde des réglages (DEC-034 « Réglages envoyés par le sans fil, sauvegarde sur commande, chargement au démarrage ») : la commande de sauvegarde est-elle acceptée en vol ? Que se passe-t-il si la batterie est coupée pendant l'écriture ? Comment détecter une mémoire « jamais écrite » (DEC-036 « Drone neuf : valeurs d'origine fixes du logiciel, sans signal ») sans contrôle d'intégrité, alors que DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée » écarte la détection de corruption ? Complément de la relecture de porte (critique) : « Sauvegarder » est acceptée à l'état « Armé, avant le lancer » (DEC-043 « Commandes sans fil acceptées selon l'état du drone ») ; une écriture en mémoire non volatile en cours peut-elle retarder le démarrage des moteurs au lancer, prévu 200 ms après le relâchement (DEC-006 « Le relâchement du bouton armé suffit à démarrer les moteurs ») ? Complément du 2026-10-28 : « Sauvegarder » est désormais ignorée à l'état « Armé, avant le lancer » (DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer », qui modifie DEC-095 « Commande Sauvegarder à l'état armé : acceptée, retard possible du lancer accepté comme risque » et DEC-043 « Commandes sans fil acceptées selon l'état du drone ») ; reste à traiter en architecture une écriture commencée avant l'armement (état « Allumé ») et encore en cours au relâchement du bouton, qui pourrait dépasser la durée maximale de la phase « Lancé ». Précision du 2026-10-28 (3e relecture de porte) : la fenêtre d'écriture dangereuse inclut l'état « Premier appui validé », seul état d'où l'armement est possible (DEC-076 « Armement possible seulement depuis le premier appui d'une série, sans effet du maintien pendant la série ») : « Sauvegarder » y est acceptée (état inclus dans « Allumé, en attente d'un appui », tableau de DEC-043 « Commandes sans fil acceptées selon l'état du drone »). Question complémentaire : « Sauvegarder » doit-elle aussi être ignorée dans l'état « Premier appui validé », comme à l'état armé (DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer »), ou l'écriture en cours à l'armement est-elle traitée autrement en architecture ? Complément du 2026-10-28 (réponse de l'utilisateur) : « Sauvegarder » est aussi ignorée à l'état « Premier appui validé » (fenêtre de maintien de 1 à 2 s) : DEC-123 « Sauvegarder ignorée aussi à l'état Premier appui validé », qui étend DEC-112 « Sauvegarder ignorée à l'état armé, avant le lancer ». Restent ouverts pour ce doute : l'écriture en vol, la coupure pendant l'écriture, la mémoire jamais écrite, une écriture commencée à l'état « Allumé » et encore en cours à l'armement. **Non tranché :** l'état « Série d'appuis en cours » (au moins un appui validé relâché, moins de 2 s écoulées, aucun appui ne peut armer) : Sauvegarder y reste acceptée à ce jour.
 **Réponse :** (a) Sauvegarder est aussi ignorée à l'état « Série d'appuis en cours » (comme « Premier appui validé » et « Armé ») ; (b) coupure de la batterie pendant l'écriture : risque accepté, à traiter en architecture (choix de mémoire ou séquence d'écriture), sans contrôle d'intégrité ; (c) mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté ; (d) Sauvegarder ignorée en vol (déjà dans le tableau de DEC-043 « Commandes sans fil acceptées selon l'état du drone », vérifié). Reste à couvrir en architecture (point nommé dans DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture », sans réponse propre de l'utilisateur) : une écriture commencée à l'état « Allumé » et encore en cours à l'armement (voir DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture »). Source : réponse de l'utilisateur en chat, 2026-10-28.
 **Décision liée :** DEC-128 « Sauvegarder ignorée aussi à l'état Série d'appuis en cours » ; DEC-129 « Coupure de la batterie pendant l'écriture des réglages : risque accepté, traité en architecture » ; DEC-130 « Mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté » ; DEC-131 « Sauvegarder ignorée en vol : confirmation du tableau des commandes » ; antérieurement DEC-123 « Sauvegarder ignorée aussi à l'état Premier appui validé » (en partie)
+
+### DOU-121 — Le suivi sans fil est-il un besoin à part entière ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** BES-010 « Suivre le drone sur un appareil de suivi » (SCN-009 « Réglage et suivi du drone par le sans fil »)
+**Question :** Le suivi sans fil est-il un besoin à part entière ? Doute noté à la rédaction des besoins.
+**Réponse :** Oui, un besoin court de priorité Souhaitable : le drone vole sans appareil de suivi. Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29.
+**Décision liée :** DEC-150 « Réglage en deux besoins, suivi en un besoin souhaitable »
+
+### DOU-122 — Faut-il un besoin sur le lieu d'emploi et les protège-hélices ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** BES-013 « Voler en appartement avec un drone de poche protégé » (SCN-001 « Vol nominal : de la batterie au posé »)
+**Question :** Faut-il un besoin sur le lieu d'emploi et les protège-hélices ? Doute noté à la rédaction des besoins.
+**Réponse :** Oui, un besoin court de priorité Important, pour que le cadre d'emploi ait un besoin en aval. Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29.
+**Décision liée :** DEC-151 « Un besoin sur le lieu d'emploi et les protège-hélices »
+
+### DOU-123 — Quelle forme donner à la page de consignes d'emploi ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** BES-012 « Disposer d'une page de consignes d'emploi » (SCN-001 « Vol nominal : de la batterie au posé »)
+**Question :** Quelle forme donner à la page de consignes d'emploi ? Doute noté à la rédaction des besoins.
+**Réponse :** Une seule page, « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`, sans nouveau registre ; « Risques acceptés » reste la source. Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29.
+**Décision liée :** DEC-154 « Notice des limites d'emploi : une page de consignes d'emploi »
+
+### DOU-124 — Les refus d'initialisation et de mode réglage entrent-ils dans le besoin de refus d'armement ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** BES-004 « Ne pas voler quand le drone n'est pas prêt » (SCN-003 « Échec : batterie faible à l'armement »)
+**Question :** Les refus d'initialisation et de mode réglage entrent-ils dans le besoin de refus d'armement ? Doute noté à la rédaction des besoins.
+**Réponse :** Oui : un seul besoin pour tous les refus et l'échec d'initialisation. Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29.
+**Décision liée :** DEC-148 « Un seul besoin pour tous les refus et l'échec d'initialisation »
+
+### DOU-125 — Faut-il des besoins sur la sécurité des tiers, la conformité, la durée de vie ou la gestion de la batterie ?
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** BES-005 « Couper les moteurs quand le vol ne peut pas continuer » (SCN-012 « Dégradé : sous-tension de la batterie »)
+**Question :** Faut-il des besoins sur la sécurité des tiers, la conformité, la durée de vie ou la gestion de la batterie ? Doute noté à la rédaction des besoins.
+**Réponse :** Non : l'utilisateur est seul et accepte les risques ; seule la protection de sous-tension reste un besoin, dans BES-005 « Couper les moteurs quand le vol ne peut pas continuer ». Décidé par l'architecte par délégation explicite de l'utilisateur, 2026-10-29.
+**Décision liée :** DEC-153 « Pas de besoin de sécurité des tiers, de conformité, de durée de vie ni de gestion de la batterie »
+

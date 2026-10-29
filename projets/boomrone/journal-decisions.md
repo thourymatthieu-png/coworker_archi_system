@@ -1317,4 +1317,233 @@ Format (exemple, non analysé) :
 **Raison :** accord explicite de l'utilisateur en chat, 2026-10-29 : « passons la gate ». Rappels : `check_traceability --gate` échoue seulement sur les douze « SCN sans BES », normaux avant la phase « besoins » ; la notice des limites d'emploi est à écrire en phase « besoins » (DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien ») ; si les essais contredisent la plage de lancer, les besoins seront à reprendre (DOU-116 « Échéance et circularité du report aux essais, comportement de SCN-002 sur la partie infaisable de la plage »).
 **Doutes levés :** (aucun)
 
+### DEC-143 — Délégation de la phase besoins à l'architecte
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`
+**Décision :** pour la phase « besoins » seulement, l'utilisateur ne veut aucune question : l'architecte décide seul, consigne chaque choix en DEC et prépare un dossier fini. Cette délégation remplace pour cette phase la règle « l'utilisateur décide » ; la porte « besoins » n'est pas franchie par l'architecte, l'accord explicite de l'utilisateur reste requis.
+**Alternatives écartées :** poser les questions une à une comme en phase « scénarios » (refusé par l'utilisateur) ; franchir aussi la porte (l'accord explicite de l'utilisateur reste obligatoire, charte §3).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-144 — Ligne directrice : simplicité, un seul utilisateur qui accepte les risques
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`
+**Décision :** critère unique de la phase : Boomrone est un premier drone, un jeu, avec un seul utilisateur (son concepteur) qui accepte les risques et les dangers, fabrique l'électronique et programme le logiciel lui-même. En cas de choix, l'option retenue est la plus simple à utiliser, à spécifier, à fabriquer et à programmer. Peu de fonctions, besoins simples.
+**Alternatives écartées :** reprendre tous les cas des scénarios un par un en besoins (une quarantaine de besoins, lourds) ; ajouter des besoins de sécurité de tiers, de public ou de conformité (voir DEC-153 « Pas de besoin de sécurité des tiers, de conformité, de durée de vie ni de gestion de la batterie »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-145 — Treize besoins : regroupements retenus
+**Date :** 2026-10-29
+**Concerne :** BES-001 « Lancer le drone à la main » à BES-013 « Voler en appartement avec un drone de poche protégé »
+**Décision :** treize besoins au total, une intention chacun : tous les refus en un besoin, toutes les coupures des moteurs en un besoin, l'information de l'utilisateur en un besoin, le réglage en deux besoins, le suivi en un besoin. Chaque scénario est couvert par au moins un besoin.
+**Alternatives écartées :** un besoin par scénario (douze besoins quasi identiques aux scénarios, sans gain) ; un besoin par signal ou par cas de bouton (dizaines de besoins, solution déjà dans les scénarios).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-146 — Besoins qualitatifs : une seule valeur chiffrée, les 10 s de stationnaire
+**Date :** 2026-10-29
+**Concerne :** BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement »
+**Décision :** les besoins sont qualitatifs, sans solution ni valeur chiffrée, sauf les 10 s de stationnaire qui font l'intention du produit. Les seuils de temps du bouton, les délais, les angles et les tensions viennent aux exigences.
+**Alternatives écartées :** chiffrer les besoins (les valeurs sont provisoires et des doutes ouverts les portent : DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m », DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture ») ; retirer aussi les 10 s (c'est l'intention du produit).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-147 — Priorités des besoins : le vol sûr d'abord, le réglage et le suivi ensuite
+**Date :** 2026-10-29
+**Concerne :** BES-001 « Lancer le drone à la main » à BES-013 « Voler en appartement avec un drone de poche protégé »
+**Décision :** Essentiel (sept besoins) : lancer, stationnaire et atterrissage, ne pas voler non prêt, couper les moteurs, arrêt en vol, information locale, programmation. Important (cinq) : ne pas armer par erreur, mode réglage, réglage et sauvegarde, page de consignes, lieu d'emploi. Souhaitable (un) : suivi sur appareil de suivi.
+**Alternatives écartées :** tout en Essentiel (n'aide pas à décider quoi livrer d'abord) ; réglage en Essentiel (le drone vole avec les valeurs d'origine sans lui).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Modifiée par :** DEC-159 « Réglage et suivi alignés en Souhaitable, subordonnés au suivi » le 2026-10-29 (BES-008 « Entrer en mode réglage et faire des vols de réglage » et BES-009 « Régler et sauvegarder les paramètres de vol » passent d'Important à Souhaitable : sept Essentiels, trois Importants, trois Souhaitables ; le reste est inchangé).
+
+### DEC-148 — Un seul besoin pour tous les refus et l'échec d'initialisation
+**Date :** 2026-10-29
+**Concerne :** BES-004 « Ne pas voler quand le drone n'est pas prêt »
+**Décision :** le refus d'armement (batterie faible, mouvement, pas à plat), le refus du mode réglage, le refus de décoller en réglage et l'échec d'initialisation forment un seul besoin : le drone ne vole pas tant qu'il n'est pas prêt, et le dit. Les différences de cas restent aux scénarios et aux exigences.
+**Alternatives écartées :** un besoin pour l'armement et un pour l'initialisation (même intention : ne pas voler non prêt) ; un besoin par cause de refus (solution déjà détaillée aux scénarios).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-124 « Les refus d'initialisation et de mode réglage entrent-ils dans le besoin de refus d'armement ? »
+
+### DEC-149 — Un seul besoin pour toutes les coupures des moteurs
+**Date :** 2026-10-29
+**Concerne :** BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
+**Décision :** échec de stabilisation, basculement, atterrissage trop long, coupure d'alimentation, batterie trop basse et logiciel bloqué forment un seul besoin : les moteurs s'arrêtent et le drone ne reprend jamais le vol seul. L'arrêt voulu par l'utilisateur reste un besoin à part (BES-006 « Arrêter le drone en vol d'un geste »), car c'est une action de sa part.
+**Alternatives écartées :** un besoin par cause (six besoins de même intention) ; fusionner aussi l'arrêt par l'utilisateur (action volontaire, intention différente).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-150 — Réglage en deux besoins, suivi en un besoin souhaitable
+**Date :** 2026-10-29
+**Concerne :** BES-008 « Entrer en mode réglage et faire des vols de réglage », BES-009 « Régler et sauvegarder les paramètres de vol » et BES-010 « Suivre le drone sur un appareil de suivi »
+**Décision :** le mode réglage avec ses vols (Important), le réglage et la sauvegarde des paramètres (Important) et le suivi sur appareil de suivi (Souhaitable) sont trois besoins courts, sans enrichissement : pas d'appairage, pas de contrôle d'intégrité, pas de limite de vols (risques déjà acceptés dans « Risques acceptés » — `projets/boomrone/risques-acceptes.md`).
+**Alternatives écartées :** un seul besoin de réglage et suivi (mélange trois intentions et trois priorités) ; suivi Important (le drone vole sans appareil de suivi : DEC-032 « Vol libre : le drone vole sans appareil de suivi »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-121 « Le suivi sans fil est-il un besoin à part entière ? »
+**Modifiée par :** DEC-159 « Réglage et suivi alignés en Souhaitable, subordonnés au suivi » le 2026-10-29 (BES-008 « Entrer en mode réglage et faire des vols de réglage » et BES-009 « Régler et sauvegarder les paramètres de vol » passent en Souhaitable).
+
+### DEC-151 — Un besoin sur le lieu d'emploi et les protège-hélices
+**Date :** 2026-10-29
+**Concerne :** BES-013 « Voler en appartement avec un drone de poche protégé »
+**Décision :** un besoin court porte le cadre d'emploi (drone de poche, appartement, protège-hélices ; gymnase et jardin en essais complémentaires) pour qu'une décision structurante antérieure (DEC-016 « Public adulte, protège-hélices obligatoires » ; DEC-040 « Périmètre d'emploi visé : l'appartement ; gymnase et jardin en essais complémentaires ») ait un besoin en aval. Priorité Important.
+**Alternatives écartées :** ne rien écrire (le cadre d'emploi n'aurait aucun besoin et les exigences de taille et de protection n'auraient pas d'amont) ; le mettre dans la page de consignes seulement (une consigne n'est pas un besoin vérifiable).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-122 « Faut-il un besoin sur le lieu d'emploi et les protège-hélices ? »
+
+### DEC-152 — Information de l'utilisateur : un seul besoin, sur le drone lui-même
+**Date :** 2026-10-29
+**Concerne :** BES-007 « Savoir où en est le drone sans autre appareil »
+**Décision :** l'information de l'utilisateur est un seul besoin, satisfait sur le drone sans appareil de suivi ; la cause détaillée sur appareil de suivi relève de BES-010 « Suivre le drone sur un appareil de suivi » (Souhaitable). Le nombre de signaux, leur forme et leur regroupement sont des sujets d'exigences et d'architecture (DEC-099 « Un statut sans fil distinct par état, effets locaux regroupables par catégorie »).
+**Alternatives écartées :** un besoin par étape du vol ou par signal (dix-sept besoins, solution déjà dans les scénarios) ; deux besoins (vol / échecs), sans gain.
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-153 — Pas de besoin de sécurité des tiers, de conformité, de durée de vie ni de gestion de la batterie
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`
+**Décision :** aucun besoin sur la sécurité des tiers, le public, la conformité, la protection contre un tiers malveillant, la durée de vie, ni la gestion de la batterie (charge, remplacement, stockage) : l'utilisateur est seul et accepte les risques. La protection de sous-tension reste portée par BES-005 « Couper les moteurs quand le vol ne peut pas continuer » (DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre »). Ces points sont rappelés dans les consignes d'emploi.
+**Alternatives écartées :** besoins de sécurité du public ou de conformité (hors du jeu d'un utilisateur unique qui accepte les risques) ; besoin de gestion de la batterie (contredit DEC-111 « Batterie et programmation : hors périmètre des scénarios, limites d'emploi à documenter »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-125 « Faut-il des besoins sur la sécurité des tiers, la conformité, la durée de vie ou la gestion de la batterie ? »
+
+### DEC-154 — Notice des limites d'emploi : une page de consignes d'emploi
+**Date :** 2026-10-29
+**Concerne :** BES-012 « Disposer d'une page de consignes d'emploi »
+**Décision :** la notice de DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien » prend sa forme la plus légère : une seule page, « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`, une quinzaine de consignes courtes (avant le vol, lancer, réglage, après le vol). « Risques acceptés » — `projets/boomrone/risques-acceptes.md` reste la source, sans nouveau registre. Le drone n'affiche rien de plus.
+**Alternatives écartées :** notice complète reprenant les 36 lignes du registre (lourde, l'utilisateur la connaît déjà) ; nouveau registre de limites d'emploi (doublon de DEC-124 « Registre consolidé des risques acceptés dans un fichier dédié »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-123 « Quelle forme donner à la page de consignes d'emploi ? »
+
+### DEC-155 — Scénarios inchangés : les complexités inutiles sont notées en simplifications possibles
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, section « Simplifications possibles »
+**Décision :** les douze scénarios validés ne sont pas modifiés. Six complexités qui pèsent sur la fabrication et la programmation sont notées dans un tableau de recommandations à l'utilisateur, qui décide (série de trois appuis, dix-sept signaux, états de Sauvegarder, commandes après échec d'initialisation, cause précise sur le sans fil, bornes des seuils).
+**Alternatives écartées :** modifier les scénarios (validés par DEC-142 « Porte scénarios franchie : accord explicite de l'utilisateur », hors délégation) ; ignorer ces complexités (l'utilisateur ne saurait pas qu'il peut les retirer).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun) ; ouvre DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur »
+**Modifiée par :** DEC-160 « Cadrage des besoins : contraintes du projet et simplification n°1 recommandée » le 2026-10-29 (sept lignes au lieu de six, la nouvelle en première position).
+
+### DEC-156 — Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, section « Couverture des scénarios »
+**Décision :** `tools/check_traceability.py` ne compte pas le lien besoin vers scénario et laissera les douze scénarios « sans BES » ; la couverture des douze scénarios est vérifiée à la main et écrite dans « Besoins » (diagramme et tableau). L'outil n'est pas modifié ; les « BES sans REQ » et « BES sans TA » sont normaux avant les phases suivantes.
+**Alternatives écartées :** modifier l'outil (interdit pour cette phase) ; ne rien vérifier (trou possible non vu).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-157 — Doutes de la phase besoins tranchés par l'architecte
+**Date :** 2026-10-29
+**Concerne :** « Registre de doutes » — `projets/boomrone/registre-doutes.md`
+**Décision :** les doutes qui relèvent d'un choix de besoin sont notés puis tranchés par l'architecte (cinq doutes de la série numérotée 121 à 125, listés dans « Doutes levés » ci-dessous, chacun levé par la décision de son besoin). Ceux qui relèvent des exigences, de l'architecture ou des essais restent ouverts, non bloquants, avec leur échéance ; DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur » est ouvert pour que l'utilisateur choisisse à la porte « besoins ». Aucun doute bloquant n'est ouvert.
+**Alternatives écartées :** laisser les doutes de besoin ouverts (la délégation demande de trancher) ; trancher aussi les doutes d'exigences et d'essais (hors du choix de besoin).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-121 « Le suivi sans fil est-il un besoin à part entière ? » (DEC-150 « Réglage en deux besoins, suivi en un besoin souhaitable ») ; DOU-122 « Faut-il un besoin sur le lieu d'emploi et les protège-hélices ? » (DEC-151 « Un besoin sur le lieu d'emploi et les protège-hélices ») ; DOU-123 « Quelle forme donner à la page de consignes d'emploi ? » (DEC-154 « Notice des limites d'emploi : une page de consignes d'emploi ») ; DOU-124 « Les refus d'initialisation et de mode réglage entrent-ils dans le besoin de refus d'armement ? » (DEC-148 « Un seul besoin pour tous les refus et l'échec d'initialisation ») ; DOU-125 « Faut-il des besoins sur la sécurité des tiers, la conformité, la durée de vie ou la gestion de la batterie ? » (DEC-153 « Pas de besoin de sécurité des tiers, de conformité, de durée de vie ni de gestion de la batterie »)
+
+### DEC-158 — Énoncés des besoins resserrés : une intention, testable, sans solution
+**Date :** 2026-10-29
+**Concerne :** BES-001 « Lancer le drone à la main » à BES-013 « Voler en appartement avec un drone de poche protégé »
+**Décision :** après les trois relectures de porte, chaque énoncé est ramené à une intention courte, critères chiffrés renvoyés aux exigences. BES-001 « Lancer le drone à la main » : titre « Lancer le drone à la main » (ancien : « ... avec un seul bouton »), « sans viser une orientation précise », promesse dépendante des essais (DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m », DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal », DEC-137 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée ») ; « se stabiliser seul » reste dans BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement ». BES-002 « Ne pas armer ni lancer par erreur » : appui involontaire ou hésitant sans lancer, renoncer après l'armement. BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement » : « sans s'éloigner de façon sensible », « sans choc violent », attente d'un nouvel appui après le posé. BES-004 « Ne pas voler quand le drone n'est pas prêt » : « conditions de départ non réunies », « échec d'initialisation », énergie d'un vol complet une fois armé (DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? », DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs » non levés), phrase d'avertissement retirée. BES-005 « Couper les moteurs quand le vol ne peut pas continuer » : causes en liste, « défaillance du drone » (SCN-011 « Dégradé : coupure d'alimentation en vol »), retour de l'alimentation sans reprise. BES-006 « Arrêter le drone en vol d'un geste » : « une fois le lancer terminé », bouton seul suffisant, arrêt sans fil facultatif, SCN-009 « Réglage et suivi du drone par le sans fil » ajouté aux références. BES-007 « Savoir où en est le drone sans autre appareil » : situations où un signal est possible, liste minimale prêt, lancé, refus, échec, coupure des moteurs en vol, posé, aucun signal après coupure d'alimentation ou sous-tension, six scénarios ajoutés aux références. BES-008 « Entrer en mode réglage et faire des vols de réglage » : besoin d'essai de réglage en vol. BES-009 « Régler et sauvegarder les paramètres de vol » : seul recours aux réglages aberrants ou perdus = reprogrammer. BES-010 « Suivre le drone sur un appareil de suivi » : état et causes de refus ou de coupure, sans recouvrement avec BES-007 « Savoir où en est le drone sans autre appareil », « sans appareil de suivi » dit une seule fois dans les contraintes (DEC-032 « Vol libre : le drone vole sans appareil de suivi »). BES-011 « Fabriquer et programmer le drone soi-même » (ancien titre : « Programmer le drone depuis l'ordinateur », retitré par DEC-166 « BES-011 retitré : fabriquer et programmer le drone soi-même ») : « avec son programmateur » retiré. BES-012 « Disposer d'une page de consignes d'emploi » : « chacun des risques de la liste de référence », test par inspection, chemin de fichier en références. BES-013 « Voler en appartement avec un drone de poche protégé » : appartement, poche, protège-hélices ; gymnase et jardin en note de périmètre.
+**Alternatives écartées :** garder les énoncés longs (ils mélangeaient besoin, solution et valeurs) ; retirer « se stabiliser seul » de BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement » (c'est son cœur).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun) ; ouvre DOU-127 « Couverture ligne à ligne des risques acceptés par les consignes d'emploi »
+**Modifiée par :** DEC-164 « Seconde relecture de porte : énoncés des besoins repris » le 2026-10-29 (énoncés des treize besoins repris).
+
+### DEC-159 — Réglage et suivi alignés en Souhaitable, subordonnés au suivi
+**Date :** 2026-10-29
+**Concerne :** BES-008 « Entrer en mode réglage et faire des vols de réglage », BES-009 « Régler et sauvegarder les paramètres de vol », BES-010 « Suivre le drone sur un appareil de suivi »
+**Décision :** les trois besoins sont Souhaitables : le drone vole avec ses valeurs d'origine sans appareil de suivi (DEC-032 « Vol libre : le drone vole sans appareil de suivi »). BES-008 « Entrer en mode réglage et faire des vols de réglage » et BES-009 « Régler et sauvegarder les paramètres de vol » sont subordonnés à BES-010 « Suivre le drone sur un appareil de suivi ». Décompte : 7 Essentiels, 3 Importants, 3 Souhaitables. Modifie DEC-147 « Priorités des besoins : le vol sûr d'abord, le réglage et le suivi ensuite ».
+**Alternatives écartées :** garder BES-008 « Entrer en mode réglage et faire des vols de réglage » et BES-009 « Régler et sauvegarder les paramètres de vol » Importants alors que BES-010 « Suivre le drone sur un appareil de suivi » Souhaitable les conditionne (priorités incohérentes).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-160 — Cadrage des besoins : contraintes du projet et simplification n°1 recommandée
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, sections « Contraintes du projet » et « Annexe B — Simplifications possibles »
+**Décision :** une section « Contraintes du projet » (propriétaire qui fabrique l'électronique et programme, un seul utilisateur qui accepte les risques, fonctionnement sans appareil de suivi) sans nouveau besoin. En première ligne des simplifications : « retirer le sans fil de réglage et de suivi (SCN-009 « Réglage et suivi du drone par le sans fil », BES-008 « Entrer en mode réglage et faire des vols de réglage », BES-009 « Régler et sauvegarder les paramètres de vol », BES-010 « Suivre le drone sur un appareil de suivi ») : le réglage se fait en reprogrammant », recommandée, avec gain, coût et colonne « Décision de l'utilisateur » à remplir. C'est le seul choix qui modifierait des scénarios validés. DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur » reste ouvert, non bloquant. Modifie DEC-155 « Scénarios inchangés : les complexités inutiles sont notées en simplifications possibles ».
+**Alternatives écartées :** retirer le sans fil d'office (modifie des scénarios validés, hors délégation) ; ne pas le proposer (l'utilisateur ne verrait pas le gain).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+**Précisée par :** DEC-163 « Communication sans fil conservée : simplification n°1 écartée » le 2026-10-29 (la n°1 recommandée est écartée par l'utilisateur) ; DEC-168 « Annexe B des besoins : quatre colonnes, simplifications n°2 à n°7 recommandées » le 2026-10-29.
+
+### DEC-161 — Lisibilité du dossier des besoins : ordre, parcours, tableau, annexes, écarts de l'outil
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`
+**Décision :** ordre : aperçu de cinq lignes, parcours de l'utilisateur (diagramme, ID seuls), tableau récapitulatif, besoins, contraintes, annexes (couverture, simplifications, doutes). Le tableau de couverture redondant est supprimé ; le diagramme scénarios vers besoins est allégé (titres abrégés, légende). Un encadré explique pourquoi `--gate` affiche ÉCHEC (12 « SCN sans BES », défaut connu de l'outil : DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé » ; « BES sans REQ » et « BES sans TA » : phases suivantes).
+**Alternatives écartées :** garder tableau et diagramme de couverture (doublon) ; modifier l'outil (interdit).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-162 — Consignes d'emploi : une consigne par ligne, les dangers en tête
+**Date :** 2026-10-29
+**Concerne :** « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`
+**Décision :** une consigne par puce, phrases de quinze mots au plus, sans jargon ; les trois consignes les plus dangereuses en tête (relâcher le bouton prêt démarre les moteurs, ne pas lancer vers des personnes, débrancher la batterie au moindre doute) ; diagramme des trois risques majeurs ; lien vers « Besoins ». Le mot « notice » devient « consignes d'emploi » dans la page et le glossaire (hors citations de titres de décisions). Précise DEC-154 « Notice des limites d'emploi : une page de consignes d'emploi ».
+**Alternatives écartées :** garder la forme dense (phrases doubles, jargon) ; reprendre les 36 lignes du registre sans regrouper.
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-163 — Communication sans fil conservée : simplification n°1 écartée
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, section « Annexe B — Simplifications possibles », ligne n°1 ; SCN-009 « Réglage et suivi du drone par le sans fil », BES-008 « Entrer en mode réglage et faire des vols de réglage », BES-009 « Régler et sauvegarder les paramètres de vol », BES-010 « Suivre le drone sur un appareil de suivi »
+**Décision :** le sans fil de réglage et de suivi est conservé ; la simplification n°1 (le retirer) est écartée. SCN-009 « Réglage et suivi du drone par le sans fil » et les mentions du sans fil dans les autres scénarios restent inchangés. Rien d'autre n'est décidé : les trois besoins restent Souhaitables et BES-008 « Entrer en mode réglage et faire des vols de réglage » et BES-009 « Régler et sauvegarder les paramètres de vol » restent subordonnés à BES-010 « Suivre le drone sur un appareil de suivi » (DEC-159 « Réglage et suivi alignés en Souhaitable, subordonnés au suivi » inchangée). Les six autres simplifications restent à décider par l'utilisateur (DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur », ouvert, non bloquant). Précise DEC-160 « Cadrage des besoins : contraintes du projet et simplification n°1 recommandée » (la n°1 recommandée est écartée par l'utilisateur) et DEC-159 « Réglage et suivi alignés en Souhaitable, subordonnés au suivi » (priorités confirmées).
+**Alternatives écartées :** retirer le sans fil de réglage et de suivi (recommandation de l'architecte : gain en radio, protocole, mode réglage ; coût en arrêt sans fil, suivi et cause lisible).
+**Raison :** décision de l'utilisateur en chat, 2026-10-29 : « on garde la communication sans fils ».
+**Doutes levés :** (aucun) ; DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur » reçoit une réponse partielle
+
+### DEC-164 — Seconde relecture de porte : énoncés des besoins repris
+**Date :** 2026-10-29
+**Concerne :** BES-001 « Lancer le drone à la main » à BES-013 « Voler en appartement avec un drone de poche protégé » (BES-006 « Arrêter le drone en vol d'un geste », BES-010 « Suivre le drone sur un appareil de suivi » et BES-011 « Fabriquer et programmer le drone soi-même » sont aussi traités par DEC-165 « Arrêt sans fil déplacé de BES-006 vers BES-010 » et DEC-166 « BES-011 retitré : fabriquer et programmer le drone soi-même »)
+**Décision :** BES-001 « Lancer le drone à la main » : les moteurs démarrent au relâchement du bouton armé, note « essais » conservée. BES-002 « Ne pas armer ni lancer par erreur » : un appui bref ne fait ni armer ni lancer, le seul renoncement après l'armement est de maintenir le bouton jusqu'au désarmement, relâcher plus tôt démarre les moteurs (risque accepté ; DEC-083 « Annulation d'un armement : le maintien jusqu'au désarmement à 10 s reste la seule annulation », DEC-073 « Armé entre 2 et 10 secondes d'appui : le relâchement donne le signal Lancé, les moteurs démarrent 200 ms plus tard »), « hésitant » et « involontaire » supprimés car non testables. BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement » : critères aux exigences (DEC-011 « Dérive de 30 cm sur 10 s en objectif à valider par essais »). BES-004 « Ne pas voler quand le drone n'est pas prêt » : une seule intention, refuser le départ ; la promesse d'énergie pour un vol complet est remplacée par un refus sous un seuil de batterie, durée de vol garantie à fixer (DOU-013 « Quelle durée de vol garantit-on après un armement accepté ? », DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs ») ; mode réglage et décollage en réglage déplacés dans BES-008 « Entrer en mode réglage et faire des vols de réglage » ; SCN-011 « Dégradé : coupure d'alimentation en vol » ajouté aux références ; « prêt » défini au glossaire. BES-005 « Couper les moteurs quand le vol ne peut pas continuer » : causes exactes (stationnaire non atteint, basculement, atterrissage trop long, batterie trop basse, logiciel bloqué ou alimentation coupée), pannes de moteur ou de capteur non détectées, sous-tension d'un drone laissé allumé rattachée à SCN-012 « Dégradé : sous-tension de la batterie » et au même effet. BES-007 « Savoir où en est le drone sans autre appareil » : liste complétée (appui validé, désarmement, mode réglage), signaux perceptibles, exceptions dites (bouton coincé sans signal local, aucun signal après coupure d'alimentation ou sous-tension, cause de coupure non conservée : DEC-113 « Cause d'une coupure en vol : confirmation, Allumé tout de suite, aucune durée minimale, risque accepté »), SCN-004 « Appui normal : bouton relâché avant 2 secondes » ajouté. BES-008 « Entrer en mode réglage et faire des vols de réglage » : refus d'entrer en mode réglage ou de décoller en réglage, limite « lien perdu en vol de réglage » (DEC-106 « Lien sans fil perdu en vol de réglage : aucune action particulière »), « usage normal » devient « mode normal ». BES-009 « Régler et sauvegarder les paramètres de vol » : aucun réglage ne désactive les coupures de sécurité (DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel » ; DEC-068 « Seuil hors bornes : refus silencieux, valeur relue sur l'appareil de suivi »), valeurs d'origine rattachées à BES-011 « Fabriquer et programmer le drone soi-même », la phrase « seul recours = reprogrammer » passe dans les contraintes. BES-013 « Voler en appartement avec un drone de poche protégé » : DEC-016 « Public adulte, protège-hélices obligatoires » citée pour les seuls protège-hélices, « Note » fusionnée dans l'énoncé. Vocabulaire : « propriétaire » devient « utilisateur », « information locale » devient « signal ». Parcours : flèche en pointillé Atterrissage vers Arrêt en vol, étiquettes « Signaux sur le drone » et « Lieu et protège-hélices ». La section sur les écarts de l'outil de porte quitte l'annexe A pour une annexe D. Modifie DEC-158 « Énoncés des besoins resserrés : une intention, testable, sans solution ».
+**Alternatives écartées :** garder les énoncés de DEC-158 « Énoncés des besoins resserrés : une intention, testable, sans solution » (relecture `critique` : formulations non testables ou en contradiction avec les scénarios) ; ajouter des besoins (le jeu reste à treize besoins).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun) ; ouvre DOU-128 « Durée minimale perceptible des signaux » et DOU-129 « Plage de lancer et hauteur d'un appartement (plafond) »
+
+### DEC-165 — Arrêt sans fil déplacé de BES-006 vers BES-010
+**Date :** 2026-10-29
+**Concerne :** BES-006 « Arrêter le drone en vol d'un geste » et BES-010 « Suivre le drone sur un appareil de suivi »
+**Décision :** BES-006 « Arrêter le drone en vol d'un geste » ne porte que le bouton : après la garde qui suit le lancer, un appui coupe les moteurs rapidement (DEC-031 « Arrêt du drone lancé : bouton et commande d'arrêt sans fil » ; DEC-087 « Arrêt d'urgence par le bouton en vol : anti-rebond très court seulement, arrêt quasi immédiat »), en priorité Essentiel, sans « facultative ». La commande d'arrêt sans fil passe dans BES-010 « Suivre le drone sur un appareil de suivi » (Souhaitable), qui fournit la liaison sans fil (suivi, causes de refus et de coupure, variables du vol, arrêt sans fil) ; SCN-003 « Échec : batterie faible à l'armement », SCN-006 « Échec : inclinaison excessive après le stationnaire » et SCN-007 « Dégradé : arrêt d'urgence par le bouton en vol » y sont ajoutés. Le titre de BES-010 « Suivre le drone sur un appareil de suivi » est conservé.
+**Alternatives écartées :** garder l'arrêt sans fil facultatif dans un besoin Essentiel (priorité floue) ; créer un besoin à part (le jeu reste à treize besoins).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-166 — BES-011 retitré : fabriquer et programmer le drone soi-même
+**Date :** 2026-10-29
+**Concerne :** BES-011 « Fabriquer et programmer le drone soi-même » (ancien titre : « Programmer le drone depuis l'ordinateur »)
+**Décision :** BES-011 « Fabriquer et programmer le drone soi-même » devient le parent des futures exigences de fabrication : l'utilisateur assemble l'électronique à la main avec des composants accessibles et programme le drone depuis son ordinateur (DEC-144 « Ligne directrice : simplicité, un seul utilisateur qui accepte les risques » ; SCN-008 « Mise en service : programmation du drone »). La contrainte correspondante devient un renvoi dans « Contraintes du projet ». L'identifiant est conservé, le nouveau titre est propagé dans les documents. Priorité Essentiel inchangée.
+**Alternatives écartées :** garder la fabrication en simple contrainte (aucun besoin en amont des exigences de fabrication) ; créer un quatorzième besoin (le jeu reste à treize).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-167 — BES-012 : contrôle croisé, consignes complétées, DOU-127 levé
+**Date :** 2026-10-29
+**Concerne :** BES-012 « Disposer d'une page de consignes d'emploi » et « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md`
+**Décision :** la page rappelle les risques majeurs et ceux qui demandent un geste de l'utilisateur ; l'inspection est un contrôle croisé avec « Risques acceptés » — `projets/boomrone/risques-acceptes.md` (35 risques, 36 numéros), sans exigence de reprendre chaque ligne. La page passe à 42 consignes : quatre réflexes essentiels en tête, dont « Hélices en rotation : ne pas toucher le drone ; maintenir le bouton ou attendre l'arrêt » et « Drone au sol et hélices arrêtées : en cas de doute, débrancher la batterie » (cohérents avec BES-006 « Arrêter le drone en vol d'un geste » et la ligne 26 des risques acceptés) ; consignes ajoutées : parasites sur le bouton, bouton coincé, pas de réglage après un échec d'initialisation, rester à portée du sans fil, vérifier un drone neuf, bornes des réglages ; « après une chute ou un posé » (drone verrouillé, allumé, rien à rebrancher) séparé de « démarrage raté » (débrancher puis rebrancher) ; verbe « débrancher » unifié avec le glossaire. Précise DEC-162 « Consignes d'emploi : une consigne par ligne, les dangers en tête ».
+**Alternatives écartées :** reprendre chaque ligne des risques acceptés dans la page (lourd, contraire à DEC-154 « Notice des limites d'emploi : une page de consignes d'emploi ») ; garder DOU-127 « Couverture ligne à ligne des risques acceptés par les consignes d'emploi » ouvert (l'exigence de couverture ligne à ligne disparaît).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** DOU-127 « Couverture ligne à ligne des risques acceptés par les consignes d'emploi »
+
+### DEC-168 — Annexe B des besoins : quatre colonnes, simplifications n°2 à n°7 recommandées
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md`, section « Annexe B — Simplifications possibles »
+**Décision :** après DEC-163 « Communication sans fil conservée : simplification n°1 écartée », le tableau passe à quatre colonnes (numéro, simplification, gain et coût en une phrase, recommandation) ; la n°1 est réduite à une phrase hors tableau (« Écartée ») ; les n°2, 4, 5, 6 et 7 sont « Recommandée », la n°3 « Recommandée (se décide aux exigences) » ; la variante « entrer en mode réglage par le sans fil » est retirée de la n°2 (elle aggraverait le risque sans appairage). L'introduction dit que la n°1 était la seule à retirer un scénario et que les autres modifient des détails de scénarios validés, à reprendre avec l'accord de l'utilisateur. Pas de colonne « Décision » (aucune décision à y inscrire). Précise DEC-160 « Cadrage des besoins : contraintes du projet et simplification n°1 recommandée ».
+**Alternatives écartées :** garder « Inutile si la n°1 est retenue » (n°1 écartée) ; garder la colonne « Décision » vide.
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun) ; DOU-126 « Simplifications possibles des scénarios : choix de l'utilisateur » reste ouvert
+
+### DEC-169 — Trois priorités définies : Essentiel, Important, Souhaitable
+**Date :** 2026-10-29
+**Concerne :** « Besoins » — `projets/boomrone/01-besoins.md` et « Glossaire » — `projets/boomrone/00-glossaire.md`
+**Décision :** Essentiel = sans lui le drone ne vole pas ou n'est pas utilisable ; Important = prévu et attendu ; Souhaitable = prévu et conservé (le sans fil est gardé), livré après les autres, sans valoir « facultatif ». Définitions dans le glossaire, rappelées avant le tableau récapitulatif et dans l'aperçu de « Besoins ». Décompte recompté après les changements : 7 Essentiels (BES-001 « Lancer le drone à la main », BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement », BES-004 « Ne pas voler quand le drone n'est pas prêt », BES-005 « Couper les moteurs quand le vol ne peut pas continuer », BES-006 « Arrêter le drone en vol d'un geste », BES-007 « Savoir où en est le drone sans autre appareil », BES-011 « Fabriquer et programmer le drone soi-même »), 3 Importants (BES-002 « Ne pas armer ni lancer par erreur », BES-012 « Disposer d'une page de consignes d'emploi », BES-013 « Voler en appartement avec un drone de poche protégé »), 3 Souhaitables (BES-008 « Entrer en mode réglage et faire des vols de réglage », BES-009 « Régler et sauvegarder les paramètres de vol », BES-010 « Suivre le drone sur un appareil de suivi »). Précise DEC-147 « Priorités des besoins : le vol sûr d'abord, le réglage et le suivi ensuite ».
+**Alternatives écartées :** laisser le mot « Souhaitable » sans définition (lu comme « facultatif », contraire à DEC-163 « Communication sans fil conservée : simplification n°1 écartée »).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : décide seul, vise la simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-170 — Consigne d'arrêt en vol par le bouton : formulation prudente
+**Date :** 2026-10-29
+**Concerne :** « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md` et BES-006 « Arrêter le drone en vol d'un geste »
+**Décision :** « Pour arrêter un drone en vol, appuie sur le bouton ; fais-le avec prudence, les hélices tournent » ; « ne pas attraper le drone » vaut pour les autres cas. BES-006 « Arrêter le drone en vol d'un geste » parle d'un appui franchissant l'anti-rebond. Écart BES-007 « Savoir où en est le drone sans autre appareil » / BES-008 « Entrer en mode réglage et faire des vols de réglage » noté dans BES-007 « Savoir où en est le drone sans autre appareil ». Retouches de forme associées (réflexe 4, titre du diagramme, contraintes du projet).
+**Alternatives écartées :** interdire de toucher le drone (rend l'arrêt par le bouton impossible).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 : simplicité, utilisateur qui accepte les risques.
+**Doutes levés :** (aucun) ; DOU-130 « Arrêt d'un drone en vol par le bouton sans le toucher » ouvert
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
