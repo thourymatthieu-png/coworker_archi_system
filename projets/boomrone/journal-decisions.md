@@ -1954,4 +1954,132 @@ Format (exemple, non analysé) :
 **Raison :** accord explicite de l'utilisateur en chat, 2026-10-29 : « accord explicite sur la porte exigences ». Rappels : `check_traceability --gate` échoue pour les 41 « REQ sans ARC » (phase suivante) et les 12 « SCN sans BES » (défaut connu, DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé ») ; les valeurs provisoires (annexe B) restent à valider aux essais sur prototype (DOU-131 « Valeurs provisoires des exigences, à valider aux essais sur prototype »).
 **Doutes levés :** (aucun)
 
+### DEC-218 — Délégation totale de la phase architecture à l'architecte
+**Date :** 2026-10-29
+**Concerne :** « Architecture » — `projets/boomrone/03-architecture.md`, « Plans de test » — `projets/boomrone/05-plans-de-test.md` (section TI)
+**Décision :** l'utilisateur ne veut aucune question pendant la phase « architecture » : l'architecte décide seul de tous les points, toujours la solution la plus simple qui fonctionne (premier drone, composants à l'unité, assemblage à la main, programmation depuis l'ordinateur, drone de poche de moins de 100 g). Chaque trou est tranché et écrit (décision, doute levé ou doute ouvert non bloquant). Les éléments d'architecture restent « Proposé » : la porte « architecture » n'est pas franchie sans l'accord explicite de l'utilisateur. Pas de commit ni d'étiquette.
+**Alternatives écartées :** poser les choix de composants à l'utilisateur un par un (refusé par l'utilisateur).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29, à la suite de DEC-217 « Porte exigences franchie : accord explicite de l'utilisateur ».
+**Doutes levés :** (aucun)
+
+### DEC-219 — Structure générale : carte maison unique, microcontrôleur STM32G431, boucle sans système temps réel
+**Date :** 2026-10-29
+**Concerne :** REQ-030 « Programmation depuis l'ordinateur », REQ-029 « Composants disponibles à l'unité », REQ-044 « Assemblage à la main », REQ-014 « Coupure sur logiciel bloqué »
+**Décision :** une carte électronique maison à deux couches (commandée en ligne, soudure au fer), un microcontrôleur STM32G431CBT6 (FPU, chien de garde indépendant, programmable avec le ST-LINK de l'utilisateur par un en-tête SWD de 5 broches), logiciel en C sans système d'exploitation temps réel. Octets d'option : IWDG_SW = 0 et BOR_LEV = 3. Éléments : ARC-001 « Structure générale du drone », ARC-002 « Microcontrôleur et programmation par liaison SWD », ARC-013 « Carte électronique, câblage et assemblage à la main », ARC-015 « Structure logicielle et ordonnancement ».
+**Alternatives écartées :** STM32F103, STM32G0 (sans FPU), ESP32 (seconde chaîne de programmation) ; carte à trous ; système temps réel.
+**Raison :** délégation, simplicité ; correction apportée par l'électronique : NRST ajouté à l'en-tête SWD, BOOT0 tiré à la masse.
+**Doutes levés :** (aucun)
+
+### DEC-220 — Capteurs : centrale LSM6DSO, hauteur VL53L1X, flux optique PMW3901
+**Date :** 2026-10-29
+**Concerne :** REQ-007 « Critère de vol stationnaire », REQ-008 « Tenue du vol stationnaire », REQ-009 « Atterrissage doux », REQ-006 « Stabilisation après le lancer »
+**Décision :** centrale LSM6DSO sur SPI, capteur de hauteur VL53L1X en mode long sur I2C, capteur de flux optique PMW3901 sur SPI, tous trois sur cartes d'évaluation soudées par fils ou broches. Le flux optique est retenu dès maintenant : sans lui la dérive de 0,5 m en 10 s de REQ-008 « Tenue du vol stationnaire » est hors d'atteinte, et il donne la vitesse horizontale qui manquait (DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m »). Éléments : ARC-003 « Centrale inertielle », ARC-004 « Capteur de hauteur à temps de vol », ARC-005 « Capteur de flux optique », ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse ». Le capteur de hauteur est monté à environ 20 mm au-dessus du plan de contact (mesure fiable à partir de 40 mm).
+**Alternatives écartées :** centrale seule (dérive de plusieurs mètres) ; VL53L0X (2 m) ; baromètre ; caméra.
+**Raison :** délégation, la solution simple qui fonctionne.
+**Doutes levés :** (aucun)
+
+### DEC-221 — Moteurs à balais 8520, hélices de 45 mm, étage de puissance coupé par défaut
+**Date :** 2026-10-29
+**Concerne :** REQ-031 « Drone de poche », REQ-032 « Protège-hélices », REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage », REQ-014 « Coupure sur logiciel bloqué », REQ-005 « Démarrage des moteurs sur geste volontaire seulement »
+**Décision :** quatre moteurs coreless à balais 8520 avec hélices de 45 mm (les hélices de 65 mm exigent environ 138 mm de côté et ne tiennent pas dans 100 mm), anneaux de protection à paroi continue, un MOSFET AO3400A côté bas par moteur avec rappel de 100 kΩ grille-masse : tout reset coupe les moteurs sans logiciel. Éléments : ARC-006 « Moteurs, hélices et protège-hélices », ARC-007 « Étage de puissance des moteurs coupés par défaut ».
+**Alternatives écartées :** hélices de 65 mm ; brushless 1S ou 2S (contrôleur à acheter fait, DShot) ; pilote de moteurs intégré.
+**Raison :** délégation, simplicité de la commande et sûreté par construction.
+**Doutes levés :** (aucun)
+
+### DEC-222 — Batterie 1S 850 mAh, connecteur XT30, alimentation 3,0 V et mesure de tension
+**Date :** 2026-10-29
+**Concerne :** REQ-013 « Marge de batterie pour un vol complet », REQ-012 « Coupure sur sous-tension de la batterie », REQ-045 « Batterie débranchable à la main », REQ-003 « Conditions de départ du drone »
+**Décision :** batterie LiPo 1S de 850 mAh d'au moins 50C sans circuit de protection, connecteur XT30 détrompé au bord du drone, sans interrupteur ; régulateur LDO 3,0 V à faible chute (un 3,3 V ne tient pas quand la batterie descend à 3,3 V et moins) ; mesure de la tension par pont diviseur à 0,1 % et correction par la référence interne. Risques résiduels (inversion de polarité, surintensité, décharge profonde si le drone reste branché) notés dans ARC-008 « Batterie et connecteur débranchable » et ARC-030 « Page de consignes d'emploi », sans protection supplémentaire. Éléments : ARC-008 « Batterie et connecteur débranchable », ARC-009 « Alimentation de la logique et mesure de la tension ».
+**Alternatives écartées :** JST-PH (2 A par contact) ; 2S ; régulateur 3,3 V ; protection d'inversion par MOSFET P (chute de tension, composant en plus).
+**Raison :** délégation, simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-223 — Radio Bluetooth HM-10, protocole de trames et logiciel d'essai en Python
+**Date :** 2026-10-29
+**Concerne :** REQ-020 « Statut sans fil », REQ-021 « Variables du vol », REQ-022 « Arrêt sans fil », REQ-023 « Commandes sans fil selon l'état du drone », REQ-038 « Causes et paramètres dans le statut sans fil », REQ-040 « Appareil de suivi »
+**Décision :** module BLE série transparent HM-10 à 9600 bauds sans configuration ni appairage ; trames binaires de 14 octets au plus, octet de synchronisation 0xA5, type, charge, CRC8 ; statut à 2 Hz et à chaque changement, variables à 10 Hz, quatre commandes ; logiciel d'essai `tools/suivi.py` (Python et bleak). Éléments : ARC-012 « Module radio Bluetooth à basse consommation », ARC-025 « Protocole et service du statut sans fil », ARC-028 « Logiciel d'essai de l'appareil de suivi ».
+**Alternatives écartées :** RN4871 (configuration AT), ESP32 (seconde chaîne de programmation), STM32WB (pile lourde) ; texte ASCII ; application pour téléphone.
+**Raison :** délégation, simplicité ; l'octet de synchronisation est ajouté car le module peut couper ou fusionner les trames.
+**Doutes levés :** (aucun)
+
+### DEC-224 — Logiciel : une seule machine à états, cycle à 1 kHz, modules
+**Date :** 2026-10-29
+**Concerne :** REQ-004 « Démarrage des moteurs 200 ms après le relâchement », REQ-005 « Démarrage des moteurs sur geste volontaire seulement », REQ-016 « Arrêt d'urgence par le bouton », REQ-021 « Variables du vol »
+**Décision :** cycle de contrôle à 1 kHz dans la boucle principale (tick en interruption), tâches de fond coopératives, une seule machine à états de 18 états avec deux seuls sites de démarrage des moteurs, filtre de Mahony, observateur de hauteur, cascade angle-vitesse angulaire, gestion du bouton par compteur à 1 kHz. Éléments : ARC-015 « Structure logicielle et ordonnancement », ARC-016 « Pilotes des capteurs et des sorties », ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse », ARC-018 « Boucle de contrôle du vol », ARC-019 « Machine à états du drone », ARC-020 « Gestion logicielle du bouton ».
+**Alternatives écartées :** machine à états par domaine, contrôle dans l'interruption, filtre de Kalman complet.
+**Raison :** délégation, simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-225 — Chien de garde matériel et coupures automatiques
+**Date :** 2026-10-29
+**Concerne :** REQ-014 « Coupure sur logiciel bloqué », REQ-036 « Coupure sur phase Lancé trop longue », REQ-011 « Coupures automatiques en vol », REQ-012 « Coupure sur sous-tension de la batterie »
+**Décision :** chien de garde indépendant de 100 ms rendu matériel par l'octet d'option, rafraîchi une fois par cycle sain et refusé quand l'état Lancé dépasse 500 ms ; coupure dans le logiciel (`motors_cut()`) pour les causes de REQ-011 « Coupures automatiques en vol » et la sous-tension de REQ-012 « Coupure sur sous-tension de la batterie », cause mémorisée en RAM non initialisée. Éléments : ARC-021 « Surveillance et coupures automatiques », ARC-022 « Chien de garde ».
+**Alternatives écartées :** chien de garde externe ; coupure sur seuil de tension instantané.
+**Raison :** délégation, aucun composant en plus.
+**Doutes levés :** (aucun)
+
+### DEC-226 — Initialisation : priorités, mode réglage après mise sous tension, causes conservées après reset
+**Date :** 2026-10-29
+**Concerne :** REQ-017 « Initialisation en 3 secondes », REQ-037 « Comportement en échec d'initialisation », REQ-024 « Entrée en mode réglage par le bouton », REQ-038 « Causes et paramètres dans le statut sans fil »
+**Décision :** à la fin de l'initialisation, priorité à l'échec (mouvement ou pas à plat), puis au mode réglage (bouton tenu depuis la mise sous tension), puis à Allumé ; le mode réglage n'est accordé que si la cause de reset est une mise sous tension ; une norme d'accélération hors de 0,8 à 1,2 g est « pas à plat » (redémarrage en l'air = échec) ; les deux causes de REQ-038 « Causes et paramètres dans le statut sans fil » sont conservées en RAM non initialisée avec marqueur et CRC pour survivre à un reset du chien de garde. Élément : ARC-023 « Initialisation et échec d'initialisation ».
+**Alternatives écartées :** mode réglage prioritaire sur l'échec ; registre de sauvegarde TAMP.
+**Raison :** délégation ; interprétations consignées dans DOU-138 « Interprétations de l'architecture logicielle : priorité de l'initialisation, causes de refus, sauvegarde et statut ».
+**Doutes levés :** (aucun)
+
+### DEC-227 — Réglages : page de flash de l'image, valeurs hors bornes, sauvegarde au sol
+**Date :** 2026-10-29
+**Concerne :** REQ-026 « Paramètres de vol réglables », REQ-027 « Sauvegarde et chargement des réglages », REQ-028 « Valeurs d'origine après la programmation »
+**Décision :** les 29 valeurs fixes sont des constantes de compilation ; les 4 paramètres réglables (un mot de 64 bits) vivent dans la dernière page de flash, dont les valeurs d'origine sont dans l'image programmée (la programmation écrit donc les valeurs d'origine) ; aucune calibration par drone ; sans somme de contrôle ; une valeur lue hors bornes revient à la valeur d'origine du paramètre ; Sauvegarder seulement en mode réglage au sol, batterie d'au moins 3,5 V, environ 45 ms, chien de garde rafraîchi avant et après ; bornes de Modifier : gains 0,5 à 2,0, hauteur visée 0,5 à 1,2 m, vitesse de descente 0,15 à 0,5 m/s. Éléments : ARC-026 « Mode réglage et vol de réglage », ARC-027 « Paramètres de vol et stockage des réglages ».
+**Alternatives écartées :** double copie à indicateur de validité ; saturation à la lecture (une page vierge donnerait un gain maximal).
+**Raison :** délégation, simplicité, compatible avec DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée » et DEC-130 « Mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté ».
+**Doutes levés :** DOU-115 « Contenu et interruption de la réécriture de la zone des réglages par la reprogrammation », DOU-120 « Écriture en mémoire sous tension basse ou pendant une phase de vol »
+
+### DEC-228 — Effets locaux : table des dix effets, buzzer actif à un seul timbre
+**Date :** 2026-10-29
+**Concerne :** REQ-018 « Effets locaux par situation », REQ-019 « Perceptibilité et distinction des effets »
+**Décision :** voyant RGB (couleur et rythme) et buzzer magnétique actif (nombre et durée des bips), table des dix effets dans « Architecture » ; effets d'événement de 1,0 s ; moteurs en marche, lumière seule. Éléments : ARC-011 « Voyant RGB et avertisseur sonore », ARC-024 « Effets locaux (logiciel) ». La distinction reste à vérifier à TS-014 « Perceptibilité et distinction des effets ».
+**Alternatives écartées :** piézo passif (environ 50 dB à 1 m, à peine audible) ; sons à plusieurs fréquences (buzzer actif impossible).
+**Raison :** délégation, simplicité.
+**Doutes levés :** (aucun)
+
+### DEC-229 — Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte
+**Date :** 2026-10-29
+**Concerne :** REQ-031 « Drone de poche », REQ-013 « Marge de batterie pour un vol complet », REQ-012 « Coupure sur sous-tension de la batterie », REQ-003 « Conditions de départ du drone », REQ-006 « Stabilisation après le lancer »
+**Décision :** le bilan (masse 65 g pour 100 g, poussée/poids 1,35, 5,5 A en stationnaire et 9,5 A en crête, chute de tension jusqu'à 3,17 V avec 3,7 V à l'armement) donne un verdict marginal à infaisable pour la tension. Les valeurs de « Exigences système » ne sont pas modifiées maintenant. Avant de commander la carte, mesurer au banc la poussée, le courant et la résistance interne. Si le banc donne moins de 20 g par moteur ou plus de 60 mΩ, l'architecte proposera à l'utilisateur de relever le seuil d'armement à 3,9 V et d'abaisser la sous-tension à 3,0 V sous charge (modification de REQ-003 « Conditions de départ du drone » et REQ-012 « Coupure sur sous-tension de la batterie »), puis d'étudier le brushless 1S. Éléments : ARC-014 « Bilan de masse, de poussée et d'autonomie », ARC-006 « Moteurs, hélices et protège-hélices », ARC-008 « Batterie et connecteur débranchable ».
+**Alternatives écartées :** modifier tout de suite les seuils (hypothèses non mesurées) ; batterie 1300 mAh (+9 g, rapport 1,19).
+**Raison :** délégation ; toutes les valeurs du bilan sont des estimations.
+**Doutes levés :** (aucun) ; DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » reste ouvert, non bloquant.
+
+### DEC-230 — Plan de livraison par jalons, ordre de livraison levé
+**Date :** 2026-10-29
+**Concerne :** REQ-005 « Démarrage des moteurs sur geste volontaire seulement », REQ-026 « Paramètres de vol réglables », REQ-041 « Conditions d'acceptation de la commande Décoller »
+**Décision :** trois jalons : J1 vol normal complet (valeurs fixes et valeurs d'origine en constantes), J2 radio (statut, variables, Arrêt), J3 mode réglage (Décoller, Modifier, Sauvegarder, flash). REQ-005 « Démarrage des moteurs sur geste volontaire seulement » est vraie avec son seul premier cas jusqu'à J3. Élément : ARC-029 « Plan de livraison par jalons ».
+**Alternatives écartées :** tout livrer d'un coup ; radio avant le vol.
+**Raison :** délégation, un vol le plus tôt possible.
+**Doutes levés :** DOU-136 « Ordre de livraison : exigence essentielle dépendant du mode réglage souhaitable »
+
+### DEC-231 — Garanties d'arrêt, batterie basse et consommation résiduelle : doutes levés
+**Date :** 2026-10-29
+**Concerne :** REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage », REQ-012 « Coupure sur sous-tension de la batterie », REQ-037 « Comportement en échec d'initialisation »
+**Décision :** (1) arrêt des moteurs garanti par le matériel à tout reset, brown-out ou débranchement (rappel de grille), par le chien de garde en cas de blocage, et par l'échec d'initialisation après un redémarrage en l'air ; non couverts : MOSFET en court-circuit, pont de soudure, carte en débogage (hélices démontées pour programmer, à écrire dans la page de consignes). (2) Après une sous-tension, état absorbant sans hystérésis : pas de redémarrage ; une batterie déjà sous 3,3 V au branchement finit en échec d'initialisation ; BOR niveau 3 (environ 2,5 V). (3) Pas de seuil de protection distinct ; en échec par sous-tension le logiciel met les capteurs en veille et passe l'horloge à 16 MHz (environ 12 mA, soit 1,4 à 2,8 h avant 3,0 V, estimation à mesurer) ; la page de consignes dit de débrancher ; risque accepté. Éléments : ARC-007 « Étage de puissance des moteurs coupés par défaut », ARC-009 « Alimentation de la logique et mesure de la tension », ARC-022 « Chien de garde », ARC-023 « Initialisation et échec d'initialisation ».
+**Alternatives écartées :** détecteur matériel à 2,9 V coupant le LDO (composant en plus, repli) ; hystérésis et réarmement automatique (contraire à REQ-037 « Comportement en échec d'initialisation »).
+**Raison :** délégation, simplicité.
+**Doutes levés :** DOU-060 « Coupure de la batterie dans chaque état du drone, et alimentation des moteurs à valider en architecture matérielle », DOU-109 « Batterie déjà déchargée : redémarrages répétés, décharge profonde et état après une coupure logicielle », DOU-118 « Seuil de protection et consommation résiduelle du drone laissé allumé »
+
+### DEC-232 — Nouveaux doutes d'architecture ouverts
+**Date :** 2026-10-29
+**Concerne :** REQ-022 « Arrêt sans fil », REQ-017 « Initialisation en 3 secondes », REQ-009 « Atterrissage doux », REQ-008 « Tenue du vol stationnaire »
+**Décision :** trois doutes non bloquants sont ouverts : DOU-137 « Latence de bout en bout de l'arrêt sans fil sur Bluetooth » (latence de l'arrêt sans fil sur Bluetooth), DOU-138 « Interprétations de l'architecture logicielle : priorité de l'initialisation, causes de refus, sauvegarde et statut » (interprétations de l'architecture logicielle) et DOU-139 « Capteurs de hauteur et de flux : hauteur de montage et sols sans texture » (hauteur de montage du capteur de hauteur, sols sans texture pour le flux optique). DOU-133 « Forme des dix effets locaux : lumière, son, distinction mesurable » et DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » restent ouverts.
+**Alternatives écartées :** trancher sans essai ce qui dépend de la mesure.
+**Raison :** délégation : doute ouvert non bloquant quand seule une mesure peut répondre.
+**Doutes levés :** (aucun)
+
+### DEC-233 — Relecture de porte architecture : corrections décidées par délégation
+**Date :** 2026-10-29
+**Concerne :** « Architecture » — `projets/boomrone/03-architecture.md`, « Plans de test » — `projets/boomrone/05-plans-de-test.md`
+**Décision :** les trois relectures de porte (`critique`, `coherence-clarte`, `exigences-tracabilite`) sont traitées sans question à l'utilisateur. (1) `motors_cut()` force d'abord les sorties du timer à l'état bas avant d'arrêter le timer ; tension de grille mesurée à {TI-011 « Cadence du cycle et temps de réponse de l'arrêt d'urgence »}. (2) {REQ-013 « Marge de batterie pour un vol complet »} n'est pas établie avant les mesures au banc : les valeurs des exigences ne sont pas changées, les critères de {TI-008 « Batterie, connecteur, chute de tension et mesure de tension »} (résistance totale d'au plus 60 mΩ, tension sous 3,3 V moins de 100 ms) déclenchent le repli R1 + R2 ({DEC-229 « Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte »}) ; la porte « architecture », si l'utilisateur l'accorde, vaut avec cette réserve. (3) Hauteur du drone = lecture du capteur moins 20 mm de montage, coupure à une lecture brute d'environ 45 mm. (4) Le chien de garde est rafraîchi par l'initialisation et autour des écritures de flash. (5) Mise sous tension reconnue à l'absence du marqueur de la RAM `.noinit` (et non au drapeau de reset), causes conservées avec marqueur et CRC. (6) Budget unique du cycle : 300 µs, tâche de fond 200 µs, alarme 500 µs. (7) Délais alignés : arrêt par le bouton 12 ms estimé et 15 ms d'essai depuis l'appui, arrêt sans fil 5 ms côté drone, phase Lancé 612 ms estimée et 700 ms d'essai. (8) Défaut de capteur en vol : coupure, cause « échec de stabilisation » ({DOU-140 « Défaut de capteur en vol : cause et effet rattachés à l'échec de stabilisation »}). (9) Tests ajoutés : garde du bouton, délai de Modifier, critères de stationnaire, configuration de la centrale, gains aux bornes, effets à 3,4 V, critères numériques de {TI-008 « Batterie, connecteur, chute de tension et mesure de tension »}, {TI-010 « Liaison Bluetooth à basse consommation »} et {TI-021 « Arrêt sans fil et filtrage des commandes par état »}. (10) Glossaire fusionné sans doublon, sons définis (court 100 ms, long 250 ms, très long 500 ms), débit 140 octets/s, autonomie 49 mAh, incertitude ±4,5 g, diagrammes corrigés. Le défaut de l'outil (12 « SCN sans BES ») n'est pas corrigé ici : hors périmètre ({DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé »}).
+**Alternatives écartées :** imposer R1 + R2 maintenant (hypothèses non mesurées) ; ouvrir des doutes bloquants (la porte reste à l'utilisateur) ; retirer le seuil de 3,5 V de Sauvegarder (gardé, signalé dans {DOU-138 « Interprétations de l'architecture logicielle : priorité de l'initialisation, causes de refus, sauvegarde et statut »}).
+**Raison :** délégation explicite de l'utilisateur, 2026-10-29 ({DEC-218 « Délégation totale de la phase architecture à l'architecte »}).
+**Doutes levés :** (aucun) ; doute ouvert : {DOU-140 « Défaut de capteur en vol : cause et effet rattachés à l'échec de stabilisation »}.
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->

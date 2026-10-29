@@ -1,10 +1,10 @@
 # Plans de test
 
 > **Aperçu**
-> - Deux niveaux définis à ce stade : 15 recettes (TA) qui vérifient les besoins en rejouant les 12 scénarios (celui de la mise en service par deux recettes) et en inspectant 3 besoins ; 26 tests système (TS) qui vérifient les 41 exigences actives.
+> - Trois niveaux définis à ce stade : 27 tests d'intégration (TI) qui vérifient les 30 éléments d'architecture (section « Tests d'intégration (TI) » en bas) ; 15 recettes (TA) qui vérifient les besoins en rejouant les 12 scénarios (celui de la mise en service par deux recettes) et en inspectant 3 besoins ; 26 tests système (TS) qui vérifient les 41 exigences actives.
 > - Chaque exigence active a au moins un TS, chaque besoin au moins un TA ; les valeurs attendues sont celles de « Exigences système » — `projets/boomrone/02-exigences.md`.
 > - Moyens simples : banc maison, alimentation de laboratoire, chronomètre ou caméra, oscilloscope ou analyseur logique, appareil de suivi, pièce d'essai.
-> - Les tests d'intégration (TI) et unitaires (TU) viennent avec l'architecture et la conception détaillée (dans l'ordre d'exécution, TU puis TI précèdent TS puis TA).
+> - Les tests unitaires (TU) viennent avec la conception détaillée (dans l'ordre d'exécution, TU puis TI précèdent TS puis TA).
 > - État : tous les tests sont écrits, aucun n'est exécuté (le prototype n'existe pas encore).
 
 ## Vue d'ensemble
@@ -46,7 +46,7 @@ flowchart LR
     TS1 -. "TS vérifie les exigences" .-> RA
 ```
 
-*Légende : trait plein = « le scénario est rejoué par la recette » ou « l'exigence est vérifiée par le test » ; pointillé = « vérifie ». Les tests d'intégration (TI) et unitaires (TU) ne figurent pas ici : ils viennent avec l'architecture et la conception détaillée. Titres abrégés ; titres complets dans les tableaux de couverture.*
+*Légende : trait plein = « le scénario est rejoué par la recette » ou « l'exigence est vérifiée par le test » ; pointillé = « vérifie ». Les tests d'intégration (TI) et unitaires (TU) ne figurent pas ici : voir la section « Tests d'intégration (TI) » et la conception détaillée. Titres abrégés ; titres complets dans les tableaux de couverture.*
 
 ## Niveaux de test
 
@@ -54,7 +54,7 @@ flowchart LR
 |---|---|---|---|---|
 | Recette | Besoins | TA | 15 | écrit |
 | Système | Exigences | TS | 26 | écrit |
-| Intégration | Architecture | TI | 0 | après l'architecture |
+| Intégration | Architecture | TI | 27 | écrit |
 | Unitaire | Conception détaillée | TU | 0 | après la conception détaillée |
 
 ## Moyens d'essai
@@ -139,6 +139,41 @@ flowchart LR
 | TS-024 « Page de consignes d'emploi » | REQ-034 « Page de consignes d'emploi » |
 | TS-025 « Appareil de suivi et logiciel d'essai » | REQ-040 « Appareil de suivi » |
 | TS-026 « Batterie débranchable à la main » | REQ-045 « Batterie débranchable à la main » |
+
+### Éléments d'architecture vers tests d'intégration
+
+| Élément d'architecture | Tests d'intégration |
+|---|---|
+| ARC-001 « Structure générale du drone » | TI-026 « Intégration d'ensemble du prototype » |
+| ARC-002 « Microcontrôleur et programmation par liaison SWD » | TI-001 « Alimentation, programmation SWD et octets d'option » ; TI-002 « Bus SPI, I2C et capteurs » ; TI-005 « Moteurs coupés par le matériel » ; TI-006 « Coupures par chien de garde et par sous-tension du microcontrôleur » ; TI-010 « Liaison Bluetooth à basse consommation » |
+| ARC-003 « Centrale inertielle » | TI-002 « Bus SPI, I2C et capteurs » ; TI-004 « Flux optique et vitesse horizontale » |
+| ARC-004 « Capteur de hauteur à temps de vol » | TI-002 « Bus SPI, I2C et capteurs » ; TI-003 « Hauteur du capteur à temps de vol et position de montage » ; TI-004 « Flux optique et vitesse horizontale » |
+| ARC-005 « Capteur de flux optique » | TI-002 « Bus SPI, I2C et capteurs » ; TI-004 « Flux optique et vitesse horizontale » |
+| ARC-006 « Moteurs, hélices et protège-hélices » | TI-007 « Moteurs, poussée, masse et dimensions » |
+| ARC-007 « Étage de puissance des moteurs coupés par défaut » | TI-005 « Moteurs coupés par le matériel » ; TI-006 « Coupures par chien de garde et par sous-tension du microcontrôleur » |
+| ARC-008 « Batterie et connecteur débranchable » | TI-008 « Batterie, connecteur, chute de tension et mesure de tension » |
+| ARC-009 « Alimentation de la logique et mesure de la tension » | TI-001 « Alimentation, programmation SWD et octets d'option » ; TI-006 « Coupures par chien de garde et par sous-tension du microcontrôleur » ; TI-008 « Batterie, connecteur, chute de tension et mesure de tension » |
+| ARC-010 « Bouton » | TI-009 « Bouton, voyant RGB et avertisseur » |
+| ARC-011 « Voyant RGB et avertisseur sonore » | TI-009 « Bouton, voyant RGB et avertisseur » |
+| ARC-012 « Module radio Bluetooth à basse consommation » | TI-010 « Liaison Bluetooth à basse consommation » |
+| ARC-013 « Carte électronique, câblage et assemblage à la main » | TI-001 « Alimentation, programmation SWD et octets d'option » ; TI-003 « Hauteur du capteur à temps de vol et position de montage » ; TI-007 « Moteurs, poussée, masse et dimensions » |
+| ARC-014 « Bilan de masse, de poussée et d'autonomie » | TI-007 « Moteurs, poussée, masse et dimensions » ; TI-008 « Batterie, connecteur, chute de tension et mesure de tension » |
+| ARC-015 « Structure logicielle et ordonnancement » | TI-011 « Cadence du cycle et temps de réponse de l'arrêt d'urgence » ; TI-017 « Chaîne chien de garde vers moteurs » |
+| ARC-016 « Pilotes des capteurs et des sorties » | TI-012 « Chaîne capteurs vers estimation » ; TI-019 « Effets locaux sur les sorties » ; TI-020 « Trame radio de bout en bout » |
+| ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse » | TI-012 « Chaîne capteurs vers estimation » ; TI-013 « Boucle de contrôle sur potence » |
+| ARC-018 « Boucle de contrôle du vol » | TI-013 « Boucle de contrôle sur potence » ; TI-015 « Armement, lancer et démarrage des moteurs » ; TI-023 « Mode réglage et vol de réglage » |
+| ARC-019 « Machine à états du drone » | TI-014 « Chaîne bouton, machine à états, effets » ; TI-015 « Armement, lancer et démarrage des moteurs » ; TI-016 « Coupures automatiques et sous-tension » ; TI-018 « Initialisation et échec d'initialisation » ; TI-021 « Arrêt sans fil et filtrage des commandes par état » ; TI-023 « Mode réglage et vol de réglage » |
+| ARC-020 « Gestion logicielle du bouton » | TI-011 « Cadence du cycle et temps de réponse de l'arrêt d'urgence » ; TI-014 « Chaîne bouton, machine à états, effets » |
+| ARC-021 « Surveillance et coupures automatiques » | TI-016 « Coupures automatiques et sous-tension » ; TI-021 « Arrêt sans fil et filtrage des commandes par état » |
+| ARC-022 « Chien de garde » | TI-017 « Chaîne chien de garde vers moteurs » ; TI-024 « Paramètres, flash et programmation » |
+| ARC-023 « Initialisation et échec d'initialisation » | TI-018 « Initialisation et échec d'initialisation » |
+| ARC-024 « Effets locaux (logiciel) » | TI-014 « Chaîne bouton, machine à états, effets » ; TI-019 « Effets locaux sur les sorties » |
+| ARC-025 « Protocole et service du statut sans fil » | TI-020 « Trame radio de bout en bout » ; TI-021 « Arrêt sans fil et filtrage des commandes par état » ; TI-022 « Logiciel d'essai relié au drone » |
+| ARC-026 « Mode réglage et vol de réglage » | TI-023 « Mode réglage et vol de réglage » ; TI-024 « Paramètres, flash et programmation » |
+| ARC-027 « Paramètres de vol et stockage des réglages » | TI-024 « Paramètres, flash et programmation » |
+| ARC-028 « Logiciel d'essai de l'appareil de suivi » | TI-022 « Logiciel d'essai relié au drone » |
+| ARC-029 « Plan de livraison par jalons » | TI-025 « Livraison par jalons » |
+| ARC-030 « Page de consignes d'emploi » | TI-027 « Cohérence de la page de consignes avec le drone » |
 
 ## Recettes (TA)
 
@@ -447,3 +482,197 @@ Chaque recette vérifie des besoins en rejouant un scénario complet, avec un dr
 **Procédure :** débrancher la batterie à la main, sans outil.
 **Résultat attendu :** batterie débranchée en 10 s au plus, connecteur accessible malgré les protège-hélices.
 **Statut :** Écrit
+
+## Tests d'intégration (TI)
+
+Chaque test d'intégration vérifie un ou plusieurs éléments de « Architecture » — `projets/boomrone/03-architecture.md` (interfaces, chaînes complètes), défini en même temps que l'élément (27 TI pour 30 éléments). Ils s'exécutent avant les tests système, sur le banc ou le prototype ; aucun n'est exécuté. Les dix premiers sont matériels, les quinze suivants logiciels (et interfaces), les deux derniers couvrent l'ensemble et les consignes.
+
+### TI-001 — Alimentation, programmation SWD et octets d'option
+**Réfs amont :** ARC-002 « Microcontrôleur et programmation par liaison SWD » ; ARC-009 « Alimentation de la logique et mesure de la tension » ; ARC-013 « Carte électronique, câblage et assemblage à la main »
+**Préconditions :** carte montée sans capteurs, alimentation de laboratoire 0 à 5 V limitée à 200 mA, multimètre, ST-LINK, STM32CubeProgrammer.
+**Procédure :** alimenter à 3,7 V et à 4,2 V et mesurer le rail logique ; programmer en SWD (NRST câblée), chronométrer, lire les octets d'option ; lire VDDA par VREFINT ; redémarrer.
+**Résultat attendu :** rail 3,0 V ±2 % ; programmation en moins de 5 min, 3 fois de suite ; IWDG_SW = 0 et BOR_LEV = 3 ; VDDA calculé à ±1 % du multimètre ; démarrage normal à chaque cycle.
+**Statut :** Écrit
+
+### TI-002 — Bus SPI, I2C et capteurs
+**Réfs amont :** ARC-002 « Microcontrôleur et programmation par liaison SWD » ; ARC-003 « Centrale inertielle » ; ARC-004 « Capteur de hauteur à temps de vol » ; ARC-005 « Capteur de flux optique »
+**Préconditions :** carte avec IMU, ToF et flux câblés, programme d'essai qui lit des registres, analyseur logique.
+**Procédure :** lire l'identifiant du LSM6DSO sur SPI1, du VL53L1X sur I2C1, du PMW3901 sur SPI2 ; mesurer les horloges ; faire fonctionner les trois bus ensemble 1 min.
+**Résultat attendu :** identifiants conformes aux fiches techniques (valeurs vérifiées dans les fiches) ; plage de ±2000 °/s, ±8 g et débit de 1,66 kHz relus dans la centrale ; aucune erreur de bus sur 1 min ; SPI1 à 8 MHz, SPI2 à 2 MHz au plus, I2C à 400 kHz.
+**Statut :** Écrit
+
+### TI-003 — Hauteur du capteur à temps de vol et position de montage
+**Réfs amont :** ARC-004 « Capteur de hauteur à temps de vol » ; ARC-013 « Carte électronique, câblage et assemblage à la main »
+**Préconditions :** drone monté, sol clair uni, règle, ToF en mode long.
+**Procédure :** mesurer à 5, 10, 20, 50, 100 et 150 cm au-dessus du sol ; tenir le drone à 2,5 cm du sol et lire la valeur, puis le poser et lire la valeur au contact ; incliner à 15° et 30° ; vérifier que rien ne coupe le cône.
+**Résultat attendu :** erreur d'au plus 2 cm de 5 à 100 cm ; lecture brute de 45 à 50 mm quand le drone est tenu à 2,5 cm du sol (coupure), soit hauteur = lecture moins 20 mm ; hauteur corrigée à ±1 cm à 15° ; cône libre.
+**Statut :** Écrit
+
+### TI-004 — Flux optique et vitesse horizontale
+**Réfs amont :** ARC-005 « Capteur de flux optique » ; ARC-004 « Capteur de hauteur à temps de vol » ; ARC-003 « Centrale inertielle »
+**Préconditions :** drone sur chariot ou potence, sol texturé puis sol uni, éclairage 300 lux, règle.
+**Procédure :** déplacer le drone de 0,5 m à 0,3 m/s à 0,5 m puis 1 m de hauteur ; répéter sur sol uni ; comparer à la vitesse réelle.
+**Résultat attendu :** vitesse mesurée à ±0,1 m/s sur sol texturé ; qualité faible détectée sur sol uni (vitesse déclarée invalide) ; aucune valeur à moins de 80 mm.
+**Statut :** Écrit
+
+### TI-005 — Moteurs coupés par le matériel
+**Réfs amont :** ARC-007 « Étage de puissance des moteurs coupés par défaut » ; ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Préconditions :** hélices démontées, oscilloscope sur une grille et un drain, alimentation de laboratoire, programme d'essai qui lance un PWM à 50 %.
+**Procédure :** lancer le PWM puis appuyer sur NRST ; couper l'alimentation ; descendre la tension sous le BOR ; mesurer le rappel de chaque grille hors tension ; rebrancher plusieurs fois (rebond).
+**Résultat attendu :** grille sous 1 V en moins de 100 µs après le reset ; aucun moteur ne tourne après un reset ou un rebranchement ; rappels de 100 kΩ ±5 % sur les 4 grilles ; aucune impulsion de grille supérieure à 1 V au démarrage.
+**Statut :** Écrit
+
+### TI-006 — Coupures par chien de garde et par sous-tension du microcontrôleur
+**Réfs amont :** ARC-002 « Microcontrôleur et programmation par liaison SWD » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » ; ARC-009 « Alimentation de la logique et mesure de la tension »
+**Préconditions :** hélices démontées, analyseur logique, alimentation de laboratoire programmable, programme d'essai qui se bloque ou retarde le démarrage des moteurs.
+**Procédure :** bloquer le logiciel moteurs en marche (20 essais) ; dépasser 500 ms en phase Lancé ; abaisser la batterie de 4,2 V à 2,4 V lentement puis par creux de 50 ms et de 150 ms ; écrire une page de flash.
+**Résultat attendu :** PWM coupé en moins de 130 ms après le dernier rafraîchissement (jamais plus de 200 ms) ; phase Lancé coupée en 700 ms au plus après le relâchement ; BOR à 2,5 V ±0,1 V à la descente ; aucun redémarrage de moteur ; pas de reset parasite pendant l'écriture de flash.
+**Statut :** Écrit
+
+### TI-007 — Moteurs, poussée, masse et dimensions
+**Réfs amont :** ARC-006 « Moteurs, hélices et protège-hélices » ; ARC-014 « Bilan de masse, de poussée et d'autonomie » ; ARC-013 « Carte électronique, câblage et assemblage à la main »
+**Préconditions :** 4 moteurs, hélices, anneaux, batterie, balance de cuisine, wattmètre, pied à coulisse, calibre de 12 mm, drone monté.
+**Procédure :** mesurer poussée et courant par moteur à 50, 75 et 100 % de PWM ; mesurer la poussée totale et le courant à poussée égale au poids ; peser le drone ; mesurer l'encombrement ; passer le calibre sur le pourtour.
+**Résultat attendu :** poussée par moteur d'au moins 20 g à 100 % (sinon repli du bilan) ; poussée totale d'au moins 1,3 fois la masse ; masse d'au plus 100 g ; volume d'au plus 100 × 100 × 50 mm ; calibre sans contact avec une hélice ; courant de stationnaire relevé et comparé à l'estimation de 5,5 A (écart supérieur à 30 % : bilan à refaire).
+**Statut :** Écrit
+
+### TI-008 — Batterie, connecteur, chute de tension et mesure de tension
+**Réfs amont :** ARC-008 « Batterie et connecteur débranchable » ; ARC-009 « Alimentation de la logique et mesure de la tension » ; ARC-014 « Bilan de masse, de poussée et d'autonomie »
+**Préconditions :** batterie à 3,7 V puis 3,9 V à vide, moteurs sur banc avec hélices, oscilloscope sur la batterie, multimètre étalon, chronomètre.
+**Procédure :** mesurer la résistance interne (chute à 5 A) ; faire 30 s de moteurs depuis 3,7 V puis 3,9 V avec une crête de 2 s et tracer la tension ; comparer la mesure ADC au multimètre de 3,0 à 4,2 V ; débrancher à la main.
+**Résultat attendu :** résistance totale d'au plus 60 mΩ (estimation 55 mΩ) ; tension sous charge restant sous 3,3 V moins de 100 ms depuis 3,7 V, sinon repli R1 + R2 proposé à l'utilisateur (DEC-229 « Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte ») ; écart ADC / multimètre d'au plus ±40 mV ; débranchement en moins de 10 s sans outil ; connecteur à moins de 10 °C d'échauffement après 30 s à 5,5 A.
+**Statut :** Écrit
+
+### TI-009 — Bouton, voyant RGB et avertisseur
+**Réfs amont :** ARC-010 « Bouton » ; ARC-011 « Voyant RGB et avertisseur sonore »
+**Préconditions :** carte avec bouton, LED et buzzer, générateur d'impulsions, sonomètre, luxmètre, oscilloscope.
+**Procédure :** envoyer des impulsions de 6 ms et de 14 ms au bouton ; mesurer le délai bouton vers coupure du PWM ; allumer chaque couleur, mesurer courant et luminosité à 1 m à 300 lux ; mesurer le niveau du buzzer à 1 m.
+**Résultat attendu :** 6 ms ignorée, 14 ms prise en compte ; délai d'au plus 15 ms depuis l'appui ; courant LED de 6 à 24 mA selon la batterie ; couleurs distinguables à 1 m ; buzzer d'au moins 55 dB à 1 m (fond d'au plus 45 dB).
+**Statut :** Écrit
+
+### TI-010 — Liaison Bluetooth à basse consommation
+**Réfs amont :** ARC-012 « Module radio Bluetooth à basse consommation » ; ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Préconditions :** module HM-10 câblé sur USART2, ordinateur avec adaptateur BLE et logiciel d'essai, mètre, drone moteurs coupés puis moteurs en marche sur banc.
+**Procédure :** se connecter sans appairage ; émettre 2 trames par seconde pendant 5 min puis 10 par seconde ; mesurer la perte à 1, 3 et 5 m moteurs coupés puis en marche ; envoyer la commande Arrêt moteurs en marche et mesurer le délai ; mesurer le courant du module.
+**Résultat attendu :** connexion sans configuration à 9600 bauds ; perte d'au plus 1 % jusqu'à 5 m ; délai de bout en bout de l'arrêt d'au plus 200 ms, sinon DOU-137 « Latence de bout en bout de l'arrêt sans fil sur Bluetooth » est traité ; courant du module relevé (estimation 9 mA).
+**Statut :** Écrit
+
+### TI-011 — Cadence du cycle et temps de réponse de l'arrêt d'urgence
+**Réfs amont :** ARC-015 « Structure logicielle et ordonnancement » ; ARC-020 « Gestion logicielle du bouton »
+**Préconditions :** carte réelle, analyseur logique sur le bouton, le tick et la commande des moteurs, compteur de cycles DWT activé.
+**Procédure :** moteurs en marche sur le banc, hélices démontées ; 20 appuis hors garde ; relever la période du tick et le temps de calcul sur 60 s.
+**Résultat attendu :** période 1,000 ms ±5 µs ; cycle de moins de 300 µs sans dépassement ; arrêt en 15 ms au plus après le début de l'appui (front brut) ; tension de grille sous 1 V après `motors_cut()` forcé pendant une phase PWM à l'état haut.
+**Statut :** Écrit
+
+### TI-012 — Chaîne capteurs vers estimation
+**Réfs amont :** ARC-016 « Pilotes des capteurs et des sorties » ; ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse »
+**Préconditions :** table tournante ou potence, règle graduée, trace série, ST-LINK.
+**Procédure :** incliner à 0°, 15°, 30° et 60° ; élever le drone sous le ToF de 0,3 à 1,5 m ; défiler une surface sous le flux à 0,3 m/s ; provoquer trois erreurs de bus d'affilée.
+**Résultat attendu :** inclinaison à ±2° ; hauteur à ±3 cm ; vitesse à ±0,1 m/s ; stationnaire déclaré seulement avec 15°, 0,3 m/s et 0,3 m tenus 10 cycles ; trois erreurs de bus d'affilée, ou capteur de hauteur débranché 200 ms moteurs en marche (banc), coupent les moteurs.
+**Statut :** Écrit
+
+### TI-013 — Boucle de contrôle sur potence
+**Réfs amont :** ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse » ; ARC-018 « Boucle de contrôle du vol »
+**Préconditions :** potence à deux axes, batterie d'au moins 3,8 V, protège-hélices montés ou hélices démontées, journal des commandes.
+**Procédure :** incliner le drone de 10° sur chaque axe ; changer la hauteur visée ; observer les 4 commandes moteur.
+**Résultat attendu :** les commandes s'opposent à l'inclinaison ; saturation de 0 à 100 % ; aucune oscillation de plus de 5° ; réponse en hauteur stable en 3 s ; mêmes résultats avec les gains aux coins des bornes (0,5 et 2,0).
+**Statut :** Écrit
+
+### TI-014 — Chaîne bouton, machine à états, effets
+**Réfs amont :** ARC-019 « Machine à états du drone » ; ARC-020 « Gestion logicielle du bouton » ; ARC-024 « Effets locaux (logiciel) »
+**Préconditions :** carte réelle avec voyant et buzzer, logiciel d'essai, chronomètre ou analyseur logique.
+**Procédure :** appuis de 0,5 s, 1,5 s, 2,5 s (prêt, puis non prêt) et 11 s ; après le relâchement armé, appuis brefs pendant les 0,5 s de garde puis appui maintenu au-delà ; impulsions de 6 ms et de 14 ms ; appui tenu à chaque retour à l'attente.
+**Résultat attendu :** chaque effet attendu au bon seuil (±0,1 s) ; appuis brefs pendant la garde sans effet, appui maintenu à la fin de la garde coupe en 50 ms au plus ; impulsion de 6 ms ignorée, de 14 ms prise en compte ; appui en cours ignoré jusqu'au relâchement.
+**Statut :** Écrit
+
+### TI-015 — Armement, lancer et démarrage des moteurs
+**Réfs amont :** ARC-018 « Boucle de contrôle du vol » ; ARC-019 « Machine à états du drone »
+**Préconditions :** banc moteurs, analyseur logique sur le bouton et une sortie moteur.
+**Procédure :** armer puis relâcher ; 10 mises sous tension, 10 coupures suivies de redémarrages, 10 appuis de moins de 2 s.
+**Résultat attendu :** moteurs à 200 ms ±50 ms du relâchement ; effet Lancé et vol en moins de 50 ms ; aucun démarrage hors des deux cas autorisés.
+**Statut :** Écrit
+
+### TI-016 — Coupures automatiques et sous-tension
+**Réfs amont :** ARC-019 « Machine à états du drone » ; ARC-021 « Surveillance et coupures automatiques »
+**Préconditions :** alimentation de laboratoire programmable, banc, analyseur logique.
+**Procédure :** forcer chaque cause (stationnaire absent, basculement à 55° et 65°, atterrissage retenu) ; baisser la tension lentement puis par creux de 50 ms et de 150 ms dans quatre états.
+**Résultat attendu :** coupure en 100 ms au plus après chaque cause ; sous-tension coupée en 250 ms au plus ; creux de 50 ms sans coupure ; échec d'initialisation après sous-tension, bouton sans effet.
+**Statut :** Écrit
+
+### TI-017 — Chaîne chien de garde vers moteurs
+**Réfs amont :** ARC-015 « Structure logicielle et ordonnancement » ; ARC-022 « Chien de garde »
+**Préconditions :** version d'essai avec boucle infinie commandée, banc moteurs, analyseur logique, mesure de la tension des grilles.
+**Procédure :** bloquer la boucle moteurs en marche ; retarder le démarrage au-delà de 500 ms en phase Lancé ; lire la cause de reset.
+**Résultat attendu :** moteurs coupés en 200 ms au plus après le dernier cycle correct ; phase Lancé coupée en 700 ms au plus après le relâchement ; après le reset, drone verrouillé et cause « chien de garde » lue ; délai réel du chien de garde relevé.
+**Statut :** Écrit
+
+### TI-018 — Initialisation et échec d'initialisation
+**Réfs amont :** ARC-019 « Machine à états du drone » ; ARC-023 « Initialisation et échec d'initialisation »
+**Préconditions :** carte, table plate, plateau incliné à 20°, ST-LINK, logiciel d'essai.
+**Procédure :** mise sous tension à plat, secouée, inclinée, bouton tenu ; reset du chien de garde en mouvement ; bouton enfoncé pendant l'initialisation ; commandes radio après l'échec ; redémarrage en chute libre simulée.
+**Résultat attendu :** initialisation complète en 3 s au plus sans reset du chien de garde (cause de reset = mise sous tension seule) ; reset par brown-out avec le bouton tenu : pas de mode réglage ; échec si mouvement ou inclinaison de plus de 15° ; mode réglage seulement après une mise sous tension ; aucun effet des commandes après l'échec ; moteurs jamais armés.
+**Statut :** Écrit
+
+### TI-019 — Effets locaux sur les sorties
+**Réfs amont :** ARC-016 « Pilotes des capteurs et des sorties » ; ARC-024 « Effets locaux (logiciel) »
+**Préconditions :** voyant RGB, buzzer, oscilloscope, fiche des 10 effets, pièce à 300 lux.
+**Procédure :** jouer les 10 effets sur le banc, moteurs arrêtés puis en marche ; mesurer durées et rythmes.
+**Résultat attendu :** événements d'au moins 0,5 s (1,0 s attendu) ; son inhibé moteurs en marche ; rythmes à ±5 % ; 10 effets reconnus à 1 m, aussi avec la batterie à 3,4 V ; son d'un effet d'événement émis au plus 300 ms après la coupure.
+**Statut :** Écrit
+
+### TI-020 — Trame radio de bout en bout
+**Réfs amont :** ARC-016 « Pilotes des capteurs et des sorties » ; ARC-025 « Protocole et service du statut sans fil »
+**Préconditions :** HM-10, ordinateur avec le logiciel d'essai, analyseur logique sur l'UART.
+**Procédure :** enregistrer 60 s de statut et de variables ; injecter des octets parasites et un CRC faux ; connecter deux appareils.
+**Résultat attendu :** statut à 2 Hz au moins et à chaque changement ; variables à 10 Hz au moins ; trame de 14 octets au plus ; trames altérées rejetées, resynchronisation en moins de 2 trames.
+**Statut :** Écrit
+
+### TI-021 — Arrêt sans fil et filtrage des commandes par état
+**Réfs amont :** ARC-019 « Machine à états du drone » ; ARC-021 « Surveillance et coupures automatiques » ; ARC-025 « Protocole et service du statut sans fil »
+**Préconditions :** banc moteurs, logiciel d'essai, analyseur logique sur l'UART et les moteurs.
+**Procédure :** envoyer chacune des 4 commandes dans chacune des 4 familles d'états ; mesurer le délai entre la fin de la trame Arrêt et la coupure.
+**Résultat attendu :** les 16 cases du tableau de REQ-023 « Commandes sans fil selon l'état du drone » respectées ; coupure en 5 ms au plus après la fin de la trame côté drone ; délai de bout en bout d'au plus 200 ms, sinon DOU-137 « Latence de bout en bout de l'arrêt sans fil sur Bluetooth » est traité.
+**Statut :** Écrit
+
+### TI-022 — Logiciel d'essai relié au drone
+**Réfs amont :** ARC-025 « Protocole et service du statut sans fil » ; ARC-028 « Logiciel d'essai de l'appareil de suivi »
+**Préconditions :** HM-10 sur le drone, ordinateur avec bleak, simulateur de drone.
+**Procédure :** lancer le script ; lire statut et variables ; envoyer chaque commande ; couper la liaison puis reconnecter.
+**Résultat attendu :** affichage des 17 codes, des causes, des 4 paramètres et des variables ; commandes reçues ; reconnexion en 10 s au plus ; vecteurs CRC8 identiques en C et en Python.
+**Statut :** Écrit
+
+### TI-023 — Mode réglage et vol de réglage
+**Réfs amont :** ARC-018 « Boucle de contrôle du vol » ; ARC-019 « Machine à états du drone » ; ARC-026 « Mode réglage et vol de réglage »
+**Préconditions :** banc ou potence, logiciel d'essai, batterie à 3,6 V puis 3,8 V.
+**Procédure :** bouton tenu au branchement ; Décoller avec batterie basse, bouton enfoncé, puis valide ; liaison coupée en vol ; appui du bouton en vol.
+**Résultat attendu :** refus avec cause ; moteurs immédiats ; stationnaire de réglage 3,0 s ±0,5 s ; vol terminé malgré le lien perdu ; bouton coupe sans garde ; retour au mode réglage sans verrouillage.
+**Statut :** Écrit
+
+### TI-024 — Paramètres, flash et programmation
+**Réfs amont :** ARC-022 « Chien de garde » ; ARC-026 « Mode réglage et vol de réglage » ; ARC-027 « Paramètres de vol et stockage des réglages »
+**Préconditions :** ST-LINK, ordinateur, alimentation de laboratoire, analyseur logique, logiciel d'essai.
+**Procédure :** Modifier chaque paramètre dans et hors des bornes ; Sauvegarder à 3,4 V et à 3,8 V ; débrancher en cours d'écriture ; reprogrammer ; relire.
+**Résultat attendu :** valeur de Modifier relue dans le statut en 100 ms au plus ; valeurs saturées aux bornes ; sauvegarde refusée sous 3,5 V ; durée de 100 ms au plus, chien de garde rafraîchi ; après une coupure en cours d'écriture, valeurs lues dans les bornes (sinon valeurs d'origine) ; valeurs d'origine après programmation, en 5 min au plus.
+**Statut :** Écrit
+
+### TI-025 — Livraison par jalons
+**Réfs amont :** ARC-029 « Plan de livraison par jalons »
+**Préconditions :** trois images produites (J1, J2, J3), carte, ST-LINK.
+**Procédure :** programmer chaque jalon ; rejouer le vol normal ; vérifier l'effet des commandes radio ; en J1, tenir le bouton au branchement.
+**Résultat attendu :** J1 vole sans radio ; J2 ajoute statut, variables et Arrêt et ignore les autres commandes ; J3 apporte le mode réglage ; en J1 le bouton tenu au branchement donne l'état Allumé (mode réglage inaccessible) ; aucun démarrage des moteurs hors du premier cas en J1 et J2.
+**Statut :** Écrit
+
+### TI-026 — Intégration d'ensemble du prototype
+**Réfs amont :** ARC-001 « Structure générale du drone »
+**Préconditions :** prototype assemblé, banc, batterie à 3,9 V, logiciel d'essai, jalon J1 puis J3.
+**Procédure :** brancher, armer, lancer sur le banc (hélices démontées) puis en vol de réglage ; débrancher la batterie à chaque état de la machine.
+**Résultat attendu :** les moteurs ne tournent que dans les deux cas autorisés ; débranchement ou reset coupent toujours les moteurs ; le drone rebranché est verrouillé en Allumé ou en échec d'initialisation.
+**Statut :** Écrit
+
+### TI-027 — Cohérence de la page de consignes avec le drone
+**Réfs amont :** ARC-030 « Page de consignes d'emploi »
+**Préconditions :** page de consignes, prototype, chronomètre.
+**Procédure :** exécuter chaque consigne de la page (quatre réflexes, débrancher après un échec, programmer hélices démontées) sur le prototype.
+**Résultat attendu :** chaque consigne est réalisable et son résultat décrit est observé ; la page tient en une face A4 et 60 lignes.
+**Statut :** Écrit
+
