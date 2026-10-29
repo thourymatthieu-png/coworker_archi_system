@@ -110,6 +110,7 @@ Légende du diagramme a :
 - Un appui de moins de 1 s au milieu d'une série remet le compteur à zéro.
 - « Vol stationnaire » exige d'être en l'air, au-dessus de la hauteur minimale.
 - Après « Posé », le signal « Allumé » est donné au retour à l'attente (diagramme b).
+- La sous-tension de la batterie (SCN-012 « Dégradé : sous-tension de la batterie ») mène à « Éteint » depuis tout état sous tension (« Initialisation en cours », « Allumé », appuis, « Armé », « Lancé », vol normal) ; seules les flèches de coupure d'alimentation sont dessinées, pour ne pas surcharger le diagramme.
 - Le chien de garde couvre aussi « Lancé », qui a une durée maximale ; coupure d'alimentation (dont la sous-tension de la batterie : SCN-012 « Dégradé : sous-tension de la batterie »), logiciel bloqué ou durée dépassée mènent à « Éteint » (diagramme b).
 - Après un redémarrage, « Allumé » seulement si le drone est immobile et à plat, sinon « Échec d'initialisation », définitif jusqu'au débranchement ; le bouton y est ignoré pour toujours après le premier relâchement, sans effet ni signal (DEC-117 « Bouton en échec d'initialisation : ignoré pour toujours après le premier relâchement, aucun effet ni signal »).
 - Le bouton encore enfoncé après un refus, un désarmement ou un posé est traité dans le diagramme b.
@@ -265,6 +266,7 @@ Légende du diagramme c :
 - Décoller ne vérifie que la batterie ; refusée, elle donne le signal « Refus », cause précise sur le statut sans fil, lisible jusqu'à la commande suivante, et le drone reste en « Mode réglage, moteurs coupés ».
 - Les phases du vol de réglage donnent les signaux du vol normal ; la pose passe par l'atterrissage : signal « Atterrissage », puis signal « Posé » (DEC-107 « Vol de réglage : signaux des phases du vol normal, acquittement des commandes par le statut sans fil seulement »).
 - Les moteurs sont coupés au plus 15 s après le décollage.
+- La sous-tension de la batterie (SCN-012 « Dégradé : sous-tension de la batterie ») mène à « Éteint » depuis « Mode réglage, moteurs coupés » comme depuis le vol de réglage ; seule la flèche du vol de réglage est dessinée.
 - Le bouton appuyé en vol de réglage est un arrêt d'urgence, pris en compte tout de suite, sans garde.
 - Un lien sans fil perdu n'a aucun effet : le vol de réglage suit son cours, sans état ni signal propre.
 - Une coupure d'alimentation ou un logiciel bloqué arrête les moteurs et mène à « Éteint ».
