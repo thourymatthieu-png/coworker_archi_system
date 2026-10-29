@@ -1051,6 +1051,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** (aucun) ; échéance « avant les besoins » fixée pour DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m », DOU-058 « Valeurs d'origine, bornes numériques, tolérance d'immobile et durées à fixer en architecture » (en partie) et DOU-101 « Tolérance d'immobile à l'armement sur un drone tenu en main : faisabilité du cas nominal »
 **Précise :** DEC-052 « Valeurs provisoires retenues pour les scénarios, à confirmer avant les exigences » et DEC-010 « Plage de lancer : toute orientation, 0,5 à 4 m/s, au moins 1,5 m du sol ».
 **Précisée par :** DEC-122 « Jalon avant les besoins : promesse de l'architecte, sans modification de l'outil de porte » le 2026-10-28 (le jalon reste une promesse de l'architecte, sans modification de l'outil de porte).
+**Modifiée par :** DEC-137 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée » et DEC-138 « Tolérance d'immobile et part de DOU-058 liée à la faisabilité : jalon déplacé aux essais » le 2026-10-28 (jalon « avant les besoins » abandonné, validation par essais sur prototype).
 
 ### DEC-115 — Troisième appui encore maintenu à l'entrée en mode réglage : maintien ignoré jusqu'au premier relâchement
 **Date :** 2026-10-28
@@ -1115,6 +1116,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-099 « Paramètres de vol sans borne : modification en vol et sauvegarde par un tiers »
 **Précise :** DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée », DEC-039 « Réglages : coupures valables en vol de réglage, aucune borne, modifiables aussi en vol normal », DEC-066 « Commande sans fil corrompue : aucun contrôle d'intégrité » et DEC-037 « Pas d'appairage : le drone obéit à tout appareil de suivi à portée ».
+**Précisée par :** DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine » le 2026-10-28 (la reprogrammation réécrit la zone des réglages : DOU-110 « La reprogrammation efface-t-elle la zone des réglages sauvegardés ? » levé).
 
 ### DEC-122 — Jalon avant les besoins : promesse de l'architecte, sans modification de l'outil de porte
 **Date :** 2026-10-28
@@ -1124,6 +1126,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-104 « Jalon avant les besoins non contrôlé par l'outil de porte »
 **Précise :** DEC-114 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : analyse avant les besoins, plage de lancer à revoir ».
+**Modifiée par :** DEC-137 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée » et DEC-138 « Tolérance d'immobile et part de DOU-058 liée à la faisabilité : jalon déplacé aux essais » le 2026-10-28 (plus aucun doute n'a l'échéance « avant les besoins »).
 
 ### DEC-123 — Sauvegarder ignorée aussi à l'état Premier appui validé
 **Date :** 2026-10-28
@@ -1202,6 +1205,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** DOU-059 « Sauvegarde des réglages : écriture en vol, coupure pendant l'écriture, mémoire jamais écrite » (point (c) ; les autres points sont répondus par les décisions de la même série)
 **Précise :** DEC-036 « Drone neuf : valeurs d'origine fixes du logiciel, sans signal » et DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée ».
+**Précisée par :** DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine » le 2026-10-29 (la programmation écrit la zone avec les valeurs d'origine ; propagation : DEC-141 « Reprogrammation : propagation de DEC-139 aux scénarios et au registre des risques »).
 
 ### DEC-131 — Sauvegarder ignorée en vol : confirmation du tableau des commandes
 **Date :** 2026-10-28
@@ -1248,6 +1252,7 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28.
 **Doutes levés :** (aucun)
 **Précise :** DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre ».
+**Maintenue par :** DEC-140 « Chute brutale sur sous-tension maintenue en connaissance de cause, sans seuil d'alerte » le 2026-10-29 (la raison d'écarter l'atterrissage doux a changé, DEC-013 « Pas de contrôle de la batterie en vol » étant modifiée par DEC-134 « Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension »).
 
 ### DEC-136 — Écriture de réglages commencée à l'état Allumé et encore en cours au relâchement du lancer : risque accepté
 **Date :** 2026-10-28
@@ -1285,5 +1290,23 @@ Format (exemple, non analysé) :
 **Raison :** réponse de l'utilisateur en chat, 2026-10-28 (option recommandée par l'architecte).
 **Doutes levés :** DOU-110 « La reprogrammation efface-t-elle la zone des réglages sauvegardés ? »
 **Précise :** DEC-121 « Paramètres de vol aberrants envoyés et sauvegardés par un tiers : risque accepté, reprogrammation seule ».
+
+### DEC-140 — Chute brutale sur sous-tension maintenue en connaissance de cause, sans seuil d'alerte
+**Date :** 2026-10-29
+**Concerne :** SCN-012 « Dégradé : sous-tension de la batterie » et SCN-001 « Vol nominal : de la batterie au posé »
+**Décision :** DEC-135 « Chute en vol sur sous-tension, sans signal, avec des personnes dessous : risque accepté » est maintenue après rappel que DEC-134 « Coupure sur sous-tension en vol assumée par le logiciel : le drone surveille la tension » a modifié DEC-013 « Pas de contrôle de la batterie en vol », qui était l'une des raisons d'écarter l'atterrissage doux. Aucun seuil d'alerte au-dessus du seuil de coupure, aucun atterrissage normal sur batterie faible : le drone coupe les moteurs sous le seuil de sous-tension, sans signal propre. La raison d'écarter l'atterrissage doux n'est plus « pas de contrôle de la batterie en vol » : c'est le choix explicite de l'utilisateur, qui connaît le risque pour les personnes dessous.
+**Alternatives écartées :** seuil d'alerte supérieur au seuil de coupure déclenchant l'atterrissage normal de SCN-001 « Vol nominal : de la batterie au posé », sans nouveau signal (option recommandée par l'architecte : moins de chutes sur des personnes, mais SCN-012 « Dégradé : sous-tension de la batterie » à compléter et deux seuils à fixer, lié à DOU-108 « Rapport entre le seuil d'armement et le seuil de sous-tension, affaissement de tension au démarrage des moteurs »).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-29, option « Maintenir la chute brutale » choisie après exposé des options.
+**Doutes levés :** (aucun)
+**Précise :** DEC-135 « Chute en vol sur sous-tension, sans signal, avec des personnes dessous : risque accepté ».
+
+### DEC-141 — Reprogrammation : propagation de DEC-139 aux scénarios et au registre des risques
+**Date :** 2026-10-29
+**Concerne :** SCN-008 « Mise en service : programmation du drone »
+**Décision :** DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine » est propagée : SCN-008 « Mise en service : programmation du drone » dit que la programmation réécrit la zone des réglages avec les valeurs d'origine et que les réglages sauvegardés sont perdus ; DEC-130 « Mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté » est notée précisée par DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine » ; les lignes 21 et 34 de « Risques acceptés » — `projets/boomrone/risques-acceptes.md` renvoient à DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine » (sur un drone programmé, la mémoire jamais écrite ne subsiste que si la programmation n'écrit pas la zone). Propagation de forme, sans changer le fond de DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine ».
+**Alternatives écartées :** laisser DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine » connue du seul journal (incohérence persistante entre DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine », DEC-130 « Mémoire jamais écrite : aucune détection, valeurs d'origine fixes du logiciel, risque accepté » et SCN-008 « Mise en service : programmation du drone »).
+**Raison :** réponse de l'utilisateur en chat, 2026-10-29, option « Oui, propager » (recommandée par l'architecte).
+**Doutes levés :** (aucun)
+**Précise :** DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine ».
 
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
