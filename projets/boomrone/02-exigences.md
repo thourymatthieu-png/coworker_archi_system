@@ -1,7 +1,7 @@
 # Exigences système
 
 > **Aperçu**
-> - 41 exigences système actives pour les 13 besoins validés (45 numéros, dont quatre exigences fusionnées et abandonnées, listées sous le tableau récapitulatif : DEC-216 « Fusions de simplicité et sous-tension en échec d'initialisation : retouches finales de la porte exigences »), chiffrées (valeur, tolérance, méthode) ou binaires (fait ou pas fait) et sans solution technique ; statut « Proposé », porte « exigences » à franchir sur accord explicite de l'utilisateur.
+> - 41 exigences système actives pour les 13 besoins validés (45 numéros, dont quatre exigences fusionnées et abandonnées, listées sous le tableau récapitulatif : DEC-216 « Fusions de simplicité et sous-tension en échec d'initialisation : retouches finales de la porte exigences »), chiffrées (valeur, tolérance, méthode) ou binaires (fait ou pas fait) et sans solution technique ; statut « Validé », porte « exigences » franchie sur accord explicite de l'utilisateur (DEC-217 « Porte exigences franchie : accord explicite de l'utilisateur »).
 > - Rédigées par délégation (DEC-172 « Délégation de la phase exigences à l'architecte ») selon la ligne « simplicité » (DEC-173 « Ligne directrice de la phase exigences : simplicité, valeurs chiffrées, aucune solution ») ; six simplifications de scénarios adoptées (DEC-181 « Simplifications de l'annexe B tranchées : DOU-126 levé ») ; dix effets locaux au lieu de dix-sept signaux (DEC-176 « Simplification n°3 adoptée : dix effets locaux au lieu de dix-sept signaux ») ; corrigées après les relectures de la porte (DEC-195 « Relecture de porte exigences : corrections décidées par délégation, identifiants conservés »), puis simplifiées par quatre fusions (DEC-216 « Fusions de simplicité et sous-tension en échec d'initialisation : retouches finales de la porte exigences »).
 > - Chaque exigence active a au moins un test système (26 TS) dans « Plans de test » — `projets/boomrone/05-plans-de-test.md` ; les valeurs provisoires sont à valider aux essais sur prototype (annexe B).
 > - Lecture : vue d'ensemble, parcours, tableau récapitulatif, puis les exigences par groupe (A à J).
@@ -192,7 +192,7 @@ Exigences abandonnées (fusionnées, identifiants jamais réutilisés ; DEC-216 
 Au retour à l'attente après un Refus ou un Désarmement, l'appui en cours suit la règle de REQ-035 « Appui en cours à un changement d'état ».
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-001 « Anti-rebond et chronologie d'un appui ») : impulsions de 6 ms puis de 14 ms sur le bouton ; appuis de 0,5 s, 1,5 s, 2,5 s et 11 s au chronomètre ; un drone non prêt (batterie basse) pour le Refus.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-003 — Conditions de départ du drone
 **Réfs amont :** BES-004 « Ne pas voler quand le drone n'est pas prêt » ; BES-001 « Lancer le drone à la main »
@@ -206,7 +206,7 @@ Au retour à l'attente après un Refus ou un Désarmement, l'appui en cours suit
 Le cas de la commande Décoller est traité par REQ-041 « Conditions d'acceptation de la commande Décoller ».
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-002 « Conditions de départ et refus d'armement ») : cas chiffrés de rotation, de secousse, d'inclinaison et de tension (voir le test).
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-004 — Démarrage des moteurs 200 ms après le relâchement
 **Réfs amont :** BES-001 « Lancer le drone à la main »
@@ -214,7 +214,7 @@ Le cas de la commande Décoller est traité par REQ-041 « Conditions d'acceptat
 **Énoncé :** Le drone armé doit, quand le bouton est relâché après 2 s à 10 s d'appui, donner l'effet Lancé et vol au plus 50 ms après le relâchement, puis démarrer ses moteurs 200 ms après le relâchement (±50 ms), même s'il n'est pas lancé (le délai de 200 ms est décidé par l'utilisateur ; 50 ms et ±50 ms sont provisoires).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-003 « Démarrage des moteurs : délai et geste volontaire ») : oscilloscope ou analyseur logique sur le bouton et la commande des moteurs.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-005 — Démarrage des moteurs sur geste volontaire seulement
 **Réfs amont :** BES-004 « Ne pas voler quand le drone n'est pas prêt » ; BES-002 « Ne pas armer ni lancer par erreur » ; BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
@@ -227,7 +227,7 @@ Le cas de la commande Décoller est traité par REQ-041 « Conditions d'acceptat
 L'état du drone après une coupure relève de REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage ». Note de livraison : le second cas dépend du mode réglage, livré après (priorité Souhaitable) ; la règle reste vraie avec le seul premier cas.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-003 « Démarrage des moteurs : délai et geste volontaire ») : 10 mises sous tension, 10 coupures d'alimentation suivies d'un redémarrage, 10 appuis de moins de 2 s et une commande Décoller hors mode réglage ; moteurs jamais démarrés (0 sur 31).
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-035 — Appui en cours à un changement d'état
 **Réfs amont :** BES-002 « Ne pas armer ni lancer par erreur » ; BES-006 « Arrêter le drone en vol d'un geste »
@@ -241,7 +241,7 @@ L'état du drone après une coupure relève de REQ-010 « Verrouillage après un
 Cette règle est écrite ici seulement. Deux cas ne la suivent pas : la garde qui suit le lancer (REQ-015 « Garde du bouton après le lancer ») et le vol de réglage, sans garde (REQ-016 « Arrêt d'urgence par le bouton »).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-007 « Verrouillage après un posé, une coupure ou un redémarrage ») : bouton tenu enfoncé à chaque changement d'état de la liste, puis relâché ; aucun effet avant le relâchement ; le nouvel appui compte.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## B. Vol normal
 
@@ -258,7 +258,7 @@ Cette règle est écrite ici seulement. Deux cas ne la suivent pas : la garde qu
 La plage de vitesse, la hauteur de 1,5 m et le délai de 2,0 s sont décidés par l'utilisateur ; la rotation, le taux de 90 % et le nombre de 20 lancers sont provisoires.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-004 « Stabilisation après le lancer ») : 20 lancers variés, chronomètre ou caméra ; si l'essai échoue, la plage est à revoir (DEC-137 « Faisabilité du stationnaire en 2 secondes depuis 1,5 m : jalon déplacé aux essais, plage de lancer inchangée »).
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-007 — Critère de vol stationnaire
 **Réfs amont :** BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement »
@@ -266,7 +266,7 @@ La plage de vitesse, la hauteur de 1,5 m et le délai de 2,0 s sont décidés pa
 **Énoncé :** Le drone ne doit déclarer le vol stationnaire que lorsque, en même temps, son inclinaison est d'au plus 15°, sa vitesse d'au plus 0,3 m/s et la hauteur mesurée sous lui d'au moins 0,3 m (valeurs provisoires) ; un drone posé (hauteur de moins de 0,3 m) n'est jamais déclaré en vol stationnaire. Limite assumée : un drone tenu en main à plus de 0,3 m, immobile et à plat, remplit ce critère et peut se croire en vol stationnaire (ligne 38 de « Risques acceptés » — `projets/boomrone/risques-acceptes.md`).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-005 « Critère et tenue du vol stationnaire ») : drone posé moteurs en marche sur le banc, puis suspendu à 0,2 m et à 0,5 m, immobile et à plat, puis incliné à 20° et déplacé à 0,5 m/s ; relevé du statut sans fil.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-008 — Tenue du vol stationnaire
 **Réfs amont :** BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement »
@@ -278,7 +278,7 @@ La plage de vitesse, la hauteur de 1,5 m et le délai de 2,0 s sont décidés pa
 Les 10 s et l'objectif de 0,3 m sont décidés par l'utilisateur ; la tolérance de 0,5 s, la fenêtre de hauteur et la dérive de 0,5 m sont provisoires.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-005 « Critère et tenue du vol stationnaire ») : vidéo devant une règle graduée ou un quadrillage, 5 vols.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-009 — Atterrissage doux
 **Réfs amont :** BES-003 « Rester en vol stationnaire 10 s puis atterrir doucement »
@@ -286,7 +286,7 @@ Les 10 s et l'objectif de 0,3 m sont décidés par l'utilisateur ; la tolérance
 **Énoncé :** Avec les valeurs d'origine des paramètres (REQ-026 « Paramètres de vol réglables »), à la fin du stationnaire (10 s, ou 3 s en vol de réglage), le drone doit descendre sur place avec une vitesse d'au plus 0,5 m/s au contact du sol (provisoire), couper ses moteurs quand la hauteur mesurée passe à 2 à 3 cm et donner l'effet Posé, avant la coupure sur délai d'atterrissage de REQ-011 « Coupures automatiques en vol ».
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-006 « Atterrissage doux ») : vidéo à 120 images par seconde, 5 vols ; temps et vitesse de contact relevés.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## C. Coupures et arrêt
 
@@ -298,7 +298,7 @@ Les 10 s et l'objectif de 0,3 m sont décidés par l'utilisateur ; la tolérance
 - Sous-tension (REQ-012 « Coupure sur sous-tension de la batterie ») : dans tous les états, mode réglage compris, le drone encore alimenté reste dans l'état d'échec d'initialisation de REQ-037 « Comportement en échec d'initialisation » : bouton et commandes sans fil sans effet jusqu'à la mise hors tension.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-007 « Verrouillage après un posé, une coupure ou un redémarrage ») : après chaque cause de coupure, dont la sous-tension et le logiciel bloqué, moteurs arrêtés jusqu'à un appui complet ; en mode réglage, retour au mode réglage sauf après une sous-tension.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-011 — Coupures automatiques en vol
 **Réfs amont :** BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
@@ -314,7 +314,7 @@ Les 10 s et l'objectif de 0,3 m sont décidés par l'utilisateur ; la tolérance
 Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-008 « Coupures automatiques en vol ») : drone armé posé sur une table, hélices démontées ; drone retourné puis incliné à 55° et à 65° en stationnaire sur potence ; atterrissage retenu par un obstacle ; chronomètre ou analyseur logique.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-012 — Coupure sur sous-tension de la batterie
 **Réfs amont :** BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
@@ -323,7 +323,7 @@ Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 **Énoncé :** Dans tout état où il est sous tension, mode réglage compris, le drone doit couper ses moteurs au plus 250 ms après que la tension de la batterie est passée sous 3,3 V par élément, quand elle y reste 100 ms (±20 ms) ou plus ; un creux de moins de 80 ms ne doit pas provoquer la coupure. Le drone encore alimenté passe alors en échec d'initialisation (REQ-037 « Comportement en échec d'initialisation ») et donne l'effet Échec d'initialisation : il est inutilisable jusqu'à la mise hors tension (bouton sans effet, il faut débrancher la batterie). Valeurs provisoires.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-009 « Coupure sur sous-tension et marge de batterie ») : alimentation de laboratoire abaissée lentement puis par un creux de 50 ms et de 150 ms, dans quatre états (attente, armé, vol sur banc, mode réglage) ; après la coupure, effet Échec d'initialisation et bouton sans effet.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-013 — Marge de batterie pour un vol complet
 **Réfs amont :** BES-004 « Ne pas voler quand le drone n'est pas prêt »
@@ -332,7 +332,7 @@ Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 **Énoncé :** Un drone armé avec une batterie juste acceptée (3,7 V par élément à vide, REQ-003 « Conditions de départ du drone ») doit pouvoir accomplir un vol complet de 30 s moteurs en marche sans que la tension mesurée sous charge reste sous 3,3 V par élément pendant 100 ms (REQ-012 « Coupure sur sous-tension de la batterie »). La batterie de référence est la batterie réellement choisie à l'architecture ; l'essai se fait sur banc. Valeurs provisoires.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-009 « Coupure sur sous-tension et marge de batterie ») : batterie choisie amenée à 3,7 V par élément à vide, 30 s de fonctionnement des moteurs sur le banc, tension enregistrée.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-014 — Coupure sur logiciel bloqué
 **Réfs amont :** BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
@@ -341,7 +341,7 @@ Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 **Énoncé :** Si le logiciel cesse de s'exécuter normalement, le drone doit couper ses moteurs au plus 200 ms après la dernière exécution correcte du logiciel, sans dépendre du logiciel bloqué (valeur provisoire).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-010 « Coupure sur logiciel bloqué ou phase Lancé trop longue ») : logiciel d'essai qui se bloque volontairement moteurs en marche sur le banc ; analyseur logique.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-036 — Coupure sur phase Lancé trop longue
 **Réfs amont :** BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
@@ -349,7 +349,7 @@ Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 **Énoncé :** Si la phase Lancé (REQ-004 « Démarrage des moteurs 200 ms après le relâchement ») dure plus de 500 ms sans démarrage des moteurs, le drone doit garder ses moteurs arrêtés et se verrouiller (REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage ») au plus 200 ms plus tard, sans dépendre du logiciel bloqué (valeurs provisoires).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-010 « Coupure sur logiciel bloqué ou phase Lancé trop longue ») : logiciel d'essai qui retarde le démarrage des moteurs de plus de 500 ms après le relâchement ; analyseur logique.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-015 — Garde du bouton après le lancer
 **Réfs amont :** BES-006 « Arrêter le drone en vol d'un geste » ; BES-001 « Lancer le drone à la main »
@@ -357,7 +357,7 @@ Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 **Énoncé :** Pendant 0,5 s (±0,1 s) à partir du relâchement du bouton armé, le drone doit ignorer tout changement d'état du bouton ; un appui encore enfoncé à la fin de cette garde doit arrêter les moteurs au plus 50 ms après la fin de la garde (délai de REQ-016 « Arrêt d'urgence par le bouton ») (valeurs provisoires).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-011 « Garde et arrêt d'urgence par le bouton ») : appuis brefs pendant la garde (sans effet), appui maintenu jusqu'à la fin de la garde (arrêt, délai de 50 ms mesuré).
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-016 — Arrêt d'urgence par le bouton
 **Réfs amont :** BES-006 « Arrêter le drone en vol d'un geste »
@@ -365,7 +365,7 @@ Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 **Énoncé :** Moteurs en marche et hors garde (REQ-015 « Garde du bouton après le lancer »), le drone doit couper ses moteurs au plus 50 ms après qu'un appui franchit l'anti-rebond (REQ-002 « Chronologie d'un appui sur le bouton ») et donner l'effet Coupure en vol (50 ms provisoire). En vol de réglage, il n'y a pas de garde : un appui après le décollage de réglage (REQ-041 « Conditions d'acceptation de la commande Décoller ») coupe aussitôt.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-011 « Garde et arrêt d'urgence par le bouton ») : appuis en vol normal et en vol de réglage sur le banc, oscilloscope ou caméra à 240 images par seconde.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## D. Initialisation
 
@@ -380,7 +380,7 @@ Le seuil de 15,0 s (±0,5 s) est défini ici seulement.
 Un appui commencé pendant l'initialisation et encore enfoncé à la fin suit la règle de REQ-035 « Appui en cours à un changement d'état ». La batterie n'est pas contrôlée à l'initialisation, seulement à l'armement (REQ-003 « Conditions de départ du drone »).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-012 « Initialisation et échec d'initialisation ») : mise sous tension à plat, secouée, inclinée à 20° ; redémarrage après coupure d'alimentation drone posé puis en mouvement ; appui commencé pendant l'initialisation.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-037 — Comportement en échec d'initialisation
 **Réfs amont :** BES-004 « Ne pas voler quand le drone n'est pas prêt » ; BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
@@ -388,7 +388,7 @@ Un appui commencé pendant l'initialisation et encore enfoncé à la fin suit la
 **Énoncé :** Le drone en échec d'initialisation ne doit jamais démarrer ses moteurs et doit ignorer le bouton et toutes les commandes sans fil, jusqu'au débranchement de la batterie. Après une coupure sur sous-tension (REQ-012 « Coupure sur sous-tension de la batterie »), le drone encore alimenté est dans le même état, avec le même effet.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-012 « Initialisation et échec d'initialisation ») : après un échec, appuis sur le bouton et les quatre commandes sans fil ; moteurs jamais démarrés, aucun effet.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## E. Information
 
@@ -412,7 +412,7 @@ Un appui commencé pendant l'initialisation et encore enfoncé à la fin suit la
 
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-013 « Effets locaux par situation ») : provoquer chacune des situations sur le banc ou en vol, relever l'effet et le statut sans fil.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-019 — Perceptibilité et distinction des effets
 **Réfs amont :** BES-007 « Savoir où en est le drone sans autre appareil »
@@ -426,7 +426,7 @@ Un appui commencé pendant l'initialisation et encore enfoncé à la fin suit la
 Toutes les valeurs sont provisoires.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-014 « Perceptibilité et distinction des effets ») : un observateur, une fiche des dix effets, une passe ; chronomètre pour la durée.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## F. Sans fil
 
@@ -457,7 +457,7 @@ Toutes les valeurs sont provisoires.
 
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-015 « Statut sans fil et variables du vol ») : provoquer chaque état, lire le code sur l'appareil de suivi ; appareil de suivi à 5 m, comptage des statuts reçus et relevé des changements d'état.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-038 — Causes et paramètres dans le statut sans fil
 **Réfs amont :** BES-010 « Suivre le drone sur un appareil de suivi » ; BES-009 « Régler et sauvegarder les paramètres de vol »
@@ -470,7 +470,7 @@ Toutes les valeurs sont provisoires.
 Les deux causes sont conservées jusqu'à la mise hors tension.
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-015 « Statut sans fil et variables du vol ») : provoquer chaque cause, lire le statut ; modifier un paramètre et relire sa valeur (TS-019 « Paramètres, sauvegarde et valeurs d'origine »).
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-039 — Cadence et portée du statut sans fil
 **Réfs amont :** BES-010 « Suivre le drone sur un appareil de suivi »
@@ -482,7 +482,7 @@ Les deux causes sont conservées jusqu'à la mise hors tension.
 **Énoncé :** Pendant tout vol (normal ou de réglage), le drone doit envoyer à l'appareil de suivi, au moins 10 fois par seconde, ses variables du vol : sa hauteur, son inclinaison et la commande de chaque moteur (valeur provisoire).
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-015 « Statut sans fil et variables du vol ») : enregistrement de 10 s d'un vol, comptage des valeurs reçues.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-022 — Arrêt sans fil
 **Réfs amont :** BES-010 « Suivre le drone sur un appareil de suivi »
@@ -490,7 +490,7 @@ Les deux causes sont conservées jusqu'à la mise hors tension.
 **Énoncé :** En vol (normal ou de réglage), à la réception de la commande Arrêt, le drone doit couper ses moteurs au plus 200 ms plus tard et donner l'effet Coupure en vol ; la cause « arrêt sans fil » est portée par REQ-038 « Causes et paramètres dans le statut sans fil » (200 ms provisoire).
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-016 « Arrêt sans fil ») : commande Arrêt envoyée en vol sur banc, délai mesuré à l'analyseur logique ou à la caméra.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-023 — Commandes sans fil selon l'état du drone
 **Réfs amont :** BES-010 « Suivre le drone sur un appareil de suivi » ; BES-008 « Entrer en mode réglage et faire des vols de réglage » ; BES-009 « Régler et sauvegarder les paramètres de vol »
@@ -506,7 +506,7 @@ Les deux causes sont conservées jusqu'à la mise hors tension.
 
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-017 « Commandes sans fil selon l'état ») : les 16 cases du tableau, une commande par case, effet relevé.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-040 — Appareil de suivi
 **Réfs amont :** BES-010 « Suivre le drone sur un appareil de suivi »
@@ -514,7 +514,7 @@ Les deux causes sont conservées jusqu'à la mise hors tension.
 **Énoncé :** L'appareil de suivi doit être un ordinateur ou un téléphone relié au drone par la liaison sans fil, avec un logiciel d'essai écrit par l'utilisateur et livré avec le projet. Ce logiciel affiche le statut (REQ-020 « Statut sans fil », REQ-038 « Causes et paramètres dans le statut sans fil ») et les variables du vol (REQ-021 « Variables du vol »), et envoie les quatre commandes de REQ-023 « Commandes sans fil selon l'état du drone ». Le protocole est un choix d'architecture.
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-025 « Appareil de suivi et logiciel d'essai ») : logiciel d'essai relié à un drone, lecture du statut, des variables et envoi de chaque commande.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## G. Réglage
 
@@ -524,7 +524,7 @@ Les deux causes sont conservées jusqu'à la mise hors tension.
 **Énoncé :** Si le bouton est maintenu enfoncé depuis la mise sous tension jusqu'à la fin d'une initialisation réussie (REQ-017 « Initialisation en 3 secondes »), le drone doit entrer en mode réglage, moteurs arrêtés, et donner l'effet Mode réglage. Il y reste jusqu'au débranchement de la batterie ; le bouton n'a aucun effet au sol, et l'appui encore en cours à l'entrée suit la règle de REQ-035 « Appui en cours à un changement d'état ».
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-018 « Mode réglage et vol de réglage ») : bouton tenu au branchement ; appuis au sol ; un redémarrage sans bouton revient en mode normal.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-041 — Conditions d'acceptation de la commande Décoller
 **Réfs amont :** BES-008 « Entrer en mode réglage et faire des vols de réglage »
@@ -532,7 +532,7 @@ Les deux causes sont conservées jusqu'à la mise hors tension.
 **Énoncé :** En mode réglage, moteurs coupés, le drone doit accepter la commande Décoller seulement si la batterie est suffisante (REQ-003 « Conditions de départ du drone », condition de batterie seule) et si le bouton n'est pas enfoncé. Sinon il donne l'effet Refus, reste en mode réglage et inscrit la cause dans le statut (REQ-038 « Causes et paramètres dans le statut sans fil »). Une commande acceptée démarre les moteurs : c'est le « décollage de réglage » (REQ-025 « Vol de réglage »).
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-002 « Conditions de départ et refus d'armement », TS-018 « Mode réglage et vol de réglage ») : Décoller à 3,6 V puis 3,8 V par élément, avec le bouton enfoncé puis relâché.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-025 — Vol de réglage
 **Réfs amont :** BES-008 « Entrer en mode réglage et faire des vols de réglage »
@@ -540,7 +540,7 @@ Les deux causes sont conservées jusqu'à la mise hors tension.
 **Énoncé :** Sur une commande Décoller acceptée (REQ-041 « Conditions d'acceptation de la commande Décoller »), le drone doit décoller, rester 3,0 s (±0,5 s) en vol stationnaire, atterrir (REQ-009 « Atterrissage doux »), couper ses moteurs, puis revenir au mode réglage sans verrouillage (REQ-010 « Verrouillage après un posé, une coupure ou un redémarrage »). Les 3 s sont décidées par l'utilisateur, la tolérance est provisoire. La coupure sur délai d'atterrissage de REQ-011 « Coupures automatiques en vol » s'applique. Une perte du lien sans fil pendant le vol de réglage ne l'interrompt pas : il suit son cours jusqu'au posé ; seuls le bouton (REQ-016 « Arrêt d'urgence par le bouton ») et les coupures de REQ-011 « Coupures automatiques en vol » l'arrêtent.
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-018 « Mode réglage et vol de réglage ») : vols de réglage successifs, durée du stationnaire chronométrée ; un vol de réglage avec le lien coupé en vol.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-042 — Vol de réglage indépendant du lien sans fil
 **Réfs amont :** BES-008 « Entrer en mode réglage et faire des vols de réglage »
@@ -575,7 +575,7 @@ Les 29 valeurs fixes sont listées ici une seule fois ; chacune a la valeur, la 
 Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Priorité :** Essentiel (la fixité des valeurs de sécurité vaut même sans mode réglage ; les quatre réglages sont livrés après, comme le second cas de REQ-005 « Démarrage des moteurs sur geste volontaire seulement »)
 **Vérification :** Essai (TS-019 « Paramètres, sauvegarde et valeurs d'origine ») : modifier chaque paramètre et relire la valeur dans le statut ; tenter de modifier un cinquième paramètre et chacune des 29 valeurs fixes par le sans fil : toutes inchangées.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-043 — Valeurs de sécurité fixes
 **Réfs amont :** BES-009 « Régler et sauvegarder les paramètres de vol » ; BES-005 « Couper les moteurs quand le vol ne peut pas continuer »
@@ -587,7 +587,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Sur une commande Sauvegarder acceptée (REQ-023 « Commandes sans fil selon l'état du drone »), le drone doit enregistrer les valeurs courantes des paramètres de vol (REQ-026 « Paramètres de vol réglables ») en mémoire non volatile en 1 s au plus (valeur provisoire), et les charger à chaque initialisation suivante ; une valeur modifiée mais non sauvegardée est perdue au débranchement.
 **Priorité :** Souhaitable
 **Vérification :** Essai (TS-019 « Paramètres, sauvegarde et valeurs d'origine ») : modifier, sauvegarder, débrancher, rebrancher, relire ; modifier sans sauvegarder, débrancher, rebrancher, relire.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-028 — Valeurs d'origine après la programmation
 **Réfs amont :** BES-011 « Fabriquer et programmer le drone soi-même » ; BES-009 « Régler et sauvegarder les paramètres de vol »
@@ -595,7 +595,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Après chaque programmation, le drone doit démarrer avec les valeurs d'origine de ses quatre paramètres de vol (REQ-026 « Paramètres de vol réglables »), les réglages sauvegardés auparavant étant perdus.
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-019 « Paramètres, sauvegarde et valeurs d'origine ») : sauvegarder des valeurs différentes, reprogrammer, relire : toutes égales aux valeurs d'origine.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## H. Fabrication
 
@@ -605,7 +605,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Chaque composant du drone doit pouvoir s'acheter à l'unité, sans commande minimale, chez au moins un revendeur en ligne grand public.
 **Priorité :** Essentiel
 **Vérification :** Inspection (TS-020 « Fabrication à la main ») de la nomenclature : chaque ligne avec son revendeur et sa quantité minimale.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-044 — Assemblage à la main
 **Réfs amont :** BES-011 « Fabriquer et programmer le drone soi-même »
@@ -615,7 +615,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 - le câblage sur modules, la carte à trous et le circuit imprimé sur mesure commandé en ligne sont permis.
 **Priorité :** Essentiel
 **Vérification :** Inspection (TS-020 « Fabrication à la main ») du boîtier de chaque ligne de la nomenclature ; montage d'une carte à la main dans la recette TA-015 « Inspection de la fabrication à la main ».
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-030 — Programmation depuis l'ordinateur
 **Réfs amont :** BES-011 « Fabriquer et programmer le drone soi-même »
@@ -623,7 +623,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** L'utilisateur doit pouvoir programmer le drone depuis son ordinateur, avec le seul programmateur relié à la carte, en 5 minutes au plus (valeur provisoire) ; à la mise sous tension suivante, le drone doit démarrer normalement (effet Allumé).
 **Priorité :** Essentiel
 **Vérification :** Essai (TS-021 « Programmation depuis l'ordinateur ») : trois programmations chronométrées sur une carte neuve et sur une carte déjà programmée.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-045 — Batterie débranchable à la main
 **Réfs amont :** BES-004 « Ne pas voler quand le drone n'est pas prêt » ; BES-011 « Fabriquer et programmer le drone soi-même »
@@ -631,7 +631,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Le drone, moteurs arrêtés et protège-hélices montés, doit permettre de débrancher la batterie à la main, sans outil, en 10 s au plus (valeur provisoire), le connecteur restant accessible malgré les protège-hélices.
 **Priorité :** Essentiel
 **Vérification :** Inspection (TS-026 « Batterie débranchable à la main ») : drone complet, moteurs arrêtés, batterie débranchée à la main et chronométrée.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## I. Cadre d'emploi
 
@@ -642,7 +642,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Le drone, protège-hélices compris, doit tenir dans un volume de 100 mm × 100 mm × 50 mm et peser au plus 100 g, batterie comprise (valeurs provisoires).
 **Priorité :** Important
 **Vérification :** Mesure (TS-022 « Dimensions, masse et protège-hélices ») : pied à coulisse et balance.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-032 — Protège-hélices
 **Réfs amont :** BES-013 « Voler en appartement avec un drone de poche protégé »
@@ -650,7 +650,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Le drone doit voler avec des protège-hélices montés tels qu'un calibre de 12 mm de diamètre, approché de l'extérieur dans le plan des hélices (par les côtés), ne touche aucune hélice. Le dessus et le dessous ne sont pas couverts : limite assumée (ligne 39 de « Risques acceptés » — `projets/boomrone/risques-acceptes.md`).
 **Priorité :** Important
 **Vérification :** Inspection (TS-022 « Dimensions, masse et protège-hélices ») : calibre de 12 mm sur tout le pourtour du plan des hélices, drone équipé.
-**Statut :** Proposé
+**Statut :** Validé
 
 ### REQ-033 — Vol dans une pièce d'appartement
 **Réfs amont :** BES-013 « Voler en appartement avec un drone de poche protégé »
@@ -658,7 +658,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Lancé à la main à une vitesse horizontale d'au plus 1 m/s depuis le centre d'une pièce de 4 m × 4 m × 2,5 m, le drone doit effectuer son vol complet sans qu'aucune de ses parties ne sorte du volume de la pièce, dans 9 vols sur 10 (valeurs provisoires ; les lancers plus rapides se font dans un lieu plus grand, gymnase ou jardin, non garantis).
 **Priorité :** Important
 **Vérification :** Essai (TS-023 « Vol dans une pièce d'appartement ») : 10 vols dans une pièce balisée, vidéo.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## J. Consignes d'emploi
 
@@ -668,7 +668,7 @@ Total : 7 + 4 + 3 + 5 + 3 + 2 + 4 + 1 = 29 valeurs fixes.
 **Énoncé :** Le projet doit fournir une page unique de consignes d'emploi : au plus une face de format A4, 60 lignes au plus, une consigne à l'infinitif par ligne, 15 mots au plus par ligne (valeurs provisoires). Elle place en tête les quatre réflexes essentiels et rappelle les risques majeurs et ceux qui demandent un geste de l'utilisateur. Le contrôle croisé avec « Risques acceptés » — `projets/boomrone/risques-acceptes.md` ne doit laisser aucun risque majeur non repris sans justification écrite.
 **Priorité :** Important
 **Vérification :** Inspection (TS-024 « Page de consignes d'emploi ») : lecture de la page, comptage des lignes et des mots, contrôle croisé ligne à ligne avec le registre, liste des écarts justifiés.
-**Statut :** Proposé
+**Statut :** Validé
 
 ## Annexe A — Couverture des besoins
 

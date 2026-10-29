@@ -1946,4 +1946,12 @@ Format (exemple, non analysé) :
 **Doutes levés :** (aucun)
 **Modifie :** DEC-195 « Relecture de porte exigences : corrections décidées par délégation, identifiants conservés » (« aucune exigence n'est abandonnée » ne vaut plus), DEC-199 « Sous-tension : verrouillage dans tous les états, mode réglage compris » (le verrouillage est l'état d'échec d'initialisation) et DEC-126 « Protection de sous-tension de la batterie : scénario court, coupure sans signal propre » (l'effet Échec d'initialisation est donné).
 
+### DEC-217 — Porte exigences franchie : accord explicite de l'utilisateur
+**Date :** 2026-10-29
+**Concerne :** « Exigences système » — `projets/boomrone/02-exigences.md` (41 exigences actives) et « Plans de test » — `projets/boomrone/05-plans-de-test.md` (26 TS, 15 TA)
+**Décision :** la porte « exigences » est franchie ; les 41 exigences actives passent à « Validé » (les quatre fusionnées restent « Abandonné ») ; la phase « architecture » peut s'ouvrir. État au franchissement : tag `gate-3-exigences-ready-v0`, aucun doute bloquant ouvert, 12 doutes non bloquants (liste dans `registre-doutes.md`), relectures de porte faites par `critique`, `coherence-clarte` et `exigences-tracabilite` (DEC-195 « Relecture de porte exigences : corrections décidées par délégation, identifiants conservés »), sans nouvelle relecture après les retouches de DEC-216 « Fusions de simplicité et sous-tension en échec d'initialisation : retouches finales de la porte exigences ».
+**Alternatives écartées :** demander une dernière passe des trois relecteurs avant la porte (proposée, non retenue par l'utilisateur) ; continuer la phase « exigences » (aucun doute bloquant, décisions prises).
+**Raison :** accord explicite de l'utilisateur en chat, 2026-10-29 : « accord explicite sur la porte exigences ». Rappels : `check_traceability --gate` échoue pour les 41 « REQ sans ARC » (phase suivante) et les 12 « SCN sans BES » (défaut connu, DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé ») ; les valeurs provisoires (annexe B) restent à valider aux essais sur prototype (DOU-131 « Valeurs provisoires des exigences, à valider aux essais sur prototype »).
+**Doutes levés :** (aucun)
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
