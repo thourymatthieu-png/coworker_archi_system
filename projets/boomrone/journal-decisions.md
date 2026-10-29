@@ -1309,4 +1309,12 @@ Format (exemple, non analysé) :
 **Doutes levés :** (aucun)
 **Précise :** DEC-139 « Reprogrammation : réécriture de la zone des réglages avec les valeurs d'origine ».
 
+### DEC-142 — Porte scénarios franchie : accord explicite de l'utilisateur
+**Date :** 2026-10-29
+**Concerne :** « Scénarios » — `projets/boomrone/00-scenarios.md` (SCN-001 « Vol nominal : de la batterie au posé » à SCN-012 « Dégradé : sous-tension de la batterie »)
+**Décision :** la porte « scénarios » est franchie ; la phase « besoins » peut s'ouvrir. État au franchissement : tag `gate-1-scenarios-ready-v1`, aucun doute bloquant ouvert, 25 doutes non bloquants (liste dans `registre-doutes.md`), cinq relectures de porte faites (`critique`, `coherence-clarte`).
+**Alternatives écartées :** continuer la phase « scénarios » (aucun doute bloquant, toutes les décisions demandées sont prises).
+**Raison :** accord explicite de l'utilisateur en chat, 2026-10-29 : « passons la gate ». Rappels : `check_traceability --gate` échoue seulement sur les douze « SCN sans BES », normaux avant la phase « besoins » ; la notice des limites d'emploi est à écrire en phase « besoins » (DEC-125 « Limites d'emploi informées par une notice écrite à la phase besoins, le drone n'affiche rien ») ; si les essais contredisent la plage de lancer, les besoins seront à reprendre (DOU-116 « Échéance et circularité du report aux essais, comportement de SCN-002 sur la partie infaisable de la plage »).
+**Doutes levés :** (aucun)
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
