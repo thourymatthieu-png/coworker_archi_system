@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "projets/boomrone/05-plans-de-test.md",
+                "file": "projets/boomrone/04-conception-detaillee.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "05-plans-de-test"
+              "title": "04-conception-detaillee"
             }
           }
         ]
@@ -190,30 +190,41 @@
   },
   "active": "b2ee19d3f5954978",
   "lastOpenFiles": [
-    "projets/boomrone/02-exigences.md",
     "projets/boomrone/03-architecture.md",
+    "projets/boomrone/04-conception-detaillee.md",
+    "projets/boomrone/releve-fiches-techniques.md",
+    "projets/boomrone/Datasheets/XT30PW-M30.pdf",
+    "projets/boomrone/Datasheets/Non confirmé 563131.crdownload",
+    "projets/boomrone/Datasheets/AO3400A.pdf",
+    "projets/boomrone/Datasheets/Non confirmé 710023.crdownload",
+    "projets/boomrone/Datasheets/SZYY1615RGB.pdf",
+    "projets/boomrone/Datasheets/Non confirmé 518977.crdownload",
+    "projets/boomrone/Datasheets/E104-BT02.pdf",
+    "projets/boomrone/Datasheets/Non confirmé 323648.crdownload",
+    "projets/boomrone/Datasheets/XC6206.pdf",
+    "projets/boomrone/Datasheets/Non confirmé 156814.crdownload",
+    "projets/boomrone/schemas/des-007-puissance-moteurs.svg",
+    "projets/boomrone/schemas/des-005-flux-optique-regulateur-2v0.svg",
+    "projets/boomrone/schemas/des-004-capteur-hauteur.svg",
+    "projets/boomrone/schemas/des-003-centrale-inertielle.svg",
+    "projets/boomrone/schemas/des-002-microcontroleur.svg",
+    "projets/boomrone/schemas/des-001-blocs-et-reseaux.svg",
+    "projets/boomrone/schemas/des-012-module-bluetooth.svg",
+    "projets/boomrone/schemas/des-011-voyant-buzzer.svg",
+    "projets/boomrone/schemas/des-010-bouton.svg",
+    "projets/boomrone/schemas/des-009-regulateur-3v0-pont-mesure.svg",
+    "projets/boomrone/05-plans-de-test.md",
+    "projets/boomrone/02-exigences.md",
     "projets/boomrone/01-besoins.md",
-    "projets/boomrone/sedxGViNv",
-    "projets/boomrone/sedy6dFbD",
-    "projets/boomrone/sedcesLTm",
     "projets/boomrone/00-scenarios.md",
-    "projets/boomrone/sedGbRxYN",
     "projets/boomrone/registre-doutes.md",
-    "projets/boomrone/sedP0aU4W",
-    "projets/boomrone/sedUud90m",
     "projets/boomrone/journal-decisions.md",
     "projets/boomrone/reprise.md",
     "projets/README.md",
-    "projets/boomrone/sedXaEp0h",
     "projets/boomrone/risques-acceptes.md",
-    "projets/boomrone/sed77NYpW",
-    "projets/boomrone/sedaciNT2",
-    "projets/boomrone/sedSAwHRT",
     "projets/boomrone/00-glossaire.md",
-    "projets/boomrone/04-conception-detaillee.md",
     "projets/boomrone/notes-architecture.md",
     "CLAUDE.md",
-    "README.md",
-    "projets/boomrone/05-plans-de-test.md"
+    "README.md"
   ]
 }
