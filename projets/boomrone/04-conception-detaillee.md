@@ -5,7 +5,7 @@
 > - Rédigée par délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; seuils de batterie conservés (DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version »), aucune mesure au banc : gains et constantes de départ provisoires.
 > - Aucun code ni schéma KiCad n'existe encore : « Réalisé par » donne les chemins prévus.
 > - Schémas SVG des circuits de la carte (un par bloc de circuit, ni mécanique ni logiciel ; dossier `projets/boomrone/schemas/`) : illustrations de conception, pas les schémas KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée ») ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée », broches non relevées : DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».
-> - État : tous les éléments sont « Proposé », la porte n'est pas franchie. Choix : DEC-255 « Conception détaillée : chaîne de développement et arborescence des fichiers » à DEC-271 « Cycle indépendant du DMA de la centrale et lecture armée après l'initialisation » ; doutes : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » à DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».
+> - État : tous les DES sont « Validé », porte franchie le 2026-10-30 (DEC-276 « Porte conception détaillée franchie : accord explicite de l'utilisateur »). Choix : DEC-255 « Conception détaillée : chaîne de développement et arborescence des fichiers » à DEC-271 « Cycle indépendant du DMA de la centrale et lecture armée après l'initialisation » ; doutes : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » à DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».
 
 ## Vue d'ensemble
 
@@ -159,7 +159,7 @@ Budget de courant : +3V0 130 mA (dimensionnement), VBATM 9,5 A en crête de 2 s.
 *Légende : vue par blocs, le schéma de chaque bloc est dans le DES indiqué dans la boîte. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (page racine « Blocs »), `projets/boomrone/hardware/calculs/calculs.py`, `projets/boomrone/schemas/des-001-blocs-et-reseaux.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-002 — Microcontrôleur : brochage, horloges, découplage et octets d'option
 **Réfs amont :** ARC-002 « Microcontrôleur et programmation par liaison SWD »
@@ -192,7 +192,7 @@ Budgets : flash 128 kio, SRAM 32 kio dont 16 kio de SRAM1 utilisés (le détail 
 *Légende : brochage par groupe de fonctions, programmation SWD, découplage. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 » ; DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence » ; DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage » ; DOU-181 « Bilan d'erreur de la mesure de tension et niveau du BOR ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « MCU »), `projets/boomrone/firmware/src/board.c`, `projets/boomrone/firmware/src/board.h`, `projets/boomrone/firmware/src/board_pins.h`, `projets/boomrone/schemas/des-002-microcontroleur.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-003 — Raccordement de la centrale inertielle LSM6DSO
 **Réfs amont :** ARC-003 « Centrale inertielle »
@@ -207,7 +207,7 @@ Registres écrits à l'initialisation (valeurs de ARC-003 « Centrale inertielle
 *Légende : liaison SPI1, rappel de CS, alimentations et registres d'initialisation. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » ; DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Capteurs »), `projets/boomrone/firmware/src/drv_imu_regs.h`, `projets/boomrone/schemas/des-003-centrale-inertielle.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-004 — Raccordement du capteur de hauteur VL53L1X
 **Réfs amont :** ARC-004 « Capteur de hauteur à temps de vol »
@@ -220,7 +220,7 @@ Mécanique : fenêtre optique dégagée, cône de 27° sans pièce dessous, capt
 *Légende : I2C1 avec rappels, GPIO1, XSHUT, alimentations et découplages. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage » ; DOU-157 « VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Capteurs »), `projets/boomrone/schemas/des-004-capteur-hauteur.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-005 — Raccordement du flux optique PMW3901MB et régulateur de 2,0 V
 **Réfs amont :** ARC-005 « Capteur de flux optique »
@@ -233,7 +233,7 @@ Optique : lentille LN03-ZSZ (fournie avec la puce, à confirmer : DOU-164 « PMW
 *Légende : régulateur XC6206 vers +2V0, VDDIO à +3V0, SPI2, NRESET et plots de repli. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-165 « Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension » ; DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Capteurs »), `projets/boomrone/schemas/des-005-flux-optique-regulateur-2v0.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-006 — Cadre, anneaux, moteurs et hélices
 **Réfs amont :** ARC-006 « Moteurs, hélices et protège-hélices »
@@ -245,7 +245,7 @@ Sens de rotation : moteurs 1 et 3 dans le sens horaire vu de dessus, moteurs 2 e
 
 Cotes verticales : capteur de hauteur à 20 mm du plan de contact, hauteur totale environ 35 mm. Les pieds, la hauteur exacte des poches et la position verticale de la carte sont fixés par le croquis coté de DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » avant la commande de la pièce. Matière et fabricant (DOU-169 « Matière, masse, délai et cotes verticales des pièces imprimées ») : impression en résine par un service en ligne, masse visée 9 g pour le cadre et les anneaux (DES-014 « Feuille de calcul du bilan de masse, de poussée et d'autonomie »).
 **Réalisé par :** `projets/boomrone/hardware/mecanique/cadre.scad`, `projets/boomrone/hardware/mecanique/cadre.stl`, `projets/boomrone/hardware/mecanique/verif.py`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-007 — Circuit de puissance des moteurs
 **Réfs amont :** ARC-007 « Étage de puissance des moteurs coupés par défaut »
@@ -260,7 +260,7 @@ Cas non couverts, testés par TI-005 « Moteurs coupés par le matériel » : MO
 *Légende : circuit d'une voie, identique pour les quatre moteurs ; le tableau donne les broches et les repères de chaque voie. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Puissance »), `projets/boomrone/schemas/des-007-puissance-moteurs.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-008 — Batterie, connecteur XT30 et entrée de la carte
 **Réfs amont :** ARC-008 « Batterie et connecteur débranchable »
@@ -273,7 +273,7 @@ Calculs de contrôle : chute dans la ferrite à 130 mA avec une résistance de 0
 *Légende : deux branches VBATM et VBATL, ferrite hors du chemin des moteurs. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion » ; DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Alimentation »), `projets/boomrone/schemas/des-008-batterie-xt30-entree.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-009 — Régulateur de 3,0 V et pont de mesure de la tension
 **Réfs amont :** ARC-009 « Alimentation de la logique et mesure de la tension »
@@ -286,7 +286,7 @@ Pont de mesure sur VBATM : 100 kohms 0,1 % (haut) et 150 kohms 0,1 % (bas), mili
 *Légende : MCP1700 de VBATL vers +3V0 et pont 100 kΩ / 150 kΩ de VBATM vers PA0. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Alimentation »), `projets/boomrone/schemas/des-009-regulateur-3v0-pont-mesure.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-010 — Circuit du bouton
 **Réfs amont :** ARC-010 « Bouton »
@@ -297,7 +297,7 @@ Pont de mesure sur VBATM : 100 kohms 0,1 % (haut) et 150 kohms 0,1 % (bas), mili
 *Légende : poussoir, 1 kΩ en série, rappel de 10 kΩ et 10 nF. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Interface »), `projets/boomrone/schemas/des-010-bouton.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-011 — Circuit du voyant RGB et du buzzer
 **Réfs amont :** ARC-011 « Voyant RGB et avertisseur sonore »
@@ -310,7 +310,7 @@ Buzzer actif SMD-9650-3327 entre VBATM et le drain d'un quatrième AO3400A (gril
 *Légende : voyant à anode commune sur VBATM, trois AO3400A, buzzer et diode de roue libre sur un quatrième AO3400A. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-161 « Tensions directes du voyant RGB : visibilité du vert et du bleu entre 3,4 et 3,7 V ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Interface »), `projets/boomrone/schemas/des-011-voyant-buzzer.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-012 — Raccordement du module Bluetooth E104-BT02
 **Réfs amont :** ARC-012 « Module radio Bluetooth à basse consommation »
@@ -321,7 +321,7 @@ Buzzer actif SMD-9650-3327 entre VBATM et le drain d'un quatrième AO3400A (gril
 *Légende : liaison série croisée avec PA2 et PA3, alimentation 3,0 V et plots de repli. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-151 « Module E104-BT02 : débit par défaut, service, absence de commande AT » ; DOU-146 « Broches d'état du module Bluetooth et de mouvement du capteur de flux » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».*
 
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Radio »), `projets/boomrone/schemas/des-012-module-bluetooth.svg`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-013 — Implantation, routage et fichiers de fabrication pour JLCPCB
 **Réfs amont :** ARC-013 « Carte électronique JLCPCB, câblage et assemblage » ; ARC-003 « Centrale inertielle » ; ARC-004 « Capteur de hauteur à temps de vol » ; ARC-005 « Capteur de flux optique »
@@ -329,13 +329,13 @@ Buzzer actif SMD-9650-3327 entre VBATM et le drain d'un quatrième AO3400A (gril
 
 Fichiers pour la commande : gerbers et perçages (greffon KiCad pour JLCPCB), nomenclature CSV avec une colonne « LCSC Part # » (une ligne par référence, numéros de « Architecture » — `projets/boomrone/03-architecture.md`, section « Nomenclature et catalogue JLCPCB/LCSC »), fichier de placement (CPL) dont les rotations sont vérifiées dans l'aperçu de JLCPCB, panneau (4 cartes), assemblage Standard double face. Liste de contrôle avant la commande : DOU-153 « Carte double face, assemblage Standard, frais d'extension et délais » (devis), DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce » (puce du flux), DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion » (genre du XT30), DOU-156 « Vérifications avant la commande de la carte » (vérifications préalables), stocks relus le jour de la commande.
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_pcb`, `projets/boomrone/hardware/fab/bom.csv`, `projets/boomrone/hardware/fab/cpl.csv`, `projets/boomrone/hardware/fab/verif_bom.py`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-014 — Feuille de calcul du bilan de masse, de poussée et d'autonomie
 **Réfs amont :** ARC-014 « Bilan de masse, de poussée et d'autonomie »
 **Description :** script `bilan.py`, entrées dans un tableau en tête de fichier (masses et incertitudes, poussée par moteur, résistances internes, courants, tension d'armement), sorties : masse totale et incertitudes (cumulée et quadratique), rapport poussée/poids, tensions sous charge des quatre cas du bilan, énergie d'un vol de 30 s. Résultats attendus avec les entrées actuelles : masse 61,1 g, incertitude cumulée 10,1 g, quadratique 4,4 g ; rapport 88 / 61,1 = 1,44 ; tensions 3,36 V ; 3,17 V ; 3,23 V ; 2,83 V ; énergie environ 49 mAh. Le script sert à refaire le bilan après les mesures au banc et à confirmer ou infirmer R1 et R2 (DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version » : seuils conservés pour la première version).
 **Réalisé par :** `projets/boomrone/hardware/calculs/bilan.py`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-015 — Arborescence du firmware, édition de liens et budget de mémoire
 **Réfs amont :** ARC-015 « Structure logicielle et ordonnancement »
@@ -347,7 +347,7 @@ Fichiers de constantes : `config_fixed.h` (les 29 valeurs fixes de REQ-026 « Pa
 
 Séquence de démarrage : table de vecteurs, copie de `.data`, mise à zéro de `.bss` (pas de `.noinit`), appel de `board_early_init()` (moteurs coupés d'abord) puis `main()`. Le lien contient des assertions : `.settings` à 0x0801F800, fin de l'image avant cette page, `.noinit` et tampons DMA dans SRAM1.
 **Réalisé par :** `projets/boomrone/firmware/Makefile`, `projets/boomrone/firmware/linker/stm32g431cb.ld`, `projets/boomrone/firmware/startup/startup_stm32g431xx.s`, `projets/boomrone/firmware/src/main.c`, `projets/boomrone/firmware/tools/check_map.py`, `projets/boomrone/firmware/test/` (fichiers `test_*.c`, `tu.h`, `mock/`)
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-016 — Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond
 **Réfs amont :** ARC-015 « Structure logicielle et ordonnancement »
@@ -378,7 +378,7 @@ Boucle principale (pseudo-code) : attendre le drapeau de cycle ; si le drapeau p
 
 Tâches de fond, par priorité décroissante : 1 arrêt radio, 2 capteur de hauteur (drapeau levé par PB6, environ 30 Hz), 3 flux optique (drapeau levé tous les 10 cycles), 4 statut (toutes les 500 ms et à chaque changement d'état) et variables (toutes les 100 ms moteurs en marche), 5 effets (tous les 10 cycles). Chaque tâche est une petite machine à états dont un pas dure au plus 200 µs. Charge des pas par seconde : flux 100 x 2, hauteur 30 x 3, variables 10 x 2, statut 2 x 2, effets 100, soit environ 420 pas sur 1000 cycles : un pas de priorité inférieure attend au plus 20 cycles (critère de TU-016 « Ordonnanceur : choix de la tâche de fond, cycles manqués et durées »). Le voyant (modulation de luminosité) n'est pas une tâche : il tourne dans l'interruption TIM6 (moins de 1 µs). Budget du cycle repris de ARC-015 « Structure logicielle et ordonnancement » : contrôle environ 100 µs, plafond 300 µs, tâche de fond 200 µs, alarme à 800 µs.
 **Réalisé par :** `projets/boomrone/firmware/src/main.c`, `projets/boomrone/firmware/src/app_sched.c`, `projets/boomrone/firmware/src/app_sched.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-017 — Coupure des moteurs, démarrage unique et gestionnaires d'exception
 **Réfs amont :** ARC-015 « Structure logicielle et ordonnancement » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » ; ARC-019 « Machine à états du drone »
@@ -386,13 +386,13 @@ Tâches de fond, par priorité décroissante : 1 arrêt radio, 2 capteur de haut
 
 Gestionnaires : `HardFault_Handler`, `MemManage_Handler`, `BusFault_Handler`, `UsageFault_Handler` et `Default_Handler` appellent `motors_cut()`, inscrivent « défaut fatal » en `.noinit`, puis bouclent sans rafraîchir le chien de garde (reset environ 100 ms nominal, 112 ms au pire, DES-030 « Chien de garde matériel et règle de rafraîchissement »). `NMI_Handler` lit FLASH_ECCR : si le bit de double erreur ECCD est levé, il l'efface et lève le drapeau `flash_ecc_error` (non fatal, utile à la lecture des réglages, DES-035 « Paramètres de vol, section d'origine et pilote de flash ») ; sinon il traite l'exception comme fatale. Le contrôle des deux sites d'appel de `motors_start()` est fait par un script (DEC-270 « Vérifications par scripts : appels uniques, mémoire et jalons »).
 **Réalisé par :** `projets/boomrone/firmware/src/drv_motor.c`, `projets/boomrone/firmware/src/fault.c`, `projets/boomrone/firmware/tools/check_calls.py`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-018 — Pilote de la centrale inertielle
 **Réfs amont :** ARC-016 « Pilotes des capteurs et des sorties » ; ARC-003 « Centrale inertielle » ; ARC-023 « Initialisation et échec d'initialisation »
 **Description :** données : `imu_raw_t` (gyroscope x, y, z, accéléromètre x, y, z en `int16`, température, instant TIM2 de la fin de lecture) et `imu_sample_t` (vitesses angulaires en rad/s, accélérations en m/s², instant en µs, repère du drone). Lecture : à chaque tick, l'interruption TIM6 abaisse CS (PA4) et lance le DMA SPI1 de 15 octets (commande 0xA0 = 0x80 | 0x20, puis 14 octets de température, gyroscope et accéléromètre) ; la fin du DMA remonte CS, relève TIM2 et lève le drapeau de cycle ; durée 15 x 8 / 5,3125 MHz = 22,6 µs. Si le DMA n'est pas fini au tick suivant, l'interruption compte une erreur, abandonne la lecture et force le cycle (DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond »). Une centrale figée est détectée par 10 lectures brutes identiques de suite, comptées comme une erreur par cycle suivant. La lecture n'est armée (`imu_streaming`) qu'après l'initialisation. Anti-repliement : DOU-179 « Anti-repliement de la centrale : sortie à 3,33 kHz lue à 1 kHz ». Conversion : vitesse angulaire = brut x 0,070 °/s x pi/180, moins le biais ; accélération = brut x 0,244 mg x 9,80665 ; matrice d'axes constante (DES-003 « Raccordement de la centrale inertielle LSM6DSO », DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs »). Échantillon répété : deux lectures identiques de suite incrémentent `repeat_count` (diagnostic, pas une erreur) ; trois erreurs consécutives lèvent `imu_failed` (consommé par DES-029 « Surveillance et coupures automatiques »), une lecture correcte (non figée) remet le compteur à zéro. Fonction `imu_calibrate_bias()` : moyenne de 1000 échantillons à l'initialisation (DES-031 « Séquence d'initialisation et échec d'initialisation »). Séquence d'initialisation : reset logiciel, attente de la fin (au plus 20 ms), contrôle de WHO_AM_I, écriture des registres de DES-003 « Raccordement de la centrale inertielle LSM6DSO ».
 **Réalisé par :** `projets/boomrone/firmware/src/drv_imu.c`, `projets/boomrone/firmware/src/drv_imu.h`, `projets/boomrone/firmware/src/drv_imu_regs.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-019 — Pilote du capteur de hauteur non bloquant
 **Réfs amont :** ARC-004 « Capteur de hauteur à temps de vol » ; ARC-016 « Pilotes des capteurs et des sorties » ; ARC-023 « Initialisation et échec d'initialisation »
@@ -417,7 +417,7 @@ stateDiagram-v2
 
 Données : `tof_meas_t` = distance brute en mm (`uint16`), code d'état de la mesure, taux de signal, instant TIM2 du front, drapeau `valid`. Pas 1 : la tâche voit le drapeau de PB6, lance en DMA l'écriture de l'index 0x0089 puis la lecture de 17 octets et rend la main (moins de 20 µs) ; pas 2 (fin du DMA) : décoder le bloc de résultat (état, distance, taux de signal, selon la structure de résultats de l'ULD, DOU-149 « Valeurs de registres du VL53L1X à vérifier dans la bibliothèque ST (ULD) »), puis lancer l'écriture de 1 dans 0x0086 (acquittement) en DMA ; pas 3 : publier. Mesure valide si le code d'état est « portée valide », le taux de signal au moins égal à `TOF_SIGNAL_MIN` (valeur de départ 0,5 Mcps, provisoire, DOU-160 « Mesure de hauteur valide et sols sombres ou brillants ») et la distance entre 40 et 3000 mm. Niveau 2 : 9 impulsions sur SCL, une par pas de tâche de fond (10 µs), puis réinitialisation du périphérique I2C. L'état Attente a un délai de garde de 100 ms : sans front de GPIO1 pendant ce temps, relecture du registre d'état puis niveau 1. Le niveau 3 (XSHUT et ULD, bloquant de 170 à 650 ms) n'est jamais lancé moteurs en marche ; il n'est lancé qu'à l'initialisation et au sol moteurs coupés, avec rafraîchissement du chien de garde entre les attentes (DOU-158 « Initialisation du capteur de hauteur plus longue que le chien de garde »). La bibliothèque ULD n'est appelée qu'à ces deux endroits (DOU-174 « Séquence d'initialisation du flux et bibliothèque ULD : taille, appels bloquants, licence »). Pour la coupure d'atterrissage (DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique », état Atterrissage seulement), une lecture brute (valide ou non) d'au plus 45 mm, ou un état « hors portée » dont la dernière valeur valide était au plus 60 mm, vaut contact (la fenêtre de validité de 40 mm est étroite à 500 mm/s : DEC-272 « Coupure d'atterrissage tolérante à la fenêtre de validité du capteur de hauteur »). `tof_last_valid_us` alimente la coupure à 200 ms de DES-029 « Surveillance et coupures automatiques ».
 **Réalisé par :** `projets/boomrone/firmware/src/drv_tof.c`, `projets/boomrone/firmware/src/drv_tof.h`, `projets/boomrone/firmware/lib/uld/`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-020 — Pilote du flux optique
 **Réfs amont :** ARC-005 « Capteur de flux optique » ; ARC-016 « Pilotes des capteurs et des sorties » ; ARC-023 « Initialisation et échec d'initialisation »
@@ -425,31 +425,31 @@ Données : `tof_meas_t` = distance brute en mm (`uint16`), code d'état de la me
 
 Lecture en vol à 100 Hz en deux pas de tâche de fond : pas A : CS bas, envoi de l'adresse du registre de rafale (0x16), attente de 40 µs bornée par TIM2 (en tout moins de 60 µs) ; pas B : lecture de 12 octets (96 bits à 1,328 MHz, 72 µs), CS haut (au repos au moins 500 ns avant la lecture suivante). Les 12 octets (mouvement, observation, delta x et delta y sur 16 bits, qualité de surface SQUAL, somme des pixels, maximum, minimum, obturateur sur 2 octets) donnent `flow_meas_t` = delta x, delta y (`int16`), SQUAL, instant TIM2, drapeau `valid` (SQUAL au moins `FLOW_SQUAL_MIN`, 30 au départ ; l'absence de mouvement donne des deltas nuls, donc une vitesse nulle valide : un drone immobile ne rend pas le flux invalide, DEC-273 « Flux optique : l'absence de mouvement est une vitesse nulle valide »). Les deltas s'accumulent dans la puce entre deux lectures : aucune perte si une lecture est retardée ; le pas de temps est la différence des instants de deux lectures, et l'âge d'un échantillon se compte depuis la dernière lecture réussie, mouvement ou non. Un pas qui dépasse 200 µs est abandonné et compté en erreur.
 **Réalisé par :** `projets/boomrone/firmware/src/drv_flow.c`, `projets/boomrone/firmware/src/drv_flow.h`, `projets/boomrone/firmware/src/drv_flow_init.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-021 — Pilotes des moteurs, du voyant, du buzzer et de la liaison série
 **Réfs amont :** ARC-016 « Pilotes des capteurs et des sorties »
 **Description :** moteurs : `motor_set(const float duty[4])` limite chaque rapport cyclique à [0 ; 1] et charge TIM1->CCRx = rapport x 7083 (arrondi vers le bas) ; `motor_cmd8()` rend la commande sur 0 à 255 pour la télémétrie ; rapport 0 donne un comparateur à 0 (sortie à l'état bas). Voyant : `led_set(r, v, b)` avec des niveaux de 0 à 10 ; `led_tick()` (appelée par l'interruption TIM6, phase de 0 à 9) met chaque sortie à 1 quand son niveau est supérieur à la phase (écritures BSRR), soit une période de 10 ms et 100 Hz ; niveau 0 éteint, niveau 10 allumé en permanence. Buzzer : `buzzer_set(bool)` sur PB11. Liaison série : USART2 8N1 à 9600 bauds, réception en DMA circulaire de 128 octets avec interruption de ligne au repos, `uart_rx_pop()` qui rend l'octet suivant à partir de l'index de queue en lisant l'index de tête du DMA (128 - compteur), détection de dépassement (drapeau ORE effacé et compteur) et de rattrapage de la queue par la tête ; émission en DMA normal, `uart_tx_start(buf, n)` refusé si une émission est en cours (`uart_tx_busy()`).
 **Réalisé par :** `projets/boomrone/firmware/src/drv_motor.c`, `projets/boomrone/firmware/src/drv_led.c`, `projets/boomrone/firmware/src/drv_buzzer.c`, `projets/boomrone/firmware/src/drv_uart.c`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-022 — Pilote de la mesure de tension de la batterie
 **Réfs amont :** ARC-009 « Alimentation de la logique et mesure de la tension » ; ARC-016 « Pilotes des capteurs et des sorties »
 **Description :** ADC1 en 12 bits, horloge synchrone HCLK/4 (42,5 MHz), temps d'échantillonnage 640,5 cycles (15,1 µs, supérieur aux 6 µs exigés par l'impédance de source de 60 kohms) ; séquence de 14 rangs déclenchée par le tick (TRGO de TIM6) : 10 conversions de PA0 (canal 1) puis 4 conversions de la référence interne VREFINT (canal 18), DMA vers un tampon de 14 mots ; durée 14 x 15,4 µs = 216 µs, résultats lus au tick suivant. Calcul : `vdda` = 3,0 V x VREFINT_CAL / moyenne des 4 mesures de VREFINT (VREFINT_CAL est la valeur d'usine à l'adresse 0x1FFF75AA, mesurée à 3,0 V) ; `vpin` = moyenne des 10 mesures x `vdda` / 4095 ; `vbat_V` = `vpin` x 250 / 150 x `VBAT_GAIN_TRIM` (rapport du pont de DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »). Garde-fous : la tension utilisée pour normaliser les moteurs est limitée à [3,0 V ; 4,3 V] ; une moyenne de VREFINT nulle ou une tension brute hors [2,0 V ; 5,0 V] rend `vbat_valid` faux (pas de division par zéro) ; budget d'erreur estimé ±15 mV à 3,7 V, ondulation des moteurs non comprise, à confirmer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension » (DOU-181 « Bilan d'erreur de la mesure de tension et niveau du BOR »). Sorties : `vbat_cycle` (par tick) et `vbat_100ms` (moyenne glissante de 100 valeurs). Drapeau `vbat_valid` faux jusqu'à la première séquence complète (environ 2 ms après le démarrage) ; si une séquence n'est pas terminée au tick suivant, la valeur précédente est conservée et `adc_stale` s'incrémente. Valeurs d'exemple : 4,2 V donne 2,52 V sur la broche, soit 3440 pas environ avec `vdda` = 3,0 V ; VREFINT nominale 1,212 V, soit environ 1654 pas à 3,0 V (valeurs de mémoire, DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence »).
 **Réalisé par :** `projets/boomrone/firmware/src/drv_adc.c`, `projets/boomrone/firmware/src/drv_adc.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-023 — Filtre d'attitude de Mahony
 **Réfs amont :** ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse »
 **Description :** état : quaternion unitaire q = (w, x, y, z), vitesse angulaire filtrée. À chaque cycle, avec dt = écart des instants TIM2 de deux échantillons, borné à [0,5 ms ; 5 ms] : (1) poids de l'accéléromètre `wa` = max(0, 1 - |norme / g - 1| / 0,5), donc 1 à 1 g et 0 sous 0,5 g ou au-delà de 1,5 g ; (2) direction de la gravité estimée v = (2(x z - w y), 2(w x + y z), w² - x² - y² + z²) ; (3) erreur e = a_unitaire x v (produit vectoriel), nulle si la norme de a est nulle ; (4) vitesse corrigée = gyroscope + Kp x `wa` x e, avec Kp = 2,0 s⁻¹ au sol et 0,3 s⁻¹ moteurs en marche (en vol l'accéléromètre mesure la poussée, pas la gravité : DOU-177 « Filtre d'attitude : l'accéléromètre en vol mesure la poussée, pas la gravité »), sans terme intégral (le biais est mesuré à l'initialisation, DES-031 « Séquence d'initialisation et échec d'initialisation ») ; (5) q <- q + 0,5 q (0, vitesse corrigée) dt, puis normalisation par 1/racine (FPU). Initialisation : q déduit de l'accélération moyenne mesurée à l'initialisation (lacet nul). Sorties : cosinus d'inclinaison `tilt_cos` = w² - x² - y² + z² (inclinaison = arccos), vecteur de gravité dans le repère du drone v, vitesse angulaire filtrée par un filtre du premier ordre à 0,3 (environ 57 Hz à 1 kHz). Coût estimé 25 µs (budget de ARC-015 « Structure logicielle et ordonnancement »). Constantes de départ marquées provisoires (DEC-261 « Estimation : filtre de Mahony, observateur de hauteur et compensation du retard », DEC-260 « Gains de référence et constantes de départ provisoires »).
 **Réalisé par :** `projets/boomrone/firmware/src/est_attitude.c`, `projets/boomrone/firmware/src/est_attitude.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-024 — Observateur de hauteur et de vitesse verticale
 **Réfs amont :** ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse »
 **Description :** état (h, v) en m et m/s. Prédiction à chaque cycle : a_z = troisième ligne de la matrice de rotation du repère du drone vers le monde appliquée à l'accélération mesurée, moins g ; h <- h + v dt + 0,5 a_z dt² ; v <- v + a_z dt. À la fin de chaque cycle, après la correction éventuelle, l'état estimé est recopié dans un historique circulaire de 64 cycles. Mise à jour à chaque mesure valide du capteur de hauteur (30 Hz) : hauteur mesurée h_m = (distance brute - 20 mm) x `tilt_cos` (rejetée si `tilt_cos` < 0,5) ; retard k = (instant courant - instant du front) arrondi au ms, plus `TOF_DELAY_MS` (33 ms au départ, DOU-170 « Constantes de capteurs de départ : échelle du flux, retard du capteur de hauteur, filtres »), rejetée si k > 63 ; innovation e = h_m - h_historique(k) ; correction de l'état courant h <- h + 0,396 e et v <- v + 1,188 e (gains L1 = 12 s⁻¹ et L2 = 36 s⁻² multipliés par la période de 33 ms). Anomalies : si |e| > 0,5 m, la mesure est ignorée, sauf à la troisième de suite où l'état est recalé (h = h_m, v = 0 ; limite connue juste après un lancer rapide : DOU-170 « Constantes de capteurs de départ : échelle du flux, retard du capteur de hauteur, filtres »). État initial : première mesure valide, sinon 0. Résultat de simulation de contrôle (rampe de 1 m/s, bruit de 10 mm sur la hauteur et de 0,2 m/s² sur l'accélération, retard de 33 ms) : erreur maximale d'environ 9 cm pendant la rampe, 3 cm en régime (DEC-261 « Estimation : filtre de Mahony, observateur de hauteur et compensation du retard »).
 **Réalisé par :** `projets/boomrone/firmware/src/est_hauteur.c`, `projets/boomrone/firmware/src/est_hauteur.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-025 — Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire
 **Réfs amont :** ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse »
@@ -457,7 +457,7 @@ Lecture en vol à 100 Hz en deux pas de tâche de fond : pas A : CS bas, envoi d
 
 Critères (calculés à chaque cycle) : à plat si `tilt_cos` >= cos 15° = 0,9659 ; immobile si la norme de la vitesse angulaire filtrée est au plus 30 °/s (0,5236 rad/s) et si, dans une fenêtre de 50 échantillons de la norme de l'accélération pris à 100 Hz (0,5 s), le maximum et le minimum sont à moins de 0,5 m/s² de la moyenne (DEC-263 « Critère d'immobilité : fenêtre de 50 échantillons à 100 Hz ») ; stationnaire si à plat, hauteur h >= 0,3 m, vitesse horizontale valide d'au plus 0,3 m/s avec une vitesse verticale d'au plus 0,3 m/s (norme combinée : lecture de REQ-007 « Critère de vol stationnaire » à valider à la porte, DOU-175 « Résolution de la vitesse horizontale du flux face au seuil de 0,3 m/s »), et ceci pendant 10 cycles consécutifs. Vitesse horizontale invalide : le critère de stationnaire est faux.
 **Réalisé par :** `projets/boomrone/firmware/src/est_vitesse.c`, `projets/boomrone/firmware/src/est_criteres.c`, `projets/boomrone/firmware/src/est_criteres.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-026 — Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique
 **Réfs amont :** ARC-018 « Boucle de contrôle du vol »
@@ -477,31 +477,31 @@ Le gain d'inclinaison (paramètre réglable) multiplie `K_ANG` seul (borne haute
 
 Mixeur en X (numérotation de DES-006 « Cadre, anneaux, moteurs et hélices ») : poussée du moteur i = collectif + a_i roulis + b_i tangage + c_i lacet, avec (a, b, c) = moteur 1 (-1, -1, +1), moteur 2 (-1, +1, -1), moteur 3 (+1, +1, +1), moteur 4 (+1, -1, -1). Si un moteur dépasse 1 ou passe sous 0, le collectif est décalé pour garder l'écart entre moteurs (priorité à l'attitude) ; si l'écart seul ne tient pas, il est réduit proportionnellement. Conversion : rapport cyclique = racine(poussée limitée à [0 ; 1]) x `V_REF` / `vbat_cycle`, limité à [0 ; 1] (DEC-259 « Contrôle : poussée linéarisée, mixeur en X et priorité à l'attitude »). Démarrage : rampe linéaire de 20 ms sur le rapport cyclique après `motors_start()`.
 **Réalisé par :** `projets/boomrone/firmware/src/ctl_attitude.c`, `projets/boomrone/firmware/src/ctl_hauteur.c`, `projets/boomrone/firmware/src/ctl_mixer.c`, `projets/boomrone/firmware/src/ctl_phases.c`, `projets/boomrone/firmware/src/config_ctl.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-027 — Machine à états : données, événements et table de transitions
 **Réfs amont :** ARC-019 « Machine à états du drone » ; ARC-024 « Effets locaux (logiciel) » ; ARC-025 « Protocole et service du statut sans fil »
 **Description :** `app_fsm.c`, fonction `fsm_step(const fsm_in_t*)` appelée une fois par cycle. États : énumération dont les valeurs sont les numéros de REQ-020 « Statut sans fil » (1 Allumé à 17 Délai de descente dépassé) plus `S_INIT` = 0. Données : `fsm_t` = état, instant d'entrée, instant de départ des moteurs, drapeau « vol de réglage », cause de refus, cause de coupure, instant du relâchement armé. Entrées `fsm_in_t` : événement du bouton (DES-028 « Gestion logicielle du bouton »), niveau filtré du bouton, événements de surveillance (DES-029 « Surveillance et coupures automatiques »), commande radio acceptée (DES-034 « Mode réglage, filtrage des commandes et vol de réglage »), critères (DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire »), état de la batterie, instant courant. Ordre de traitement par cycle : sous-tension, bouton, commande Arrêt, le reste (ARC-019 « Machine à états du drone »). Les transitions sont exactement celles du tableau de « Architecture » — `projets/boomrone/03-architecture.md` (section « Machine à états : transitions »), codées en `switch` par état avec des gardes ; à chaque changement d'état, `btn_set_ignore_if_pressed()` pose le drapeau d'appui en cours. États événements (5, 7, 12, 13 à 17) : le code est publié à l'entrée (DES-033 « Trames du statut sans fil, automate de réception et file d'émission »), l'état suivant est pris au cycle d'après. Effets : états 1 vers effet 1, 3 vers 2, 6 vers 3, 8 à 11 vers 4, 2 vers 9, 4 vers 10 en effet de base ; événements 5 vers 6, 7 vers 7, 12 vers 5, 13 à 17 vers 8, superposés (DES-032 « Effets locaux : table, séquenceur de lumière et de son »). Actions : `motors_start()` aux deux sites d'appel, `motors_cut()` pour toute coupure (en premier), écriture de la cause en `.noinit`. Un Lancé de plus de 500 ms sans moteurs ne rafraîchit plus le chien de garde (DES-030 « Chien de garde matériel et règle de rafraîchissement »).
 **Réalisé par :** `projets/boomrone/firmware/src/app_fsm.c`, `projets/boomrone/firmware/src/app_fsm.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-028 — Gestion logicielle du bouton
 **Réfs amont :** ARC-020 « Gestion logicielle du bouton »
 **Description :** `btn_isr_sample(level)` appelée par l'interruption TIM6 : compteur d'échantillons identiques, niveau filtré modifié quand le compteur atteint 10 (10 ms). Événements dérivés du niveau filtré dans la boucle principale : appui, relâchement, passages à 1,0 s, 2,0 s et 10,0 s depuis l'appui initial (instants TIM2, constantes de `config_fixed.h`). Drapeau `ignore_until_release` : posé par `btn_set_ignore_if_pressed()` à chaque changement d'état, il supprime tous les événements jusqu'au premier relâchement filtré. Garde de 500 ms à partir du relâchement armé : les fronts sont supprimés, l'antirebond continue, et si le niveau filtré est bas à la fin de la garde l'événement `BTN_LOW_AFTER_GUARD` est émis (coupure au cycle suivant) ; pas de garde en vol de réglage. À l'initialisation : `btn_held_since_poweron()` est vrai si le niveau filtré est bas dès la première valeur filtrée (10 ms après le départ) et n'est jamais remonté pendant l'initialisation. Délai de l'arrêt d'urgence : antirebond de 10 ms plus un cycle, environ 12 ms.
 **Réalisé par :** `projets/boomrone/firmware/src/app_button.c`, `projets/boomrone/firmware/src/app_button.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-029 — Surveillance et coupures automatiques
 **Réfs amont :** ARC-021 « Surveillance et coupures automatiques » ; ARC-015 « Structure logicielle et ordonnancement » ; ARC-016 « Pilotes des capteurs et des sorties »
 **Description :** `safety_step()` à chaque cycle avant le contrôle, produit au plus un événement par cycle selon la priorité : sous-tension, coupure demandée par le bouton (via la machine à états), arrêt radio, puis les autres. Sous-tension : compteur de cycles ; sous 3,30 V le compteur augmente, entre 3,30 V et 3,35 V il est conservé, à 3,35 V et plus il est remis à zéro ; à 100 le compteur déclenche l'événement (coupure environ 105 ms après le début du creux) ; actif dans tous les états dès que `vbat_valid` est vrai (DEC-258 « Mesure de la tension : séquence de conversion et zone de maintien de la sous-tension »). Armement : `safety_ready()` évalue au moment des 2,0 s d'appui, par ordre de priorité des causes de refus : batterie (`vbat_100ms` < 3,70 V), mouvement (non immobile), pas à plat (inclinaison supérieure à 15°). Coupures en vol : « stationnaire non atteint » à 2,0 s du démarrage des moteurs sans critère de stationnaire vrai ; « basculement » si `tilt_cos` < 0,5 (60°) pendant 100 cycles, seulement après le stationnaire (états 10 et 11) ; « délai de descente » à 15,0 s après le début de l'atterrissage (en vol de réglage, après le décollage) ; « échec de stabilisation » si `imu_failed` ou si aucune mesure de hauteur valide depuis 200 ms moteurs en marche (DOU-140 « Défaut de capteur en vol : cause et effet rattachés à l'échec de stabilisation ») ; arrêt sans fil traité au cycle suivant la trame. Rattachement aux 17 états : « stationnaire non atteint », `imu_failed` et l'absence de mesure de hauteur donnent tous l'état 13 et le code de coupure 1 « échec de stabilisation ». Le délai de 2,0 s est le même en vol de réglage (seul le maintien du stationnaire passe de 10 s à 3 s). Chaque coupure appelle `motors_cut()`, écrit la cause en `.noinit` (avec contrôle de validité, DES-033 « Trames du statut sans fil, automate de réception et file d'émission ») puis signale l'événement à la machine à états.
 **Réalisé par :** `projets/boomrone/firmware/src/app_safety.c`, `projets/boomrone/firmware/src/app_safety.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-030 — Chien de garde matériel et règle de rafraîchissement
 **Réfs amont :** ARC-022 « Chien de garde »
 **Description :** IWDG avec prédiviseur 8 sur l'oscillateur LSI de 32 kHz (4 kHz) et rechargement 399, soit 100 ms nominal (±10 % de dispersion supposée) ; gelé quand le débogueur arrête le cœur (DBGMCU). Une seule fonction écrit la clé de rafraîchissement : `wdg_refresh(reason)`. En fin de cycle, elle n'écrit que si (1) `cycle_ran` est vrai (puis il est remis à zéro) et (2) l'état Lancé dure moins de 500 ms (TIM2). Elle est aussi appelée avant et après une écriture de flash, et à chaque étape de l'initialisation (DES-031 « Séquence d'initialisation et échec d'initialisation ») et de l'initialisation du capteur de hauteur (DES-019 « Pilote du capteur de hauteur non bloquant »). Pire cas de détection : cycle manquant environ 112 ms après le dernier rafraîchissement ; phase Lancé coupée environ 612 ms après le relâchement. Cause du reset : lue dans RCC_CSR au démarrage (drapeaux IWDG, BOR, broche NRST), mémorisée puis effacée ; elle sert à DES-031 « Séquence d'initialisation et échec d'initialisation ». Les HardFault ne rafraîchissent pas (DES-017 « Coupure des moteurs, démarrage unique et gestionnaires d'exception »).
 **Réalisé par :** `projets/boomrone/firmware/src/drv_wdg.c`, `projets/boomrone/firmware/src/app_wdg.c`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-031 — Séquence d'initialisation et échec d'initialisation
 **Réfs amont :** ARC-023 « Initialisation et échec d'initialisation »
@@ -527,13 +527,13 @@ gantt
 *Légende : abscisse en millisecondes (axe gradué en secondes par le moteur de rendu).* Étapes : (1) lire la cause de reset et valider le marqueur `.noinit` (mise sous tension reconnue si le marqueur est absent ou invalide, ou si le drapeau de coupure d'alimentation ou de brown-out du reset est levé : mise sous tension, causes remises à zéro, marqueur posé) ; (2) horloges, broches moteurs à l'état bas ; (3) pilote de la centrale ; (4) bouton lu ; (5) capteur de hauteur : au plus 2 tentatives de 300 ms avec remise à zéro par XSHUT, échec déclaré avant 1 s ; (6) flux optique ; (7) attente de 0,5 s (l'ADC démarre, `vbat_valid` devient vrai) ; (8) 1000 échantillons (biais accepté seulement s'il est au plus 3 °/s par axe, sinon échec « mouvement ») : biais du gyroscope, moyenne de l'accélération (attitude initiale), tests d'immobilité (norme angulaire sous 30 °/s et fenêtre d'accélération, DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire ») et d'inclinaison (15°), norme de l'accélération entre 0,8 g et 1,2 g ; (9) charge des réglages (DES-035 « Paramètres de vol, section d'origine et pilote de flash ») ; (10) décision par priorité : échec (REQ-037 « Comportement en échec d'initialisation ») si absence de la centrale, du flux ou du capteur de hauteur (DEC-264 « Initialisation : centrale inertielle ou flux optique absent vaut échec d'initialisation »), mouvement, pas à plat, chute libre ou sous-tension (moins de 3,3 V pendant 100 cycles, DES-029 « Surveillance et coupures automatiques ») ; sinon mode réglage si `btn_held_since_poweron()` et mise sous tension reconnue (marqueur absent) ; sinon Allumé ; drapeau d'appui en cours posé si le bouton est enfoncé. En échec : moteurs jamais armés, bouton et commandes ignorés ; pour l'échec par sous-tension, capteurs en veille et voyant au niveau 1 sur 10, horloge inchangée à 170 MHz (DEC-274 « Échec par sous-tension : horloge conservée à 170 MHz », DOU-178 « Horloge à 16 MHz de l'échec par sous-tension abandonnée », DOU-118 « Seuil de protection et consommation résiduelle du drone laissé allumé »). Aucun statut radio avant la fin de l'étape 10.
 Absence de la centrale ou du flux : DEC-264 « Initialisation : centrale inertielle ou flux optique absent vaut échec d'initialisation », DOU-168 « Centrale inertielle ou flux optique absent à l'initialisation ».
 **Réalisé par :** `projets/boomrone/firmware/src/app_init.c`, `projets/boomrone/firmware/src/app_init.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-032 — Effets locaux : table, séquenceur de lumière et de son
 **Réfs amont :** ARC-024 « Effets locaux (logiciel) »
 **Description :** table de 10 lignes en constantes (`effect_t` : niveaux R, V, B de 0 à 10, période de clignotement en ms (0 = fixe), rapport 50 %, motif sonore = nombre de bips, durée d'un bip, pause de 100 ms) : 1 Allumé (0, 10, 0 fixe, aucun son) ; 2 Appui validé (0, 10, 10 fixe, 1 bip de 100 ms) ; 3 Prêt (0, 10, 0 période 250 ms, 2 bips de 100 ms) ; 4 Lancé et vol (10, 10, 10 fixe, aucun son) ; 5 Posé (0, 0, 10 fixe, 1 bip de 250 ms) ; 6 Refus (10, 10, 0 période 250 ms, 3 bips de 100 ms) ; 7 Désarmement (10, 0, 10 fixe, 2 bips de 250 ms) ; 8 Coupure en vol (10, 0, 0 fixe, 1 bip de 500 ms) ; 9 Échec d'initialisation (1, 0, 0 période 1000 ms, 1 bip de 500 ms) ; 10 Mode réglage (0, 0, 10 période 1000 ms, 1 bip de 200 ms). Moteur : `effects_set_base(n)` fixe l'effet de base ; `effects_event(n)` superpose l'effet pendant 1,0 s (les événements 5, 6, 7, 8) puis revient à la base, un nouvel événement remplaçant l'ancien ; la tâche `effects_task()` tourne tous les 10 ms (ordonnanceur, DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond ») et calcule les niveaux (clignotement, séquence de bips). Son : jamais moteurs en marche ; le son d'un événement est repoussé jusqu'à 300 ms après la coupure ; le son est joué une seule fois à l'entrée de l'effet. La teinte du blanc et du cyan varie avec la décharge (anode sur la batterie) : essai à 3,4 V (DOU-133 « Forme des dix effets locaux : lumière, son, distinction mesurable »).
 **Réalisé par :** `projets/boomrone/firmware/src/app_effects.c`, `projets/boomrone/firmware/src/app_effects.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-033 — Trames du statut sans fil, automate de réception et file d'émission
 **Réfs amont :** ARC-025 « Protocole et service du statut sans fil »
@@ -542,13 +542,13 @@ Absence de la centrale ou du flux : DEC-264 « Initialisation : centrale inertie
 Automate de réception : états attente de 0xA5, type, charge, CRC ; un type inconnu ou un CRC faux fait rejouer les octets déjà reçus après le 0xA5 (le module peut couper ou fusionner les trames) ; une trame partielle est abandonnée après 50 ms de silence. Lecture déclenchée par l'interruption de ligne au repos, tâche de priorité 1 (DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond »), commande Arrêt exécutée au cycle suivant (au plus 5 ms après la fin de la trame côté drone). Émission : file de 8 trames de 14 octets ; le statut remplace un statut déjà en attente ; si la file est pleine, la plus ancienne trame de variables est abandonnée ; une trame est lancée quand `uart_tx_busy()` est faux. Causes mémorisées dans `.noinit` : marqueur de 32 bits, deux octets de cause, CRC8 ; à la mise sous tension, RAM invalide donc causes à zéro ; après un reset du chien de garde, les causes sont conservées.
 Choix de format : DEC-265 « Protocole sans fil : octets, codes de cause, file d'émission et réception ».
 **Réalisé par :** `projets/boomrone/firmware/src/app_proto.c`, `projets/boomrone/firmware/src/app_proto.h`, `projets/boomrone/firmware/src/app_radio.c`, `projets/boomrone/firmware/test/vecteurs_trames.txt`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-034 — Mode réglage, filtrage des commandes et vol de réglage
 **Réfs amont :** ARC-026 « Mode réglage et vol de réglage » ; ARC-025 « Protocole et service du statut sans fil » ; ARC-027 « Paramètres de vol et stockage des réglages »
 **Description :** `tuning_accept(etat, commande)` applique le tableau de REQ-023 « Commandes sans fil selon l'état du drone » (source unique, copié dans une table de 18 lignes (états 0 à 17) x 4 commandes ; état 2 : tout ignoré). Décoller : accepté en état 4 si `vbat_100ms` >= 3,70 V et si le niveau du bouton n'est pas bas (REQ-041 « Conditions d'acceptation de la commande Décoller ») ; sinon état 5 avec la cause (batterie, puis bouton), retour à l'état 4. Décoller accepté : drapeau « réglage » levé, `motors_start()` immédiat (sans délai de 200 ms ni état Lancé), état 9. Vol de réglage : mêmes critères et mêmes phases, stationnaire de 3,0 s, pas de garde du bouton, Arrêt et bouton coupent, Modifier acceptée, Sauvegarder ignorée ; la perte du lien n'a aucun effet. Fin du vol : retour à l'état 4 sans verrouillage, sauf sous-tension (état 2). Modifier avec un identifiant supérieur à 3 : trame ignorée, aucun effet (REQ-026 « Paramètres de vol réglables »). Modifier : `param_set(id, valeur)` (DES-035 « Paramètres de vol, section d'origine et pilote de flash ») saturée aux bornes, appliquée au cycle suivant. Sauvegarder : `param_save()` en état 4 seulement, batterie d'au moins 3,5 V ; en état 2 toute commande est ignorée (REQ-037 « Comportement en échec d'initialisation »).
 **Réalisé par :** `projets/boomrone/firmware/src/app_tuning.c`, `projets/boomrone/firmware/src/app_tuning.h`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-035 — Paramètres de vol, section d'origine et pilote de flash
 **Réfs amont :** ARC-027 « Paramètres de vol et stockage des réglages »
@@ -556,24 +556,24 @@ Choix de format : DEC-265 « Protocole sans fil : octets, codes de cause, file d
 
 `param_load()` : met à zéro `flash_ecc_error`, lit le mot, vérifie le drapeau (le gestionnaire NMI de DES-017 « Coupure des moteurs, démarrage unique et gestionnaires d'exception » l'a peut-être levé), puis valide chaque champ ; un champ hors bornes devient sa valeur d'origine (une page vierge donne donc les valeurs d'origine, jamais un gain maximal) ; erreur ECC : les quatre valeurs d'origine (DEC-266 « Réglages : origine en double dans le code et lecture protégée contre l'erreur ECC »). `param_set(id, v)` : saturation aux bornes. `param_save()` : refusée si la batterie est sous 3,5 V ou si le drone n'est pas en mode réglage au sol ; sinon rafraîchir le chien de garde, déverrouiller la flash, effacer la page 63 (22 à 40 ms), programmer le mot de 64 bits, attendre la fin, verrouiller, relire et comparer, rafraîchir ; durée environ 45 ms ; échec compté. Aucune somme de contrôle (DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée »).
 **Réalisé par :** `projets/boomrone/firmware/src/app_params.c`, `projets/boomrone/firmware/src/app_params.h`, `projets/boomrone/firmware/src/drv_flash.c`, `projets/boomrone/firmware/src/config_fixed.h`, `projets/boomrone/firmware/tools/check_fixed.py`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-036 — Logiciel de suivi en Python
 **Réfs amont :** ARC-028 « Logiciel d'essai de l'appareil de suivi »
 **Description :** script `suivi.py` (Python 3.11 ou plus, bibliothèque `bleak`). Modules internes : `Parser` (même automate que DES-033 « Trames du statut sans fil, automate de réception et file d'émission », mêmes vecteurs de test), `Link` (connexion au module par nom ou adresse ; identifiants de service et de caractéristique passés en options `--service` et `--char`, à relever sur le module : DOU-151 « Module E104-BT02 : débit par défaut, service, absence de commande AT » ; réception par notifications, envoi sans réponse découpé en morceaux de 20 octets), `Display` (affichage console rafraîchi cinq fois par seconde : état en code et nom, causes de refus et de coupure en clair, quatre paramètres, hauteur, inclinaison, commandes moteur, trames par seconde, erreurs de CRC), `Journal` (fichier CSV horodaté pour mesurer les fréquences de REQ-020 « Statut sans fil » et REQ-021 « Variables du vol »), `Keys` (d Décoller, a Arrêt, m Modifier avec saisie de l'identifiant et de la valeur, s Sauvegarder, q quitter). Option `--simu` : drone simulé en bouclage (envoie statuts et variables à 2 Hz et 10 Hz, répond aux commandes) pour tester le script sans module.
 **Réalisé par :** `projets/boomrone/tools/suivi.py`, `projets/boomrone/tools/test_suivi.py`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-037 — Jalons de livraison et configurations de compilation
 **Réfs amont :** ARC-029 « Plan de livraison par jalons »
 **Description :** option de compilation `JALON` = 1, 2 ou 3, utilisée dans le `Makefile` (cibles `j1`, `j2`, `j3`) et dans `config_jalon.h`. Jalon 1 (vol normal) : `main`, `board`, tous les pilotes sauf `drv_flash` en écriture, estimation, contrôle, bouton, surveillance, machine à états, effets, chien de garde, initialisation ; les quatre paramètres sont des constantes aux valeurs d'origine ; `motors_start()` a un seul site d'appel. Jalon 2 : ajoute `app_proto` et `app_radio` ; la machine à états ne reçoit que Arrêt, les autres commandes sont ignorées. Jalon 3 : ajoute `app_tuning`, `param_save()`, le vol de réglage et le second site d'appel de `motors_start()`. Chaque jalon compile sans les modules suivants (remplacés par des fonctions vides dans `stubs_jalon.c`) et a son test d'intégration (TI-025 « Livraison par jalons »).
 **Réalisé par :** `projets/boomrone/firmware/Makefile`, `projets/boomrone/firmware/src/config_jalon.h`, `projets/boomrone/firmware/src/stubs_jalon.c`
-**Statut :** Proposé
+**Statut :** Validé
 
 ### DES-038 — Contenu de la page de consignes d'emploi
 **Réfs amont :** ARC-030 « Page de consignes d'emploi »
 **Description :** la page « Consignes d'emploi » — `projets/boomrone/consignes-emploi.md` tient sur une face A4, 60 lignes au plus (48 aujourd'hui). À ajouter ou vérifier, une ligne ou deux chacune : (1) après un échec d'initialisation ou une sous-tension, débrancher la batterie ; (2) programmer hélices démontées et sans relier le 3,3 V du ST-LINK à la carte ; (3) hélices de 45 mm et anneaux obligatoires ; (4) un drone laissé branché se décharge en profondeur (consigne « débrancher ») ; (5) et (6), proposés et non exigés par l'architecture : mentionner la marge de batterie faible (DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie ») et la hauteur minimale de lancer de 1,5 m (REQ-006 « Stabilisation après le lancer »). Les points (1) à (4) sont ceux de ARC-030 « Page de consignes d'emploi » ; aucune nouvelle exigence.
 **Réalisé par :** `projets/boomrone/consignes-emploi.md`, `projets/boomrone/firmware/tools/check_consignes.py`
-**Statut :** Proposé
+**Statut :** Validé
 
 <!-- Ajouter les éléments ci-dessous, au même format, en dehors des blocs de code. -->
