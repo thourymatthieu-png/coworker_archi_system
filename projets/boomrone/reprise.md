@@ -1,11 +1,11 @@
-# Reprise du projet Boomrone — état au 2026-10-29
+# Reprise du projet Boomrone — état au 2026-10-30
 
 > **Aperçu**
 > - Phase « architecture » rédigée par délégation totale (DEC-218 « Délégation totale de la phase architecture à l'architecte ») : 30 éléments d'architecture, 29 tests d'intégration, tous « Proposé » ; trois relectures de porte initiales faites et corrigées, puis une seconde relecture après la révision (DEC-233 « Relecture de porte architecture : corrections décidées par délégation »). Révision du 2026-10-29 pour la contrainte JLCPCB (DEC-234 « JLCPCB, fabricant de la carte : contrainte de début de projet » à DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation ») : carte assemblée par JLCPCB, composants du stock, corrections des deux revues d'experts, nouvelle relecture de porte.
 > - Livrables : « Architecture » — `projets/boomrone/03-architecture.md` et section TI de « Plans de test » — `projets/boomrone/05-plans-de-test.md`.
-> - La porte « architecture » n'est PAS franchie : l'accord explicite de l'utilisateur est attendu. Réserve majeure : la tension de la batterie sous charge est marginale à infaisable avec les seuils actuels (DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie »).
+> - La porte « architecture » est franchie le 2026-10-30 sur accord explicite de l'utilisateur (DEC-251 « Porte architecture franchie : accord explicite de l'utilisateur »), les ARC sont « Validé ». Réserve majeure : la tension de la batterie sous charge est marginale à infaisable avec les seuils actuels (DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie »).
 > - 0 doute bloquant ; non bloquants ouverts : voir ci-dessous. Avant la commande de la carte : tester le module E104-BT02 seul (DOU-151 « Module E104-BT02 : débit par défaut, service, absence de commande AT »), lire le devis de JLCPCB (DOU-153 « Carte double face, assemblage Standard, frais d'extension et délais »), y vérifier la pose de la puce du flux optique et la lentille (DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce »), choisir le genre du XT30 (DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion »), faire les mesures au banc.
-> - Prochain pas : accord de la porte, puis mesures au banc avant la commande de la carte, puis phase « conception détaillée ».
+> - Prochain pas : mesures au banc avant la commande de la carte, puis phase « conception détaillée ».
 
 ```mermaid
 ---
@@ -17,14 +17,14 @@ flowchart LR
     B --> PB{{"Porte besoins : franchie"}}
     PB --> R["Exigences : validées"]
     R --> PR{{"Porte exigences : franchie"}}
-    PR --> A["Architecture : proposée"]
-    A --> PA{{"Porte architecture : en attente de l'utilisateur"}}
+    PR --> A["Architecture : validée"]
+    A --> PA{{"Porte architecture : franchie"}}
     PA --> D["Conception détaillée"]
     D --> I["Implémentation et tests"]
     classDef fait fill:#c8e6c9,stroke:#2e7d32
     classDef cours fill:#ffe9a8,stroke:#c90
-    class S,PS,B,PB,R,PR fait
-    class A,PA cours
+    class S,PS,B,PB,R,PR,A,PA fait
+    class D cours
 ```
 
 ## Choix d'architecture clés
@@ -43,7 +43,7 @@ flowchart LR
 `python tools/check_traceability.py projets/boomrone` : aucune erreur de titre ni de référence (état au 2026-10-29 après la révision) ; plus aucun « REQ sans ARC » ni « ARC sans TI ». Trous restants : 30 « ARC sans DES » (attendus avant la conception détaillée) et 12 « SCN sans BES » (défaut connu de l'outil, DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé »).
 
 ## À faire ensuite
-1. L'utilisateur donne ou refuse l'accord de la porte « architecture » (statut des ARC « Proposé » à passer à « Validé », à consigner par une décision).
+1. Fait : porte « architecture » franchie (DEC-251 « Porte architecture franchie : accord explicite de l'utilisateur »).
 2. Mesurer au banc poussée, courant et résistance interne (TI-007 « Moteurs, poussée, masse et dimensions », TI-008 « Batterie, connecteur, chute de tension et mesure de tension ») avant de commander la carte ; décider du repli R1 + R2 si nécessaire.
 3. Phase « conception détaillée » (`04-conception-detaillee.md`), avec les tests unitaires.
 4. DOU-150 « Écart entre l'exigence d'assemblage à la main et l'assemblage par JLCPCB » est levé : REQ-044 « Assemblage à la main », TS-020 « Fabrication à la main » et TA-015 « Inspection de la fabrication à la main » sont réécrites (DEC-245 « REQ-044 réécrite : carte fabriquée et assemblée par JLCPCB, raccordements à la main »).
