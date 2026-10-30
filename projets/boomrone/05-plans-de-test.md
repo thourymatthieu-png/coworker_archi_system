@@ -1,10 +1,10 @@
 # Plans de test
 
 > **Aperçu**
-> - Trois niveaux définis à ce stade : 29 tests d'intégration (TI) qui vérifient les 30 éléments d'architecture (section « Tests d'intégration (TI) » en bas) ; 15 recettes (TA) qui vérifient les besoins en rejouant les 12 scénarios (celui de la mise en service par deux recettes) et en inspectant 3 besoins ; 26 tests système (TS) qui vérifient les 41 exigences actives.
+> - Quatre niveaux définis à ce stade : 38 tests unitaires (TU) qui vérifient les 38 éléments de conception (section « Tests unitaires (TU) » tout en bas) ; 29 tests d'intégration (TI) qui vérifient les 30 éléments d'architecture (section « Tests d'intégration (TI) ») ; 15 recettes (TA) qui vérifient les besoins en rejouant les 12 scénarios (celui de la mise en service par deux recettes) et en inspectant 3 besoins ; 26 tests système (TS) qui vérifient les 41 exigences actives.
 > - Chaque exigence active a au moins un TS, chaque besoin au moins un TA ; les valeurs attendues sont celles de « Exigences système » — `projets/boomrone/02-exigences.md`.
 > - Moyens simples : banc maison, alimentation de laboratoire, chronomètre ou caméra, oscilloscope ou analyseur logique, appareil de suivi, pièce d'essai.
-> - Les tests unitaires (TU) viennent avec la conception détaillée (ordre d'exécution : TU, TI, TS, TA).
+> - Les tests unitaires (TU) sont écrits avec la conception détaillée (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; ordre d'exécution : TU, TI, TS, TA.
 > - État : tous les tests sont écrits, aucun n'est exécuté (le prototype n'existe pas encore).
 
 ## Vue d'ensemble
@@ -55,7 +55,7 @@ flowchart LR
 | Recette | Besoins | TA | 15 | écrit |
 | Système | Exigences | TS | 26 | écrit |
 | Intégration | Architecture | TI | 29 | écrit |
-| Unitaire | Conception détaillée | TU | 0 | après la conception détaillée |
+| Unitaire | Conception détaillée | TU | 38 | écrit |
 
 ## Moyens d'essai
 
@@ -688,4 +688,282 @@ Chaque test d'intégration vérifie un ou plusieurs éléments de « Architectur
 **Préconditions :** carte réelle, ST-LINK, fichier de carte mémoire (`.map`), analyseur logique sur une sortie moteur et une sortie de test, hélices démontées.
 **Procédure :** (1) écrire la page des réglages (effacement et écriture, 22 à 40 ms) pendant une mesure de hauteur puis pendant une lecture de la centrale, au sol, moteurs coupés ; (2) provoquer un HardFault (accès invalide) moteurs commandés ; (3) vérifier dans le fichier de carte mémoire que `.noinit` et les tampons DMA sont en SRAM1, relire la zone `.noinit` après un reset par le chien de garde, un brown-out et une mise sous tension ; relever le comportement de la SRAM2 au reset ; (4) mesurer avec TIM2 la garde du bouton et la phase Lancé pendant une écriture de flash ; (5) compter les tâches de fond exécutées par cycle.
 **Résultat attendu :** aucune erreur de bus non comptée, mesure suivante valide, chien de garde rafraîchi ; HardFault : moteurs coupés en moins de 1 ms ; `.noinit` et tampons DMA en SRAM1, causes conservées après un reset du chien de garde et remises à zéro à la mise sous tension ; durées mesurées à ±1 ms malgré le gel de la flash ; au plus une tâche de fond par cycle.
+**Statut :** Écrit
+
+## Tests unitaires (TU)
+
+Chaque test unitaire vérifie un élément de « Conception détaillée » — `projets/boomrone/04-conception-detaillee.md`, défini en même temps que lui (38 TU pour 38 DES, numérotés dans le même ordre que les DES). Aucun TU n'est exécuté : le code et les fichiers n'existent pas encore. Limite connue : DOU-176 « Tests unitaires sur PC : écart entre la maquette de registres et le composant réel ».
+
+| Famille | Commande | TU |
+|---|---|---|
+| Logiciel compilé sur PC, maquette des registres (DEC-256 « Tests unitaires compilés sur PC avec maquette des registres ») | `make -C projets/boomrone/firmware test` | de TU-016 « Ordonnanceur : choix de la tâche de fond, cycles manqués et durées » à TU-035 « Paramètres et flash : bornes, valeurs d'origine, séquence de sauvegarde » |
+| Contrôle de calcul ou de fichier du matériel | `python projets/boomrone/hardware/calculs/calculs.py` (aussi `bilan.py`, `verif.py`, `verif_bom.py`) | de TU-001 « Réseaux de la carte : table, ERC et broches uniques » à TU-014 « Bilan : le script reproduit les valeurs du bilan d'architecture » |
+| Script de fichiers ou de Python | `check_map.py`, `check_calls.py`, `check_fixed.py`, `check_consignes.py`, `python -m unittest` | TU-015 « Firmware : plan mémoire, sections et absence de tas », TU-036 « Logiciel de suivi : réception, affichage, commandes et simulation », TU-037 « Jalons : chaque configuration se compile et appelle les bons sites », TU-038 « Page de consignes : longueur et points obligatoires » |
+
+Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence arithmétique d'un DES, pas la valeur d'une fiche (valeurs « de mémoire » : DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence », DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage »), qui relève des TI (mesures au multimètre incluses : TU-010 « Bouton : constantes de temps et niveaux » et TU-012 « Module Bluetooth : débit et occupation de la liaison » en reprennent une partie). Les tests des modules sur la cible (temps réel, bus réels) sont dans les tests d'intégration.
+
+### TU-001 — Réseaux de la carte : table, ERC et broches uniques
+**Réfs amont :** DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte »
+**Préconditions :** schéma KiCad saisi, netlist exportée `boomrone.net`, `board_pins.h` de DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option ».
+**Procédure :** lancer le contrôle des règles électriques de KiCad (ERC) ; lancer `python projets/boomrone/hardware/calculs/calculs.py reseaux` qui lit la netlist et compare à la table de réseaux de DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte » (nom, broche du microcontrôleur) ; vérifier qu'aucune broche n'apparaît dans deux réseaux et que chaque réseau a au moins deux broches.
+**Résultat attendu :** ERC sans erreur ; aucun réseau manquant, en trop ou à une seule broche ; aucune broche utilisée deux fois ; les trois domaines VBATM, VBATL et +3V0 sans court-circuit entre eux.
+**Statut :** Écrit
+
+### TU-002 — Microcontrôleur : horloges, diviseurs, broches et octets d'option
+**Réfs amont :** DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option »
+**Préconditions :** fichiers `board.h` et `board_pins.h` ; test PC `test_board_cfg.c`.
+**Procédure :** calculer à partir des constantes : PLL (16 / 4 x 85 / 2), SPI1, SPI2, rechargement de TIM1, TIM6 et prédiviseur de TIM2, BRR de l'USART2 ; parcourir le tableau des broches ; relire la liste des octets d'option.
+**Résultat attendu :** fonctions alternatives de chaque broche conformes à la fiche (PA11 en particulier, DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence ») ; PLL = 170 MHz ; SPI1 = 5,3125 MHz et SPI2 = 1,328125 MHz (jamais plus de 10 MHz et 2 MHz) ; TIM1 = 24,001 kHz ±0,01 kHz ; TIM6 = 1000 Hz ; TIM2 = 1 MHz ; débit de l'USART2 = 9600 bauds à 0,1 % près ; aucune broche en double ; PA15 et PB4 jamais associées à une grille ; octets IWDG_SW = 0 et BOR_LEV = 3 dans la liste de programmation.
+**Statut :** Écrit
+
+### TU-003 — Centrale inertielle : registres, échelles et durée de lecture
+**Réfs amont :** DES-003 « Raccordement de la centrale inertielle LSM6DSO »
+**Préconditions :** `drv_imu_regs.h` ; test PC `test_imu_regs.c`.
+**Procédure :** comparer les constantes de registres à la table de DES-003 « Raccordement de la centrale inertielle LSM6DSO » ; convertir des valeurs brutes (8192 pas sur l'accéléromètre, 428 pas sur le gyroscope) ; calculer la durée de 15 octets à 5,3125 MHz.
+**Résultat attendu :** CTRL3_C = 0x44, CTRL4_C = 0x06, CTRL1_XL = 0x9C, CTRL2_G = 0x9C, INT1_CTRL = 0x03, WHO_AM_I = 0x6C ; 8192 pas = 2,00 g ±0,01 g ; 428 pas = 29,96 °/s ±0,1 °/s ; durée 22,6 µs ±0,1 µs ; axes : la rotation de 180° autour de x inverse y et z.
+**Statut :** Écrit
+
+### TU-004 — Capteur de hauteur : temps de montée de l'I2C, alimentation et seuils de hauteur
+**Réfs amont :** DES-004 « Raccordement du capteur de hauteur VL53L1X »
+**Préconditions :** script `calculs.py` (section « tof »).
+**Procédure :** calculer le temps de montée 0,8473 x R x C pour R = 4,7 kohms et C = 15, 30 et 75 pF ; vérifier la marge d'alimentation (rail 2,9 V contre minimum 2,6 V) ; convertir la lecture brute en hauteur du drone (lecture moins 20 mm).
+**Résultat attendu :** temps de montée 60, 119 et 299 ns (inférieur à 300 ns jusqu'à 75 pF) ; marge d'alimentation 0,3 V ; lecture 45 mm = hauteur 25 mm, lecture 20 mm = contact.
+**Statut :** Écrit
+
+### TU-005 — Flux optique : marges d'alimentation et de niveaux
+**Réfs amont :** DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »
+**Préconditions :** script `calculs.py` (section « flux »), valeurs de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V ».
+**Procédure :** calculer la marge de chute du XC6206 (rail 2,9 V et 3,0 V, courants 9 mA et 70 mA), la plage de sortie avec 2 % de tolérance, la dissipation moyenne et de pointe.
+**Résultat attendu :** sortie 1,96 à 2,04 V, dans la plage 1,8 à 2,1 V de la puce ; marge de chute au moins 0,9 V contre 0,78 V annoncé à 100 mA ; dissipation 9 mW et 70 mW au plus, très inférieure à la limite du boîtier SOT-23.
+**Statut :** Écrit
+
+### TU-006 — Cadre : encombrement, anneaux et calibre de 12 mm
+**Réfs amont :** DES-006 « Cadre, anneaux, moteurs et hélices »
+**Préconditions :** modèle `cadre.scad` exporté en `cadre.stl`, script `hardware/mecanique/verif.py` (boîte englobante).
+**Procédure :** lire la boîte englobante du STL ; calculer le diamètre extérieur des anneaux (47 + 2 x 1,0) et l'entraxe ; vérifier la poche de moteur (8,6 mm pour 8,5 mm) et le jeu entre l'hélice de 45 mm et l'anneau de 47 mm ; vérifier que les rayons de support restent sous le plan de l'hélice.
+**Résultat attendu :** encombrement 98 x 98 mm ±0,5 mm, hauteur au plus 40 mm ; anneaux tangents (diamètre extérieur 49 mm = entraxe) ; jeu d'hélice 1,0 mm par côté ; masse du modèle (volume x densité de la matière retenue) au plus 11 g (9 g visés plus une marge) ; hauteur d'anneau 10 mm donc calibre de 12 mm sans contact par les côtés.
+**Statut :** Écrit
+
+### TU-007 — Circuit de puissance : constantes de temps, pertes et courants
+**Réfs amont :** DES-007 « Circuit de puissance des moteurs »
+**Préconditions :** script `calculs.py` (section « puissance »).
+**Procédure :** calculer la décharge de la grille (100 kohms x 300 pF et x 630 pF), la constante de commutation (47 ohms x 630 pF), la perte par conduction à 2,4 A et 33 mohms, l'échauffement avec 100 et 150 K/W.
+**Résultat attendu :** 33 µs et 69 µs pour passer sous 1 V depuis 3,0 V ; 30 ns ; 0,19 W ; hausse de 19 à 29 K ; courant de crête de la ligne 9,5 A à ±0,1 A (quatre moteurs de 2,4 A donnent 9,6 A).
+**Statut :** Écrit
+
+### TU-008 — Batterie et entrée : chutes de tension et courants admissibles
+**Réfs amont :** DES-008 « Batterie, connecteur XT30 et entrée de la carte »
+**Préconditions :** script `calculs.py` (section « entrée »).
+**Procédure :** calculer la résistance d'une piste de 4 mm de large, 35 µm d'épaisseur, 30 mm de long ; la chute dans la ferrite à 130 mA pour 0,1 ohm ; vérifier que la liste des composants du chemin des moteurs ne contient pas la ferrite.
+**Résultat attendu :** total connecteur, fils et pistes = 15 mohms (calculé dans la procédure : 4 mohms de pistes, 11 mohms de connecteur et fils, estimation) ; 3,7 mohms ±0,2 ; 13 mV ; ferrite absente du chemin des moteurs (netlist de TU-001 « Réseaux de la carte : table, ERC et broches uniques ») ; total 15 mohms comme dans le bilan.
+**Statut :** Écrit
+
+### TU-009 — Régulateur de 3,0 V et pont de mesure : dissipation, rapport et erreur
+**Réfs amont :** DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »
+**Préconditions :** script `calculs.py` (section « alimentation »).
+**Procédure :** calculer la dissipation à 4,2 V et 130 mA, l'échauffement à 230 K/W, le rapport du pont, la tension et le courant du pont à 4,2 V, le pas du convertisseur, l'erreur du pont à 0,1 % à 3,7 V.
+**Résultat attendu :** 0,16 W ; 36 K ±2 K ; rapport 0,6 ; 2,52 V et 16,8 µA ; 0,73 mV sur la broche et 1,22 mV sur la batterie ; erreur du pont au plus 3 mV.
+**Statut :** Écrit
+
+### TU-010 — Bouton : constantes de temps et niveaux
+**Réfs amont :** DES-010 « Circuit du bouton »
+**Préconditions :** script `calculs.py` (section « bouton »).
+**Procédure :** calculer les constantes de temps d'appui et de relâchement, le courant dans le contact.
+**Résultat attendu :** 10 µs et 110 µs, très inférieures à 10 ms ; 0,27 mA ; au contrôle de la carte (multimètre) : PB5 à 3,0 V ±0,1 V au repos et à moins de 0,3 V enfoncé (0,27 mA dans le 1 kohm), sous le seuil bas du microcontrôleur.
+**Statut :** Écrit
+
+### TU-011 — Voyant RGB et buzzer : courants calculés
+**Réfs amont :** DES-011 « Circuit du voyant RGB et du buzzer »
+**Préconditions :** script `calculs.py` (section « voyant »).
+**Procédure :** calculer les courants à 4,2 V et à 3,4 V avec les deux jeux de tensions directes (supposées, catalogue) ; la somme maximale avec le buzzer.
+**Résultat attendu :** à 4,2 V : 18,3 mA (rouge) et 17,6 mA (vert, bleu) avec les valeurs supposées, 15 mA et 11,8 mA avec celles du catalogue ; chacun au plus 20 mA ; somme maximale 84 mA ; à 3,4 V avec 3,4 V de tension directe le vert et le bleu sont à 0 mA (résultat noté pour DOU-161 « Tensions directes du voyant RGB : visibilité du vert et du bleu entre 3,4 et 3,7 V »).
+**Statut :** Écrit
+
+### TU-012 — Module Bluetooth : débit et occupation de la liaison
+**Réfs amont :** DES-012 « Raccordement du module Bluetooth E104-BT02 »
+**Préconditions :** script `calculs.py` (section « radio »).
+**Procédure :** calculer la durée d'un octet et d'une trame de 14 octets à 9600 bauds, l'occupation avec un statut toutes les 500 ms et des variables toutes les 100 ms ; contrôle de continuité TX vers RX croisé sur la carte (multimètre).
+**Résultat attendu :** 1,04 ms par octet, 14,6 ms par trame ; 138 octets par seconde, soit 14 % de 960 ; PA2 relié à RXD du module et PA3 à TXD.
+**Statut :** Écrit
+
+### TU-013 — Fichiers de fabrication : nomenclature, placement et règles
+**Réfs amont :** DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »
+**Préconditions :** fichiers `bom.csv`, `cpl.csv`, gerbers ; script `verif_bom.py`.
+**Procédure :** lancer le contrôle des règles de dessin de KiCad (DRC) ; lancer `verif_bom.py` qui compare chaque numéro LCSC de la nomenclature à la table de « Architecture » — `projets/boomrone/03-architecture.md` et compte les références ; vérifier que chaque ligne du placement correspond à une ligne de nomenclature.
+**Résultat attendu :** DRC sans erreur (pistes et espacements au moins 0,15 mm, vias 0,3 / 0,6 mm) ; chaque numéro LCSC de la nomenclature d'architecture présent une fois ; aucune référence sans placement ; aucun composant hors catalogue dans la nomenclature de l'assemblage (XT30 et en-tête SWD à la main exceptés, listés à part).
+**Statut :** Écrit
+
+### TU-014 — Bilan : le script reproduit les valeurs du bilan d'architecture
+**Réfs amont :** DES-014 « Feuille de calcul du bilan de masse, de poussée et d'autonomie »
+**Préconditions :** `bilan.py` avec les entrées actuelles.
+**Procédure :** lancer `python projets/boomrone/hardware/calculs/bilan.py` et comparer la sortie au tableau et aux cas de la section « Bilan de masse, de poussée et d'autonomie » de « Architecture » — `projets/boomrone/03-architecture.md`.
+**Résultat attendu :** masse 61,1 g ±0,05 ; incertitudes 10,1 g et 4,4 g ; rapport 1,44 ±0,01 ; tensions 3,36 V ; 3,17 V ; 3,23 V ; 2,83 V (±0,01 V) ; énergie 49 mAh ±1 ; le script change les sorties quand on change une entrée.
+**Statut :** Écrit
+
+### TU-015 — Firmware : plan mémoire, sections et absence de tas
+**Réfs amont :** DES-015 « Arborescence du firmware, édition de liens et budget de mémoire »
+**Préconditions :** premier binaire compilé, fichier `.map`, script `firmware/tools/check_map.py`.
+**Procédure :** lancer `check_map.py` sur le `.map` : adresse de `.settings`, section `.noinit`, tampons DMA, taille du code, taille de `.data` + `.bss`, présence des symboles `malloc` et `sbrk`.
+**Résultat attendu :** `.settings` à 0x0801F800 ; `.noinit` et tampons DMA dans SRAM1 ; flash utilisée au plus 100 kio (application 50 kio + bibliothèque 50 kio) ; `.data` + `.bss` au plus 8 kio ; aucune référence à `malloc` ; le lien échoue si une assertion du script d'édition de liens est violée (essai en déplaçant volontairement une section).
+**Statut :** Écrit
+
+### TU-016 — Ordonnanceur : choix de la tâche de fond, cycles manqués et durées
+**Réfs amont :** DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond »
+**Préconditions :** test PC `test_sched.c` sur la fonction pure `sched_pick(flags)` et le compteur de cycles manqués.
+**Procédure :** lever des combinaisons de drapeaux (arrêt radio, hauteur, flux, statut, variables, effets) ; simuler 1000 cycles avec les cadences de DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond » et des pas de durée fixée ; simuler un drapeau de cycle non consommé.
+**Résultat attendu :** DMA de la centrale bloqué trois cycles de suite : le cycle tourne quand même, `imu_failed` est levé au troisième ; lecture automatique inactive avant `imu_streaming` ; au plus une tâche par cycle ; ordre de priorité arrêt, hauteur, flux, statut ou variables, effets ; aucune tâche en attente plus de 20 cycles dans la simulation de charge (420 pas par seconde) ; `missed_cycles` s'incrémente exactement une fois par drapeau non consommé ; une durée de cycle de 801 µs déclenche `overrun`, 799 µs non.
+**Statut :** Écrit
+
+### TU-017 — Coupure des moteurs : ordre des écritures et sites d'appel
+**Réfs amont :** DES-017 « Coupure des moteurs, démarrage unique et gestionnaires d'exception »
+**Préconditions :** test PC `test_motor_cut.c` avec la maquette des registres de TIM1 et de GPIOA ; script `firmware/tools/check_calls.py`.
+**Procédure :** appeler `motors_cut()` moteurs en marche et enregistrer l'ordre des écritures ; l'appeler deux fois de suite ; appeler `NMI_Handler` avec ECCD levé puis levé à zéro ; lancer `check_calls.py` sur les sources.
+**Résultat attendu :** ordre : MOE effacé, compteur arrêté, broches PA8 à PA11 en sortie basse ; deuxième appel sans nouvelle écriture de registre (compteur d'appels +1) ; HardFault simulé : `motors_cut()` appelée, aucun rafraîchissement du chien de garde ; avec ECCD, le drapeau `flash_ecc_error` est levé, ECCD effacé et les moteurs non coupés ; sans ECCD, `motors_cut()` est appelée ; exactement deux sites d'appel de `motors_start()` en jalon 3 (un en jalon 1 et 2) dans les sources.
+**Statut :** Écrit
+
+### TU-018 — Pilote de la centrale : conversions, axes, erreurs et biais
+**Réfs amont :** DES-018 « Pilote de la centrale inertielle »
+**Préconditions :** test PC `test_drv_imu.c` avec une maquette du SPI qui fournit des tampons de 15 octets.
+**Procédure :** fournir des tampons connus (accéléromètre z = 4096 pas, gyroscope x = 428 pas), des tampons identiques deux fois de suite, une fin de DMA absente trois fois de suite puis une lecture correcte ; appeler `imu_calibrate_bias()` avec 1000 échantillons d'un biais constant.
+**Résultat attendu :** 10 lectures brutes identiques de suite comptent une erreur par cycle suivant, `imu_failed` levé 3 cycles plus tard ; carte face vers le bas (brut z = -4096) : accélération z du drone = +9,80 m/s² ±0,02 (4096 pas x 0,244 mg = 1,0 g) ; gyroscope x = 0,523 rad/s ±0,002 après passage dans la matrice d'axes ; `repeat_count` = 1 ; `imu_failed` levé à la troisième erreur et abaissé après la lecture correcte ; biais retrouvé à 0,001 rad/s près.
+**Statut :** Écrit
+
+### TU-019 — Pilote du capteur de hauteur : pas, reprise par niveaux et publication
+**Réfs amont :** DES-019 « Pilote du capteur de hauteur non bloquant »
+**Préconditions :** test PC `test_drv_tof.c` avec une maquette de l'I2C (réponses, NACK, bus bloqué) et de TIM2.
+**Procédure :** (1) déclencher un front et dérouler les pas avec une réponse correcte ; (2) injecter un NACK, puis deux NACK de suite, puis un bus bloqué, en vol et au sol ; (3) mesurer le nombre d'opérations par pas ; (4) fournir un état de mesure invalide, un taux de signal faible, une distance de 39 mm et de 3001 mm.
+**Résultat attendu :** sans front de GPIO1 pendant 100 ms, relecture du registre d'état puis niveau 1 ; les 9 impulsions de SCL se font une par pas ; une lecture brute de 45 mm, ou un état hors portée après une dernière valeur de 60 mm, déclenche le contact ; une mesure publiée avec l'instant du front, drapeau valide ; un NACK donne une relance ; deux NACK déclenchent les 9 impulsions sur SCL puis la réinitialisation du périphérique ; le niveau 3 (XSHUT et ULD) n'est jamais appelé en vol et l'est au sol ; chaque pas fait au plus 200 µs simulés et ne contient aucune attente ; les trois mesures invalides ont le drapeau faux ; `tof_last_valid_us` ne bouge pas pour une mesure invalide.
+**Statut :** Écrit
+
+### TU-020 — Pilote du flux optique : lecture de rafale, validité et durée des pas
+**Réfs amont :** DES-020 « Pilote du flux optique »
+**Préconditions :** test PC `test_drv_flow.c` avec une maquette du SPI2 qui rend des rafales de 12 octets.
+**Procédure :** fournir une rafale (mouvement levé, delta x = +300, delta y = -150, SQUAL = 60), puis mouvement abaissé avec deltas nuls (SQUAL = 60), puis SQUAL = 20 ; vérifier l'ordre des pas A et B et leurs durées calculées ; faire échouer l'identité (registre 0x00 différent de 0x49).
+**Résultat attendu :** `flow_meas_t` = (+300, -150, 60, valide) pour la première ; mouvement abaissé : valide avec vitesse nulle ; SQUAL = 20 : invalide ; pas A au plus 60 µs et pas B au plus 100 µs simulés (inférieurs à 200 µs) ; CS remonté 500 ns au moins entre deux rafales ; échec d'identité signalé à l'initialisation.
+**Statut :** Écrit
+
+### TU-021 — Pilotes de sortie et liaison série : rapport cyclique, voyant, anneau de réception
+**Réfs amont :** DES-021 « Pilotes des moteurs, du voyant, du buzzer et de la liaison série »
+**Préconditions :** test PC `test_drv_out.c` avec la maquette des registres de TIM1, GPIOB et du DMA de l'USART2.
+**Procédure :** `motor_set` avec 0, 0,5, 1,0, -0,2 et 1,3 ; `motor_cmd8` correspondant ; `led_set` aux niveaux 0, 1, 5, 10 sur 10 appels de `led_tick` ; remplir l'anneau de réception de 128 octets avec bouclage, puis le dépasser ; refuser une émission pendant une émission en cours.
+**Résultat attendu :** comparateurs 0, 3541, 7083, 0, 7083 ; commandes 0, 127, 255, 0, 255 (±1) ; le niveau n allume exactement n phases sur 10 ; lecture des octets dans l'ordre avec bouclage ; le dépassement incrémente le compteur et ne produit aucun octet faux ; la deuxième émission est refusée.
+**Statut :** Écrit
+
+### TU-022 — Mesure de tension : formule, référence interne et valeur périmée
+**Réfs amont :** DES-022 « Pilote de la mesure de tension de la batterie »
+**Préconditions :** test PC `test_drv_adc.c` avec des tampons de 14 mots.
+**Procédure :** fournir 10 mesures de PA0 et 4 de VREFINT pour : 4,2 V avec `vdda` = 3,0 V (3440 et 1654 pas) ; 3,3 V avec `vdda` = 2,95 V (les pas calculés pour cette tension) ; une séquence non terminée ; le tout premier cycle avant la première séquence.
+**Résultat attendu :** moyenne de VREFINT nulle : `vbat_valid` faux, aucune division par zéro ; tension de normalisation toujours dans [3,0 V ; 4,3 V] ; 4,200 V ±0,005 V ; 3,300 V ±0,005 V (la référence interne annule la variation de `vdda`) ; séquence non terminée : valeur précédente conservée et `adc_stale` incrémenté ; `vbat_valid` faux avant la première séquence ; moyenne glissante de 100 valeurs exacte sur un échelon de 3,7 V à 3,3 V.
+**Statut :** Écrit
+
+### TU-023 — Filtre d'attitude : stabilité, intégration sans accéléromètre, convergence
+**Réfs amont :** DES-023 « Filtre d'attitude de Mahony »
+**Préconditions :** test PC `test_att.c`, flottants simple précision.
+**Procédure :** (1) q identité, accélération (0, 0, 9,81), gyroscope nul pendant 10 s ; (2) rotation de 1 rad/s autour de x pendant 1 s avec une accélération mesurée nulle (chute libre) ; (3) quaternion initial incliné de 20°, gravité mesurée à l'aplomb, pendant 2 s ; (6) quaternion initial exact à 15°, gyroscope nul, moteurs en marche (Kp de vol), poussée de 1,2 g dans l'axe du corps incliné de 15° ; (4) rotation de 1 tour/s autour de z à plat pendant 5 s ; (5) norme de q après 10 s.
+**Résultat attendu :** (6) l'inclinaison estimée dérive vers l'horizontale à moins de 0,2 s⁻¹ : au moins 10° restent après 2 s (cas qui illustre DOU-177 « Filtre d'attitude : l'accéléromètre en vol mesure la poussée, pas la gravité », valeur à confirmer sur la potence) ; (1) inclinaison inférieure à 0,05° ; (2) angle de 57,3° ±0,5° (accéléromètre sans poids en chute libre) ; (3) erreur d'inclinaison inférieure à 2° après 2 s ; (4) inclinaison inférieure à 0,5° ; (5) norme 1 ±0,0001 ; poids `wa` égal à 1 à 1 g, 0,5 à 0,75 g et 0 à 0,5 g.
+**Statut :** Écrit
+
+### TU-024 — Observateur de hauteur : suivi d'une rampe avec retard de mesure
+**Réfs amont :** DES-024 « Observateur de hauteur et de vitesse verticale »
+**Préconditions :** test PC `test_hauteur.c` avec un simulateur de vol vertical (graine du bruit fixée).
+**Procédure :** simuler 4 s : stationnaire, rampe de 1 m/s sur 1 s, stationnaire ; mesures à 30 Hz avec retard de 33 ms et bruit de 10 mm, accélération bruitée de 0,2 m/s² et biais de 0,05 m/s² ; ajouter une mesure aberrante isolée de +2 m, puis trois de suite ; comparer à la vérité.
+**Résultat attendu :** échelon de 0,3 m sur une mesure valide : retour sans oscillation en moins de 0,5 s ; erreur de hauteur au plus 12 cm pendant la rampe et 4 cm en régime (valeurs simulées de contrôle : 9 cm et 3 cm) ; la mesure aberrante isolée est ignorée ; à la troisième de suite l'état est recalé ; une mesure avec `tilt_cos` < 0,5 est rejetée ; un retard supérieur à 63 cycles est rejeté.
+**Statut :** Écrit
+
+### TU-025 — Vitesse horizontale et critères : seuils et persistance
+**Réfs amont :** DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire »
+**Préconditions :** test PC `test_criteres.c`.
+**Procédure :** (a) fenêtre d'accélération avec un écart de 0,49 puis 0,51 m/s² ; (b) gyroscope à 29,9 puis 30,1 °/s ; (c) inclinaison de 14,9° puis 15,1° ; (d) hauteur de 0,299 puis 0,300 m avec tout le reste vrai ; (e) vitesse horizontale de 0,29 puis 0,31 m/s ; (f) flux invalide ; (g) stationnaire vrai pendant 9 puis 10 cycles ; (h) conversion de pas du flux en vitesse pour 0,5 m/s à 1 m de hauteur ; (j) drone immobile pendant 2 s avec des deltas nuls et SQUAL = 60 ; (k) vitesse verticale de 0,29 puis 0,31 m/s ; (i) cas d'invalidité : hauteur 0,07 m, qualité faible, inclinaison 35°, échantillon vieux de 60 ms.
+**Résultat attendu :** (j) stationnaire vrai ; (k) vrai puis faux ; (e) et (h) avec des nombres entiers de pas du flux, le seuil étant appliqué à la vitesse déjà convertie ; (a) vrai puis faux ; (b) vrai puis faux ; (c) vrai puis faux ; (d) faux puis vrai ; (e) vrai puis faux ; (f) stationnaire faux ; (g) faux puis vrai ; (h) vitesse restituée à 0,05 m/s près après filtrage (environ 2,4 pas par échantillon de 10 ms) ; (i) vitesse invalide dans les quatre cas.
+**Statut :** Écrit
+
+### TU-026 — Contrôle : signes du mixeur, saturation, conversion en rapport cyclique
+**Réfs amont :** DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique »
+**Préconditions :** test PC `test_ctl.c`.
+**Procédure :** (1) commande de roulis pure, de tangage pur, de lacet pur ; (2) collectif à 0,95 avec un roulis de 0,2 ; (3) poussée de 0,69 à 3,7 V puis à 3,3 V ; poussée 1,2 ; (4) erreurs d'angle de signe connu, vérifier le signe du couple demandé ; (5) rampe d'atterrissage ; (6) intégrale en butée ; (7) démarrage : rampe de 20 ms.
+**Résultat attendu :** descente à 500 mm/s qui saute la fenêtre de validité du capteur : coupure d'atterrissage au contact ; (1) les écarts entre moteurs suivent la table (a, b, c) de DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique » et la somme des poussées reste égale à 4 x collectif ; (2) le collectif est décalé, l'écart entre les moteurs gauche et droit reste 0,4 ; (3) rapports cycliques 0,831 et 0,931, puis 1,0 pour 1,2 ; (4) un couple de signe opposé à l'erreur ; (5) la cible baisse de la vitesse de descente x 1 s, à 1 mm près ; (6) intégrale de hauteur limitée à ±0,15 ; (7) 50 % à 10 ms, 100 % à 20 ms.
+**Statut :** Écrit
+
+### TU-027 — Machine à états : transitions, priorités et commandes ignorées
+**Réfs amont :** DES-027 « Machine à états : données, événements et table de transitions »
+**Préconditions :** test PC `test_fsm.c` avec des maquettes du bouton, de la surveillance, des critères, de `motors_start` et `motors_cut`.
+**Procédure :** une ligne d'essai par ligne du tableau « Machine à états : transitions » de « Architecture » — `projets/boomrone/03-architecture.md` (entrées, état de départ, état attendu, actions attendues) ; cas de conflit : sous-tension et bouton dans le même cycle, bouton et Arrêt ; état 2 absorbant ; commandes ignorées aux états 1, 3, 6, 8, 2 et 0 ; Lancé de plus de 500 ms sans moteurs ; chaque coupure.
+**Résultat attendu :** démarrage des moteurs à 200 ms ±1 ms après le relâchement armé ; chaque ligne donne l'état d'arrivée du tableau ; sous-tension l'emporte sur le bouton, le bouton sur Arrêt ; l'état 2 n'est quitté par aucune entrée ; `motors_start` appelé une fois par chemin de démarrage (relâchement armé plus 200 ms, Décoller accepté) et jamais ailleurs ; `motors_cut` appelé avant l'écriture de la cause ; l'état Lancé trop long demande l'arrêt du rafraîchissement du chien de garde.
+**Statut :** Écrit
+
+### TU-028 — Bouton logiciel : antirebond, seuils, appui en cours et garde
+**Réfs amont :** DES-028 « Gestion logicielle du bouton »
+**Préconditions :** test PC `test_button.c`, échantillons injectés un par milliseconde.
+**Procédure :** rebond de 5 ms puis 9 échantillons bas puis 10 ; appui tenu 1000, 2000 et 10 000 ms ; drapeau `ignore_until_release` posé pendant un appui ; garde de 500 ms avec fronts suppressés, puis niveau bas à la fin ; `btn_held_since_poweron()` avec un relâchement pendant l'initialisation ou non.
+**Résultat attendu :** appui filtré au 10e échantillon bas, pas avant ; seuils à 1000, 2000, 10 000 ms ±1 ms depuis l'appui initial ; aucun événement tant que ignore est levé et jusqu'au premier relâchement filtré ; fronts de la garde supprimés, événement `BTN_LOW_AFTER_GUARD` émis à 500 ms ±1 ms si le niveau est bas ; `btn_held_since_poweron()` vrai sans relâchement, faux avec un relâchement.
+**Statut :** Écrit
+
+### TU-029 — Surveillance : sous-tension, armement et coupures en vol
+**Réfs amont :** DES-029 « Surveillance et coupures automatiques »
+**Préconditions :** test PC `test_safety.c`.
+**Procédure :** tension à 3,29 V pendant 99 puis 100 cycles ; un creux de 79 cycles ; une tension oscillant entre 3,31 V et 3,34 V ; remontée à 3,36 V ; armement avec 3,69 V et 3,71 V, avec mouvement et pas à plat simultanés ; stationnaire non atteint à 1999 et 2001 ms ; inclinaison de 61° pendant 99 et 100 cycles avant puis après le stationnaire ; aucune mesure de hauteur pendant 199 et 201 ms moteurs en marche ; trois erreurs de centrale.
+**Résultat attendu :** atterrissage coupé à 15,0 s ±0,1 s ; stationnaire de réglage maintenu 3,0 s et normal 10,0 s ; basculement déclenché à 60° exactement ; même délai de 2,0 s en vol de réglage ; événement de sous-tension au 100e cycle seulement ; le creux de 79 cycles est ignoré ; la zone de 3,30 V à 3,35 V conserve le compteur et 3,36 V le remet à zéro ; armement refusé à 3,69 V (cause batterie en premier) et accepté à 3,71 V ; coupure « stationnaire non atteint » entre 1999 et 2001 ms (à 2000 ms ±1 ms) ; basculement seulement après le stationnaire, au 100e cycle ; coupure de hauteur à 200 ms ; chaque coupure laisse une cause correcte.
+**Statut :** Écrit
+
+### TU-030 — Chien de garde : conditions de rafraîchissement et valeurs
+**Réfs amont :** DES-030 « Chien de garde matériel et règle de rafraîchissement »
+**Préconditions :** test PC `test_wdg.c` avec la maquette de l'IWDG ; script `check_calls.py`.
+**Procédure :** appeler `wdg_refresh` avec `cycle_ran` vrai, faux ; avec l'état Lancé à 499 ms et 501 ms ; autour d'une écriture de flash ; chercher les écritures de la clé dans les sources ; lire la constante de rechargement.
+**Résultat attendu :** écriture de la clé seulement quand `cycle_ran` est vrai et le Lancé inférieur à 500 ms ; `cycle_ran` remis à zéro après chaque rafraîchissement ; rafraîchissements avant et après la flash ; une seule écriture de la clé dans les sources ; rechargement 399 avec prédiviseur 8, soit 100 ms à 4 kHz.
+**Statut :** Écrit
+
+### TU-031 — Initialisation : issues, durées et rafraîchissements
+**Réfs amont :** DES-031 « Séquence d'initialisation et échec d'initialisation »
+**Préconditions :** test PC `test_init.c` avec des pilotes maquettes et un temps simulé.
+**Procédure :** scénarios : nominal ; gyroscope à 40 °/s pendant l'étape 8 ; inclinaison de 20° ; norme d'accélération de 0,5 g ; capteur de hauteur muet (deux tentatives de 300 ms) ; centrale ou flux absent ; bouton tenu depuis la mise sous tension avec marqueur absent ; bouton tenu avec marqueur valide (reset du chien de garde) ; bouton enfoncé à la fin sans avoir été tenu depuis le départ.
+**Résultat attendu :** batterie à 3,2 V pendant 100 cycles : état 2, bouton et commandes ignorés ; biais de 25 °/s : échec « mouvement » (biais accepté jusqu'à 3 °/s) ; marqueur valide mais drapeau de coupure d'alimentation levé : mise sous tension reconnue ; nominal : état 1 en moins de 2,5 s simulées ; mouvement, pas à plat et chute libre : état 2 ; capteur de hauteur muet, centrale ou flux absent : état 2 déclaré avant 1 s pour le capteur de hauteur ; bouton tenu et marqueur absent : état 4 ; bouton tenu et marqueur valide : état 1 avec drapeau d'appui en cours ; bouton enfoncé en fin d'initialisation : drapeau d'appui en cours posé ; jamais plus de 80 ms simulées (le chien de garde réel dure 91 à 109 ms) sans rafraîchissement du chien de garde ; moteurs jamais démarrés.
+**Statut :** Écrit
+
+### TU-032 — Effets locaux : séquences de lumière et de son, durées, inhibition
+**Réfs amont :** DES-032 « Effets locaux : table, séquenceur de lumière et de son »
+**Préconditions :** test PC `test_effects.c`, tâche appelée tous les 10 ms simulées.
+**Procédure :** jouer chaque effet de la table et relever les niveaux et l'état du buzzer à chaque ms ; événement pendant un effet de base ; deux événements rapprochés ; son avec moteurs en marche puis moteurs coupés ; vérifier l'unicité des paires (couleur, rythme).
+**Résultat attendu :** chaque séquence reproduit la table (par exemple Refus : jaune clignotant, 3 bips de 100 ms séparés de 100 ms) ; un événement dure 1,0 s ±10 ms puis la base revient ; le second événement remplace le premier ; aucun son moteurs en marche, son joué entre 0 et 300 ms après la coupure ; effet 9 à un niveau sur 10 ; paires (couleur, rythme) toutes distinctes.
+**Statut :** Écrit
+
+### TU-033 — Trames : encodage, CRC8, réception résiliente, file d'émission
+**Réfs amont :** DES-033 « Trames du statut sans fil, automate de réception et file d'émission »
+**Préconditions :** test PC `test_proto.c`, fichier `vecteurs_trames.txt`.
+**Procédure :** encoder chaque trame de référence de DES-033 « Trames du statut sans fil, automate de réception et file d'émission » et comparer octet par octet ; décoder ; réception avec des octets parasites avant, une trame coupée en deux, deux trames fusionnées, un CRC faux, un type inconnu, un silence de 50 ms au milieu d'une trame ; remplir la file d'émission ; contrôler les causes en `.noinit` avec un marqueur invalide.
+**Résultat attendu :** les sept vecteurs sont identiques (`A5 11 77`, `A5 10 70`, `A5 13 79`, `A5 12 00 E8 03 A9`, statut, variables, CRC8 de « 123456789 » = 0xF4) ; chaque trame valide est reconnue, chaque trame invalide rejetée sans perdre la suivante ; longueur au plus 14 octets ; le statut remplace un statut en attente, la file pleine abandonne la plus ancienne trame de variables ; causes remises à zéro quand le marqueur est invalide et conservées sinon.
+**Statut :** Écrit
+
+### TU-034 — Commandes sans fil : tableau d'acceptation, Décoller, Modifier, Sauvegarder
+**Réfs amont :** DES-034 « Mode réglage, filtrage des commandes et vol de réglage »
+**Préconditions :** test PC `test_tuning.c`.
+**Procédure :** pour chaque état de 0 à 17 et chaque commande, comparer la réponse au tableau de REQ-023 « Commandes sans fil selon l'état du drone » ; Décoller avec 3,69 V et 3,71 V, avec bouton bas, avec batterie faible et bouton bas ensemble ; Modifier avec valeurs hors bornes ; Sauvegarder à 3,49 V et 3,51 V ; vol de réglage jusqu'à sa fin (posé, coupure, sous-tension).
+**Résultat attendu :** Modifier avec les identifiants 4 et 255 : aucune valeur modifiée ; les 72 réponses sont conformes au tableau ; Décoller refusé avec la cause « batterie » en priorité sur « bouton » ; Décoller accepté appelle `motors_start()` une fois, sans état Lancé ; valeurs saturées aux bornes ; Sauvegarder refusée sous 3,5 V ; retour à l'état 4 après le posé ou une coupure, état 2 après une sous-tension.
+**Statut :** Écrit
+
+### TU-035 — Paramètres et flash : bornes, valeurs d'origine, séquence de sauvegarde
+**Réfs amont :** DES-035 « Paramètres de vol, section d'origine et pilote de flash »
+**Préconditions :** test PC `test_params.c` avec une maquette de la flash (effacement, programmation par mot de 64 bits, drapeau ECC).
+**Procédure :** charger une page vierge (tout à 0xFF), un mot valide, un mot avec un seul champ hors bornes, un mot avec une erreur ECC simulée ; `param_set` hors bornes ; `param_save` avec 3,49 V, 3,51 V, hors mode réglage ; suivre les appels de la maquette.
+**Résultat attendu :** `check_fixed.py` : les 29 valeurs fixes de `config_fixed.h` sont celles de REQ-026 « Paramètres de vol réglables » ; page vierge : 1000, 1000, 1000, 200 ; mot valide restitué ; champ hors bornes remplacé par sa seule valeur d'origine ; erreur ECC : quatre valeurs d'origine ; saturation aux bornes (500 à 2000, 500 à 1200, 150 à 500) ; sauvegarde refusée sous 3,5 V et hors mode réglage ; sauvegarde acceptée : un effacement de la page 63, une programmation d'un mot, une relecture, deux rafraîchissements du chien de garde (avant et après).
+**Statut :** Écrit
+
+### TU-036 — Logiciel de suivi : réception, affichage, commandes et simulation
+**Réfs amont :** DES-036 « Logiciel de suivi en Python »
+**Préconditions :** `python -m unittest projets/boomrone/tools/test_suivi.py`, option `--simu`.
+**Procédure :** rejouer les vecteurs de `vecteurs_trames.txt` dans `Parser` ; recevoir un statut et des variables de la simulation ; appuyer sur chaque touche (d, a, m, s) et relever les octets envoyés ; compter les trames reçues par seconde sur 10 s ; relire le journal CSV.
+**Résultat attendu :** mêmes résultats que les tests C pour tous les vecteurs ; affichage des états, causes et paramètres en clair ; octets envoyés égaux aux vecteurs de commande (Arrêt `A5 11 77`, Décoller `A5 10 70`, Sauvegarder `A5 13 79`, Modifier `A5 12 00 E8 03 A9` pour l'identifiant 0 et la valeur 1000) ; environ 2 statuts et 10 variables par seconde ; journal horodaté sans trou.
+**Statut :** Écrit
+
+### TU-037 — Jalons : chaque configuration se compile et appelle les bons sites
+**Réfs amont :** DES-037 « Jalons de livraison et configurations de compilation »
+**Préconditions :** `Makefile`, `config_jalon.h`, `stubs_jalon.c`.
+**Procédure :** lancer `make test JALON=1`, `JALON=2`, `JALON=3` (versions PC) et la compilation croisée de `j1`, `j2`, `j3` quand la chaîne arm-none-eabi-gcc est disponible ; compter les sites d'appel de `motors_start()` par jalon avec `check_calls.py`.
+**Résultat attendu :** les trois configurations compilent et s'éditent sans les modules suivants ; sites d'appel : 1 en jalon 1, 1 en jalon 2, 2 en jalon 3 ; en jalon 1 et 2 les commandes Décoller, Modifier et Sauvegarder n'ont aucun effet ; en jalon 2 la commande Arrêt coupe.
+**Statut :** Écrit
+
+### TU-038 — Page de consignes : longueur et points obligatoires
+**Réfs amont :** DES-038 « Contenu de la page de consignes d'emploi »
+**Préconditions :** `consignes-emploi.md` complétée ; script `firmware/tools/check_consignes.py`.
+**Procédure :** lancer le script : nombre de lignes, présence des mots-clés (débrancher, hélices démontées, 3,3 V, 45 mm, anneaux, décharge) ; relire la page à côté de ARC-030 « Page de consignes d'emploi ».
+**Résultat attendu :** 60 lignes au plus ; les quatre points de ARC-030 « Page de consignes d'emploi » présents ; aucune valeur de la page différente d'une valeur de « Exigences système » — `projets/boomrone/02-exigences.md`.
 **Statut :** Écrit

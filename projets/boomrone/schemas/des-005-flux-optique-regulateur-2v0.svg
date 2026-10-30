@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 660" width="900" height="660" role="img" aria-labelledby="t d"><title id="t">DES-005 — Raccordement du flux optique PMW3901MB et régulateur de 2,0 V</title><desc id="d">XC6206P202MR-G de +3V0 vers +2V0 pour VDD de la puce PMW3901MB, VDDIO au +3V0, SPI2 vers PB12 à PB15, NRESET au +3V0 par 10 kohms.</desc><style>
+:root{--fg:#1f2937}
+.bg{fill:#ffffff}
+@media (prefers-color-scheme: dark){:root{--fg:#e5e7eb}.bg{fill:#1e1e1e}}
+text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
+.w{stroke:var(--fg);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:var(--fg);stroke-width:1;fill:none}
+.box{stroke:var(--fg);stroke-width:1.6;fill:var(--fg);fill-opacity:.06}
+.dash{stroke:var(--fg);stroke-width:1.2;fill:none;stroke-dasharray:5 4}
+.bat{stroke:#ef4444;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l3{stroke:#3b82f6;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l2{stroke:#a855f7;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.warn{stroke:#d97706;stroke-width:1.8;fill:none;stroke-dasharray:6 3}
+.sig{stroke:#059669;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:var(--fg);stroke:none}
+.fbat{fill:#ef4444;stroke:none}.fl3{fill:#3b82f6;stroke:none}.fl2{fill:#a855f7;stroke:none}.fsig{fill:#059669;stroke:none}
+.tbat{fill:#ef4444;font-weight:bold}.tl3{fill:#3b82f6;font-weight:bold}.tl2{fill:#a855f7;font-weight:bold}
+.tsig{fill:#059669}.twarn{fill:#d97706;font-weight:bold}
+.ref{font-weight:bold}.small{font-size:11px}.title{font-size:16px;font-weight:bold}
+.val{opacity:.9}
+</style>
+<rect class="bg" id="fond" x="0" y="0" width="900" height="660"/>
+<text x="20" y="26" style="font-size:16px;font-weight:bold">DES-005 — Raccordement du flux optique PMW3901MB et régulateur de 2,0 V</text>
+<polyline class="l3" points="90,100 90,84"/>
+<polygon class="fl3" points="90,76 85,86 95,86"/>
+<text x="90" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<polyline class="l3" points="90,100 90,250 130,250"/>
+<circle cx="90" cy="250" r="3.2" class="fl3"/>
+<polyline class="w" points="90,250 90,277.0"/>
+<polyline class="w" points="90,283.0 90,310"/>
+<polyline class="w" points="80,277.0 100,277.0"/>
+<polyline class="w" points="80,283.0 100,283.0"/>
+<text x="90" y="337" text-anchor="middle" class="ref " font-size="11">C13</text>
+<text x="90" y="349" text-anchor="middle" class="val" font-size="11">1 µF</text>
+<polyline class="w" points="90,310 90,316"/>
+<polyline class="w" points="81,316 99,316"/>
+<polyline class="w" points="84,320 96,320"/>
+<polyline class="w" points="87,324 93,324"/>
+<rect x="130" y="195" width="100" height="80" rx="4" class="box"/>
+<text x="180.0" y="211" text-anchor="middle" class="ref" font-size="13">U6</text>
+<text x="180.0" y="225" text-anchor="middle" font-size="11">XC6206P202MR-G</text>
+<text x="136" y="254" text-anchor="start" font-size="11">VIN</text>
+<text x="224" y="254" text-anchor="end" font-size="11">VOUT</text>
+<text x="124" y="244" text-anchor="end" class="twarn" font-size="9">3</text>
+<text x="236" y="244" text-anchor="start" class="twarn" font-size="9">2</text>
+<polyline class="w" points="180,275 180,310"/>
+<polyline class="w" points="180,310 180,316"/>
+<polyline class="w" points="171,316 189,316"/>
+<polyline class="w" points="174,320 186,320"/>
+<polyline class="w" points="177,324 183,324"/>
+<text x="176" y="268" text-anchor="end" font-size="10">VSS</text>
+<text x="186" y="296" text-anchor="start" class="twarn" font-size="9">1</text>
+<polyline class="l2" points="230,250 456,250"/>
+<circle cx="280" cy="250" r="3.2" class="fl2"/>
+<polyline class="w" points="280,250 280,277.0"/>
+<polyline class="w" points="280,283.0 280,310"/>
+<polyline class="w" points="270,277.0 290,277.0"/>
+<polyline class="w" points="270,283.0 290,283.0"/>
+<text x="280" y="337" text-anchor="middle" class="ref " font-size="11">C14</text>
+<text x="280" y="349" text-anchor="middle" class="val" font-size="11">2,2 µF</text>
+<polyline class="w" points="280,310 280,316"/>
+<polyline class="w" points="271,316 289,316"/>
+<polyline class="w" points="274,320 286,320"/>
+<polyline class="w" points="277,324 283,324"/>
+<circle cx="330" cy="250" r="3.2" class="fl2"/>
+<polyline class="w" points="330,250 330,277.0"/>
+<polyline class="w" points="330,283.0 330,310"/>
+<polyline class="w" points="320,277.0 340,277.0"/>
+<polyline class="w" points="320,283.0 340,283.0"/>
+<text x="330" y="337" text-anchor="middle" class="ref twarn" font-size="11">C15</text>
+<text x="330" y="349" text-anchor="middle" class="twarn" font-size="11">1 µF</text>
+<polyline class="w" points="330,310 330,316"/>
+<polyline class="w" points="321,316 339,316"/>
+<polyline class="w" points="324,320 336,320"/>
+<polyline class="w" points="327,324 333,324"/>
+<circle cx="375" cy="250" r="3.2" class="fl2"/>
+<polyline class="w" points="375,250 375,277.0"/>
+<polyline class="w" points="375,283.0 375,310"/>
+<polyline class="w" points="365,277.0 385,277.0"/>
+<polyline class="w" points="365,283.0 385,283.0"/>
+<text x="375" y="337" text-anchor="middle" class="ref twarn" font-size="11">C16</text>
+<text x="375" y="349" text-anchor="middle" class="twarn" font-size="11">100 nF</text>
+<polyline class="w" points="375,310 375,316"/>
+<polyline class="w" points="366,316 384,316"/>
+<polyline class="w" points="369,320 381,320"/>
+<polyline class="w" points="372,324 378,324"/>
+<text x="410" y="243" text-anchor="start" class="tl2" font-size="12">+2V0</text>
+<rect x="470" y="110" width="180" height="250" rx="4" class="box"/>
+<text x="560.0" y="126" text-anchor="middle" class="ref" font-size="13">U4</text>
+<text x="560.0" y="140" text-anchor="middle" font-size="11">PMW3901MB-TXQT (COB-28)</text>
+<text x="476" y="154" text-anchor="start" font-size="11">VDDIO</text>
+<text x="476" y="254" text-anchor="start" font-size="11">VDD</text>
+<text x="476" y="294" text-anchor="start" font-size="11">VREG</text>
+<polyline class="l3" points="470,150 420,150"/>
+<circle cx="420" cy="150" r="3.2" class="fl3"/>
+<polyline class="l3" points="420,150 420,100"/>
+<polyline class="l3" points="420,100 420,84"/>
+<polygon class="fl3" points="420,76 415,86 425,86"/>
+<text x="420" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<polyline class="w" points="420,150 420,172.0"/>
+<polyline class="w" points="420,178.0 420,200"/>
+<polyline class="w" points="410,172.0 430,172.0"/>
+<polyline class="w" points="410,178.0 430,178.0"/>
+<text x="406" y="174.0" text-anchor="end" class="ref twarn" font-size="11">C17</text>
+<text x="406" y="187.0" text-anchor="end" class="twarn" font-size="11">100 nF</text>
+<polyline class="w" points="420,200 420,206"/>
+<polyline class="w" points="411,206 429,206"/>
+<polyline class="w" points="414,210 426,210"/>
+<polyline class="w" points="417,214 423,214"/>
+<polyline class="l2" points="470,250 456,250"/>
+<polyline class="w" points="470,290 445,290"/>
+<circle cx="445" cy="290" r="3.2" class="fill"/>
+<polyline class="w" points="445,290 445,314.5"/>
+<polyline class="w" points="445,320.5 445,345"/>
+<polyline class="w" points="435,314.5 455,314.5"/>
+<polyline class="w" points="435,320.5 455,320.5"/>
+<text x="445" y="372" text-anchor="middle" class="ref twarn" font-size="11">C18</text>
+<text x="445" y="384" text-anchor="middle" class="twarn" font-size="11">2,2 µF</text>
+<polyline class="w" points="445,345 445,351"/>
+<polyline class="w" points="436,351 454,351"/>
+<polyline class="w" points="439,355 451,355"/>
+<polyline class="w" points="442,359 448,359"/>
+<polyline class="w" points="560,360 560,380"/>
+<polyline class="w" points="560,380 560,386"/>
+<polyline class="w" points="551,386 569,386"/>
+<polyline class="w" points="554,390 566,390"/>
+<polyline class="w" points="557,394 563,394"/>
+<text x="568" y="376" text-anchor="start" font-size="11">GND (plot central)</text>
+<text x="644" y="154" text-anchor="end" font-size="11">NRESET</text>
+<polyline class="w" points="650,150 700,150"/>
+<circle cx="700" cy="150" r="3.2" class="fill"/>
+<polyline class="w" points="700,100 700,112.0"/>
+<polyline class="w" points="700,138.0 700,150"/>
+<rect x="695" y="112.0" width="10" height="26" rx="1" class="w"/>
+<text x="686" y="124.0" text-anchor="end" class="ref " font-size="11">R23</text>
+<text x="686" y="137.0" text-anchor="end" class="val" font-size="11">10 kΩ</text>
+<polyline class="l3" points="700,100 700,84"/>
+<polygon class="fl3" points="700,76 695,86 705,86"/>
+<text x="700" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<text x="644" y="194" text-anchor="end" font-size="11">MOTION</text>
+<polyline class="w" points="650,190 668,190"/>
+<polyline class="w" points="669,185 679,195"/>
+<polyline class="w" points="669,195 679,185"/>
+<text x="686" y="194" text-anchor="start" font-size="11">non câblée</text>
+<rect x="780" y="185" width="100" height="150" rx="4" class="box"/>
+<text x="830.0" y="201" text-anchor="middle" class="ref" font-size="13">U1</text>
+<text x="830.0" y="215" text-anchor="middle" font-size="11">STM32G431</text>
+<text x="644" y="234" text-anchor="end" font-size="11">CS</text>
+<polyline class="sig" points="650,230 780,230"/>
+<text x="662" y="226" text-anchor="start" class="tsig" font-size="10">FLX_CS</text>
+<text x="786" y="234" text-anchor="start" font-size="11">PB12</text>
+<text x="644" y="259" text-anchor="end" font-size="11">MOSI</text>
+<polyline class="sig" points="650,255 780,255"/>
+<text x="662" y="251" text-anchor="start" class="tsig" font-size="10">FLX_MOSI</text>
+<text x="786" y="259" text-anchor="start" font-size="11">PB15</text>
+<text x="644" y="284" text-anchor="end" font-size="11">MISO</text>
+<polyline class="sig" points="650,280 780,280"/>
+<text x="662" y="276" text-anchor="start" class="tsig" font-size="10">FLX_MISO</text>
+<text x="786" y="284" text-anchor="start" font-size="11">PB14</text>
+<text x="644" y="309" text-anchor="end" font-size="11">SCK</text>
+<polyline class="sig" points="650,305 780,305"/>
+<text x="662" y="301" text-anchor="start" class="tsig" font-size="10">FLX_SCK</text>
+<text x="786" y="309" text-anchor="start" font-size="11">PB13</text>
+<circle cx="745" cy="230" r="3.2" class="fsig"/>
+<polyline class="w" points="745,100 745,152.0"/>
+<polyline class="w" points="745,178.0 745,230"/>
+<rect x="740" y="152.0" width="10" height="26" rx="1" class="w"/>
+<text x="759" y="164.0" text-anchor="start" class="ref " font-size="11">R22</text>
+<text x="759" y="177.0" text-anchor="start" class="val" font-size="11">10 kΩ</text>
+<polyline class="l3" points="745,100 745,84"/>
+<polygon class="fl3" points="745,76 740,86 750,86"/>
+<text x="745" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<text x="20" y="412" text-anchor="start" font-size="11">Six plots de repli (1,5 × 1,5 mm, pas de 2,54 mm, bord de carte) : +3V0, masse, SCK, MOSI, MISO, CS, pistes de moins de 5 mm.</text>
+<text x="20" y="437" text-anchor="start" font-size="11">Bilan : charge 9 mA, pointe de 70 mA à la montée ; chute minimale du régulateur 0,55 à 0,78 V (70 à 100 mA) ; marge 1,0 V (rail à 3,0 V) ou 0,9 V (2,9 V).</text>
+<text x="20" y="451" text-anchor="start" font-size="11">Sortie 1,96 à 2,04 V si la tolérance est de 2 % ; limite de la puce 1,8 à 2,1 V ; dissipation moyenne 9 mW, 70 mW à la pointe.</text>
+<text x="20" y="465" text-anchor="start" font-size="11">SPI2 mode 3, diviseur 128 : 1,328125 MHz ; VDDIO au moins égale à VDD, respecté dès le démarrage.</text>
+<text x="20" y="479" text-anchor="start" font-size="11">Lentille LN03-ZSZ collée à la main sur la puce (DOU-164).</text>
+<text x="20" y="497" text-anchor="start" class="twarn" font-size="11">Orange : C15 à C18 (« empreintes 0603 prévues », valeurs finales à relever sur la figure 8 de la fiche), numéros de broches du régulateur de mémoire.</text>
+<line x1="14" y1="530" x2="886" y2="530" class="thin" style="opacity:.4"/>
+<text x="20" y="546" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
+<text x="20" y="560" style="font-size:11px">Texte de référence : DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V ». Régulateur : 1 µF (C13) en entrée, 2,2 µF (C14) en</text>
+<text x="20" y="574" style="font-size:11px">   sortie.</text>
+<text x="20" y="588" style="font-size:11px">Repères (U6, C13 à C18, R22, R23) provisoires ; noms de broches de la puce de mémoire. À vérifier (orange) : DOU-165 « Flux optique : alimentation en</text>
+<text x="20" y="602" style="font-size:11px">   2,0 V, valeurs de fiche et mise sous tension » ; DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce » ; DOU-182 « Noms et</text>
+<text x="20" y="616" style="font-size:11px">   numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches » ; DOU-183 « Repères de composants provisoires des schémas</text>
+<text x="20" y="630" style="font-size:11px">   SVG de la conception détaillée ».</text>
+<text x="20" y="644" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
+</svg>

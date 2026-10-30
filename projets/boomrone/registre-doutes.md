@@ -282,6 +282,150 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :** (aucune) ; mesure de la température de la puce à TI-004 « Flux optique et vitesse horizontale » (moteurs en marche 30 s) ; hauteur à dessiner avec le croquis coté avant le routage. Aucune exigence ne fixe la température ambiante de vol : à demander à l'utilisateur avant la commande (jardin d'été). Distance entre le régulateur et la puce, cuivre et comportement du logiciel si la qualité du flux chute (vitesse déclarée invalide) à fixer au routage. Non bloquant.
 **Décision liée :** {DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB »}
 
+### DOU-167 — Orientation des axes de la centrale et sens de rotation des moteurs
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-003 « Centrale inertielle », ARC-006 « Moteurs, hélices et protège-hélices », ARC-018 « Boucle de contrôle du vol », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-006 « Cadre, anneaux, moteurs et hélices », DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique »
+**Question :** la matrice d'axes de la centrale (puce sur la face basse) et la table de signes du mixeur supposent un repère x avant, y gauche, z haut et des moteurs 1 et 3 horaires. Ces choix ne sont connus qu'après le routage (sens de la puce) et l'essai des hélices.
+**Réponse :** décision provisoire de DEC-259 « Contrôle : poussée linéarisée, mixeur en X et priorité à l'attitude » : matrice par défaut de 180° autour de x, table de signes de DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique » ; vérifier sur la potence (TI-013 « Boucle de contrôle sur potence ») et corriger les constantes (une seule table, `config_fixed.h` et `ctl_mixer.c`). Non bloquant.
+**Décision liée :** DEC-259 « Contrôle : poussée linéarisée, mixeur en X et priorité à l'attitude »
+
+### DOU-168 — Centrale inertielle ou flux optique absent à l'initialisation
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-023 « Initialisation et échec d'initialisation », REQ-017 « Initialisation en 3 secondes », REQ-037 « Comportement en échec d'initialisation », DES-031 « Séquence d'initialisation et échec d'initialisation »
+**Question :** REQ-017 « Initialisation en 3 secondes » ne cite que le mouvement et le défaut de platitude comme causes d'échec d'initialisation, et ARC-023 « Initialisation et échec d'initialisation » y ajoute le capteur de hauteur absent. L'absence de la centrale inertielle ou du flux optique n'est prévue nulle part.
+**Réponse :** décision provisoire de DEC-264 « Initialisation : centrale inertielle ou flux optique absent vaut échec d'initialisation » : ces absences valent échec d'initialisation, comme le capteur de hauteur. À confirmer à la porte (une ligne à ajouter à REQ-017 « Initialisation en 3 secondes » si l'utilisateur le souhaite ; ARC-023 « Initialisation et échec d'initialisation » et REQ-017 « Initialisation en 3 secondes » ne sont pas modifiées par cette phase). Non bloquant.
+**Décision liée :** DEC-264 « Initialisation : centrale inertielle ou flux optique absent vaut échec d'initialisation »
+
+### DOU-169 — Matière, masse, délai et cotes verticales des pièces imprimées
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-006 « Moteurs, hélices et protège-hélices », ARC-014 « Bilan de masse, de poussée et d'autonomie », DES-006 « Cadre, anneaux, moteurs et hélices »
+**Question :** la matière du cadre (résine ou autre), son prix, son délai, sa masse réelle (9 g estimés) et la tenue de parois de 1,0 mm ne sont pas établis ; les cotes verticales dépendent du croquis de DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie ».
+**Réponse :** décision provisoire de DEC-268 « Mécanique : anneaux tangents, modèle OpenSCAD et impression en ligne » : résine par un service en ligne ; devis et masse à relever avant la commande de la pièce ; repli sur une autre technique si les parois ne tiennent pas. Non bloquant.
+**Décision liée :** DEC-268 « Mécanique : anneaux tangents, modèle OpenSCAD et impression en ligne »
+
+### DOU-170 — Constantes de capteurs de départ : échelle du flux, retard du capteur de hauteur, filtres
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-005 « Capteur de flux optique », ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse », DES-024 « Observateur de hauteur et de vitesse verticale », DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire »
+**Question :** l'échelle du flux (0,0021 rad par pas, reprise de mémoire d'un pilote publié), le retard effectif du capteur de hauteur (33 ms), les seuils de qualité du flux (30) et du taux de signal sont des valeurs de départ non vérifiées.
+**Réponse :** décision provisoire de DEC-260 « Gains de référence et constantes de départ provisoires » et DEC-261 « Estimation : filtre de Mahony, observateur de hauteur et compensation du retard » : valeurs de départ dans `config_fixed.h`, étalonnées à TI-004 « Flux optique et vitesse horizontale », TI-003 « Hauteur du capteur à temps de vol et position de montage » et TI-012 « Chaîne capteurs vers estimation ». Non bloquant.
+**Décision liée :** DEC-260 « Gains de référence et constantes de départ provisoires »
+
+### DOU-171 — Gains de référence, poussée de sustentation et linéarisation de la poussée
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-018 « Boucle de contrôle du vol », REQ-006 « Stabilisation après le lancer », REQ-008 « Tenue du vol stationnaire », DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique »
+**Question :** les gains de DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique », la poussée de sustentation de 0,69 (rapport poussée/poids de 1,44) et l'hypothèse « poussée proportionnelle au carré de la tension » ne reposent sur aucune mesure (pas de mesures au banc : DEC-252 « Phase conception détaillée ouverte avant les mesures au banc »). Le stationnaire en 2 s depuis 1,5 m n'est pas démontré (DOU-050 « Mesure de vitesse horizontale et faisabilité du stationnaire en 2 s depuis 1,5 m »).
+**Réponse :** décision provisoire de DEC-259 « Contrôle : poussée linéarisée, mixeur en X et priorité à l'attitude » et DEC-260 « Gains de référence et constantes de départ provisoires » ; réglage sur la potence (TI-013 « Boucle de contrôle sur potence ») puis en vol. Non bloquant.
+**Décision liée :** DEC-260 « Gains de référence et constantes de départ provisoires »
+
+### DOU-172 — Valeurs de configuration des périphériques à vérifier dans le manuel de référence
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-002 « Microcontrôleur et programmation par liaison SWD », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-022 « Pilote de la mesure de tension de la batterie »
+**Question :** états d'attente de la flash à 170 MHz et mode « boost », registre de timing de l'I2C à 400 kHz, horloge de l'ADC, adresse de VREFINT_CAL (0x1FFF75AA), valeur nominale de VREFINT et canal 18 de l'ADC1 sont repris de mémoire.
+**Réponse :** à relever dans le manuel de référence RM0440 et la fiche DS12589, y compris la fonction alternative de chaque broche moteur (PA11 est TIM1_CH4 en AF11 de mémoire, pas AF6) à l'écriture du code, avant le premier essai sur la carte ; une carte Nucleo STM32G431 permet l'essai avant la commande de la carte (DOU-156 « Vérifications avant la commande de la carte »). Non bloquant.
+**Décision liée :** DEC-257 « Valeurs de configuration des horloges, timers, bus et convertisseur »
+
+### DOU-173 — Composants passifs et découplages à relever dans les fiches avant le routage
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-003 « Centrale inertielle », ARC-004 « Capteur de hauteur à temps de vol », ARC-009 « Alimentation de la logique et mesure de la tension », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-004 « Raccordement du capteur de hauteur VL53L1X », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »
+**Question :** découplages de la centrale, du capteur de hauteur, du microcontrôleur, condensateurs d'entrée et de sortie du MCP1700 et du XC6206, liaison auxiliaire de la centrale, résistance de la ferrite ne sont pas relevés dans les fiches (seul souvenir ou ordre de grandeur dans DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option » à DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »).
+**Réponse :** relever dans les fiches avant le routage ; les valeurs de ce document sont des valeurs usuelles (100 nF par broche, 1 à 10 µF). Non bloquant.
+**Décision liée :** DEC-269 « Matériel : ferrite hors du chemin des moteurs, mesure en amont, rappels des sélections de bus »
+
+### DOU-174 — Séquence d'initialisation du flux et bibliothèque ULD : taille, appels bloquants, licence
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-004 « Capteur de hauteur à temps de vol », ARC-005 « Capteur de flux optique », DES-015 « Arborescence du firmware, édition de liens et budget de mémoire », DES-019 « Pilote du capteur de hauteur non bloquant », DES-020 « Pilote du flux optique »
+**Question :** la suite d'une cinquantaine d'écritures du PMW3901 vient d'un pilote publié, dont la licence est à vérifier avant d'en recopier le texte ; la bibliothèque ULD de ST a une taille (budget de 50 kio) et des fonctions à attentes bloquantes à découper pour le chien de garde, non mesurées.
+**Réponse :** à vérifier à l'écriture du code ; si la licence l'interdit, refaire la suite d'après la fiche de PixArt ; si l'ULD dépasse le budget, ne garder que les fonctions d'initialisation. Non bloquant.
+**Décision liée :** DEC-255 « Conception détaillée : chaîne de développement et arborescence des fichiers »
+
+### DOU-175 — Résolution de la vitesse horizontale du flux face au seuil de 0,3 m/s
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** DEC-262 « Vitesse horizontale invalide : stationnaire non déclaré », DOU-139 « Capteurs de hauteur et de flux : hauteur de montage et sols sans texture », REQ-007 « Critère de vol stationnaire », ARC-005 « Capteur de flux optique », DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire »
+**Question :** avec l'échelle de départ, un pas du flux correspond à environ 0,21 m/s à 1 m de hauteur et 100 Hz ; le seuil de stationnaire est de 0,3 m/s : sa précision de mesure dépend du filtrage et de la hauteur.
+**Réponse :** le filtre du premier ordre à 0,3 lisse les pas ; à confirmer à TI-004 « Flux optique et vitesse horizontale » ; si le critère est trop bruité, revoir le filtre ou le seuil par une demande de modification de REQ-007 « Critère de vol stationnaire ». Non bloquant.
+**Décision liée :** DEC-262 « Vitesse horizontale invalide : stationnaire non déclaré »
+
+### DOU-176 — Tests unitaires sur PC : écart entre la maquette de registres et le composant réel
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** DES-015 « Arborescence du firmware, édition de liens et budget de mémoire », DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond », DES-017 « Coupure des moteurs, démarrage unique et gestionnaires d'exception »
+**Question :** les tests des pilotes sur PC utilisent une maquette de registres : ils ne détectent ni une erreur de nom de bit, ni un temps d'attente trop court, ni un conflit de DMA.
+**Réponse :** ces risques sont couverts par les tests d'intégration sur la carte (TI-002 « Bus SPI, I2C et capteurs », TI-011 « Cadence du cycle et temps de réponse de l'arrêt d'urgence », TI-029 « Mémoire, écriture de flash pendant une mesure et chronomètres ») ; ne pas considérer un TU de pilote comme preuve du fonctionnement du composant. Non bloquant.
+**Décision liée :** DEC-256 « Tests unitaires compilés sur PC avec maquette des registres »
+
+### DOU-177 — Filtre d'attitude : l'accéléromètre en vol mesure la poussée, pas la gravité
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse », DES-023 « Filtre d'attitude de Mahony »
+**Question :** moteurs en marche, l'accélération mesurée est la force spécifique (poussée et traînée) : le filtre de Mahony la prend pour la gravité et tire l'inclinaison vers l'horizontale.
+**Réponse :** décision provisoire : Kp de 0,3 s⁻¹ moteurs en marche (2,0 s⁻¹ au sol) ; à régler sur la potence (TI-013 « Boucle de contrôle sur potence »). Non bloquant.
+**Décision liée :** DEC-260 « Gains de référence et constantes de départ provisoires »
+
+### DOU-178 — Horloge à 16 MHz de l'échec par sous-tension abandonnée
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-023 « Initialisation et échec d'initialisation », DES-031 « Séquence d'initialisation et échec d'initialisation », DOU-118 « Seuil de protection et consommation résiduelle du drone laissé allumé »
+**Question :** ARC-023 « Initialisation et échec d'initialisation » prévoit 16 MHz en échec par sous-tension ; la conception garde 170 MHz, la consommation résiduelle et la durée avant 3,0 V (DOU-118 « Seuil de protection et consommation résiduelle du drone laissé allumé ») sont donc moins bonnes que les 12 mA estimés.
+**Réponse :** décision provisoire de DEC-274 « Échec par sous-tension : horloge conservée à 170 MHz » ; consigne « débrancher » de ARC-030 « Page de consignes d'emploi » ; à mesurer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension ». Non bloquant ; à présenter à la porte.
+**Décision liée :** DEC-274 « Échec par sous-tension : horloge conservée à 170 MHz »
+
+### DOU-179 — Anti-repliement de la centrale : sortie à 3,33 kHz lue à 1 kHz
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-003 « Centrale inertielle », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-018 « Pilote de la centrale inertielle », DOU-154 « Vibrations des moteurs sur la centrale inertielle posée sur la carte rigide »
+**Question :** la lecture à 1 kHz d'une sortie à 3,33 kHz peut replier les vibrations des moteurs ; aucun filtre passe-bas n'est réglé sur l'accéléromètre.
+**Réponse :** à mesurer sur la carte (spectre des vibrations, TI-013 « Boucle de contrôle sur potence ») ; options : filtre numérique de l'accéléromètre, sortie à 1,66 kHz, lecture sur INT1. Non bloquant.
+**Décision liée :** DEC-261 « Estimation : filtre de Mahony, observateur de hauteur et compensation du retard »
+
+### DOU-180 — Recouvrement de la carte et des disques d'hélice
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-006 « Moteurs, hélices et protège-hélices », ARC-013 « Carte électronique JLCPCB, câblage et assemblage », ARC-014 « Bilan de masse, de poussée et d'autonomie », DES-006 « Cadre, anneaux, moteurs et hélices », DES-014 « Feuille de calcul du bilan de masse, de poussée et d'autonomie », DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie »
+**Question :** la carte de 40 x 35 mm déborde sur les disques des quatre hélices de 45 mm ; la poussée perdue n'est pas dans le bilan.
+**Réponse :** à chiffrer sur le croquis coté de DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » avant le routage ; repli : carte plus étroite. Non bloquant.
+**Décision liée :** DEC-268 « Mécanique : anneaux tangents, modèle OpenSCAD et impression en ligne »
+
+### DOU-181 — Bilan d'erreur de la mesure de tension et niveau du BOR
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-022 « Pilote de la mesure de tension de la batterie », DOU-142 « Fuite d'entrée de l'ADC et marge de ±50 mV de la mesure de tension »
+**Question :** l'incertitude de la mesure ne compte pas la tolérance de VREFINT_CAL, le gain de l'ADC, ni l'ondulation à 24 kHz des moteurs ; le niveau 3 du BOR (environ 2,5 V de mémoire) est sous le minimum de 2,6 V du capteur de hauteur.
+**Réponse :** budget estimé ±15 mV à confirmer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension » (critère de recette ±30 mV) ; tension du niveau du BOR à relever dans la fiche DS12589. Non bloquant.
+**Décision liée :** DEC-258 « Mesure de la tension : séquence de conversion et zone de maintien de la sous-tension »
+
+### DOU-182 — Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-004 « Raccordement du capteur de hauteur VL53L1X », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension », DES-012 « Raccordement du module Bluetooth E104-BT02 », DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 »
+**Question :** les schémas SVG de la conception détaillée (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée ») nomment des broches que le texte des DES ne donne pas : SCL (SCK), SDA/SDI (MOSI), SDO/SA0 (MISO), INT2, VDDIO de la centrale ; SCL, SDA, GPIO1, XSHUT, AVDD, AVDDVCSEL, IOVDD du capteur de hauteur ; VDD, VDDIO, VREG, NRESET, MOTION, MOSI, MISO, SCK, CS du flux optique ; RXD, TXD, VCC du module radio ; VIN, VOUT, GND des régulateurs. Ces noms sont de mémoire, aucune fiche n'a été lue. Les numéros de broches ne sont affichés que pour les régulateurs MCP1700 et XC6206 (SOT-23 : 1 à 3, en orange, de mémoire) ; ils sont omis pour la centrale (LGA-14), le capteur de hauteur (LGA-12), la puce du flux (COB-28), le module radio et le microcontrôleur (DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 »).
+**Réponse :** (à remplir) relever noms et numéros dans les fiches avant le routage, puis corriger les schémas SVG ; ne bloque ni la porte ni la commande de la carte si les schémas KiCad sont saisis depuis les fiches.
+**Décision liée :** DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »
+
+### DOU-183 — Repères de composants provisoires des schémas SVG de la conception détaillée
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-007 « Circuit de puissance des moteurs », DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-011 « Circuit du voyant RGB et du buzzer »
+**Question :** le texte des DES ne donne aucun repère de composant (R1, C3, U2…) : il décrit les composants par leur fonction et leur valeur. Les schémas SVG (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée ») attribuent des repères provisoires, uniques sur toute la carte : U1 microcontrôleur, U2 centrale, U3 capteur de hauteur, U4 flux optique, U5 MCP1700, U6 XC6206, U7 module radio ; Q1 à Q4 moteurs, Q5 à Q7 voyant, Q8 buzzer ; D1 à D4 et D5 SS34 ; M1 à M4 ; R1 à R4 grilles de 47 ohms, R5 à R8 rappels des moteurs ; R9 à R11 et R12 à R14 grille et rappel du voyant, R15 à R17 résistances du voyant ; R18 et R19 grille et rappel du buzzer ; R20 et R21 pont de mesure ; R22 à R31 rappels et résistances diverses ; C1 à C33 (C9 non attribué) ; J1 XT30, J2 SWD, FB1 ferrite, SW1 bouton, LED1, BZ1. L'annotation de KiCad les remplacera sans doute. Quels repères retenir, ceux des schémas SVG (au risque de les voir changer à l'annotation) ou ceux de KiCad (à reporter alors dans les SVG et dans le texte des DES) ?
+**Réponse :** (à remplir) proposition : garder les repères provisoires jusqu'à la saisie du schéma KiCad, puis reporter les repères définitifs dans les SVG et dans le texte des DES ; ne bloque pas.
+**Décision liée :** DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »
+
+### DOU-184 — Condensateurs d'entrée du régulateur de 3,0 V : 22 µF sur VBATL et 1 µF sur l'entrée du composant
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »
+**Question :** DES-008 « Batterie, connecteur XT30 et entrée de la carte » met 22 µF (1206, 25 V) sur VBATL ; DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » met 1 µF en entrée du MCP1700, sur le même réseau. Les deux schémas SVG dessinent les deux condensateurs (C8 et C10) en parallèle, ce qui est une lecture du texte, non une certitude : s'agit-il de deux condensateurs distincts (un en tête de branche, un au plus près du composant) ou d'une même valeur à corriger ?
+**Réponse :** (à remplir) à trancher avec la fiche du MCP1700 (DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage »).
+**Décision liée :** DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »
+
 <!-- Ajouter les nouveaux doutes ci-dessus, avant ce marqueur, au même format, en dehors des blocs de code. -->
 
 ## Archive — doutes levés

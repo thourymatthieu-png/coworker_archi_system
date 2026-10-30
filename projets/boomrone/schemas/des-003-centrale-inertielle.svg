@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 646" width="900" height="646" role="img" aria-labelledby="t d"><title id="t">DES-003 — Raccordement de la centrale inertielle LSM6DSO</title><desc id="d">LSM6DSOTR en SPI 4 fils sur SPI1, CS avec rappel de 10 kohms, INT1 vers PB0, VDD et VDDIO au +3V0 avec 100 nF et 10 microfarads.</desc><style>
+:root{--fg:#1f2937}
+.bg{fill:#ffffff}
+@media (prefers-color-scheme: dark){:root{--fg:#e5e7eb}.bg{fill:#1e1e1e}}
+text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
+.w{stroke:var(--fg);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:var(--fg);stroke-width:1;fill:none}
+.box{stroke:var(--fg);stroke-width:1.6;fill:var(--fg);fill-opacity:.06}
+.dash{stroke:var(--fg);stroke-width:1.2;fill:none;stroke-dasharray:5 4}
+.bat{stroke:#ef4444;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l3{stroke:#3b82f6;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l2{stroke:#a855f7;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.warn{stroke:#d97706;stroke-width:1.8;fill:none;stroke-dasharray:6 3}
+.sig{stroke:#059669;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:var(--fg);stroke:none}
+.fbat{fill:#ef4444;stroke:none}.fl3{fill:#3b82f6;stroke:none}.fl2{fill:#a855f7;stroke:none}.fsig{fill:#059669;stroke:none}
+.tbat{fill:#ef4444;font-weight:bold}.tl3{fill:#3b82f6;font-weight:bold}.tl2{fill:#a855f7;font-weight:bold}
+.tsig{fill:#059669}.twarn{fill:#d97706;font-weight:bold}
+.ref{font-weight:bold}.small{font-size:11px}.title{font-size:16px;font-weight:bold}
+.val{opacity:.9}
+</style>
+<rect class="bg" id="fond" x="0" y="0" width="900" height="646"/>
+<text x="20" y="26" style="font-size:16px;font-weight:bold">DES-003 — Raccordement de la centrale inertielle LSM6DSO</text>
+<rect x="20" y="110" width="110" height="190" rx="4" class="box"/>
+<text x="75.0" y="126" text-anchor="middle" class="ref" font-size="13">U1</text>
+<text x="75.0" y="140" text-anchor="middle" font-size="11">STM32G431</text>
+<rect x="380" y="110" width="190" height="230" rx="4" class="box"/>
+<text x="475.0" y="126" text-anchor="middle" class="ref" font-size="13">U2</text>
+<text x="475.0" y="140" text-anchor="middle" font-size="11">LSM6DSOTR (LGA-14)</text>
+<polyline class="w" points="130,170 130,170"/>
+<text x="125" y="174" text-anchor="end" font-size="11">PA4</text>
+<polyline class="sig" points="130,170 380,170"/>
+<text x="150" y="165" text-anchor="start" class="tsig" font-size="11">IMU_CS</text>
+<text x="386" y="174" text-anchor="start" font-size="11">CS</text>
+<polyline class="w" points="130,200 130,200"/>
+<text x="125" y="204" text-anchor="end" font-size="11">PA5</text>
+<polyline class="sig" points="130,200 380,200"/>
+<text x="150" y="195" text-anchor="start" class="tsig" font-size="11">IMU_SCK</text>
+<text x="386" y="204" text-anchor="start" font-size="11">SCL (SCK)</text>
+<polyline class="w" points="130,230 130,230"/>
+<text x="125" y="234" text-anchor="end" font-size="11">PA7</text>
+<polyline class="sig" points="130,230 380,230"/>
+<text x="150" y="225" text-anchor="start" class="tsig" font-size="11">IMU_MOSI</text>
+<text x="386" y="234" text-anchor="start" font-size="11">SDA/SDI (MOSI)</text>
+<polyline class="w" points="130,260 130,260"/>
+<text x="125" y="264" text-anchor="end" font-size="11">PA6</text>
+<polyline class="sig" points="130,260 380,260"/>
+<text x="150" y="255" text-anchor="start" class="tsig" font-size="11">IMU_MISO</text>
+<text x="386" y="264" text-anchor="start" font-size="11">SDO/SA0 (MISO)</text>
+<polyline class="w" points="130,290 130,290"/>
+<text x="125" y="294" text-anchor="end" font-size="11">PB0</text>
+<polyline class="sig" points="130,290 380,290"/>
+<text x="150" y="285" text-anchor="start" class="tsig" font-size="11">IMU_INT1</text>
+<text x="386" y="294" text-anchor="start" font-size="11">INT1</text>
+<polygon class="fsig" points="136,290 148,285 148,295"/>
+<circle cx="300" cy="170" r="3.2" class="fsig"/>
+<polyline class="w" points="300,110 300,127.0"/>
+<polyline class="w" points="300,153.0 300,170"/>
+<rect x="295" y="127.0" width="10" height="26" rx="1" class="w"/>
+<text x="314" y="139.0" text-anchor="start" class="ref " font-size="11">R24</text>
+<text x="314" y="152.0" text-anchor="start" class="val" font-size="11">10 kΩ</text>
+<polyline class="l3" points="300,110 300,94"/>
+<polygon class="fl3" points="300,86 295,96 305,96"/>
+<text x="300" y="80" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<text x="20" y="318" text-anchor="start" font-size="11">SPI1 (AF5), mode 3, diviseur 32 : 5,3125 MHz</text>
+<text x="20" y="332" text-anchor="start" font-size="11">CS au repos haut : composant désélectionné pendant le reset</text>
+<text x="564" y="174" text-anchor="end" font-size="11">VDD</text>
+<text x="564" y="204" text-anchor="end" font-size="11">VDDIO</text>
+<polyline class="l3" points="570,170 600,170"/>
+<polyline class="l3" points="570,200 600,200"/>
+<polyline class="l3" points="600,110 600,200"/>
+<circle cx="600" cy="170" r="3.2" class="fl3"/>
+<circle cx="600" cy="200" r="3.2" class="fl3"/>
+<polyline class="l3" points="600,110 780,110"/>
+<polyline class="l3" points="600,110 600,94"/>
+<polygon class="fl3" points="600,86 595,96 605,96"/>
+<text x="600" y="80" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<circle cx="660" cy="110" r="3.2" class="fl3"/>
+<polyline class="w" points="660,110 660,137.0"/>
+<polyline class="w" points="660,143.0 660,170"/>
+<polyline class="w" points="650,137.0 670,137.0"/>
+<polyline class="w" points="650,143.0 670,143.0"/>
+<text x="660" y="197" text-anchor="middle" class="ref " font-size="11">C19</text>
+<text x="660" y="209" text-anchor="middle" class="val" font-size="11">100 nF</text>
+<polyline class="w" points="660,170 660,176"/>
+<polyline class="w" points="651,176 669,176"/>
+<polyline class="w" points="654,180 666,180"/>
+<polyline class="w" points="657,184 663,184"/>
+<circle cx="720" cy="110" r="3.2" class="fl3"/>
+<polyline class="w" points="720,110 720,137.0"/>
+<polyline class="w" points="720,143.0 720,170"/>
+<polyline class="w" points="710,137.0 730,137.0"/>
+<polyline class="w" points="710,143.0 730,143.0"/>
+<text x="720" y="197" text-anchor="middle" class="ref " font-size="11">C20</text>
+<text x="720" y="209" text-anchor="middle" class="val" font-size="11">100 nF</text>
+<polyline class="w" points="720,170 720,176"/>
+<polyline class="w" points="711,176 729,176"/>
+<polyline class="w" points="714,180 726,180"/>
+<polyline class="w" points="717,184 723,184"/>
+<polyline class="w" points="780,110 780,137.0"/>
+<polyline class="w" points="780,143.0 780,170"/>
+<polyline class="w" points="770,137.0 790,137.0"/>
+<polyline class="w" points="770,143.0 790,143.0"/>
+<text x="780" y="197" text-anchor="middle" class="ref " font-size="11">C21</text>
+<text x="780" y="209" text-anchor="middle" class="val" font-size="11">10 µF</text>
+<polyline class="w" points="780,170 780,176"/>
+<polyline class="w" points="771,176 789,176"/>
+<polyline class="w" points="774,180 786,180"/>
+<polyline class="w" points="777,184 783,184"/>
+<polyline class="w" points="570,260 588,260"/>
+<polyline class="w" points="589,255 599,265"/>
+<polyline class="w" points="589,265 599,255"/>
+<text x="564" y="264" text-anchor="end" font-size="11">INT2</text>
+<text x="604" y="264" text-anchor="start" font-size="11">non raccordée</text>
+<polyline class="w" points="570,290 588,290"/>
+<text x="564" y="294" text-anchor="end" font-size="11">liaison auxiliaire</text>
+<text x="604" y="294" text-anchor="start" class="twarn" font-size="11">à la masse ou laissée (fiche à relever)</text>
+<polyline class="w" points="475,340 475,360"/>
+<polyline class="w" points="475,360 475,366"/>
+<polyline class="w" points="466,366 484,366"/>
+<polyline class="w" points="469,370 481,370"/>
+<polyline class="w" points="472,374 478,374"/>
+<text x="485" y="356" text-anchor="start" font-size="11">GND</text>
+<text x="485" y="372" text-anchor="start" font-size="11">pas de plan de masse coupé sous le composant</text>
+<text x="20" y="395" text-anchor="start" class="ref" font-size="11">Registres écrits à l'initialisation (à confirmer dans la fiche ST) :</text>
+<text x="20" y="411" text-anchor="start" font-size="11">CTRL3_C = 0x44 (BDU et IF_INC, après SW_RESET et attente de fin de reset) ; CTRL4_C = 0x06 (liaison I2C coupée, filtre passe-bas du gyroscope actif)</text>
+<text x="20" y="425" text-anchor="start" font-size="11">CTRL1_XL = 0x9C (3,33 kHz, ±8 g) ; CTRL2_G = 0x9C (3,33 kHz, ±2000 °/s) ; INT1_CTRL = 0x03 (données prêtes accéléromètre et gyroscope)</text>
+<text x="20" y="439" text-anchor="start" font-size="11">identité WHO_AM_I (0x0F) attendue : 0x6C ; échelles : gyroscope 70 m°/s par pas, accéléromètre 0,244 mg par pas</text>
+<text x="20" y="471" text-anchor="start" class="twarn" font-size="11">Axes : rotation de 180° autour de x par défaut (puce face vers le bas), constante de config_fixed.h, à confirmer après le routage (DOU-167).</text>
+<text x="20" y="487" text-anchor="start" class="twarn" font-size="11">Orange : liaison auxiliaire, valeurs de registres, orientation des axes.</text>
+<line x1="14" y1="530" x2="886" y2="530" class="thin" style="opacity:.4"/>
+<text x="20" y="546" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
+<text x="20" y="560" style="font-size:11px">Texte de référence : DES-003 « Raccordement de la centrale inertielle LSM6DSO ». Croisement de fils sans point = pas de liaison. Noms des broches du</text>
+<text x="20" y="574" style="font-size:11px">   composant de mémoire.</text>
+<text x="20" y="588" style="font-size:11px">Repères (R24, C19 à C21) provisoires. À vérifier (orange) : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » ; DOU-173</text>
+<text x="20" y="602" style="font-size:11px">   « Composants passifs et découplages à relever dans les fiches avant le routage » ; DOU-182 « Noms et numéros de broches des circuits intégrés des</text>
+<text x="20" y="616" style="font-size:11px">   schémas SVG non relevés dans les fiches » ; DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».</text>
+<text x="20" y="630" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
+</svg>

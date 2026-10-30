@@ -1,0 +1,278 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1060" width="900" height="1060" role="img" aria-labelledby="t d"><title id="t">DES-002 — Microcontrôleur : brochage, horloges, découplage et octets d'option</title><desc id="d">STM32G431CBT6 en LQFP-48 : brochage des fonctions, programmation SWD, NRST avec 100 nF, BOOT0 avec 10 kohms à la masse, découplage de VDD et VDDA.</desc><style>
+:root{--fg:#1f2937}
+.bg{fill:#ffffff}
+@media (prefers-color-scheme: dark){:root{--fg:#e5e7eb}.bg{fill:#1e1e1e}}
+text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
+.w{stroke:var(--fg);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:var(--fg);stroke-width:1;fill:none}
+.box{stroke:var(--fg);stroke-width:1.6;fill:var(--fg);fill-opacity:.06}
+.dash{stroke:var(--fg);stroke-width:1.2;fill:none;stroke-dasharray:5 4}
+.bat{stroke:#ef4444;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l3{stroke:#3b82f6;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l2{stroke:#a855f7;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.warn{stroke:#d97706;stroke-width:1.8;fill:none;stroke-dasharray:6 3}
+.sig{stroke:#059669;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:var(--fg);stroke:none}
+.fbat{fill:#ef4444;stroke:none}.fl3{fill:#3b82f6;stroke:none}.fl2{fill:#a855f7;stroke:none}.fsig{fill:#059669;stroke:none}
+.tbat{fill:#ef4444;font-weight:bold}.tl3{fill:#3b82f6;font-weight:bold}.tl2{fill:#a855f7;font-weight:bold}
+.tsig{fill:#059669}.twarn{fill:#d97706;font-weight:bold}
+.ref{font-weight:bold}.small{font-size:11px}.title{font-size:16px;font-weight:bold}
+.val{opacity:.9}
+</style>
+<rect class="bg" id="fond" x="0" y="0" width="900" height="1060"/>
+<text x="20" y="26" style="font-size:16px;font-weight:bold">DES-002 — Microcontrôleur : brochage, horloges, découplage et octets d'option</text>
+<text x="580" y="128" text-anchor="start" class="ref" font-size="11">Moteurs → DES-007</text>
+<polyline class="sig" points="560,151 574,151"/>
+<text x="555" y="155" text-anchor="end" font-size="11">PA8</text>
+<text x="580" y="155" text-anchor="start" class="tsig" font-size="11">M1_G</text>
+<text x="680" y="155" text-anchor="start" font-size="10">TIM1 CH1 (AF6)</text>
+<polyline class="sig" points="560,166 574,166"/>
+<text x="555" y="170" text-anchor="end" font-size="11">PA9</text>
+<text x="580" y="170" text-anchor="start" class="tsig" font-size="11">M2_G</text>
+<text x="680" y="170" text-anchor="start" font-size="10">TIM1 CH2 (AF6)</text>
+<polyline class="sig" points="560,181 574,181"/>
+<text x="555" y="185" text-anchor="end" font-size="11">PA10</text>
+<text x="580" y="185" text-anchor="start" class="tsig" font-size="11">M3_G</text>
+<text x="680" y="185" text-anchor="start" font-size="10">TIM1 CH3 (AF6)</text>
+<polyline class="sig" points="560,196 574,196"/>
+<text x="555" y="200" text-anchor="end" font-size="11">PA11</text>
+<text x="580" y="200" text-anchor="start" class="tsig" font-size="11">M4_G</text>
+<text x="680" y="200" text-anchor="start" class="twarn" font-size="10">TIM1 CH4 (AF11 de mémoire ?)</text>
+<text x="580" y="220" text-anchor="start" class="ref" font-size="11">Centrale → DES-003</text>
+<polyline class="sig" points="560,243 574,243"/>
+<text x="555" y="247" text-anchor="end" font-size="11">PA4</text>
+<text x="580" y="247" text-anchor="start" class="tsig" font-size="11">IMU_CS</text>
+<text x="680" y="247" text-anchor="start" font-size="10">sortie, haut au repos</text>
+<polyline class="sig" points="560,258 574,258"/>
+<text x="555" y="262" text-anchor="end" font-size="11">PA5</text>
+<text x="580" y="262" text-anchor="start" class="tsig" font-size="11">IMU_SCK</text>
+<text x="680" y="262" text-anchor="start" font-size="10">SPI1 (AF5), mode 3</text>
+<polyline class="sig" points="560,273 574,273"/>
+<text x="555" y="277" text-anchor="end" font-size="11">PA6</text>
+<text x="580" y="277" text-anchor="start" class="tsig" font-size="11">IMU_MISO</text>
+<text x="680" y="277" text-anchor="start" font-size="10">SPI1</text>
+<polyline class="sig" points="560,288 574,288"/>
+<text x="555" y="292" text-anchor="end" font-size="11">PA7</text>
+<text x="580" y="292" text-anchor="start" class="tsig" font-size="11">IMU_MOSI</text>
+<text x="680" y="292" text-anchor="start" font-size="10">SPI1</text>
+<polyline class="sig" points="560,303 574,303"/>
+<text x="555" y="307" text-anchor="end" font-size="11">PB0</text>
+<text x="580" y="307" text-anchor="start" class="tsig" font-size="11">IMU_INT1</text>
+<text x="680" y="307" text-anchor="start" font-size="10">entrée</text>
+<text x="580" y="327" text-anchor="start" class="ref" font-size="11">Flux optique → DES-005</text>
+<polyline class="sig" points="560,350 574,350"/>
+<text x="555" y="354" text-anchor="end" font-size="11">PB12</text>
+<text x="580" y="354" text-anchor="start" class="tsig" font-size="11">FLX_CS</text>
+<text x="680" y="354" text-anchor="start" font-size="10">sortie, haut au repos</text>
+<polyline class="sig" points="560,365 574,365"/>
+<text x="555" y="369" text-anchor="end" font-size="11">PB13</text>
+<text x="580" y="369" text-anchor="start" class="tsig" font-size="11">FLX_SCK</text>
+<text x="680" y="369" text-anchor="start" font-size="10">SPI2 (AF5), mode 3</text>
+<polyline class="sig" points="560,380 574,380"/>
+<text x="555" y="384" text-anchor="end" font-size="11">PB14</text>
+<text x="580" y="384" text-anchor="start" class="tsig" font-size="11">FLX_MISO</text>
+<text x="680" y="384" text-anchor="start" font-size="10">SPI2</text>
+<polyline class="sig" points="560,395 574,395"/>
+<text x="555" y="399" text-anchor="end" font-size="11">PB15</text>
+<text x="580" y="399" text-anchor="start" class="tsig" font-size="11">FLX_MOSI</text>
+<text x="680" y="399" text-anchor="start" font-size="10">SPI2</text>
+<text x="580" y="419" text-anchor="start" class="ref" font-size="11">Capteur de hauteur → DES-004</text>
+<polyline class="sig" points="560,442 574,442"/>
+<text x="555" y="446" text-anchor="end" font-size="11">PA15</text>
+<text x="580" y="446" text-anchor="start" class="tsig" font-size="11">I2C_SCL</text>
+<text x="680" y="446" text-anchor="start" font-size="10">I2C1 (AF4), drain ouvert</text>
+<polyline class="sig" points="560,457 574,457"/>
+<text x="555" y="461" text-anchor="end" font-size="11">PB7</text>
+<text x="580" y="461" text-anchor="start" class="tsig" font-size="11">I2C_SDA</text>
+<text x="680" y="461" text-anchor="start" font-size="10">I2C1 (AF4), drain ouvert</text>
+<polyline class="sig" points="560,472 574,472"/>
+<text x="555" y="476" text-anchor="end" font-size="11">PB6</text>
+<text x="580" y="476" text-anchor="start" class="tsig" font-size="11">TOF_GPIO1</text>
+<text x="680" y="476" text-anchor="start" font-size="10">entrée, interruption (front descendant)</text>
+<polyline class="sig" points="560,487 574,487"/>
+<text x="555" y="491" text-anchor="end" font-size="11">PB9</text>
+<text x="580" y="491" text-anchor="start" class="tsig" font-size="11">TOF_XSHUT</text>
+<text x="680" y="491" text-anchor="start" font-size="10">sortie</text>
+<text x="580" y="511" text-anchor="start" class="ref" font-size="11">Radio → DES-012</text>
+<polyline class="sig" points="560,534 574,534"/>
+<text x="555" y="538" text-anchor="end" font-size="11">PA2</text>
+<text x="580" y="538" text-anchor="start" class="tsig" font-size="11">BLE_TX</text>
+<text x="680" y="538" text-anchor="start" font-size="10">USART2 TX (AF7)</text>
+<polyline class="sig" points="560,549 574,549"/>
+<text x="555" y="553" text-anchor="end" font-size="11">PA3</text>
+<text x="580" y="553" text-anchor="start" class="tsig" font-size="11">BLE_RX</text>
+<text x="680" y="553" text-anchor="start" font-size="10">USART2 RX (AF7)</text>
+<text x="580" y="573" text-anchor="start" class="ref" font-size="11">Voyant et buzzer → DES-011</text>
+<polyline class="sig" points="560,596 574,596"/>
+<text x="555" y="600" text-anchor="end" font-size="11">PB1</text>
+<text x="580" y="600" text-anchor="start" class="tsig" font-size="11">LED_R</text>
+<text x="680" y="600" text-anchor="start" font-size="10">sortie</text>
+<polyline class="sig" points="560,611 574,611"/>
+<text x="555" y="615" text-anchor="end" font-size="11">PB2</text>
+<text x="580" y="615" text-anchor="start" class="tsig" font-size="11">LED_G</text>
+<text x="680" y="615" text-anchor="start" font-size="10">sortie</text>
+<polyline class="sig" points="560,626 574,626"/>
+<text x="555" y="630" text-anchor="end" font-size="11">PB10</text>
+<text x="580" y="630" text-anchor="start" class="tsig" font-size="11">LED_B</text>
+<text x="680" y="630" text-anchor="start" font-size="10">sortie</text>
+<polyline class="sig" points="560,641 574,641"/>
+<text x="555" y="645" text-anchor="end" font-size="11">PB11</text>
+<text x="580" y="645" text-anchor="start" class="tsig" font-size="11">BUZ</text>
+<text x="680" y="645" text-anchor="start" font-size="10">sortie</text>
+<text x="580" y="665" text-anchor="start" class="ref" font-size="11">Bouton → DES-010</text>
+<polyline class="sig" points="560,688 574,688"/>
+<text x="555" y="692" text-anchor="end" font-size="11">PB5</text>
+<text x="580" y="692" text-anchor="start" class="tsig" font-size="11">BTN</text>
+<text x="680" y="692" text-anchor="start" font-size="10">entrée</text>
+<text x="580" y="712" text-anchor="start" class="ref" font-size="11">Mesure de la batterie → DES-009</text>
+<polyline class="sig" points="560,735 574,735"/>
+<text x="555" y="739" text-anchor="end" font-size="11">PA0</text>
+<text x="580" y="739" text-anchor="start" class="tsig" font-size="11">VBAT_SENSE</text>
+<text x="680" y="739" text-anchor="start" font-size="10">ADC1 IN1 (analogique)</text>
+<rect x="330" y="110" width="230" height="643" rx="4" class="box"/>
+<text x="445.0" y="126" text-anchor="middle" class="ref" font-size="13">U1</text>
+<text x="445.0" y="140" text-anchor="middle" font-size="11">STM32G431CBT6 (LQFP-48)</text>
+<text x="340" y="150" text-anchor="start" class="twarn" font-size="11">n° de broches physiques</text>
+<text x="340" y="164" text-anchor="start" class="twarn" font-size="11">non relevés (DOU-148)</text>
+<rect x="50" y="125" width="70" height="165" rx="4" class="box"/>
+<text x="85" y="143" text-anchor="middle" class="ref" font-size="12">J2</text>
+<polyline class="w" points="120,160 134,160"/>
+<text x="115" y="164" text-anchor="end" font-size="11">VTref</text>
+<polyline class="w" points="120,190 134,190"/>
+<text x="115" y="194" text-anchor="end" font-size="11">SWDIO</text>
+<polyline class="w" points="120,220 134,220"/>
+<text x="115" y="224" text-anchor="end" font-size="11">SWCLK</text>
+<polyline class="w" points="120,250 134,250"/>
+<text x="115" y="254" text-anchor="end" font-size="11">GND</text>
+<polyline class="w" points="120,280 134,280"/>
+<text x="115" y="284" text-anchor="end" font-size="11">NRST</text>
+<text x="85" y="308" text-anchor="middle" font-size="11">en-tête SWD 1 × 5</text>
+<polyline class="l3" points="134,160 160,160"/>
+<polyline class="l3" points="160,160 160,144"/>
+<polygon class="fl3" points="160,136 155,146 165,146"/>
+<text x="160" y="130" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<polyline class="w" points="134,250 150,250"/>
+<polyline class="w" points="150,250 150,256"/>
+<polyline class="w" points="141,256 159,256"/>
+<polyline class="w" points="144,260 156,260"/>
+<polyline class="w" points="147,264 153,264"/>
+<polyline class="w" points="330,190 316,190"/>
+<text x="335" y="194" text-anchor="start" font-size="11">PA13 SWDIO</text>
+<polyline class="sig" points="134,190 316,190"/>
+<text x="170" y="185" text-anchor="start" class="tsig" font-size="11">SWDIO</text>
+<polyline class="w" points="330,220 316,220"/>
+<text x="335" y="224" text-anchor="start" font-size="11">PA14 SWCLK</text>
+<polyline class="sig" points="134,220 316,220"/>
+<text x="170" y="215" text-anchor="start" class="tsig" font-size="11">SWCLK</text>
+<polyline class="w" points="330,280 316,280"/>
+<text x="335" y="284" text-anchor="start" font-size="11">NRST</text>
+<polyline class="sig" points="134,280 316,280"/>
+<text x="170" y="275" text-anchor="start" class="tsig" font-size="11">NRST</text>
+<circle cx="250" cy="280" r="3.2" class="fsig"/>
+<polyline class="w" points="250,280 250,307.0"/>
+<polyline class="w" points="250,313.0 250,340"/>
+<polyline class="w" points="240,307.0 260,307.0"/>
+<polyline class="w" points="240,313.0 260,313.0"/>
+<text x="236" y="309.0" text-anchor="end" class="ref " font-size="11">C31</text>
+<text x="236" y="322.0" text-anchor="end" class="val" font-size="11">100 nF</text>
+<polyline class="w" points="250,340 250,346"/>
+<polyline class="w" points="241,346 259,346"/>
+<polyline class="w" points="244,350 256,350"/>
+<polyline class="w" points="247,354 253,354"/>
+<polyline class="w" points="330,335 316,335"/>
+<text x="335" y="339" text-anchor="start" font-size="11">PB8 BOOT0</text>
+<polyline class="w" points="316,335 296,335"/>
+<circle cx="296" cy="335" r="3.2" class="fill"/>
+<polyline class="w" points="296,335 296,352.0"/>
+<polyline class="w" points="296,378.0 296,395"/>
+<rect x="291" y="352.0" width="10" height="26" rx="1" class="w"/>
+<text x="282" y="364.0" text-anchor="end" class="ref " font-size="11">R31</text>
+<text x="282" y="377.0" text-anchor="end" class="val" font-size="11">10 kΩ</text>
+<polyline class="w" points="296,395 296,401"/>
+<polyline class="w" points="287,401 305,401"/>
+<polyline class="w" points="290,405 302,405"/>
+<polyline class="w" points="293,409 299,409"/>
+<text x="20" y="326" text-anchor="start" font-size="11">pas de bouton de reset</text>
+<polyline class="l3" points="330,440 316,440"/>
+<text x="335" y="444" text-anchor="start" font-size="11">VDD (chaque broche)</text>
+<polyline class="l3" points="316,440 45,440"/>
+<polyline class="l3" points="45,440 45,424"/>
+<polygon class="fl3" points="45,416 40,426 50,426"/>
+<text x="45" y="410" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<circle cx="110" cy="440" r="3.2" class="fl3"/>
+<polyline class="w" points="110,440 110,464.5"/>
+<polyline class="w" points="110,470.5 110,495"/>
+<polyline class="w" points="100,464.5 120,464.5"/>
+<polyline class="w" points="100,470.5 120,470.5"/>
+<text x="110" y="522" text-anchor="middle" class="ref twarn" font-size="11">C27</text>
+<text x="110" y="534" text-anchor="middle" class="twarn" font-size="11">100 nF × n</text>
+<polyline class="w" points="110,495 110,501"/>
+<polyline class="w" points="101,501 119,501"/>
+<polyline class="w" points="104,505 116,505"/>
+<polyline class="w" points="107,509 113,509"/>
+<circle cx="190" cy="440" r="3.2" class="fl3"/>
+<polyline class="w" points="190,440 190,464.5"/>
+<polyline class="w" points="190,470.5 190,495"/>
+<polyline class="w" points="180,464.5 200,464.5"/>
+<polyline class="w" points="180,470.5 200,470.5"/>
+<text x="190" y="522" text-anchor="middle" class="ref twarn" font-size="11">C28</text>
+<text x="190" y="534" text-anchor="middle" class="twarn" font-size="11">4,7 µF</text>
+<polyline class="w" points="190,495 190,501"/>
+<polyline class="w" points="181,501 199,501"/>
+<polyline class="w" points="184,505 196,505"/>
+<polyline class="w" points="187,509 193,509"/>
+<polyline class="l3" points="330,560 316,560"/>
+<text x="335" y="564" text-anchor="start" font-size="11">VDDA</text>
+<polyline class="l3" points="316,560 45,560"/>
+<polyline class="l3" points="45,560 45,544"/>
+<polygon class="fl3" points="45,536 40,546 50,546"/>
+<text x="45" y="530" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<circle cx="110" cy="560" r="3.2" class="fl3"/>
+<polyline class="w" points="110,560 110,584.5"/>
+<polyline class="w" points="110,590.5 110,615"/>
+<polyline class="w" points="100,584.5 120,584.5"/>
+<polyline class="w" points="100,590.5 120,590.5"/>
+<text x="110" y="642" text-anchor="middle" class="ref twarn" font-size="11">C29</text>
+<text x="110" y="654" text-anchor="middle" class="twarn" font-size="11">100 nF</text>
+<polyline class="w" points="110,615 110,621"/>
+<polyline class="w" points="101,621 119,621"/>
+<polyline class="w" points="104,625 116,625"/>
+<polyline class="w" points="107,629 113,629"/>
+<circle cx="190" cy="560" r="3.2" class="fl3"/>
+<polyline class="w" points="190,560 190,584.5"/>
+<polyline class="w" points="190,590.5 190,615"/>
+<polyline class="w" points="180,584.5 200,584.5"/>
+<polyline class="w" points="180,590.5 200,590.5"/>
+<text x="190" y="642" text-anchor="middle" class="ref twarn" font-size="11">C30</text>
+<text x="190" y="654" text-anchor="middle" class="twarn" font-size="11">1 µF</text>
+<polyline class="w" points="190,615 190,621"/>
+<polyline class="w" points="181,621 199,621"/>
+<polyline class="w" points="184,625 196,625"/>
+<polyline class="w" points="187,629 193,629"/>
+<polyline class="w" points="330,630 316,630"/>
+<text x="335" y="634" text-anchor="start" font-size="11">VSS</text>
+<polyline class="w" points="316,630 290,630"/>
+<polyline class="w" points="290,630 290,636"/>
+<polyline class="w" points="281,636 299,636"/>
+<polyline class="w" points="284,640 296,640"/>
+<polyline class="w" points="287,644 293,644"/>
+<text x="110" y="426" text-anchor="start" class="twarn" font-size="11">découplage de mémoire : à confirmer (DOU-173)</text>
+<text x="20" y="778" text-anchor="start" font-size="11">Horloges (valeurs de DEC-257 « Valeurs de configuration des horloges, timers, bus et convertisseur ») : HSI 16 MHz, PLL M = 4, N = 85, R = 2 donnant</text>
+<text x="20" y="792" text-anchor="start" font-size="11">  170 MHz ; HCLK, PCLK1, PCLK2 à 170 MHz ; mode boost ; flash 8 états d'attente avec prefetch et caches (à confirmer : DOU-172).</text>
+<text x="20" y="812" text-anchor="start" font-size="11">TIM2 : prédiviseur 169, 1 MHz, 32 bits ; TIM6 : prédiviseur 169, rechargement 999, tick de 1 kHz ; TIM1 : rechargement 7082, 170 MHz / 7083 = 24,001</text>
+<text x="20" y="826" text-anchor="start" font-size="11">  kHz ; SPI1 diviseur 32 = 5,3125 MHz ; SPI2 diviseur 128 = 1,328125 MHz ; USART2 BRR = 17708 = 9600 bauds ; I2C1 400 kHz (registre de timing à</text>
+<text x="20" y="840" text-anchor="start" font-size="11">  relever : DOU-172).</text>
+<text x="20" y="860" text-anchor="start" font-size="11">Octets d'option : IWDG_SW = 0 (chien de garde matériel), BOR_LEV = 3 (environ 2,5 V de mémoire, DOU-181), protection en lecture niveau 0. PB4</text>
+<text x="20" y="874" text-anchor="start" font-size="11">  inutilisée ; PA15 ne commande jamais une grille (JTAG au reset) ; toute broche non listée est une entrée analogique.</text>
+<text x="20" y="894" text-anchor="start" font-size="11">Programmation : STM32CubeProgrammer en SWD, hélices démontées, sans relier le 3,3 V du ST-LINK. Budgets : flash 128 kio, SRAM 32 kio dont 16 kio de</text>
+<text x="20" y="908" text-anchor="start" font-size="11">  SRAM1 utilisés (DES-015).</text>
+<line x1="14" y1="930" x2="886" y2="930" class="thin" style="opacity:.4"/>
+<text x="20" y="946" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
+<text x="20" y="960" style="font-size:11px">Texte de référence : DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option ». Les grilles des moteurs et du voyant passent par</text>
+<text x="20" y="974" style="font-size:11px">   des résistances (voir les schémas de DES-007 et DES-011).</text>
+<text x="20" y="988" style="font-size:11px">Repères (U1, J2, C27 à C31, R31) provisoires. À vérifier (orange) : DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589</text>
+<text x="20" y="1002" style="font-size:11px">   » ; DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence » ; DOU-173 « Composants passifs et découplages à</text>
+<text x="20" y="1016" style="font-size:11px">   relever dans les fiches avant le routage » ; DOU-181 « Bilan d'erreur de la mesure de tension et niveau du BOR » ; DOU-183 « Repères de composants</text>
+<text x="20" y="1030" style="font-size:11px">   provisoires des schémas SVG de la conception détaillée ».</text>
+<text x="20" y="1044" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
+</svg>

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 572" width="900" height="572" role="img" aria-labelledby="t d"><title id="t">DES-008 — Batterie, connecteur XT30 et entrée de la carte</title><desc id="d">Batterie LiPo 1S vers le connecteur XT30, deux branches : VBATM (moteurs, voyant, buzzer, pont de mesure) et VBATL (régulateurs) à travers la ferrite.</desc><style>
+:root{--fg:#1f2937}
+.bg{fill:#ffffff}
+@media (prefers-color-scheme: dark){:root{--fg:#e5e7eb}.bg{fill:#1e1e1e}}
+text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
+.w{stroke:var(--fg);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:var(--fg);stroke-width:1;fill:none}
+.box{stroke:var(--fg);stroke-width:1.6;fill:var(--fg);fill-opacity:.06}
+.dash{stroke:var(--fg);stroke-width:1.2;fill:none;stroke-dasharray:5 4}
+.bat{stroke:#ef4444;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l3{stroke:#3b82f6;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l2{stroke:#a855f7;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.warn{stroke:#d97706;stroke-width:1.8;fill:none;stroke-dasharray:6 3}
+.sig{stroke:#059669;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:var(--fg);stroke:none}
+.fbat{fill:#ef4444;stroke:none}.fl3{fill:#3b82f6;stroke:none}.fl2{fill:#a855f7;stroke:none}.fsig{fill:#059669;stroke:none}
+.tbat{fill:#ef4444;font-weight:bold}.tl3{fill:#3b82f6;font-weight:bold}.tl2{fill:#a855f7;font-weight:bold}
+.tsig{fill:#059669}.twarn{fill:#d97706;font-weight:bold}
+.ref{font-weight:bold}.small{font-size:11px}.title{font-size:16px;font-weight:bold}
+.val{opacity:.9}
+</style>
+<rect class="bg" id="fond" x="0" y="0" width="900" height="572"/>
+<text x="20" y="26" style="font-size:16px;font-weight:bold">DES-008 — Batterie, connecteur XT30 et entrée de la carte</text>
+<polyline class="bat" points="70,150 70,190"/>
+<polyline class="bat" points="54,190 86,190"/>
+<polyline class="bat" points="62,200 78,200"/>
+<polyline class="w" points="70,200 70,232"/>
+<text x="70" y="138" text-anchor="middle" class="ref" font-size="12">Batterie</text>
+<text x="100" y="195" text-anchor="start" class="ref" font-size="12">+</text>
+<text x="70" y="252" text-anchor="middle" font-size="11">LiPo 1S 850 mAh</text>
+<text x="70" y="266" text-anchor="middle" font-size="11">≥ 50C, sans protection</text>
+<text x="70" y="280" text-anchor="middle" font-size="11">≈ 19 g ; Ri ≈ 40 mΩ</text>
+<text x="70" y="294" text-anchor="middle" font-size="11">(Ri à mesurer)</text>
+<polyline class="bat" points="70,150 170,150"/>
+<polyline class="w" points="70,232 170,232"/>
+<rect x="170" y="100" width="110" height="150" rx="4" class="box"/>
+<text x="225.0" y="116" text-anchor="middle" class="ref" font-size="13">J1</text>
+<text x="225.0" y="130" text-anchor="middle" font-size="11">XT30PW</text>
+<text x="225" y="190" text-anchor="middle" class="twarn" font-size="11">genre côté carte</text>
+<text x="225" y="203" text-anchor="middle" class="twarn" font-size="11">à confirmer</text>
+<text x="176" y="154" text-anchor="start" font-size="11">+ (rouge)</text>
+<text x="176" y="236" text-anchor="start" font-size="11">− (noir)</text>
+<polyline class="bat" points="280,150 340,150"/>
+<circle cx="340" cy="150" r="3.2" class="fbat"/>
+<polyline class="w" points="280,232 320,232"/>
+<polyline class="w" points="320,232 320,238"/>
+<polyline class="w" points="311,238 329,238"/>
+<polyline class="w" points="314,242 326,242"/>
+<polyline class="w" points="317,246 323,246"/>
+<text x="336" y="256" text-anchor="start" font-size="11">GND : plan plein</text>
+<polyline class="bat" points="340,150 340,110 860,110"/>
+<polyline class="bat" points="340,110 340,94"/>
+<polygon class="fbat" points="340,86 335,96 345,96"/>
+<text x="332" y="80" text-anchor="start" class="tbat" font-size="12">VBATM : polygone plein, pistes ≥ 4 mm</text>
+<circle cx="465" cy="110" r="3.2" class="fbat"/>
+<polyline class="bat" points="465,110 465,126"/>
+<circle cx="637" cy="110" r="3.2" class="fbat"/>
+<polyline class="bat" points="637,110 637,126"/>
+<circle cx="780" cy="110" r="3.2" class="fbat"/>
+<polyline class="bat" points="780,110 780,126"/>
+<rect x="370" y="126" width="190" height="44" rx="4" class="box"/>
+<text x="465.0" y="143" text-anchor="middle" class="ref" font-size="11">DES-007</text>
+<text x="465.0" y="157" text-anchor="middle" font-size="11">moteurs : Q1 à Q4, M1 à M4, C5 à C7</text>
+<rect x="575" y="126" width="125" height="44" rx="4" class="box"/>
+<text x="637.5" y="143" text-anchor="middle" class="ref" font-size="11">DES-011</text>
+<text x="637.5" y="157" text-anchor="middle" font-size="11">voyant RGB, buzzer</text>
+<rect x="715" y="126" width="130" height="44" rx="4" class="box"/>
+<text x="780.0" y="143" text-anchor="middle" class="ref" font-size="11">DES-009</text>
+<text x="780.0" y="157" text-anchor="middle" font-size="11">pont de mesure</text>
+<polyline class="bat" points="340,150 340,230"/>
+<circle cx="340" cy="230" r="3.2" class="fbat"/>
+<polyline class="bat" points="340,230 397.0,230"/>
+<polyline class="bat" points="423.0,230 480,230"/>
+<rect x="397.0" y="225" width="26" height="10" rx="1" class="w"/>
+<text x="410.0" y="220" text-anchor="middle" font-size="11">FB1 BLM18PG121SN1D 120 Ω</text>
+<polyline class="bat" points="480,230 800,230"/>
+<circle cx="600" cy="230" r="3.2" class="fbat"/>
+<polyline class="bat" points="800,230 800,214"/>
+<polygon class="fbat" points="800,206 795,216 805,216"/>
+<text x="800" y="200" text-anchor="middle" class="tbat" font-size="12">VBATL</text>
+<text x="800" y="252" text-anchor="middle" font-size="11">vers DES-009 : U5 MCP1700</text>
+<polyline class="w" points="600,230 600,262.0"/>
+<polyline class="w" points="600,268.0 600,300"/>
+<polyline class="w" points="590,262.0 610,262.0"/>
+<polyline class="w" points="590,268.0 610,268.0"/>
+<text x="614" y="264.0" text-anchor="start" class="ref " font-size="11">C8</text>
+<text x="614" y="277.0" text-anchor="start" class="val" font-size="11">22 µF 1206 25 V</text>
+<polyline class="w" points="600,300 600,306"/>
+<polyline class="w" points="591,306 609,306"/>
+<polyline class="w" points="594,310 606,310"/>
+<polyline class="w" points="597,314 603,314"/>
+<text x="405" y="248" text-anchor="start" class="twarn" font-size="11">R ≈ 0,1 Ω à relever</text>
+<text x="345" y="278" text-anchor="start" font-size="11">ferrite hors du chemin des moteurs</text>
+<text x="345" y="292" text-anchor="start" font-size="11">(valeur nominale : 1 A seulement)</text>
+<text x="20" y="345" text-anchor="start" class="ref" font-size="11">Calculs de contrôle (texte de DES-008) :</text>
+<text x="20" y="361" text-anchor="start" font-size="11">Ferrite à 130 mA avec 0,1 Ω : 13 mV, sans effet sur la mesure puisque le pont lit VBATM.</text>
+<text x="20" y="375" text-anchor="start" font-size="11">Piste de 4 mm, cuivre 35 µm, 30 mm : 3,7 mΩ ; total connecteur, fils et pistes : 15 mΩ (bilan de DES-014).</text>
+<text x="20" y="389" text-anchor="start" font-size="11">Polarité marquée sur la carte (rouge au plus, noir à la masse) ; détrompage du connecteur seul, ni protection contre l'inversion ni contre la surintensité.</text>
+<text x="20" y="403" text-anchor="start" font-size="11">Surtension à la connexion : mesurée par TI-008.</text>
+<text x="20" y="429" text-anchor="start" class="twarn" font-size="11">Orange : genre du connecteur côté carte ; résistance de la ferrite (0,1 Ω, ordre de grandeur).</text>
+<line x1="14" y1="470" x2="886" y2="470" class="thin" style="opacity:.4"/>
+<text x="20" y="486" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
+<text x="20" y="500" style="font-size:11px">Texte de référence : DES-008 « Batterie, connecteur XT30 et entrée de la carte ». Repères (J1, FB1, C8) provisoires, sauf FB1 = BLM18PG121SN1D du</text>
+<text x="20" y="514" style="font-size:11px">   texte.</text>
+<text x="20" y="528" style="font-size:11px">À vérifier (orange) : DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion » ; DOU-173 « Composants passifs et découplages à</text>
+<text x="20" y="542" style="font-size:11px">   relever dans les fiches avant le routage » ; DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».</text>
+<text x="20" y="556" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
+</svg>

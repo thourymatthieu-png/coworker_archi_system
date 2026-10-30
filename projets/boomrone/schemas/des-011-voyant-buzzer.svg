@@ -1,0 +1,231 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 648" width="900" height="648" role="img" aria-labelledby="t d"><title id="t">DES-011 — Circuit du voyant RGB et du buzzer</title><desc id="d">Voyant RGB à anode commune sur VBATM, trois AO3400A avec résistances de limitation de 120, 68 et 68 ohms ; buzzer actif et diode SS34 sur un quatrième AO3400A.</desc><style>
+:root{--fg:#1f2937}
+.bg{fill:#ffffff}
+@media (prefers-color-scheme: dark){:root{--fg:#e5e7eb}.bg{fill:#1e1e1e}}
+text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
+.w{stroke:var(--fg);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:var(--fg);stroke-width:1;fill:none}
+.box{stroke:var(--fg);stroke-width:1.6;fill:var(--fg);fill-opacity:.06}
+.dash{stroke:var(--fg);stroke-width:1.2;fill:none;stroke-dasharray:5 4}
+.bat{stroke:#ef4444;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l3{stroke:#3b82f6;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l2{stroke:#a855f7;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.warn{stroke:#d97706;stroke-width:1.8;fill:none;stroke-dasharray:6 3}
+.sig{stroke:#059669;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:var(--fg);stroke:none}
+.fbat{fill:#ef4444;stroke:none}.fl3{fill:#3b82f6;stroke:none}.fl2{fill:#a855f7;stroke:none}.fsig{fill:#059669;stroke:none}
+.tbat{fill:#ef4444;font-weight:bold}.tl3{fill:#3b82f6;font-weight:bold}.tl2{fill:#a855f7;font-weight:bold}
+.tsig{fill:#059669}.twarn{fill:#d97706;font-weight:bold}
+.ref{font-weight:bold}.small{font-size:11px}.title{font-size:16px;font-weight:bold}
+.val{opacity:.9}
+</style>
+<rect class="bg" id="fond" x="0" y="0" width="900" height="648"/>
+<text x="20" y="26" style="font-size:16px;font-weight:bold">DES-011 — Circuit du voyant RGB et du buzzer</text>
+<polyline class="bat" points="190,90 880,90"/>
+<polyline class="bat" points="190,90 190,74"/>
+<polygon class="fbat" points="190,66 185,76 195,76"/>
+<text x="190" y="60" text-anchor="middle" class="tbat" font-size="12">VBATM</text>
+<rect x="205" y="98" width="400" height="70" rx="6" class="dash"/>
+<text x="210" y="112" text-anchor="start" class="ref" font-size="11">LED1 SZYY1615RGB-B (anode commune)</text>
+<circle cx="260" cy="90" r="3.2" class="fbat"/>
+<polyline class="bat" points="260,90 260,118"/>
+<polyline class="w" points="260,118 260,130.0"/>
+<polyline class="w" points="260,146.0 260,158"/>
+<polygon class="w" points="252,130.0 268,130.0 260,146.0"/>
+<polyline class="w" points="252,146.0 268,146.0"/>
+<polyline class="w" points="272,136.0 280,128.0"/>
+<polyline class="w" points="272,144.0 280,136.0"/>
+<text x="242" y="140" text-anchor="end" font-size="11">rouge</text>
+<polyline class="w" points="260,158 260,178"/>
+<polyline class="w" points="260,178 260,192.0"/>
+<polyline class="w" points="260,218.0 260,232"/>
+<rect x="255" y="192.0" width="10" height="26" rx="1" class="w"/>
+<text x="274" y="204.0" text-anchor="start" class="ref " font-size="11">R15</text>
+<text x="274" y="217.0" text-anchor="start" class="val" font-size="11">120 Ω</text>
+<polyline class="w" points="260,232 260,240"/>
+<polyline class="w" points="230,268 238,268"/>
+<polyline class="w" points="238,254 238,282"/>
+<polyline class="w" points="243,252 243,259"/>
+<polyline class="w" points="243,264 243,272"/>
+<polyline class="w" points="243,277 243,284"/>
+<polyline class="w" points="243,255.5 260,255.5 260,240"/>
+<polyline class="w" points="243,280.5 260,280.5 260,296"/>
+<polyline class="w" points="243,268 260,268 260,280.5"/>
+<polygon class="fill" points="243,268 250,264.5 250,271.5"/>
+<text x="268" y="312" text-anchor="start" class="ref" font-size="11">Q5</text>
+<polyline class="w" points="260,296 260,340"/>
+<polyline class="w" points="260,340 260,346"/>
+<polyline class="w" points="251,346 269,346"/>
+<polyline class="w" points="254,350 266,350"/>
+<polyline class="w" points="257,354 263,354"/>
+<polyline class="sig" points="230,268 208,268"/>
+<polyline class="sig" points="120,268 151.0,268"/>
+<polyline class="sig" points="177.0,268 208,268"/>
+<rect x="151.0" y="263" width="26" height="10" rx="1" class="w"/>
+<text x="164.0" y="258" text-anchor="middle" font-size="11">R9 100 Ω</text>
+<circle cx="208" cy="268" r="3.2" class="fsig"/>
+<polyline class="w" points="208,268 208,291.0"/>
+<polyline class="w" points="208,317.0 208,340"/>
+<rect x="203" y="291.0" width="10" height="26" rx="1" class="w"/>
+<text x="194" y="303.0" text-anchor="end" class="ref " font-size="11">R12</text>
+<text x="194" y="316.0" text-anchor="end" class="val" font-size="11">100 kΩ</text>
+<polyline class="w" points="208,340 208,346"/>
+<polyline class="w" points="199,346 217,346"/>
+<polyline class="w" points="202,350 214,350"/>
+<polyline class="w" points="205,354 211,354"/>
+<text x="120" y="244" text-anchor="start" class="tsig" font-size="11">LED_R (PB1)</text>
+<circle cx="410" cy="90" r="3.2" class="fbat"/>
+<polyline class="bat" points="410,90 410,118"/>
+<polyline class="w" points="410,118 410,130.0"/>
+<polyline class="w" points="410,146.0 410,158"/>
+<polygon class="w" points="402,130.0 418,130.0 410,146.0"/>
+<polyline class="w" points="402,146.0 418,146.0"/>
+<polyline class="w" points="422,136.0 430,128.0"/>
+<polyline class="w" points="422,144.0 430,136.0"/>
+<text x="392" y="140" text-anchor="end" class="twarn" font-size="11">vert</text>
+<polyline class="w" points="410,158 410,178"/>
+<polyline class="w" points="410,178 410,192.0"/>
+<polyline class="w" points="410,218.0 410,232"/>
+<rect x="405" y="192.0" width="10" height="26" rx="1" class="w"/>
+<text x="424" y="204.0" text-anchor="start" class="ref " font-size="11">R16</text>
+<text x="424" y="217.0" text-anchor="start" class="val" font-size="11">68 Ω</text>
+<polyline class="w" points="410,232 410,240"/>
+<polyline class="w" points="380,268 388,268"/>
+<polyline class="w" points="388,254 388,282"/>
+<polyline class="w" points="393,252 393,259"/>
+<polyline class="w" points="393,264 393,272"/>
+<polyline class="w" points="393,277 393,284"/>
+<polyline class="w" points="393,255.5 410,255.5 410,240"/>
+<polyline class="w" points="393,280.5 410,280.5 410,296"/>
+<polyline class="w" points="393,268 410,268 410,280.5"/>
+<polygon class="fill" points="393,268 400,264.5 400,271.5"/>
+<text x="418" y="312" text-anchor="start" class="ref" font-size="11">Q6</text>
+<polyline class="w" points="410,296 410,340"/>
+<polyline class="w" points="410,340 410,346"/>
+<polyline class="w" points="401,346 419,346"/>
+<polyline class="w" points="404,350 416,350"/>
+<polyline class="w" points="407,354 413,354"/>
+<polyline class="sig" points="380,268 358,268"/>
+<polyline class="sig" points="270,268 301.0,268"/>
+<polyline class="sig" points="327.0,268 358,268"/>
+<rect x="301.0" y="263" width="26" height="10" rx="1" class="w"/>
+<text x="314.0" y="258" text-anchor="middle" font-size="11">R10 100 Ω</text>
+<circle cx="358" cy="268" r="3.2" class="fsig"/>
+<polyline class="w" points="358,268 358,291.0"/>
+<polyline class="w" points="358,317.0 358,340"/>
+<rect x="353" y="291.0" width="10" height="26" rx="1" class="w"/>
+<text x="344" y="303.0" text-anchor="end" class="ref " font-size="11">R13</text>
+<text x="344" y="316.0" text-anchor="end" class="val" font-size="11">100 kΩ</text>
+<polyline class="w" points="358,340 358,346"/>
+<polyline class="w" points="349,346 367,346"/>
+<polyline class="w" points="352,350 364,350"/>
+<polyline class="w" points="355,354 361,354"/>
+<text x="270" y="244" text-anchor="start" class="tsig" font-size="11">LED_G (PB2)</text>
+<circle cx="560" cy="90" r="3.2" class="fbat"/>
+<polyline class="bat" points="560,90 560,118"/>
+<polyline class="w" points="560,118 560,130.0"/>
+<polyline class="w" points="560,146.0 560,158"/>
+<polygon class="w" points="552,130.0 568,130.0 560,146.0"/>
+<polyline class="w" points="552,146.0 568,146.0"/>
+<polyline class="w" points="572,136.0 580,128.0"/>
+<polyline class="w" points="572,144.0 580,136.0"/>
+<text x="542" y="140" text-anchor="end" class="twarn" font-size="11">bleu</text>
+<polyline class="w" points="560,158 560,178"/>
+<polyline class="w" points="560,178 560,192.0"/>
+<polyline class="w" points="560,218.0 560,232"/>
+<rect x="555" y="192.0" width="10" height="26" rx="1" class="w"/>
+<text x="574" y="204.0" text-anchor="start" class="ref " font-size="11">R17</text>
+<text x="574" y="217.0" text-anchor="start" class="val" font-size="11">68 Ω</text>
+<polyline class="w" points="560,232 560,240"/>
+<polyline class="w" points="530,268 538,268"/>
+<polyline class="w" points="538,254 538,282"/>
+<polyline class="w" points="543,252 543,259"/>
+<polyline class="w" points="543,264 543,272"/>
+<polyline class="w" points="543,277 543,284"/>
+<polyline class="w" points="543,255.5 560,255.5 560,240"/>
+<polyline class="w" points="543,280.5 560,280.5 560,296"/>
+<polyline class="w" points="543,268 560,268 560,280.5"/>
+<polygon class="fill" points="543,268 550,264.5 550,271.5"/>
+<text x="568" y="312" text-anchor="start" class="ref" font-size="11">Q7</text>
+<polyline class="w" points="560,296 560,340"/>
+<polyline class="w" points="560,340 560,346"/>
+<polyline class="w" points="551,346 569,346"/>
+<polyline class="w" points="554,350 566,350"/>
+<polyline class="w" points="557,354 563,354"/>
+<polyline class="sig" points="530,268 508,268"/>
+<polyline class="sig" points="420,268 451.0,268"/>
+<polyline class="sig" points="477.0,268 508,268"/>
+<rect x="451.0" y="263" width="26" height="10" rx="1" class="w"/>
+<text x="464.0" y="258" text-anchor="middle" font-size="11">R11 100 Ω</text>
+<circle cx="508" cy="268" r="3.2" class="fsig"/>
+<polyline class="w" points="508,268 508,291.0"/>
+<polyline class="w" points="508,317.0 508,340"/>
+<rect x="503" y="291.0" width="10" height="26" rx="1" class="w"/>
+<text x="494" y="303.0" text-anchor="end" class="ref " font-size="11">R14</text>
+<text x="494" y="316.0" text-anchor="end" class="val" font-size="11">100 kΩ</text>
+<polyline class="w" points="508,340 508,346"/>
+<polyline class="w" points="499,346 517,346"/>
+<polyline class="w" points="502,350 514,350"/>
+<polyline class="w" points="505,354 511,354"/>
+<text x="420" y="244" text-anchor="start" class="tsig" font-size="11">LED_B (PB10)</text>
+<circle cx="790" cy="90" r="3.2" class="fbat"/>
+<polyline class="bat" points="790,90 790,130"/>
+<circle cx="790" cy="148" r="17" class="w"/>
+<text x="790" y="152" text-anchor="middle" class="ref" font-size="11">BZ1</text>
+<text x="768" y="140" text-anchor="end" font-size="11">buzzer actif</text>
+<text x="768" y="153" text-anchor="end" font-size="11">SMD-9650-3327</text>
+<polyline class="w" points="790,165 790,240"/>
+<circle cx="850" cy="90" r="3.2" class="fbat"/>
+<polyline class="bat" points="850,90 850,120"/>
+<polyline class="w" points="850,100 850,162.0"/>
+<polyline class="w" points="850,178.0 850,240"/>
+<polygon class="w" points="842,178.0 858,178.0 850,162.0"/>
+<polyline class="w" points="842,162.0 858,162.0"/>
+<text x="836" y="170.0" text-anchor="end" class="ref " font-size="11">D5</text>
+<text x="836" y="183.0" text-anchor="end" class="val" font-size="11">SS34</text>
+<polyline class="w" points="850,240 790,240"/>
+<circle cx="790" cy="240" r="3.2" class="fill"/>
+<polyline class="w" points="760,268 768,268"/>
+<polyline class="w" points="768,254 768,282"/>
+<polyline class="w" points="773,252 773,259"/>
+<polyline class="w" points="773,264 773,272"/>
+<polyline class="w" points="773,277 773,284"/>
+<polyline class="w" points="773,255.5 790,255.5 790,240"/>
+<polyline class="w" points="773,280.5 790,280.5 790,296"/>
+<polyline class="w" points="773,268 790,268 790,280.5"/>
+<polygon class="fill" points="773,268 780,264.5 780,271.5"/>
+<text x="798" y="312" text-anchor="start" class="ref" font-size="11">Q8</text>
+<polyline class="w" points="790,296 790,340"/>
+<polyline class="w" points="790,340 790,346"/>
+<polyline class="w" points="781,346 799,346"/>
+<polyline class="w" points="784,350 796,350"/>
+<polyline class="w" points="787,354 793,354"/>
+<polyline class="sig" points="760,268 738,268"/>
+<polyline class="sig" points="650,268 681.0,268"/>
+<polyline class="sig" points="707.0,268 738,268"/>
+<rect x="681.0" y="263" width="26" height="10" rx="1" class="w"/>
+<text x="694.0" y="258" text-anchor="middle" font-size="11">R18 100 Ω</text>
+<circle cx="738" cy="268" r="3.2" class="fsig"/>
+<polyline class="w" points="738,268 738,291.0"/>
+<polyline class="w" points="738,317.0 738,340"/>
+<rect x="733" y="291.0" width="10" height="26" rx="1" class="w"/>
+<text x="724" y="303.0" text-anchor="end" class="ref " font-size="11">R19</text>
+<text x="724" y="316.0" text-anchor="end" class="val" font-size="11">100 kΩ</text>
+<polyline class="w" points="738,340 738,346"/>
+<polyline class="w" points="729,346 747,346"/>
+<polyline class="w" points="732,350 744,350"/>
+<polyline class="w" points="735,354 741,354"/>
+<text x="650" y="244" text-anchor="start" class="tsig" font-size="11">BUZ (PB11)</text>
+<text x="20" y="395" text-anchor="start" class="ref" font-size="11">Courants à 4,2 V (texte de DES-011) :</text>
+<text x="20" y="411" text-anchor="start" font-size="11">rouge (4,2 − 2,0) / 120 = 18,3 mA ; vert et bleu (4,2 − 3,0) / 68 = 17,6 mA, avec les tensions directes supposées (2,0 V ; 3,0 V).</text>
+<text x="20" y="425" text-anchor="start" font-size="11">avec celles du catalogue (2,4 V ; 3,4 V) : 15 mA et 11,8 mA ; blanc (trois couleurs) : au plus 54 mA.</text>
+<text x="20" y="439" text-anchor="start" font-size="11">buzzer : environ 30 mA, fréquence propre 2,7 kHz, un seul timbre ; courant total le plus défavorable : 54 mA + 30 mA = 84 mA.</text>
+<text x="20" y="453" text-anchor="start" font-size="11">MOSFET Q5 à Q8 : AO3400A (SOT-23). Diode D5 : SS34, cathode côté VBATM (roue libre du buzzer).</text>
+<text x="20" y="479" text-anchor="start" class="twarn" font-size="11">Orange : tensions directes du vert et du bleu (3,0 V supposé, 3,4 V au catalogue) : faibles sous 3,7 V de batterie si 3,4 V.</text>
+<line x1="14" y1="560" x2="886" y2="560" class="thin" style="opacity:.4"/>
+<text x="20" y="576" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
+<text x="20" y="590" style="font-size:11px">Texte de référence : DES-011 « Circuit du voyant RGB et du buzzer ». Repères (LED1, BZ1, Q5 à Q8, R9 à R19, D5) provisoires.</text>
+<text x="20" y="604" style="font-size:11px">À vérifier (orange) : DOU-161 « Tensions directes du voyant RGB : visibilité du vert et du bleu entre 3,4 et 3,7 V » ; DOU-183 « Repères de composants</text>
+<text x="20" y="618" style="font-size:11px">   provisoires des schémas SVG de la conception détaillée ».</text>
+<text x="20" y="632" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
+</svg>

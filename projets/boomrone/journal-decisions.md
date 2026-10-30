@@ -2230,4 +2230,196 @@ Format (exemple, non analysé) :
 **Raison :** accord explicite de l'utilisateur en chat, 2026-10-30 : « passe la porte ». Rappels : DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » reste ouvert, non bloquant (tension de la batterie sous charge marginale ; REQ-013 « Marge de batterie pour un vol complet » non établie avant les mesures au banc ; repli proposé : armement à 3,9 V et sous-tension à 3,0 V) ; avant la commande de la carte : mesures au banc (TI-007 « Moteurs, poussée, masse et dimensions », TI-008 « Batterie, connecteur, chute de tension et mesure de tension »), test du module Bluetooth seul (DOU-151 « Module E104-BT02 : débit par défaut, service, absence de commande AT »), devis JLCPCB (DOU-153 « Carte double face, assemblage Standard, frais d'extension et délais », DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce »), genre du XT30 (DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion ») ; `check_traceability --gate` échoue pour les 30 « ARC sans DES » (phase suivante) et les 12 « SCN sans BES » (défaut connu, DEC-156 « Couverture des scénarios vérifiée à la main, outil de traçabilité inchangé ») ; `tools/check_traceability_V2.py --gate --phase architecture` donne OK.
 **Doutes levés :** (aucun)
 
+### DEC-252 — Phase conception détaillée ouverte avant les mesures au banc
+**Date :** 2026-10-30
+**Concerne :** « Conception détaillée » — `projets/boomrone/04-conception-detaillee.md`, DEC-229 « Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte », DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie »
+**Décision :** la phase « conception détaillée » est ouverte juste après la porte « architecture » (DEC-251 « Porte architecture franchie : accord explicite de l'utilisateur »), sans attendre les mesures au banc. Instruction de l'utilisateur en chat, 2026-10-30 : « cette première version ne sera pas passée par les mesures au banc ». Les 30 ARC sont à décliner en DES, avec les tests unitaires (TU) définis en même temps.
+**Alternatives écartées :** faire les mesures au banc avant d'ouvrir la phase (proposé, non retenu).
+**Raison :** instruction explicite de l'utilisateur. Écart signalé : DEC-229 « Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte » prévoyait ces mesures avant la commande de la carte ; la question de savoir si l'écart vaut renonciation à cette décision (seuils conservés ou repli à 3,9 V et 3,0 V) est tranchée par DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version » ; DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » reste ouvert, non bloquant.
+**Doutes levés :** (aucun)
+
+### DEC-253 — Seuils de batterie conservés, sans mesures au banc pour la première version
+**Date :** 2026-10-30
+**Concerne :** REQ-003 « Conditions de départ du drone », REQ-012 « Coupure sur sous-tension de la batterie », REQ-013 « Marge de batterie pour un vol complet », DEC-229 « Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte », DEC-252 « Phase conception détaillée ouverte avant les mesures au banc »
+**Décision :** la conception détaillée garde les seuils actuels de REQ-003 « Conditions de départ du drone » et REQ-012 « Coupure sur sous-tension de la batterie » (pas de repli à 3,9 V et 3,0 V). La première version de la carte est commandée sans mesures au banc ; DEC-229 « Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte » n'est plus appliquée pour cette version. Les seuils restent réglables dans leurs bornes (DEC-051 « Seuils de sécurité réglables dans des bornes fixées par le logiciel »), le repli reste possible après les premiers essais.
+**Alternatives écartées :** repli à 3,9 V à l'armement et 3,0 V en sous-tension (modification des deux exigences) ; faire les mesures au banc avant la commande.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-30 : « Seuils actuels ». Risque connu : tension sous charge estimée à 3,17 V, REQ-013 « Marge de batterie pour un vol complet » non établie ; DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie » reste ouvert, non bloquant, à vérifier aux essais sur prototype.
+**Doutes levés :** (aucun)
+
+### DEC-254 — Délégation totale de la phase conception détaillée à l'architecte
+**Date :** 2026-10-30
+**Concerne :** « Conception détaillée » — `projets/boomrone/04-conception-detaillee.md` et section TU de « Plans de test » — `projets/boomrone/05-plans-de-test.md`
+**Décision :** l'architecte rédige seul les DES et les TU de la phase « conception détaillée », comme pour l'architecture (DEC-218 « Délégation totale de la phase architecture à l'architecte »). Il choisit la solution la plus simple qui fonctionne, consigne ses décisions dans le journal et ses doutes dans le registre, fait relire par `critique`, `coherence-clarte` et `exigences-tracabilite`, et ne franchit pas la porte : l'accord explicite de l'utilisateur reste requis.
+**Alternatives écartées :** consulter l'utilisateur à chaque module.
+**Raison :** réponse de l'utilisateur en chat, 2026-10-30 : « l'architecte rédige les DES et les TU seul, comme pour l'architecture ».
+**Doutes levés :** (aucun)
+
+### DEC-255 — Conception détaillée : chaîne de développement et arborescence des fichiers
+**Date :** 2026-10-30
+**Concerne :** DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte », DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB », DES-015 « Arborescence du firmware, édition de liens et budget de mémoire », DES-036 « Logiciel de suivi en Python »
+**Décision :** (1) Matériel dessiné dans KiCad, exports vers JLCPCB par le greffon dédié, fichiers sous `projets/boomrone/hardware/`. (2) Firmware sous `projets/boomrone/firmware/` : arm-none-eabi-gcc, Makefile, registres CMSIS et pilotes LL de ST (pas la bibliothèque HAL, trop lourde et opaque pour un premier drone), bibliothèque ULD de ST pour le capteur de hauteur seulement. (3) Logiciel de suivi sous `projets/boomrone/tools/suivi.py` (le chemin `tools/suivi.py` de ARC-028 « Logiciel d'essai de l'appareil de suivi » se lit relativement au projet, pour ne pas toucher aux outils du dépôt). (4) Programmation par STM32CubeProgrammer et ST-LINK.
+**Alternatives écartées :** STM32CubeIDE avec HAL (projet généré difficile à relire, tests sur PC malaisés) ; PlatformIO (une dépendance de plus) ; Eagle ou EasyEDA (EasyEDA relie à JLCPCB mais enferme les fichiers dans un service en ligne).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; la solution la plus simple qui fonctionne et qui reste lisible et testable.
+**Doutes levés :** (aucun)
+
+### DEC-256 — Tests unitaires compilés sur PC avec maquette des registres
+**Date :** 2026-10-30
+**Concerne :** section « Tests unitaires (TU) » de « Plans de test » — `projets/boomrone/05-plans-de-test.md`, DES-015 « Arborescence du firmware, édition de liens et budget de mémoire », DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond »
+**Décision :** les tests unitaires du logiciel sont compilés avec `gcc` sur le PC et lancés par `make -C projets/boomrone/firmware test`. Les modules d'estimation, de contrôle et d'application n'accèdent jamais directement aux registres : ils passent par des fonctions de pilote que les tests remplacent par des maquettes. Les pilotes se testent avec une maquette des structures de registres de ST (fichier d'entête de substitution dans `firmware/test/mock/`). Macros d'assertion maison (`tu.h`, quelques lignes), sans bibliothèque extérieure. Les tests qui exigent le temps réel ou les bus réels sont ceux d'intégration (TI). Les calculs et les circuits sont vérifiés par script Python (`calculs.py`).
+**Alternatives écartées :** tests uniquement sur la cible (lents, impossibles à automatiser, peu de cas limites) ; Unity ou CppUTest (dépendance sans nécessité) ; aucun test avant l'intégration.
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; les cas limites (seuils, priorités) se testent mieux en machine hôte, avec un temps simulé.
+**Doutes levés :** (aucun) ; limite suivie par DOU-176 « Tests unitaires sur PC : écart entre la maquette de registres et le composant réel »
+
+### DEC-257 — Valeurs de configuration des horloges, timers, bus et convertisseur
+**Date :** 2026-10-30
+**Concerne :** DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-022 « Pilote de la mesure de tension de la batterie », DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond »
+**Décision :** HSI 16 MHz avec PLL M = 4, N = 85, R = 2 pour 170 MHz ; diviseurs de bus 1 ; flash à 8 états d'attente avec prefetch et caches ; TIM2 (compteur libre 1 MHz, prédiviseur 169), TIM6 (tick 1 kHz), TIM1 (rechargement 7082, 24,001 kHz) ; SPI1 diviseur 32, SPI2 diviseur 128 ; USART2 BRR 17708 ; ADC en horloge synchrone HCLK/4, temps d'échantillonnage 640,5 cycles, déclenché par TIM6. Les valeurs de registres de ST sont reprises de mémoire et à confirmer.
+**Alternatives écartées :** quartz externe (composant en plus, inutile) ; ADC à 247,5 cycles (5,8 µs, inférieur aux 6 µs exigés par la source de 60 kohms) ; suréchantillonnage matériel x16 de l'ADC (le x10 de ARC-009 « Alimentation de la logique et mesure de la tension » est conservé).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; chaque valeur est la plus simple compatible avec les limites de DEC-238 « Fréquences SPI et lecture de la centrale inertielle ».
+**Doutes levés :** (aucun) ; suivi par DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence »
+
+### DEC-258 — Mesure de la tension : séquence de conversion et zone de maintien de la sous-tension
+**Date :** 2026-10-30
+**Concerne :** DES-022 « Pilote de la mesure de tension de la batterie », DES-029 « Surveillance et coupures automatiques », REQ-012 « Coupure sur sous-tension de la batterie », ARC-021 « Surveillance et coupures automatiques »
+**Décision :** (1) Séquence de 14 conversions par tick : 10 de la batterie et 4 de la référence interne (le maximum de l'ADC est de 16 rangs). (2) Le compteur de sous-tension de ARC-021 « Surveillance et coupures automatiques » augmente sous 3,30 V, est conservé entre 3,30 V et 3,35 V et est remis à zéro à 3,35 V et plus, pour qu'un bruit de quelques millivolts autour du seuil n'empêche jamais indéfiniment la coupure ; le seuil de 3,3 V et la confirmation de 100 ms de REQ-012 « Coupure sur sous-tension de la batterie » ne changent pas. (3) Seuils conservés tels quels (DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version »).
+**Alternatives écartées :** remise à zéro dès 3,30 V (une oscillation de 5 mV autour du seuil empêcherait la coupure) ; hystérésis de 100 mV (retarde la remise à zéro inutilement).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte »).
+**Doutes levés :** (aucun)
+
+### DEC-259 — Contrôle : poussée linéarisée, mixeur en X et priorité à l'attitude
+**Date :** 2026-10-30
+**Concerne :** DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique », ARC-018 « Boucle de contrôle du vol »
+**Décision :** les commandes du régulateur sont des fractions de poussée ; le rapport cyclique est la racine de la poussée multipliée par 3,7 V / tension de la batterie, limité à 0-1 (la poussée d'une hélice varie comme le carré de la vitesse, donc de la tension). Le mixeur est en X avec la numérotation et les signes de DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique ». En cas de saturation, le collectif est décalé pour conserver l'écart entre moteurs (l'attitude passe avant la hauteur).
+**Alternatives écartées :** rapport cyclique directement proportionnel à la commande (gains qui varient avec le point de fonctionnement) ; priorité au collectif (perte d'attitude à pleine poussée, lancer à 4 m/s).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; une racine carrée de plus, calculée par le FPU en 14 cycles, pour des gains presque constants.
+**Doutes levés :** (aucun) ; hypothèse suivie par DOU-171 « Gains de référence, poussée de sustentation et linéarisation de la poussée »
+
+### DEC-260 — Gains de référence et constantes de départ provisoires
+**Date :** 2026-10-30
+**Concerne :** DES-023 « Filtre d'attitude de Mahony », DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique », REQ-026 « Paramètres de vol réglables », REQ-006 « Stabilisation après le lancer »
+**Décision :** les gains, la poussée de sustentation de 0,69, le gain Kp du filtre de 2,0 s⁻¹, les gains de l'observateur et les seuils de qualité des capteurs sont des valeurs de départ, tirées de la théorie et de réglages connus de petits drones, non de mesures. Ils sont marqués provisoires comme les autres valeurs de DOU-131 « Valeurs provisoires des exigences, à valider aux essais sur prototype » et se règlent sur la potence puis en vol (TI-013 « Boucle de contrôle sur potence » et suivants). Aucun n'est une valeur de sécurité (les valeurs de sécurité sont les 29 valeurs fixes de REQ-026 « Paramètres de vol réglables »).
+**Alternatives écartées :** attendre les mesures au banc (écarté par DEC-252 « Phase conception détaillée ouverte avant les mesures au banc ») ; recopier le réglage d'un autre drone sans le dire (suppose des moteurs et une masse identiques).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; ne pas bloquer la conception sur des valeurs que seuls les essais peuvent fixer.
+**Doutes levés :** (aucun) ; suivi par DOU-171 « Gains de référence, poussée de sustentation et linéarisation de la poussée » et DOU-170 « Constantes de capteurs de départ : échelle du flux, retard du capteur de hauteur, filtres »
+
+### DEC-261 — Estimation : filtre de Mahony, observateur de hauteur et compensation du retard
+**Date :** 2026-10-30
+**Concerne :** DES-023 « Filtre d'attitude de Mahony », DES-024 « Observateur de hauteur et de vitesse verticale », ARC-017 « Estimation de l'attitude, de la hauteur et de la vitesse »
+**Décision :** filtre de Mahony sans terme intégral (biais du gyroscope mesuré à l'initialisation, Kp = 2,0 s⁻¹, poids de l'accéléromètre linéaire entre 0,5 g et 1,5 g) ; observateur de hauteur à deux états avec gains L1 = 12 s⁻¹ et L2 = 36 s⁻² (pôles doubles à 6 rad/s), correction par l'innovation calculée à l'instant de la mesure grâce à l'historique de 64 cycles, retard de 33 ms (valeur de départ) ; rejet d'une mesure aberrante isolée. Une simulation de contrôle avant écriture donne 9 cm d'erreur maximale pendant une rampe de 1 m/s et 3 cm en régime.
+**Alternatives écartées :** filtre de Kalman complet (réglage lourd) ; filtre complémentaire sans compensation du retard (erreur de 3 cm par m/s de vitesse verticale) ; filtre de Madgwick (même résultat, plus de calcul).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte »).
+**Doutes levés :** (aucun) ; suivi par DOU-170 « Constantes de capteurs de départ : échelle du flux, retard du capteur de hauteur, filtres »
+
+### DEC-262 — Vitesse horizontale invalide : stationnaire non déclaré
+**Date :** 2026-10-30
+**Concerne :** DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire », REQ-007 « Critère de vol stationnaire », DOU-139 « Capteurs de hauteur et de flux : hauteur de montage et sols sans texture »
+**Décision :** quand la vitesse horizontale est invalide (hauteur sous 8 cm, qualité faible, inclinaison supérieure à 30°, échantillon vieux de plus de 50 ms), le critère de stationnaire de REQ-007 « Critère de vol stationnaire » est faux : le drone ne se croit jamais stationnaire sans mesure de dérive, et la coupure de REQ-011 « Coupures automatiques en vol » à 2,0 s s'applique.
+**Alternatives écartées :** déclarer le stationnaire avec la seule vitesse verticale (un drone qui dérive ou qui est porté s'en croirait stationnaire) ; geler la dernière vitesse connue.
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; le choix sûr, le plus simple.
+**Doutes levés :** (aucun) ; conséquence sur sol sans texture suivie par DOU-139 « Capteurs de hauteur et de flux : hauteur de montage et sols sans texture »
+
+### DEC-263 — Critère d'immobilité : fenêtre de 50 échantillons à 100 Hz
+**Date :** 2026-10-30
+**Concerne :** DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire », REQ-003 « Conditions de départ du drone »
+**Décision :** la condition « la norme de l'accélération ne s'écarte pas de plus de ±0,5 m/s² de sa moyenne pendant les 0,5 s précédentes » est calculée sur 50 échantillons de la norme pris à 100 Hz : chaque échantillon doit être à moins de 0,5 m/s² de la moyenne de la fenêtre (maximum et minimum comparés à la moyenne).
+**Alternatives écartées :** fenêtre de 500 échantillons à 1 kHz (500 comparaisons par cycle) ; moyenne exponentielle (ne donne pas un maximum d'écart sur 0,5 s).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; 200 octets de mémoire et 50 comparaisons tous les 10 ms.
+**Doutes levés :** (aucun)
+
+### DEC-264 — Initialisation : centrale inertielle ou flux optique absent vaut échec d'initialisation
+**Date :** 2026-10-30
+**Concerne :** DES-031 « Séquence d'initialisation et échec d'initialisation », DES-020 « Pilote du flux optique », ARC-023 « Initialisation et échec d'initialisation », REQ-037 « Comportement en échec d'initialisation »
+**Décision :** l'absence de réponse de la centrale inertielle, du flux optique (identité fausse) ou du capteur de hauteur à l'initialisation est un échec d'initialisation (moteurs jamais armés, état 2), comme le prévoit déjà ARC-023 « Initialisation et échec d'initialisation » pour le capteur de hauteur. Sans la centrale le drone ne peut ni voler ni juger l'immobilité ; sans le flux, la dérive est hors d'atteinte et le stationnaire ne serait jamais déclaré.
+**Alternatives écartées :** continuer sans le flux (coupure à 2 s à chaque vol, sans message clair) ; échec seulement pour la centrale.
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; extension de ARC-023 « Initialisation et échec d'initialisation » et de REQ-017 « Initialisation en 3 secondes » au-delà de leurs deux causes (mouvement, pas à plat), signalée par DOU-168 « Centrale inertielle ou flux optique absent à l'initialisation ».
+**Doutes levés :** (aucun) ; suivi par DOU-168 « Centrale inertielle ou flux optique absent à l'initialisation »
+
+### DEC-265 — Protocole sans fil : octets, codes de cause, file d'émission et réception
+**Date :** 2026-10-30
+**Concerne :** DES-033 « Trames du statut sans fil, automate de réception et file d'émission », ARC-025 « Protocole et service du statut sans fil »
+**Décision :** longueur de charge fixe par type, petit-boutiquier, CRC8 polynôme 0x07 initial 0 ; codes de cause numérotés comme dans DES-033 « Trames du statut sans fil, automate de réception et file d'émission » (refus 1 à 4, coupure 1 à 6) ; réception déclenchée par la ligne au repos de l'USART (priorité de l'arrêt) ; reprise des octets après un CRC faux ; file d'émission de 8 trames où le statut remplace le statut en attente ; vecteurs de test communs au C et au Python.
+**Alternatives écartées :** champ de longueur dans la trame (inutile, longueurs fixes) ; sondage de l'USART à chaque cycle (retarde l'arrêt jusqu'à 1 ms sans gain) ; CRC16.
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte »).
+**Doutes levés :** (aucun)
+
+### DEC-266 — Réglages : origine en double dans le code et lecture protégée contre l'erreur ECC
+**Date :** 2026-10-30
+**Concerne :** DES-035 « Paramètres de vol, section d'origine et pilote de flash », DES-017 « Coupure des moteurs, démarrage unique et gestionnaires d'exception », ARC-027 « Paramètres de vol et stockage des réglages »
+**Décision :** la section d'origine est initialisée par l'éditeur de liens à partir des mêmes macros que le code ; une page vierge, un mot hors bornes ou une erreur ECC donnent les valeurs d'origine des macros. L'erreur ECC double à la lecture (écriture interrompue par une coupure de la batterie) déclenche une interruption non masquable ; son gestionnaire lève un drapeau et ne coupe rien, et `param_load()` teste le drapeau. Pas de somme de contrôle (DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée »).
+**Alternatives écartées :** deux copies avec indicateur de validité (contraire à DEC-035 « Pas de retour aux valeurs d'origine ; mémoire corrompue non traitée » et inutile avec un mot unique) ; ignorer l'interruption non masquable (le drone redémarrerait en boucle après une écriture interrompue).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; réponse au risque inscrit dans « Architecture » (écriture de 64 bits interrompue).
+**Doutes levés :** (aucun)
+
+### DEC-267 — Ordonnancement : voyant dans l'interruption du tick, flux en deux pas, tâches de fond par priorité
+**Date :** 2026-10-30
+**Concerne :** DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond », DES-020 « Pilote du flux optique », DES-021 « Pilotes des moteurs, du voyant, du buzzer et de la liaison série », DOU-159 « Ordonnancement des tâches de fond : flux à 100 Hz, pilote de hauteur et latence de l'arrêt sans fil »
+**Décision :** (1) la modulation du voyant (10 niveaux, 100 Hz) est faite dans l'interruption TIM6 (moins de 1 µs) car elle doit tourner à chaque milliseconde ; la séquence des effets, elle, est une tâche de fond tous les 10 ms. (2) la lecture du flux est découpée en deux pas (adresse puis 12 octets), chacun inférieur à 200 µs. (3) le drapeau de cycle est levé par la fin du DMA de l'IMU (et non par TIM6) pour que la lecture soit terminée avant le calcul. (4) priorités de tâches : arrêt radio, hauteur, flux, statut ou variables, effets ; charge d'environ 420 pas par seconde. L'alarme de 800 µs de DOU-159 « Ordonnancement des tâches de fond : flux à 100 Hz, pilote de hauteur et latence de l'arrêt sans fil » est conservée.
+**Alternatives écartées :** voyant en tâche de fond (la modulation se déformerait avec les pas des autres tâches) ; timer matériel du voyant (conflits de broches de DEC-240 « Brochage, timers, voyant et bouton ») ; flux en un seul pas de 120 µs (reste dans le budget, mais près de la limite de 200 µs avec les attentes de la fiche).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte »).
+**Doutes levés :** (aucun) ; DOU-159 « Ordonnancement des tâches de fond : flux à 100 Hz, pilote de hauteur et latence de l'arrêt sans fil » reste ouvert jusqu'à la mesure de TI-011 « Cadence du cycle et temps de réponse de l'arrêt d'urgence »
+
+### DEC-268 — Mécanique : anneaux tangents, modèle OpenSCAD et impression en ligne
+**Date :** 2026-10-30
+**Concerne :** DES-006 « Cadre, anneaux, moteurs et hélices », ARC-006 « Moteurs, hélices et protège-hélices »
+**Décision :** cadre fait de quatre anneaux tangents (diamètre extérieur égal à l'entraxe de 49 mm), sans bras ; modèle paramétrique OpenSCAD ; impression en résine par un service en ligne (sans imprimante personnelle supposée). Cotes verticales fixées par le croquis de DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie ».
+**Alternatives écartées :** bras en croix entre les moteurs (plus de masse, encombrement identique) ; carte de circuit imprimé comme cadre (rigide mais lourd et cher) ; impression sur l'imprimante de l'utilisateur (non connue).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; la forme la plus simple qui tient dans 98 x 98 mm.
+**Doutes levés :** (aucun) ; suivi par DOU-169 « Matière, masse, délai et cotes verticales des pièces imprimées »
+
+### DEC-269 — Matériel : ferrite hors du chemin des moteurs, mesure en amont, rappels des sélections de bus
+**Date :** 2026-10-30
+**Concerne :** DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », ARC-009 « Alimentation de la logique et mesure de la tension »
+**Décision :** (1) la ferrite d'entrée (1 A nominal) n'est que dans la branche des régulateurs ; les moteurs, le voyant, le buzzer et le pont de mesure sont sur la branche directe du connecteur. (2) Le pont de mesure lit la batterie en amont de la ferrite (la chute de 13 mV de la ferrite ne fausse pas la mesure). (3) Les lignes de sélection de puce (CS) de la centrale et du flux sont rappelées au +3V0 par 10 kohms, pour qu'aucun composant ne soit sélectionné pendant le reset.
+**Alternatives écartées :** ferrite sur l'entrée complète (brûlerait à 9,5 A) ; mesure après la ferrite (erreur de la chute, variable avec la consommation).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; précision apportée à ARC-009 « Alimentation de la logique et mesure de la tension » qui disait « entrée filtrée » sans préciser la branche.
+**Doutes levés :** (aucun)
+
+### DEC-270 — Vérifications par scripts : appels uniques, mémoire et jalons
+**Date :** 2026-10-30
+**Concerne :** DES-015 « Arborescence du firmware, édition de liens et budget de mémoire », DES-017 « Coupure des moteurs, démarrage unique et gestionnaires d'exception », DES-030 « Chien de garde matériel et règle de rafraîchissement », DES-037 « Jalons de livraison et configurations de compilation », DES-038 « Contenu de la page de consignes d'emploi »
+**Décision :** les propriétés de structure que le compilateur ne contrôle pas sont vérifiées par de courts scripts Python sous `firmware/tools/` : nombre de sites d'appel de `motors_start()` (REQ-005 « Démarrage des moteurs sur geste volontaire seulement »), unicité de l'écriture de la clé du chien de garde, plan mémoire du fichier `.map`, longueur et mots-clés de la page de consignes.
+**Alternatives écartées :** revue manuelle seule (une régression passerait inaperçue) ; analyse statique complète (outil lourd).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte »).
+**Doutes levés :** (aucun)
+
+### DEC-271 — Cycle indépendant du DMA de la centrale et lecture armée après l'initialisation
+**Date :** 2026-10-30
+**Concerne :** DES-016 « Tick de 1 kHz, cycle de contrôle et ordonnanceur de tâches de fond », DES-018 « Pilote de la centrale inertielle », DES-029 « Surveillance et coupures automatiques »
+**Décision :** l'interruption TIM6 lève le drapeau de cycle même si la lecture précédente de la centrale n'est pas finie (erreur comptée, trois erreurs : `imu_failed`), pour que la surveillance et le chien de garde ne dépendent pas du DMA ; la lecture automatique n'est armée qu'après l'initialisation de la centrale ; 10 lectures brutes identiques valent une erreur par cycle suivant (blocage détecté après au moins 12 cycles).
+**Alternatives écartées :** cycle déclenché seulement par le DMA (une centrale muette supprime la surveillance et provoque un reset sans cause) ; délai de garde par un comparateur de TIM2.
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; point relevé par la relecture critique de la phase.
+**Doutes levés :** (aucun)
+
+### DEC-272 — Coupure d'atterrissage tolérante à la fenêtre de validité du capteur de hauteur
+**Date :** 2026-10-30
+**Concerne :** DES-019 « Pilote du capteur de hauteur non bloquant », DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique », ARC-018 « Boucle de contrôle du vol », DOU-160 « Mesure de hauteur valide et sols sombres ou brillants »
+**Décision :** une lecture brute (valide ou non) d'au plus 45 mm, en état Atterrissage seulement,, ou un état hors portée dont la dernière valeur valide était d'au plus 60 mm, vaut contact et coupe les moteurs, car la fenêtre de validité (40 à 45 mm) est franchie en moins de 33 ms à 0,5 m/s.
+**Alternatives écartées :** abaisser la borne de validité à 20 mm (mesure non fiable sous 40 mm) ; attendre la coupure par absence de mesure à 200 ms (mauvaise cause, moteurs en marche au sol).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte »).
+**Doutes levés :** (aucun)
+
+### DEC-273 — Flux optique : l'absence de mouvement est une vitesse nulle valide
+**Date :** 2026-10-30
+**Concerne :** DES-020 « Pilote du flux optique », DES-025 « Vitesse horizontale et critères d'immobilité, de platitude et de stationnaire », DEC-262 « Vitesse horizontale invalide : stationnaire non déclaré »
+**Décision :** la validité d'une mesure de flux ne dépend que de la qualité de surface (SQUAL) ; un bit de mouvement absent donne des deltas nuls, donc une vitesse nulle valide ; l'âge de l'échantillon se compte depuis la dernière lecture réussie.
+**Alternatives écartées :** exiger un mouvement détecté (un drone immobile serait coupé à 2 s).
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; précise DEC-262 « Vitesse horizontale invalide : stationnaire non déclaré ».
+**Doutes levés :** (aucun)
+
+### DEC-274 — Échec par sous-tension : horloge conservée à 170 MHz
+**Date :** 2026-10-30
+**Concerne :** DES-031 « Séquence d'initialisation et échec d'initialisation », ARC-023 « Initialisation et échec d'initialisation », DOU-118 « Seuil de protection et consommation résiduelle du drone laissé allumé »
+**Décision :** en échec d'initialisation par sous-tension, le drone garde l'horloge à 170 MHz (capteurs en veille, voyant au niveau 1 sur 10) au lieu des 16 MHz de ARC-023 « Initialisation et échec d'initialisation » : tous les chronomètres, le débit série et les bus sont calés sur 170 MHz et une seconde table de constantes serait un risque de plus. La consommation résiduelle est donc supérieure aux 12 mA estimés.
+**Alternatives écartées :** seconde table de constantes à 16 MHz (complexité, tests supplémentaires) ; supprimer le voyant.
+**Raison :** délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte »).
+**Doutes levés :** (aucun) ; écart signalé par DOU-178 « Horloge à 16 MHz de l'échec par sous-tension abandonnée »
+
+### DEC-275 — Schémas SVG des circuits de la carte dans la conception détaillée
+**Date :** 2026-10-30
+**Concerne :** DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-004 « Raccordement du capteur de hauteur VL53L1X », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-007 « Circuit de puissance des moteurs », DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension », DES-010 « Circuit du bouton », DES-011 « Circuit du voyant RGB et du buzzer », DES-012 « Raccordement du module Bluetooth E104-BT02 »
+**Décision :** instruction de l'utilisateur en chat, 2026-10-30 : ajouter dans la conception détaillée des schémas SVG, comme des morceaux de schéma électronique, pour tout ce qui concerne la carte. Périmètre : la carte seulement, sans la mécanique (DES-006 « Cadre, anneaux, moteurs et hélices ») ni le logiciel pour le moment. Un SVG par bloc de circuit, dans `projets/boomrone/schemas/`, inséré dans le DES concerné avec une légende ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB » n'a pas de schéma (le texte ne fixe aucune position de composant, ce qui est l'objet du croquis de DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie »). Les schémas SVG sont des illustrations de conception, rédigées à partir du texte des DES : ce ne sont pas les schémas KiCad de fabrication, qui restent à saisir (« Réalisé par » de chaque DES) et qui font foi pour la commande de la carte. Le texte technique des DES n'est pas modifié ; les éléments que le texte ne donne pas (repères, noms de broches) sont marqués provisoires ou à vérifier dans les SVG et suivis par DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches », DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée » et DOU-184 « Condensateurs d'entrée du régulateur de 3,0 V : 22 µF sur VBATL et 1 µF sur l'entrée du composant ».
+**Alternatives écartées :** diagrammes Mermaid (pas de symboles de composants ni de broches, illisibles pour un circuit) ; schémas KiCad saisis dès maintenant (travail de saisie lourd avant que les fiches de composants soient relevées, DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage » ; reste prévu plus tard, les SVG serviront de brouillon) ; schémas pour la mécanique et le logiciel (hors du périmètre demandé pour le moment).
+**Raison :** une image de circuit se relit et se critique plus vite qu'une phrase de valeurs de composants, et fait apparaître les oublis de brochage avant la saisie KiCad ; la règle « Mermaid par défaut, SVG quand Mermaid ne suffit pas » de `framework/regles-documentaires.md` autorise le SVG pour un schéma de carte. Les SVG sont du XML sans dépendance externe, avec un fond blanc ou sombre selon le thème (le rendu ne dépend pas du thème de l'éditeur) et des traits en couleurs sûres. Ils restent « Proposé » comme les DES qu'ils illustrent.
+**Doutes levés :** (aucun) ; doutes ouverts : DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches », DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée », DOU-184 « Condensateurs d'entrée du régulateur de 3,0 V : 22 µF sur VBATL et 1 µF sur l'entrée du composant »
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->

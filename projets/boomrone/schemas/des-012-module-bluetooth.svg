@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" role="img" aria-labelledby="t d"><title id="t">DES-012 — Raccordement du module Bluetooth E104-BT02</title><desc id="d">Module E104-BT02 alimenté en 3,0 V avec 10 microfarads et 100 nanofarads ; liaison série croisée avec PA2 et PA3 du microcontrôleur.</desc><style>
+:root{--fg:#1f2937}
+.bg{fill:#ffffff}
+@media (prefers-color-scheme: dark){:root{--fg:#e5e7eb}.bg{fill:#1e1e1e}}
+text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
+.w{stroke:var(--fg);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke:var(--fg);stroke-width:1;fill:none}
+.box{stroke:var(--fg);stroke-width:1.6;fill:var(--fg);fill-opacity:.06}
+.dash{stroke:var(--fg);stroke-width:1.2;fill:none;stroke-dasharray:5 4}
+.bat{stroke:#ef4444;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l3{stroke:#3b82f6;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.l2{stroke:#a855f7;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.warn{stroke:#d97706;stroke-width:1.8;fill:none;stroke-dasharray:6 3}
+.sig{stroke:#059669;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fill{fill:var(--fg);stroke:none}
+.fbat{fill:#ef4444;stroke:none}.fl3{fill:#3b82f6;stroke:none}.fl2{fill:#a855f7;stroke:none}.fsig{fill:#059669;stroke:none}
+.tbat{fill:#ef4444;font-weight:bold}.tl3{fill:#3b82f6;font-weight:bold}.tl2{fill:#a855f7;font-weight:bold}
+.tsig{fill:#059669}.twarn{fill:#d97706;font-weight:bold}
+.ref{font-weight:bold}.small{font-size:11px}.title{font-size:16px;font-weight:bold}
+.val{opacity:.9}
+</style>
+<rect class="bg" id="fond" x="0" y="0" width="900" height="600"/>
+<text x="20" y="26" style="font-size:16px;font-weight:bold">DES-012 — Raccordement du module Bluetooth E104-BT02</text>
+<rect x="20" y="120" width="120" height="120" rx="4" class="box"/>
+<text x="80.0" y="136" text-anchor="middle" class="ref" font-size="13">U1</text>
+<text x="80.0" y="150" text-anchor="middle" font-size="11">STM32G431</text>
+<polyline class="w" points="140,160 140,160"/>
+<text x="135" y="164" text-anchor="end" font-size="11">PA2</text>
+<polyline class="w" points="140,200 140,200"/>
+<text x="135" y="204" text-anchor="end" font-size="11">PA3</text>
+<rect x="430" y="100" width="190" height="220" rx="4" class="box"/>
+<text x="525.0" y="116" text-anchor="middle" class="ref" font-size="13">U7</text>
+<text x="525.0" y="130" text-anchor="middle" font-size="11">Ebyte E104-BT02 (DA14580)</text>
+<polyline class="sig" points="140,160 430,160"/>
+<polyline class="sig" points="140,200 430,200"/>
+<text x="150" y="154" text-anchor="start" class="tsig" font-size="11">BLE_TX (émission du MCU)</text>
+<text x="150" y="194" text-anchor="start" class="tsig" font-size="11">BLE_RX (réception du MCU)</text>
+<text x="150" y="174" text-anchor="start" font-size="11">USART2 TX (AF7), 9600 bauds visés</text>
+<text x="150" y="214" text-anchor="start" font-size="11">USART2 RX (AF7)</text>
+<text x="436" y="164" text-anchor="start" font-size="11">RXD</text>
+<text x="436" y="204" text-anchor="start" font-size="11">TXD</text>
+<polygon class="fsig" points="425,160 413,155 413,165"/>
+<polygon class="fsig" points="146,200 158,195 158,205"/>
+<rect x="375" y="155" width="10" height="10" class="w"/>
+<rect x="375" y="195" width="10" height="10" class="w"/>
+<text x="380" y="148" text-anchor="middle" font-size="10">plot TX</text>
+<text x="380" y="188" text-anchor="middle" font-size="10">plot RX</text>
+<polyline class="l3" points="620,130 680,130"/>
+<circle cx="680" cy="130" r="3.2" class="fl3"/>
+<text x="626" y="124" text-anchor="start" font-size="11">VCC</text>
+<polyline class="l3" points="680,130 680,100"/>
+<polyline class="l3" points="680,100 680,84"/>
+<polygon class="fl3" points="680,76 675,86 685,86"/>
+<text x="680" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
+<polyline class="l3" points="680,130 750,130"/>
+<circle cx="750" cy="130" r="3.2" class="fl3"/>
+<polyline class="w" points="680,130 680,167.0"/>
+<polyline class="w" points="680,173.0 680,210"/>
+<polyline class="w" points="670,167.0 690,167.0"/>
+<polyline class="w" points="670,173.0 690,173.0"/>
+<text x="694" y="169.0" text-anchor="start" class="ref " font-size="11">C32</text>
+<text x="694" y="182.0" text-anchor="start" class="val" font-size="11">10 µF</text>
+<polyline class="w" points="680,210 680,216"/>
+<polyline class="w" points="671,216 689,216"/>
+<polyline class="w" points="674,220 686,220"/>
+<polyline class="w" points="677,224 683,224"/>
+<polyline class="w" points="750,130 750,167.0"/>
+<polyline class="w" points="750,173.0 750,210"/>
+<polyline class="w" points="740,167.0 760,167.0"/>
+<polyline class="w" points="740,173.0 760,173.0"/>
+<text x="764" y="169.0" text-anchor="start" class="ref " font-size="11">C33</text>
+<text x="764" y="182.0" text-anchor="start" class="val" font-size="11">100 nF</text>
+<polyline class="w" points="750,210 750,216"/>
+<polyline class="w" points="741,216 759,216"/>
+<polyline class="w" points="744,220 756,220"/>
+<polyline class="w" points="747,224 753,224"/>
+<rect x="822" y="125" width="10" height="10" class="w"/>
+<polyline class="l3" points="750,130 822,130"/>
+<text x="827" y="118" text-anchor="middle" font-size="10">plot 3,0 V</text>
+<polyline class="w" points="525,320 525,340"/>
+<polyline class="w" points="525,340 525,346"/>
+<polyline class="w" points="516,346 534,346"/>
+<polyline class="w" points="519,350 531,350"/>
+<polyline class="w" points="522,354 528,354"/>
+<text x="533" y="336" text-anchor="start" font-size="11">GND</text>
+<rect x="560" y="338" width="10" height="10" class="w"/>
+<text x="565" y="362" text-anchor="middle" font-size="10">plot GND</text>
+<text x="436" y="250" text-anchor="start" class="twarn" font-size="11">autres broches : selon la fiche d'Ebyte</text>
+<text x="436" y="264" text-anchor="start" class="twarn" font-size="11">(à relever, aucune commande AT prévue)</text>
+<text x="436" y="290" text-anchor="start" font-size="11">antenne en dépassement du bord de carte,</text>
+<text x="436" y="304" text-anchor="start" font-size="11">sans cuivre, piste ni batterie dessous</text>
+<text x="150" y="244" text-anchor="start" font-size="11">niveaux de 3,0 V des deux côtés</text>
+<text x="20" y="385" text-anchor="start" font-size="11">Débit : 9600 bauds visés = 104,2 µs par bit, 1,04 ms par octet ; une trame de 14 octets dure 14,6 ms ;</text>
+<text x="20" y="399" text-anchor="start" font-size="11">charge utile (DES-033) ≈ 138 octets par seconde = 14 % des 960 octets par seconde disponibles.</text>
+<text x="20" y="413" text-anchor="start" font-size="11">Quatre pastilles de repli (3,0 V, masse, TX, RX) pour souder un autre module série.</text>
+<line x1="14" y1="470" x2="886" y2="470" class="thin" style="opacity:.4"/>
+<text x="20" y="486" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
+<text x="20" y="500" style="font-size:11px">Texte de référence : DES-012 « Raccordement du module Bluetooth E104-BT02 ». Croisement : PA2 (BLE_TX, émission du microcontrôleur) arrive sur RXD du</text>
+<text x="20" y="514" style="font-size:11px">   module, TXD du module arrive sur PA3.</text>
+<text x="20" y="528" style="font-size:11px">Repères (U7, C32, C33) provisoires ; noms des broches du module de mémoire. À vérifier (orange) : DOU-151 « Module E104-BT02 : débit par défaut,</text>
+<text x="20" y="542" style="font-size:11px">   service, absence de commande AT » ; DOU-146 « Broches d'état du module Bluetooth et de mouvement du capteur de flux » ; DOU-182 « Noms et numéros</text>
+<text x="20" y="556" style="font-size:11px">   de broches des circuits intégrés des schémas SVG non relevés dans les fiches » ; DOU-183 « Repères de composants provisoires des schémas SVG de la</text>
+<text x="20" y="570" style="font-size:11px">   conception détaillée ».</text>
+<text x="20" y="584" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
+</svg>
