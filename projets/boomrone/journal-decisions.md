@@ -2521,4 +2521,13 @@ Format (exemple, non analysé) :
 **Raison :** décision de l'utilisateur 2026-10-30 (chat) : la polarité est couverte par la fiche anglaise et l'essai du module seul (TI-010 « Liaison Bluetooth à basse consommation »), la coupure de la liaison sur reset est sans conséquence de sécurité ; moins de composants.
 **Doutes levés :** (aucun) ; DOU-195 « Module E104-BT02 : niveau de WKP, état à la mise sous tension et mot de passe aérien » reste ouvert, non bloquant
 
+### DEC-287 — Références JLCPCB/LCSC des composants actifs ajoutées aux DES
+**Date :** 2026-10-30
+**Concerne :** « Conception détaillée » — `projets/boomrone/04-conception-detaillee.md`
+**Décision :** chaque DES qui contient un composant actif porte la ligne « Références JLCPCB/LCSC » avec le code LCSC, le boîtier et le type (de base ou étendu) relevés dans la nomenclature de « Architecture » — `projets/boomrone/03-architecture.md` (stocks du 2026-10-29, à relire le jour de la commande) ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB » en donne le récapitulatif. Aucun code nouveau : ce sont ceux de DEC-235 « Catalogue JLCPCB/LCSC vérifié : composants retenus » et de DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB ».
+**Alternatives écartées :** ajouter aussi les passifs, le XT30, le bouton et la ferrite (restent dans la nomenclature d'architecture) ; relever de nouveaux stocks maintenant.
+**Raison :** instruction de l'utilisateur en chat, 2026-10-30 : « pour les composants actifs propose et ajoute le code de jlcpcb dans conception détaillée, dans chaque DES qui en a besoin ». DES-004 « Raccordement du capteur de hauteur VL53L1X » cite le VL53L1X alors que la référence commandée est le VL53L1CX : écart suivi par DOU-157 « VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres ».
+**Modifie :** DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-004 « Raccordement du capteur de hauteur VL53L1X », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-007 « Circuit de puissance des moteurs », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension », DES-011 « Circuit du voyant RGB et du buzzer », DES-012 « Raccordement du module Bluetooth E104-BT02 », DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB ».
+**Doutes levés :** (aucun)
+
 <!-- Ajouter les décisions ci-dessous, au même format, en dehors des blocs de code. -->
