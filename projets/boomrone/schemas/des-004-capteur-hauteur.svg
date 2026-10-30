@@ -31,7 +31,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="125" y="174" text-anchor="end" font-size="11">PA15</text>
 <polyline class="sig" points="130,170 480,170"/>
 <text x="140" y="165" text-anchor="start" class="tsig" font-size="11">I2C_SCL</text>
-<text x="486" y="174" text-anchor="start" font-size="11">SCL</text>
+<text x="486" y="174" text-anchor="start" font-size="11">SCL (10)</text>
 <circle cx="220" cy="170" r="3.2" class="fsig"/>
 <polyline class="w" points="220,100 220,122.0"/>
 <polyline class="w" points="220,148.0 220,170"/>
@@ -45,7 +45,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="125" y="204" text-anchor="end" font-size="11">PB7</text>
 <polyline class="sig" points="130,200 480,200"/>
 <text x="140" y="195" text-anchor="start" class="tsig" font-size="11">I2C_SDA</text>
-<text x="486" y="204" text-anchor="start" font-size="11">SDA</text>
+<text x="486" y="204" text-anchor="start" font-size="11">SDA (9)</text>
 <circle cx="284" cy="200" r="3.2" class="fsig"/>
 <polyline class="w" points="284,100 284,137.0"/>
 <polyline class="w" points="284,163.0 284,200"/>
@@ -59,7 +59,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="125" y="234" text-anchor="end" font-size="11">PB6</text>
 <polyline class="sig" points="130,230 480,230"/>
 <text x="140" y="225" text-anchor="start" class="tsig" font-size="11">TOF_GPIO1</text>
-<text x="486" y="234" text-anchor="start" font-size="11">GPIO1</text>
+<text x="486" y="234" text-anchor="start" font-size="11">GPIO1 (7)</text>
 <circle cx="348" cy="230" r="3.2" class="fsig"/>
 <polyline class="w" points="348,100 348,152.0"/>
 <polyline class="w" points="348,178.0 348,230"/>
@@ -73,7 +73,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="125" y="264" text-anchor="end" font-size="11">PB9</text>
 <polyline class="sig" points="130,260 480,260"/>
 <text x="140" y="255" text-anchor="start" class="tsig" font-size="11">TOF_XSHUT</text>
-<text x="486" y="264" text-anchor="start" font-size="11">XSHUT</text>
+<text x="486" y="264" text-anchor="start" font-size="11">XSHUT (5)</text>
 <circle cx="412" cy="260" r="3.2" class="fsig"/>
 <polyline class="w" points="412,100 412,167.0"/>
 <polyline class="w" points="412,193.0 412,260"/>
@@ -83,28 +83,24 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="l3" points="412,100 412,84"/>
 <polygon class="fl3" points="412,76 407,86 417,86"/>
 <text x="412" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
-<polyline class="l3" points="670,100 670,230"/>
+<polyline class="l3" points="670,100 670,200"/>
 <polyline class="l3" points="670,100 670,84"/>
 <polygon class="fl3" points="670,76 665,86 675,86"/>
 <text x="670" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
 <polyline class="l3" points="650,170 670,170"/>
 <circle cx="670" cy="170" r="3.2" class="fl3"/>
-<text x="636" y="174" text-anchor="end" font-size="11">AVDD</text>
+<text x="636" y="174" text-anchor="end" font-size="11">AVDD (11)</text>
 <polyline class="l3" points="650,200 670,200"/>
 <circle cx="670" cy="200" r="3.2" class="fl3"/>
-<text x="636" y="204" text-anchor="end" font-size="11">AVDDVCSEL</text>
-<polyline class="l3" points="650,230 670,230"/>
-<circle cx="670" cy="230" r="3.2" class="fl3"/>
-<text x="636" y="234" text-anchor="end" font-size="11">IOVDD</text>
+<text x="636" y="204" text-anchor="end" font-size="11">AVDDVCSEL (1)</text>
 <polyline class="l3" points="670,170 850,170"/>
 <polyline class="l3" points="670,200 810,200"/>
-<polyline class="l3" points="670,230 730,230"/>
 <polyline class="w" points="850,170 850,202.0"/>
 <polyline class="w" points="850,208.0 850,240"/>
 <polyline class="w" points="840,202.0 860,202.0"/>
 <polyline class="w" points="840,208.0 860,208.0"/>
-<text x="850" y="267" text-anchor="middle" class="ref twarn" font-size="11">C24</text>
-<text x="850" y="279" text-anchor="middle" class="twarn" font-size="11">100 nF</text>
+<text x="850" y="267" text-anchor="middle" class="ref" font-size="11">C24</text>
+<text x="850" y="279" text-anchor="middle" font-size="11">100 nF</text>
 <polyline class="w" points="850,240 850,246"/>
 <polyline class="w" points="841,246 859,246"/>
 <polyline class="w" points="844,250 856,250"/>
@@ -113,8 +109,8 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="w" points="770,233.0 770,260"/>
 <polyline class="w" points="760,227.0 780,227.0"/>
 <polyline class="w" points="760,233.0 780,233.0"/>
-<text x="770" y="287" text-anchor="middle" class="ref twarn" font-size="11">C22</text>
-<text x="770" y="299" text-anchor="middle" class="twarn" font-size="11">4,7 µF</text>
+<text x="770" y="287" text-anchor="middle" class="ref" font-size="11">C22</text>
+<text x="770" y="299" text-anchor="middle" font-size="11">4,7 µF</text>
 <polyline class="w" points="770,260 770,266"/>
 <polyline class="w" points="761,266 779,266"/>
 <polyline class="w" points="764,270 776,270"/>
@@ -124,40 +120,31 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="w" points="810,233.0 810,260"/>
 <polyline class="w" points="800,227.0 820,227.0"/>
 <polyline class="w" points="800,233.0 820,233.0"/>
-<text x="810" y="287" text-anchor="middle" class="ref twarn" font-size="11">C23</text>
-<text x="810" y="299" text-anchor="middle" class="twarn" font-size="11">100 nF</text>
+<text x="810" y="287" text-anchor="middle" class="ref" font-size="11">C23</text>
+<text x="810" y="299" text-anchor="middle" font-size="11">100 nF</text>
 <polyline class="w" points="810,260 810,266"/>
 <polyline class="w" points="801,266 819,266"/>
 <polyline class="w" points="804,270 816,270"/>
 <polyline class="w" points="807,274 813,274"/>
-<polyline class="w" points="730,230 730,252.0"/>
-<polyline class="w" points="730,258.0 730,280"/>
-<polyline class="w" points="720,252.0 740,252.0"/>
-<polyline class="w" points="720,258.0 740,258.0"/>
-<text x="730" y="307" text-anchor="middle" class="ref twarn" font-size="11">C25</text>
-<text x="730" y="319" text-anchor="middle" class="twarn" font-size="11">100 nF</text>
-<polyline class="w" points="730,280 730,286"/>
-<polyline class="w" points="721,286 739,286"/>
-<polyline class="w" points="724,290 736,290"/>
-<polyline class="w" points="727,294 733,294"/>
 <text x="660" y="190" text-anchor="start"></text>
 <polyline class="w" points="560,340 560,360"/>
 <polyline class="w" points="560,360 560,366"/>
 <polyline class="w" points="551,366 569,366"/>
 <polyline class="w" points="554,370 566,370"/>
 <polyline class="w" points="557,374 563,374"/>
-<text x="570" y="356" text-anchor="start" font-size="11">GND</text>
+<text x="570" y="356" text-anchor="start" font-size="11">GND (3, 4, 6, 12), AVSSVCSEL (2)</text>
 <text x="20" y="395" text-anchor="start" font-size="11">I2C1 400 kHz, adresse 0x29 ; temps de montée = 0,8473 × 4,7 kΩ × C : 119 ns avec 30 pF, sous les 300 ns exigés tant que C &lt; 75 pF.</text>
-<text x="20" y="409" text-anchor="start" font-size="11">XSHUT : rappel de 10 kΩ, le capteur est actif dès la mise sous tension. Le rail +3V0 descend à environ 2,9 V (minimum du composant : 2,6 V).</text>
+<text x="20" y="409" text-anchor="start" font-size="11">XSHUT : rappel de 10 kΩ, le capteur est actif dès la mise sous tension. Le rail +3V0 descend à environ 2,9 V (minimum du composant : 2,6 V, fiche DS12385 p. 18).</text>
 <text x="20" y="423" text-anchor="start" font-size="11">Fenêtre optique dégagée, cône de 27°, capteur à 20 mm du plan de contact (DES-006) : hauteur = lecture brute − 20 mm ;</text>
 <text x="20" y="437" text-anchor="start" font-size="11">coupure à 25 mm de hauteur = lecture brute de 45 mm.</text>
-<text x="20" y="465" text-anchor="start" class="twarn" font-size="11">Orange : C22 à C25 (4,7 µF + 100 nF sur AVDDVCSEL, 100 nF sur AVDD et IOVDD) tirés de la fiche DS12093 de mémoire.</text>
+<text x="486" y="294" text-anchor="start" font-size="11">DNC (8) : flottante</text>
+<text x="20" y="465" text-anchor="start" class="twarn" font-size="11">Orange : mode 2V8 des E/S à régler dans l'ULD (DOU-149). C22, C23 : figure 3 p. 6 de la fiche DS12385 ; C24 : ajout du projet. Aucune broche IOVDD.</text>
 <line x1="14" y1="500" x2="886" y2="500" class="thin" style="opacity:.4"/>
 <text x="20" y="516" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
 <text x="20" y="530" style="font-size:11px">Texte de référence : DES-004 « Raccordement du capteur de hauteur VL53L1X ». Croisement de fils sans point = pas de liaison (les rappels montent vers</text>
-<text x="20" y="544" style="font-size:11px">   +3V0). Noms des broches de mémoire.</text>
-<text x="20" y="558" style="font-size:11px">Repères (R25 à R28, C22 à C25) provisoires. À vérifier (orange) : DOU-173 « Composants passifs et découplages à relever dans les fiches avant le</text>
-<text x="20" y="572" style="font-size:11px">   routage » ; DOU-157 « VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres » ; DOU-182 « Noms et numéros de broches des circuits</text>
-<text x="20" y="586" style="font-size:11px">   intégrés des schémas SVG non relevés dans les fiches » ; DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».</text>
+<text x="20" y="544" style="font-size:11px">   +3V0). Noms et numéros des broches relevés dans la fiche DS12385 Rev 8 (figures 2 et 3 p. 5 et 6).</text>
+<text x="20" y="558" style="font-size:11px">Repères (R25 à R28, C22 à C24) provisoires. À vérifier (orange) : DOU-149 « Valeurs de registres du VL53L1X à vérifier dans la bibliothèque ST (ULD) » ;</text>
+<text x="20" y="572" style="font-size:11px">   DOU-157 « VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres » ; DOU-183 « Repères de composants provisoires des schémas SVG de la</text>
+<text x="20" y="586" style="font-size:11px">   conception détaillée ».</text>
 <text x="20" y="600" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
 </svg>

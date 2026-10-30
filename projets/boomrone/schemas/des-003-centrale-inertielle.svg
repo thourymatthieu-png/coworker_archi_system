@@ -31,27 +31,27 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="125" y="174" text-anchor="end" font-size="11">PA4</text>
 <polyline class="sig" points="130,170 380,170"/>
 <text x="150" y="165" text-anchor="start" class="tsig" font-size="11">IMU_CS</text>
-<text x="386" y="174" text-anchor="start" font-size="11">CS</text>
+<text x="386" y="174" text-anchor="start" font-size="11">CS (12)</text>
 <polyline class="w" points="130,200 130,200"/>
 <text x="125" y="204" text-anchor="end" font-size="11">PA5</text>
 <polyline class="sig" points="130,200 380,200"/>
 <text x="150" y="195" text-anchor="start" class="tsig" font-size="11">IMU_SCK</text>
-<text x="386" y="204" text-anchor="start" font-size="11">SCL (SCK)</text>
+<text x="386" y="204" text-anchor="start" font-size="11">SCL (SCK) (13)</text>
 <polyline class="w" points="130,230 130,230"/>
 <text x="125" y="234" text-anchor="end" font-size="11">PA7</text>
 <polyline class="sig" points="130,230 380,230"/>
 <text x="150" y="225" text-anchor="start" class="tsig" font-size="11">IMU_MOSI</text>
-<text x="386" y="234" text-anchor="start" font-size="11">SDA/SDI (MOSI)</text>
+<text x="386" y="234" text-anchor="start" font-size="11">SDA/SDI (MOSI) (14)</text>
 <polyline class="w" points="130,260 130,260"/>
 <text x="125" y="264" text-anchor="end" font-size="11">PA6</text>
 <polyline class="sig" points="130,260 380,260"/>
 <text x="150" y="255" text-anchor="start" class="tsig" font-size="11">IMU_MISO</text>
-<text x="386" y="264" text-anchor="start" font-size="11">SDO/SA0 (MISO)</text>
+<text x="386" y="264" text-anchor="start" font-size="11">SDO/SA0 (MISO) (1)</text>
 <polyline class="w" points="130,290 130,290"/>
 <text x="125" y="294" text-anchor="end" font-size="11">PB0</text>
 <polyline class="sig" points="130,290 380,290"/>
 <text x="150" y="285" text-anchor="start" class="tsig" font-size="11">IMU_INT1</text>
-<text x="386" y="294" text-anchor="start" font-size="11">INT1</text>
+<text x="386" y="294" text-anchor="start" font-size="11">INT1 (4)</text>
 <polygon class="fsig" points="136,290 148,285 148,295"/>
 <circle cx="300" cy="170" r="3.2" class="fsig"/>
 <polyline class="w" points="300,110 300,127.0"/>
@@ -64,8 +64,8 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="300" y="80" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
 <text x="20" y="318" text-anchor="start" font-size="11">SPI1 (AF5), mode 3, diviseur 32 : 5,3125 MHz</text>
 <text x="20" y="332" text-anchor="start" font-size="11">CS au repos haut : composant désélectionné pendant le reset</text>
-<text x="564" y="174" text-anchor="end" font-size="11">VDD</text>
-<text x="564" y="204" text-anchor="end" font-size="11">VDDIO</text>
+<text x="564" y="174" text-anchor="end" font-size="11">VDD (8)</text>
+<text x="564" y="204" text-anchor="end" font-size="11">VDDIO (5)</text>
 <polyline class="l3" points="570,170 600,170"/>
 <polyline class="l3" points="570,200 600,200"/>
 <polyline class="l3" points="600,110 600,200"/>
@@ -110,11 +110,15 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="w" points="570,260 588,260"/>
 <polyline class="w" points="589,255 599,265"/>
 <polyline class="w" points="589,265 599,255"/>
-<text x="564" y="264" text-anchor="end" font-size="11">INT2</text>
+<text x="564" y="264" text-anchor="end" font-size="11">INT2 (9)</text>
 <text x="604" y="264" text-anchor="start" font-size="11">non raccordée</text>
 <polyline class="w" points="570,290 588,290"/>
-<text x="564" y="294" text-anchor="end" font-size="11">liaison auxiliaire</text>
-<text x="604" y="294" text-anchor="start" class="twarn" font-size="11">à la masse ou laissée (fiche à relever)</text>
+<text x="564" y="294" text-anchor="end" font-size="11">SDx (2), SCx (3)</text>
+<text x="604" y="294" text-anchor="start" font-size="11">à la masse (jamais flottantes)</text>
+<text x="564" y="312" text-anchor="end" font-size="11">OCS_Aux (10), SDO_Aux (11)</text>
+<text x="604" y="312" text-anchor="start" font-size="11">non connectées (soudées, sans piste)</text>
+<text x="564" y="330" text-anchor="end" font-size="11">GND (6, 7)</text>
+<text x="604" y="330" text-anchor="start" font-size="11">à la masse</text>
 <polyline class="w" points="475,340 475,360"/>
 <polyline class="w" points="475,360 475,366"/>
 <polyline class="w" points="466,366 484,366"/>
@@ -122,18 +126,19 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="w" points="472,374 478,374"/>
 <text x="485" y="356" text-anchor="start" font-size="11">GND</text>
 <text x="485" y="372" text-anchor="start" font-size="11">pas de plan de masse coupé sous le composant</text>
-<text x="20" y="395" text-anchor="start" class="ref" font-size="11">Registres écrits à l'initialisation (à confirmer dans la fiche ST) :</text>
+<text x="20" y="395" text-anchor="start" class="ref" font-size="11">Registres écrits à l'initialisation (confirmés dans la fiche DS12140 Rev 3, p. 47 à 52) :</text>
 <text x="20" y="411" text-anchor="start" font-size="11">CTRL3_C = 0x44 (BDU et IF_INC, après SW_RESET et attente de fin de reset) ; CTRL4_C = 0x06 (liaison I2C coupée, filtre passe-bas du gyroscope actif)</text>
 <text x="20" y="425" text-anchor="start" font-size="11">CTRL1_XL = 0x9C (3,33 kHz, ±8 g) ; CTRL2_G = 0x9C (3,33 kHz, ±2000 °/s) ; INT1_CTRL = 0x03 (données prêtes accéléromètre et gyroscope)</text>
 <text x="20" y="439" text-anchor="start" font-size="11">identité WHO_AM_I (0x0F) attendue : 0x6C ; échelles : gyroscope 70 m°/s par pas, accéléromètre 0,244 mg par pas</text>
+<text x="20" y="453" text-anchor="start" font-size="11">Mise en route : IMU_BOOT_WAIT_MS = 40 ms (au moins 35 ms, fiche p. 11) avant le premier accès SPI.</text>
 <text x="20" y="471" text-anchor="start" class="twarn" font-size="11">Axes : rotation de 180° autour de x par défaut (puce face vers le bas), constante de config_fixed.h, à confirmer après le routage (DOU-167).</text>
-<text x="20" y="487" text-anchor="start" class="twarn" font-size="11">Orange : liaison auxiliaire, valeurs de registres, orientation des axes.</text>
+<text x="20" y="487" text-anchor="start" class="twarn" font-size="11">Orange : orientation des axes (DOU-167) ; durée du reset logiciel et départ des 35 ms (DOU-196).</text>
 <line x1="14" y1="530" x2="886" y2="530" class="thin" style="opacity:.4"/>
 <text x="20" y="546" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
-<text x="20" y="560" style="font-size:11px">Texte de référence : DES-003 « Raccordement de la centrale inertielle LSM6DSO ». Croisement de fils sans point = pas de liaison. Noms des broches du</text>
-<text x="20" y="574" style="font-size:11px">   composant de mémoire.</text>
-<text x="20" y="588" style="font-size:11px">Repères (R24, C19 à C21) provisoires. À vérifier (orange) : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » ; DOU-173</text>
-<text x="20" y="602" style="font-size:11px">   « Composants passifs et découplages à relever dans les fiches avant le routage » ; DOU-182 « Noms et numéros de broches des circuits intégrés des</text>
-<text x="20" y="616" style="font-size:11px">   schémas SVG non relevés dans les fiches » ; DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».</text>
+<text x="20" y="560" style="font-size:11px">Texte de référence : DES-003 « Raccordement de la centrale inertielle LSM6DSO ». Croisement de fils sans point = pas de liaison. Noms et numéros des broches de</text>
+<text x="20" y="574" style="font-size:11px">   la fiche DS12140 Rev 3 (tableau 1 p. 8).</text>
+<text x="20" y="588" style="font-size:11px">Repères (R24, C19 à C21) provisoires. À vérifier (orange) : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » ; DOU-196</text>
+<text x="20" y="602" style="font-size:11px">   « LSM6DSO : durée du reset logiciel et départ du temps de mise en route non trouvés » ; DOU-183 « Repères de composants provisoires des schémas SVG de la</text>
+<text x="20" y="616" style="font-size:11px">   conception détaillée ».</text>
 <text x="20" y="630" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
 </svg>

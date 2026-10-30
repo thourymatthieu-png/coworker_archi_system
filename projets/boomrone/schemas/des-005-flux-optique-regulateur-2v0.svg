@@ -41,15 +41,15 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="180.0" y="225" text-anchor="middle" font-size="11">XC6206P202MR-G</text>
 <text x="136" y="254" text-anchor="start" font-size="11">VIN</text>
 <text x="224" y="254" text-anchor="end" font-size="11">VOUT</text>
-<text x="124" y="244" text-anchor="end" class="twarn" font-size="9">3</text>
-<text x="236" y="244" text-anchor="start" class="twarn" font-size="9">2</text>
+<text x="124" y="244" text-anchor="end" font-size="9">3</text>
+<text x="236" y="244" text-anchor="start" font-size="9">2</text>
 <polyline class="w" points="180,275 180,310"/>
 <polyline class="w" points="180,310 180,316"/>
 <polyline class="w" points="171,316 189,316"/>
 <polyline class="w" points="174,320 186,320"/>
 <polyline class="w" points="177,324 183,324"/>
 <text x="176" y="268" text-anchor="end" font-size="10">VSS</text>
-<text x="186" y="296" text-anchor="start" class="twarn" font-size="9">1</text>
+<text x="186" y="296" text-anchor="start" font-size="9">1</text>
 <polyline class="l2" points="230,250 456,250"/>
 <circle cx="280" cy="250" r="3.2" class="fl2"/>
 <polyline class="w" points="280,250 280,277.0"/>
@@ -171,8 +171,9 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polygon class="fl3" points="745,76 740,86 750,86"/>
 <text x="745" y="70" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
 <text x="20" y="412" text-anchor="start" font-size="11">Six plots de repli (1,5 × 1,5 mm, pas de 2,54 mm, bord de carte) : +3V0, masse, SCK, MOSI, MISO, CS, pistes de moins de 5 mm.</text>
-<text x="20" y="437" text-anchor="start" font-size="11">Bilan : charge 9 mA, pointe de 70 mA à la montée ; chute minimale du régulateur 0,55 à 0,78 V (70 à 100 mA) ; marge 1,0 V (rail à 3,0 V) ou 0,9 V (2,9 V).</text>
-<text x="20" y="451" text-anchor="start" font-size="11">Sortie 1,96 à 2,04 V si la tolérance est de 2 % ; limite de la puce 1,8 à 2,1 V ; dissipation moyenne 9 mW, 70 mW à la pointe.</text>
+<text x="20" y="423" text-anchor="start" font-size="11">Bilan : charge 9 mA, pointe de 70 mA à la montée ; chute du régulateur à 100 mA : 0,35 V typique, 0,78 V au plus (non donnée à 70 mA) ;</text>
+<text x="20" y="437" text-anchor="start" font-size="11">marge 1,0 V (rail à 3,0 V) ou 0,9 V (2,9 V).</text>
+<text x="20" y="451" text-anchor="start" font-size="11">Sortie 1,96 à 2,04 V (précision de 2 %, fiche Torex p. 5) ; limite de la puce 1,8 à 2,1 V ; dissipation moyenne 9 mW, 70 mW à la pointe.</text>
 <text x="20" y="465" text-anchor="start" font-size="11">SPI2 mode 3, diviseur 128 : 1,328125 MHz ; VDDIO au moins égale à VDD, respecté dès le démarrage.</text>
 <text x="20" y="479" text-anchor="start" font-size="11">Lentille LN03-ZSZ collée à la main sur la puce (DOU-164).</text>
 <text x="20" y="497" text-anchor="start" class="twarn" font-size="11">Orange : C15 à C18 (« empreintes 0603 prévues », valeurs finales à relever sur la figure 8 de la fiche), numéros de broches du régulateur de mémoire.</text>

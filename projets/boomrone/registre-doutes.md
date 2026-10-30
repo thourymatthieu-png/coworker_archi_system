@@ -103,7 +103,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension » et REQ-003 « Conditions de départ du drone »
 **Question :** la fuite d'entrée de l'ADC du STM32G431 n'est pas relevée ; avec une source d'environ 60 kΩ, 100 nA de fuite donnent 6 mV à la broche, soit environ 10 mV sur la batterie. Le budget estimé (pont à 0,1 % 3 mV, VREFINT 6 mV, décalage 5 mV, fuite 10 mV, soit environ ±25 mV) tient-il dans les ±50 mV ?
-**Réponse :** (aucune) ; à relever dans la fiche DS12589 et à mesurer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension » ; étalonnage de gain au multimètre en repli. Non bloquant.
+**Réponse :** (aucune) ; à relever dans la fiche DS12589 et à mesurer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension » ; étalonnage de gain au multimètre en repli. Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-281 « Puissance et alimentation : AO3400A, MCP1700, source de l'ADC et étalonnage ») : DS12589 limite RAIN à 50 kΩ (tableau 60) et à 39 kΩ à 640,5 cycles à 60 MHz sur voie rapide (tableau 61) ; le pont fait 60 kΩ ; le pont est conservé et le condensateur de 100 nF sur PA0 est obligatoire (CADC au plus 5 pF : écart de partage de charge au plus 0,13 mV) ; la fuite d'entrée de l'ADC n'est toujours pas relevée : le doute reste ouvert, la mesure de TI-008 « Batterie, connecteur, chute de tension et mesure de tension » reste la preuve.
 **Décision liée :** {DEC-242 « Alimentation de la logique à 130 mA et masse recalculée à 62 g »}
 
 ### DOU-143 — Tensions d'alimentation acceptées par les capteurs et le module à 3,0 V
@@ -135,7 +135,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-012 « Module radio Bluetooth à basse consommation » et ARC-005 « Capteur de flux optique »
 **Question :** la broche d'état (connexion) du module Bluetooth et la broche de mouvement (MOTION) du capteur de flux ne sont pas câblées au microcontrôleur : choix de simplicité (le statut radio est lu par trames, le flux par interrogation). À reconsidérer si l'essai montre un besoin.
-**Réponse :** (aucune) ; décision provisoire : non câblées, plots de test seulement. Non bloquant.
+**Réponse :** (aucune) ; décision provisoire : non câblées, plots de test seulement. Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier ») : la fiche d'Ebyte montre que WKP (P06, broche 9) n'est pas optionnel : le module est en veille par défaut et l'UART ne reçoit plus en veille ; WKP est relié à PA1 ; MOD laissée libre, RESET_H à la masse, STA non câblée ; la broche MOTION du PMW3901MB reste non câblée, la fiche de la puce étant absente (DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »). Ouvert : niveau actif de WKP à confirmer (DOU-195 « Module E104-BT02 : niveau de WKP, état à la mise sous tension et mot de passe aérien »). Complément du 2026-10-30 : niveau confirmé par la fiche anglaise (bas = éveillé) ; STA reste non câblée ; WKP est relié directement à PA1 (DEC-286 « WKP : PA1 directe, emplacements de 0 Ω supprimés », qui remplace DEC-285 « WKP : PA1 conservée, résistance série de 0 Ω et emplacement de 0 Ω vers la masse non posé » : les emplacements de 0 ohm sont supprimés), sans effet sur ce doute.
 **Décision liée :** {DEC-240 « Brochage, timers, voyant et bouton »}
 
 ### DOU-147 — Compatibilité de l'empreinte avec le STM32G474
@@ -146,29 +146,13 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :** (aucune) ; comparaison à faire dans les fiches avant le routage. Non bloquant.
 **Décision liée :** {DEC-240 « Brochage, timers, voyant et bouton »}
 
-### DOU-148 — Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** ARC-002 « Microcontrôleur et programmation par liaison SWD »
-**Question :** le brochage de l'architecture est donné par les noms PAx et PBx, sans les numéros de broches physiques ni la vérification des fonctions alternatives (fiche DS12589 non téléchargeable à la rédaction).
-**Réponse :** (aucune) ; à relever en conception détaillée avant le schéma. Non bloquant.
-**Décision liée :** {DEC-240 « Brochage, timers, voyant et bouton »}
-
 ### DOU-149 — Valeurs de registres du VL53L1X à vérifier dans la bibliothèque ST (ULD)
 **Statut :** Ouvert
 **Bloquant :** Non
 **Concerne :** ARC-004 « Capteur de hauteur à temps de vol »
 **Question :** les registres de lecture du résultat, d'acquittement de l'interruption, de polarité de GPIO1 et de budget de mesure sont donnés de mémoire dans les notes d'architecture.
-**Réponse :** (aucune) ; à vérifier dans l'ULD de ST et la fiche DS12093 en conception détaillée. Non bloquant.
+**Réponse :** (aucune) ; à vérifier dans l'ULD de ST et la fiche DS12093 en conception détaillée. Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-280 « Capteurs : VL53L1X sans broche IOVDD, LSM6DSO et délai de mise en route ») : la fiche déposée est DS12385 Rev 8 (et non DS12093) ; elle ne donne pas les registres (renvoi à la note UM2356), seuls l'identifiant 0x010F = 0xEA, le type de module 0x0110 = 0xCC et la révision 0x0111 = 0x10 sont donnés (p. 16) ; le mode d'E/S par défaut du pilote est 1V8, le mode 2V8 (niveaux de 2,6 à 3,5 V, tableau 13 p. 18) est à régler : vérifier dans l'ULD que l'initialisation le fait (DES-019 « Pilote du capteur de hauteur non bloquant »). Reste ouvert.
 **Décision liée :** {DEC-239 « Capteur de hauteur : pilote non bloquant, reprise, échec d'initialisation, mesure horodatée »}
-
-### DOU-151 — Module E104-BT02 : débit par défaut, service, absence de commande AT
-**Statut :** Ouvert
-**Bloquant :** Non
-**Concerne :** ARC-012 « Module radio Bluetooth à basse consommation » et ARC-028 « Logiciel d'essai de l'appareil de suivi »
-**Question :** le catalogue ne donne ni le débit par défaut, ni l'identifiant du service et de la caractéristique, ni l'absence de commande AT du E104-BT02, ni sa version Bluetooth (4.2 selon Ebyte, 5.1 selon le catalogue).
-**Réponse :** (aucune) ; essai d'un module seul avec un adaptateur USB-UART avant la commande de la carte (TI-010 « Liaison Bluetooth à basse consommation »). Non bloquant pour la porte, à lever avant la commande de la carte. Plan B : pastilles pour un autre module.
-**Décision liée :** {DEC-243 « Latence de l'arrêt sans fil et module Bluetooth : mesure avant la commande de la carte »}
 
 ### DOU-153 — Carte double face, assemblage Standard, frais d'extension et délais
 **Statut :** Ouvert
@@ -191,7 +175,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-008 « Batterie et connecteur débranchable » et ARC-009 « Alimentation de la logique et mesure de la tension »
 **Question :** le XT30PW retenu est mâle (C431092) ; la batterie achetée peut avoir un connecteur du même genre. De plus, la mise sous tension de la batterie peut produire un dépassement de tension sur l'entrée du régulateur (maximum absolu d'environ 6 V, dépassement calculé d'environ 4,7 V, valeurs à vérifier).
-**Réponse :** (aucune) ; choisir le genre à l'achat de la batterie ; mesure du dépassement à TI-008 « Batterie, connecteur, chute de tension et mesure de tension ». Non bloquant ; à lever avant la commande de la carte.
+**Réponse :** (aucune) ; choisir le genre à l'achat de la batterie ; mesure du dépassement à TI-008 « Batterie, connecteur, chute de tension et mesure de tension ». Non bloquant ; à lever avant la commande de la carte. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-282 « Voyant RGB, XC6206 et connecteur XT30 : valeurs de fiche ») : genre mâle confirmé pour le XT30PW (fiche Amass p. 1 et 2) ; désignation de la fiche XT30PW30-M.G.Y, différente de la nomenclature (DOU-198 « Écarts avec l'architecture à reporter à la prochaine révision : débit, réveil du module, boîtier, désignation du XT30 ») ; le genre de la batterie achetée reste à relever (fiche absente : DOU-191 « Fiche de la batterie absente du dossier des fiches ») ; MCP1700 : maximum absolu 6,5 V, fonctionnement 2,3 à 6,0 V (dépassement calculé de 4,7 V, marge de 1,8 V), la mesure de TI-008 « Batterie, connecteur, chute de tension et mesure de tension » reste nécessaire. Reste ouvert.
 **Décision liée :** {DEC-243 « Latence de l'arrêt sans fil et module Bluetooth : mesure avant la commande de la carte »}
 
 ### DOU-156 — Vérifications avant la commande de la carte
@@ -239,7 +223,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-011 « Voyant RGB et avertisseur sonore » et REQ-019 « Perceptibilité et distinction des effets »
 **Question :** si le vert et le bleu ont 3,4 V de tension directe, ils sont très faibles autour de 3,7 V (environ 4 mA) et éteints sous 3,4 V, alors que l'effet 1 « Allumé » est vert et l'effet 4 « Lancé et vol » est blanc.
-**Réponse :** (aucune) ; mesurer la LED retenue, changer de LED ou de résistances avant la commande si besoin. Non bloquant.
+**Réponse :** (aucune) ; mesurer la LED retenue, changer de LED ou de résistances avant la commande si besoin. Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-282 « Voyant RGB, XC6206 et connecteur XT30 : valeurs de fiche ») : fiche SZYY1615RGB-B : tension directe du vert et du bleu de 2,8 à 3,4 V à 20 mA, courbe typique d'environ 3,1 V et 3,2 V ; la décision sur la LED ou les résistances dépend d'un échantillon mesuré à TI-009 « Bouton, voyant RGB et avertisseur ». Rouge : 37 mW pour 40 mW permis, courant admis réduit vers 45 à 50 °C : marge faible acceptée pour la première version. Reste ouvert.
 **Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
 
 ### DOU-162 — Implantation mécanique de la carte, du connecteur et de la batterie
@@ -255,7 +239,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-004 « Capteur de hauteur à temps de vol », ARC-007 « Étage de puissance des moteurs coupés par défaut » et ARC-002 « Microcontrôleur et programmation par liaison SWD »
 **Question :** GPIO1 serait en drain ouvert (rappel externe prévu) ; la résistance de l'AO3400A à 2,5 V est peut-être plus élevée que 33 mΩ (pertes de 0,2 W optimistes) ; la fonction USB de PA11 sur le G431 est incertaine ; le courant de calage d'un moteur 8520 bloqué n'est pas écrit.
-**Réponse :** (aucune) ; relever dans les fiches avant le routage. Non bloquant.
+**Réponse :** (aucune) ; relever dans les fiches avant le routage. Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-281 « Puissance et alimentation : AO3400A, MCP1700, source de l'ADC et étalonnage ») : GPIO1 du VL53L1X en drain ouvert avec rappel de 10 kΩ (DS12385 p. 5 et 6) ; AO3400A 24 mΩ typique et 48 mΩ au maximum à VGS = 2,5 V (p. 2), la valeur à 3,0 V n'étant pas trouvée (DOU-199 « AO3400A : résistance à 3,0 V et capacité d'entrée maximale non trouvées dans la fiche ») ; PA11 en AF11 (TIM1_CH4), USB_DM sans effet (DS12589 tableau 13) ; le courant de calage du moteur 8520 est détaché dans DOU-190 « Fiche du moteur 8520 absente du dossier des fiches : courant de calage ». Reste ouvert tant que les deux points non trouvés ne sont pas tranchés.
 **Décision liée :** {DEC-244 « Relecture de porte de la révision JLCPCB : corrections décidées par délégation »}
 
 ### DOU-164 — PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce
@@ -271,7 +255,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », ARC-005 « Capteur de flux optique » et ARC-002 « Microcontrôleur et programmation par liaison SWD »
 **Question :** le XC6206P202MR-G (2,0 V fixe, C2891260) n'a pas été lu dans sa fiche : tolérance de la sortie (la puce n'accepte que 1,8 à 2,1 V, bruit compris), chute de tension à 9 mA (le catalogue donne 780 mV à 100 mA), capacité de sortie pour la stabilité et réponse à la pointe de 70 mA de la mise sous tension. Valeurs des condensateurs et des résistances de la figure 8 de la fiche de la puce (texte extrait ambigu). Niveau d'entrée haut du STM32G431 face à la sortie MISO de la puce (au moins VDDIO − 0,45 V, soit 2,55 V à 1 mA), à relever dans DS12589 (à lire dans DS12589, hors du périmètre de DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 »). Ordre de mise sous tension : VDDIO (rail de 3,0 V) est présent avant VDD (2,0 V), conforme à VDDIO ≥ VDD de la fiche, séquence non écrite dans la fiche lue : hypothèse, non démontrée ; à l'extinction VDDIO peut tomber avant VDD (capacité de sortie du régulateur) et un creux du rail en vol peut faire décrocher la puce sans reset du microcontrôleur, NRESET n'étant pas câblée : prévoir la détection logicielle d'une puce muette ou figée et sa ré-initialisation par registre (au sol), et l'essai de coupure rapide de TI-001 « Alimentation, programmation SWD et octets d'option ». La tolérance totale du XC6206 (tension, température, charge) doit tenir dans 1,8 à 2,1 V avant la commande : sinon régulateur de précision ±1 %. À lever avant le gel de la nomenclature.
-**Réponse :** (aucune) ; relever dans les fiches avant le routage ; mesurer à TI-001 « Alimentation, programmation SWD et octets d'option » (rail de 2,0 V entre 1,8 et 2,1 V) et TI-002 « Bus SPI, I2C et capteurs ». Non bloquant.
+**Réponse :** (aucune) ; relever dans les fiches avant le routage ; mesurer à TI-001 « Alimentation, programmation SWD et octets d'option » (rail de 2,0 V entre 1,8 et 2,1 V) et TI-002 « Bus SPI, I2C et capteurs ». Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-282 « Voyant RGB, XC6206 et connecteur XT30 : valeurs de fiche ») : XC6206P202MR-G (fiche Torex ETR0305_004b) : sortie 1,96 à 2,04 V, chute à 100 mA de 350 mV typique et 780 mV au maximum (valeur à 70 mA non donnée), 120 mA minimum, CIN = 1,0 µF et CL = 1,0 µF (2,2 µF compatible), SOT-23 1 VSS, 2 VOUT, 3 VIN ; VIH du STM32 = 0,7 × VDD = 2,1 V pour une sortie MISO d'au moins 2,55 V (marge de 0,45 V). Manquent toujours la fiche de la puce (figure 8, ordre de mise sous tension, réponse à la pointe de 70 mA, NRESET : DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »). Reste ouvert.
 **Décision liée :** {DEC-247 « Flux optique : alimentation en 2,0 V par un régulateur dédié, signaux en 3,0 V »}
 
 ### DOU-166 — PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille
@@ -327,7 +311,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-002 « Microcontrôleur et programmation par liaison SWD », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-022 « Pilote de la mesure de tension de la batterie »
 **Question :** états d'attente de la flash à 170 MHz et mode « boost », registre de timing de l'I2C à 400 kHz, horloge de l'ADC, adresse de VREFINT_CAL (0x1FFF75AA), valeur nominale de VREFINT et canal 18 de l'ADC1 sont repris de mémoire.
-**Réponse :** à relever dans le manuel de référence RM0440 et la fiche DS12589, y compris la fonction alternative de chaque broche moteur (PA11 est TIM1_CH4 en AF11 de mémoire, pas AF6) à l'écriture du code, avant le premier essai sur la carte ; une carte Nucleo STM32G431 permet l'essai avant la commande de la carte (DOU-156 « Vérifications avant la commande de la carte »). Non bloquant.
+**Réponse :** à relever dans le manuel de référence RM0440 et la fiche DS12589, y compris la fonction alternative de chaque broche moteur (PA11 est TIM1_CH4 en AF11 de mémoire, pas AF6) à l'écriture du code, avant le premier essai sur la carte ; une carte Nucleo STM32G431 permet l'essai avant la commande de la carte (DOU-156 « Vérifications avant la commande de la carte »). Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-278 « Microcontrôleur : états d'attente de la flash, séquence boost, USART2 et I2C1 d'après les fiches ») : confirmés dans DS12589 et RM0440 : PA11 en AF11, mode boost (R1MODE), PLL (M = 4, N = 85, R = 2), adresse 0x1FFF75AA de VREFINT_CAL à 3,0 V, VREFINT nominale, canal 18, horloge de l'ADC HCLK/4, déclenchement par TIM6 ; états d'attente corrigés à 4 (et non 8) ; I2C1 sur HSI16 avec TIMINGR = 0x10320309 (exemple à 16 MHz du RM0440, rien pour 170 MHz) ; la durée de démarrage du régulateur de l'ADC (tADCVREG_STUP) est ambiguë dans l'extraction du texte de DS12589 p. 119 (DOU-197 « ADC : attente du régulateur à confirmer et comportement si l'étalonnage échoue »). Reste ouvert tant que ce dernier point et le contrôle du TIMINGR avec l'outil de ST ne sont pas faits.
 **Décision liée :** DEC-257 « Valeurs de configuration des horloges, timers, bus et convertisseur »
 
 ### DOU-173 — Composants passifs et découplages à relever dans les fiches avant le routage
@@ -335,7 +319,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-003 « Centrale inertielle », ARC-004 « Capteur de hauteur à temps de vol », ARC-009 « Alimentation de la logique et mesure de la tension », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-004 « Raccordement du capteur de hauteur VL53L1X », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »
 **Question :** découplages de la centrale, du capteur de hauteur, du microcontrôleur, condensateurs d'entrée et de sortie du MCP1700 et du XC6206, liaison auxiliaire de la centrale, résistance de la ferrite ne sont pas relevés dans les fiches (seul souvenir ou ordre de grandeur dans DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option » à DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »).
-**Réponse :** relever dans les fiches avant le routage ; les valeurs de ce document sont des valeurs usuelles (100 nF par broche, 1 à 10 µF). Non bloquant.
+**Réponse :** relever dans les fiches avant le routage ; les valeurs de ce document sont des valeurs usuelles (100 nF par broche, 1 à 10 µF). Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-279 « Microcontrôleur : découplage, BOR et chien de garde d'après les fiches » et DEC-280 « Capteurs : VL53L1X sans broche IOVDD, LSM6DSO et délai de mise en route ») : relevés dans les fiches : microcontrôleur (VDDA 10 nF + 1 µF, VREF+ 100 nF + 1 µF, VBAT, 100 nF par VDD et 4,7 µF, NRST 100 nF), centrale (100 nF sur VDD et VDDIO, liaison auxiliaire, le 10 µF commun est un ajout du projet), capteur de hauteur (4,7 µF + 100 nF sur AVDDVCSEL, le 100 nF sur AVDD est un ajout du projet), MCP1700 (1 µF en entrée et en sortie au minimum), XC6206 (1,0 µF). Manquent la résistance de la ferrite (DOU-186 « Fiche de la ferrite BLM18PG121SN1D absente du dossier des fiches ») et la figure 8 de la puce du flux (DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »). Reste ouvert.
 **Décision liée :** DEC-269 « Matériel : ferrite hors du chemin des moteurs, mesure en amont, rappels des sélections de bus »
 
 ### DOU-174 — Séquence d'initialisation du flux et bibliothèque ULD : taille, appels bloquants, licence
@@ -399,7 +383,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-022 « Pilote de la mesure de tension de la batterie », DOU-142 « Fuite d'entrée de l'ADC et marge de ±50 mV de la mesure de tension »
 **Question :** l'incertitude de la mesure ne compte pas la tolérance de VREFINT_CAL, le gain de l'ADC, ni l'ondulation à 24 kHz des moteurs ; le niveau 3 du BOR (environ 2,5 V de mémoire) est sous le minimum de 2,6 V du capteur de hauteur.
-**Réponse :** budget estimé ±15 mV à confirmer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension » (critère de recette ±30 mV) ; tension du niveau du BOR à relever dans la fiche DS12589. Non bloquant.
+**Réponse :** budget estimé ±15 mV à confirmer à TI-008 « Batterie, connecteur, chute de tension et mesure de tension » (critère de recette ±30 mV) ; tension du niveau du BOR à relever dans la fiche DS12589. Non bloquant. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-279 « Microcontrôleur : découplage, BOR et chien de garde d'après les fiches ») : niveau 3 du BOR relevé (descendant 2,47 / 2,52 / 2,57 V, montant 2,56 / 2,61 / 2,66 V, DS12589 tableau 19 p. 72), sous le minimum de 2,6 V du VL53L1X : écart accepté (le rail +3V0 reste au-dessus de 2,91 V tant que la batterie dépasse 3,1 V, le drone se coupe sous 3,3 V), niveau 4 écarté ; budget d'erreur : conversion 6,9 LSB au plus, VREFINT_CAL à ±10 mV soit ±12 mV sur 3,7 V, pont ±3,7 mV, somme arithmétique d'environ 24 mV et quadratique d'environ 15 mV, hors dérive et ondulation ; la mesure de TI-008 « Batterie, connecteur, chute de tension et mesure de tension » reste la preuve. Reste ouvert.
 **Décision liée :** DEC-258 « Mesure de la tension : séquence de conversion et zone de maintien de la sous-tension »
 
 ### DOU-182 — Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches
@@ -407,7 +391,7 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-004 « Raccordement du capteur de hauteur VL53L1X », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension », DES-012 « Raccordement du module Bluetooth E104-BT02 », DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 »
 **Question :** les schémas SVG de la conception détaillée (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée ») nomment des broches que le texte des DES ne donne pas : SCL (SCK), SDA/SDI (MOSI), SDO/SA0 (MISO), INT2, VDDIO de la centrale ; SCL, SDA, GPIO1, XSHUT, AVDD, AVDDVCSEL, IOVDD du capteur de hauteur ; VDD, VDDIO, VREG, NRESET, MOTION, MOSI, MISO, SCK, CS du flux optique ; RXD, TXD, VCC du module radio ; VIN, VOUT, GND des régulateurs. Ces noms sont de mémoire, aucune fiche n'a été lue. Les numéros de broches ne sont affichés que pour les régulateurs MCP1700 et XC6206 (SOT-23 : 1 à 3, en orange, de mémoire) ; ils sont omis pour la centrale (LGA-14), le capteur de hauteur (LGA-12), la puce du flux (COB-28), le module radio et le microcontrôleur (DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 »).
-**Réponse :** (à remplir) relever noms et numéros dans les fiches avant le routage, puis corriger les schémas SVG ; ne bloque ni la porte ni la commande de la carte si les schémas KiCad sont saisis depuis les fiches.
+**Réponse :** (à remplir) relever noms et numéros dans les fiches avant le routage, puis corriger les schémas SVG ; ne bloque ni la porte ni la commande de la carte si les schémas KiCad sont saisis depuis les fiches. Complément du 2026-10-30 (relevé des fiches, instruction de l'utilisateur « Oui, appliquer » ; DEC-280 « Capteurs : VL53L1X sans broche IOVDD, LSM6DSO et délai de mise en route ») : noms et numéros de broches relevés dans les fiches pour le STM32 (DOU-148 « Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589 » levé), la centrale, le capteur de hauteur, les deux régulateurs (brochage confirmé) et le module radio, et reportés dans les schémas SVG et les DES ; manquent les broches de la puce du flux (DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »). Reste ouvert.
 **Décision liée :** DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »
 
 ### DOU-183 — Repères de composants provisoires des schémas SVG de la conception détaillée
@@ -415,16 +399,128 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Bloquant :** Non
 **Concerne :** DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option », DES-007 « Circuit de puissance des moteurs », DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-011 « Circuit du voyant RGB et du buzzer »
 **Question :** le texte des DES ne donne aucun repère de composant (R1, C3, U2…) : il décrit les composants par leur fonction et leur valeur. Les schémas SVG (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée ») attribuent des repères provisoires, uniques sur toute la carte : U1 microcontrôleur, U2 centrale, U3 capteur de hauteur, U4 flux optique, U5 MCP1700, U6 XC6206, U7 module radio ; Q1 à Q4 moteurs, Q5 à Q7 voyant, Q8 buzzer ; D1 à D4 et D5 SS34 ; M1 à M4 ; R1 à R4 grilles de 47 ohms, R5 à R8 rappels des moteurs ; R9 à R11 et R12 à R14 grille et rappel du voyant, R15 à R17 résistances du voyant ; R18 et R19 grille et rappel du buzzer ; R20 et R21 pont de mesure ; R22 à R31 rappels et résistances diverses ; C1 à C33 (C9 non attribué) ; J1 XT30, J2 SWD, FB1 ferrite, SW1 bouton, LED1, BZ1. L'annotation de KiCad les remplacera sans doute. Quels repères retenir, ceux des schémas SVG (au risque de les voir changer à l'annotation) ou ceux de KiCad (à reporter alors dans les SVG et dans le texte des DES) ?
-**Réponse :** (à remplir) proposition : garder les repères provisoires jusqu'à la saisie du schéma KiCad, puis reporter les repères définitifs dans les SVG et dans le texte des DES ; ne bloque pas.
+**Réponse :** (à remplir) proposition : garder les repères provisoires jusqu'à la saisie du schéma KiCad, puis reporter les repères définitifs dans les SVG et dans le texte des DES ; ne bloque pas. Complément du 2026-10-30 : deux repères provisoires de plus dans le schéma SVG de DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option » : C34 (100 nF) et C35 (1 µF) sur VREF+ ; le repère C9 reste non attribué ; le total passe de C1 à C35 (DEC-279 « Microcontrôleur : découplage, BOR et chien de garde d'après les fiches »). Complément du 2026-10-30 : les repères R32 et R33 attribués un temps à DES-012 « Raccordement du module Bluetooth E104-BT02 » (DEC-285 « WKP : PA1 conservée, résistance série de 0 Ω et emplacement de 0 Ω vers la masse non posé ») sont supprimés (DEC-286 « WKP : PA1 directe, emplacements de 0 Ω supprimés ») et libérés ; la suite des repères provisoires est inchangée.
 **Décision liée :** DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »
 
-### DOU-184 — Condensateurs d'entrée du régulateur de 3,0 V : 22 µF sur VBATL et 1 µF sur l'entrée du composant
+### DOU-185 — Fiche du capteur de flux PMW3901MB absente du dossier des fiches
 **Statut :** Ouvert
 **Bloquant :** Non
-**Concerne :** DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »
-**Question :** DES-008 « Batterie, connecteur XT30 et entrée de la carte » met 22 µF (1206, 25 V) sur VBATL ; DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » met 1 µF en entrée du MCP1700, sur le même réseau. Les deux schémas SVG dessinent les deux condensateurs (C8 et C10) en parallèle, ce qui est une lecture du texte, non une certitude : s'agit-il de deux condensateurs distincts (un en tête de branche, un au plus près du composant) ou d'une même valeur à corriger ?
-**Réponse :** (à remplir) à trancher avec la fiche du MCP1700 (DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage »).
-**Décision liée :** DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »
+**Concerne :** ARC-005 « Capteur de flux optique », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-020 « Pilote du flux optique »
+**Question :** la fiche de la puce n'est pas dans `projets/boomrone/Datasheets/` : brochage de la puce COB-28, figure 8 (valeurs des condensateurs et résistances), ordre de mise sous tension, niveau d'entrée bas VIL, réponse à la pointe de 70 mA, NRESET, fréquence maximale de SPI2 (2 MHz de mémoire), valeurs d'identité 0x49 et 0x5F : non trouvés, aucune valeur inventée.
+**Réponse :** (à remplir) déposer la fiche et refaire le relevé ; à lever avant le gel de la nomenclature et le routage. Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-186 — Fiche de la ferrite BLM18PG121SN1D absente du dossier des fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-008 « Batterie et connecteur débranchable », DES-008 « Batterie, connecteur XT30 et entrée de la carte »
+**Question :** la résistance continue de la ferrite (0,1 ohm de mémoire, 13 mV à 130 mA) et son courant nominal (1 A de mémoire) ne sont pas relevés : fiche absente du dossier.
+**Réponse :** (à remplir) déposer la fiche ; le calcul de DES-008 « Batterie, connecteur XT30 et entrée de la carte » reste un ordre de grandeur. Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-187 — Fiche de la diode SS34 absente du dossier des fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-007 « Étage de puissance des moteurs coupés par défaut », DES-007 « Circuit de puissance des moteurs », DES-011 « Circuit du voyant RGB et du buzzer »
+**Question :** la tension directe, le courant admissible et le temps de recouvrement de la diode SS34 (roue libre des moteurs et du buzzer) ne sont pas relevés : fiche absente du dossier.
+**Réponse :** (à remplir) déposer la fiche et vérifier le courant de crête de 2,4 A par moteur. Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-188 — Fiche du buzzer SMD-9650-3327 absente du dossier des fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-011 « Voyant RGB et avertisseur sonore », DES-011 « Circuit du voyant RGB et du buzzer »
+**Question :** le courant (30 mA de mémoire), la fréquence propre (2,7 kHz de mémoire), la tension nominale et le niveau sonore du buzzer ne sont pas relevés : fiche absente du dossier.
+**Réponse :** (à remplir) déposer la fiche ; la perceptibilité reste à vérifier à TS-014 « Perceptibilité et distinction des effets ». Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-189 — Fiche du bouton TS-1088-AR02016 absente du dossier des fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-010 « Bouton », DES-010 « Circuit du bouton »
+**Question :** le courant et la tension de contact, la durée des rebonds et l'empreinte du poussoir ne sont pas relevés : fiche absente du dossier (courant dans le contact de 0,27 mA calculé).
+**Réponse :** (à remplir) déposer la fiche ; les rebonds sont absorbés par l'antirebond logiciel de 10 ms de DES-028 « Gestion logicielle du bouton ». Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-190 — Fiche du moteur 8520 absente du dossier des fiches : courant de calage
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-006 « Moteurs, hélices et protège-hélices », ARC-007 « Étage de puissance des moteurs coupés par défaut », DES-007 « Circuit de puissance des moteurs »
+**Question :** le courant de calage d'un moteur 8520 bloqué, son courant à vide et sa résistance de bobinage ne sont pas relevés : fiche absente du dossier ; le calcul de DES-007 « Circuit de puissance des moteurs » repose sur 2,4 A par moteur (9,5 A en crête). Point détaché de DOU-163 « Valeurs de fiche à relever : rappel de GPIO1, résistance de l'AO3400A, USB du G431 ».
+**Réponse :** (à remplir) déposer la fiche ou mesurer le courant de calage au banc (TI-007 « Moteurs, poussée, masse et dimensions »). Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-191 — Fiche de la batterie absente du dossier des fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-008 « Batterie et connecteur débranchable », DES-008 « Batterie, connecteur XT30 et entrée de la carte »
+**Question :** la fiche de la batterie 1S 850 mAh (décharge continue, résistance interne de 40 mohms estimée, genre et désignation du connecteur, tension maximale) n'est pas dans le dossier.
+**Réponse :** (à remplir) déposer la fiche, mesurer la résistance interne à TI-008 « Batterie, connecteur, chute de tension et mesure de tension ». Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-192 — Fiche du VL53L1CX absente du dossier des fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-004 « Capteur de hauteur à temps de vol », DES-004 « Raccordement du capteur de hauteur VL53L1X », DOU-157 « VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres »
+**Question :** la fiche déposée est celle du VL53L1X : l'identifiant du VL53L1CX (composant de la nomenclature, VL53L1CXV0FY/1), ses registres et sa bibliothèque ne sont pas dans le dossier.
+**Réponse :** (à remplir) déposer la fiche du VL53L1CX ; à traiter avec DOU-157 « VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres ». Non bloquant.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »
+
+### DOU-193 — Fiche du VL53L1X déposée sous la référence DS12385 au lieu de DS12093
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-004 « Capteur de hauteur à temps de vol », DES-004 « Raccordement du capteur de hauteur VL53L1X »
+**Question :** le texte de DES-004 « Raccordement du capteur de hauteur VL53L1X » citait la fiche DS12093 de mémoire ; le fichier déposé porte DS12385 Rev 8 en pied de page. La référence est corrigée dans le DES et dans son schéma SVG. Cette fiche couvre-t-elle le VL53L1CX commandé, ou seulement le VL53L1X ?
+**Réponse :** (à remplir) confirmer la référence de la fiche du composant commandé avec DOU-192 « Fiche du VL53L1CX absente du dossier des fiches ». Non bloquant.
+**Décision liée :** DEC-280 « Capteurs : VL53L1X sans broche IOVDD, LSM6DSO et délai de mise en route »
+
+### DOU-194 — Fiche chinoise du E104-BT02 : relecture, tolérance d'horloge et niveaux d'entrée
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-012 « Module radio Bluetooth à basse consommation », DES-012 « Raccordement du module Bluetooth E104-BT02 »
+**Question :** la fiche d'Ebyte est en chinois : le relevé a été fait par lecture des tableaux, sans relecture par une personne qui lit le chinois (points concernés : veille et WKP, commandes, débit, service). Non trouvés de façon sûre : tolérance de l'horloge du module (donc l'erreur de débit totale avec les ±1,75 % de la HSI16) et niveaux d'entrée VIL et VIH.
+**Réponse :** (à remplir) relecture des pages 5 à 10 et 24 de la fiche par une personne lisant le chinois, ou essai du module seul à TI-010 « Liaison Bluetooth à basse consommation » (trames sans erreur à 0 et 40 °C). Non bloquant.
+**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier »
+
+### DOU-195 — Module E104-BT02 : niveau de WKP, état à la mise sous tension et mot de passe aérien
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-012 « Module radio Bluetooth à basse consommation », DES-012 « Raccordement du module Bluetooth E104-BT02 », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option »
+**Question :** (1) niveau « éveillé » de WKP (P06, broche 9) : présumé bas (rappel interne haut = veille par défaut selon le relevé), non démontré ; (2) comportement d'un WKP tenu bas dès la mise sous tension (non décrit) et valeur de PA1 pendant le reset du microcontrôleur (broche analogique, module en veille) ; (3) mot de passe aérien par défaut 123456 : toute personne à portée peut reconfigurer le module (le relevé propose la commande <UPDPWDxxx> au premier essai) ; (4) consommation en veille et éveillé.
+**Réponse :** (à remplir) essai du module seul avant la commande de la carte (TI-010 « Liaison Bluetooth à basse consommation ») : niveau de WKP, réception UART éveillé, comportement à la mise sous tension ; la constante du niveau est unique dans `board_pins.h`. Non bloquant. Complément (relectures, DEC-284 « Relevé des fiches : corrections issues des relectures ») : le sens du rappel interne est une déduction, la veille pourrait aussi s'activer par commande (<WSMON>) ; PA1 est en haute impédance pendant tout reset (un reset du chien de garde en vol remet le module en veille jusqu'à `board_early_init()`) : une veille brève coupe-t-elle la liaison ? Proposition à décider : traiter ce doute comme bloquant avant la commande de la carte, avec résistance série et deux emplacements de rappel autour de WKP. Complément du 2026-10-30, fiche anglaise « E104-BT02 Datasheet v1.0 » (`Datasheets/E104-BT02_EN.pdf`, pages 5 et 6) : (1) CONFIRMÉ : WKP (P06) à l'état bas = module éveillé, à l'état haut = veille, rappel interne haut, veille par défaut ; (4) consommation relevée : veille 3 µA, émission 3,4 mA à 0 dBm, réception 3,7 mA. En veille, l'UART ne reçoit plus (le drone ne peut plus écrire vers le module) mais les données Bluetooth reçues sortent encore par l'UART ; point nouveau : entrer en veille coupe automatiquement la connexion Bluetooth en cours, donc une veille accidentelle (PA1 en haute impédance pendant un reset, rappel interne haut) déconnecte le téléphone. Réveil : environ 25 ms après le passage à l'état bas. (2) NON DÉCRIT : WKP tenu bas dès la mise sous tension ; la force du rappel interne n'est pas donnée. (3) NON CONFIRMÉ : la fiche anglaise ne mentionne ni mot de passe aérien ni commande <UPDPWD> ; le 123456 et cette commande viennent de la lecture de la fiche chinoise et restent à essayer sur le module seul. Autres points de la fiche anglaise : débit 19200 bauds par défaut, 1 bit d'arrêt, sans parité (confirmé) ; trame Bluetooth de 20 octets au plus (les trames du drone de 14 octets passent) ; service 0xFFF0, notification 0xFFF1, écriture 0xFFF2 (confirmé) ; alimentation 2,35 à 3,3 V, niveaux de 0 à 3 V (le rail de 3,0 V convient) ; version Bluetooth 4.1 et puce DA14580 (le « BLE 5.1 » du relevé est faux). Option simple à décider par l'utilisateur : relier WKP à la masse par une résistance (module toujours éveillé, 3,7 mA de plus, plus de broche PA1 ni de veille accidentelle). Décision du 2026-10-30 (DEC-286 « WKP : PA1 directe, emplacements de 0 Ω supprimés », qui remplace DEC-285 « WKP : PA1 conservée, résistance série de 0 Ω et emplacement de 0 Ω vers la masse non posé ») : PA1 reliée directement à WKP, sans composant ; au reset PA1 est en haute impédance, le module passe brièvement en veille puis se réveille (environ 25 ms) quand `board_early_init()` met PA1 à l'état bas ; seul effet, la connexion Bluetooth établie est coupée par un reset en vol, sans conséquence de sécurité (moteurs coupés par le matériel, ARC-007 « Étage de puissance des moteurs coupés par défaut »). Les points (1) et (4) sont réglés par la fiche anglaise ; le doute reste ouvert : WKP tenu bas dès la mise sous tension, force du rappel interne et mot de passe aérien (3) restent à essayer sur le module seul (TI-010 « Liaison Bluetooth à basse consommation »). Reste non bloquant.
+**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier » ; DEC-286 « WKP : PA1 directe, emplacements de 0 Ω supprimés »
+
+### DOU-196 — LSM6DSO : durée du reset logiciel et départ du temps de mise en route non trouvés
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-003 « Centrale inertielle », DES-003 « Raccordement de la centrale inertielle LSM6DSO », DES-018 « Pilote de la centrale inertielle »
+**Question :** la fiche DS12140 Rev 3 donne un temps de mise en route de 35 ms typique (tableau 3 p. 11) sans dire s'il court depuis la mise sous tension ou depuis un changement de débit de sortie, et ne donne pas la durée du reset logiciel (SW_RESET) : DES-018 « Pilote de la centrale inertielle » attend 40 ms après le reset du microcontrôleur puis au plus 20 ms après le reset logiciel (valeur du projet, non relevée).
+**Réponse :** (à remplir) mesurer sur la première carte (premier accès SPI possible, durée de SW_RESET) ; garder les marges tant que non mesuré. Non bloquant.
+**Décision liée :** DEC-280 « Capteurs : VL53L1X sans broche IOVDD, LSM6DSO et délai de mise en route »
+
+### DOU-197 — ADC : attente du régulateur à confirmer et comportement si l'étalonnage échoue
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », DES-022 « Pilote de la mesure de tension de la batterie », DES-031 « Séquence d'initialisation et échec d'initialisation »
+**Question :** (1) la durée de démarrage du régulateur de l'ADC (tADCVREG_STUP, DS12589 p. 119) est ambiguë dans l'extraction du texte (2,0 ou 20 µs) ; DES-022 « Pilote de la mesure de tension de la batterie » attend 100 µs, au-dessus des deux ; (2) si l'étalonnage ne se termine pas en 1 ms, `vbat_valid` reste faux et `adc_cal_failed` est compté : l'effet sur l'initialisation (échec d'initialisation ou non) n'est pas défini par DES-031 « Séquence d'initialisation et échec d'initialisation ».
+**Réponse :** (à remplir) lire la valeur sur le PDF ; décision de l'utilisateur sur le comportement en cas d'échec d'étalonnage (proposition : échec d'initialisation, comme une tension invalide). Non bloquant. Complément (relectures) : si `vbat_valid` reste faux de façon permanente, DES-029 « Surveillance et coupures automatiques » n'active pas la sous-tension et DES-031 « Séquence d'initialisation et échec d'initialisation » ne teste pas `vbat_valid` à l'étape 10 : le drone pourrait décoller sans protection de tension ; décision de l'utilisateur attendue avant l'implémentation de `app_init`.
+**Décision liée :** DEC-281 « Puissance et alimentation : AO3400A, MCP1700, source de l'ADC et étalonnage »
+
+### DOU-198 — Écarts avec l'architecture à reporter à la prochaine révision : débit, réveil du module, boîtier, désignation du XT30
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-002 « Microcontrôleur et programmation par liaison SWD », ARC-008 « Batterie et connecteur débranchable », ARC-012 « Module radio Bluetooth à basse consommation », ARC-016 « Pilotes des capteurs et des sorties », TI-010 « Liaison Bluetooth à basse consommation »
+**Question :** l'architecture validée n'est pas modifiée, mais la conception détaillée s'en écarte sur quatre points : (1) ARC-012 « Module radio Bluetooth à basse consommation » et ARC-016 « Pilotes des capteurs et des sorties » parlent de 9600 bauds visés, le débit retenu est 19200 bauds ; (2) ARC-012 « Module radio Bluetooth à basse consommation » donne un boîtier de 22,3 x 14 mm (fiche : 14,6 x 21,9 mm) et dit que la broche d'état n'est pas utilisée sans traiter WKP, relié à PA1 ; ARC-002 « Microcontrôleur et programmation par liaison SWD » ne cite pas PA1 ; (3) ARC-008 « Batterie et connecteur débranchable » écrit XT30PW-M30.G.Y (fiche : XT30PW30-M.G.Y) ; (4) TI-010 « Liaison Bluetooth à basse consommation » est à compléter (WKP, 19200 bauds, rail de 3,0 V sous les 3,3 V de puissance garantie, mot de passe aérien) ; (5) sans objet : DEC-285 « WKP : PA1 conservée, résistance série de 0 Ω et emplacement de 0 Ω vers la masse non posé » (deux emplacements de 0 ohm sur WKP) est remplacée par DEC-286 « WKP : PA1 directe, emplacements de 0 Ω supprimés », PA1 est reliée directement à WKP, aucun composant de plus que l'architecture.
+**Réponse :** (à remplir) reporter ces points dans l'architecture et dans TI-010 « Liaison Bluetooth à basse consommation » à la prochaine révision ; sans effet sur les REQ et les BES. Non bloquant. Complément (relectures) : ajouter aussi le diagramme d'ensemble de « Architecture » — `projets/boomrone/03-architecture.md` (UART 9600 à confirmer), ARC-025 « Protocole et service du statut sans fil » (9600 bauds visés), ARC-023 « Initialisation et échec d'initialisation » (reconnaissance de la mise sous tension par le marqueur seul, alors que DES-031 « Séquence d'initialisation et échec d'initialisation » ajoute BORRSTF ; 2,2 s contre 2,3 s) et ARC-009 « Alimentation de la logique et mesure de la tension » (repli à 3,0 V sous charge, lié à l'acceptation du BOR).
+**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier » ; DEC-282 « Voyant RGB, XC6206 et connecteur XT30 : valeurs de fiche »
+
+### DOU-199 — AO3400A : résistance à 3,0 V et capacité d'entrée maximale non trouvées dans la fiche
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** ARC-007 « Étage de puissance des moteurs coupés par défaut », DES-007 « Circuit de puissance des moteurs »
+**Question :** la fiche donne la résistance à VGS = 2,5 V et 4,5 V mais pas à 3,0 V (tension de grille réelle), la charge de grille à 3,0 V ni de valeur maximale de Ciss (630 pF typique seulement) : DES-007 « Circuit de puissance des moteurs » majore avec les valeurs à 2,5 V et le double du Ciss typique.
+**Réponse :** (à remplir) mesure de l'échauffement des MOSFET à TI-005 « Moteurs coupés par le matériel » ou au banc ; aucune valeur inventée. Non bloquant.
+**Décision liée :** DEC-281 « Puissance et alimentation : AO3400A, MCP1700, source de l'ADC et étalonnage »
 
 <!-- Ajouter les nouveaux doutes ci-dessus, avant ce marqueur, au même format, en dehors des blocs de code. -->
 
@@ -1502,3 +1598,27 @@ Complément du 2026-10-28 (3e relecture de porte) : des paramètres de vol aberr
 **Question :** la puce nue PMW3901MB-TXQT (C43496881, 182 en stock) annonce une alimentation de 1,8 à 2,1 V, un boîtier COB de 6 × 6 × 2,28 mm et une plage de 0 à 40 °C au catalogue ; son profil de refusion et sa lentille sont inconnus. La carte achetée est retenue pour cette version ; l'alimentation de cette carte est à relever (état avant DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB »).
 **Réponse :** instruction de l'utilisateur en chat, 2026-10-29 : le capteur de flux est acheté et posé par JLCPCB (puce PMW3901MB-TXQT, C43496881, COB-28), tout ce qui peut être pris chez JLCPCB l'est. Fiche PixArt version 1.00 lue : VDD 1,8 à 2,1 V (2,0 V typique), VDDIO 1,8 à 3,6 V ; VDD alimenté en 2,0 V par un régulateur XC6206P202MR-G (C2891260, en stock) depuis le rail de 3,0 V, VDDIO et SPI2 à 3,0 V sans décalage de niveau. Les points restants (lentille, assemblage par JLCPCB, refusion, valeurs de fiche, température, hauteur de montage) sont suivis par DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce », DOU-165 « Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension » et DOU-166 « PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille ». Repli : carte achetée Pimoroni (DEC-248 « Flux optique : lentille collée à la main et repli sur carte achetée »).
 **Décision liée :** DEC-246 « Flux optique : puce PMW3901MB-TXQT achetée et posée par JLCPCB » ; DEC-247 « Flux optique : alimentation en 2,0 V par un régulateur dédié, signaux en 3,0 V » ; DEC-248 « Flux optique : lentille collée à la main et repli sur carte achetée » ; DEC-236 « Assemblage par JLCPCB : puces nues, carte double face, flux acheté »
+
+### DOU-148 — Numéros de broches physiques du LQFP-48 à relever dans la fiche DS12589
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** ARC-002 « Microcontrôleur et programmation par liaison SWD »
+**Question :** le brochage de l'architecture est donné par les noms PAx et PBx, sans les numéros de broches physiques ni la vérification des fonctions alternatives (fiche DS12589 non téléchargeable à la rédaction).
+**Réponse :** Levé le 2026-10-30 (instruction de l'utilisateur « Oui, appliquer ») : numéros de broches physiques et fonctions alternatives relevés dans DS12589 Rev 6 (figure 8 p. 45, tableaux 12 et 13) et reportés dans DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option » ; PA11 en AF11 (TIM1_CH4) confirmé ; reste à les reporter dans KiCad à la saisie du schéma.
+**Décision liée :** DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour » ; DEC-278 « Microcontrôleur : états d'attente de la flash, séquence boost, USART2 et I2C1 d'après les fiches »
+
+### DOU-151 — Module E104-BT02 : débit par défaut, service, absence de commande AT
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** ARC-012 « Module radio Bluetooth à basse consommation » et ARC-028 « Logiciel d'essai de l'appareil de suivi »
+**Question :** le catalogue ne donne ni le débit par défaut, ni l'identifiant du service et de la caractéristique, ni l'absence de commande AT du E104-BT02, ni sa version Bluetooth (4.2 selon Ebyte, 5.1 selon le catalogue).
+**Réponse :** Levé le 2026-10-30 (instruction de l'utilisateur « Oui, appliquer », débit 19200 bauds retenu) : fiche d'Ebyte lue (en chinois) : débit par défaut 19200 bauds, 8N1 sans parité ; service 0xFFF0, caractéristique 0xFFF1 (notification) et 0xFFF2 (écriture), 0xFFF3 de configuration ; le module a des commandes entre chevrons, sans préfixe AT, que le projet n'utilise pas ; BLE 5.1 annoncé (le 4.2 cité par le doute n'apparaît pas). Décision : USART2 à 19200 bauds sans commande, WKP relié à PA1. Restent ouverts : niveau de WKP et mot de passe aérien (DOU-195 « Module E104-BT02 : niveau de WKP, état à la mise sous tension et mot de passe aérien »), relecture de la fiche chinoise (DOU-194 « Fiche chinoise du E104-BT02 : relecture, tolérance d'horloge et niveaux d'entrée »), essai du module seul à TI-010 « Liaison Bluetooth à basse consommation ».
+**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier » ; DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour » ; DEC-243 « Latence de l'arrêt sans fil et module Bluetooth : mesure avant la commande de la carte »
+
+### DOU-184 — Condensateurs d'entrée du régulateur de 3,0 V : 22 µF sur VBATL et 1 µF sur l'entrée du composant
+**Statut :** Levé
+**Bloquant :** Non
+**Concerne :** DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »
+**Question :** DES-008 « Batterie, connecteur XT30 et entrée de la carte » met 22 µF (1206, 25 V) sur VBATL ; DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » met 1 µF en entrée du MCP1700, sur le même réseau. Les deux schémas SVG dessinent les deux condensateurs (C8 et C10) en parallèle, ce qui est une lecture du texte, non une certitude : s'agit-il de deux condensateurs distincts (un en tête de branche, un au plus près du composant) ou d'une même valeur à corriger ?
+**Réponse :** Levé le 2026-10-30 (instruction de l'utilisateur « Oui, appliquer ») : deux condensateurs distincts, valeurs inchangées : 1 µF céramique au plus près du MCP1700 (minimum de la fiche, suffit jusqu'à 100 mA, DS20001826C p. 10 et 12) et 22 µF en tête de VBATL (la charge de 130 mA dépasse 100 mA, la valeur dépend alors de la source et une valeur plus grande est permise) ; les deux schémas SVG les dessinent en parallèle, ce qui est correct.
+**Décision liée :** DEC-281 « Puissance et alimentation : AO3400A, MCP1700, source de l'ADC et étalonnage » ; DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour »

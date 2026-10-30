@@ -711,23 +711,23 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 
 ### TU-002 — Microcontrôleur : horloges, diviseurs, broches et octets d'option
 **Réfs amont :** DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option »
-**Préconditions :** fichiers `board.h` et `board_pins.h` ; test PC `test_board_cfg.c`.
-**Procédure :** calculer à partir des constantes : PLL (16 / 4 x 85 / 2), SPI1, SPI2, rechargement de TIM1, TIM6 et prédiviseur de TIM2, BRR de l'USART2 ; parcourir le tableau des broches ; relire la liste des octets d'option.
-**Résultat attendu :** fonctions alternatives de chaque broche conformes à la fiche (PA11 en particulier, DOU-172 « Valeurs de configuration des périphériques à vérifier dans le manuel de référence ») ; PLL = 170 MHz ; SPI1 = 5,3125 MHz et SPI2 = 1,328125 MHz (jamais plus de 10 MHz et 2 MHz) ; TIM1 = 24,001 kHz ±0,01 kHz ; TIM6 = 1000 Hz ; TIM2 = 1 MHz ; débit de l'USART2 = 9600 bauds à 0,1 % près ; aucune broche en double ; PA15 et PB4 jamais associées à une grille ; octets IWDG_SW = 0 et BOR_LEV = 3 dans la liste de programmation.
+**Préconditions :** fichiers `board.h` et `board_pins.h` ; test PC `test_board_cfg.c` avec une maquette des registres RCC, FLASH, PWR et IWDG qui enregistre l'ordre des écritures.
+**Procédure :** calculer à partir des constantes : PLL (16 / 4 x 85 / 2), SPI1, SPI2, rechargement de TIM1, TIM6 et prédiviseur de TIM2, BRR de l'USART2 et son débit avec une HSI16 écartée de -1,75 % et de +1,75 % ; relever l'ordre des écritures de l'initialisation des horloges (latence de la flash, PLL, diviseur AHB, R1MODE, commutation, attente, diviseur) ; lire I2C1SEL et TIMINGR ; parcourir le tableau des broches ; relire la liste des octets d'option.
+**Résultat attendu :** fonctions alternatives de chaque broche conformes à la fiche (PA11 en AF11 en particulier, DS12589 tableau 13) ; latence de la flash égale à 4 (jamais 8) à 170 MHz, écrite et relue avant la commutation sur la PLL, diviseur AHB à 2 avant R1MODE = 0 (boost), attente de plus de 1 µs avant le retour du diviseur à 1 ; PLL = 170 MHz ; SPI1 = 5,3125 MHz et SPI2 = 1,328125 MHz (jamais plus de 10 MHz et 2 MHz) ; TIM1 = 24,001 kHz ±0,01 kHz ; TIM6 = 1000 Hz ; TIM2 = 1 MHz ; débit de l'USART2 = 19200 bauds à 0,1 % près (170 MHz / 8854 = 19200,4) et entre 18864 et 19536 bauds (à 1 baud près) avec la HSI16 à ±1,75 % ; I2C1SEL = 10 (HSI16) et TIMINGR = 0x10320309 ; PA1 en sortie pour le réveil du module radio ; aucune broche en double ; PA15 et PB4 jamais associées à une grille ; octets IWDG_SW = 0 et BOR_LEV = 3 dans la liste de programmation.
 **Statut :** Écrit
 
 ### TU-003 — Centrale inertielle : registres, échelles et durée de lecture
 **Réfs amont :** DES-003 « Raccordement de la centrale inertielle LSM6DSO »
 **Préconditions :** `drv_imu_regs.h` ; test PC `test_imu_regs.c`.
-**Procédure :** comparer les constantes de registres à la table de DES-003 « Raccordement de la centrale inertielle LSM6DSO » ; convertir des valeurs brutes (8192 pas sur l'accéléromètre, 428 pas sur le gyroscope) ; calculer la durée de 15 octets à 5,3125 MHz.
-**Résultat attendu :** CTRL3_C = 0x44, CTRL4_C = 0x06, CTRL1_XL = 0x9C, CTRL2_G = 0x9C, INT1_CTRL = 0x03, WHO_AM_I = 0x6C ; 8192 pas = 2,00 g ±0,01 g ; 428 pas = 29,96 °/s ±0,1 °/s ; durée 22,6 µs ±0,1 µs ; axes : la rotation de 180° autour de x inverse y et z.
+**Procédure :** comparer les constantes de registres à la table de DES-003 « Raccordement de la centrale inertielle LSM6DSO » ; convertir des valeurs brutes (8192 pas sur l'accéléromètre, 428 pas sur le gyroscope) ; calculer la durée de 15 octets à 5,3125 MHz ; lire la constante `IMU_BOOT_WAIT_MS` ; lire la netlist exportée `boomrone.net` (voir TU-001 « Réseaux de la carte : table, ERC et broches uniques ») pour les broches de la centrale.
+**Résultat attendu :** CTRL3_C = 0x44, CTRL4_C = 0x06, CTRL1_XL = 0x9C, CTRL2_G = 0x9C, INT1_CTRL = 0x03, WHO_AM_I = 0x6C ; 8192 pas = 2,00 g ±0,01 g ; 428 pas = 29,96 °/s ±0,1 °/s ; durée 22,6 µs ±0,1 µs ; axes : la rotation de 180° autour de x inverse y et z ; `IMU_BOOT_WAIT_MS` au moins 35 (valeur retenue : 40) ; SDx (2), SCx (3) et les deux GND (6, 7) sur la masse, OCS_Aux (10) et SDO_Aux (11) sans réseau, INT2 (9) sans réseau, INT1 (4) sans rappel haut.
 **Statut :** Écrit
 
 ### TU-004 — Capteur de hauteur : temps de montée de l'I2C, alimentation et seuils de hauteur
 **Réfs amont :** DES-004 « Raccordement du capteur de hauteur VL53L1X »
 **Préconditions :** script `calculs.py` (section « tof »).
-**Procédure :** calculer le temps de montée 0,8473 x R x C pour R = 4,7 kohms et C = 15, 30 et 75 pF ; vérifier la marge d'alimentation (rail 2,9 V contre minimum 2,6 V) ; convertir la lecture brute en hauteur du drone (lecture moins 20 mm).
-**Résultat attendu :** temps de montée 60, 119 et 299 ns (inférieur à 300 ns jusqu'à 75 pF) ; marge d'alimentation 0,3 V ; lecture 45 mm = hauteur 25 mm, lecture 20 mm = contact.
+**Procédure :** calculer le temps de montée 0,8473 x R x C pour R = 4,7 kohms et C = 15, 30 et 75 pF ; vérifier la marge d'alimentation (rail 2,9 V contre minimum 2,6 V) ; convertir la lecture brute en hauteur du drone (lecture moins 20 mm) ; lire la netlist exportée `boomrone.net` (voir TU-001 « Réseaux de la carte : table, ERC et broches uniques ») pour les broches du capteur.
+**Résultat attendu :** temps de montée 60, 119 et 299 ns (inférieur à 300 ns jusqu'à 75 pF) ; marge d'alimentation 0,3 V ; lecture 45 mm = hauteur 25 mm, lecture 20 mm = contact ; AVDD (11) et AVDDVCSEL (1) sur le +3V0, AVSSVCSEL (2) et les GND (3, 4, 6, 12) sur la masse, DNC (8) sans réseau, aucune broche IOVDD.
 **Statut :** Écrit
 
 ### TU-005 — Flux optique : marges d'alimentation et de niveaux
@@ -747,8 +747,8 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 ### TU-007 — Circuit de puissance : constantes de temps, pertes et courants
 **Réfs amont :** DES-007 « Circuit de puissance des moteurs »
 **Préconditions :** script `calculs.py` (section « puissance »).
-**Procédure :** calculer la décharge de la grille (100 kohms x 300 pF et x 630 pF), la constante de commutation (47 ohms x 630 pF), la perte par conduction à 2,4 A et 33 mohms, l'échauffement avec 100 et 150 K/W.
-**Résultat attendu :** 33 µs et 69 µs pour passer sous 1 V depuis 3,0 V ; 30 ns ; 0,19 W ; hausse de 19 à 29 K ; courant de crête de la ligne 9,5 A à ±0,1 A (quatre moteurs de 2,4 A donnent 9,6 A).
+**Procédure :** calculer la décharge de la grille (100 kohms x 630 pF, valeur typique de la fiche, puis x 1260 pF en marge), la constante de commutation (47 ohms x 630 pF), la perte par conduction à 2,4 A avec 24 mohms (typique) et 48 mohms (maximum), l'échauffement avec 100 et 150 K/W, puis le cas à chaud (résistance maximale x 1,5, 150 K/W).
+**Résultat attendu :** 69 µs et 138 µs pour passer sous 1 V depuis 3,0 V ; 30 ns ; 0,14 W et 0,28 W ; hausse de 14 à 41 K ; cas à chaud 0,41 W et 62 K ; courant de crête de la ligne 9,5 A à ±0,1 A (quatre moteurs de 2,4 A donnent 9,6 A).
 **Statut :** Écrit
 
 ### TU-008 — Batterie et entrée : chutes de tension et courants admissibles
@@ -761,8 +761,8 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 ### TU-009 — Régulateur de 3,0 V et pont de mesure : dissipation, rapport et erreur
 **Réfs amont :** DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »
 **Préconditions :** script `calculs.py` (section « alimentation »).
-**Procédure :** calculer la dissipation à 4,2 V et 130 mA, l'échauffement à 230 K/W, le rapport du pont, la tension et le courant du pont à 4,2 V, le pas du convertisseur, l'erreur du pont à 0,1 % à 3,7 V.
-**Résultat attendu :** 0,16 W ; 36 K ±2 K ; rapport 0,6 ; 2,52 V et 16,8 µA ; 0,73 mV sur la broche et 1,22 mV sur la batterie ; erreur du pont au plus 3 mV.
+**Procédure :** calculer la dissipation à 4,2 V et 130 mA, l'échauffement à 230 K/W et à 336 K/W, le rapport du pont, la tension et le courant du pont à 4,2 V, le pas du convertisseur, l'erreur du pont à 0,1 % à 3,7 V, l'écart de partage de charge de la capacité d'échantillonnage de l'ADC (5 pF) avec le condensateur de 100 nF de PA0 sur 2,52 V.
+**Résultat attendu :** 0,16 W ; 36 K ±2 K à 230 K/W et 54 K ±2 K à 336 K/W ; rapport 0,6 ; 2,52 V et 16,8 µA ; 0,73 mV sur la broche et 1,22 mV sur la batterie ; erreur du pont au plus 3 mV ; écart de partage de charge 0,13 mV ±0,01 mV (0,17 pas), le condensateur de 100 nF de PA0 étant présent dans la netlist exportée `boomrone.net`.
 **Statut :** Écrit
 
 ### TU-010 — Bouton : constantes de temps et niveaux
@@ -775,15 +775,15 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 ### TU-011 — Voyant RGB et buzzer : courants calculés
 **Réfs amont :** DES-011 « Circuit du voyant RGB et du buzzer »
 **Préconditions :** script `calculs.py` (section « voyant »).
-**Procédure :** calculer les courants à 4,2 V et à 3,4 V avec les deux jeux de tensions directes (supposées, catalogue) ; la somme maximale avec le buzzer.
-**Résultat attendu :** à 4,2 V : 18,3 mA (rouge) et 17,6 mA (vert, bleu) avec les valeurs supposées, 15 mA et 11,8 mA avec celles du catalogue ; chacun au plus 20 mA ; somme maximale 84 mA ; à 3,4 V avec 3,4 V de tension directe le vert et le bleu sont à 0 mA (résultat noté pour DOU-161 « Tensions directes du voyant RGB : visibilité du vert et du bleu entre 3,4 et 3,7 V »).
+**Procédure :** calculer les courants à 4,2 V et à 3,4 V avec les trois jeux de tensions directes (supposées, catalogue, minima de la fiche : 1,8 V ; 2,8 V ; 2,8 V) ; la somme maximale avec le buzzer ; la puissance du rouge.
+**Résultat attendu :** à 4,2 V : 18,3 mA (rouge) et 17,6 mA (vert, bleu) avec les valeurs supposées, 15 mA et 11,8 mA avec celles du catalogue, 20,0 mA (rouge) et 20,6 mA (vert, bleu) avec les minima de la fiche ; chacun au plus 25 mA (maximum de la fiche) ; blanc 54 mA (valeurs supposées) et 61 mA (minima) ; somme maximale 91 mA ; puissance du rouge 37 mW pour 40 mW permis ; à 3,4 V avec 3,4 V de tension directe le vert et le bleu sont à 0 mA (résultat noté pour DOU-161 « Tensions directes du voyant RGB : visibilité du vert et du bleu entre 3,4 et 3,7 V »).
 **Statut :** Écrit
 
 ### TU-012 — Module Bluetooth : débit et occupation de la liaison
 **Réfs amont :** DES-012 « Raccordement du module Bluetooth E104-BT02 »
 **Préconditions :** script `calculs.py` (section « radio »).
-**Procédure :** calculer la durée d'un octet et d'une trame de 14 octets à 9600 bauds, l'occupation avec un statut toutes les 500 ms et des variables toutes les 100 ms ; contrôle de continuité TX vers RX croisé sur la carte (multimètre).
-**Résultat attendu :** 1,04 ms par octet, 14,6 ms par trame ; 138 octets par seconde, soit 14 % de 960 ; PA2 relié à RXD du module et PA3 à TXD.
+**Procédure :** calculer la durée d'un octet et d'une trame de 14 octets à 19200 bauds, l'occupation avec un statut toutes les 500 ms et des variables toutes les 100 ms ; contrôle de continuité sur la carte (multimètre, carte hors tension) : liaison série croisée, réveil, reset.
+**Résultat attendu :** 0,52 ms par octet, 7,3 ms par trame ; 138 octets par seconde, soit 7 % de 1920 ; PA2 relié à P05 (RXD, broche 8) du module et PA3 à P04 (TXD, broche 7) ; PA1 relié directement à P06 (WKP, broche 9) ; RESET_H (broche 13) à la masse ; MOD (broche 3) sans liaison.
 **Statut :** Écrit
 
 ### TU-013 — Fichiers de fabrication : nomenclature, placement et règles
@@ -824,8 +824,8 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 ### TU-018 — Pilote de la centrale : conversions, axes, erreurs et biais
 **Réfs amont :** DES-018 « Pilote de la centrale inertielle »
 **Préconditions :** test PC `test_drv_imu.c` avec une maquette du SPI qui fournit des tampons de 15 octets.
-**Procédure :** fournir des tampons connus (accéléromètre z = 4096 pas, gyroscope x = 428 pas), des tampons identiques deux fois de suite, une fin de DMA absente trois fois de suite puis une lecture correcte ; appeler `imu_calibrate_bias()` avec 1000 échantillons d'un biais constant.
-**Résultat attendu :** 10 lectures brutes identiques de suite comptent une erreur par cycle suivant, `imu_failed` levé 3 cycles plus tard ; carte face vers le bas (brut z = -4096) : accélération z du drone = +9,80 m/s² ±0,02 (4096 pas x 0,244 mg = 1,0 g) ; gyroscope x = 0,523 rad/s ±0,002 après passage dans la matrice d'axes ; `repeat_count` = 1 ; `imu_failed` levé à la troisième erreur et abaissé après la lecture correcte ; biais retrouvé à 0,001 rad/s près.
+**Procédure :** fournir des tampons connus (accéléromètre z = 4096 pas, gyroscope x = 428 pas), des tampons identiques deux fois de suite, une fin de DMA absente trois fois de suite puis une lecture correcte ; appeler `imu_calibrate_bias()` avec 1000 échantillons d'un biais constant ; relever l'instant simulé du premier accès SPI de l'initialisation.
+**Résultat attendu :** aucun accès SPI avant 40 ms simulées après le départ de l'initialisation ; 10 lectures brutes identiques de suite comptent une erreur par cycle suivant, `imu_failed` levé 3 cycles plus tard ; carte face vers le bas (brut z = -4096) : accélération z du drone = +9,80 m/s² ±0,02 (4096 pas x 0,244 mg = 1,0 g) ; gyroscope x = 0,523 rad/s ±0,002 après passage dans la matrice d'axes ; `repeat_count` = 1 ; `imu_failed` levé à la troisième erreur et abaissé après la lecture correcte ; biais retrouvé à 0,001 rad/s près.
 **Statut :** Écrit
 
 ### TU-019 — Pilote du capteur de hauteur : pas, reprise par niveaux et publication
@@ -852,8 +852,8 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 ### TU-022 — Mesure de tension : formule, référence interne et valeur périmée
 **Réfs amont :** DES-022 « Pilote de la mesure de tension de la batterie »
 **Préconditions :** test PC `test_drv_adc.c` avec des tampons de 14 mots.
-**Procédure :** fournir 10 mesures de PA0 et 4 de VREFINT pour : 4,2 V avec `vdda` = 3,0 V (3440 et 1654 pas) ; 3,3 V avec `vdda` = 2,95 V (les pas calculés pour cette tension) ; une séquence non terminée ; le tout premier cycle avant la première séquence.
-**Résultat attendu :** moyenne de VREFINT nulle : `vbat_valid` faux, aucune division par zéro ; tension de normalisation toujours dans [3,0 V ; 4,3 V] ; 4,200 V ±0,005 V ; 3,300 V ±0,005 V (la référence interne annule la variation de `vdda`) ; séquence non terminée : valeur précédente conservée et `adc_stale` incrémenté ; `vbat_valid` faux avant la première séquence ; moyenne glissante de 100 valeurs exacte sur un échelon de 3,7 V à 3,3 V.
+**Procédure :** fournir 10 mesures de PA0 et 4 de VREFINT pour : 4,2 V avec `vdda` = 3,0 V (3440 et 1654 pas) ; 3,3 V avec `vdda` = 2,95 V (les pas calculés pour cette tension) ; une séquence non terminée ; le tout premier cycle avant la première séquence ; l'initialisation avec la maquette de l'ADC (ordre des écritures, ADCAL qui retombe, puis ADCAL qui ne retombe pas).
+**Résultat attendu :** initialisation dans l'ordre DEEPPWD à 0, ADVREGEN à 1, attente de 100 µs, ADCAL, attente de la fin, ADEN ; ADCAL qui ne retombe pas en 1 ms : `vbat_valid` faux et `adc_cal_failed` incrémenté ; moyenne de VREFINT nulle : `vbat_valid` faux, aucune division par zéro ; tension de normalisation toujours dans [3,0 V ; 4,3 V] ; 4,200 V ±0,005 V ; 3,300 V ±0,005 V (la référence interne annule la variation de `vdda`) ; séquence non terminée : valeur précédente conservée et `adc_stale` incrémenté ; `vbat_valid` faux avant la première séquence ; moyenne glissante de 100 valeurs exacte sur un échelon de 3,7 V à 3,3 V.
 **Statut :** Écrit
 
 ### TU-023 — Filtre d'attitude : stabilité, intégration sans accéléromètre, convergence
@@ -908,15 +908,15 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 ### TU-030 — Chien de garde : conditions de rafraîchissement et valeurs
 **Réfs amont :** DES-030 « Chien de garde matériel et règle de rafraîchissement »
 **Préconditions :** test PC `test_wdg.c` avec la maquette de l'IWDG ; script `check_calls.py`.
-**Procédure :** appeler `wdg_refresh` avec `cycle_ran` vrai, faux ; avec l'état Lancé à 499 ms et 501 ms ; autour d'une écriture de flash ; chercher les écritures de la clé dans les sources ; lire la constante de rechargement.
-**Résultat attendu :** écriture de la clé seulement quand `cycle_ran` est vrai et le Lancé inférieur à 500 ms ; `cycle_ran` remis à zéro après chaque rafraîchissement ; rafraîchissements avant et après la flash ; une seule écriture de la clé dans les sources ; rechargement 399 avec prédiviseur 8, soit 100 ms à 4 kHz.
+**Procédure :** appeler `wdg_refresh` avec `cycle_ran` vrai, faux ; avec l'état Lancé à 499 ms et 501 ms ; autour d'une écriture de flash ; chercher les écritures de la clé dans les sources ; lire la constante de rechargement ; relever l'ordre des écritures de `board_early_init()`.
+**Résultat attendu :** écriture de la clé seulement quand `cycle_ran` est vrai et le Lancé inférieur à 500 ms ; `cycle_ran` remis à zéro après chaque rafraîchissement ; rafraîchissements avant et après la flash ; une seule écriture de la clé dans les sources ; rechargement 399 avec prédiviseur 8, soit 100 ms à 4 kHz ; le prédiviseur et le rechargement sont écrits avant tout autre accès de `board_early_init()` (l'IWDG démarre à environ 512 ms).
 **Statut :** Écrit
 
 ### TU-031 — Initialisation : issues, durées et rafraîchissements
 **Réfs amont :** DES-031 « Séquence d'initialisation et échec d'initialisation »
 **Préconditions :** test PC `test_init.c` avec des pilotes maquettes et un temps simulé.
-**Procédure :** scénarios : nominal ; gyroscope à 40 °/s pendant l'étape 8 ; inclinaison de 20° ; norme d'accélération de 0,5 g ; capteur de hauteur muet (deux tentatives de 300 ms) ; centrale ou flux absent ; bouton tenu depuis la mise sous tension avec marqueur absent ; bouton tenu avec marqueur valide (reset du chien de garde) ; bouton enfoncé à la fin sans avoir été tenu depuis le départ.
-**Résultat attendu :** batterie à 3,2 V pendant 100 cycles : état 2, bouton et commandes ignorés ; biais de 25 °/s : échec « mouvement » (biais accepté jusqu'à 3 °/s) ; marqueur valide mais drapeau de coupure d'alimentation levé : mise sous tension reconnue ; nominal : état 1 en moins de 2,5 s simulées ; mouvement, pas à plat et chute libre : état 2 ; capteur de hauteur muet, centrale ou flux absent : état 2 déclaré avant 1 s pour le capteur de hauteur ; bouton tenu et marqueur absent : état 4 ; bouton tenu et marqueur valide : état 1 avec drapeau d'appui en cours ; bouton enfoncé en fin d'initialisation : drapeau d'appui en cours posé ; jamais plus de 80 ms simulées (le chien de garde réel dure 91 à 109 ms) sans rafraîchissement du chien de garde ; moteurs jamais démarrés.
+**Procédure :** scénarios : nominal ; gyroscope à 40 °/s pendant l'étape 8 ; inclinaison de 20° ; norme d'accélération de 0,5 g ; capteur de hauteur muet (deux tentatives de 300 ms) ; centrale ou flux absent ; bouton tenu depuis la mise sous tension avec marqueur absent ; bouton tenu avec marqueur valide (reset du chien de garde) ; bouton enfoncé à la fin sans avoir été tenu depuis le départ ; relever l'instant du premier accès SPI à la centrale et l'ordre des étapes de l'ADC.
+**Résultat attendu :** premier accès SPI à la centrale au plus tôt à 40 ms simulées, étalonnage de l'ADC fait avant l'étape (7) ; batterie à 3,2 V pendant 100 cycles : état 2, bouton et commandes ignorés ; biais de 25 °/s : échec « mouvement » (biais accepté jusqu'à 3 °/s) ; marqueur valide mais drapeau BORRSTF levé : mise sous tension reconnue ; nominal : état 1 en moins de 2,5 s simulées ; mouvement, pas à plat et chute libre : état 2 ; capteur de hauteur muet, centrale ou flux absent : état 2 déclaré avant 1 s pour le capteur de hauteur ; bouton tenu et marqueur absent : état 4 ; bouton tenu et marqueur valide : état 1 avec drapeau d'appui en cours ; bouton enfoncé en fin d'initialisation : drapeau d'appui en cours posé ; jamais plus de 80 ms simulées (le chien de garde réel dure 91 à 109 ms) sans rafraîchissement du chien de garde ; moteurs jamais démarrés.
 **Statut :** Écrit
 
 ### TU-032 — Effets locaux : séquences de lumière et de son, durées, inhibition

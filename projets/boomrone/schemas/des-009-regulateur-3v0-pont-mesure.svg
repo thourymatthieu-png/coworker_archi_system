@@ -30,8 +30,8 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="w" points="80,238.0 80,270"/>
 <polyline class="w" points="70,232.0 90,232.0"/>
 <polyline class="w" points="70,238.0 90,238.0"/>
-<text x="66" y="234.0" text-anchor="end" class="ref twarn" font-size="11">C10</text>
-<text x="66" y="247.0" text-anchor="end" class="twarn" font-size="11">1 µF</text>
+<text x="66" y="234.0" text-anchor="end" class="ref" font-size="11">C10</text>
+<text x="66" y="247.0" text-anchor="end" font-size="11">1 µF</text>
 <polyline class="w" points="80,270 80,276"/>
 <polyline class="w" points="71,276 89,276"/>
 <polyline class="w" points="74,280 86,280"/>
@@ -41,25 +41,25 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="236.0" y="190" text-anchor="middle" font-size="11">MCP1700T-3002E/TT</text>
 <polyline class="w" points="176,200 176,200"/>
 <text x="181" y="204" text-anchor="start" font-size="11">VIN</text>
-<text x="173" y="197" text-anchor="end" class="twarn" font-size="9">3</text>
+<text x="173" y="197" text-anchor="end" font-size="9">3</text>
 <polyline class="w" points="296,200 310,200"/>
 <text x="291" y="204" text-anchor="end" font-size="11">VOUT</text>
-<text x="299" y="197" text-anchor="start" class="twarn" font-size="9">2</text>
+<text x="299" y="197" text-anchor="start" font-size="9">2</text>
 <polyline class="w" points="236,250 236,276"/>
 <polyline class="w" points="236,276 236,282"/>
 <polyline class="w" points="227,282 245,282"/>
 <polyline class="w" points="230,286 242,286"/>
 <polyline class="w" points="233,290 239,290"/>
 <text x="244" y="266" text-anchor="start" font-size="11">GND</text>
-<text x="232" y="262" text-anchor="end" class="twarn" font-size="9">1</text>
+<text x="232" y="262" text-anchor="end" font-size="9">1</text>
 <polyline class="l3" points="310,200 590,200"/>
 <circle cx="350" cy="200" r="3.2" class="fl3"/>
 <polyline class="w" points="350,200 350,232.0"/>
 <polyline class="w" points="350,238.0 350,270"/>
 <polyline class="w" points="340,232.0 360,232.0"/>
 <polyline class="w" points="340,238.0 360,238.0"/>
-<text x="364" y="234.0" text-anchor="start" class="ref twarn" font-size="11">C11</text>
-<text x="364" y="247.0" text-anchor="start" class="twarn" font-size="11">4,7 µF</text>
+<text x="364" y="234.0" text-anchor="start" class="ref" font-size="11">C11</text>
+<text x="364" y="247.0" text-anchor="start" font-size="11">4,7 µF</text>
 <polyline class="w" points="350,270 350,276"/>
 <polyline class="w" points="341,276 359,276"/>
 <polyline class="w" points="344,280 356,280"/>
@@ -69,11 +69,11 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="590" y="170" text-anchor="middle" class="tl3" font-size="12">+3V0</text>
 <text x="400" y="190" text-anchor="start" font-size="11">vers U6 (DES-005), MCU, capteurs,</text>
 <text x="400" y="218" text-anchor="start" font-size="11">module radio : 130 mA</text>
-<text x="176" y="140" text-anchor="start" class="twarn" font-size="11">n° 1, 2, 3 de mémoire (SOT-23)</text>
+<text x="176" y="140" text-anchor="start" font-size="11">n° 1, 2, 3 : fiche DS20001826C p. 1 (SOT-23)</text>
 <text x="30" y="330" text-anchor="start" font-size="11">Dimensionnement : 130 mA ; à 4,2 V : 1,2 V × 0,13 A = 0,16 W</text>
-<text x="30" y="344" text-anchor="start" font-size="11">échauffement 37 K avec 230 K/W (SOT-23 sans cuivre) ; petit polygone de cuivre</text>
-<text x="30" y="358" text-anchor="start" font-size="11">sortie réglée tant que la batterie dépasse 3,1 V</text>
-<text x="30" y="372" text-anchor="start" font-size="11">composant : 1 µF au minimum en céramique (valeurs à confirmer)</text>
+<text x="30" y="344" text-anchor="start" font-size="11">échauffement 37 K (230 K/W) à 54 K (336 K/W, fiche p. 4) ; petit polygone de cuivre</text>
+<text x="30" y="358" text-anchor="start" font-size="11">sortie réglée tant que la batterie dépasse 3,1 V (hypothèse)</text>
+<text x="30" y="372" text-anchor="start" font-size="11">composant : 1 µF, suffit jusqu'à 100 mA (fiche p. 10 et 12)</text>
 <polyline class="bat" points="700,110 700,94"/>
 <polygon class="fbat" points="700,86 695,96 705,96"/>
 <text x="700" y="80" text-anchor="middle" class="tbat" font-size="12">VBATM</text>
@@ -114,18 +114,18 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="742" y="240" text-anchor="end" class="tsig" font-size="11">VBAT_SENSE</text>
 <text x="820" y="270" text-anchor="middle" font-size="11">ADC1 IN1</text>
 <text x="560" y="385" text-anchor="start" font-size="11">Rapport 0,6 : 4,2 V donne 2,52 V ; courant 16,8 µA</text>
-<text x="560" y="399" text-anchor="start" font-size="11">impédance de source 60 kΩ</text>
+<text x="560" y="399" text-anchor="start" class="twarn" font-size="11">impédance de source 60 kΩ : 100 nF obligatoire (RAIN)</text>
 <text x="560" y="413" text-anchor="start" font-size="11">pas 3,0 V / 4095 = 0,73 mV sur la broche,</text>
 <text x="560" y="427" text-anchor="start" font-size="11">soit 1,22 mV sur la batterie</text>
 <text x="560" y="441" text-anchor="start" font-size="11">erreur du pont à 0,1 % : ≈ 3 mV à 3,7 V</text>
 <text x="560" y="455" text-anchor="start" font-size="11">constante VBAT_GAIN_TRIM (étalonnage facultatif)</text>
 <text x="560" y="372" text-anchor="start" font-size="11">Séquence et formule : DES-022</text>
-<text x="30" y="410" text-anchor="start" class="twarn" font-size="11">Orange : valeurs des condensateurs et numéros de broches de mémoire.</text>
+<text x="30" y="410" text-anchor="start" font-size="11">C8 (22 µF, DES-008) et C10 (1 µF) sont distincts (DEC-281).</text>
+<text x="30" y="424" text-anchor="start" class="twarn" font-size="11">Orange : source de 60 kΩ de l'ADC (DOU-142).</text>
 <line x1="14" y1="520" x2="886" y2="520" class="thin" style="opacity:.4"/>
 <text x="20" y="536" style="font-size:11px">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
 <text x="20" y="550" style="font-size:11px">Texte de référence : DES-009 « Régulateur de 3,0 V et pont de mesure de la tension ». Le pont lit VBATM (avant la ferrite), pas VBATL.</text>
-<text x="20" y="564" style="font-size:11px">Repères (U5, C10, C11, R20, R21, C12) provisoires. À vérifier (orange) : DOU-173 « Composants passifs et découplages à relever dans les fiches avant</text>
-<text x="20" y="578" style="font-size:11px">   le routage » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches » ; DOU-183 « Repères de</text>
-<text x="20" y="592" style="font-size:11px">   composants provisoires des schémas SVG de la conception détaillée ».</text>
+<text x="20" y="564" style="font-size:11px">Repères (U5, C10, C11, R20, R21, C12) provisoires. À vérifier (orange) : DOU-142 « Fuite d'entrée de l'ADC et marge de ±50 mV de la mesure de tension » ; DOU-183</text>
+<text x="20" y="578" style="font-size:11px">   « Repères de composants provisoires des schémas SVG de la conception détaillée ».</text>
 <text x="20" y="606" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
 </svg>
