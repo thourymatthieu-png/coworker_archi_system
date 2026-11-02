@@ -324,6 +324,44 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="315" y="723" text-anchor="middle" font-size="10">1 µF</text>
 <text x="315" y="868" text-anchor="middle" font-size="10">VREF+</text>
 <text x="60" y="890" text-anchor="start" font-size="10">Découplage relevé dans DS12589, figure 16 p. 68. VREF+ est reliée à VDDA (même rail +3V0).</text>
+<text x="60" y="936" text-anchor="start" class="ref" font-size="12">Broches non connectées (NC)</text>
+<polyline class="w" points="380,960 362,960"/>
+<polyline class="w" points="354,955 364,965"/>
+<polyline class="w" points="354,965 364,955"/>
+<text x="388" y="964" text-anchor="start" font-size="11">PC13 (2) · NC</text>
+<polyline class="w" points="380,984 362,984"/>
+<polyline class="w" points="354,979 364,989"/>
+<polyline class="w" points="354,989 364,979"/>
+<text x="388" y="988" text-anchor="start" font-size="11">PC14 (3) · NC</text>
+<polyline class="w" points="380,1008 362,1008"/>
+<polyline class="w" points="354,1003 364,1013"/>
+<polyline class="w" points="354,1013 364,1003"/>
+<text x="388" y="1012" text-anchor="start" font-size="11">PC15 (4) · NC</text>
+<polyline class="w" points="380,1032 362,1032"/>
+<polyline class="w" points="354,1027 364,1037"/>
+<polyline class="w" points="354,1037 364,1027"/>
+<text x="388" y="1036" text-anchor="start" font-size="11">PF0 (5) · NC</text>
+<polyline class="w" points="380,1056 362,1056"/>
+<polyline class="w" points="354,1051 364,1061"/>
+<polyline class="w" points="354,1061 364,1051"/>
+<text x="388" y="1060" text-anchor="start" font-size="11">PF1 (6) · NC</text>
+<polyline class="w" points="380,1080 362,1080"/>
+<polyline class="w" points="354,1075 364,1085"/>
+<polyline class="w" points="354,1085 364,1075"/>
+<text x="388" y="1084" text-anchor="start" font-size="11">PA1 (9) · NC</text>
+<polyline class="w" points="380,1104 362,1104"/>
+<polyline class="w" points="354,1099 364,1109"/>
+<polyline class="w" points="354,1109 364,1099"/>
+<text x="388" y="1108" text-anchor="start" font-size="11">PA12 (34) · NC</text>
+<polyline class="w" points="380,1128 362,1128"/>
+<polyline class="w" points="354,1123 364,1133"/>
+<polyline class="w" points="354,1133 364,1123"/>
+<text x="388" y="1132" text-anchor="start" font-size="11">PB3 (40) · NC</text>
+<polyline class="w" points="380,1152 362,1152"/>
+<polyline class="w" points="354,1147 364,1157"/>
+<polyline class="w" points="354,1157 364,1147"/>
+<text x="388" y="1156" text-anchor="start" font-size="11">PB4 (41) · NC</text>
+<text x="60" y="1180" text-anchor="start" font-size="10">Croix = broche laissée en l'air sur la carte (configurée en entrée analogique).</text>
 <text x="20" y="1416" text-anchor="start" font-size="11">I2C1 sur HSI16 : TIMINGR = 0x10320309 (400 kHz). Ordre : latence flash, PLL, AHB /2, boost, commutation sur la PLL, 1 µs, AHB /1.</text>
 <text x="20" y="1446" text-anchor="start" font-size="11">Horloges (valeurs de DEC-257 « Valeurs de configuration des horloges, timers, bus et convertisseur ») : HSI 16 MHz, PLL M = 4, N = 85, R = 2 donnant</text>
 <text x="20" y="1461" text-anchor="start" font-size="11">  170 MHz ; HCLK, PCLK1, PCLK2 à 170 MHz ; mode boost ; flash 4 états d'attente (LATENCY = 4) avec prefetch et caches.</text>
@@ -335,7 +373,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="20" y="1581" text-anchor="start" font-size="11">Programmation : STM32CubeProgrammer en SWD, hélices démontées, sans relier le 3,3 V du ST-LINK. Budgets : flash 128 kio, SRAM 32 kio dont 16 kio de</text>
 <text x="20" y="1596" text-anchor="start" font-size="11">  SRAM1 utilisés (DES-015).</text>
 <line x1="14" y1="1617" x2="1166" y2="1617" class="thin" style="opacity:.4"/>
-<text x="20" y="1635" text-anchor="start" font-size="11">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; orange = à vérifier.</text>
+<text x="20" y="1635" text-anchor="start" font-size="11">Couleurs : rouge = VBATM / VBATL ; bleu = +3V0 ; violet = +2V0 ; vert = signaux ; noir = masse et liaisons ; croix = broche non connectée (NC) ; orange = à vérifier.</text>
 <text x="20" y="1649" text-anchor="start" font-size="11">Texte de référence : DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option ». Les grilles des moteurs et du voyant passent par</text>
 <text x="20" y="1663" text-anchor="start" font-size="11">   des résistances (voir les schémas de DES-007 et DES-011).</text>
 <text x="20" y="1677" text-anchor="start" font-size="11">Repères (U1, J2, C27 à C31, C34, C35, R31) provisoires. À vérifier (orange) : DOU-181 « Bilan d'erreur de la mesure de tension et niveau du BOR » ;</text>
