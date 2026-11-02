@@ -97,15 +97,11 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="sig" points="560,534 574,534"/>
 <text x="555" y="538" text-anchor="end" font-size="11">PA2 (10)</text>
 <text x="580" y="538" text-anchor="start" class="tsig" font-size="11">BLE_TX</text>
-<text x="680" y="538" text-anchor="start" font-size="10">USART2 TX (AF7), 19200 bauds</text>
+<text x="680" y="538" text-anchor="start" font-size="10">USART2 TX (AF7), 115200 bauds</text>
 <polyline class="sig" points="560,549 574,549"/>
 <text x="555" y="553" text-anchor="end" font-size="11">PA3 (11)</text>
 <text x="580" y="553" text-anchor="start" class="tsig" font-size="11">BLE_RX</text>
 <text x="680" y="553" text-anchor="start" font-size="10">USART2 RX (AF7)</text>
-<polyline class="sig" points="560,564 574,564"/>
-<text x="555" y="568" text-anchor="end" font-size="11">PA1 (9)</text>
-<text x="580" y="568" text-anchor="start" class="tsig" font-size="11">BLE_WKP</text>
-<text x="680" y="568" text-anchor="start" font-size="10">sortie, éveillé dès board_early_init()</text>
 <text x="580" y="588" text-anchor="start" class="ref" font-size="11">Voyant et buzzer → DES-011</text>
 <polyline class="sig" points="560,611 574,611"/>
 <text x="555" y="615" text-anchor="end" font-size="11">PB1 (17)</text>
@@ -268,7 +264,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="20" y="778" text-anchor="start" font-size="11">Horloges (valeurs de DEC-257 « Valeurs de configuration des horloges, timers, bus et convertisseur ») : HSI 16 MHz, PLL M = 4, N = 85, R = 2 donnant</text>
 <text x="20" y="792" text-anchor="start" font-size="11">  170 MHz ; HCLK, PCLK1, PCLK2 à 170 MHz ; mode boost ; flash 4 états d'attente (LATENCY = 4) avec prefetch et caches.</text>
 <text x="20" y="812" text-anchor="start" font-size="11">TIM2 : prédiviseur 169, 1 MHz, 32 bits ; TIM6 : prédiviseur 169, rechargement 999, tick de 1 kHz ; TIM1 : rechargement 7082, 170 MHz / 7083 = 24,001</text>
-<text x="20" y="826" text-anchor="start" font-size="11">  kHz ; SPI1 diviseur 32 = 5,3125 MHz ; SPI2 diviseur 128 = 1,328125 MHz ; USART2 BRR = 8854 = 19200 bauds (≈ ±1,75 % avec la HSI16) ; I2C1 400 kHz sur HSI16</text>
+<text x="20" y="826" text-anchor="start" font-size="11">  kHz ; SPI1 diviseur 32 = 5,3125 MHz ; SPI2 diviseur 128 = 1,328125 MHz ; USART2 BRR = 1476 = 115200 bauds (≈ ±1,75 % avec la HSI16) ; I2C1 400 kHz sur HSI16</text>
 <text x="20" y="840" text-anchor="start" font-size="11">  (TIMINGR = 0x10320309).</text>
 <text x="20" y="860" text-anchor="start" font-size="11">Octets d'option : IWDG_SW = 0 (chien de garde matériel), BOR_LEV = 3 (descendant 2,47 à 2,57 V, DS12589 p. 72 ; DOU-181), protection en lecture niveau 0. PB4</text>
 <text x="20" y="874" text-anchor="start" font-size="11">  inutilisée ; PA15 ne commande jamais une grille (JTAG au reset) ; toute broche non listée est une entrée analogique.</text>
@@ -279,7 +275,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <text x="20" y="960" style="font-size:11px">Texte de référence : DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option ». Les grilles des moteurs et du voyant passent par</text>
 <text x="20" y="974" style="font-size:11px">   des résistances (voir les schémas de DES-007 et DES-011).</text>
 <text x="20" y="988" style="font-size:11px">Repères (U1, J2, C27 à C31, C34, C35, R31) provisoires. À vérifier (orange) : DOU-181 « Bilan d'erreur de la mesure de tension et niveau du BOR » ;</text>
-<text x="20" y="1002" style="font-size:11px">   DOU-195 « Module E104-BT02 : niveau de WKP, état à la mise sous tension et mot de passe aérien » ; DOU-183 « Repères de composants provisoires des schémas</text>
+<text x="20" y="1002" style="font-size:11px">   DOU-203 « PB-03F sans broche de réveil : veille, reset en vol et état à la mise sous tension » ; DOU-183 « Repères de composants provisoires des schémas</text>
 <text x="20" y="1016" style="font-size:11px">   SVG de la conception détaillée ».</text>
 <text x="20" y="1044" style="font-size:11px">Illustration de conception, pas le schéma KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »).</text>
 </svg>

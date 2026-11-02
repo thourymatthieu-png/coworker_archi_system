@@ -552,9 +552,9 @@ Chaque test d'intégration vérifie un ou plusieurs éléments de « Architectur
 
 ### TI-010 — Liaison Bluetooth à basse consommation
 **Réfs amont :** ARC-012 « Module radio Bluetooth à basse consommation » ; ARC-002 « Microcontrôleur et programmation par liaison SWD »
-**Préconditions :** module E104-BT02 (d'abord seul, relié à l'ordinateur par un adaptateur USB-UART, avant la commande de la carte ; puis câblé sur USART2), ordinateur avec adaptateur BLE et logiciel d'essai, mètre, drone moteurs coupés puis moteurs en marche sur banc.
+**Préconditions :** module PB-03F (d'abord seul, relié à l'ordinateur par un adaptateur USB-UART en 3,3 V, avant la commande de la carte ; puis câblé sur USART2), ordinateur avec adaptateur BLE et logiciel d'essai, mètre, drone moteurs coupés puis moteurs en marche sur banc.
 **Procédure :** se connecter sans appairage ; émettre 2 trames par seconde pendant 5 min puis 10 par seconde ; mesurer la perte à 1, 3 et 5 m moteurs coupés puis en marche ; envoyer la commande Arrêt moteurs en marche et mesurer le délai ; mesurer le courant du module.
-**Résultat attendu :** débit par défaut, service, caractéristique et absence de commande AT relevés (DOU-151 « Module E104-BT02 : débit par défaut, service, absence de commande AT ») ; connexion sans configuration ; perte d'au plus 1 % jusqu'à 5 m ; délai de bout en bout de l'arrêt d'au plus 200 ms, sinon DOU-137 « Latence de bout en bout de l'arrêt sans fil sur Bluetooth » est traité ; courant du module relevé (estimation 4 à 10 mA).
+**Résultat attendu :** débit par défaut, format, service, caractéristique, mode transparent sans commande et microprogramme d'origine relevés (DOU-200 « PB-03F : mode transparent sans commande, microprogramme d'origine, débit et service Bluetooth ») ; courant de crête et portée à 3,0 V (DOU-201 « PB-03F : source de plus de 200 mA en crête et rail de 3,0 V ») ; comportement à la mise sous tension et pendant un reset (DOU-203 « PB-03F sans broche de réveil : veille, reset en vol et état à la mise sous tension ») ; connexion sans configuration ; perte d'au plus 1 % jusqu'à 5 m ; délai de bout en bout de l'arrêt d'au plus 200 ms, sinon DOU-137 « Latence de bout en bout de l'arrêt sans fil sur Bluetooth » est traité ; courant du module relevé (estimation 4 à 10 mA).
 **Statut :** Écrit
 
 ### TI-011 — Cadence du cycle et temps de réponse de l'arrêt d'urgence
@@ -622,7 +622,7 @@ Chaque test d'intégration vérifie un ou plusieurs éléments de « Architectur
 
 ### TI-020 — Trame radio de bout en bout
 **Réfs amont :** ARC-016 « Pilotes des capteurs et des sorties » ; ARC-025 « Protocole et service du statut sans fil »
-**Préconditions :** module E104-BT02, ordinateur avec le logiciel d'essai, analyseur logique sur l'UART.
+**Préconditions :** module PB-03F, ordinateur avec le logiciel d'essai, analyseur logique sur l'UART.
 **Procédure :** enregistrer 60 s de statut et de variables ; injecter des octets parasites et un CRC faux ; connecter deux appareils.
 **Résultat attendu :** statut à 2 Hz au moins et à chaque changement ; variables à 10 Hz au moins ; trame de 14 octets au plus ; trames altérées rejetées, resynchronisation en moins de 2 trames.
 **Statut :** Écrit
@@ -636,7 +636,7 @@ Chaque test d'intégration vérifie un ou plusieurs éléments de « Architectur
 
 ### TI-022 — Logiciel d'essai relié au drone
 **Réfs amont :** ARC-025 « Protocole et service du statut sans fil » ; ARC-028 « Logiciel d'essai de l'appareil de suivi »
-**Préconditions :** module E104-BT02 sur le drone, ordinateur avec bleak, simulateur de drone.
+**Préconditions :** module PB-03F sur le drone, ordinateur avec bleak, simulateur de drone.
 **Procédure :** lancer le script ; lire statut et variables ; envoyer chaque commande ; couper la liaison puis reconnecter.
 **Résultat attendu :** affichage des 17 codes, des causes, des 4 paramètres et des variables ; commandes reçues ; reconnexion en 10 s au plus ; vecteurs CRC8 identiques en C et en Python.
 **Statut :** Écrit
@@ -713,7 +713,7 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 **Réfs amont :** DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option »
 **Préconditions :** fichiers `board.h` et `board_pins.h` ; test PC `test_board_cfg.c` avec une maquette des registres RCC, FLASH, PWR et IWDG qui enregistre l'ordre des écritures.
 **Procédure :** calculer à partir des constantes : PLL (16 / 4 x 85 / 2), SPI1, SPI2, rechargement de TIM1, TIM6 et prédiviseur de TIM2, BRR de l'USART2 et son débit avec une HSI16 écartée de -1,75 % et de +1,75 % ; relever l'ordre des écritures de l'initialisation des horloges (latence de la flash, PLL, diviseur AHB, R1MODE, commutation, attente, diviseur) ; lire I2C1SEL et TIMINGR ; parcourir le tableau des broches ; relire la liste des octets d'option.
-**Résultat attendu :** fonctions alternatives de chaque broche conformes à la fiche (PA11 en AF11 en particulier, DS12589 tableau 13) ; latence de la flash égale à 4 (jamais 8) à 170 MHz, écrite et relue avant la commutation sur la PLL, diviseur AHB à 2 avant R1MODE = 0 (boost), attente de plus de 1 µs avant le retour du diviseur à 1 ; PLL = 170 MHz ; SPI1 = 5,3125 MHz et SPI2 = 1,328125 MHz (jamais plus de 10 MHz et 2 MHz) ; TIM1 = 24,001 kHz ±0,01 kHz ; TIM6 = 1000 Hz ; TIM2 = 1 MHz ; débit de l'USART2 = 19200 bauds à 0,1 % près (170 MHz / 8854 = 19200,4) et entre 18864 et 19536 bauds (à 1 baud près) avec la HSI16 à ±1,75 % ; I2C1SEL = 10 (HSI16) et TIMINGR = 0x10320309 ; PA1 en sortie pour le réveil du module radio ; aucune broche en double ; PA15 et PB4 jamais associées à une grille ; octets IWDG_SW = 0 et BOR_LEV = 3 dans la liste de programmation.
+**Résultat attendu :** fonctions alternatives de chaque broche conformes à la fiche (PA11 en AF11 en particulier, DS12589 tableau 13) ; latence de la flash égale à 4 (jamais 8) à 170 MHz, écrite et relue avant la commutation sur la PLL, diviseur AHB à 2 avant R1MODE = 0 (boost), attente de plus de 1 µs avant le retour du diviseur à 1 ; PLL = 170 MHz ; SPI1 = 5,3125 MHz et SPI2 = 1,328125 MHz (jamais plus de 10 MHz et 2 MHz) ; TIM1 = 24,001 kHz ±0,01 kHz ; TIM6 = 1000 Hz ; TIM2 = 1 MHz ; débit de l'USART2 = 115200 bauds à 0,1 % près (170 MHz / 1476 = 115176) et entre 113161 et 117192 bauds (à 1 baud près) avec la HSI16 à ±1,75 % ; I2C1SEL = 10 (HSI16) et TIMINGR = 0x10320309 ; PA1 en entrée analogique, non reliée (le PB-03F n'a pas de broche de réveil : DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB ») ; aucune broche en double ; PA15 et PB4 jamais associées à une grille ; octets IWDG_SW = 0 et BOR_LEV = 3 dans la liste de programmation.
 **Statut :** Écrit
 
 ### TU-003 — Centrale inertielle : registres, échelles et durée de lecture
@@ -780,10 +780,10 @@ Les TU matériels sont des contrôles de calcul : ils prouvent la cohérence ari
 **Statut :** Écrit
 
 ### TU-012 — Module Bluetooth : débit et occupation de la liaison
-**Réfs amont :** DES-012 « Raccordement du module Bluetooth E104-BT02 »
+**Réfs amont :** DES-012 « Raccordement du module Bluetooth PB-03F »
 **Préconditions :** script `calculs.py` (section « radio »).
-**Procédure :** calculer la durée d'un octet et d'une trame de 14 octets à 19200 bauds, l'occupation avec un statut toutes les 500 ms et des variables toutes les 100 ms ; contrôle de continuité sur la carte (multimètre, carte hors tension) : liaison série croisée, réveil, reset.
-**Résultat attendu :** 0,52 ms par octet, 7,3 ms par trame ; 138 octets par seconde, soit 7 % de 1920 ; PA2 relié à P05 (RXD, broche 8) du module et PA3 à P04 (TXD, broche 7) ; PA1 relié directement à P06 (WKP, broche 9) ; RESET_H (broche 13) à la masse ; MOD (broche 3) sans liaison.
+**Procédure :** calculer la durée d'un octet et d'une trame de 14 octets à 115200 bauds, l'occupation avec un statut toutes les 500 ms et des variables toutes les 100 ms ; contrôle de continuité sur la carte (multimètre, carte hors tension) : liaison série croisée, alimentation, plots de test.
+**Résultat attendu :** 86,8 µs par octet, 1,2 ms par trame ; 138 octets par seconde, soit 1,2 % de 11 520 ; PA2 relié à P10 (RXD, broche 21) du module et PA3 à P9 (TXD, broche 22) ; VDD (broche 8) au +3V0 et GND (broche 15) à la masse ; PA1 non reliée.
 **Statut :** Écrit
 
 ### TU-013 — Fichiers de fabrication : nomenclature, placement et règles

@@ -78,7 +78,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <circle cx="725.0" cy="200" r="3.2" class="fl3"/>
 <polyline class="l3" points="725.0,200 725.0,245"/>
 <rect x="680" y="245" width="90" height="50" rx="4" class="box"/>
-<text x="725.0" y="261" text-anchor="middle" class="ref" font-size="11">U7 E104-BT02</text>
+<text x="725.0" y="261" text-anchor="middle" class="ref" font-size="11">U7 PB-03F</text>
 <text x="725.0" y="277" text-anchor="middle" font-size="11">DES-012</text>
 <circle cx="830.0" cy="200" r="3.2" class="fl3"/>
 <polyline class="l3" points="830.0,200 830.0,245"/>
@@ -108,7 +108,7 @@ text{fill:var(--fg);font-family:Segoe UI,Arial,sans-serif;font-size:12px}
 <polyline class="w" points="57,289 63,289"/>
 <text x="20" y="440" text-anchor="start" font-size="11">Réseaux de signaux (nom, broche) : M1_G à M4_G (PA8 à PA11) ; IMU_SCK, IMU_MISO, IMU_MOSI (PA5, PA6, PA7), IMU_CS (PA4), IMU_INT1 (PB0) ; FLX_SCK,</text>
 <text x="20" y="454" text-anchor="start" font-size="11">  FLX_MISO, FLX_MOSI (PB13, PB14, PB15), FLX_CS (PB12) ; I2C_SCL (PA15), I2C_SDA (PB7), TOF_GPIO1 (PB6), TOF_XSHUT (PB9) ; BLE_TX (PA2), BLE_RX (PA3)</text>
-<text x="20" y="468" text-anchor="start" font-size="11">  ; BLE_WKP (PA1) ; LED_R, LED_G, LED_B (PB1, PB2, PB10), BUZ (PB11) ; BTN (PB5) ; VBAT_SENSE (PA0) ; SWDIO (PA13), SWCLK (PA14), NRST, BOOT0 (PB8).</text>
+<text x="20" y="468" text-anchor="start" font-size="11">  ; LED_R, LED_G, LED_B (PB1, PB2, PB10), BUZ (PB11) ; BTN (PB5) ; VBAT_SENSE (PA0) ; SWDIO (PA13), SWCLK (PA14), NRST, BOOT0 (PB8).</text>
 <text x="20" y="488" text-anchor="start" font-size="11">Points d'essai (pastilles de 1 mm, face haute) : +3V0, +2V0, VBATM, VBATL, GND (deux), M1_D (drain du moteur 1), BLE_TX, BLE_RX, TOF_GPIO1.</text>
 <text x="20" y="508" text-anchor="start" font-size="11">Règle de lecture : un réseau absent de la liste ne doit pas exister au schéma ; un réseau de la liste a au moins deux broches (TU-001). Budgets : +3V0</text>
 <text x="20" y="522" text-anchor="start" font-size="11">  130 mA ; VBATM 9,5 A en crête de 2 s.</text>
