@@ -214,6 +214,25 @@ Budgets : flash 128 kio, SRAM 32 kio dont 16 kio de SRAM1 utilisés (le détail 
 *Légende : brochage par groupe de fonctions, programmation SWD, découplage relevé dans la fiche. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-195 « Module E104-BT02 : niveau de WKP, état à la mise sous tension et mot de passe aérien » ; DOU-181 « Bilan d'erreur de la mesure de tension et niveau du BOR ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** microcontrôleur STM32G431CBT6, LQFP-48, LCSC C529355 (type étendu, 4,78 USD à l'unité).
+
+**Références JLCPCB/LCSC des passifs reliés au microcontrôleur** (numéros de la nomenclature de « Architecture » — `projets/boomrone/03-architecture.md` ; tous de type base sauf mention ; à relire le jour de la commande) :
+
+| Valeur | Boîtier | LCSC | Qté | Où |
+|---|---|---|---|---|
+| 47 Ω | 0603 | C23182 | 4 | grilles des moteurs (PA8 à PA11) |
+| 100 Ω | 0603 | C22775 | 4 | grilles du voyant et du buzzer (PB1, PB2, PB10, PB11) |
+| 1 kΩ | 0603 | C21190 | 1 | série du bouton (PB5) |
+| 4,7 kΩ | 0603 | C23162 | 2 | rappels I2C (PA15, PB7) |
+| 10 kΩ | 0603 | C25804 | 6 | rappels de PA4, PB12, PB6, PB9, PB5 ; BOOT0 (PB8) vers la masse |
+| 100 kΩ 1 % | 0603 | C25803 | 8 | rappels des 8 grilles (moteurs, voyant, buzzer) |
+| 100 kΩ 0,1 % | 0603 | C122538 (étendu) | 1 | pont de mesure de la batterie (PA0) |
+| 150 kΩ 0,1 % | 0603 | C326734 (étendu) | 1 | pont de mesure de la batterie (PA0) |
+| 10 nF | 0603 | C57112 | 2 | PB5 ; VDDA |
+| 100 nF | 0603 | C14663 | 6 | VDD (3), VREF+, NRST, PA0 |
+| 1 µF | 0603 | C15849 | 2 | VDDA, VREF+ |
+| 4,7 µF | 0603 | C19666 | 1 | VDD, commun |
+
+Total : 38 passifs, dont 2 de type étendu.
 **Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « MCU »), `projets/boomrone/firmware/src/board.c`, `projets/boomrone/firmware/src/board.h`, `projets/boomrone/firmware/src/board_pins.h`, `projets/boomrone/schemas/des-002-microcontroleur.svg`
 **Statut :** Validé
 
