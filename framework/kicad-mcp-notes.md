@@ -14,17 +14,66 @@ découvert bloc par bloc pendant la saisie (constat du test Boomrone, DES-011 : 
 « LED RGB anode commune » standard, pas d'empreinte pour la LED SZYY1615RGB-B ni le buzzer
 SMD-9650-3327, découverts seulement pendant la saisie de ce bloc).
 
+## Changement de serveur MCP (2026-11-04) : `kicad` = désormais `mixelpixx/KiCAD-MCP-Server`
+
+Comparaison de quatre serveurs MCP KiCad faite le 2026-11-04 (`framework/kicad-mcp-bug-report.md`) :
+l'ancien serveur `kicad` (paquet PyPI `kicad-eda-mcp`, section ci-dessous) et son concurrent
+`kicad-pro` ont tous les deux un défaut de texte en miroir après une rotation à 180° ; deux serveurs
+sans ce défaut ont été trouvés (`mixelpixx/KiCAD-MCP-Server` et `mixelpixx/Konnect`), et
+`mixelpixx/KiCAD-MCP-Server` a été retenu pour rester maintenu en open source (MIT) — `Konnect` vient
+d'un dépôt archivé, son successeur commercial `Konnect-EDA` n'a encore publié aucun binaire.
+
+**Les deux anciens serveurs (`kicad`/`kicad-eda-mcp` et `kicad-pro`/`kicad-mcp-pro`) ont été
+désinstallés** (venvs supprimés, entrées retirées de `.claude.json`). Tout ce qui suit dans ce
+document à propos du comportement d'un « serveur kicad » décrit ce **serveur abandonné**, gardé par
+écrit pour comparaison (section « Opérations cassées du serveur » et « Rotation des composants : …») —
+pas un bug encore à craindre avec le serveur actuel. Les règles de lisibilité/placement (grille,
+symboles de puissance, vérification par rendu visuel) restent valables quel que soit le serveur.
+
 ## Mise en route sur une nouvelle machine
+
+- Installer KiCad (testé avec KiCad 10), Node.js 18+ et Python 3.11+ (testé avec Node 24.20.0 et le
+  Python embarqué de KiCad, 3.11.5).
+- Cloner et construire le serveur `mixelpixx/KiCAD-MCP-Server` (branche `stable`) :
+  ```bash
+  git clone --branch stable https://github.com/mixelpixx/KiCAD-MCP-Server.git <ailleurs que le dépôt, p. ex. ~/mcp-servers/KiCAD-MCP-Server>
+  cd <dossier cloné> && npm install && npm run build   # produit dist/index.js
+  ```
+- Ce serveur a besoin de `pcbnew` (bindings Python de KiCad), qui n'existe que dans le Python
+  **embarqué** de KiCad (`<install KiCad>\bin\python.exe` sur Windows), pas le Python système : un
+  venv basé sur le Python système ne peut pas l'importer (ABI différente). **Ne pas suivre le script
+  d'installation officiel du projet (`setup-windows.ps1`)**, qui installe les dépendances directement
+  dans le dossier d'installation de KiCad (le modifie). À la place, créer un venv **à partir du
+  Python de KiCad** avec accès à ses paquets système, qui reste isolé de l'installation KiCad :
+  ```bash
+  "<install KiCad>\bin\python.exe" -m venv --system-site-packages <chemin du venv, p. ex. ~/.venvs/kicad-mcp>
+  "<venv>\Scripts\python.exe" -m pip install -r <dossier cloné>/requirements.txt
+  ```
+  Piège à connaître : `PYTHONPATH` ne permet **pas** de contourner cette étape pour un Python embarqué
+  de KiCad lancé hors venv — son `sitecustomize.py` fait `sys.path = []` puis le reconstruit lui-même
+  (ignore `PYTHONPATH`) tant qu'il n'est pas dans un venv (`sys.prefix != sys.base_prefix`).
+- Déclarer le serveur dans `.claude.json` (clé `mcpServers.kicad`, machine-locale, pas dans ce
+  dépôt) :
+  ```json
+  {
+    "type": "stdio",
+    "command": "node",
+    "args": ["<chemin complet vers dist/index.js>"],
+    "env": { "KICAD_PYTHON": "<chemin complet vers <venv>\\Scripts\\python.exe>" }
+  }
+  ```
+  Puis redémarrer la session Claude Code pour que les outils apparaissent.
+- Pas de variables `KICAD_SYMBOL_DIR`/`KICAD_FOOTPRINT_DIR` à poser pour ce serveur (c'était une
+  nécessité du serveur abandonné, voir ci-dessous) : `pcbnew`, via le Python embarqué, connaît déjà
+  les bibliothèques de l'installation KiCad.
+
+## Ancien serveur « kicad » (`kicad-eda-mcp`, abandonné le 2026-11-04) — pour mémoire
 
 - Installer KiCad (testé avec KiCad 10).
 - Le serveur MCP `kicad` (outil `kicad_schematic_edit`, basé sur `kicad-sch-api`, pur Python) ne lit
   pas le `sym-lib-table` de KiCad : il cherche seulement `KICAD_SYMBOL_DIR` / `KICAD9_SYMBOL_DIR` /
   `KICAD8_SYMBOL_DIR` / `KICAD7_SYMBOL_DIR` (pas `KICAD10_SYMBOL_DIR`). Sans ces variables, les
   symboles de base (`Device:R`, `Device:C`, `Switch:SW_Push`, `power:GND`, etc.) ne sont pas trouvés.
-  **À refaire sur chaque machine** : ajouter `KICAD_SYMBOL_DIR` et `KICAD_FOOTPRINT_DIR` (pointant
-  vers le dossier `share/kicad/symbols` et `share/kicad/footprints` de l'installation locale) à la
-  config du serveur MCP `kicad` dans `.claude.json`, à côté des `KICAD10_*` déjà présentes, puis
-  redémarrer le serveur.
 
 ## Opérations cassées du serveur (confirmé, pas de contournement côté serveur)
 
@@ -182,6 +231,14 @@ coordonnées — toujours vérifier par un rendu visuel.** C'est la cause direct
   + marge), puis placer dans cet ordre — plutôt que placer au fil de l'eau et ajuster après coup.
 
 ## Feuilles hiérarchiques (une page par bloc)
+
+**Avec le serveur actuel (`mixelpixx/KiCAD-MCP-Server`), le script `tools/add_kicad_sheet.py`
+ci-dessous n'est plus nécessaire** : l'outil MCP `create_hierarchical_subsheet` crée le fichier de
+sous-feuille et l'insère dans le schéma parent en un seul appel (voir
+`framework/kicad-mcp-bug-report.md`, test comparatif « kicad-mixelpixx »). Le principe reste le même
+(un bloc = une page, labels hiérarchiques pour ce qui sort du bloc, vérification par rendu visuel) ;
+cette section décrit la méthode avec l'ancien serveur, gardée pour mémoire tant que la méthode avec
+le nouveau serveur n'est pas documentée ici après son premier usage réel.
 
 `tools/add_kicad_sheet.py <dossier_projet_kicad> --name "DES-xxx — Titre" --file des-xxx-titre.kicad_sch [--pin NOM:forme ...]`
 (forme = `input`/`output`/`bidirectional`/`tri_state`/`passive`, une par signal qui sort du bloc).
