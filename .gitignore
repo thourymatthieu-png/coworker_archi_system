@@ -1,3 +1,6 @@
 
 # Fiches techniques PDF (volumineuses, voir releve-fiches-techniques.md)
 projets/*/Datasheets/
+
+# Fichiers de verrou KiCad (transitoires, créés à l'ouverture d'un projet)
+~*.lck

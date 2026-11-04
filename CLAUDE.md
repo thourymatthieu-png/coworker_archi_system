@@ -100,4 +100,7 @@ Nouveau projet : copier `framework/templates/` dans `projets/<nom>/`, puis lance
 ```bash
 python tools/check_traceability.py projets/<nom>          # état de la traçabilité
 python tools/check_traceability.py projets/<nom> --gate   # échoue s'il reste un doute bloquant ou un trou
+python tools/fix_kicad_project_uuid.py <dossier_projet_kicad> --check   # cohérence UUID .kicad_pro / .kicad_sch
 ```
+
+`fix_kicad_project_uuid.py` corrige (sans `--check`) un bug connu de `kicad_workflow create_project` (MCP `kicad`) : le `.kicad_sch` généré a un UUID racine incohérent avec le `.kicad_pro`, ce qui fait apparaître le schéma comme vide dans KiCad. À lancer juste après tout `create_project` — voir `.claude/agents/electronique-hardware.md`.
