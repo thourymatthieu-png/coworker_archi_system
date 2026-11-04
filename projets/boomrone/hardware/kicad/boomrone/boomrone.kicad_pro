@@ -618,7 +618,7 @@
       "include_excluded_from_bom": true,
       "name": "Default Editing",
       "sort_asc": true,
-      "sort_field": "Référence"
+      "sort_field": "R\u00e9f\u00e9rence"
     },
     "bus_aliases": {},
     "connection_grid_size": 50.0,
@@ -671,7 +671,11 @@
     ],
     [
       "fd7c0399-ad6a-4060-820a-a62c72681c6e",
-      "DES-010 — Circuit du bouton"
+      "DES-010 \u2014 Circuit du bouton"
+    ],
+    [
+      "5558eed9-9863-453b-acf0-0b6e6790bfe8",
+      "DES-011 \u2014 Circuit du voyant RGB et du buzzer"
     ]
   ],
   "text_variables": {},

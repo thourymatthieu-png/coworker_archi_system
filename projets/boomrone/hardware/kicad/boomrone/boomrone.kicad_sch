@@ -67,6 +67,104 @@
 			)
 		)
 	)
+	(sheet
+		(at 105 35)
+		(size 70 45)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "5558eed9-9863-453b-acf0-0b6e6790bfe8")
+		(property "Sheetname" "DES-011 — Circuit du voyant RGB et du buzzer"
+			(at 105 34.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "des-011-voyant-buzzer.kicad_sch"
+			(at 105 81.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "VBATM" passive
+			(at 105 43 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "18cf79dd-f177-4304-bda3-63070e377c21")
+		)
+		(pin "GND" passive
+			(at 105 48.08 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c0cb2c78-9288-4370-89f2-7856f47af20c")
+		)
+		(pin "PB1" input
+			(at 105 53.16 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9e13c146-1c30-4d22-818b-36283fb45fab")
+		)
+		(pin "PB2" input
+			(at 105 58.239999999999995 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "e9f51ae6-c85a-4e2d-ad82-47fbf502ad37")
+		)
+		(pin "PB10" input
+			(at 105 63.31999999999999 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "da7563bf-94ec-4b62-a209-6296b22c0804")
+		)
+		(pin "PB11" input
+			(at 105 68.39999999999999 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9fc236b6-d5c2-4773-a903-39d62ca7e282")
+		)
+		(instances
+			(project "boomrone"
+				(path "/35569232-9425-44ae-9575-d4f2245f7212"
+					(page "3")
+				)
+			)
+		)
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")
