@@ -334,3 +334,10 @@ en cp1252 : un accent (ou un caractère chinois d'un import EasyEDA) dans une de
 l'ouverture de la feuille (« 'charmap' codec can't decode byte »). Écrire en ASCII tout ce qui passe par
 `create_symbol`, `create_footprint`, `create_hierarchical_subsheet`, et nettoyer les imports EasyEDA.
 Contrôle : `grep -P '[^\x00-\x7F]' *.kicad_sch lib_*.kicad_sym lib_*.pretty/*`.
+
+**Avertissement « Ce fichier a été créé par une version plus ancienne de KiCad ».** Le serveur écrit les
+feuilles avec un numéro de version de format ancien (`version 20260101`). KiCad 10.0.8 les ouvre mais
+prévient. À lancer à la fin d'une session de saisie, sur chaque feuille :
+`kicad-cli sch upgrade <feuille>.kicad_sch` (met à jour vers `20260306`, sans changer le contenu ; vérifié :
+ERC toujours à 0). Faire de même avec `kicad-cli sym upgrade lib_<projet>.kicad_sym` si la bibliothèque est
+signalée.

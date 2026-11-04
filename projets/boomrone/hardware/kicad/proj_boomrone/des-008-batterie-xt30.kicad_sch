@@ -1,38 +1,46 @@
 (kicad_sch
-	(version 20260101)
+	(version 20260306)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid af3cf1e2-6767-4770-96ea-67f8cba90f9e)
+	(uuid "af3cf1e2-6767-4770-96ea-67f8cba90f9e")
 	(paper "A4")
 	(lib_symbols
-		(symbol "lib_boomrone:XT30PW-M"
+		(symbol "Device:C"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0.254)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "J"
-				(at 2.54 0 0)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Value" "XT30PW-M"
-				(at 0 -2.54 0)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
+					(justify left)
 				)
 			)
-			(property "Footprint" "lib_boomrone:CONN-TH_XT30PW-M"
-				(at 0 -5.08 0)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -43,28 +51,6 @@
 				)
 			)
 			(property "Datasheet" ""
-				(at 0 -7.62 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Description" "XT30PW-M30.G.Y male connector, 2 right-angle power pins (Amass, LCSC C431092). Mechanical pads 3 and 4 in the footprint, no symbol pin. Polarity to be confirmed (DOU-155)"
-				(at 0 -10.16 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "XT30 XT30PW connector battery"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -75,24 +61,70 @@
 					)
 				)
 			)
-			(symbol "XT30PW-M_0_1"
-				(rectangle
-					(start -2.54 -5.08)
-					(end 2.54 5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
 					)
 				)
 			)
-			(symbol "XT30PW-M_1_1"
-				(pin power_out line
-					(at 5.08 -2.54 180)
-					(length 2.54)
-					(name "-"
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts
+						(xy -2.032 0.762) (xy 2.032 0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -107,10 +139,10 @@
 						)
 					)
 				)
-				(pin power_out line
-					(at 5.08 2.54 180)
-					(length 2.54)
-					(name "+"
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name ""
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -293,42 +325,34 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:C"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0.254)
-			)
+		(symbol "lib_boomrone:XT30PW-M"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
-			(property "Reference" "C"
-				(at 0.635 2.54 0)
+			(property "Reference" "J"
+				(at 2.54 0 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Value" "C"
-				(at 0.635 -2.54 0)
+			(property "Value" "XT30PW-M"
+				(at 0 -2.54 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
-					(justify left)
 				)
 			)
-			(property "Footprint" ""
-				(at 0.9652 -3.81 0)
+			(property "Footprint" "lib_boomrone:CONN-TH_XT30PW-M"
+				(at 0 -5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(hide yes)
@@ -339,6 +363,28 @@
 				)
 			)
 			(property "Datasheet" ""
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "XT30PW-M30.G.Y male connector, 2 right-angle power pins (Amass, LCSC C431092). Mechanical pads 3 and 4 in the footprint, no symbol pin. Polarity to be confirmed (DOU-155)"
+				(at 0 -10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "XT30 XT30PW connector battery"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -349,70 +395,24 @@
 					)
 				)
 			)
-			(property "Description" "Unpolarized capacitor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_keywords" "cap capacitor"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "ki_fp_filters" "C_*"
-				(at 0 0 0)
-				(show_name no)
-				(do_not_autoplace no)
-				(hide yes)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(symbol "C_0_1"
-				(polyline
-					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
-					)
+			(symbol "XT30PW-M_0_1"
+				(rectangle
+					(start -2.54 -5.08)
+					(end 2.54 5.08)
 					(stroke
-						(width 0.508)
+						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
-					)
-					(stroke
-						(width 0.508)
-						(type default)
-					)
-					(fill
-						(type none)
+						(type background)
 					)
 				)
 			)
-			(symbol "C_1_1"
-				(pin passive line
-					(at 0 3.81 270)
-					(length 2.794)
-					(name ""
+			(symbol "XT30PW-M_1_1"
+				(pin power_out line
+					(at 5.08 -2.54 180)
+					(length 2.54)
+					(name "-"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -427,10 +427,10 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 0 -3.81 90)
-					(length 2.794)
-					(name ""
+				(pin power_out line
+					(at 5.08 2.54 180)
+					(length 2.54)
+					(name "+"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -563,123 +563,333 @@
 			)
 			(embedded_fonts no)
 		)
-	
-        	(symbol "power:PWR_FLAG"
-    		(power global)
-    		(pin_numbers
-    			(hide yes)
-    		)
-    		(pin_names
-    			(offset 0)
-    			(hide yes)
-    		)
-    		(exclude_from_sim no)
-    		(in_bom yes)
-    		(on_board yes)
-    		(in_pos_files yes)
-    		(duplicate_pin_numbers_are_jumpers no)
-    		(property "Reference" "#FLG"
-    			(at 0 1.905 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Value" "PWR_FLAG"
-    			(at 0 3.81 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Footprint" ""
-    			(at 0 0 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Datasheet" ""
-    			(at 0 0 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "Description" "Special symbol for telling ERC where power comes from"
-    			(at 0 0 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(property "ki_keywords" "flag power"
-    			(at 0 0 0)
-    			(show_name no)
-    			(do_not_autoplace no)
-    			(hide yes)
-    			(effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    		)
-    		(symbol "PWR_FLAG_0_0"
-    			(pin power_out line
-    				(at 0 0 90)
-    				(length 0)
-    				(name ""
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    				(number "1"
-    					(effects
-    						(font
-    							(size 1.27 1.27)
-    						)
-    					)
-    				)
-    			)
-    		)
-    		(symbol "PWR_FLAG_0_1"
-    			(polyline
-    				(pts
-    					(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
-    				)
-    				(stroke
-    					(width 0)
-    					(type default)
-    				)
-    				(fill
-    					(type none)
-    				)
-    			)
-    		)
-    		(embedded_fonts no)
-    	)
-  )
+		(symbol "power:PWR_FLAG"
+			(power global)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#FLG"
+				(at 0 1.905 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "PWR_FLAG"
+				(at 0 3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Special symbol for telling ERC where power comes from"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "flag power"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_0"
+				(pin power_out line
+					(at 0 0 90)
+					(length 0)
+					(name ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(symbol "PWR_FLAG_0_1"
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(text "DES-008 - Batterie, connecteur XT30 et entree de la carte"
+		(exclude_from_sim no)
+		(at 90.17 83.82 0)
+		(effects
+			(font
+				(size 2.5 2.5)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "32b03492-63de-4f2d-9942-84d96cc418d9")
+	)
+	(junction
+		(at 165.1 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0beff0f3-59bb-4c50-b28a-89162ab074a2")
+	)
+	(junction
+		(at 134.62 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "32b517ec-c585-49b1-b26e-5d0f524ae61e")
+	)
+	(junction
+		(at 157.48 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5f1a08fb-b581-4ac4-8b97-69434a409cc1")
+	)
+	(wire
+		(pts
+			(xy 134.62 96.52) (xy 144.78 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c411f70-c46f-4ae6-a169-33ab7abf340a")
+	)
+	(wire
+		(pts
+			(xy 157.48 104.14) (xy 165.1 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "390eee0c-3a80-4b87-a60f-0538d41b50fd")
+	)
+	(wire
+		(pts
+			(xy 134.62 104.14) (xy 139.7 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44c30a2a-322d-4767-b396-94a76aca8688")
+	)
+	(wire
+		(pts
+			(xy 134.62 104.14) (xy 134.62 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b264789-027d-474e-8b47-c2e6e4690eba")
+	)
+	(wire
+		(pts
+			(xy 165.1 104.14) (xy 172.72 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d3d0fd7-f217-43cf-a78f-26b42edaf328")
+	)
+	(wire
+		(pts
+			(xy 147.32 104.14) (xy 157.48 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b3c050e-8614-4323-866f-3e81420f189e")
+	)
+	(wire
+		(pts
+			(xy 129.54 109.22) (xy 129.54 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6e217a63-36ce-40e8-bcee-503f9df00f6d")
+	)
+	(wire
+		(pts
+			(xy 129.54 104.14) (xy 134.62 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "958a8670-2fb4-42f0-b553-5ed136d403a9")
+	)
+	(hierarchical_label "VBATL"
+		(shape output)
+		(at 172.72 104.14 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "19de606e-9c9e-4401-b3fc-d674faac03ca")
+	)
+	(hierarchical_label "VBATM"
+		(shape output)
+		(at 144.78 96.52 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a6f1735c-fd54-4fba-8414-22f63fb90d03")
+	)
+	(symbol
+		(lib_id "Device:FerriteBead")
+		(at 143.51 104.14 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0b4e40f6-7d6f-406f-8699-dbf523c9f3ab")
+		(property "Reference" "FB1"
+			(at 143.51 108.21 270)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "BLM18PG121SN1D"
+			(at 143.51 110.75 270)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+			(at 143.51 105.918 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 143.51 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Ferrite bead"
+			(at 143.51 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "385741a5-b397-4f1f-bcba-91406c2b2ef8")
+		)
+		(pin "2"
+			(uuid "3f25d775-217d-4f11-9862-d5192affcceb")
+		)
+		(instances
+			(project "proj_boomrone"
+				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d/85ff9e74-f25e-41fb-b380-b787f50b1577"
+					(reference "FB1")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(symbol
 		(lib_id "lib_boomrone:XT30PW-M")
 		(at 124.46 106.68 0)
@@ -760,8 +970,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:FerriteBead")
-		(at 143.51 104.14 90)
+		(lib_id "power:PWR_FLAG")
+		(at 165.1 104.14 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -769,9 +979,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "0b4e40f6-7d6f-406f-8699-dbf523c9f3ab")
-		(property "Reference" "FB1"
-			(at 143.51 108.21 270)
+		(uuid "2173b941-2747-4c8d-9cf7-ef3e7315d75d")
+		(property "Reference" "#FLG01"
+			(at 165.1 104.14 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -780,8 +991,8 @@
 				)
 			)
 		)
-		(property "Value" "BLM18PG121SN1D"
-			(at 143.51 110.75 270)
+		(property "Value" "PWR_FLAG"
+			(at 165.1 99.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -790,8 +1001,8 @@
 				)
 			)
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
-			(at 143.51 105.918 90)
+		(property "Footprint" ""
+			(at 165.1 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -802,7 +1013,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 143.51 104.14 0)
+			(at 165.1 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -812,8 +1023,8 @@
 				)
 			)
 		)
-		(property "Description" "Ferrite bead"
-			(at 143.51 104.14 0)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 165.1 104.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -824,15 +1035,166 @@
 			)
 		)
 		(pin "1"
-			(uuid "385741a5-b397-4f1f-bcba-91406c2b2ef8")
-		)
-		(pin "2"
-			(uuid "3f25d775-217d-4f11-9862-d5192affcceb")
+			(uuid "e77612a9-9a32-4ba8-8f98-a4820aa61e34")
 		)
 		(instances
 			(project "proj_boomrone"
 				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d/85ff9e74-f25e-41fb-b380-b787f50b1577"
-					(reference "FB1")
+					(reference "#FLG01")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 157.48 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4487753f-9f16-4b8f-88bd-208e4abcb542")
+		(property "Reference" "#PWR05"
+			(at 157.48 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 157.48 116.4 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 157.48 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 157.48 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 157.48 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3933525b-9911-4af0-b02d-0428e74bb5e9")
+		)
+		(instances
+			(project "proj_boomrone"
+				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d/85ff9e74-f25e-41fb-b380-b787f50b1577"
+					(reference "#PWR05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 129.54 114.3 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "af42fc7b-a3e8-45dd-acb3-5c78a39f754c")
+		(property "Reference" "#PWR04"
+			(at 129.54 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 129.54 118.94 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 129.54 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 129.54 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 129.54 114.3 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2534de11-3131-4645-be29-413f35a7a6fd")
+		)
+		(instances
+			(project "proj_boomrone"
+				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d/85ff9e74-f25e-41fb-b380-b787f50b1577"
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -919,360 +1281,7 @@
 			)
 		)
 	)
-	(symbol
-		(lib_id "power:GND")
-		(at 157.48 111.76 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "4487753f-9f16-4b8f-88bd-208e4abcb542")
-		(property "Reference" "#PWR05"
-			(at 157.48 111.76 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 157.48 116.4 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 157.48 111.76 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 157.48 111.76 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 157.48 111.76 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "3933525b-9911-4af0-b02d-0428e74bb5e9")
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d/85ff9e74-f25e-41fb-b380-b787f50b1577"
-					(reference "#PWR05")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 129.54 104.14) (xy 134.62 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "958a8670-2fb4-42f0-b553-5ed136d403a9")
-	)
-	(wire
-		(pts
-			(xy 134.62 104.14) (xy 139.7 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "44c30a2a-322d-4767-b396-94a76aca8688")
-	)
-	(wire
-		(pts
-			(xy 134.62 104.14) (xy 134.62 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4b264789-027d-474e-8b47-c2e6e4690eba")
-	)
-	(wire
-		(pts
-			(xy 134.62 96.52) (xy 144.78 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2c411f70-c46f-4ae6-a169-33ab7abf340a")
-	)
-	(junction
-		(at 134.62 104.14)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "32b517ec-c585-49b1-b26e-5d0f524ae61e")
-	)
-	(wire
-		(pts
-			(xy 147.32 104.14) (xy 157.48 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6b3c050e-8614-4323-866f-3e81420f189e")
-	)
-	(wire
-		(pts
-			(xy 157.48 104.14) (xy 165.1 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "390eee0c-3a80-4b87-a60f-0538d41b50fd")
-	)
-	(junction
-		(at 157.48 104.14)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "5f1a08fb-b581-4ac4-8b97-69434a409cc1")
-	)
-	(hierarchical_label "VBATM"
-		(shape output)
-		(at 144.78 96.52 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a6f1735c-fd54-4fba-8414-22f63fb90d03")
-	)
-	(hierarchical_label "VBATL"
-		(shape output)
-		(at 172.72 104.14 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "19de606e-9c9e-4401-b3fc-d674faac03ca")
-	)
-	(text "DES-008 - Batterie, connecteur XT30 et entree de la carte"
-		(exclude_from_sim no)
-		(at 90.17 83.82 0)
-		(effects
-			(font
-				(size 2.5 2.5)
-				(bold yes)
-			)
-			(justify left bottom)
-		)
-		(uuid "32b03492-63de-4f2d-9942-84d96cc418d9")
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 129.54 114.3 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "af42fc7b-a3e8-45dd-acb3-5c78a39f754c")
-		(property "Reference" "#PWR04"
-			(at 129.54 114.3 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 129.54 118.94 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 129.54 114.3 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 129.54 114.3 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 129.54 114.3 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "2534de11-3131-4645-be29-413f35a7a6fd")
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d/85ff9e74-f25e-41fb-b380-b787f50b1577"
-					(reference "#PWR04")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts
-			(xy 129.54 109.22000000000001) (xy 129.54 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6e217a63-36ce-40e8-bcee-503f9df00f6d")
-	)
-	  (symbol (lib_id "power:PWR_FLAG") (at 165.1 104.14 0) (unit 1)
-    (body_style 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (in_pos_files yes) (dnp no)
-    (uuid "2173b941-2747-4c8d-9cf7-ef3e7315d75d")
-    (property "Reference" "#FLG01"
-			(at 165.1 104.14 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-    (property "Value" "PWR_FLAG"
-			(at 165.1 99.5 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-    (property "Footprint" ""
-      (at 165.1 104.14 0)
-      (hide yes)
-      (show_name no)
-      (do_not_autoplace no)
-      (effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    )
-    (property "Datasheet" ""
-      (at 165.1 104.14 0)
-      (hide yes)
-      (show_name no)
-      (do_not_autoplace no)
-      (effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    )
-    (property "Description" "Special symbol for telling ERC where power comes from"
-      (at 165.1 104.14 0)
-      (hide yes)
-      (show_name no)
-      (do_not_autoplace no)
-      (effects
-    				(font
-    					(size 1.27 1.27)
-    				)
-    			)
-    )
-    (pin "1" (uuid "e77612a9-9a32-4ba8-8f98-a4820aa61e34"))
-    (instances
-      (project "proj_boomrone"
-        (path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d/85ff9e74-f25e-41fb-b380-b787f50b1577"
-          (reference "#FLG01")
-          (unit 1)
-        )
-      )
-    )
-  )
-	(wire
-		(pts
-			(xy 165.1 104.14) (xy 172.72 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5d3d0fd7-f217-43cf-a78f-26b42edaf328")
-	)
-	(junction
-		(at 165.1 104.14)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0beff0f3-59bb-4c50-b28a-89162ab074a2")
-	)
-  (sheet_instances
+	(sheet_instances
 		(path "/"
 			(page "1")
 		)
