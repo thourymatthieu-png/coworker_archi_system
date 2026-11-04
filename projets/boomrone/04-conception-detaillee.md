@@ -3,7 +3,7 @@
 > **Aperçu**
 > - 38 éléments de conception (DES) qui déclinent les 30 éléments de « Architecture » — `projets/boomrone/03-architecture.md` : 14 matériels (schémas, valeurs de composants, mécanique, bilan, numérotés en premier) et 24 logiciels ou documentaires ; 38 tests unitaires (TU) dans « Plans de test » — `projets/boomrone/05-plans-de-test.md`.
 > - Rédigée par délégation totale (DEC-254 « Délégation totale de la phase conception détaillée à l'architecte ») ; seuils de batterie conservés (DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version »), aucune mesure au banc : gains et constantes de départ provisoires.
-> - Aucun code ni schéma KiCad n'existe encore : « Réalisé par » donne les chemins prévus.
+> - Le schéma KiCad existe (`projets/boomrone/hardware/kicad/proj_boomrone/`, 11 pages, ERC à 0, saisi le 2026-11-04 : DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page ») ; aucun code firmware n'existe encore : « Réalisé par » donne les chemins prévus pour le reste.
 > - Schémas SVG des circuits de la carte (un par bloc de circuit, ni mécanique ni logiciel ; dossier `projets/boomrone/schemas/`) : illustrations de conception, pas les schémas KiCad de fabrication (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée ») ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée », broches non relevées : DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».
 > - État : tous les DES sont « Validé », porte franchie le 2026-10-30 (DEC-276 « Porte conception détaillée franchie : accord explicite de l'utilisateur »). Choix : DEC-255 « Conception détaillée : chaîne de développement et arborescence des fichiers » à DEC-274 « Échec par sous-tension : horloge conservée à 170 MHz » ; doutes : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » à DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». Corrigée le 2026-10-30 d'après les fiches techniques déposées (« Relevé des fiches techniques » — `projets/boomrone/releve-fiches-techniques.md`) : DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier » à DEC-283 « Relevé des fiches : doutes levés et doutes mis à jour ».
 
@@ -177,7 +177,7 @@ Budget de courant : +3V0 130 mA (dimensionnement), VBATM 9,5 A en crête de 2 s.
 
 *Légende : vue par blocs, le schéma de chaque bloc est dans le DES indiqué dans la boîte. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».*
 
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (page racine « Blocs »), `projets/boomrone/hardware/calculs/calculs.py`, `projets/boomrone/schemas/des-001-blocs-et-reseaux.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/proj_boomrone.kicad_sch` (page racine, index des feuilles), `projets/boomrone/hardware/calculs/calculs.py`, `projets/boomrone/schemas/des-001-blocs-et-reseaux.svg`
 **Statut :** Validé
 
 ### DES-002 — Microcontrôleur : brochage, horloges, découplage et octets d'option
@@ -232,7 +232,7 @@ Budgets : flash 128 kio, SRAM 32 kio dont 16 kio de SRAM1 utilisés (le détail 
 | 4,7 µF | 0603 | C19666 | 1 | VDD, commun |
 
 Total : 38 passifs, dont 2 de type étendu.
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « MCU »), `projets/boomrone/firmware/src/board.c`, `projets/boomrone/firmware/src/board.h`, `projets/boomrone/firmware/src/board_pins.h`, `projets/boomrone/schemas/des-002-microcontroleur.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-002-microcontroleur.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/firmware/src/board.c`, `projets/boomrone/firmware/src/board.h`, `projets/boomrone/firmware/src/board_pins.h`, `projets/boomrone/schemas/des-002-microcontroleur.svg`
 **Statut :** Validé
 
 ### DES-003 — Raccordement de la centrale inertielle LSM6DSO
@@ -248,7 +248,7 @@ Mise en route : le premier accès SPI attend `IMU_BOOT_WAIT_MS` = 40 ms (constan
 *Légende : liaison SPI1, rappel de CS, alimentations et registres d'initialisation. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs » ; DOU-196 « LSM6DSO : durée du reset logiciel et départ du temps de mise en route non trouvés ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** centrale inertielle LSM6DSOTR, LGA-14, LCSC C2655100 (type étendu).
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Capteurs »), `projets/boomrone/firmware/src/drv_imu_regs.h`, `projets/boomrone/schemas/des-003-centrale-inertielle.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-003-centrale-inertielle.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/firmware/src/drv_imu_regs.h`, `projets/boomrone/schemas/des-003-centrale-inertielle.svg`
 **Statut :** Validé
 
 ### DES-004 — Raccordement du capteur de hauteur VL53L1X
@@ -262,7 +262,7 @@ Mécanique : fenêtre optique dégagée, cône de 27° sans pièce dessous, capt
 *Légende : I2C1 avec rappels, GPIO1, XSHUT, alimentations et découplages. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-149 « Valeurs de registres du VL53L1X à vérifier dans la bibliothèque ST (ULD) » ; DOU-157 « VL53L1CX contre VL53L1X : identifiant, bibliothèque et registres ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** capteur de hauteur VL53L1CXV0FY/1 (référence ST du VL53L1X), LGA-12, LCSC C190004 (type étendu).
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Capteurs »), `projets/boomrone/schemas/des-004-capteur-hauteur.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-004-capteur-hauteur.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-004-capteur-hauteur.svg`
 **Statut :** Validé
 
 ### DES-005 — Raccordement du flux optique PMW3901MB et régulateur de 2,0 V
@@ -276,7 +276,7 @@ Optique : lentille LN03-ZSZ (fournie avec la puce, à confirmer : DOU-164 « PMW
 *Légende : régulateur XC6206 vers +2V0, VDDIO à +3V0, SPI2, NRESET et plots de repli. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-165 « Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension » ; DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** puce du flux optique PMW3901MB-TXQT, COB-28, LCSC C43496881 (type étendu, 182 en stock, assemblage et lentille à confirmer) ; régulateur de 2,0 V XC6206P202MR-G, SOT-23, LCSC C2891260 (type étendu).
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Capteurs »), `projets/boomrone/schemas/des-005-flux-optique-regulateur-2v0.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-005-flux-optique.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-005-flux-optique-regulateur-2v0.svg`
 **Statut :** Validé
 
 ### DES-006 — Cadre, anneaux, moteurs et hélices
@@ -304,7 +304,7 @@ Cas non couverts, testés par TI-005 « Moteurs coupés par le matériel » : MO
 *Légende : circuit d'une voie, identique pour les quatre moteurs ; le tableau donne les broches et les repères de chaque voie. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-199 « AO3400A : résistance à 3,0 V et capacité d'entrée maximale non trouvées dans la fiche ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** MOSFET AO3400A, SOT-23, LCSC C20917 (type de base) ; diode de roue libre SS34, SMA, LCSC C8678 (type de base).
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Puissance »), `projets/boomrone/schemas/des-007-puissance-moteurs.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-007-puissance-moteurs.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-007-puissance-moteurs.svg`
 **Statut :** Validé
 
 ### DES-008 — Batterie, connecteur XT30 et entrée de la carte
@@ -317,7 +317,7 @@ Calculs de contrôle : chute dans la ferrite à 130 mA avec une résistance de 0
 
 *Légende : deux branches VBATM et VBATL, ferrite hors du chemin des moteurs. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion » ; DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage ».*
 
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Alimentation »), `projets/boomrone/schemas/des-008-batterie-xt30-entree.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-008-batterie-xt30.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-008-batterie-xt30-entree.svg`
 **Statut :** Validé
 
 ### DES-009 — Régulateur de 3,0 V et pont de mesure de la tension
@@ -331,7 +331,7 @@ Pont de mesure sur VBATM : 100 kohms 0,1 % (haut) et 150 kohms 0,1 % (bas), mili
 *Légende : MCP1700 de VBATL vers +3V0 et pont 100 kΩ / 150 kΩ de VBATM vers PA0. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-173 « Composants passifs et découplages à relever dans les fiches avant le routage » ; DOU-182 « Noms et numéros de broches des circuits intégrés des schémas SVG non relevés dans les fiches ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** régulateur de 3,0 V MCP1700T-3002E/TT, SOT-23, LCSC C62244 (type étendu) ; repli ME6211C30M5G-N, SOT-23-5, LCSC C403651 (type étendu).
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Alimentation »), `projets/boomrone/schemas/des-009-regulateur-3v0-pont-mesure.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-009-regulateur-pont.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-009-regulateur-3v0-pont-mesure.svg`
 **Statut :** Validé
 
 ### DES-010 — Circuit du bouton
@@ -342,7 +342,7 @@ Pont de mesure sur VBATM : 100 kohms 0,1 % (haut) et 150 kohms 0,1 % (bas), mili
 
 *Légende : poussoir, 1 kΩ en série, rappel de 10 kΩ et 10 nF. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ».*
 
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Interface »), `projets/boomrone/schemas/des-010-bouton.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-010-bouton.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-010-bouton.svg`
 **Statut :** Validé
 
 ### DES-011 — Circuit du voyant RGB et du buzzer
@@ -356,7 +356,7 @@ Buzzer actif SMD-9650-3327 entre VBATM et le drain d'un quatrième AO3400A (gril
 *Légende : voyant à anode commune sur VBATM, trois AO3400A, buzzer et diode de roue libre sur un quatrième AO3400A. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-161 « Tensions directes du voyant RGB : visibilité du vert et du bleu entre 3,4 et 3,7 V ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** voyant RGB à anode commune SZYY1615RGB-B, LCSC C3029071 (type étendu) ; MOSFET AO3400A, SOT-23, LCSC C20917 (type de base) ; diode SS34, LCSC C8678 (type de base) ; buzzer actif SMD-9650-3327, LCSC C42420997 (type étendu).
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Interface »), `projets/boomrone/schemas/des-011-voyant-buzzer.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-011-voyant-buzzer.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-011-voyant-buzzer.svg`
 **Statut :** Validé
 
 ### DES-012 — Raccordement du module Bluetooth PB-03F
@@ -368,7 +368,7 @@ Buzzer actif SMD-9650-3327 entre VBATM et le drain d'un quatrième AO3400A (gril
 *Légende : liaison série croisée avec PA2 et PA3, alimentation 3,0 V, PA1 non reliée et plots de repli. Illustration de conception (DEC-275 « Schémas SVG des circuits de la carte dans la conception détaillée »), pas le schéma KiCad de fabrication ; repères provisoires : DOU-183 « Repères de composants provisoires des schémas SVG de la conception détaillée ». En orange, éléments à vérifier : DOU-200 « PB-03F : mode transparent sans commande, microprogramme d'origine, débit et service Bluetooth » ; DOU-202 « PB-03F : circuit d'application, programmation du module et plots de test » ; DOU-203 « PB-03F sans broche de réveil : veille, reset en vol et état à la mise sous tension ».*
 
 **Références JLCPCB/LCSC (composants actifs ; stocks relevés le 2026-10-29 dans « Architecture » — `projets/boomrone/03-architecture.md`, à relire le jour de la commande) :** module Bluetooth Ai-Thinker PB-03F (PHY6252), SMD-22, LCSC C2980027 (type étendu, 6 019 en stock et 1,36 USD relevés le 2026-11-02 dans une base tierce, à relire sur jlcpcb.com ; l'ancien C411314 du E104-BT02 est refusé par JLCPCB : DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB »).
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_sch` (feuille « Radio »), `projets/boomrone/schemas/des-012-module-bluetooth.svg`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/des-012-module-bluetooth.kicad_sch` (feuille hiérarchique, page A4/A3 paysage ; ERC à 0), `projets/boomrone/schemas/des-012-module-bluetooth.svg`
 **Statut :** Validé
 
 ### DES-013 — Implantation, routage et fichiers de fabrication pour JLCPCB
@@ -377,7 +377,7 @@ Buzzer actif SMD-9650-3327 entre VBATM et le drain d'un quatrième AO3400A (gril
 
 Fichiers pour la commande : gerbers et perçages (greffon KiCad pour JLCPCB), nomenclature CSV avec une colonne « LCSC Part # » (une ligne par référence, numéros de « Architecture » — `projets/boomrone/03-architecture.md`, section « Nomenclature et catalogue JLCPCB/LCSC »), fichier de placement (CPL) dont les rotations sont vérifiées dans l'aperçu de JLCPCB, panneau (4 cartes), assemblage Standard double face. Liste de contrôle avant la commande : DOU-153 « Carte double face, assemblage Standard, frais d'extension et délais » (devis), DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce » (puce du flux), DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion » (genre du XT30), DOU-156 « Vérifications avant la commande de la carte » (vérifications préalables), stocks relus le jour de la commande.
 **Références JLCPCB/LCSC des composants actifs (récapitulatif) :** STM32G431CBT6 C529355 ; LSM6DSOTR C2655100 ; VL53L1CXV0FY/1 C190004 ; PMW3901MB-TXQT C43496881 ; XC6206P202MR-G C2891260 ; MCP1700T-3002E/TT C62244 (repli ME6211C30M5G-N C403651) ; AO3400A C20917 ; SS34 C8678 ; SZYY1615RGB-B C3029071 ; PB-03F C2980027. Les passifs, le XT30, le bouton, la ferrite et l'en-tête SWD restent dans la nomenclature de « Architecture » — `projets/boomrone/03-architecture.md`.
-**Réalisé par :** `projets/boomrone/hardware/kicad/boomrone.kicad_pcb`, `projets/boomrone/hardware/fab/bom.csv`, `projets/boomrone/hardware/fab/cpl.csv`, `projets/boomrone/hardware/fab/verif_bom.py`
+**Réalisé par :** `projets/boomrone/hardware/kicad/proj_boomrone/proj_boomrone.kicad_pcb`, `projets/boomrone/hardware/fab/bom.csv`, `projets/boomrone/hardware/fab/cpl.csv`, `projets/boomrone/hardware/fab/verif_bom.py`
 **Statut :** Validé
 
 ### DES-014 — Feuille de calcul du bilan de masse, de poussée et d'autonomie

@@ -11,3 +11,6 @@ projets/*/Datasheets/
 
 # Historique local d'éditeur (ex. extension VS Code Local History)
 .history/
+
+# Réglages d affichage locaux de KiCad (propres à chaque poste)
+*.kicad_prl

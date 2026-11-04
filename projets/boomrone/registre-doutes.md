@@ -556,7 +556,8 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Concerne :** ARC-012 « Module radio Bluetooth à basse consommation », DES-012 « Raccordement du module Bluetooth PB-03F », DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option »
 **Question :** (1) niveau « éveillé » de WKP (P06, broche 9) : présumé bas (rappel interne haut = veille par défaut selon le relevé), non démontré ; (2) comportement d'un WKP tenu bas dès la mise sous tension (non décrit) et valeur de PA1 pendant le reset du microcontrôleur (broche analogique, module en veille) ; (3) mot de passe aérien par défaut 123456 : toute personne à portée peut reconfigurer le module (le relevé propose la commande <UPDPWDxxx> au premier essai) ; (4) consommation en veille et éveillé.
 **Réponse :** Sans objet depuis DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB » : le PB-03F n'a pas de broche WKP ; son état à la mise sous tension et sa veille sont suivis par DOU-203 « PB-03F sans broche de réveil : veille, reset en vol et état à la mise sous tension ».
-**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier » ; DEC-286 « WKP : PA1 directe, emplacements de 0 Ω supprimés » ; DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB »
+**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier » ; DEC-286 « WKP : PA1 directe, emplacements de 0 Ω supprimés »
+ ; DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB »
 
 
 
@@ -566,7 +567,8 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Concerne :** ARC-012 « Module radio Bluetooth à basse consommation », DES-012 « Raccordement du module Bluetooth PB-03F »
 **Question :** la fiche d'Ebyte est en chinois : le relevé a été fait par lecture des tableaux, sans relecture par une personne qui lit le chinois (points concernés : veille et WKP, commandes, débit, service). Non trouvés de façon sûre : tolérance de l'horloge du module (donc l'erreur de débit totale avec les ±1,75 % de la HSI16) et niveaux d'entrée VIL et VIH.
 **Réponse :** Sans objet depuis DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB » : le E104-BT02 (C411314) est remplacé par le PB-03F, dont la fiche est en anglais ; les points de la fiche du PB-03F sont suivis par DOU-200 « PB-03F : mode transparent sans commande, microprogramme d'origine, débit et service Bluetooth ».
-**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier » ; DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB »
+**Décision liée :** DEC-277 « Module radio : 19200 bauds, réveil par PA1, broches du module et boîtier »
+ ; DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB »
 
 
 
@@ -1674,3 +1676,20 @@ Complément du 2026-10-28 (3e relecture de porte) : des paramètres de vol aberr
 **Question :** le schéma de référence de la fiche PMW3901MB v1.5 (figure 7, p. 12) prévoit sur VDD deux condensateurs de 22 µF et un de 100 nF avec une résistance R1, sur VDDIO 10 µF et 100 nF, sur VREG 4,7 µF et 100 nF, et une résistance de 10 kohms (R2), tous au plus près des broches. DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » prévoit 1 µF et 100 nF sur VDD, 100 nF sur VDDIO et 2,2 µF sur VREG. La valeur et le rôle de R1 (extraction du PDF illisible, page non affichable ici) et la raison des 22 µF (réponse à la pointe de 70 mA ?) ne sont pas lus : adopter les valeurs de la fiche ou justifier un écart est une décision.
 **Réponse :** (à remplir) lire R1 et le rôle de R2 sur la page 12 du PDF ; proposition : adopter les valeurs de la fiche sauf manque de place, après avoir vérifié la stabilité du XC6206 avec une capacité de sortie plus grande (fiche Torex : CL de 1 µF, 2,2 µF compatible, au-delà non dit). Non bloquant, à lever avant le routage.
 **Décision liée :** DEC-289 « Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1 »
+
+### DOU-206 — Buzzer SMD-9650-3327 : empreinte EasyEDA de 9,0 mm contre 9,6 mm de la nomenclature
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** DES-011 « Circuit du voyant RGB et du buzzer », DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »
+**Question :** l'empreinte importée d'EasyEDA pour C42420997 s'appelle « BUZ-SMD_L9.0-W9.0_SMD-0955-42-27 » (corps de 9,0 x 9,0 mm, deux pastilles de 2,2 x 4,0 mm), alors que « Architecture » — `projets/boomrone/03-architecture.md` donne 9,6 x 9,6 x 5 mm pour le SMD-9650-3327. Les deux ne sont pas la même pièce ou une des données est fausse.
+**Réponse :** (à remplir) comparer avec la fiche du buzzer (absente du dossier des fiches) ou mesurer la pièce ; corriger l'empreinte ou la nomenclature avant le routage.
+**Décision liée :** DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page »
+
+### DOU-207 — Symboles EasyEDA du PMW3901MB et du PB-03F : brochage à comparer aux fiches
+**Statut :** Ouvert
+**Bloquant :** Non
+**Concerne :** DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-012 « Raccordement du module Bluetooth PB-03F »
+**Question :** les symboles du PMW3901MB (29 broches) et du PB-03F (22 broches) viennent d'EasyEDA ; leurs noms de broches concordent avec le texte de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » et de DES-012 « Raccordement du module Bluetooth PB-03F », mais ils n'ont pas été comparés broche par broche aux fiches (la fiche du PMW3901MB n'est pas dans `projets/boomrone/Datasheets/`, voir DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »). La polarité des plots du XT30PW sur l'empreinte EasyEDA (« - » à gauche, « + » à droite) reste à confirmer : DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion ».
+**Réponse :** (à remplir) déposer les fiches et vérifier avant la commande de la carte.
+**Décision liée :** DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page »
+

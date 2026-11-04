@@ -89,7 +89,8 @@ Règles détaillées : `framework/regles-documentaires.md`. En résumé : un ape
 ```
 .claude/agents/            les six agents
 framework/                 règles documentaires et gabarits (templates/)
-tools/check_traceability.py  vérification de traçabilité et des doutes
+tools/check_traceability_V2.py  vérification de traçabilité et des doutes (phase par phase)
+tools/kicad_*.py             saisie et mise en page des schémas KiCad (voir §9)
 projets/<nom>/             documents d'un projet (copiés depuis framework/templates)
 ```
 
@@ -98,12 +99,18 @@ Nouveau projet : copier `framework/templates/` dans `projets/<nom>/`, puis lance
 ## 9. Vérification
 
 ```bash
-python tools/check_traceability.py projets/<nom>          # état de la traçabilité
-python tools/check_traceability.py projets/<nom> --gate   # échoue s'il reste un doute bloquant ou un trou
-python tools/fix_kicad_project_uuid.py <dossier_projet_kicad> --check   # cohérence UUID .kicad_pro / .kicad_sch
-python tools/add_kicad_sheet.py <dossier_projet_kicad> --name "..." --file ...kicad_sch   # nouvelle page/bloc KiCad
+python tools/check_traceability_V2.py projets/<nom> --gate --phase conception   # traçabilité et doutes (phase : scenarios, besoins, exigences, architecture, conception...)
+python tools/kicad_place_fields.py <feuille>.kicad_sch                          # place les textes référence/valeur selon le type de symbole (+ avertit des pas trop serrés)
+python tools/kicad_add_items.py <feuille>.kicad_sch spec.json                  # fils, étiquettes hiérarchiques/locales, croix NC, jonctions en une fois
+python tools/kicad_build_root.py <dossier_projet_kicad>                         # page racine : cases, broches de feuille, étiquettes
+kicad-cli sch erc <racine>.kicad_sch -o rapport.txt                             # ERC de toute la hiérarchie (objectif : 0 violation)
+kicad-cli sch upgrade <feuille>.kicad_sch                                       # format le plus récent (évite l'avertissement à l'ouverture)
 ```
 
-`fix_kicad_project_uuid.py` corrige (sans `--check`) un bug connu de `kicad_workflow create_project` (MCP `kicad`) : le `.kicad_sch` généré a un UUID racine incohérent avec le `.kicad_pro`, ce qui fait apparaître le schéma comme vide dans KiCad. À lancer juste après tout `create_project` — voir `.claude/agents/electronique-hardware.md`.
+Le serveur MCP KiCad actuel est `mixelpixx/KiCAD-MCP-Server` ; l'ancien serveur (`kicad-eda-mcp`) et ses contournements (`tools/add_kicad_sheet.py`, `tools/fix_kicad_project_uuid.py`) sont obsolètes, gardés pour mémoire. Méthode, pièges et mise en route sur une nouvelle machine : `framework/kicad-mcp-notes.md` — **à relire sur tout nouveau poste** (la déclaration du serveur MCP dans `~/.claude.json` et les environnements Python sont locaux à chaque poste, pas dans ce dépôt).
 
-`add_kicad_sheet.py` contourne un autre bug du même MCP (`kicad_schematic_edit` opération `add_sheet` cassée) : il crée une feuille hiérarchique (une page A4/A3 paysage par bloc, titre en haut) dans le schéma racine et un fichier de sous-feuille prêt à être rempli. Un bloc KiCad = une page, pas un schéma mélangé. Détails, autres bugs du MCP et méthode de câblage : `framework/kicad-mcp-notes.md` — à relire sur toute nouvelle machine (la config des variables d'environnement du serveur MCP kicad est locale à chaque poste, pas dans ce dépôt).
+## 10. Préférences de travail de l'utilisateur (à respecter sur tout poste)
+
+- **Fiches techniques en anglais** : si une fiche est en chinois, demander une version anglaise.
+- **Automatiser les réglages répétitifs** : quand un réglage manuel se répète (ex. position des textes d'un schéma KiCad), écrire ou enrichir un script du dépôt plutôt que corriger à la main, et l'améliorer à chaque correction.
+- **Schémas KiCad : une page à la fois**, validée par l'utilisateur dans KiCad avant la suivante ; pièces douteuses : bibliothèque EasyEDA/LCSC ; ne rien commiter sans accord.

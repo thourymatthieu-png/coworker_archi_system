@@ -268,7 +268,7 @@ le nouveau serveur n'est pas documentée ici après son premier usage réel.
    `<projet>.svg` pour la racine, `<projet>-<Nom de la feuille>.svg` pour chaque sous-feuille).
 
 Premier bloc fait ainsi : DES-010 « Circuit du bouton » (`des-010-bouton.kicad_sch`), la feuille
-racine (`boomrone.kicad_sch`) sert de page d'index avec une case par bloc.
+racine (`proj_boomrone.kicad_sch`) sert de page d'index avec une case par bloc.
 
 ## Serveur `mixelpixx/KiCAD-MCP-Server` : constats du premier usage (2026-11-04, proj_boomrone)
 
@@ -341,3 +341,12 @@ prévient. À lancer à la fin d'une session de saisie, sur chaque feuille :
 `kicad-cli sch upgrade <feuille>.kicad_sch` (met à jour vers `20260306`, sans changer le contenu ; vérifié :
 ERC toujours à 0). Faire de même avec `kicad-cli sym upgrade lib_<projet>.kicad_sym` si la bibliothèque est
 signalée.
+
+## Reprendre le travail sur un autre poste (checklist)
+
+1. Cloner le dépôt ; installer KiCad 10, Node.js 18+, Python 3.11+ ; refaire la section « Mise en route sur une nouvelle machine » plus haut (serveur `mixelpixx/KiCAD-MCP-Server`, venv basé sur le Python de KiCad, déclaration dans `~/.claude.json`, redémarrer la session).
+2. Outils Python des scripts du dépôt (aucun n'est dans le dépôt, tout est machine-local) : `kicad-cli` est livré avec KiCad (`<KiCad>\bin\kicad-cli.exe`) ; pour rendre une page en image, un petit venv avec `pypdfium2` et `pillow` ; pour importer une pièce d'EasyEDA/LCSC, un venv avec `easyeda2kicad` (`easyeda2kicad --lcsc_id Cxxxxx --full --output <dossier>/ee`).
+3. Mémoire de Claude : elle est locale au poste. Les préférences de l'utilisateur sont donc copiées dans `CLAUDE.md` § 10 ; l'état du projet est dans `projets/<nom>/reprise.md`, les décisions dans `journal-decisions.md`, les doutes dans `registre-doutes.md`.
+4. Vérifier que tout fonctionne : `python tools/check_traceability_V2.py projets/boomrone --gate --phase conception` (OK attendu) et `kicad-cli sch erc projets/boomrone/hardware/kicad/proj_boomrone/proj_boomrone.kicad_sch -o rapport.txt` (0 violation attendue).
+5. Projet KiCad : toujours l'ouvrir par `proj_boomrone.kicad_pro` (les chemins `${KIPRJMOD}` des bibliothèques en dépendent) ; fichier `*.kicad_prl` (réglages d'affichage locaux) volontairement non versionné.
+6. Les fiches techniques PDF (`projets/*/Datasheets/`) sont ignorées par Git (volumineuses) : les recopier à la main sur le nouveau poste (elles servent à vérifier brochages et empreintes ; plusieurs manquent déjà : PMW3901MB, buzzer, voir DOU-185 et DOU-206 dans `registre-doutes.md`).
