@@ -101,6 +101,9 @@ Nouveau projet : copier `framework/templates/` dans `projets/<nom>/`, puis lance
 python tools/check_traceability.py projets/<nom>          # état de la traçabilité
 python tools/check_traceability.py projets/<nom> --gate   # échoue s'il reste un doute bloquant ou un trou
 python tools/fix_kicad_project_uuid.py <dossier_projet_kicad> --check   # cohérence UUID .kicad_pro / .kicad_sch
+python tools/add_kicad_sheet.py <dossier_projet_kicad> --name "..." --file ...kicad_sch   # nouvelle page/bloc KiCad
 ```
 
 `fix_kicad_project_uuid.py` corrige (sans `--check`) un bug connu de `kicad_workflow create_project` (MCP `kicad`) : le `.kicad_sch` généré a un UUID racine incohérent avec le `.kicad_pro`, ce qui fait apparaître le schéma comme vide dans KiCad. À lancer juste après tout `create_project` — voir `.claude/agents/electronique-hardware.md`.
+
+`add_kicad_sheet.py` contourne un autre bug du même MCP (`kicad_schematic_edit` opération `add_sheet` cassée) : il crée une feuille hiérarchique (une page A4/A3 paysage par bloc, titre en haut) dans le schéma racine et un fichier de sous-feuille prêt à être rempli. Un bloc KiCad = une page, pas un schéma mélangé.

@@ -4,3 +4,10 @@ projets/*/Datasheets/
 
 # Fichiers de verrou KiCad (transitoires, créés à l'ouverture d'un projet)
 ~*.lck
+
+# Sauvegardes automatiques KiCad et rapports d'ERC transitoires
+*.backup
+*-erc.json
+
+# Historique local d'éditeur (ex. extension VS Code Local History)
+.history/
