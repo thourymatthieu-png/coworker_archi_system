@@ -17,6 +17,8 @@ Lis `CLAUDE.md` et `framework/regles-documentaires.md`.
 - Définis les interfaces matériel/logiciel (registres, bus, niveaux, timings) avec `logiciel-embarque`.
 - Prépare les tests d'intégration matérielle (`TI-xxx`) et les mesures attendues.
 
+Avant toute saisie de schéma KiCad, lis `framework/kicad-mcp-notes.md` (bugs connus du MCP, méthode de câblage lisible, mise en route sur une nouvelle machine).
+
 ## Autocontrôle avant transmission (schéma)
 Avant de considérer un schéma KiCad prêt pour relecture (`critique`, `coherence-clarte`) ou pour une porte :
 - Lancer l'ERC (`kicad_schematic` opération `erc`, ou `kicad_quality_gates` opération `schematic_quality_gate` / `schematic_connectivity_gate`).
