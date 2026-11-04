@@ -52,6 +52,19 @@ symboles de puissance, vérification par rendu visuel) restent valables quel que
   Piège à connaître : `PYTHONPATH` ne permet **pas** de contourner cette étape pour un Python embarqué
   de KiCad lancé hors venv — son `sitecustomize.py` fait `sys.path = []` puis le reconstruit lui-même
   (ignore `PYTHONPATH`) tant qu'il n'est pas dans un venv (`sys.prefix != sys.base_prefix`).
+  Piège : le `pip` du Python embarqué de KiCad plante (« OPENSSL_Uplink … no OPENSSL_Applink »). Contournement :
+  piloter l'installation avec un autre Python (ex. Python 3.12 système) qui cible le venv :
+  ```bash
+  C:\Python312\python.exe -m pip --python <venv>\Scripts\python.exe install -r <dossier cloné>/requirements.txt
+  ```
+- Piège : **plusieurs versions de KiCad installées** (constaté : 9.0 et 10.0 côte à côte). Le serveur
+  ajoute en tête de `sys.path` les `site-packages` de *toutes* les installations trouvées
+  (`utils/platform_helper.py`, `get_kicad_python_paths`), la plus ancienne finissant en premier : les
+  paquets de KiCad 9 masquent ceux de KiCad 10 et le processus Python meurt au démarrage avec le même
+  message `no OPENSSL_Applink`, côté MCP : « Connection closed » dès le premier appel d'outil. Diagnostic :
+  lancer le serveur à la main (`node dist/index.js`, avec `KICAD_PYTHON`) et lire le log. Corrections
+  possibles : désinstaller l'ancienne version de KiCad, ou limiter la boucle sur `kicad_install_roots()`
+  à la première racine (la plus récente) dans `platform_helper.py` (vérifié sur une copie).
 - Déclarer le serveur dans `.claude.json` (clé `mcpServers.kicad`, machine-locale, pas dans ce
   dépôt) :
   ```json
@@ -256,3 +269,68 @@ le nouveau serveur n'est pas documentée ici après son premier usage réel.
 
 Premier bloc fait ainsi : DES-010 « Circuit du bouton » (`des-010-bouton.kicad_sch`), la feuille
 racine (`boomrone.kicad_sch`) sert de page d'index avec une case par bloc.
+
+## Serveur `mixelpixx/KiCAD-MCP-Server` : constats du premier usage (2026-11-04, proj_boomrone)
+
+- **Projet** : `create_project` puis `create_hierarchical_subsheet` (une page par bloc, A4 paysage par
+  défaut) puis `add_sheet_pin` sur le schéma racine pour chaque `hierarchical_label` de la sous-feuille
+  (même nom, même sens). `fix_kicad_project_uuid.py` ne sert plus (format KiCad 10 non reconnu par le
+  script, et le bug d'UUID n'existe pas avec ce serveur).
+- **Rotation** : les positions de broches après rotation sont correctes (vérifier quand même avec
+  `get_schematic_pin_locations` avant de câbler). Les textes Référence/Valeur d'un composant tourné à
+  90° s'affichent à la verticale : régler l'angle du champ à 270 avec `set_schematic_component_property`
+  (`name` = `Reference` ou `Value`, avec `x`, `y`, `justify`, `hide`).
+- **`add_schematic_text` et `justify: "center"`** écrit `(justify center bottom)`, que KiCad 10 refuse à
+  l'ouverture (« Attendu left, right, top, bottom, or mirror »). `kicad-cli` ne s'en plaint pas, seule
+  l'interface graphique plante. Ne jamais passer `center` à `add_schematic_text` : centrer en décalant
+  l'ancre à gauche (largeur ≈ 0,5 × nombre de caractères × taille de police).
+- **Symboles de puissance** (`power:GND`, `power:+3V0`) : masquer leur Référence (`hide: true`) ; poser
+  le symbole GND sous la broche, relié par un fil, et placer sa Valeur explicitement sous le triangle.
+- **Bibliothèque projet** : `create_symbol` / `import_symbol` écrivent des champs `(id N)` d'un ancien
+  format et provoquent l'avertissement ERC « lib_symbol_mismatch ». Corriger avec
+  `kicad-cli sym upgrade lib_boomrone.kicad_sym` puis `update_symbol_from_library`. Les tables
+  `sym-lib-table` / `fp-lib-table` du projet utilisent `${KIPRJMOD}` (pas de chemin absolu).
+- **Import EasyEDA/LCSC** : `easyeda2kicad --lcsc_id Cxxxxx --full` (installé dans un venv jetable) donne
+  symbole, empreinte et 3D ; les types de broches arrivent tous « unspecified » (à corriger), les chemins
+  3D sont absolus (à remplacer par `${KIPRJMOD}/lib_<projet>.3dshapes/...`).
+- **Vérification visuelle sans navigateur** : `kicad-cli sch export pdf`, puis rendu d'une page en PNG
+  avec `pypdfium2` (rognage en mm), puis lecture de l'image.
+
+## Placement automatique des champs : `tools/kicad_place_fields.py`
+
+À lancer après avoir posé les composants d'une feuille (et avant de relire le rendu) :
+`python tools/kicad_place_fields.py <feuille>.kicad_sch [--refs R1,R2] [--dry-run]`.
+Règles par type de symbole (voir l'en-tête du script) : résistance/condensateur horizontal = textes
+au-dessus, vertical = à gauche alignés à droite ; GND = Valeur sous le triangle, alimentations = au-dessus,
+Référence des symboles de puissance masquée ; transistor = à droite ; circuit intégré = Référence au-dessus
+et Valeur en dessous ; angle du champ = (360 − rotation) % 360 pour 90/270. Le script teste les collisions
+(fils, autres symboles, étiquettes, textes déjà placés) et prend le premier emplacement libre.
+**À chaque placement manuel nécessaire, améliorer ce script plutôt que de corriger à la main**
+(demande de l'utilisateur). Limite connue : des rangées de résistances horizontales espacées de moins de
+7,62 mm ne laissent pas la place à deux lignes de texte (prévoir ce pas à la conception de la page).
+
+## Saisie rapide d'une grande feuille : `tools/kicad_add_items.py`
+
+Pour une feuille à nombreuses liaisons (microcontrôleur : 25 étiquettes, ~55 fils), poser les composants par
+`batch_add_components` (champs non placés : `auto_position_fields: false`), relever les broches avec
+`get_schematic_pin_locations`, écrire un `spec.json` (fils, étiquettes hiérarchiques, étiquettes locales,
+croix NC, jonctions) et lancer `python tools/kicad_add_items.py <feuille>.kicad_sch spec.json` ; puis
+`python tools/kicad_place_fields.py <feuille>.kicad_sch` ; puis ERC et rendu. Un composant tourné ou déplacé
+après coup se corrige en modifiant le fichier (position `(at ...)`) puis en relançant `kicad_place_fields.py`.
+Pas d'espacement inférieur à 12,7 mm entre condensateurs verticaux voisins sur un bus (sinon leurs textes
+se chevauchent). Papier A3 : remplacer `(paper "A4")` par `(paper "A3")` dans le fichier de la sous-feuille
+juste après `create_hierarchical_subsheet`.
+
+**Pas minimal entre composants voisins (règle de conception de page).** `kicad_place_fields.py` signale
+« ESPACEMENT » quand deux passifs voisins sont trop serrés pour que leurs textes tiennent. Valeurs à
+retenir dès la conception d'une page (0603, police 1,27 mm) : condensateurs ou résistances **verticaux** côte à
+côte : au moins 12,7 mm (15,24 mm si une valeur dépasse 6 caractères) ; résistances **horizontales** en
+colonne : au moins 10,16 mm ; un symbole de puissance GND sous un composant ajoute environ 5 mm. Choisir ces
+pas **avant** de placer, pas après.
+
+**Texte accentué dans les symboles et empreintes.** Le serveur `mixelpixx/KiCAD-MCP-Server` ouvre les fichiers
+en cp1252 : un accent (ou un caractère chinois d'un import EasyEDA) dans une description, un champ
+« Manufacturer » ou un nom de feuille est écrit en double encodage (« accÃ©lÃ©romÃ¨tre »), ou fait échouer
+l'ouverture de la feuille (« 'charmap' codec can't decode byte »). Écrire en ASCII tout ce qui passe par
+`create_symbol`, `create_footprint`, `create_hierarchical_subsheet`, et nettoyer les imports EasyEDA.
+Contrôle : `grep -P '[^\x00-\x7F]' *.kicad_sch lib_*.kicad_sym lib_*.pretty/*`.

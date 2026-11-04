@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "lib_boomrone")(type "KiCad")(uri "${KIPRJMOD}/lib_boomrone.kicad_sym")(options "")(descr ""))
+)
