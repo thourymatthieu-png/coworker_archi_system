@@ -2560,7 +2560,7 @@ Format (exemple, non analysé) :
 **Doutes levés :** (aucun) ; DOU-206 « Buzzer SMD-9650-3327 : empreinte EasyEDA de 9,0 mm contre 9,6 mm de la nomenclature » et DOU-207 « Symboles EasyEDA du PMW3901MB et du PB-03F : brochage à comparer aux fiches » ouverts, non bloquants
 
 
-### DEC-291 — Page « Synoptique de la carte » dans le schéma KiCad
+### DEC-291 — Page dédiée du synoptique de la carte dans le schéma KiCad
 **Date :** 2026-11-05
 **Concerne :** DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte »
 **Modifie :** projet KiCad `proj_boomrone` : nouvelle feuille `synoptique.kicad_sch` (A3, image PNG seule, aucun composant) et case correspondante sur la page racine (page 12) ; images `projets/boomrone/schemas/synoptique-boomrone.svg` et `.png` ; scripts `tools/gen_synoptique_boomrone.py` et `tools/kicad_add_image_sheet.py`. Aucun ARC, REQ ni DES modifié.
