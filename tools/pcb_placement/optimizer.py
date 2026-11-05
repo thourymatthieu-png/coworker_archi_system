@@ -58,7 +58,7 @@ def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progre
         print(f"{progress_prefix}graine {seed} cycle {cycle}: cout={cost.total:.1f} "
               f"(aire={cost.area_mm2:.0f}mm2, cablage={cost.wirelength_mm:.0f}mm, "
               f"croisements={cost.crossings}, vias~={cost.vias_estimate}, "
-              f"recouvrement={cost.overlap_mm2:.2f}mm2, faisable={cost.feasible})")
+              f"recouvrement={cost.overlap_mm2:.2f}mm2, dispersion blocs={cost.dispersion_mm:.1f}mm, faisable={cost.feasible})")
 
         improved = best_cost is None or is_better(cost, best_cost)
         if improved:

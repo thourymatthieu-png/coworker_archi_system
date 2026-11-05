@@ -53,6 +53,9 @@ class EngineConfig:
     sa_global_t0: float = 1.5
     sa_t_end: float = 0.03
     block_move_prob: float = 0.4          # probabilite de deplacer un bloc entier plutot qu'un composant (niveau global)
+    penalty_ramp: bool = False             # penalite progressive du recuit global (cf. HierarchyConfig)
+    penalty_start: float = 0.03
+    penalty_ramp_frac: float = 0.7
     use_compaction: bool = True           # passe de compactage deterministe en fin de pipeline (0 recouvrement garanti, cf. hierarchy.optimize_board)
 
     # --- Boucle d'optimisation et strategies paralleles (sections 6 et 10) ---
@@ -85,6 +88,9 @@ class EngineConfig:
             sa_global=AnnealingConfig(iterations=self.sa_global_iterations, t0=self.sa_global_t0, t_end=self.sa_t_end, seed=s),
             block_move_prob=self.block_move_prob,
             use_compaction=self.use_compaction,
+            penalty_ramp=self.penalty_ramp,
+            penalty_start=self.penalty_start,
+            penalty_ramp_frac=self.penalty_ramp_frac,
             seed=s,
         )
 

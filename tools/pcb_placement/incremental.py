@@ -120,6 +120,7 @@ class IncrementalCost:
         self.refs = list(refs)
         self.nets_in = nets
         self.w = weights
+        self.base_w = weights
         self.ridx = {r: i for i, r in enumerate(self.refs)}
         self._commits = 0
         self._pending: Optional[dict] = None
@@ -531,6 +532,17 @@ class IncrementalCost:
         self._commits += 1
         if self._commits % _RESYNC_EVERY == 0:
             self._build()
+
+    def set_penalty_scale(self, f: float) -> CostBreakdown:
+        """Multiplie le poids des contraintes dures (recouvrement, hors-contour) par `f` par
+        rapport au poids de base, et recalcule le cout courant. A appeler entre deux pas (hors
+        proposition en cours). Sert a la penalite progressive du recuit global."""
+        import dataclasses
+        self._pending = None
+        self.w = dataclasses.replace(self.base_w, overlap_penalty_weight=self.base_w.overlap_penalty_weight * f)
+        self.current = self._breakdown(self.overlap, self.oob, self.area, self.wl, self.cong,
+                                       self.crossings, self.access, self.dec)
+        return self.current
 
     def discard(self) -> None:
         self._pending = None

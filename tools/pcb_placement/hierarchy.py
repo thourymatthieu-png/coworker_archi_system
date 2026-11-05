@@ -19,7 +19,7 @@ import numpy as np
 
 from .annealing import AnnealingConfig, relevant_nets, run_annealing
 from .compaction import _Packer, compact
-from .cost import CostBreakdown, CostWeights, is_better, total_cost
+from .cost import CostBreakdown, CostWeights, block_dispersion, is_better, total_cost
 from . import live
 from .incremental import IncrementalCost
 from .model import ALLOWED_ROTATIONS, Board
@@ -40,6 +40,14 @@ class HierarchyConfig:
     # pipeline plutot que la legalisation seule - cf. optimize_board. Desactiver seulement
     # pour comparer au comportement historique (recuit + legalisation seules).
     use_compaction: bool = True
+    # Penalite progressive du recuit global : le poids des contraintes de recouvrement et de
+    # contour demarre a `penalty_start` x sa valeur pleine et monte (geometriquement) jusqu'a
+    # 1 apres `penalty_ramp_frac` des pas. Evite de forcer un etat faisable avant le recuit
+    # (qui deplace des composants a l'aveugle) et laisse le recuit resoudre les recouvrements
+    # en douceur. False : ancien comportement (remise en etat faisable puis poids plein).
+    penalty_ramp: bool = False
+    penalty_start: float = 0.03
+    penalty_ramp_frac: float = 0.7
     rotation_probe_every: int = 15
     seed: int = 0
 
@@ -381,6 +389,12 @@ def run_global_annealing_with_block_moves(
     log_ratio = math.log(max(sa_cfg.t_end, 1e-6) / max(sa_cfg.t0, 1e-6))
 
     for step in range(n_steps):
+        if cfg.penalty_ramp and step % 25 == 0:
+            frac = min(step / max(cfg.penalty_ramp_frac * n_steps, 1.0), 1.0)
+            current = ic.set_penalty_scale(cfg.penalty_start ** (1.0 - frac))
+            if not best.feasible:  # les couts a des poids differents ne se comparent pas
+                best = current
+                best_snapshot = board.clone_positions()
         t = sa_cfg.t0 * math.exp(log_ratio * step / n_steps)
         before = board.clone_positions()
         moved = []
@@ -449,7 +463,7 @@ def optimize_board(board: Board, weights: CostWeights, cfg: HierarchyConfig) -> 
 
     all_refs = [r for refs in blocks_map.values() for r in refs]
     legalize(board, all_refs, min_clearance_mm=weights.min_clearance_mm)
-    if cfg.use_compaction and board.outline is not None:
+    if cfg.use_compaction and board.outline is not None and not cfg.penalty_ramp:
         # Etat FAISABLE avant le recuit global : sinon la penalite de recouvrement/contour
         # (poids 1000) domine le cout et le recuit passe son temps a repousser les composants
         # au hasard, ce qui eclate les grappes construites aux niveaux inferieurs. Deplacement
@@ -479,6 +493,7 @@ def optimize_board(board: Board, weights: CostWeights, cfg: HierarchyConfig) -> 
         legalize(board, all_refs, min_clearance_mm=weights.min_clearance_mm)
 
     cost = total_cost(board, all_refs, board.nets, weights)
+    cost.dispersion_mm = block_dispersion(board)[0]
     live.set_phase("cycle termine", block=None, show_cost=True)
     live.tick(board, cost, force=True)
     return cost

@@ -289,6 +289,31 @@ def decoupling_excess(board: Board, rule: dict) -> float:
     return max(0.0, best - rule["dmax"])
 
 
+def block_dispersion(board: Board, merge_split: bool = True):
+    """Compacite des blocs : pour chaque bloc, distance RMS (mm) des centres de ses composants
+    LIBRES a leur centre de gravite ; moyenne ponderee par le nombre de composants. Plus c'est
+    petit, plus les blocs sont groupes. `merge_split=True` regroupe les sous-blocs d'un bloc
+    decoupe par ancre (ex. DES-007 en -M1..-M4) sous le bloc d'origine (feuille DES) ; False les
+    garde separes. Renvoie (dispersion moyenne, {bloc: dispersion})."""
+    groups = {}
+    for ref, c in board.components.items():
+        if c.fixed:
+            continue
+        key = board.block_parent.get(c.block, c.block) if merge_split else c.block
+        groups.setdefault(key, []).append(c.world_center())
+    total, n, per = 0.0, 0, {}
+    for key, pts in groups.items():
+        if len(pts) < 2:
+            continue
+        cx = sum(p[0] for p in pts) / len(pts)
+        cy = sum(p[1] for p in pts) / len(pts)
+        rms = math.sqrt(sum((p[0] - cx) ** 2 + (p[1] - cy) ** 2 for p in pts) / len(pts))
+        per[key] = rms
+        total += rms * len(pts)
+        n += len(pts)
+    return (total / n if n else 0.0), per
+
+
 def decoupling_total(board: Board) -> float:
     return sum(decoupling_excess(board, r) for r in board.decoupling_rules)
 
@@ -319,6 +344,7 @@ class CostBreakdown:
     total: float
     feasible: bool
     decoupling_mm: float = 0.0  # depassement cumule des distances de decouplage (mm)
+    dispersion_mm: float = 0.0  # dispersion moyenne des blocs (mm), cf. block_dispersion (information)
 
 
 def is_better(candidate: "CostBreakdown", current_best: "CostBreakdown") -> bool:

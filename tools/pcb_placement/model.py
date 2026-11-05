@@ -116,6 +116,8 @@ class Board:
     # Regles de decouplage (cf. io_data.apply_decoupling) : liste de dicts
     # {"cap": ref, "ic": ref, "pins": [numeros de broche], "dmax": mm}. Vide = pas de regle.
     decoupling_rules: list = field(default_factory=list)
+    # sous-bloc -> bloc d'origine (feuille DES), rempli par io_data.split_blocks_by_anchor
+    block_parent: dict = field(default_factory=dict)
 
     def pad_world_pos(self, ref: str, pad_name: str) -> Optional[Tuple[float, float]]:
         comp = self.components.get(ref)

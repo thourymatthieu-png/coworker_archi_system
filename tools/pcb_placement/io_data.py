@@ -61,6 +61,7 @@ def split_blocks_by_anchor(board: Board, max_pins: int = 8) -> dict:
                 owner[r] = min(anchors, key=lambda a: (board.components[a].x - cx) ** 2 + (board.components[a].y - cy) ** 2)
         for r in refs:
             board.components[r].block = f"{block}-{owner[r]}"
+            board.block_parent[f"{block}-{owner[r]}"] = block
         result[block] = sorted({f"{block}-{a}" for a in anchors})
     return result
 
