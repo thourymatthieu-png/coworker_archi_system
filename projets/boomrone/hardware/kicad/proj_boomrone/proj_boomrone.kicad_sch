@@ -2008,2158 +2008,665 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Schema racine - carte Boomrone : index des feuilles"
-		(exclude_from_sim no)
-		(at 38.1 25.4 0)
-		(effects
-			(font
-				(size 2.5 2.5)
-				(bold yes)
-			)
-			(justify left)
-		)
-		(uuid "2892a01d-8209-455a-9308-217a59f57144")
-	)
-	(wire
-		(pts
-			(xy 76.2 111.76) (xy 91.44 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0077931d-89ee-4603-8673-9a3cd5df1aed")
-	)
-	(wire
-		(pts
-			(xy 76.2 114.3) (xy 91.44 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0599a190-fb3e-4967-b269-210a14695b68")
-	)
-	(wire
-		(pts
-			(xy 38.1 114.3) (xy 22.86 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "07d085c1-cfa6-481f-9917-c9bab37612cd")
-	)
-	(wire
-		(pts
-			(xy 38.1 180.34) (xy 22.86 180.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "081af9cb-c11b-4992-a6c4-5e89e902dd6a")
-	)
-	(wire
-		(pts
-			(xy 342.9 50.8) (xy 327.66 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "087662ad-4abd-46ff-b3d1-c5926a57a7d7")
-	)
-	(wire
-		(pts
-			(xy 177.8 213.36) (xy 193.04 213.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0b4f8ddd-5d10-4c9e-b89e-b255bb4a7835")
-	)
-	(wire
-		(pts
-			(xy 342.9 60.96) (xy 327.66 60.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0c5d6d2e-8b9d-4622-a9f7-1f2949201f08")
-	)
-	(wire
-		(pts
-			(xy 139.7 50.8) (xy 124.46 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0c71b581-d338-4ee9-aa2c-685e4f2ea554")
-	)
-	(wire
-		(pts
-			(xy 139.7 177.8) (xy 124.46 177.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "11d00d3a-ef62-4265-81da-d161f7c37d00")
-	)
-	(wire
-		(pts
-			(xy 177.8 203.2) (xy 193.04 203.2)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "19b56cda-298b-4a9f-887d-5a96444d6ef4")
-	)
-	(wire
-		(pts
-			(xy 139.7 175.26) (xy 124.46 175.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1e0eda73-25c4-4ee9-875f-234ca2ed4379")
-	)
-	(wire
-		(pts
-			(xy 177.8 175.26) (xy 193.04 175.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "212c722c-2d51-4b73-a2e4-e6d89aed09c6")
-	)
-	(wire
-		(pts
-			(xy 38.1 172.72) (xy 22.86 172.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "21691fd3-cb38-4265-a346-49d7c1331cf2")
-	)
-	(wire
-		(pts
-			(xy 38.1 116.84) (xy 22.86 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2646c821-a3a6-4fbc-8ae3-f473d3c4e1a2")
-	)
-	(wire
-		(pts
-			(xy 342.9 55.88) (xy 327.66 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ca0a93d-524c-4655-92bd-b6a04c550104")
-	)
-	(wire
-		(pts
-			(xy 139.7 182.88) (xy 124.46 182.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2e1fb8db-7ed8-48bc-b3ac-6024cb075f1e")
-	)
-	(wire
-		(pts
-			(xy 139.7 180.34) (xy 124.46 180.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2f101aa8-1fe7-4e32-a755-d9c494ee6680")
-	)
-	(wire
-		(pts
-			(xy 177.8 177.8) (xy 193.04 177.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "327ab495-8b35-4ebe-b9c5-35f0f1239ce0")
-	)
-	(wire
-		(pts
-			(xy 342.9 58.42) (xy 327.66 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3865fe03-9896-4ceb-895f-2db4ea01ff20")
-	)
-	(wire
-		(pts
-			(xy 139.7 114.3) (xy 124.46 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3a57abf2-2ce3-4d00-b2ba-fd89f6716c95")
-	)
-	(wire
-		(pts
-			(xy 177.8 215.9) (xy 193.04 215.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "425a78d0-ae52-42e3-99e7-373ec7a1d433")
-	)
-	(wire
-		(pts
-			(xy 38.1 175.26) (xy 22.86 175.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "456322cb-0968-46cc-85ef-83f531b307df")
-	)
-	(wire
-		(pts
-			(xy 38.1 111.76) (xy 22.86 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "525c435e-7f32-495e-98f9-906cc4923a12")
-	)
-	(wire
-		(pts
-			(xy 139.7 111.76) (xy 124.46 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5833612a-7f04-40b0-ad88-6760a1f2c60a")
-	)
-	(wire
-		(pts
-			(xy 139.7 172.72) (xy 124.46 172.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5ad6caab-e543-4aa9-afac-95c9d5e611da")
-	)
-	(wire
-		(pts
-			(xy 342.9 53.34) (xy 327.66 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6035bed3-3c16-4dfc-9f4f-98f278228a6f")
-	)
-	(wire
-		(pts
-			(xy 177.8 208.28) (xy 193.04 208.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "695a1135-e7bf-4748-b1b2-b6915e66cb73")
-	)
-	(wire
-		(pts
-			(xy 177.8 200.66) (xy 193.04 200.66)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6b9cf7d5-dbe8-4b15-a19e-ecbc77d13e46")
-	)
-	(wire
-		(pts
-			(xy 342.9 111.76) (xy 327.66 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "76db865a-59d9-4acb-804f-6a06aca6ebe4")
-	)
-	(wire
-		(pts
-			(xy 177.8 198.12) (xy 193.04 198.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8d442c38-bb45-4292-a31a-f5ca32395c53")
-	)
-	(wire
-		(pts
-			(xy 76.2 50.8) (xy 91.44 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8ed836f9-c888-42cb-964f-8947cde44e84")
-	)
-	(wire
-		(pts
-			(xy 177.8 180.34) (xy 193.04 180.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "911f09ba-1b93-4799-8237-00dfbc153abe")
-	)
-	(wire
-		(pts
-			(xy 177.8 187.96) (xy 193.04 187.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "92e7cc66-c33c-4d3d-a2c7-3be6a65e9305")
-	)
-	(wire
-		(pts
-			(xy 38.1 182.88) (xy 22.86 182.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "98edc2c7-060b-43be-a036-d16380222fb0")
-	)
-	(wire
-		(pts
-			(xy 76.2 53.34) (xy 91.44 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a24dde7c-cee6-4f02-83b5-937eac8f9cc2")
-	)
-	(wire
-		(pts
-			(xy 279.4 50.8) (xy 294.64 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a25e25a7-0be5-4e1f-9032-ce6689d9e4cb")
-	)
-	(wire
-		(pts
-			(xy 139.7 187.96) (xy 124.46 187.96)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a7d78989-4b4b-408f-a872-0751b30b1f36")
-	)
-	(wire
-		(pts
-			(xy 279.4 111.76) (xy 294.64 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a82f7263-f7e7-4ccc-953b-d0423a1f3861")
-	)
-	(wire
-		(pts
-			(xy 177.8 185.42) (xy 193.04 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "abcb2230-2f2b-4699-aec8-35ae2bfad77a")
-	)
-	(wire
-		(pts
-			(xy 177.8 193.04) (xy 193.04 193.04)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b062f41e-a555-4ab5-99ae-cf3b6552833d")
-	)
-	(wire
-		(pts
-			(xy 139.7 116.84) (xy 124.46 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3e52f76-a244-45f9-baa1-b53604ead335")
-	)
-	(wire
-		(pts
-			(xy 279.4 116.84) (xy 294.64 116.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c4ed32de-9bc9-4bfa-86ed-38620ea17719")
-	)
-	(wire
-		(pts
-			(xy 241.3 111.76) (xy 226.06 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c875c08c-f30b-48a4-aba8-e8daca3ef31d")
-	)
-	(wire
-		(pts
-			(xy 177.8 210.82) (xy 193.04 210.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d0a28a47-e32e-4bef-9304-9ad5f224f1dc")
-	)
-	(wire
-		(pts
-			(xy 279.4 114.3) (xy 294.64 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d10ce969-bbee-44ca-b421-ee27e8eb953e")
-	)
-	(wire
-		(pts
-			(xy 177.8 182.88) (xy 193.04 182.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d8783d1c-b793-49d0-bc4d-234b041e9bcc")
-	)
-	(wire
-		(pts
-			(xy 177.8 50.8) (xy 193.04 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "da0ce8c1-7335-4ba9-801d-56890cf1e5e2")
-	)
-	(wire
-		(pts
-			(xy 381 111.76) (xy 396.24 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "daff405d-fe65-4fc7-a460-7a5620977a54")
-	)
-	(wire
-		(pts
-			(xy 177.8 195.58) (xy 193.04 195.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "debe394b-cd93-4ca6-af1e-6e6f8265fbc0")
-	)
-	(wire
-		(pts
-			(xy 177.8 190.5) (xy 193.04 190.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e006abbd-423d-474f-a19a-a19c304db5a5")
-	)
-	(wire
-		(pts
-			(xy 139.7 53.34) (xy 124.46 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e598d166-dd6a-4453-b019-804e79b6fce4")
-	)
-	(wire
-		(pts
-			(xy 177.8 172.72) (xy 193.04 172.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e6ba2589-cea1-4fc9-9e45-ca3805eed3b1")
-	)
-	(wire
-		(pts
-			(xy 38.1 177.8) (xy 22.86 177.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e7e86242-556a-44b9-8ae4-575f72b6e1f3")
-	)
-	(wire
-		(pts
-			(xy 177.8 205.74) (xy 193.04 205.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e94ffaf1-d52a-4692-813e-e90d1b82254e")
-	)
-	(wire
-		(pts
-			(xy 139.7 185.42) (xy 124.46 185.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eaf22e8b-1949-41fa-80c4-f83de25dc25f")
-	)
-	(wire
-		(pts
-			(xy 177.8 111.76) (xy 193.04 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fb6b8042-c48a-4ae1-8b0b-882ec234a8c3")
-	)
-	(label "LED_R"
-		(at 327.66 53.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0048983d-d8f1-491f-aa0a-50c5fbbf668a")
-	)
-	(label "IMU_MOSI"
-		(at 193.04 180.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "01e50ce9-9717-432e-b921-46966cfc7482")
-	)
-	(label "IMU_CS"
-		(at 193.04 175.26 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "06ebe3a6-c30d-48a7-a1e8-cff1c0693b69")
-	)
-	(label "M3_G"
-		(at 193.04 187.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "089f93c7-eee9-4b04-a010-3e5be60bd4cb")
-	)
-	(label "FLX_CS"
-		(at 124.46 111.76 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "0dc0ce09-f7b1-4239-b366-b4c417155d6f")
-	)
-	(label "IMU_MISO"
-		(at 91.44 114.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "145bf389-65db-43fc-a154-97aaf4371057")
-	)
-	(label "LED_B"
-		(at 327.66 58.42 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "16633862-9618-4833-acfd-b531a39c45f4")
-	)
-	(label "IMU_SCK"
-		(at 22.86 114.3 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "1a5bdb35-ea71-484c-b7b1-ee8600de384e")
-	)
-	(label "M2_G"
-		(at 22.86 177.8 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2266c06e-0695-4410-a2f1-2838a94dea90")
-	)
-	(label "BLE_TX"
-		(at 193.04 172.72 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "26f4b615-fa34-4d8f-885e-2fadda3b5340")
-	)
-	(label "BUZ"
-		(at 327.66 60.96 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "2d799333-de38-47fc-8e48-838aa56c355f")
-	)
-	(label "TOF_XSHUT"
-		(at 226.06 111.76 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "328ee8a5-cfdc-434f-9f25-89ed2fff9b71")
-	)
-	(label "M4_G"
-		(at 193.04 190.5 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "38d5bf2f-1b92-4203-99af-8e4d75310a07")
-	)
-	(label "VBATM"
-		(at 327.66 50.8 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "397902f0-eec6-435e-b384-7c728302beba")
-	)
-	(label "VBATL"
-		(at 124.46 53.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "45ba4ae7-da88-4655-8f21-0dc2c0547412")
-	)
-	(label "VBATM"
-		(at 91.44 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "48a9b0f9-c296-4bda-ac2e-5cacc14c8edd")
-	)
-	(label "TOF_GPIO1"
-		(at 124.46 185.42 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "494371dd-3194-4e03-807a-cb69bc3fde1c")
-	)
-	(label "IMU_MOSI"
-		(at 22.86 116.84 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "4bd2a9c8-ec45-4048-8bb5-84526f83686c")
-	)
-	(label "LED_B"
-		(at 193.04 205.74 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4d7409a9-de7c-4b32-a4fe-044ec2209a1a")
-	)
-	(label "I2C_SDA"
-		(at 193.04 200.66 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4eeca15f-9cf6-4685-8ccd-b79e0618603a")
-	)
-	(label "IMU_INT1"
-		(at 91.44 111.76 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "513e91ed-1e78-4172-ba2f-269b493e3160")
-	)
-	(label "BTN"
-		(at 294.64 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "51c600bf-9546-4d65-b73e-e3fbe23e0c9b")
-	)
-	(label "BLE_TX"
-		(at 327.66 111.76 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "55f91b46-aa3d-4ede-9513-72da824ead88")
-	)
-	(label "BUZ"
-		(at 193.04 208.28 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5c91bc26-c9ba-4977-ba32-e068f94c6fe4")
-	)
-	(label "LED_G"
-		(at 327.66 55.88 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "636d0cad-3fff-4bea-8915-2ec897e2171c")
-	)
-	(label "LED_R"
-		(at 193.04 193.04 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "65fb18b1-1357-4dd6-a58e-0375d0618cad")
-	)
-	(label "FLX_MOSI"
-		(at 193.04 215.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "66659e75-c130-47a5-8ff3-c6c5f412f59a")
-	)
-	(label "I2C_SDA"
-		(at 294.64 114.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "735b9ee4-98c1-4378-abec-99b0a5d04d00")
-	)
-	(label "FLX_MISO"
-		(at 124.46 187.96 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "7968e037-9f17-4c05-8723-51ba3ece816e")
-	)
-	(label "FLX_CS"
-		(at 193.04 210.82 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7b73cab6-84eb-432c-8804-684a2a52c108")
-	)
-	(label "BLE_RX"
-		(at 396.24 111.76 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7dc4caad-5ae7-4e56-914a-4624802c0951")
-	)
-	(label "M1_G"
-		(at 193.04 182.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8a9337ec-f8b4-4274-ad87-e065558adb1f")
-	)
-	(label "M4_G"
-		(at 22.86 182.88 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "91e31847-e666-494d-b18d-3ad82aa968bf")
-	)
-	(label "VBAT_SENSE"
-		(at 124.46 172.72 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "94b9cba6-917b-4c81-8a12-e200e9bdbea1")
-	)
-	(label "FLX_MISO"
-		(at 193.04 111.76 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "99cfed70-063b-48e4-be9e-2386e28c6e71")
-	)
-	(label "LED_G"
-		(at 193.04 195.58 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9a2248b4-7e15-4fba-8603-db42b94fd73f")
-	)
-	(label "FLX_SCK"
-		(at 193.04 213.36 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9a6393b9-f3fb-44e6-aef5-f5169c2a3ca4")
-	)
-	(label "BLE_RX"
-		(at 124.46 175.26 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "9ccbcd82-fd0c-405e-9dbb-d67f404e52a7")
-	)
-	(label "IMU_INT1"
-		(at 124.46 180.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a202ac6a-d41a-4ad2-9621-ad6345b3064b")
-	)
-	(label "VBATM"
-		(at 124.46 50.8 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "a3d4413d-9c70-49cf-9e85-762abe343c41")
-	)
-	(label "I2C_SCL"
-		(at 294.64 116.84 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b22aadd2-dd63-4077-92fc-ec184c017b71")
-	)
-	(label "IMU_CS"
-		(at 22.86 111.76 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b298b32b-c1a9-4610-b5ed-ecd8fd6700ba")
-	)
-	(label "FLX_MOSI"
-		(at 124.46 116.84 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b4142db2-50c9-41b3-8d92-19b1590fcb38")
-	)
-	(label "M3_G"
-		(at 22.86 180.34 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c1c86b0d-3f13-445d-bc60-1118a7db76eb")
-	)
-	(label "TOF_GPIO1"
-		(at 294.64 111.76 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c6ffb4c5-1196-49c1-ae0d-532813f240b1")
-	)
-	(label "I2C_SCL"
-		(at 193.04 198.12 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c737c750-2baf-49ed-a884-797e39b6fcec")
-	)
-	(label "FLX_SCK"
-		(at 124.46 114.3 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "c7ba76fc-118a-437f-8e92-9d26e7e1723f")
-	)
-	(label "M2_G"
-		(at 193.04 185.42 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cdc545e2-b416-4703-b8e7-3f37c3c6c112")
-	)
-	(label "M1_G"
-		(at 22.86 175.26 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d51a7c1c-f976-4cd3-81de-30a3c6e95a99")
-	)
-	(label "IMU_MISO"
-		(at 124.46 177.8 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "d93798ee-9df8-4c16-a36f-d3e7d17ffdbc")
-	)
-	(label "VBATL"
-		(at 91.44 53.34 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "dc4e4eeb-d5ee-4f91-a688-f3a2e1bc8b97")
-	)
-	(label "BTN"
-		(at 124.46 182.88 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "ecbf49eb-150e-446b-a013-34552e8c3d82")
-	)
-	(label "VBATM"
-		(at 22.86 172.72 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "ee1a70ca-5327-4b58-aba3-a715de830418")
-	)
-	(label "TOF_XSHUT"
-		(at 193.04 203.2 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "f9a4abad-35a9-4d10-a17b-8625de59fe86")
-	)
-	(label "VBAT_SENSE"
-		(at 193.04 50.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fa5216cc-8ab2-4c76-be7d-2a10491af7f4")
-	)
-	(label "IMU_SCK"
-		(at 193.04 177.8 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "fde81dd4-c433-41ba-bf0a-28846a4fa66e")
-	)
-	(sheet
-		(at 241.3 106.68)
-		(size 38.1 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "1e15e723-dc1d-4bb0-8d30-68d3b2bfd9a5")
-		(property "Sheetname" "DES-004 Capteur de hauteur VL53L1X"
-			(at 243.84 105.41 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-004-capteur-hauteur.kicad_sch"
-			(at 243.84 123.19 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "TOF_XSHUT" input
-			(at 241.3 111.76 180)
-			(uuid "af7189df-8f86-46bf-825a-67422639393d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "TOF_GPIO1" output
-			(at 279.4 111.76 0)
-			(uuid "9ea0729c-81fd-4d0c-8a98-89ec3805a67a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SDA" bidirectional
-			(at 279.4 114.3 0)
-			(uuid "9ec1a639-0281-4358-a6d3-8689069d993d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SCL" bidirectional
-			(at 279.4 116.84 0)
-			(uuid "99dc478e-39f4-44c4-8cdf-b00ef499af92")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "5")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 139.7 106.68)
-		(size 38.1 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "64a5f1df-6739-40ec-903e-a1db95861e0d")
-		(property "Sheetname" "DES-005 Flux optique et regulateur 2V0"
-			(at 142.24 105.41 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-005-flux-optique.kicad_sch"
-			(at 142.24 123.19 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "FLX_CS" input
-			(at 139.7 111.76 180)
-			(uuid "246407c8-544c-4042-ac92-3f2ce4eb0e6a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "FLX_SCK" input
-			(at 139.7 114.3 180)
-			(uuid "de73ac6f-a795-41fc-83ee-bff81d2c21e6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "FLX_MOSI" input
-			(at 139.7 116.84 180)
-			(uuid "dde84e90-6587-4be4-a554-fc7e192d0f5d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "FLX_MISO" output
-			(at 177.8 111.76 0)
-			(uuid "0d43c923-ec34-4660-abe4-757726a655d6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "9")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 38.1 45.72)
-		(size 38.1 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "85ff9e74-f25e-41fb-b380-b787f50b1577")
-		(property "Sheetname" "DES-008 Batterie XT30 et entree"
-			(at 40.64 44.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-008-batterie-xt30.kicad_sch"
-			(at 40.64 62.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "VBATM" output
-			(at 76.2 50.8 0)
-			(uuid "ebd014cc-e2d5-470c-993e-15d0d0504d5e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "VBATL" output
-			(at 76.2 53.34 0)
-			(uuid "bb32d70f-e31d-4b82-8e82-7ac0d9dcc37d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "3")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 139.7 45.72)
-		(size 38.1 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "9b23fe31-ba67-4b5a-b5ec-ba8eb0da319e")
-		(property "Sheetname" "DES-009 Regulateur 3V0 et pont"
-			(at 142.24 44.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-009-regulateur-pont.kicad_sch"
-			(at 142.24 62.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "VBATM" input
-			(at 139.7 50.8 180)
-			(uuid "0c16c7c6-c374-4dde-96f5-2bebe1a0cc97")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "VBATL" input
-			(at 139.7 53.34 180)
-			(uuid "31e883b8-8fd8-4d09-a550-ac379c564097")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "VBAT_SENSE" output
-			(at 177.8 50.8 0)
-			(uuid "4b6e17a9-2425-4993-8543-50ac7865355c")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "4")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 139.7 167.64)
-		(size 38.1 53.34)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "c670eb31-450e-4444-a402-391f7629f20a")
-		(property "Sheetname" "DES-002 Microcontroleur STM32G431"
-			(at 142.24 166.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-002-microcontroleur.kicad_sch"
-			(at 142.24 222.25 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "VBAT_SENSE" input
-			(at 139.7 172.72 180)
-			(uuid "5b99ab3a-7443-40e3-a09b-328e638c96bf")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "BLE_RX" input
-			(at 139.7 175.26 180)
-			(uuid "86e6df3f-74ff-49e3-886b-92bf3740d40b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "IMU_MISO" input
-			(at 139.7 177.8 180)
-			(uuid "605ec8f9-48e8-4786-9feb-df4b331b1ded")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "IMU_INT1" input
-			(at 139.7 180.34 180)
-			(uuid "6e1d519b-0fa5-458a-a209-e95ea49867b7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "BTN" input
-			(at 139.7 182.88 180)
-			(uuid "6d96f9a5-55d6-47b1-a3f6-b0cc5180f236")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "TOF_GPIO1" input
-			(at 139.7 185.42 180)
-			(uuid "64de506a-a004-41be-b38b-cb5e7b9a9b7a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "FLX_MISO" input
-			(at 139.7 187.96 180)
-			(uuid "b7b178a6-a1f2-45dc-9da5-ed8a0fdd9434")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "BLE_TX" output
-			(at 177.8 172.72 0)
-			(uuid "5c5ff6fb-5918-439c-8e90-f3f2c17d398a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "IMU_CS" output
-			(at 177.8 175.26 0)
-			(uuid "3344df1c-3244-46e6-9dad-c4c0c8dceb5b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "IMU_SCK" output
-			(at 177.8 177.8 0)
-			(uuid "160445f3-3227-4f91-8318-a856cd57484e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "IMU_MOSI" output
-			(at 177.8 180.34 0)
-			(uuid "5d63f5f4-d063-4df8-9874-9a27cab2814d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "M1_G" output
-			(at 177.8 182.88 0)
-			(uuid "fa092db1-430a-4a8e-96b4-745c3c0522d7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "M2_G" output
-			(at 177.8 185.42 0)
-			(uuid "1df54c22-165a-49d7-8999-6f280828973b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "M3_G" output
-			(at 177.8 187.96 0)
-			(uuid "0f931bbb-c8db-458d-a1db-85ad1f41e8d6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "M4_G" output
-			(at 177.8 190.5 0)
-			(uuid "eb5db821-8718-4be1-9ea0-02855a976496")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "LED_R" output
-			(at 177.8 193.04 0)
-			(uuid "9337a54f-c36f-415e-9afc-1faf5519aea2")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "LED_G" output
-			(at 177.8 195.58 0)
-			(uuid "53f71d18-bfa5-4a1a-adae-a6d275c1c935")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SCL" bidirectional
-			(at 177.8 198.12 0)
-			(uuid "5eae1914-ce00-4828-b630-a3d1ba6986a4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "I2C_SDA" bidirectional
-			(at 177.8 200.66 0)
-			(uuid "a32e7b6c-628f-4921-a49b-d5fbe66a354a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "TOF_XSHUT" output
-			(at 177.8 203.2 0)
-			(uuid "65e1afff-2bdb-49f2-9ff6-3329a5271889")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "LED_B" output
-			(at 177.8 205.74 0)
-			(uuid "9135a059-3358-42a5-9ea3-9be503b006a0")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "BUZ" output
-			(at 177.8 208.28 0)
-			(uuid "33058d55-7a25-4fbd-9e79-c3fc91a73cd4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "FLX_CS" output
-			(at 177.8 210.82 0)
-			(uuid "ffd3cec8-07c6-4c5d-a2db-da7051ac08fd")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "FLX_SCK" output
-			(at 177.8 213.36 0)
-			(uuid "8b818a60-6839-46e1-b25c-476a27b20776")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "FLX_MOSI" output
-			(at 177.8 215.9 0)
-			(uuid "4d560cb6-f84a-4878-9cce-4fcc9c1f2b98")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "7")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 342.9 45.72)
-		(size 38.1 20.32)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "e98d040c-fa68-4c3c-9ab1-a19c5c16e619")
-		(property "Sheetname" "DES-011 Voyant RGB et buzzer"
-			(at 345.44 44.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-011-voyant-buzzer.kicad_sch"
-			(at 345.44 67.31 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "VBATM" input
-			(at 342.9 50.8 180)
-			(uuid "7ac18358-0da3-4e7d-99e3-39ca1b9baf35")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "LED_R" input
-			(at 342.9 53.34 180)
-			(uuid "edb31e4b-9051-4bd2-bf0a-a3a58bc7315e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "LED_G" input
-			(at 342.9 55.88 180)
-			(uuid "3ee984a7-fc1b-4f1e-8810-9f1f3cb5e757")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "LED_B" input
-			(at 342.9 58.42 180)
-			(uuid "4b15228f-c953-4b94-831f-7238da39ffd4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "BUZ" input
-			(at 342.9 60.96 180)
-			(uuid "738494c6-2089-4383-a068-de8fa8ebed45")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "6")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 38.1 167.64)
-		(size 38.1 20.32)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "ea04de94-5761-4e96-acdc-453de9c980a4")
-		(property "Sheetname" "DES-007 Puissance des moteurs"
-			(at 40.64 166.37 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-007-puissance-moteurs.kicad_sch"
-			(at 40.64 189.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "VBATM" input
-			(at 38.1 172.72 180)
-			(uuid "1ce6e2e7-99fd-4343-86e3-d85675ec6bc9")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "M1_G" input
-			(at 38.1 175.26 180)
-			(uuid "335b3533-f579-4a00-b0ab-8170a3c8827f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "M2_G" input
-			(at 38.1 177.8 180)
-			(uuid "86dfb88a-27ea-4677-8177-8c467423b784")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "M3_G" input
-			(at 38.1 180.34 180)
-			(uuid "a6d7b865-a861-43da-b69b-8b9f7fb8ac7c")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "M4_G" input
-			(at 38.1 182.88 180)
-			(uuid "340c4898-7118-47f7-b961-8dca1c5939d6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "11")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 38.1 106.68)
-		(size 38.1 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "ed55ca0a-6dd7-482d-923c-3c5c576a001e")
-		(property "Sheetname" "DES-003 Centrale inertielle LSM6DSO"
-			(at 40.64 105.41 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-003-centrale-inertielle.kicad_sch"
-			(at 40.64 123.19 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "IMU_CS" input
-			(at 38.1 111.76 180)
-			(uuid "3d366b4a-9417-488d-94b1-3f0193896b0c")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "IMU_SCK" input
-			(at 38.1 114.3 180)
-			(uuid "3d881c3b-a222-446b-be91-1b94a33dd9b4")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "IMU_MOSI" input
-			(at 38.1 116.84 180)
-			(uuid "46b87ea8-a9dc-440e-b560-e554d7bad686")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "IMU_INT1" output
-			(at 76.2 111.76 0)
-			(uuid "8ada39b7-0d00-45bc-9b7f-c46f810f95d3")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "IMU_MISO" output
-			(at 76.2 114.3 0)
-			(uuid "acf068bf-fd04-4630-b9d3-63c3faa7fb76")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "8")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 241.3 45.72)
-		(size 38.1 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "f0e88b02-b14a-44c2-bafe-1b5d6c99ed1f")
-		(property "Sheetname" "DES-010 Circuit du bouton"
-			(at 243.84 44.45 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-010-bouton.kicad_sch"
-			(at 243.84 62.23 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "BTN" output
-			(at 279.4 50.8 0)
-			(uuid "490e3730-e247-4375-8918-9d35e175ada6")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "2")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 342.9 106.68)
-		(size 38.1 15.24)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.0006)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0)
-		)
-		(uuid "f1c3be2a-e2b2-48d1-93ae-213b61b93f55")
-		(property "Sheetname" "DES-012 Module Bluetooth PB-03F"
-			(at 345.44 105.41 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "des-012-module-bluetooth.kicad_sch"
-			(at 345.44 123.19 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(pin "BLE_TX" input
-			(at 342.9 111.76 180)
-			(uuid "eb8c9744-0ab0-4755-b187-287918f230e8")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "BLE_RX" output
-			(at 381 111.76 0)
-			(uuid "1f806c31-2ec8-4e05-a7bc-dcfde492381d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(instances
-			(project "proj_boomrone"
-				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
-					(page "10")
-				)
-			)
-		)
-	)
+  (sheet (at 241.3 106.68) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "1e15e723-dc1d-4bb0-8d30-68d3b2bfd9a5")
+    (property "Sheetname" "DES-004 Capteur de hauteur VL53L1X" (at 243.84 105.41 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-004-capteur-hauteur.kicad_sch" (at 243.84 123.19 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "5")
+    				)
+    			)
+    		)
+    (pin "TOF_XSHUT" input (at 241.3 111.76 180)
+      (uuid "3e434a1c-362d-408e-9afa-cb717a75233a")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "TOF_GPIO1" output (at 279.4 111.76 0)
+      (uuid "1987f1de-91f4-485b-bdd6-6b3a74e12ca0")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "I2C_SDA" bidirectional (at 279.4 114.3 0)
+      (uuid "0eee379b-bac6-4427-aa40-ea34c9ebf62a")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "I2C_SCL" bidirectional (at 279.4 116.84 0)
+      (uuid "6b88ff81-9b67-4bf2-8c0e-ad388e026252")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 241.3 111.76) (xy 226.06 111.76)) (stroke (width 0) (type default)) (uuid "33aa86b5-20e6-4789-ae5e-aea47f6fcaf8"))
+  (label "TOF_XSHUT" (at 226.06 111.76 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "e59ae3be-0327-4a59-8f54-788735e8d754"))
+  (wire (pts (xy 279.4 111.76) (xy 294.64 111.76)) (stroke (width 0) (type default)) (uuid "d6acc09f-ef18-46e0-8646-fe530d0e673c"))
+  (label "TOF_GPIO1" (at 294.64 111.76 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "3d17e150-cbfc-448c-a731-de298a054eb3"))
+  (wire (pts (xy 279.4 114.3) (xy 294.64 114.3)) (stroke (width 0) (type default)) (uuid "a75ba87f-4692-41b5-97fc-c881c78cc367"))
+  (label "I2C_SDA" (at 294.64 114.3 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "ad5f4918-1e21-40e3-8c10-009f6d9e0a7a"))
+  (wire (pts (xy 279.4 116.84) (xy 294.64 116.84)) (stroke (width 0) (type default)) (uuid "fb4416aa-e25b-424b-b1d2-44f2f22b644f"))
+  (label "I2C_SCL" (at 294.64 116.84 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "56c18118-8cfd-44c6-9ee9-bbc86403fd60"))
+  (sheet (at 139.7 106.68) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "64a5f1df-6739-40ec-903e-a1db95861e0d")
+    (property "Sheetname" "DES-005 Flux optique et regulateur 2V0" (at 142.24 105.41 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-005-flux-optique.kicad_sch" (at 142.24 123.19 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "9")
+    				)
+    			)
+    		)
+    (pin "FLX_CS" input (at 139.7 111.76 180)
+      (uuid "8136ccb4-6638-4adc-9396-ad41012aa2eb")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "FLX_SCK" input (at 139.7 114.3 180)
+      (uuid "373cf0b3-f35e-4b51-9679-9c41eca42433")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "FLX_MOSI" input (at 139.7 116.84 180)
+      (uuid "548a7fd6-1e47-4061-82d5-c8e2659bf60f")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "FLX_MISO" output (at 177.8 111.76 0)
+      (uuid "e507beb1-a97c-4498-9a23-5c0f6cfff2e5")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 139.7 111.76) (xy 124.46 111.76)) (stroke (width 0) (type default)) (uuid "fce8e387-ae56-4d57-a772-b4780835ff66"))
+  (label "FLX_CS" (at 124.46 111.76 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "abb1a5b5-c1aa-4e15-827a-8c4e43ca078f"))
+  (wire (pts (xy 139.7 114.3) (xy 124.46 114.3)) (stroke (width 0) (type default)) (uuid "27ad5c89-4e99-42ae-abe3-64dd4beaf4d6"))
+  (label "FLX_SCK" (at 124.46 114.3 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "88603fa8-69c2-49ae-b759-1248a111e569"))
+  (wire (pts (xy 139.7 116.84) (xy 124.46 116.84)) (stroke (width 0) (type default)) (uuid "6c1b6feb-f13e-46bc-af74-3a99f53bb30e"))
+  (label "FLX_MOSI" (at 124.46 116.84 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "8ecb9eb4-d811-4aca-9549-1bec83c0fc19"))
+  (wire (pts (xy 177.8 111.76) (xy 193.04 111.76)) (stroke (width 0) (type default)) (uuid "27161604-c5ce-4af2-b4b6-b66d3e5281a9"))
+  (label "FLX_MISO" (at 193.04 111.76 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "bc0800c8-ee04-4dbd-9c02-c5bfcd4cfd58"))
+  (sheet (at 38.1 45.72) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "85ff9e74-f25e-41fb-b380-b787f50b1577")
+    (property "Sheetname" "DES-008 Batterie XT30 et entree" (at 40.64 44.45 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-008-batterie-xt30.kicad_sch" (at 40.64 62.23 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "3")
+    				)
+    			)
+    		)
+    (pin "VBATM" output (at 76.2 50.8 0)
+      (uuid "36c26485-48cc-4d19-8200-df10eb0ce5cc")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "VBATL" output (at 76.2 53.34 0)
+      (uuid "d82319af-fcdd-4b59-a5cb-150a53ee751a")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 76.2 50.8) (xy 91.44 50.8)) (stroke (width 0) (type default)) (uuid "d6d7197d-a87e-4942-abf4-70909d8f230f"))
+  (label "VBATM" (at 91.44 50.8 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "8e11fb22-4af8-43d1-9253-304f7c5981c4"))
+  (wire (pts (xy 76.2 53.34) (xy 91.44 53.34)) (stroke (width 0) (type default)) (uuid "ca246692-aba5-4975-b5ab-e510d2c17237"))
+  (label "VBATL" (at 91.44 53.34 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "375afea6-6431-40c4-81bd-86d8f68fb3e1"))
+  (sheet (at 139.7 45.72) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "9b23fe31-ba67-4b5a-b5ec-ba8eb0da319e")
+    (property "Sheetname" "DES-009 Regulateur 3V0 et pont" (at 142.24 44.45 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-009-regulateur-pont.kicad_sch" (at 142.24 62.23 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "4")
+    				)
+    			)
+    		)
+    (pin "VBATM" input (at 139.7 50.8 180)
+      (uuid "f0a83073-d6b2-4fd3-aa70-c5d339a34226")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "VBATL" input (at 139.7 53.34 180)
+      (uuid "e2262f54-aab3-402c-b79a-de837c7761f8")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "VBAT_SENSE" output (at 177.8 50.8 0)
+      (uuid "fb068262-1358-4a4e-b251-7949f37e2e42")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 139.7 50.8) (xy 124.46 50.8)) (stroke (width 0) (type default)) (uuid "c0852551-e405-4207-9f15-93d7890fc6e0"))
+  (label "VBATM" (at 124.46 50.8 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "22cd16b5-2b1f-4098-982a-be65456a7ecb"))
+  (wire (pts (xy 139.7 53.34) (xy 124.46 53.34)) (stroke (width 0) (type default)) (uuid "ded76c8d-ec4f-47d8-aeda-e8c71d4abe79"))
+  (label "VBATL" (at 124.46 53.34 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "22de3201-aaa2-412b-b2dc-dd1771c41537"))
+  (wire (pts (xy 177.8 50.8) (xy 193.04 50.8)) (stroke (width 0) (type default)) (uuid "8257f468-b4b6-40e3-a7f7-7ce4791282c1"))
+  (label "VBAT_SENSE" (at 193.04 50.8 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "1a010354-c540-48b7-955f-ee905814ead1"))
+  (sheet (at 139.7 167.64) (size 38.1 53.34) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "c670eb31-450e-4444-a402-391f7629f20a")
+    (property "Sheetname" "DES-002 Microcontroleur STM32G431" (at 142.24 166.37 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-002-microcontroleur.kicad_sch" (at 142.24 222.25 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "7")
+    				)
+    			)
+    		)
+    (pin "VBAT_SENSE" input (at 139.7 172.72 180)
+      (uuid "1b81509b-2090-4019-8c4d-4e8bbe838850")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "BLE_RX" input (at 139.7 175.26 180)
+      (uuid "92dfd975-0b9d-41c8-aa6e-82708e2b96cb")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "IMU_MISO" input (at 139.7 177.8 180)
+      (uuid "9172cf59-8b8b-4592-bef1-1f947e7148ba")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "IMU_INT1" input (at 139.7 180.34 180)
+      (uuid "f40f0464-a54b-4936-a375-222b6ca0dc93")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "BTN" input (at 139.7 182.88 180)
+      (uuid "62e0fa04-d568-43e7-b5cc-06ac07a4d5a7")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "TOF_GPIO1" input (at 139.7 185.42 180)
+      (uuid "e14db52a-ea4b-4f70-bb71-5f67be6cbf9a")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "FLX_MISO" input (at 139.7 187.96 180)
+      (uuid "acf59345-4328-4855-a7ec-5c7a481b691e")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "BLE_TX" output (at 177.8 172.72 0)
+      (uuid "5983eaef-18d6-4d02-a447-fabef0104f76")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "IMU_CS" output (at 177.8 175.26 0)
+      (uuid "1573892c-4d33-40d0-bd79-46c67081abcb")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "IMU_SCK" output (at 177.8 177.8 0)
+      (uuid "ae31967a-baa9-488f-acc3-c436df3bc91d")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "IMU_MOSI" output (at 177.8 180.34 0)
+      (uuid "6582b071-bcaa-411f-af44-be8c1a3515eb")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "M1_G" output (at 177.8 182.88 0)
+      (uuid "a8827538-67d2-47af-a2e7-6f9996757894")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "M2_G" output (at 177.8 185.42 0)
+      (uuid "43e5b4f7-e8ae-4151-b068-4d339999f673")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "M3_G" output (at 177.8 187.96 0)
+      (uuid "000c393d-009b-4205-b76b-ac496ed95db3")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "M4_G" output (at 177.8 190.5 0)
+      (uuid "2ff682c1-ceb7-4791-91a1-3ea7f2c0e172")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "LED_R" output (at 177.8 193.04 0)
+      (uuid "ee494dfe-62d4-449f-9f4f-a0ac9afb5bfc")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "LED_G" output (at 177.8 195.58 0)
+      (uuid "eb2c0d74-3270-4184-bb2c-59006a7dfcea")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "I2C_SCL" bidirectional (at 177.8 198.12 0)
+      (uuid "9b15ba58-a258-4db2-b2c6-9db3041d6f38")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "I2C_SDA" bidirectional (at 177.8 200.66 0)
+      (uuid "fc1b7e63-1b22-4bc2-9351-e7bde9cc8407")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "TOF_XSHUT" output (at 177.8 203.2 0)
+      (uuid "a2af81c9-9af4-412e-9707-412f6df10e00")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "LED_B" output (at 177.8 205.74 0)
+      (uuid "62b19c81-2f7c-4932-95b8-28b1840bd9dd")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "BUZ" output (at 177.8 208.28 0)
+      (uuid "a992520d-659d-485d-89d9-fcb7688211a3")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "FLX_CS" output (at 177.8 210.82 0)
+      (uuid "1d6a0cfd-8f80-42ba-af3b-d7a42dd5efc1")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "FLX_SCK" output (at 177.8 213.36 0)
+      (uuid "8761bd8b-1e37-4aa5-bc08-48066ffc7698")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "FLX_MOSI" output (at 177.8 215.9 0)
+      (uuid "8810435b-ce0e-4889-8822-08fd1174fb64")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 139.7 172.72) (xy 124.46 172.72)) (stroke (width 0) (type default)) (uuid "f1ab3a20-bda9-4847-9553-788a14dccd54"))
+  (label "VBAT_SENSE" (at 124.46 172.72 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "fa44e460-c67c-4dc7-a589-aa7c0b4f1692"))
+  (wire (pts (xy 139.7 175.26) (xy 124.46 175.26)) (stroke (width 0) (type default)) (uuid "f38648dd-baa9-4241-8b0f-dade0c1ace4f"))
+  (label "BLE_RX" (at 124.46 175.26 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "96804685-3e28-41d1-b342-2bf97904d534"))
+  (wire (pts (xy 139.7 177.8) (xy 124.46 177.8)) (stroke (width 0) (type default)) (uuid "bc3ca466-8349-4c93-95f4-0d09ad7ff003"))
+  (label "IMU_MISO" (at 124.46 177.8 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "94dff7d2-5821-4a85-9c8b-fecbbea6ae51"))
+  (wire (pts (xy 139.7 180.34) (xy 124.46 180.34)) (stroke (width 0) (type default)) (uuid "2979141e-769e-4926-af24-594c1940cae2"))
+  (label "IMU_INT1" (at 124.46 180.34 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "336a6822-bae6-45a1-90c2-6ce2559e9866"))
+  (wire (pts (xy 139.7 182.88) (xy 124.46 182.88)) (stroke (width 0) (type default)) (uuid "80d6b17e-3f9b-4e4c-b19b-a1ae59889fb5"))
+  (label "BTN" (at 124.46 182.88 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "4acd4c44-c334-41ad-b334-2f5b37f329b3"))
+  (wire (pts (xy 139.7 185.42) (xy 124.46 185.42)) (stroke (width 0) (type default)) (uuid "8dd802bd-c462-406c-8aa3-a5ce3eca507d"))
+  (label "TOF_GPIO1" (at 124.46 185.42 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "62c82e37-fdf1-4e74-af30-00d954377ef3"))
+  (wire (pts (xy 139.7 187.96) (xy 124.46 187.96)) (stroke (width 0) (type default)) (uuid "1b0b31af-bf82-4429-ac26-65e8de951bb9"))
+  (label "FLX_MISO" (at 124.46 187.96 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "6feb324b-0453-430a-ad0c-a7133ee5af56"))
+  (wire (pts (xy 177.8 172.72) (xy 193.04 172.72)) (stroke (width 0) (type default)) (uuid "8629e9df-f006-4238-a057-3776fbae1810"))
+  (label "BLE_TX" (at 193.04 172.72 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "7af6ca79-d834-4c83-8214-c0ae240333a9"))
+  (wire (pts (xy 177.8 175.26) (xy 193.04 175.26)) (stroke (width 0) (type default)) (uuid "fedcd7de-f28b-4363-984e-fcd39fbe8f82"))
+  (label "IMU_CS" (at 193.04 175.26 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "229319b8-fe06-4287-a326-e2368f0455af"))
+  (wire (pts (xy 177.8 177.8) (xy 193.04 177.8)) (stroke (width 0) (type default)) (uuid "26d30adf-7ef2-4b93-8b99-9ed22e1f0b82"))
+  (label "IMU_SCK" (at 193.04 177.8 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "cf70efec-4532-481d-9d27-65af28517d3d"))
+  (wire (pts (xy 177.8 180.34) (xy 193.04 180.34)) (stroke (width 0) (type default)) (uuid "fc36b311-df54-4922-895a-712257cc093a"))
+  (label "IMU_MOSI" (at 193.04 180.34 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "9ef743a1-acf5-4652-9eb1-7c5913ddb9cc"))
+  (wire (pts (xy 177.8 182.88) (xy 193.04 182.88)) (stroke (width 0) (type default)) (uuid "fc9370b3-6aad-4717-a7bd-584d7d63173d"))
+  (label "M1_G" (at 193.04 182.88 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "50a006d0-f73f-4b0e-872b-eeef4260ba37"))
+  (wire (pts (xy 177.8 185.42) (xy 193.04 185.42)) (stroke (width 0) (type default)) (uuid "c1d1e74f-822e-40f4-8755-dcadbefd0665"))
+  (label "M2_G" (at 193.04 185.42 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "b775d3a0-9bef-41c3-abbb-8ee02332b4b9"))
+  (wire (pts (xy 177.8 187.96) (xy 193.04 187.96)) (stroke (width 0) (type default)) (uuid "2aecf38b-6031-499d-a8aa-64118d9984a0"))
+  (label "M3_G" (at 193.04 187.96 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "a2bf61a0-b2c2-4140-a3a6-df99c86eaba2"))
+  (wire (pts (xy 177.8 190.5) (xy 193.04 190.5)) (stroke (width 0) (type default)) (uuid "afe5b215-9fc2-42fe-b16f-2c305a5b75a5"))
+  (label "M4_G" (at 193.04 190.5 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "feea8321-45ec-4e36-82d3-19526b39d4fb"))
+  (wire (pts (xy 177.8 193.04) (xy 193.04 193.04)) (stroke (width 0) (type default)) (uuid "9f2f2315-9bca-4bcf-86bc-a0d4c1a92a69"))
+  (label "LED_R" (at 193.04 193.04 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "4c942eb0-8a19-47bb-9525-fb78bbead2a8"))
+  (wire (pts (xy 177.8 195.58) (xy 193.04 195.58)) (stroke (width 0) (type default)) (uuid "0e364c93-2aea-4570-b119-5bcdb8e53506"))
+  (label "LED_G" (at 193.04 195.58 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "e997ea83-1110-4e9a-8c1c-9b47fee0627d"))
+  (wire (pts (xy 177.8 198.12) (xy 193.04 198.12)) (stroke (width 0) (type default)) (uuid "4ccca408-70a4-4144-99a5-5878fb2d2cfc"))
+  (label "I2C_SCL" (at 193.04 198.12 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "9d29a772-bfe7-4472-a064-64f32faf18af"))
+  (wire (pts (xy 177.8 200.66) (xy 193.04 200.66)) (stroke (width 0) (type default)) (uuid "19418dbe-f49c-4fb2-8442-3884ded8606c"))
+  (label "I2C_SDA" (at 193.04 200.66 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "4ee87966-0079-479d-aff2-f0ef657e16b6"))
+  (wire (pts (xy 177.8 203.2) (xy 193.04 203.2)) (stroke (width 0) (type default)) (uuid "86cbef88-507d-4fbe-9df9-aa4fc7452471"))
+  (label "TOF_XSHUT" (at 193.04 203.2 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "98b87b13-19bd-447d-bdee-7a205cc552b0"))
+  (wire (pts (xy 177.8 205.74) (xy 193.04 205.74)) (stroke (width 0) (type default)) (uuid "e5f06db4-34ca-44af-9e92-8491b3f21752"))
+  (label "LED_B" (at 193.04 205.74 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "f5c62a20-59d8-4ba3-9407-3623a818df6f"))
+  (wire (pts (xy 177.8 208.28) (xy 193.04 208.28)) (stroke (width 0) (type default)) (uuid "d5c25c7a-792f-40f4-a5fd-43b87298f7ad"))
+  (label "BUZ" (at 193.04 208.28 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "cff4d15f-8e01-42c3-b26c-7ed518b0094f"))
+  (wire (pts (xy 177.8 210.82) (xy 193.04 210.82)) (stroke (width 0) (type default)) (uuid "9b5e7fac-4238-4b06-824e-16d8a968285b"))
+  (label "FLX_CS" (at 193.04 210.82 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "ecbec755-fe81-4469-ba77-edd45868227e"))
+  (wire (pts (xy 177.8 213.36) (xy 193.04 213.36)) (stroke (width 0) (type default)) (uuid "16d566d0-e103-4e63-8056-46b3444fc8b1"))
+  (label "FLX_SCK" (at 193.04 213.36 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "ebbf506b-4245-4d51-85fa-04d2ec96c625"))
+  (wire (pts (xy 177.8 215.9) (xy 193.04 215.9)) (stroke (width 0) (type default)) (uuid "5fd2125c-1d68-40fc-ba55-6b9612fffdde"))
+  (label "FLX_MOSI" (at 193.04 215.9 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "9ed525f3-a171-4134-bfc7-565715ec9ff3"))
+  (sheet (at 342.9 45.72) (size 38.1 20.32) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "e98d040c-fa68-4c3c-9ab1-a19c5c16e619")
+    (property "Sheetname" "DES-011 Voyant RGB et buzzer" (at 345.44 44.45 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-011-voyant-buzzer.kicad_sch" (at 345.44 67.31 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "6")
+    				)
+    			)
+    		)
+    (pin "VBATM" input (at 342.9 50.8 180)
+      (uuid "2a2c3966-bc96-4da5-a384-61804f753dc4")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "LED_R" input (at 342.9 53.34 180)
+      (uuid "06a9d03c-82ef-4006-80e9-d912b7f058b3")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "LED_G" input (at 342.9 55.88 180)
+      (uuid "247cef98-8f80-42dd-94f7-7da2830aef27")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "LED_B" input (at 342.9 58.42 180)
+      (uuid "8245fb1d-9f7c-4a08-a143-36179a761534")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "BUZ" input (at 342.9 60.96 180)
+      (uuid "d7cfd1cc-d5a1-48a1-b273-10ec00c2ffc7")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+  )
+  (wire (pts (xy 342.9 50.8) (xy 327.66 50.8)) (stroke (width 0) (type default)) (uuid "3533dc18-4e59-44d3-aca6-7b5cec8910e5"))
+  (label "VBATM" (at 327.66 50.8 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "342ccea2-43bc-4ecf-93c7-89e40a3739b5"))
+  (wire (pts (xy 342.9 53.34) (xy 327.66 53.34)) (stroke (width 0) (type default)) (uuid "5c120e39-938c-4666-aad9-8246d718bc11"))
+  (label "LED_R" (at 327.66 53.34 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "aba7b0cf-fba3-458a-9bf7-680a6520e61e"))
+  (wire (pts (xy 342.9 55.88) (xy 327.66 55.88)) (stroke (width 0) (type default)) (uuid "de16c0bf-0a60-47fc-8299-67e24142c537"))
+  (label "LED_G" (at 327.66 55.88 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "dd6c7462-bc00-4f58-9371-3041b88c49c1"))
+  (wire (pts (xy 342.9 58.42) (xy 327.66 58.42)) (stroke (width 0) (type default)) (uuid "14cf1acc-b12d-42fd-9666-0a329440fb2f"))
+  (label "LED_B" (at 327.66 58.42 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "6446b9a1-c8b2-435f-99ef-ddf9d2d6b4e4"))
+  (wire (pts (xy 342.9 60.96) (xy 327.66 60.96)) (stroke (width 0) (type default)) (uuid "bcd0f46b-055c-4380-bf26-3e91b78b0706"))
+  (label "BUZ" (at 327.66 60.96 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "a9a308f3-59c2-41f7-a748-f158b53b85fc"))
+  (sheet (at 38.1 167.64) (size 38.1 20.32) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "ea04de94-5761-4e96-acdc-453de9c980a4")
+    (property "Sheetname" "DES-007 Puissance des moteurs" (at 40.64 166.37 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-007-puissance-moteurs.kicad_sch" (at 40.64 189.23 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "11")
+    				)
+    			)
+    		)
+    (pin "VBATM" input (at 38.1 172.72 180)
+      (uuid "abb8c8f0-375f-4fdc-926e-49e7ebbf01f9")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "M1_G" input (at 38.1 175.26 180)
+      (uuid "574e0704-6925-4c0e-85de-09e1f755c5af")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "M2_G" input (at 38.1 177.8 180)
+      (uuid "578287a9-a09d-448c-96b5-c5047ceab9ce")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "M3_G" input (at 38.1 180.34 180)
+      (uuid "b06ad791-d20f-4953-b1dd-ef2e06230d0e")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "M4_G" input (at 38.1 182.88 180)
+      (uuid "599b0cb5-46fd-47e9-a166-5ed5f31d1405")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+  )
+  (wire (pts (xy 38.1 172.72) (xy 22.86 172.72)) (stroke (width 0) (type default)) (uuid "0e8e041f-67d9-42a5-8439-155f5c6338b0"))
+  (label "VBATM" (at 22.86 172.72 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "0821939e-3ad9-4c19-a2ef-369098cae718"))
+  (wire (pts (xy 38.1 175.26) (xy 22.86 175.26)) (stroke (width 0) (type default)) (uuid "40428f42-40ae-4456-99ef-08685589e790"))
+  (label "M1_G" (at 22.86 175.26 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "a47616c1-b3d4-4483-afc4-a7b3df84fc1d"))
+  (wire (pts (xy 38.1 177.8) (xy 22.86 177.8)) (stroke (width 0) (type default)) (uuid "94ede38e-4e6e-44f6-b2ef-f6bc2321ee08"))
+  (label "M2_G" (at 22.86 177.8 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "033b21b5-6022-4516-8368-1a16bd91ec4f"))
+  (wire (pts (xy 38.1 180.34) (xy 22.86 180.34)) (stroke (width 0) (type default)) (uuid "8c0726e0-cd8a-4875-aa62-557e8332a6d2"))
+  (label "M3_G" (at 22.86 180.34 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "9928bf07-3b7b-43a7-9eef-127c6a7dac13"))
+  (wire (pts (xy 38.1 182.88) (xy 22.86 182.88)) (stroke (width 0) (type default)) (uuid "47f8d6da-3112-4673-a16f-f8750fd246aa"))
+  (label "M4_G" (at 22.86 182.88 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "96014f7e-1368-444a-8b54-b7a62f6ef213"))
+  (sheet (at 38.1 106.68) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "ed55ca0a-6dd7-482d-923c-3c5c576a001e")
+    (property "Sheetname" "DES-003 Centrale inertielle LSM6DSO" (at 40.64 105.41 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-003-centrale-inertielle.kicad_sch" (at 40.64 123.19 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "8")
+    				)
+    			)
+    		)
+    (pin "IMU_CS" input (at 38.1 111.76 180)
+      (uuid "5d46f72d-b9a5-4e48-8085-8f3f0b6e0b16")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "IMU_SCK" input (at 38.1 114.3 180)
+      (uuid "0d5ec531-292b-49c9-9ffd-a01ab66e5f29")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "IMU_MOSI" input (at 38.1 116.84 180)
+      (uuid "1e325b6a-35e5-4053-b11b-4fd72f9009e1")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "IMU_INT1" output (at 76.2 111.76 0)
+      (uuid "1fa1e58c-e638-4cba-9227-deae3c882c2d")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (pin "IMU_MISO" output (at 76.2 114.3 0)
+      (uuid "5e415232-63ba-400f-9a8d-c88b245996e0")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 38.1 111.76) (xy 22.86 111.76)) (stroke (width 0) (type default)) (uuid "c6f983b9-1db5-499e-b3b5-741a02dd6078"))
+  (label "IMU_CS" (at 22.86 111.76 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "bf30f362-9ac6-4610-9c45-510d82492f5e"))
+  (wire (pts (xy 38.1 114.3) (xy 22.86 114.3)) (stroke (width 0) (type default)) (uuid "6816a12e-43c0-4951-8be0-6df18182e914"))
+  (label "IMU_SCK" (at 22.86 114.3 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "85012173-7aa3-4788-8222-9fe9173c6829"))
+  (wire (pts (xy 38.1 116.84) (xy 22.86 116.84)) (stroke (width 0) (type default)) (uuid "40000133-0c85-40ad-bb37-b5921e3d0fd7"))
+  (label "IMU_MOSI" (at 22.86 116.84 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "cb64abe9-5416-4abf-a61a-fdc65a92a3eb"))
+  (wire (pts (xy 76.2 111.76) (xy 91.44 111.76)) (stroke (width 0) (type default)) (uuid "e95fc884-e3dd-450b-b5c4-856a9104f440"))
+  (label "IMU_INT1" (at 91.44 111.76 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "49f23cf7-3323-4c7f-b46a-ef0071cc466a"))
+  (wire (pts (xy 76.2 114.3) (xy 91.44 114.3)) (stroke (width 0) (type default)) (uuid "42a3d66b-fa5c-4490-b21b-e4b2798bbf11"))
+  (label "IMU_MISO" (at 91.44 114.3 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "4a22d36c-c783-4461-abb4-83dd94753232"))
+  (sheet (at 241.3 45.72) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "f0e88b02-b14a-44c2-bafe-1b5d6c99ed1f")
+    (property "Sheetname" "DES-010 Circuit du bouton" (at 243.84 44.45 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-010-bouton.kicad_sch" (at 243.84 62.23 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "2")
+    				)
+    			)
+    		)
+    (pin "BTN" output (at 279.4 50.8 0)
+      (uuid "32e38fd4-3053-4795-841d-770f50aa41e5")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 279.4 50.8) (xy 294.64 50.8)) (stroke (width 0) (type default)) (uuid "15872f78-26ae-4284-97fd-f74f034ae415"))
+  (label "BTN" (at 294.64 50.8 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "7f317c9e-2784-455d-9e46-50d340a5a14d"))
+  (sheet (at 342.9 106.68) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "f1c3be2a-e2b2-48d1-93ae-213b61b93f55")
+    (property "Sheetname" "DES-012 Module Bluetooth PB-03F" (at 345.44 105.41 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "des-012-module-bluetooth.kicad_sch" (at 345.44 123.19 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "10")
+    				)
+    			)
+    		)
+    (pin "BLE_TX" input (at 342.9 111.76 180)
+      (uuid "0dfc084e-102a-4c37-8455-79f0734a4cea")
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (pin "BLE_RX" output (at 381 111.76 0)
+      (uuid "f6b67100-bbb5-4c7a-b686-896631f5389b")
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+  )
+  (wire (pts (xy 342.9 111.76) (xy 327.66 111.76)) (stroke (width 0) (type default)) (uuid "9f70e4bb-da43-4fe2-a718-c719e4d80955"))
+  (label "BLE_TX" (at 327.66 111.76 180) (effects (font (size 1.27 1.27)) (justify right bottom)) (uuid "66b89b74-69ca-444b-8eb9-2d53eec07d1b"))
+  (wire (pts (xy 381 111.76) (xy 396.24 111.76)) (stroke (width 0) (type default)) (uuid "c897ca2a-0ca8-4665-87cf-13f00e41ed15"))
+  (label "BLE_RX" (at 396.24 111.76 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid "2b824c46-58a5-4ff5-a93e-ee9c64ed528a"))
+  (sheet (at 241.3 167.64) (size 38.1 15.24) (fields_autoplaced yes)
+    (stroke (width 0.0006) (type default))
+    (fill (color 0 0 0 0.0000))
+    (uuid "5a34f916-0ac9-40ca-8629-15f4b47a48fb")
+    (property "Sheetname" "Synoptique de la carte" (at 243.84 166.37 0)
+      (effects (font (size 1.27 1.27)) (justify left bottom))
+    )
+    (property "Sheetfile" "synoptique.kicad_sch" (at 243.84 184.15 0)
+      (effects (font (size 1.27 1.27)) (justify left top))
+    )
+    (instances
+    			(project "proj_boomrone"
+    				(path "/c8c64292-f6f0-4cd7-a67a-d2d22f233e4d"
+    					(page "12")
+    				)
+    			)
+    		)
+  )
+  (text "Schema racine - index des feuilles" (exclude_from_sim no) (at 38.1 25.4 0) (effects (font (size 2.5 2.5) (bold yes)) (justify left)) (uuid "fde901a9-3f87-486d-9e94-5e379d5a667c"))
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	(sheet_instances
 		(path "/"
 			(page "1")

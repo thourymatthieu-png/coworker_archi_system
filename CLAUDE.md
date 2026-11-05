@@ -103,6 +103,7 @@ python tools/check_traceability_V2.py projets/<nom> --gate --phase conception   
 python tools/kicad_place_fields.py <feuille>.kicad_sch                          # place les textes référence/valeur selon le type de symbole (+ avertit des pas trop serrés)
 python tools/kicad_add_items.py <feuille>.kicad_sch spec.json                  # fils, étiquettes hiérarchiques/locales, croix NC, jonctions en une fois
 python tools/kicad_build_root.py <dossier_projet_kicad>                         # page racine : cases, broches de feuille, étiquettes
+python tools/kicad_add_image_sheet.py <dossier_projet_kicad> <image.png>                # page dédiée contenant une image (synoptique) + case à la racine ; image générée par tools/gen_synoptique_boomrone.py
 kicad-cli sch erc <racine>.kicad_sch -o rapport.txt                             # ERC de toute la hiérarchie (objectif : 0 violation)
 kicad-cli sch upgrade <feuille>.kicad_sch                                       # format le plus récent (évite l'avertissement à l'ouverture)
 ```

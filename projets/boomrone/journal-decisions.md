@@ -2559,3 +2559,12 @@ Format (exemple, non analysé) :
 **Raison :** instructions de l'utilisateur en chat, 2026-11-04 : « il faut créer un projet KiCad 10 (proj_boomrone) », « on vérifie que la bibliothèque a tous les symboles pour tous les composants, sinon on crée une bibliothèque locale au projet (lib_boomrone) », « une page par bloc, A4 paysage ou A3 si besoin, le schéma grossièrement centré », « montre-moi page après page que je puisse valider », « pour les composants avec doute, EasyEDA Libraries est la voie à suivre », « à chaque ajustement de texte, essaie d'améliorer une règle ou un script ».
 **Doutes levés :** (aucun) ; DOU-206 « Buzzer SMD-9650-3327 : empreinte EasyEDA de 9,0 mm contre 9,6 mm de la nomenclature » et DOU-207 « Symboles EasyEDA du PMW3901MB et du PB-03F : brochage à comparer aux fiches » ouverts, non bloquants
 
+
+### DEC-291 — Page « Synoptique de la carte » dans le schéma KiCad
+**Date :** 2026-11-05
+**Concerne :** DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte »
+**Modifie :** projet KiCad `proj_boomrone` : nouvelle feuille `synoptique.kicad_sch` (A3, image PNG seule, aucun composant) et case correspondante sur la page racine (page 12) ; images `projets/boomrone/schemas/synoptique-boomrone.svg` et `.png` ; scripts `tools/gen_synoptique_boomrone.py` et `tools/kicad_add_image_sheet.py`. Aucun ARC, REQ ni DES modifié.
+**Décision :** le synoptique détaillé de la carte (alimentation, microcontrôleur, capteurs, radio, actionneurs, interfaces, extérieur) est une image importée sur une page dédiée du schéma, et non sur la page racine, trop chargée pour la recevoir lisiblement. ERC : 0 violation.
+**Alternatives écartées :** image en bande basse de la racine (illisible) ; réorganisation des cases de la racine (touche des pages déjà validées).
+**Raison :** demande de l'utilisateur en chat, 2026-11-05 : « une page dédiée Synoptique » ; illustration de conception, pas un schéma de fabrication.
+**Doutes levés :** (aucun)

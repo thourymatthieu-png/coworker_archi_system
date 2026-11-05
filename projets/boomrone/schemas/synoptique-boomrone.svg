@@ -1,0 +1,282 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1280" width="2000" height="1280" font-family="Segoe UI,Arial,sans-serif">
+<title>Synoptique de la carte Boomrone</title><defs>
+<marker id="ar_bat" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/></marker>
+<marker id="ar_l3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/></marker>
+<marker id="ar_l2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9333ea"/></marker>
+<marker id="ar_sig" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#059669"/></marker>
+<marker id="ar_ser" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0891b2"/></marker>
+<marker id="ar_gnd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#374151"/></marker>
+<marker id="ar_warn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d97706"/></marker>
+</defs><rect width="100%" height="100%" fill="#ffffff"/>
+<text x="30" y="38" text-anchor="start" font-size="24" fill="#1f2937" font-weight="bold">Boomrone — Synoptique de la carte (drone de poche, 100 g au plus)</text>
+<text x="30" y="60" text-anchor="start" font-size="12" fill="#4b5563">Carte unique double face 40 × 35 mm, fabriquée et assemblée par JLCPCB · STM32G431 à 170 MHz, cycle de contrôle 1 kHz · vue d'ensemble de DES-001 « Schéma par blocs, réseaux et domaines de tension de la carte »</text>
+<rect x="20" y="85" width="250" height="1150" rx="10" fill="#6b7280" fill-opacity="0.06" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="30" y="103" text-anchor="start" font-size="13" fill="#6b7280" font-weight="bold">EXTÉRIEUR DE LA CARTE</text>
+<rect x="40" y="120" width="210" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="145.0" y="140" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">Batterie LiPo 1S 850 mAh</text>
+<text x="145.0" y="158" text-anchor="middle" font-size="12" fill="#1f2937">3,1 à 4,2 V · 50C au moins</text>
+<text x="145.0" y="173" text-anchor="middle" font-size="12" fill="#1f2937">sans protection · ~19 g</text>
+<text x="145.0" y="188" text-anchor="middle" font-size="12" fill="#1f2937">connecteur XT30</text>
+<rect x="40" y="650" width="210" height="80" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="145.0" y="670" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">ST-LINK</text>
+<text x="145.0" y="688" text-anchor="middle" font-size="12" fill="#1f2937">programmation du firmware</text>
+<text x="145.0" y="703" text-anchor="middle" font-size="12" fill="#1f2937">liaison SWD (pas d'USB)</text>
+<rect x="40" y="760" width="210" height="80" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="145.0" y="780" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">Ordinateur / téléphone</text>
+<text x="145.0" y="798" text-anchor="middle" font-size="12" fill="#1f2937">logiciel d'essai Python</text>
+<text x="145.0" y="813" text-anchor="middle" font-size="12" fill="#1f2937">Bluetooth basse consommation</text>
+<rect x="40" y="870" width="210" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="145.0" y="890" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">Utilisateur</text>
+<text x="145.0" y="908" text-anchor="middle" font-size="12" fill="#1f2937">appui bouton · voit le voyant</text>
+<text x="145.0" y="923" text-anchor="middle" font-size="12" fill="#1f2937">entend le buzzer</text>
+<rect x="40" y="970" width="210" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="145.0" y="990" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">Sol survolé</text>
+<text x="145.0" y="1008" text-anchor="middle" font-size="12" fill="#1f2937">vu par U3 (hauteur)</text>
+<text x="145.0" y="1023" text-anchor="middle" font-size="12" fill="#1f2937">et U4 (flux optique)</text>
+<rect x="40" y="1070" width="210" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="145.0" y="1090" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">Cadre imprimé 3D</text>
+<text x="145.0" y="1108" text-anchor="middle" font-size="12" fill="#1f2937">4 anneaux tangents</text>
+<text x="145.0" y="1123" text-anchor="middle" font-size="12" fill="#1f2937">hélices de 45 mm</text>
+<rect x="290" y="85" width="1700" height="1150" rx="10" fill="#1f2937" fill-opacity="0.06" stroke="#1f2937" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="300" y="103" text-anchor="start" font-size="13" fill="#1f2937" font-weight="bold">CARTE ÉLECTRONIQUE 40 × 35 mm — un bloc = une feuille hiérarchique KiCad</text>
+<rect x="310" y="110" width="800" height="335" rx="10" fill="#dc2626" fill-opacity="0.06" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="320" y="128" text-anchor="start" font-size="13" fill="#dc2626" font-weight="bold">ALIMENTATION</text>
+<rect x="345" y="160" width="100" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="395.0" y="180" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">J1</text>
+<text x="395.0" y="198" text-anchor="middle" font-size="12" fill="#1f2937">XT30PW</text>
+<text x="395.0" y="213" text-anchor="middle" font-size="12" fill="#1f2937">DES-008</text>
+<polyline points="250,195 345,195" fill="none" stroke="#dc2626" stroke-width="3.4" stroke-linejoin="round"/>
+<circle cx="325" cy="195" r="4.5" fill="#dc2626"/>
+<text x="255" y="182" text-anchor="start" font-size="10" fill="#dc2626" font-weight="bold">VBATM</text>
+<polyline points="445,195 900,195" fill="none" stroke="#dc2626" stroke-width="3.4" stroke-linejoin="round"/>
+<text x="460" y="185" text-anchor="start" font-size="13" fill="#dc2626" font-weight="bold">VBATM  3,1 à 4,2 V · crête 9,5 A pendant 2 s</text>
+<circle cx="480" cy="195" r="4.5" fill="#dc2626"/>
+<polyline points="480,195 480,259 500,259" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<rect x="500" y="230" width="110" height="58" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="555.0" y="250" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">FB1</text>
+<text x="555.0" y="268" text-anchor="middle" font-size="12" fill="#1f2937">ferrite 120 Ω</text>
+<text x="555.0" y="283" text-anchor="middle" font-size="12" fill="#1f2937">DES-008</text>
+<polyline points="610,259 650,259" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<text x="612" y="250" text-anchor="start" font-size="11" fill="#dc2626" font-weight="bold">VBATL</text>
+<text x="500" y="306" text-anchor="start" font-size="11" fill="#dc2626">22 µF en tête de VBATL</text>
+<rect x="650" y="230" width="140" height="58" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="720.0" y="250" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">U5  MCP1700</text>
+<text x="720.0" y="268" text-anchor="middle" font-size="12" fill="#1f2937">LDO 3,0 V · DES-009</text>
+<polyline points="790,259 1130,259" fill="none" stroke="#2563eb" stroke-width="3.4" stroke-linejoin="round"/>
+<text x="800" y="250" text-anchor="start" font-size="13" fill="#2563eb" font-weight="bold">+3V0  (130 mA dimensionné)</text>
+<circle cx="1050" cy="259" r="4.5" fill="#2563eb"/>
+<polyline points="1050,259 1050,300" fill="none" stroke="#2563eb" stroke-width="2.6" stroke-linejoin="round"/>
+<rect x="1000" y="300" width="100" height="58" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1050.0" y="320" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">U6  XC6206</text>
+<text x="1050.0" y="338" text-anchor="middle" font-size="12" fill="#1f2937">LDO 2,0 V</text>
+<text x="1050.0" y="353" text-anchor="middle" font-size="12" fill="#1f2937">DES-005</text>
+<polyline points="1050,358 1050,395 1100,395" fill="none" stroke="#9333ea" stroke-width="3" stroke-linejoin="round"/>
+<text x="1000" y="380" text-anchor="end" font-size="12" fill="#9333ea" font-weight="bold">+2V0</text>
+<text x="1000" y="396" text-anchor="end" font-size="11" fill="#9333ea">≈ 9 mA vers U4</text>
+<circle cx="900" cy="195" r="4.5" fill="#dc2626"/>
+<polyline points="900,195 900,330" fill="none" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/>
+<rect x="840" y="330" width="120" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="900.0" y="350" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">Pont diviseur</text>
+<text x="900.0" y="368" text-anchor="middle" font-size="12" fill="#1f2937">100 kΩ / 150 kΩ</text>
+<text x="900.0" y="383" text-anchor="middle" font-size="12" fill="#1f2937">DES-009</text>
+<text x="970" y="420" text-anchor="start" font-size="11" fill="#059669">VBAT_SENSE vers PA0 (ADC)</text>
+<text x="330" y="330" text-anchor="start" font-size="12" fill="#374151" font-weight="bold">Masse unique : plan plein</text>
+<text x="330" y="348" text-anchor="start" font-size="11" fill="#374151">Points d'essai : +3V0, +2V0, VBATM, VBATL, GND ×2</text>
+<text x="330" y="364" text-anchor="start" font-size="11" fill="#d97706">Aucune protection contre l'inversion ni la surintensité</text>
+<text x="330" y="380" text-anchor="start" font-size="11" fill="#d97706">Batterie sous charge : jusqu'à 3,17 V (marginal, DOU-135)</text>
+<rect x="310" y="470" width="800" height="755" rx="10" fill="#dc2626" fill-opacity="0.06" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="320" y="488" text-anchor="start" font-size="13" fill="#dc2626" font-weight="bold">ACTIONNEURS : alimentés en VBATM, pilotés par MOSFET AO3400A côté bas</text>
+<polyline points="325,195 325,1190" fill="none" stroke="#dc2626" stroke-width="3.4" stroke-linejoin="round"/>
+<text x="333" y="1005" text-anchor="start" font-size="12" fill="#dc2626" font-weight="bold">VBATM</text>
+<rect x="360" y="510" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="435.0" y="530" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">M1  moteur 8520</text>
+<text x="435.0" y="548" text-anchor="middle" font-size="12" fill="#1f2937">à balais</text>
+<text x="435.0" y="563" text-anchor="middle" font-size="12" fill="#1f2937">hélice de 45 mm</text>
+<text x="435.0" y="578" text-anchor="middle" font-size="12" fill="#1f2937">SS34 + 100 nF</text>
+<circle cx="325" cy="555" r="4.5" fill="#dc2626"/>
+<polyline points="325,555 360,555" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<rect x="590" y="510" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="665.0" y="530" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">Q1  AO3400A</text>
+<text x="665.0" y="548" text-anchor="middle" font-size="12" fill="#1f2937">grille ← M1_G (PA8)</text>
+<text x="665.0" y="563" text-anchor="middle" font-size="12" fill="#1f2937">47 Ω série · 100 kΩ rappel</text>
+<text x="665.0" y="578" text-anchor="middle" font-size="12" fill="#1f2937">DES-007</text>
+<polyline points="510,555 590,555" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<text x="515" y="548" text-anchor="start" font-size="10" fill="#dc2626">drain</text>
+<polyline points="1120,555 740,555" fill="none" stroke="#059669" stroke-width="2.6" marker-end="url(#ar_sig)" stroke-linejoin="round"/>
+<text x="930" y="548" text-anchor="middle" font-size="11" fill="#059669">M1_G  PWM TIM1</text>
+<rect x="360" y="630" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="435.0" y="650" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">M2  moteur 8520</text>
+<text x="435.0" y="668" text-anchor="middle" font-size="12" fill="#1f2937">à balais</text>
+<text x="435.0" y="683" text-anchor="middle" font-size="12" fill="#1f2937">hélice de 45 mm</text>
+<text x="435.0" y="698" text-anchor="middle" font-size="12" fill="#1f2937">SS34 + 100 nF</text>
+<circle cx="325" cy="675" r="4.5" fill="#dc2626"/>
+<polyline points="325,675 360,675" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<rect x="590" y="630" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="665.0" y="650" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">Q2  AO3400A</text>
+<text x="665.0" y="668" text-anchor="middle" font-size="12" fill="#1f2937">grille ← M2_G (PA9)</text>
+<text x="665.0" y="683" text-anchor="middle" font-size="12" fill="#1f2937">47 Ω série · 100 kΩ rappel</text>
+<text x="665.0" y="698" text-anchor="middle" font-size="12" fill="#1f2937">DES-007</text>
+<polyline points="510,675 590,675" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<text x="515" y="668" text-anchor="start" font-size="10" fill="#dc2626">drain</text>
+<polyline points="1120,675 740,675" fill="none" stroke="#059669" stroke-width="2.6" marker-end="url(#ar_sig)" stroke-linejoin="round"/>
+<text x="930" y="668" text-anchor="middle" font-size="11" fill="#059669">M2_G  PWM TIM1</text>
+<rect x="360" y="750" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="435.0" y="770" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">M3  moteur 8520</text>
+<text x="435.0" y="788" text-anchor="middle" font-size="12" fill="#1f2937">à balais</text>
+<text x="435.0" y="803" text-anchor="middle" font-size="12" fill="#1f2937">hélice de 45 mm</text>
+<text x="435.0" y="818" text-anchor="middle" font-size="12" fill="#1f2937">SS34 + 100 nF</text>
+<circle cx="325" cy="795" r="4.5" fill="#dc2626"/>
+<polyline points="325,795 360,795" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<rect x="590" y="750" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="665.0" y="770" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">Q3  AO3400A</text>
+<text x="665.0" y="788" text-anchor="middle" font-size="12" fill="#1f2937">grille ← M3_G (PA10)</text>
+<text x="665.0" y="803" text-anchor="middle" font-size="12" fill="#1f2937">47 Ω série · 100 kΩ rappel</text>
+<text x="665.0" y="818" text-anchor="middle" font-size="12" fill="#1f2937">DES-007</text>
+<polyline points="510,795 590,795" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<text x="515" y="788" text-anchor="start" font-size="10" fill="#dc2626">drain</text>
+<polyline points="1120,795 740,795" fill="none" stroke="#059669" stroke-width="2.6" marker-end="url(#ar_sig)" stroke-linejoin="round"/>
+<text x="930" y="788" text-anchor="middle" font-size="11" fill="#059669">M3_G  PWM TIM1</text>
+<rect x="360" y="870" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="435.0" y="890" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">M4  moteur 8520</text>
+<text x="435.0" y="908" text-anchor="middle" font-size="12" fill="#1f2937">à balais</text>
+<text x="435.0" y="923" text-anchor="middle" font-size="12" fill="#1f2937">hélice de 45 mm</text>
+<text x="435.0" y="938" text-anchor="middle" font-size="12" fill="#1f2937">SS34 + 100 nF</text>
+<circle cx="325" cy="915" r="4.5" fill="#dc2626"/>
+<polyline points="325,915 360,915" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<rect x="590" y="870" width="150" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="665.0" y="890" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">Q4  AO3400A</text>
+<text x="665.0" y="908" text-anchor="middle" font-size="12" fill="#1f2937">grille ← M4_G (PA11)</text>
+<text x="665.0" y="923" text-anchor="middle" font-size="12" fill="#1f2937">47 Ω série · 100 kΩ rappel</text>
+<text x="665.0" y="938" text-anchor="middle" font-size="12" fill="#1f2937">DES-007</text>
+<polyline points="510,915 590,915" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<text x="515" y="908" text-anchor="start" font-size="10" fill="#dc2626">drain</text>
+<polyline points="1120,915 740,915" fill="none" stroke="#059669" stroke-width="2.6" marker-end="url(#ar_sig)" stroke-linejoin="round"/>
+<text x="930" y="908" text-anchor="middle" font-size="11" fill="#059669">M4_G  PWM TIM1</text>
+<polyline points="1160,390 1120,390 1120,1010" fill="none" stroke="#059669" stroke-width="2.6" stroke-linejoin="round"/>
+<circle cx="1120" cy="390" r="4.5" fill="#059669"/>
+<polyline points="325,1190 870,1190" fill="none" stroke="#dc2626" stroke-width="3.4" stroke-linejoin="round"/>
+<rect x="360" y="1030" width="280" height="140" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="500.0" y="1050" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">LED1  voyant RGB SZYY1615RGB-B</text>
+<text x="500.0" y="1068" text-anchor="middle" font-size="12" fill="#1f2937">anode commune sur VBATM</text>
+<text x="500.0" y="1083" text-anchor="middle" font-size="12" fill="#1f2937">Q5, Q6, Q7 ← LED_R/G/B (PB1, PB2, PB10)</text>
+<text x="500.0" y="1098" text-anchor="middle" font-size="12" fill="#1f2937">120 Ω rouge, 68 Ω vert et bleu</text>
+<text x="500.0" y="1113" text-anchor="middle" font-size="12" fill="#1f2937">15 à 18 mA par couleur · DES-011</text>
+<rect x="670" y="1030" width="200" height="140" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="770.0" y="1050" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">BZ1  buzzer actif</text>
+<text x="770.0" y="1068" text-anchor="middle" font-size="12" fill="#1f2937">SMD-9650-3327 · 3,3 V · 30 mA</text>
+<text x="770.0" y="1083" text-anchor="middle" font-size="12" fill="#1f2937">80 dB à 10 cm · 2 700 Hz</text>
+<text x="770.0" y="1098" text-anchor="middle" font-size="12" fill="#1f2937">Q8 ← BUZ (PB11)</text>
+<text x="770.0" y="1113" text-anchor="middle" font-size="12" fill="#1f2937">DES-011</text>
+<polyline points="500,1190 500,1170" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<polyline points="770,1190 770,1170" fill="none" stroke="#dc2626" stroke-width="2.6" stroke-linejoin="round"/>
+<circle cx="500" cy="1190" r="4.5" fill="#dc2626"/>
+<circle cx="770" cy="1190" r="4.5" fill="#dc2626"/>
+<polyline points="1120,1010 500,1010 500,1030" fill="none" stroke="#059669" stroke-width="2.6" marker-end="url(#ar_sig)" stroke-linejoin="round"/>
+<polyline points="770,1010 770,1030" fill="none" stroke="#059669" stroke-width="2.6" marker-end="url(#ar_sig)" stroke-linejoin="round"/>
+<circle cx="770" cy="1010" r="4.5" fill="#059669"/>
+<rect x="1130" y="110" width="430" height="1115" rx="10" fill="#2563eb" fill-opacity="0.06" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1140" y="128" text-anchor="start" font-size="13" fill="#2563eb" font-weight="bold">MICROCONTRÔLEUR ET PÉRIPHÉRIQUES</text>
+<rect x="1160" y="150" width="360" height="260" rx="6" fill="#eff6ff" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1340.0" y="170" text-anchor="middle" font-size="17" fill="#1f2937" font-weight="bold">U1  STM32G431CBT6</text>
+<text x="1340.0" y="188" text-anchor="middle" font-size="12" fill="#1f2937">Cortex-M4F 170 MHz · LQFP-48 · 128 Ko de flash</text>
+<text x="1340.0" y="203" text-anchor="middle" font-size="12" fill="#1f2937">cycle 1 kHz · machine à états unique (18 états)</text>
+<text x="1340.0" y="218" text-anchor="middle" font-size="12" fill="#1f2937">chien de garde matériel de 100 ms · BOR</text>
+<text x="1340.0" y="233" text-anchor="middle" font-size="12" fill="#1f2937">SPI1 · SPI2 · I²C1 · USART2 · TIM1 · ADC1</text>
+<text x="1340.0" y="248" text-anchor="middle" font-size="12" fill="#1f2937">SWD (PA13, PA14) · NRST · BOOT0 (PB8)</text>
+<text x="1340.0" y="263" text-anchor="middle" font-size="12" fill="#1f2937">DES-002 · découplage de VDD et VDDA</text>
+<polyline points="1130,259 1160,259" fill="none" stroke="#2563eb" stroke-width="3.4" stroke-linejoin="round"/>
+<text x="1165" y="428" text-anchor="start" font-size="11" fill="#059669">Sorties de TIM1 (PA8 à PA11) vers les grilles Q1 à Q4 : bloc ACTIONNEURS</text>
+<polyline points="1520,300 1535,300 1535,1075" fill="none" stroke="#059669" stroke-width="2.6" stroke-linejoin="round"/>
+<circle cx="1535" cy="300" r="4.5" fill="#059669"/>
+<rect x="1150" y="445" width="390" height="335" rx="10" fill="#059669" fill-opacity="0.06" stroke="#059669" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1160" y="463" text-anchor="start" font-size="13" fill="#059669" font-weight="bold">CAPTEURS (face basse)</text>
+<rect x="1170" y="470" width="330" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1335.0" y="490" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">U2  LSM6DSO · centrale inertielle</text>
+<text x="1335.0" y="508" text-anchor="middle" font-size="12" fill="#1f2937">accéléromètre + gyroscope 3 axes</text>
+<text x="1335.0" y="523" text-anchor="middle" font-size="12" fill="#1f2937">SPI1 PA4–PA7 (5,3 MHz) · INT1 PB0 · DES-003</text>
+<polyline points="1500,505 1535,505" fill="none" stroke="#059669" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="1535" cy="505" r="4.5" fill="#059669"/>
+<rect x="1170" y="555" width="330" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1335.0" y="575" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">U3  VL53L1CX · hauteur par temps de vol</text>
+<text x="1335.0" y="593" text-anchor="middle" font-size="12" fill="#1f2937">fiable dès 40 mm · I²C1 PA15/PB7</text>
+<text x="1335.0" y="608" text-anchor="middle" font-size="12" fill="#1f2937">XSHUT PB9 · GPIO1 PB6 · DES-004</text>
+<polyline points="1500,590 1535,590" fill="none" stroke="#059669" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="1535" cy="590" r="4.5" fill="#059669"/>
+<rect x="1170" y="640" width="330" height="70" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1335.0" y="660" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">U4  PMW3901MB · flux optique</text>
+<text x="1335.0" y="678" text-anchor="middle" font-size="12" fill="#1f2937">dérive horizontale · SPI2 PB12–PB15 (1,33 MHz)</text>
+<text x="1335.0" y="693" text-anchor="middle" font-size="12" fill="#1f2937">VDD 2,0 V · VDDIO 3,0 V · lentille collée · DES-005</text>
+<polyline points="1500,675 1535,675" fill="none" stroke="#059669" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="1535" cy="675" r="4.5" fill="#059669"/>
+<text x="1170" y="735" text-anchor="start" font-size="11" fill="#2563eb">Alimentés en +3V0 (U4 : VDD en +2V0 et VDDIO en +3V0).</text>
+<text x="1170" y="751" text-anchor="start" font-size="11" fill="#d97706">Coupure des moteurs à 2–3 cm du sol (lecture brute ≈ 45 mm).</text>
+<rect x="1150" y="795" width="390" height="190" rx="10" fill="#0891b2" fill-opacity="0.06" stroke="#0891b2" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1160" y="813" text-anchor="start" font-size="13" fill="#0891b2" font-weight="bold">RADIO</text>
+<rect x="1170" y="825" width="330" height="90" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1335.0" y="845" text-anchor="middle" font-size="14" fill="#1f2937" font-weight="bold">U7  PB-03F (Ai-Thinker)</text>
+<text x="1335.0" y="863" text-anchor="middle" font-size="12" fill="#1f2937">PHY6252 · Bluetooth 5.2 · antenne sur le module</text>
+<text x="1335.0" y="878" text-anchor="middle" font-size="12" fill="#1f2937">USART2 : PA2 → RXD (P10), TXD (P9) → PA3</text>
+<text x="1335.0" y="893" text-anchor="middle" font-size="12" fill="#1f2937">115 200 bauds · DES-012</text>
+<polyline points="1500,870 1542,870 1542,350 1520,350" fill="none" stroke="#0891b2" stroke-width="2.6" marker-end="url(#ar_ser)" stroke-linejoin="round"/>
+<text x="1170" y="940" text-anchor="start" font-size="11" fill="#d97706">Microprogramme d'origine, aucune commande envoyée :</text>
+<text x="1170" y="956" text-anchor="start" font-size="11" fill="#d97706">à essayer seul avant la commande (DOU-200).</text>
+<text x="1170" y="972" text-anchor="start" font-size="11" fill="#d97706">Antenne en dépassement du bord de carte (DOU-204).</text>
+<rect x="1150" y="1000" width="390" height="215" rx="10" fill="#9333ea" fill-opacity="0.06" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1160" y="1018" text-anchor="start" font-size="13" fill="#9333ea" font-weight="bold">INTERFACES LOCALES</text>
+<rect x="1170" y="1030" width="330" height="60" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1335.0" y="1050" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">SW1  bouton</text>
+<text x="1335.0" y="1068" text-anchor="middle" font-size="12" fill="#1f2937">PB5 · rappel 10 kΩ · RC antirebond · DES-010</text>
+<rect x="1170" y="1105" width="330" height="60" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.8"/>
+<text x="1335.0" y="1125" text-anchor="middle" font-size="13" fill="#1f2937" font-weight="bold">J2  en-tête SWD 1×5</text>
+<text x="1335.0" y="1143" text-anchor="middle" font-size="12" fill="#1f2937">VTref · SWDIO (PA13) · SWCLK (PA14) · GND · NRST</text>
+<polyline points="1500,1060 1535,1060" fill="none" stroke="#059669" stroke-width="2.4" stroke-linejoin="round"/>
+<circle cx="1535" cy="1060" r="4.5" fill="#059669"/>
+<polyline points="1500,1135 1548,1135 1548,380 1520,380" fill="none" stroke="#374151" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#ar_gnd)" stroke-linejoin="round"/>
+<text x="1170" y="1190" text-anchor="start" font-size="11" fill="#374151">Entrée en mode réglage : bouton tenu à la mise sous tension.</text>
+<text x="1170" y="1206" text-anchor="start" font-size="11" fill="#374151">Un reset du MCU coupe les moteurs (rappel de grille à la masse).</text>
+<polyline points="250,690 292,690" fill="none" stroke="#374151" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#ar_gnd)"/>
+<text x="271" y="676" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">SWD</text>
+<polyline points="250,800 292,800" fill="none" stroke="#0891b2" stroke-width="2.4" marker-end="url(#ar_ser)" marker-start="url(#ar_ser)"/>
+<text x="271" y="786" text-anchor="middle" font-size="11" fill="#0891b2" font-weight="bold">BLE</text>
+<polyline points="250,905 292,905" fill="none" stroke="#059669" stroke-width="2.4" marker-end="url(#ar_sig)"/>
+<text x="271" y="891" text-anchor="middle" font-size="11" fill="#059669" font-weight="bold">SW1</text>
+<polyline points="250,1005 292,1005" fill="none" stroke="#d97706" stroke-width="2.4" marker-end="url(#ar_warn)"/>
+<text x="271" y="991" text-anchor="middle" font-size="11" fill="#d97706" font-weight="bold">mesure</text>
+<polyline points="250,1105 292,1105" fill="none" stroke="#374151" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#ar_gnd)"/>
+<text x="271" y="1091" text-anchor="middle" font-size="11" fill="#374151" font-weight="bold">fixé</text>
+<rect x="1580" y="110" width="400" height="700" rx="10" fill="#6b7280" fill-opacity="0.06" stroke="#6b7280" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="1590" y="128" text-anchor="start" font-size="13" fill="#6b7280" font-weight="bold">LÉGENDE ET CHIFFRES CLÉS</text>
+<polyline points="1600,150 1650,150" fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round"/>
+<text x="1660" y="154" text-anchor="start" font-size="12" fill="#1f2937">VBATM / VBATL (batterie)</text>
+<polyline points="1600,174 1650,174" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>
+<text x="1660" y="178" text-anchor="start" font-size="12" fill="#1f2937">+3V0 (logique)</text>
+<polyline points="1600,198 1650,198" fill="none" stroke="#9333ea" stroke-width="3" stroke-linejoin="round"/>
+<text x="1660" y="202" text-anchor="start" font-size="12" fill="#1f2937">+2V0 (flux optique)</text>
+<polyline points="1600,222 1650,222" fill="none" stroke="#059669" stroke-width="3" stroke-linejoin="round"/>
+<text x="1660" y="226" text-anchor="start" font-size="12" fill="#1f2937">Signaux SPI, I²C, GPIO, PWM</text>
+<polyline points="1600,246 1650,246" fill="none" stroke="#0891b2" stroke-width="3" stroke-linejoin="round"/>
+<text x="1660" y="250" text-anchor="start" font-size="12" fill="#1f2937">Liaison série U1 ↔ U7</text>
+<polyline points="1600,270 1650,270" fill="none" stroke="#374151" stroke-width="3" stroke-dasharray="6 4" stroke-linejoin="round"/>
+<text x="1660" y="274" text-anchor="start" font-size="12" fill="#1f2937">Programmation SWD, liens extérieurs</text>
+<polyline points="1600,294 1650,294" fill="none" stroke="#d97706" stroke-width="3" stroke-linejoin="round"/>
+<text x="1660" y="298" text-anchor="start" font-size="12" fill="#1f2937">Point d'attention</text>
+<text x="1595" y="350" text-anchor="start" font-size="13" fill="#1f2937" font-weight="bold">Chiffres clés</text>
+<text x="1595" y="372" text-anchor="start" font-size="12" fill="#1f2937">• Masse 61 g pour 100 g permis · poussée/poids 1,44</text>
+<text x="1595" y="391" text-anchor="start" font-size="12" fill="#1f2937">• Logique : 130 mA · moteurs : 9,5 A en crête (2 s)</text>
+<text x="1595" y="410" text-anchor="start" font-size="12" fill="#1f2937">• Batterie sous charge jusqu'à 3,17 V : marginal</text>
+<text x="1595" y="429" text-anchor="start" font-size="12" fill="#1f2937">• Moteurs coupés par défaut (rappel de grille)</text>
+<text x="1595" y="448" text-anchor="start" font-size="12" fill="#1f2937">• Hauteur : fiable dès 40 mm (U3)</text>
+<text x="1595" y="467" text-anchor="start" font-size="12" fill="#1f2937">• Flux optique : dérive horizontale (U4)</text>
+<text x="1595" y="486" text-anchor="start" font-size="12" fill="#1f2937">• 18 états logiciels · cycle 1 kHz · chien de garde 100 ms</text>
+<text x="1595" y="530" text-anchor="start" font-size="13" fill="#1f2937" font-weight="bold">Fabrication</text>
+<text x="1595" y="552" text-anchor="start" font-size="12" fill="#1f2937">• JLCPCB pose les puces et le module radio.</text>
+<text x="1595" y="571" text-anchor="start" font-size="12" fill="#1f2937">• À la main : XT30, bouton, lentille du flux.</text>
+<text x="1595" y="590" text-anchor="start" font-size="12" fill="#1f2937">• Carte 40 × 35 mm, 1,0 mm, double face.</text>
+<text x="1595" y="630" text-anchor="start" font-size="13" fill="#1f2937" font-weight="bold">Points d'essai (TP1 à TP11)</text>
+<text x="1595" y="652" text-anchor="start" font-size="12" fill="#1f2937">+3V0, +2V0, VBATM, VBATL, GND ×2,</text>
+<text x="1595" y="671" text-anchor="start" font-size="12" fill="#1f2937">M1_D, BLE_TX, BLE_RX, TOF_GPIO1,</text>
+<text x="1595" y="690" text-anchor="start" font-size="12" fill="#1f2937">plus 6 plots de repli du flux optique.</text>
+<text x="1595" y="730" text-anchor="start" font-size="12" fill="#4b5563">Un diagramme par bloc : feuilles DES-002 à DES-012</text>
+<text x="1595" y="748" text-anchor="start" font-size="12" fill="#4b5563">du projet KiCad (DES-006 : mécanique, hors carte).</text>
+<text x="30" y="1268" text-anchor="start" font-size="11" fill="#6b7280">Illustration de conception, pas le schéma de fabrication. Sources : « Conception détaillée » — projets/boomrone/04-conception-detaillee.md et « Architecture » — projets/boomrone/03-architecture.md.</text>
+</svg>
