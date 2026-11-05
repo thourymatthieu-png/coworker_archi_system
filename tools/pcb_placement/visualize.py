@@ -34,7 +34,15 @@ def draw_board(board: Board, ax, title: str, show_nets: bool = True) -> None:
                                 linewidth=0.8 if comp.fixed else 0.4, alpha=0.75, zorder=2))
         ax.text((x0 + x1) / 2, (y0 + y1) / 2, ref, ha="center", va="center", fontsize=3.5, zorder=3)
 
+    if board.outline is not None:
+        ox0, oy0, ox1, oy1 = board.outline
+        ax.add_patch(Rectangle((ox0, oy0), ox1 - ox0, oy1 - oy0, fill=False, edgecolor="red",
+                                linewidth=1.3, linestyle="--", zorder=4))
+
     x0, y0, x1, y1 = board.global_bbox()
+    if board.outline is not None:
+        ox0, oy0, ox1, oy1 = board.outline
+        x0, y0, x1, y1 = min(x0, ox0), min(y0, oy0), max(x1, ox1), max(y1, oy1)
     margin = 3
     ax.set_xlim(x0 - margin, x1 + margin)
     ax.set_ylim(y1 + margin, y0 - margin)  # Y vers le bas comme dans KiCad
@@ -88,6 +96,8 @@ def _format_cost(c: CostBreakdown) -> str:
         f"- Croisements de pistes probables : {c.crossings}\n"
         f"- Vias estimes : {c.vias_estimate}\n"
         f"- Penalite d'accessibilite des pastilles : {c.accessibility_penalty:.1f}\n"
-        f"- Recouvrement residuel : {c.overlap_mm2:.4f} mm2 ({'OK' if c.feasible else 'VIOLATION'})\n"
+        f"- Recouvrement residuel : {c.overlap_mm2:.4f} mm2\n"
+        f"- Hors du contour de carte : {c.out_of_bounds_mm2:.4f} mm2\n"
+        f"- Faisable : {'OK' if c.feasible else 'VIOLATION'}\n"
         f"- Cout total pondere : {c.total:.1f}"
     )

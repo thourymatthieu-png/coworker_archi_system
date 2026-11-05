@@ -25,7 +25,7 @@ import time
 sys.path.insert(0, os.path.dirname(__file__))
 
 from pcb_placement.config import EngineConfig  # noqa: E402
-from pcb_placement.io_data import load_board, save_solution, load_solution_into  # noqa: E402
+from pcb_placement.io_data import apply_constraints, load_board, save_solution, load_solution_into  # noqa: E402
 from pcb_placement.optimizer import run_parallel_strategies, best_of  # noqa: E402
 from pcb_placement.visualize import save_comparison, format_report  # noqa: E402
 
@@ -58,13 +58,17 @@ def cmd_optimize(args: argparse.Namespace) -> None:
         print(f"Aucune config fournie : parametres par defaut ecrits dans {config_default_path} (modifiable pour un prochain essai).")
 
     board_before = load_board(args.extract_json)
+    if args.constraints:
+        apply_constraints(board_before, args.constraints)
 
     t_start = time.time()
-    results = run_parallel_strategies(args.extract_json, config, parallel=not args.no_parallel)
+    results = run_parallel_strategies(args.extract_json, config, parallel=not args.no_parallel, constraints_path=args.constraints)
     best = best_of(results)
     elapsed = time.time() - t_start
 
     board_after = load_board(args.extract_json)
+    if args.constraints:
+        apply_constraints(board_after, args.constraints)
     board_after.restore_positions(best.positions)
 
     sol_path = os.path.join(args.out_dir, "best_solution.json")
@@ -137,6 +141,7 @@ def main() -> None:
     p_opt.add_argument("extract_json")
     p_opt.add_argument("--out-dir", default="resultats_placement")
     p_opt.add_argument("--config", default=None, help="Fichier de config JSON (EngineConfig) ; defaut si omis")
+    p_opt.add_argument("--constraints", default=None, help="Fichier JSON de contraintes mecaniques (contour de carte fixe, ancres, debords) - cf. README")
     p_opt.add_argument("--no-parallel", action="store_true", help="Force l'execution sequentielle des strategies (debogage)")
     p_opt.set_defaults(func=cmd_optimize)
 

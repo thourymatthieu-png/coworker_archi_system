@@ -1,0 +1,84 @@
+{
+  "outline_mm": [
+    0.0,
+    0.0,
+    50.0,
+    50.0
+  ],
+  "overhang_refs": [
+    "J1",
+    "U7"
+  ],
+  "positions": {
+    "M1": {
+      "x_mm": 3.8891,
+      "y_mm": 3.8891,
+      "rotation_deg": 135.0,
+      "fixed": true,
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0
+    },
+    "M2": {
+      "x_mm": 46.1109,
+      "y_mm": 3.8891,
+      "rotation_deg": 45.0,
+      "fixed": true,
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0
+    },
+    "M3": {
+      "x_mm": 46.1109,
+      "y_mm": 46.1109,
+      "rotation_deg": -45.0,
+      "fixed": true,
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0
+    },
+    "M4": {
+      "x_mm": 3.8891,
+      "y_mm": 46.1109,
+      "rotation_deg": -135.0,
+      "fixed": true,
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0
+    },
+    "J1": {
+      "x_mm": 25.0,
+      "y_mm": 43.4875,
+      "rotation_deg": 0,
+      "fixed": true
+    },
+    "U7": {
+      "x_mm": -8.0,
+      "y_mm": 29.25,
+      "rotation_deg": 0.0,
+      "fixed": true
+    }
+  },
+  "courtyard_overrides": {
+    "M1": {
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0,
+      "courtyard_offset_x_mm": 0.0,
+      "courtyard_offset_y_mm": 0.0
+    },
+    "M2": {
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0,
+      "courtyard_offset_x_mm": 0.0,
+      "courtyard_offset_y_mm": 0.0
+    },
+    "M3": {
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0,
+      "courtyard_offset_x_mm": 0.0,
+      "courtyard_offset_y_mm": 0.0
+    },
+    "M4": {
+      "courtyard_w_mm": 8.0,
+      "courtyard_h_mm": 3.0,
+      "courtyard_offset_x_mm": 0.0,
+      "courtyard_offset_y_mm": 0.0
+    }
+  }
+}

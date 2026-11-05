@@ -35,33 +35,45 @@ class Component:
     # Etat de placement courant (mm, degres) ; (0, 0) / 0 par defaut, a initialiser.
     x: float = 0.0
     y: float = 0.0
-    rotation: int = 0
+    # int pour un composant mobile (grille ALLOWED_ROTATIONS) ; peut etre un angle quelconque
+    # (float) pour une ancre FIXE, jamais touchee par le moteur (cf. io_data.load_board).
+    rotation: float = 0
     fixed: bool = False  # ancre mecanique dure : jamais deplace/tourne par le moteur
 
-    def world_half_extents(self) -> Tuple[float, float]:
-        """Demi-largeur/demi-hauteur du rectangle d'encombrement en orientation courante."""
-        w, h = self.courtyard_w, self.courtyard_h
-        if self.rotation in (90, 270):
-            w, h = h, w
-        return w / 2.0, h / 2.0
-
-    def world_center(self) -> Tuple[float, float]:
-        """Centre reel du rectangle d'encombrement (le centre du footprint n'est pas toujours
-        le centre du courtyard, cf. courtyard_offset_*)."""
+    def _local_corners(self) -> Tuple[Tuple[float, float], ...]:
         ox, oy = self.courtyard_offset_x, self.courtyard_offset_y
-        if self.rotation == 90:
-            ox, oy = -oy, ox
-        elif self.rotation == 180:
-            ox, oy = -ox, -oy
-        elif self.rotation == 270:
-            ox, oy = oy, -ox
-        return self.x + ox, self.y + oy
+        hw, hh = self.courtyard_w / 2.0, self.courtyard_h / 2.0
+        return ((ox - hw, oy - hh), (ox + hw, oy - hh), (ox + hw, oy + hh), (ox - hw, oy + hh))
 
     def world_bbox(self) -> Tuple[float, float, float, float]:
-        """(xmin, ymin, xmax, ymax) du rectangle d'encombrement en coordonnees carte."""
-        cx, cy = self.world_center()
-        hw, hh = self.world_half_extents()
-        return cx - hw, cy - hh, cx + hw, cy + hh
+        """(xmin, ymin, xmax, ymax) du rectangle d'encombrement en coordonnees carte.
+
+        Calcule par rotation exacte des 4 coins locaux : couvre aussi bien les rotations
+        multiples de 90 (le cas courant, ou le resultat est exact) que les rotations
+        quelconques d'une ancre fixe (ex. moteurs a 45 degres sur Boomrone, orientes en
+        diagonale vers les bras du chassis) - dans ce dernier cas la boite retournee est la
+        boite ENGLOBANTE (conservative) du rectangle tourne, pas le rectangle tourne
+        lui-meme (cf. limite documentee : la detection de recouvrement reste un test de
+        boites alignees aux axes, cf. ALLOWED_ROTATIONS)."""
+        a = math.radians(self.rotation)
+        cos_a, sin_a = math.cos(a), math.sin(a)
+        xs, ys = [], []
+        for lx, ly in self._local_corners():
+            xs.append(self.x + lx * cos_a - ly * sin_a)
+            ys.append(self.y + lx * sin_a + ly * cos_a)
+        return min(xs), min(ys), max(xs), max(ys)
+
+    def world_center(self) -> Tuple[float, float]:
+        """Centre du rectangle d'encombrement (le centre du footprint n'est pas toujours le
+        centre du courtyard, cf. courtyard_offset_*) ; pour une rotation non multiple de 90,
+        c'est le centre de la boite ENGLOBANTE (cf. world_bbox)."""
+        x0, y0, x1, y1 = self.world_bbox()
+        return (x0 + x1) / 2.0, (y0 + y1) / 2.0
+
+    def world_half_extents(self) -> Tuple[float, float]:
+        """Demi-largeur/demi-hauteur de la boite ENGLOBANTE (cf. world_bbox)."""
+        x0, y0, x1, y1 = self.world_bbox()
+        return (x1 - x0) / 2.0, (y1 - y0) / 2.0
 
     def pad_world_pos(self, pad: Pad) -> Tuple[float, float]:
         a = math.radians(self.rotation)
@@ -88,8 +100,19 @@ class Board:
     components: Dict[str, Component]
     nets: Dict[str, Net]
     source_pcb: str = ""
-    outline_w: float = 0.0
+    outline_w: float = 0.0  # dimensions de la boite englobante au moment de l'extraction (info, pas une contrainte)
     outline_h: float = 0.0
+    # Contour de carte FIXE (xmin, ymin, xmax, ymax, mm) impose par la mecanique (chassis,
+    # bras moteur...) - a la difference de outline_w/h ci-dessus, c'est une contrainte dure :
+    # tout composant hors de ce rectangle (et pas dans overhang_refs) penalise le cout comme
+    # un recouvrement (cf. cost.out_of_bounds_penalty). None = pas de contour impose, le
+    # moteur est alors libre de choisir la taille de la carte (comportement d'origine).
+    outline: Optional[Tuple[float, float, float, float]] = None
+    # References autorisees a deborder du contour (ex. connecteur batterie, antenne radio) -
+    # exemptees de la contrainte ci-dessus. Prevu pour des ancres FIXES dont le debord est une
+    # decision mecanique deja prise (cf. tools/pcb_placement/README.md) ; le moteur ne decide
+    # jamais lui-meme qu'un composant peut deborder.
+    overhang_refs: frozenset = frozenset()
 
     def pad_world_pos(self, ref: str, pad_name: str) -> Optional[Tuple[float, float]]:
         comp = self.components.get(ref)

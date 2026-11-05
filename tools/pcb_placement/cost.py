@@ -48,6 +48,26 @@ def overlap_penalty(board: Board, refs: List[str], min_clearance_mm: float) -> f
     return total
 
 
+def out_of_bounds_penalty(board: Board, refs: List[str]) -> float:
+    """Somme des surfaces (mm^2) de chaque composant qui tombent EN DEHORS du contour de
+    carte fixe (board.outline), hors references exemptees (board.overhang_refs - debord
+    mecanique deja decide, ex. connecteur batterie, antenne). Contrainte dure, meme principe
+    que overlap_penalty : doit tendre vers 0. Retourne 0 si aucun contour n'est impose
+    (board.outline is None, comportement d'origine : le moteur choisit la taille de carte)."""
+    if board.outline is None:
+        return 0.0
+    total = 0.0
+    for r in refs:
+        if r in board.overhang_refs:
+            continue
+        comp = board.components[r]
+        x0, y0, x1, y1 = comp.world_bbox()
+        comp_area = max(x1 - x0, 0.0) * max(y1 - y0, 0.0)
+        inside_area = rect_overlap_area((x0, y0, x1, y1), board.outline)
+        total += max(comp_area - inside_area, 0.0)
+    return total
+
+
 def board_area(board: Board, refs: List[str], margin_mm: float = 1.0) -> float:
     x0, y0, x1, y1 = board.global_bbox(refs)
     w = max(x1 - x0 + 2 * margin_mm, 0.0)
@@ -268,6 +288,7 @@ class CostBreakdown:
     vias_estimate: int
     accessibility_penalty: float
     overlap_mm2: float
+    out_of_bounds_mm2: float
     total: float
     feasible: bool
 
@@ -295,7 +316,8 @@ def total_cost(board: Board, refs: List[str], nets: Dict[str, "Net"], weights: C
     cong = grid.score()
     access = accessibility_penalty(board, refs)
 
-    feasible = overlap <= 1e-6
+    oob = out_of_bounds_penalty(board, refs)
+    feasible = overlap <= 1e-6 and oob <= 1e-6
     total = (
         weights.area * area
         + weights.wirelength * wl
@@ -303,7 +325,7 @@ def total_cost(board: Board, refs: List[str], nets: Dict[str, "Net"], weights: C
         + weights.crossings * crossings
         + weights.vias * vias
         + weights.accessibility * access
-        + weights.overlap_penalty_weight * overlap
+        + weights.overlap_penalty_weight * (overlap + oob)
     )
     return CostBreakdown(
         area_mm2=area,
@@ -313,6 +335,7 @@ def total_cost(board: Board, refs: List[str], nets: Dict[str, "Net"], weights: C
         vias_estimate=vias,
         accessibility_penalty=access,
         overlap_mm2=overlap,
+        out_of_bounds_mm2=oob,
         total=total,
         feasible=feasible,
     )

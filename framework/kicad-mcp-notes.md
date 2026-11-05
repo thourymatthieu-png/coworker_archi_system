@@ -1,8 +1,79 @@
 # Notes sur le MCP KiCad — bugs connus et méthode
 
+## Outils MCP « différés » : un agent peut croire un outil absent alors qu'il existe
+
+Constat du 2026-11-05 (préparation du PCB Boomrone, DES-013) : l'agent `electronique-hardware`,
+bien que sa liste `tools:` contienne les outils PCB (`place_component`, `run_drc`, `autoroute`,
+etc.), a conclu qu'« aucun outil PCB dédié » n'était accessible et a tout fait par script Python
+direct sur `pcbnew`. Cause réelle : la plateforme (pas KiCad, pas le serveur MCP) charge certains
+outils MCP en différé — leur schéma n'est disponible qu'après un appel `ToolSearch` avec
+`query: "select:<noms des outils>"`. Un appel direct avant ce chargement échoue
+(`InputValidationError`), ce qui peut laisser croire à tort que l'outil n'existe pas. Il manquait
+aussi `ToolSearch` lui-même dans la liste `tools:` de l'agent, qui ne pouvait donc pas charger les
+outils différés. Correction appliquée : `ToolSearch` ajouté à la liste `tools:` de
+`electronique-hardware.md`, et instruction d'appeler `ToolSearch` en tout début de tâche PCB avant
+le premier `place_component`/`route_trace`/etc. Si ça se reproduit avec d'autres outils (schéma ou
+PCB), même diagnostic : vérifier `ToolSearch` avant de conclure à une absence d'outil.
+
 Ce document existe pour que ces constats survivent à un changement de machine ou de session
 (contrairement à la mémoire d'une session Claude Code, qui est locale). Lu par `electronique-hardware`
 avant toute saisie de schéma KiCad.
+
+## J1 (XT30PW-M, connecteur batterie) : sens d'enfichage confirmé par l'utilisateur dans KiCad
+
+Un agent avait déduit le sens d'enfichage de J1 par lecture géométrique du footprint seule (position
+des pastilles, forme de la sérigraphie) et conclu qu'il fallait une rotation de 180°. **L'utilisateur
+a ouvert KiCad, regardé le connecteur réel et corrigé lui-même : la bonne orientation est rotation
+0°**, pas 180°. Leçon : la lecture géométrique d'un footprint importé (surtout EasyEDA/LCSC, cf.
+DOU-206/DOU-207 au sujet d'autres pièces) peut induire en erreur sur un détail mécanique comme le sens
+d'un connecteur — un rendu visuel zoomé ou, mieux, la confirmation de l'utilisateur dans KiCad priment
+sur un raisonnement géométrique seul.
+
+**État de référence confirmé (2026-11-05), carte Boomrone, projet `proj_boomrone`** : J1
+(`lib_boomrone:CONN-TH_XT30PW-M`), position (25, 43,4875) mm, **rotation 0°**, couche F.Cu. Broches 1
+(GND) et 2 (VBATM, pastilles traversantes Ø2,5 mm) côté nord (y ≈ 38,49, vers le centre de la carte) ;
+broches de maintien 3/4 (sans réseau) côté sud (y ≈ 48,49, vers le bord bas de la carte, où le boîtier
+dépasse légèrement du contour — comportement attendu, c'est là que le câble s'enfiche depuis
+l'extérieur). **Ne pas retourner ce composant dans une future passe de placement** (le passer en
+`locked` dans `suggest_placement`) sans revalidation explicite de l'utilisateur.
+
+## Placement PCB : utiliser `suggest_placement`, ne jamais replacer composant par composant
+
+Constat du 2026-11-05 (carte Boomrone, 107 composants) : un premier essai a placé les composants
+un par un (`place_component`/`move_component` répétés, découplage ↔ CI redérivé à la main en
+relisant chaque feuille de schéma) — lent (~200 appels d'outils pour une carte) et de mauvaise
+qualité (106 chevauchements de boîtiers non résolus). **Erreur : `suggest_placement` existe déjà et
+fait presque tout ça automatiquement** (lecture du code source du serveur,
+`python/commands/placement_optimizer.py`, 835 lignes, pas une supposition) :
+- Placement par forces dirigées (refroidissement progressif), `decoupling_boost` (rapproche un
+  passif 2 broches de son CI multi-broches **par connectivité réelle**, pas par nom de référence),
+  `power_weight`/`power_nets` (réseaux de forte puissance tirés courts et directs).
+- Collision sur la **géométrie réelle des boîtiers** (courtyard), pas une boîte approximative.
+- `spread` (diffusion de densité) + légalisation (sépare les chevauchements) + `align` (rangées/colonnes).
+- **Dry-run par défaut** (`apply: false`), score avant/après (longueur de câblage HPWL, nombre de
+  chevauchements) — ne jamais appeler avec `apply: true` sans avoir regardé le score et validé.
+- `locked` : fige des ancres (composants à contrainte mécanique dure — connecteurs, pièces RF,
+  position imposée) ; le reste se place en tirant sur ces ancres fixes, pas en les traitant comme une
+  pénalité parmi d'autres.
+- `bounds` + `refs` : regroupement scopé à une zone/un sous-ensemble — reproduit la discipline
+  « un bloc à la fois » du schéma, sans perturber le reste de la carte déjà placé.
+- Workflow obligatoire : `suggest_placement(apply=false)` → `check_courtyard_overlaps(positions=proposals)`
+  pour valider l'hypothèse → seulement alors `suggest_placement(apply=true)` (ou rejouer avec les
+  mêmes paramètres et `apply: true`) → vérification visuelle → `autoroute`/routage manuel.
+
+**Méthode à suivre systématiquement** : placer à la main uniquement les quelques composants à
+contrainte mécanique dure (connecteur batterie, sorties moteur, pièce RF...), les passer en `locked`,
+puis laisser `suggest_placement` faire le reste bloc par bloc. Ne jamais revenir au placement
+composant par composant sauf si `suggest_placement` échoue explicitement sur un cas précis.
+
+**Correction d'un constat antérieur** : la note ci-dessus (2026-11-05, « outils MCP différés ») disait
+qu'aucun outil PCB dédié n'était accessible — c'était un vrai problème de chargement différé à ce
+moment-là, pas une absence réelle d'outils. Une fois `ToolSearch` en place, les outils de placement et
+d'optimisation (dont `suggest_placement`) sont bien exposés.
+
+**Contour non rectangulaire** : `add_board_outline` accepte `shape: "polygon"` avec une liste de
+`points` — un contour en L/T (ex. languette d'antenne qui dépasse le carré principal) est directement
+possible par cet outil, pas besoin d'édition manuelle du `.kicad_pcb` pour ce cas.
 
 ## Méthode : bilan de bibliothèque avant tout schéma
 
@@ -295,6 +366,62 @@ racine (`proj_boomrone.kicad_sch`) sert de page d'index avec une case par bloc.
   3D sont absolus (à remplacer par `${KIPRJMOD}/lib_<projet>.3dshapes/...`).
 - **Vérification visuelle sans navigateur** : `kicad-cli sch export pdf`, puis rendu d'une page en PNG
   avec `pypdfium2` (rognage en mm), puis lecture de l'image.
+
+## `sync_schematic_to_board` cassé par un bug de la bibliothèque `kicad-skip` (constaté 2026-11-05, proj_boomrone)
+
+L'outil MCP `sync_schematic_to_board` (import du schéma vers le PCB, équivalent F8) échoue
+systématiquement dès qu'une sous-feuille du schéma ne contient **qu'une seule** étiquette d'un type
+donné (`label`, `global_label` ou `hierarchical_label`) : `TypeError: __bool__ should return bool,
+returned str`. Cause : dans la bibliothèque Python `kicad-skip` (utilisée en interne par le serveur
+pour lire les sous-feuilles), `sch.label` (au singulier) renvoie l'élément unique directement plutôt
+qu'une liste à un élément ; le code du serveur fait `getattr(sch, "label", None) or []`, et
+`bool()` sur cet élément unique (`ParsedValue.__bool__`, fichier
+`skip/sexp/parser.py`) renvoie la valeur brute (une chaîne, le texte de l'étiquette) au lieu d'un
+booléen, ce que Python refuse. Reproduit sur `des-010-bouton.kicad_sch` (un seul
+`hierarchical_label`). Confirmé par la trace du serveur
+(`~/.kicad-mcp/logs/kicad_interface-*.log`, chercher `__bool__ should return bool`).
+
+**Pas de contournement côté appel d'outil** (aucun paramètre n'évite le scan de cette sous-feuille,
+`sync_schematic_to_board` parcourt toute la hiérarchie). Contournement utilisé : un script Python
+autonome, lancé avec le même interpréteur que le serveur (`KICAD_PYTHON` de `.claude.json`), qui :
+1. copie le paquet `skip` du venv vers un dossier hors du projet (ne jamais modifier
+   l'installation du venv partagé — geste irréversible hors du dépôt) ;
+2. corrige la copie : `ParsedValue.__bool__` doit renvoyer `bool(self._value)` au lieu de
+   `self._value` dans le cas non booléen (`skip/sexp/parser.py`, méthode `__bool__`) ;
+3. met cette copie en tête de `sys.path`, puis importe `commands.schematic_handlers` du serveur
+   (`<dossier cloné>/python`) et instancie une classe minimale héritant de
+   `SchematicHandlersMixin` (avec juste `self.board`, `_safe_load_board` (`pcbnew.LoadBoard`),
+   `_update_command_handlers` (no-op) et `_find_kicad_cli_static` (chemin de `kicad-cli.exe`)) pour
+   appeler directement `_handle_sync_schematic_to_board({"schematicPath": ..., "boardPath": ...})` —
+   réutilise toute la logique réelle du serveur (netliste, assignation des pastilles, ajout des
+   empreintes manquantes), seul le bug de `kicad-skip` est contourné.
+4. **Fermer le projet côté session MCP (`close_project`, `save: false`) avant de lancer ce script**
+   (sinon la sauvegarde du script et celle de la session MCP se marchent dessus), le rouvrir après.
+
+À corriger en amont (remonter le bug à `kicad-skip` ou au serveur `mixelpixx/KiCAD-MCP-Server`) si
+revu plus tard ; pour l'instant, le script de contournement n'est pas versionné dans ce dépôt (créé
+dans le scratchpad de la session), à refaire à l'identique si le besoin se représente.
+
+## Pas d'outils MCP dédiés pour l'implantation/le contour/les règles de conception du PCB (constaté 2026-11-05)
+
+Le jeu d'outils MCP effectivement exposé pour ce projet ne contient **aucun** outil PCB au-delà de
+`sync_schematic_to_board` (pas de contour de carte, pas de règles de conception, pas de classes de
+réseaux, pas d'autorouteur, pas d'export SVG/2D du PCB, pas de sauvegarde explicite), alors que le
+serveur annonce 244 outils dans ses logs (`All 244 tools visible`) : `KICAD_MCP_TOOLBOXES` limite
+probablement l'ensemble exposé à la session. Contournement utilisé pour le contour de carte, le
+cuivre/l'épaisseur et les règles de conception : édition directe par script (même interpréteur
+`KICAD_PYTHON`) — `pcbnew.LoadBoard` + `pcbnew.PCB_SHAPE` sur `Edge.Cuts` pour le contour,
+`BOARD_DESIGN_SETTINGS` (`ds.m_MinClearance`, `ds.m_TrackMinWidth`, `ds.m_ViasMinSize`,
+`ds.m_MinThroughDrill`, toutes en unités internes = nanomètres, `pcbnew.FromMM`/`ToMM`) pour les
+règles, puis `board.Save(...)`. Les classes de réseaux (KiCad 10) ne sont **pas** dans le
+`.kicad_pcb` mais dans le `.kicad_pro` (clé `net_settings.classes` et
+`net_settings.netclass_patterns`, liste de `{"netclass": ..., "pattern": ...}` assortie par nom de
+réseau) : édition JSON directe la plus simple, `BOARD_STACKUP`/`NETCLASS` ne sont pas exposés
+proprement par les bindings SWIG de ce poste (`GetStackupDescriptor()` renvoie un `SwigPyObject`
+opaque, pas une classe Python utilisable). La vérification visuelle du PCB se fait par
+`kicad-cli pcb export svg --exclude-drawing-sheet --page-size-mode 2 --mode-single` (cadre la page
+sur le contour de carte, contrairement à l'export schématique) puis rendu en PNG par Edge headless
+(même méthode que pour le schéma).
 
 ## Placement automatique des champs : `tools/kicad_place_fields.py`
 

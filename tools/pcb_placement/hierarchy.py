@@ -18,6 +18,7 @@ from typing import Dict, List, Optional
 import numpy as np
 
 from .annealing import AnnealingConfig, relevant_nets, run_annealing
+from .compaction import compact
 from .cost import CostBreakdown, CostWeights, is_better, total_cost
 from .model import ALLOWED_ROTATIONS, Board
 from .partition import build_weight_matrix, partition_refs
@@ -33,6 +34,10 @@ class HierarchyConfig:
     sa_block: AnnealingConfig = field(default_factory=lambda: AnnealingConfig(iterations=2500, t0=10.0))
     sa_global: AnnealingConfig = field(default_factory=lambda: AnnealingConfig(iterations=4000, t0=6.0))
     block_move_prob: float = 0.15
+    # Passe de compactage deterministe (0 chevauchement/hors-contour garanti) en fin de
+    # pipeline plutot que la legalisation seule - cf. optimize_board. Desactiver seulement
+    # pour comparer au comportement historique (recuit + legalisation seules).
+    use_compaction: bool = True
     rotation_probe_every: int = 15
     seed: int = 0
 
@@ -298,10 +303,23 @@ def optimize_board(board: Board, weights: CostWeights, cfg: HierarchyConfig) -> 
 
     # Niveau 5 : recuit global avec mouvements de bloc.
     cost = run_global_annealing_with_block_moves(board, blocks_map, weights, cfg)
-    # Deux passes de legalisation : une chaine de poussees (A pousse B qui pousse C...) peut
-    # laisser un residu apres la premiere passe si elle s'arrete a max_iters ; relancer sur
-    # l'etat deja presque legal converge generalement en quelques iterations de plus.
-    legalize(board, all_refs, min_clearance_mm=weights.min_clearance_mm)
-    legalize(board, all_refs, min_clearance_mm=weights.min_clearance_mm)
+
+    if cfg.use_compaction:
+        # Passe de compactage deterministe : GARANTIT 0 chevauchement et 0 hors-contour par
+        # construction (le recuit + la legalisation seuls peuvent laisser des residus ou de
+        # grands vides, cf. retour utilisateur du 2026-11-05) - remplace la legalisation en
+        # fin de pipeline. Garde approximativement le regroupement par bloc du recuit
+        # (default_compaction_order), au prix d'un resultat un peu moins affine cote cablage
+        # qu'un recuit seul.
+        unplaced = compact(board, all_refs, margin_mm=weights.min_clearance_mm, seed=cfg.seed)
+        if unplaced:
+            print(f"ATTENTION : {len(unplaced)} composant(s) n'ont trouve aucune place dans "
+                  f"le contour impose (carte trop petite/dense pour cette config) : {unplaced}")
+    else:
+        # Repli historique (pas de contour fixe, ou compactage explicitement desactive) :
+        # deux passes de legalisation seulement (poussee locale, peut laisser un residu).
+        legalize(board, all_refs, min_clearance_mm=weights.min_clearance_mm)
+        legalize(board, all_refs, min_clearance_mm=weights.min_clearance_mm)
+
     cost = total_cost(board, all_refs, board.nets, weights)
     return cost

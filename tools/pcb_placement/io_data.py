@@ -29,7 +29,11 @@ def load_board(extract_json_path: str) -> Board:
             pads=pads,
             x=c["current_x_mm"],
             y=c["current_y_mm"],
-            rotation=_snap_rotation(c["current_rotation_deg"]),
+            # Une ancre fixe (is_anchor) n'est JAMAIS tournee par le moteur (cf. ALLOWED_ROTATIONS,
+            # limite aux multiples de 90) : son angle reel est donc conserve tel quel (ex. moteurs
+            # a 45 degres sur Boomrone), pas arrondi - seuls les composants mobiles sont forces sur
+            # la grille 0/90/180/270 que le recuit simule sait explorer.
+            rotation=c["current_rotation_deg"] if c["is_anchor"] else _snap_rotation(c["current_rotation_deg"]),
             fixed=c["is_anchor"],
         )
         components[comp.ref] = comp
@@ -49,6 +53,60 @@ def load_board(extract_json_path: str) -> Board:
         outline_h=data["board_outline_bbox_mm"]["h_mm"],
     )
     return board
+
+
+def apply_constraints(board: Board, constraints_path: str) -> None:
+    """Charge un fichier JSON de contraintes mecaniques specifiques au projet (contour de
+    carte fixe, positions d'ancres imposees, references autorisees a deborder) et les
+    applique sur `board`. Format :
+        {
+          "outline_mm": [xmin, ymin, xmax, ymax],
+          "overhang_refs": ["J1", "U7"],
+          "positions": {
+            "M1": {"x_mm": .., "y_mm": .., "rotation_deg": .., "fixed": true}
+          },
+          "courtyard_overrides": {
+            "M1": {"courtyard_w_mm": .., "courtyard_h_mm": ..}
+          }
+        }
+    Toutes les cles sont optionnelles. `positions` ecrase x/y/rotation (et fixed si fourni)
+    des references listees - prevu pour des contraintes mecaniques deja decidees (coin de
+    carte, bord de connecteur, debord d'antenne), jamais devinees par le moteur lui-meme.
+    `courtyard_overrides` corrige la geometrie (empreinte) d'une reference quand celle de
+    l'extraction est fausse ou provisoire (ex. empreinte de substitution utilisee le temps
+    de choisir le vrai connecteur) - applique AVANT `positions`, pour que les positions de
+    coin/bord soient calculees avec la bonne taille."""
+    with open(constraints_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    if "outline_mm" in data:
+        board.outline = tuple(data["outline_mm"])
+    if "overhang_refs" in data:
+        board.overhang_refs = frozenset(data["overhang_refs"])
+    for ref, cy in data.get("courtyard_overrides", {}).items():
+        if ref not in board.components:
+            continue
+        c = board.components[ref]
+        if "courtyard_w_mm" in cy:
+            c.courtyard_w = cy["courtyard_w_mm"]
+        if "courtyard_h_mm" in cy:
+            c.courtyard_h = cy["courtyard_h_mm"]
+        if "courtyard_offset_x_mm" in cy:
+            c.courtyard_offset_x = cy["courtyard_offset_x_mm"]
+        if "courtyard_offset_y_mm" in cy:
+            c.courtyard_offset_y = cy["courtyard_offset_y_mm"]
+    for ref, pos in data.get("positions", {}).items():
+        if ref not in board.components:
+            continue
+        c = board.components[ref]
+        if "x_mm" in pos:
+            c.x = pos["x_mm"]
+        if "y_mm" in pos:
+            c.y = pos["y_mm"]
+        if "rotation_deg" in pos:
+            c.rotation = pos["rotation_deg"]
+        if "fixed" in pos:
+            c.fixed = pos["fixed"]
 
 
 def _snap_rotation(angle_deg: float) -> int:

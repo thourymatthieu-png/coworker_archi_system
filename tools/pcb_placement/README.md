@@ -88,6 +88,55 @@ Cout total pondere = somme de :
   `feasible=False` et n'est JAMAIS retenue comme meilleure solution si une solution faisable
   existe, quel que soit son score sur les autres criteres.
 
+## Contour de carte fixe et contraintes mecaniques (`io_data.apply_constraints`)
+
+Par defaut, le moteur choisit librement la taille de la carte (compacte la boite englobante
+des composants). Si la carte a un contour deja impose par la mecanique (chassis, bras
+moteur, dimensions arretees ailleurs dans le cycle en V), passer `--constraints
+<fichier.json>` a `optimize` :
+
+```json
+{
+  "outline_mm": [0.0, 0.0, 50.0, 50.0],
+  "overhang_refs": ["J1", "U7"],
+  "positions": {
+    "M1": {"x_mm": 3.89, "y_mm": 3.89, "rotation_deg": 135, "fixed": true}
+  },
+  "courtyard_overrides": {
+    "M1": {"courtyard_w_mm": 8.0, "courtyard_h_mm": 3.0, "courtyard_offset_x_mm": 0.0, "courtyard_offset_y_mm": 0.0}
+  }
+}
+```
+
+- `outline_mm` : contour FIXE (xmin, ymin, xmax, ymax) - tout composant qui en sort (hors
+  `overhang_refs`) rend la solution infaisable (meme poids que le recouvrement, cf.
+  `cost.out_of_bounds_penalty`).
+- `overhang_refs` : references dont le debord est une decision mecanique deja prise
+  (connecteur, antenne) - exemptees du contour, jamais decide par le moteur lui-meme.
+- `positions` : ecrase x/y/rotation/fixed de references precises - pour des ancres dont la
+  position exacte (coin de carte, bord, debord) est deja connue plutot que laissee a
+  l'extraction du PCB courant.
+- `courtyard_overrides` : corrige la geometrie d'une reference si celle de l'extraction est
+  fausse/provisoire (ex. empreinte de substitution). Applique avant `positions`.
+
+Aucune de ces valeurs n'est devinee par le moteur : toutes viennent de contraintes
+mecaniques deja tranchees par l'utilisateur (cf. le cas Boomrone plus bas, DOU-162/DOU-204).
+
+## Compactage deterministe (`compaction.py`)
+
+Le recuit simule + la legalisation (poussee locale) peuvent laisser des chevauchements
+residuels si le budget d'iterations est insuffisant, ET laisser de grands vides (rien ne
+pousse activement a remplir l'espace - cf. retour utilisateur du 2026-11-05). Depuis cette
+version, une passe de **compactage deterministe** (bottom-left-fill, repris de l'essai
+`tools/kicad_tetris_placement.py`) tourne en fin de pipeline (`HierarchyConfig.use_compaction`,
+`True` par defaut) : chaque composant mobile est replace par tassement autour des ancres
+fixes et des composants deja poses, en respectant le contour si impose. **Garantit 0
+recouvrement et 0 hors-contour par construction** (tant qu'il y a physiquement la place),
+contrairement au recuit seul. Prix a payer : le resultat est un peu moins affine cote
+cablage qu'un recuit qui converge parfaitement (le compactage deplace les composants apres
+coup, sans regarder le cout de cablage). Desactivable (`use_compaction: false` dans la
+config) pour revenir au comportement historique (legalisation seule) si besoin de comparer.
+
 ## Partitionnement (`partition.py`)
 
 Bissection spectrale (vecteur de Fiedler du Laplacien, `numpy.linalg.eigh`) + raffinement

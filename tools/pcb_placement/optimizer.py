@@ -14,7 +14,7 @@ from typing import Dict, List, Optional, Tuple
 from .config import EngineConfig
 from .cost import CostBreakdown, is_better
 from .hierarchy import optimize_board
-from .io_data import load_board
+from .io_data import apply_constraints, load_board
 from .model import Board
 
 
@@ -33,8 +33,10 @@ class StrategyResult:
     elapsed_s: float
 
 
-def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progress_prefix: str = "") -> StrategyResult:
+def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progress_prefix: str = "", constraints_path: Optional[str] = None) -> StrategyResult:
     board = load_board(extract_json_path)
+    if constraints_path:
+        apply_constraints(board, constraints_path)
     weights = config.to_cost_weights()
 
     best_cost: Optional[CostBreakdown] = None
@@ -75,9 +77,9 @@ def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progre
     return StrategyResult(seed=seed, best_cost=best_cost, positions=best_snapshot, history=history, elapsed_s=time.time() - t_start)
 
 
-def _run_strategy_worker(extract_json_path: str, config_dict: dict, seed: int) -> StrategyResult:
+def _run_strategy_worker(extract_json_path: str, config_dict: dict, seed: int, constraints_path: Optional[str]) -> StrategyResult:
     config = _config_from_dict(config_dict)
-    return run_strategy(extract_json_path, config, seed, progress_prefix=f"[strategie {seed}] ")
+    return run_strategy(extract_json_path, config, seed, progress_prefix=f"[strategie {seed}] ", constraints_path=constraints_path)
 
 
 def _config_from_dict(config_dict: dict) -> EngineConfig:
@@ -90,16 +92,16 @@ def _config_from_dict(config_dict: dict) -> EngineConfig:
     return cfg
 
 
-def run_parallel_strategies(extract_json_path: str, config: EngineConfig, parallel: bool = True) -> List[StrategyResult]:
+def run_parallel_strategies(extract_json_path: str, config: EngineConfig, parallel: bool = True, constraints_path: Optional[str] = None) -> List[StrategyResult]:
     seeds = [config.random_seed + i for i in range(config.n_parallel_strategies)]
     config_dict = dataclasses.asdict(config)
 
     if not parallel or config.n_parallel_strategies <= 1:
-        return [run_strategy(extract_json_path, config, s) for s in seeds]
+        return [run_strategy(extract_json_path, config, s, constraints_path=constraints_path) for s in seeds]
 
     results: List[StrategyResult] = []
     with ProcessPoolExecutor(max_workers=config.n_parallel_strategies) as pool:
-        futures = {pool.submit(_run_strategy_worker, extract_json_path, config_dict, s): s for s in seeds}
+        futures = {pool.submit(_run_strategy_worker, extract_json_path, config_dict, s, constraints_path): s for s in seeds}
         for fut in as_completed(futures):
             results.append(fut.result())
     results.sort(key=lambda r: r.seed)

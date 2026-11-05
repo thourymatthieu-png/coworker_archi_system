@@ -49,6 +49,7 @@ class EngineConfig:
     sa_global_t0: float = 6.0
     sa_t_end: float = 0.03
     block_move_prob: float = 0.15         # probabilite de deplacer un bloc entier plutot qu'un composant (niveau global)
+    use_compaction: bool = True           # passe de compactage deterministe en fin de pipeline (0 recouvrement garanti, cf. hierarchy.optimize_board)
 
     # --- Boucle d'optimisation et strategies paralleles (sections 6 et 10) ---
     stopping: StoppingCriteria = field(default_factory=lambda: StoppingCriteria(max_cycles=3, no_improve_cycles=2))
@@ -78,6 +79,7 @@ class EngineConfig:
             sa_block=AnnealingConfig(iterations=self.sa_block_iterations, t0=self.sa_block_t0, t_end=self.sa_t_end, seed=s),
             sa_global=AnnealingConfig(iterations=self.sa_global_iterations, t0=self.sa_global_t0, t_end=self.sa_t_end, seed=s),
             block_move_prob=self.block_move_prob,
+            use_compaction=self.use_compaction,
             seed=s,
         )
 
