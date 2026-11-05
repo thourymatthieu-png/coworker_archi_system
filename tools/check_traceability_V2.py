@@ -2,9 +2,9 @@
 """Vérifie la traçabilité du cycle en V, les références (ID + titre) et les doutes d'un projet.
 
 Usage :
-    python tools/check_traceability.py projets/<nom>
-    python tools/check_traceability.py projets/<nom> --gate
-    python tools/check_traceability.py projets/<nom> --matrice projets/<nom>/06-matrice-tracabilite.md
+    python tools/check_traceability_V2.py projets/<nom>
+    python tools/check_traceability_V2.py projets/<nom> --gate
+    python tools/check_traceability_V2.py projets/<nom> --matrice projets/<nom>/06-matrice-tracabilite.md
 
 Sans --gate : les erreurs (références invalides) font échouer, les trous de couverture et
 les doutes bloquants sont signalés. Avec --gate : tout fait échouer.
@@ -167,7 +167,7 @@ def main():
 
     if args.matrice:
         rows = ["# Matrice de traçabilité", "",
-                "> Généré par `tools/check_traceability.py`. Ne pas modifier à la main.", "",
+                "> Généré par `tools/check_traceability_V2.py`. Ne pas modifier à la main.", "",
                 "| Besoin | Exigence | Architecture | Test système |", "|---|---|---|---|"]
         ref = lambda i: "%s « %s »" % (i, elements[i]["title"])
         for rid in sorted(e for e in elements if e.startswith("REQ-")):

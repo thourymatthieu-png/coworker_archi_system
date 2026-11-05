@@ -188,7 +188,7 @@ def main():
             "ref": ref,
             "value": val,
             "block": block,
-            "is_anchor": ref in ANCHOR_REFS,
+            "is_anchor": bool(fp.IsLocked()),  # fixe = empreinte verrouillee dans KiCad
             "current_x_mm": round(x_mm, 4),
             "current_y_mm": round(y_mm, 4),
             "current_rotation_deg": rot,
@@ -200,6 +200,15 @@ def main():
         })
 
     board_extents = board.GetBoardEdgesBoundingBox()
+    # Contour = rectangle(s) Edge.Cuts dessine(s) dans KiCad (contrainte dure si trouve).
+    edge = [d for d in board.GetDrawings() if d.GetLayerName() == "Edge.Cuts"]
+    outline = None
+    if edge:
+        bb = edge[0].GetBoundingBox()
+        for d in edge[1:]:
+            bb.Merge(d.GetBoundingBox())
+        outline = [round(mm(bb.GetX()), 4), round(mm(bb.GetY()), 4),
+                   round(mm(bb.GetX() + bb.GetWidth()), 4), round(mm(bb.GetY() + bb.GetHeight()), 4)]
     data = {
         "source_pcb": os.path.abspath(pcb_path),
         "note": "Extraction en lecture seule, aucune modification du .kicad_pcb.",
@@ -209,6 +218,7 @@ def main():
             "w_mm": mm(board_extents.GetWidth()),
             "h_mm": mm(board_extents.GetHeight()),
         },
+        "outline_mm": outline,
         "components": components,
         "missing_block_refs": missing_block,
     }

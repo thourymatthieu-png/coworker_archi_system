@@ -6,21 +6,38 @@ from typing import Dict, List, Optional, Tuple
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Patch, Rectangle
 from matplotlib.lines import Line2D
 
 from .cost import CostBreakdown, net_segments
 from .model import Board
 
+# 12 couleurs franches et bien distinctes (palette Okabe-Ito completee), une par bloc.
 _PALETTE = [
-    "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f",
-    "#edc948", "#b07aa1", "#ff9da7", "#9c755f", "#bab0ac",
+    "#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9",
+    "#F0E442", "#8B4513", "#6A3D9A", "#2F4F4F", "#FF1493", "#7FBF00",
+    "#A6CEE3", "#B15928",
 ]
 
 
+_DARK = {"#0072B2", "#D55E00", "#8B4513", "#6A3D9A", "#2F4F4F", "#009E73", "#FF1493", "#B15928"}
+
+
+def block_colors(board: Board) -> Dict[str, str]:
+    """Couleur par bloc fonctionnel, stable (ordre alphabetique) d'une carte a l'autre."""
+    return {b: _PALETTE[i % len(_PALETTE)] for i, b in enumerate(sorted(board.blocks()))}
+
+
+def block_label(block: str) -> str:
+    """'DES-007-puissance-moteurs' -> 'DES-007 puissance moteurs'."""
+    parts = block.split("-")
+    if len(parts) >= 3 and parts[0] == "DES":
+        return f"{parts[0]}-{parts[1]} {' '.join(parts[2:])}"
+    return block
+
+
 def draw_board(board: Board, ax, title: str, show_nets: bool = True) -> None:
-    blocks = board.blocks()
-    color_by_block = {b: _PALETTE[i % len(_PALETTE)] for i, b in enumerate(blocks)}
+    color_by_block = block_colors(board)
 
     if show_nets:
         for p1, p2, _net in net_segments(board):
@@ -29,10 +46,12 @@ def draw_board(board: Board, ax, title: str, show_nets: bool = True) -> None:
     for ref, comp in board.components.items():
         x0, y0, x1, y1 = comp.world_bbox()
         color = color_by_block.get(comp.block, "#cccccc")
-        edge = "black" if comp.fixed else color
+        edge = "black" if comp.fixed else "#222222"
         ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, facecolor=color, edgecolor=edge,
-                                linewidth=0.8 if comp.fixed else 0.4, alpha=0.75, zorder=2))
-        ax.text((x0 + x1) / 2, (y0 + y1) / 2, ref, ha="center", va="center", fontsize=3.5, zorder=3)
+                                linewidth=1.2 if comp.fixed else 0.35, alpha=0.9, zorder=2,
+                                hatch="//" if comp.fixed else None))
+        ax.text((x0 + x1) / 2, (y0 + y1) / 2, ref, ha="center", va="center", fontsize=3.5,
+                color="white" if color in _DARK else "black", zorder=3)
 
     if board.outline is not None:
         ox0, oy0, ox1, oy1 = board.outline
@@ -55,13 +74,17 @@ def draw_board(board: Board, ax, title: str, show_nets: bool = True) -> None:
 
 def save_comparison(board_before: Board, board_after: Board, cost_before: Optional[CostBreakdown],
                      cost_after: CostBreakdown, out_path: str) -> None:
-    fig, axes = plt.subplots(1, 2, figsize=(12, 6))
+    fig, axes = plt.subplots(1, 2, figsize=(14, 7.5))
     title_before = "Placement initial"
     if cost_before is not None:
         title_before += f" (cout={cost_before.total:.0f})"
     draw_board(board_before, axes[0], title_before)
     draw_board(board_after, axes[1], f"Placement optimise (cout={cost_after.total:.0f})")
-    fig.tight_layout()
+    colors = block_colors(board_after)
+    handles = [Patch(facecolor=c, edgecolor="#222222", label=block_label(b)) for b, c in colors.items()]
+    handles.append(Patch(facecolor="white", edgecolor="black", hatch="//", label="fixe (verrouille)"))
+    fig.legend(handles=handles, loc="lower center", ncol=4, fontsize=7, frameon=False)
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
     fig.savefig(out_path, dpi=200)
     plt.close(fig)
 
@@ -98,6 +121,7 @@ def _format_cost(c: CostBreakdown) -> str:
         f"- Penalite d'accessibilite des pastilles : {c.accessibility_penalty:.1f}\n"
         f"- Recouvrement residuel : {c.overlap_mm2:.4f} mm2\n"
         f"- Hors du contour de carte : {c.out_of_bounds_mm2:.4f} mm2\n"
+        f"- Depassement de distance de decouplage : {c.decoupling_mm:.2f} mm\n"
         f"- Faisable : {'OK' if c.feasible else 'VIOLATION'}\n"
         f"- Cout total pondere : {c.total:.1f}"
     )

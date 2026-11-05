@@ -221,10 +221,13 @@ assemblage (section "Hierarchie" plus haut).
 
 ## Utilisation
 
+Le Python de KiCad 10 (seul a importer `pcbnew`) est cherche dans l'ordre : option
+`--kicad-python`, variable `KICAD_PYTHON`, puis le venv `~/.venvs/kicad-mcp` du poste (aucun
+chemin propre a un poste dans ce depot). Le Python systeme a besoin de `numpy` et `matplotlib`.
+
 ```bash
 # 1. Extraction (Python embarque KiCad, a cause de pcbnew)
-python tools/pcb_optimize_placement.py extract <proj.kicad_pcb> --out-dir resultats/ \
-    --kicad-python "C:\Users\quent\.venvs\kicad-mcp\Scripts\python.exe"
+python tools/pcb_optimize_placement.py extract <proj.kicad_pcb> --out-dir resultats/
 
 # 2. Optimisation (Python systeme, pas besoin de pcbnew)
 python tools/pcb_optimize_placement.py optimize resultats/extract.json --out-dir resultats/ \
@@ -232,7 +235,7 @@ python tools/pcb_optimize_placement.py optimize resultats/extract.json --out-dir
 
 # 3. Application sur une COPIE du PCB (Python embarque KiCad)
 python tools/pcb_optimize_placement.py apply <proj.kicad_pcb> resultats/best_solution.json \
-    <proj_optimise.kicad_pcb> --kicad-python "C:\Users\quent\.venvs\kicad-mcp\Scripts\python.exe"
+    <proj_optimise.kicad_pcb>
 ```
 
 Sorties de l'etape 2, dans `--out-dir` : `best_solution.json` (positions + metriques),
@@ -242,3 +245,81 @@ mission), `comparaison.png` (avant/apres), `rapport.md` (metriques lisibles).
 `proj_optimise.kicad_pcb` est un nouveau fichier : ouvrir ce fichier dans KiCad pour relire
 visuellement le resultat AVANT de l'adopter (verification visuelle obligatoire du projet,
 cf. `framework/kicad-mcp-notes.md`) ; rien n'est ecrase automatiquement.
+
+
+## Mise a jour du 2026-11-05 (soir) : ce qui a change depuis les sections ci-dessus
+
+Ces points remplacent les passages correspondants plus haut quand ils se contredisent.
+
+### Entrees lues dans KiCad (plus de liste en dur)
+- **Contour** : lu sur la couche *Edge.Cuts* (`outline_mm` dans `extract.json`), plus besoin de
+  `placement_constraints.json` pour le contour.
+- **Pieces fixes** : toute empreinte **verrouillee** dans KiCad (clic droit > *Locked*, ou touche
+  `L`) est une ancre fixe. `ANCHOR_REFS` n'est plus utilise.
+- **Debords** : une piece fixe qui depasse du contour est exemptee automatiquement
+  (`io_data.auto_overhang`).
+- **Blocs** : un bloc qui contient plusieurs pieces verrouillees est decoupe en un sous-bloc par
+  ancre (`io_data.split_blocks_by_anchor`) : `DES-007` donne `-M1` a `-M4`, chaque composant
+  etant rattache a l'ancre la plus proche dans le schema (reseaux de 8 pastilles au plus).
+
+### Pipeline (`hierarchy.optimize_board`)
+1. Chaque bloc, separement et dans un repere arbitraire : groupes (<= 10), forces dirigees,
+   legalisation, recuit, assemblage rigide des groupes, recuit du bloc.
+2. **Pose des blocs sur la carte** (`assemble_blocks`) : rectangles rigides, du plus grand au plus
+   petit, a l'emplacement libre le plus proche de ce a quoi ils sont relies, avec la rotation
+   (0/90/180/270) qui minimise le cablage vers l'existant. Un bloc qui contient une piece
+   verrouillee reste en place (ses composants sont deja tires vers ses ancres) et sert
+   d'obstacle. Sans contour impose : ancien assemblage par forces dirigees.
+3. Legalisation puis **remise en etat faisable** avant le recuit global.
+4. Recuit global (mouvements de composants et de blocs entiers, 40 % de blocs, temperature de
+   depart 1,5 mm).
+5. Remise en etat faisable finale.
+
+### Remise en etat faisable (`compaction.compact`)
+Un composant qui se recouvre ou depasse n'est plus « teleporte » : (1) `spread_resolve`, relaxation
+locale - les paires qui se recouvrent sont ecartees, le deplacement etant partage entre les deux
+(les petits cedent plus, une piece verrouillee ne bouge pas), les parois ramenent vers l'interieur,
+la poussee se propage de proche en proche ; (2) repli `compact_minimal` (place libre la plus
+proche, balayage vectorise) ; (3) repli `_compact_repack` (repavage complet, plus gros d'abord).
+Cause du changement : le repavage complet defaisait le travail du recuit (condensateurs de
+decouplage eloignes de leur circuit, blocs eclates).
+
+### Cout incremental (`incremental.py`)
+Meme fonction de cout que `cost.total_cost`, mise a jour seulement pour ce qu'un deplacement
+change (paires recouvrantes, reseaux touches, segments modifies de l'arbre couvrant, cellules de
+congestion, pastilles voisines). Parite verifiee a 0 ecart sur des deplacements aleatoires ; ~2,4
+ms par pas contre ~110 ms. La congestion utilise une grille a origine fixe (valeur absolue ~7 %
+plus basse que `cost.congestion_grid`). Resynchronisation complete tous les 1500 commits.
+
+### Regle de decouplage (`--decoupling decouplage.json`)
+Penalite par mm au-dela de `distance_max_mm` (5 mm par defaut, valeur de projet, pas de fiche)
+entre le centre du condensateur et la broche d'alimentation la plus proche de son circuit (groupes
+de condensateurs equivalents acceptes). Poids `weight_decoupling` (10 par mm). Fichier produit par
+l'agent `electronique-hardware` a partir du schema et des fiches ; il porte la source et la
+certitude de chaque appariement. Sans l'option, aucun effet.
+
+### Suivi en direct (`--live`)
+`optimize --live` ecrit des instantanes JSON (`live.py`) et sert `viewer/index.html` sur
+`http://127.0.0.1:8765` (option `--port`, pause apres le calcul `--live-hold-s`). La page montre le
+carre de la carte, le bloc en cours au centre et les autres en grappes sur les cotes, puis les
+vraies positions, le chevelu (arbre couvrant par reseau), les paires de decouplage (vert/rouge),
+la couleur par bloc, les mesures et un menu de strategie. Accessible depuis le PC seulement.
+
+### Couleurs et rapports
+`comparaison.png` colore chaque bloc (palette de 14 couleurs, legende, pieces verrouillees
+hachurees) ; `rapport.md` donne le depassement de decouplage.
+
+### Configurations d'exemple
+`config_rapide.json` (2 strategies), `config_parallele.json` (10 strategies), `config_qualite.json`.
+Defauts modifies : `sa_global_t0` 1,5 (au lieu de 6), `block_move_prob` 0,4 (au lieu de 0,15).
+Le Python de KiCad 10 est cherche dans l'ordre : `--kicad-python`, `KICAD_PYTHON`,
+`~/.venvs/kicad-mcp`. Le Python systeme a besoin de `numpy` et `matplotlib`.
+
+### Resultats de reference (Boomrone, 107 composants, contour 50 x 50 mm, 10 strategies)
+| | Sans regle (coup 1) | Regle, ancien pipeline | Pipeline du soir |
+|---|---|---|---|
+| Cout | 5014 | 7513 | 4327 |
+| Cablage | 2275 mm | 1985 mm | 1250 mm |
+| Croisements | 830 | 676 | 340 |
+| Depassement de decouplage | 371 mm | 274 mm | 15 mm |
+Temps : 388 s, 413 s, 517 s.

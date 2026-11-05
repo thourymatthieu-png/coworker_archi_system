@@ -113,6 +113,9 @@ class Board:
     # decision mecanique deja prise (cf. tools/pcb_placement/README.md) ; le moteur ne decide
     # jamais lui-meme qu'un composant peut deborder.
     overhang_refs: frozenset = frozenset()
+    # Regles de decouplage (cf. io_data.apply_decoupling) : liste de dicts
+    # {"cap": ref, "ic": ref, "pins": [numeros de broche], "dmax": mm}. Vide = pas de regle.
+    decoupling_rules: list = field(default_factory=list)
 
     def pad_world_pos(self, ref: str, pad_name: str) -> Optional[Tuple[float, float]]:
         comp = self.components.get(ref)

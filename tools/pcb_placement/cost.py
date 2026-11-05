@@ -267,6 +267,32 @@ def accessibility_penalty(board: Board, refs: List[str], probe_mm: float = 1.5) 
     return penalty
 
 
+def decoupling_excess(board: Board, rule: dict) -> float:
+    """Depassement (mm) de la distance max entre un condensateur de decouplage et la broche
+    d'alimentation de son circuit integre : centre du condensateur -> broche la plus proche
+    parmi `rule["pins"]` (plusieurs broches candidates pour un groupe de condensateurs
+    equivalents). 0 si le condensateur est assez proche, ou si la regle ne s'applique pas."""
+    cap = board.components.get(rule["cap"])
+    ic = board.components.get(rule["ic"])
+    if cap is None or ic is None:
+        return 0.0
+    cx, cy = cap.world_center()
+    best = None
+    for p in ic.pads:
+        if p.name in rule["pins"]:
+            px, py = ic.pad_world_pos(p)
+            d = math.hypot(px - cx, py - cy)
+            if best is None or d < best:
+                best = d
+    if best is None:
+        return 0.0
+    return max(0.0, best - rule["dmax"])
+
+
+def decoupling_total(board: Board) -> float:
+    return sum(decoupling_excess(board, r) for r in board.decoupling_rules)
+
+
 @dataclass
 class CostWeights:
     area: float = 1.0
@@ -277,6 +303,7 @@ class CostWeights:
     vias: float = 0.6
     min_clearance_mm: float = 0.3
     overlap_penalty_weight: float = 1000.0  # contrainte dure : poids ecrasant, pas un critere parmi d'autres
+    decoupling: float = 0.0  # poids du depassement de distance de decouplage (mm), 0 = sans effet
 
 
 @dataclass
@@ -291,6 +318,7 @@ class CostBreakdown:
     out_of_bounds_mm2: float
     total: float
     feasible: bool
+    decoupling_mm: float = 0.0  # depassement cumule des distances de decouplage (mm)
 
 
 def is_better(candidate: "CostBreakdown", current_best: "CostBreakdown") -> bool:
@@ -317,6 +345,7 @@ def total_cost(board: Board, refs: List[str], nets: Dict[str, "Net"], weights: C
     access = accessibility_penalty(board, refs)
 
     oob = out_of_bounds_penalty(board, refs)
+    dec = decoupling_total(board)
     feasible = overlap <= 1e-6 and oob <= 1e-6
     total = (
         weights.area * area
@@ -325,6 +354,7 @@ def total_cost(board: Board, refs: List[str], nets: Dict[str, "Net"], weights: C
         + weights.crossings * crossings
         + weights.vias * vias
         + weights.accessibility * access
+        + weights.decoupling * dec
         + weights.overlap_penalty_weight * (overlap + oob)
     )
     return CostBreakdown(
@@ -338,4 +368,5 @@ def total_cost(board: Board, refs: List[str], nets: Dict[str, "Net"], weights: C
         out_of_bounds_mm2=oob,
         total=total,
         feasible=feasible,
+        decoupling_mm=dec,
     )

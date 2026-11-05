@@ -9,6 +9,7 @@ import math
 import random
 from typing import Dict, List, Optional
 
+from . import live
 from .model import ALLOWED_ROTATIONS, Board
 from .partition import build_weight_matrix
 
@@ -58,6 +59,7 @@ def force_directed_layout(
     # dizaines de mm des ancres alors que la carte fait quelques cm).
 
     for it in range(iterations):
+        live.tick(board)
         disp: Dict[str, List[float]] = {r: [0.0, 0.0] for r in movable}
         center_x = sum(board.components[r].x for r in refs) / len(refs)
         center_y = sum(board.components[r].y for r in refs) / len(refs)

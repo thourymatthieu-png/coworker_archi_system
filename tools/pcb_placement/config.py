@@ -31,6 +31,10 @@ class EngineConfig:
     weight_vias: float = 0.6              # poids du nombre de vias estime
     min_clearance_mm: float = 0.3         # distance minimale entre boitiers (contrainte dure)
     overlap_penalty_weight: float = 1000.0  # poids ecrasant de la contrainte "pas de recouvrement"
+    weight_decoupling: float = 10.0       # poids par mm de depassement de la distance de decouplage
+    decoupling_file: Optional[str] = None  # decouplage.json (condensateur -> broche d'alimentation) ; None = sans regle
+    live_dir: Optional[str] = None        # dossier de suivi en direct (page web), None = desactive
+    decoupling_max_mm: float = 5.0        # distance max par defaut quand une regle n'en donne pas (valeur de projet, pas de fiche)
 
     # --- Hierarchie (section 3) ---
     max_group_size: int = 10              # taille max d'un "petit groupe" avant repartitionnement
@@ -46,9 +50,9 @@ class EngineConfig:
     sa_block_iterations: int = 2000
     sa_block_t0: float = 10.0
     sa_global_iterations: int = 3500
-    sa_global_t0: float = 6.0
+    sa_global_t0: float = 1.5
     sa_t_end: float = 0.03
-    block_move_prob: float = 0.15         # probabilite de deplacer un bloc entier plutot qu'un composant (niveau global)
+    block_move_prob: float = 0.4          # probabilite de deplacer un bloc entier plutot qu'un composant (niveau global)
     use_compaction: bool = True           # passe de compactage deterministe en fin de pipeline (0 recouvrement garanti, cf. hierarchy.optimize_board)
 
     # --- Boucle d'optimisation et strategies paralleles (sections 6 et 10) ---
@@ -67,6 +71,7 @@ class EngineConfig:
             vias=self.weight_vias,
             min_clearance_mm=self.min_clearance_mm,
             overlap_penalty_weight=self.overlap_penalty_weight,
+            decoupling=self.weight_decoupling,
         )
 
     def to_hierarchy_config(self, seed: Optional[int] = None) -> HierarchyConfig:

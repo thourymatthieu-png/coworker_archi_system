@@ -8,6 +8,63 @@ from typing import Dict
 from .model import Board, Component, Net, Pad
 
 
+def auto_overhang(board: Board) -> None:
+    """Un composant FIXE (verrouille dans KiCad) qui depasse du contour est un debord mecanique
+    deja decide par l'utilisateur : on l'exempte de la contrainte de contour (ajout a
+    board.overhang_refs, en plus de ceux deja listes). Sans effet si aucun contour n'est impose."""
+    if board.outline is None:
+        return
+    ox0, oy0, ox1, oy1 = board.outline
+    extra = set()
+    for ref, c in board.components.items():
+        if not c.fixed:
+            continue
+        x0, y0, x1, y1 = c.world_bbox()
+        if x0 < ox0 or y0 < oy0 or x1 > ox1 or y1 > oy1:
+            extra.add(ref)
+    board.overhang_refs = frozenset(set(board.overhang_refs) | extra)
+
+
+def split_blocks_by_anchor(board: Board, max_pins: int = 8) -> dict:
+    """Un bloc qui contient PLUSIEURS pieces verrouillees (ex. DES-007 : un connecteur moteur
+    par coin, M1 a M4) est decoupe en autant de sous-blocs que d'ancres : chaque composant libre
+    est rattache a l'ancre la plus proche dans le schema (distance en nombre de reseaux de
+    <= `max_pins` pastilles, les gros reseaux d'alimentation/masse ne comptent pas), en
+    partant des ancres. Un composant sans lien est rattache a l'ancre la plus proche
+    geometriquement. Nom des sous-blocs : '<bloc>-<ancre>'. Renvoie {bloc: [sous-blocs]}."""
+    from collections import deque
+    result = {}
+    for block in board.blocks():
+        refs = board.refs_in_block(block)
+        anchors = [r for r in refs if board.components[r].fixed]
+        if len(anchors) < 2:
+            continue
+        in_block = set(refs)
+        adj = {r: set() for r in refs}
+        for net in board.nets.values():
+            if len(net.pins) > max_pins:
+                continue
+            members = {r for r, _p in net.pins if r in in_block}
+            for a in members:
+                adj[a] |= members - {a}
+        owner = {a: a for a in anchors}
+        queue = deque(anchors)
+        while queue:
+            r = queue.popleft()
+            for n in sorted(adj[r]):
+                if n not in owner and not board.components[n].fixed:
+                    owner[n] = owner[r]
+                    queue.append(n)
+        for r in refs:
+            if r not in owner:
+                cx, cy = board.components[r].world_center()
+                owner[r] = min(anchors, key=lambda a: (board.components[a].x - cx) ** 2 + (board.components[a].y - cy) ** 2)
+        for r in refs:
+            board.components[r].block = f"{block}-{owner[r]}"
+        result[block] = sorted({f"{block}-{a}" for a in anchors})
+    return result
+
+
 def load_board(extract_json_path: str) -> Board:
     with open(extract_json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -52,6 +109,10 @@ def load_board(extract_json_path: str) -> Board:
         outline_w=data["board_outline_bbox_mm"]["w_mm"],
         outline_h=data["board_outline_bbox_mm"]["h_mm"],
     )
+    if data.get("outline_mm"):  # contour Edge.Cuts dessine dans KiCad
+        board.outline = tuple(data["outline_mm"])
+    auto_overhang(board)
+    split_blocks_by_anchor(board)
     return board
 
 
@@ -107,6 +168,7 @@ def apply_constraints(board: Board, constraints_path: str) -> None:
             c.rotation = pos["rotation_deg"]
         if "fixed" in pos:
             c.fixed = pos["fixed"]
+    auto_overhang(board)
 
 
 def _snap_rotation(angle_deg: float) -> int:
@@ -138,3 +200,27 @@ def load_solution_into(board: Board, path: str) -> None:
         c.x = pos["x_mm"]
         c.y = pos["y_mm"]
         c.rotation = int(pos["rotation_deg"])
+
+
+def apply_decoupling(board: Board, path: str, default_mm: float = 5.0) -> dict:
+    """Charge les regles de decouplage d'un fichier `decouplage.json` (tableau
+    `decouplage_proximite` : condensateur, circuit integre, broche(s) d'alimentation,
+    `distance_max_mm`). Une regle sans distance prend `default_mm` (la fiche ne donne que
+    « as close as possible », la valeur est une valeur de projet, pas une valeur de fiche).
+    Les references absentes de la carte sont ignorees et listees. Renvoie un resume."""
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    rules, skipped = [], []
+    for e in data.get("decouplage_proximite", []):
+        cap, ic = e.get("condensateur"), e.get("circuit_integre")
+        pins = [c["num"] for c in e.get("broches_candidates", []) if c.get("num")]
+        if e.get("broche_alimentation_num"):
+            pins.append(str(e["broche_alimentation_num"]))
+        if cap not in board.components or ic not in board.components or not pins:
+            skipped.append(cap)
+            continue
+        dmax = e.get("distance_max_mm")
+        rules.append({"cap": cap, "ic": ic, "pins": pins,
+                      "dmax": float(dmax) if dmax is not None else float(default_mm)})
+    board.decoupling_rules = rules
+    return {"rules": len(rules), "skipped": skipped}

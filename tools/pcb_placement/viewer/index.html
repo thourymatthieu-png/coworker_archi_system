@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Placement en direct</title>
+<style>
+  :root{--bg:#f6f7f9;--panel:#ffffff;--ink:#1d2330;--mute:#6b7385;--line:#d9dde5;--board:#fbfbf4;--red:#d62728}
+  @media (prefers-color-scheme:dark){:root{--bg:#14171d;--panel:#1d222b;--ink:#e6e9ef;--mute:#99a1b3;--line:#323946;--board:#232a2f}}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font:13px/1.35 system-ui,Segoe UI,sans-serif}
+  #app{display:grid;grid-template-columns:1fr 280px;height:100%}
+  #stage{position:relative;min-width:0}
+  canvas{width:100%;height:100%;display:block}
+  aside{background:var(--panel);border-left:1px solid var(--line);padding:12px;overflow:auto}
+  h1{font-size:14px;margin:0 0 8px}
+  .row{display:flex;justify-content:space-between;gap:8px;padding:2px 0}
+  .row span:first-child{color:var(--mute)}
+  .phase{font-weight:600;margin:6px 0 10px}
+  select,label{font-size:12px}
+  select{width:100%;margin:2px 0 8px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:3px}
+  .legend div{display:flex;align-items:center;gap:6px;padding:1px 0;font-size:12px}
+  .sw{width:12px;height:12px;border:1px solid #2227;display:inline-block}
+  .ok{color:#1a8f4d}.ko{color:var(--red)}
+  #msg{position:absolute;left:10px;bottom:8px;color:var(--mute);font-size:12px}
+  @media (max-width:760px){#app{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid var(--line);max-height:42%}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="stage"><canvas id="cv"></canvas><div id="msg">chargement…</div></div>
+  <aside>
+    <h1>Placement en direct</h1>
+    <div class="phase" id="phase">—</div>
+    <label>Stratégie suivie</label>
+    <select id="strat"></select>
+    <div class="row"><span>Cycle</span><b id="cycle">—</b></div>
+    <div class="row"><span>Temps</span><b id="elapsed">—</b></div>
+    <div class="row"><span>Coût total</span><b id="c_total">—</b></div>
+    <div class="row"><span>Surface</span><b id="c_area">—</b></div>
+    <div class="row"><span>Câblage (HPWL)</span><b id="c_hpwl">—</b></div>
+    <div class="row"><span>Croisements</span><b id="c_cross">—</b></div>
+    <div class="row"><span>Découplage hors limite</span><b id="c_dec">—</b></div>
+    <div class="row"><span>Recouvrement</span><b id="c_ov">—</b></div>
+    <div class="row"><span>Faisable</span><b id="c_ok">—</b></div>
+    <hr style="border:0;border-top:1px solid var(--line);margin:10px 0">
+    <label><input type="checkbox" id="t_rat" checked> chevelu (liaisons)</label><br>
+    <label><input type="checkbox" id="t_pow"> inclure les gros réseaux (masse, alim.)</label><br>
+    <label><input type="checkbox" id="t_dec" checked> paires de découplage</label><br>
+    <label><input type="checkbox" id="t_ref" checked> références</label>
+    <hr style="border:0;border-top:1px solid var(--line);margin:10px 0">
+    <div class="legend" id="legend"></div>
+  </aside>
+</div>
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const cv=$('cv'), ctx=cv.getContext('2d');
+let S=null, comps=[], byRef={}, netsList=[], state=null, states={}, zk=3.1;
+const POW_PINS=8;
+
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+async function jget(u){const r=await fetch(u+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('http');return r.json()}
+
+function worldPad(pos,p){const a=pos[2]*Math.PI/180,co=Math.cos(a),si=Math.sin(a);return[pos[0]+p.x*co-p.y*si,pos[1]+p.x*si+p.y*co]}
+
+function mst(pts){const k=pts.length;if(k<2)return[];const inT=new Array(k).fill(false);inT[0]=true;
+  const d=pts.map(q=>Math.hypot(pts[0][0]-q[0],pts[0][1]-q[1])),par=new Array(k).fill(0),e=[];
+  for(let n=1;n<k;n++){let b=-1,bd=1e18;for(let i=0;i<k;i++)if(!inT[i]&&d[i]<bd){b=i;bd=d[i]}
+    if(b<0)break;inT[b]=true;e.push([par[b],b]);
+    for(let i=0;i<k;i++)if(!inT[i]){const dd=Math.hypot(pts[b][0]-pts[i][0],pts[b][1]-pts[i][1]);if(dd<d[i]){d[i]=dd;par[i]=b}}}
+  return e}
+
+// ---- emplacements des grappes de blocs (niveaux groupe/bloc : repere arbitraire)
+let slots=[];
+function buildSlots(){
+  const o=S.outline||[0,0,50,50], cx=(o[0]+o[2])/2, cy=(o[1]+o[3])/2, w=o[2]-o[0], h=o[3]-o[1];
+  const g=w*0.12, sw=w*0.78, sh=h*0.5;
+  slots=[];
+  for(const y of[-0.55,0,0.55]) slots.push({x:cx-w/2-g-sw/2, y:cy+y*h, w:sw, h:sh});
+  for(const y of[-0.55,0,0.55]) slots.push({x:cx+w/2+g+sw/2, y:cy+y*h, w:sw, h:sh});
+  for(const x of[-0.62,0.62])  slots.push({x:cx+x*w, y:cy-h/2-g-sh/2, w:w*0.6, h:sh});
+  for(const x of[-0.62,0.62])  slots.push({x:cx+x*w, y:cy+h/2+g+sh/2, w:w*0.6, h:sh});
+}
+function displayPositions(st){
+  const pos={}, o=S.outline||[0,0,50,50], bx=(o[0]+o[2])/2, by=(o[1]+o[3])/2, real=st.pos;
+  for(const c of comps)c._sc=1;
+  if(!st.block){ for(const r in real)pos[r]=real[r]; return pos }
+  const byBlock={};
+  for(const c of comps){ (byBlock[c.block]=byBlock[c.block]||[]).push(c.ref) }
+  S.blocks.forEach((b,i)=>{
+    const refs=(byBlock[b]||[]).filter(r=>!byRef[r].fixed);
+    if(!refs.length)return;
+    let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+    for(const r of refs){const p=real[r],c=byRef[r];const hw=Math.max(c.w,c.h)/2;
+      x0=Math.min(x0,p[0]-hw);y0=Math.min(y0,p[1]-hw);x1=Math.max(x1,p[0]+hw);y1=Math.max(y1,p[1]+hw)}
+    const mx=(x0+x1)/2,my=(y0+y1)/2;
+    let tx,ty,sc=1;
+    if(b===st.block){tx=bx;ty=by;sc=1}
+    else{const s=slots[i%slots.length];tx=s.x;ty=s.y;sc=Math.min(1,s.w/Math.max(x1-x0,1),s.h/Math.max(y1-y0,1))}
+    for(const r of refs){const p=real[r];pos[r]=[tx+(p[0]-mx)*sc,ty+(p[1]-my)*sc,p[2]];byRef[r]._sc=sc}
+  });
+  for(const c of comps) if(c.fixed) pos[c.ref]=real[c.ref];
+  return pos;
+}
+function darkText(hex){const n=parseInt(hex.slice(1),16),r=n>>16,g=(n>>8)&255,b=n&255;return(0.299*r+0.587*g+0.114*b)<140}
+
+function draw(){
+  const W=cv.clientWidth,H=cv.clientHeight,dpr=window.devicePixelRatio||1;
+  if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr)}
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+  if(!S||!state)return;
+  const o=S.outline||[0,0,50,50],bw=o[2]-o[0],bh=o[3]-o[1],cx=(o[0]+o[2])/2,cy=(o[1]+o[3])/2;
+  const parked=!!state.block;
+  zk+=((parked?3.1:1.6)-zk)*0.12;            // zoom doux : large pendant les blocs, serre sur la carte ensuite
+  const vw=bw*zk, vh=bh*zk*0.9, sc=Math.min(W/vw,H/vh), ox=W/2-cx*sc, oy=H/2-cy*sc;
+  const X=x=>x*sc+ox, Y=y=>y*sc+oy;
+  const pos=displayPositions(state);
+  ctx.fillStyle=css('--board');ctx.fillRect(X(o[0]),Y(o[1]),bw*sc,bh*sc);
+  ctx.strokeStyle=css('--red');ctx.lineWidth=2;ctx.setLineDash([7,5]);ctx.strokeRect(X(o[0]),Y(o[1]),bw*sc,bh*sc);ctx.setLineDash([]);
+  if(parked){ctx.fillStyle=css('--mute');ctx.font='11px system-ui';ctx.textAlign='center'
+    S.blocks.forEach((b,i)=>{const s=slots[i%slots.length];
+      const lab=(S.block_labels[b]||b)+(b===state.block?'  (en cours)':state.done.includes(b)?'  (terminé)':'  (en attente)');
+      ctx.fillText(lab,X(s.x),Y(s.y-s.h/2)-4)})}
+  if($('t_rat').checked && !parked){
+    ctx.lineWidth=0.6;
+    for(const net of netsList){
+      const big=net.pins.length>POW_PINS; if(big && !$('t_pow').checked)continue;
+      const pts=[];
+      for(const [r,pn] of net.pins){const c=byRef[r],p=pos[r];if(!c||!p)continue;const pd=c.padMap[pn];if(!pd)continue;pts.push(worldPad(p,pd))}
+      ctx.strokeStyle=big?'rgba(120,120,140,.28)':'rgba(90,100,120,.55)';
+      ctx.beginPath();for(const [i,j] of mst(pts)){ctx.moveTo(X(pts[i][0]),Y(pts[i][1]));ctx.lineTo(X(pts[j][0]),Y(pts[j][1]))}ctx.stroke()
+    }
+  }
+  for(const c of comps){
+    const p=pos[c.ref];if(!p)continue;const k=c._sc||1;
+    ctx.save();ctx.translate(X(p[0]),Y(p[1]));ctx.rotate(p[2]*Math.PI/180);ctx.scale(sc*k,sc*k);
+    ctx.fillStyle=S.block_colors[c.block]||'#999';ctx.globalAlpha=.92;
+    ctx.fillRect(c.ox-c.w/2,c.oy-c.h/2,c.w,c.h);ctx.globalAlpha=1;
+    ctx.lineWidth=(c.fixed?2:.6)/(sc*k);ctx.strokeStyle=c.fixed?'#000':'rgba(20,20,30,.6)';
+    ctx.strokeRect(c.ox-c.w/2,c.oy-c.h/2,c.w,c.h);
+    if(c.fixed){ctx.save();ctx.beginPath();ctx.rect(c.ox-c.w/2,c.oy-c.h/2,c.w,c.h);ctx.clip();
+      ctx.lineWidth=1.1/(sc*k);ctx.strokeStyle='rgba(0,0,0,.55)';ctx.beginPath();
+      for(let t=-40;t<40;t+=1.6){ctx.moveTo(c.ox+t-30,c.oy+30);ctx.lineTo(c.ox+t+30,c.oy-30)}ctx.stroke();ctx.restore()}
+    ctx.restore();
+  }
+  if($('t_ref').checked){ctx.font='9px system-ui';ctx.textAlign='center';ctx.textBaseline='middle'
+    for(const c of comps){const p=pos[c.ref];if(!p)continue;const k=c._sc||1;
+      if(Math.min(c.w,c.h)*sc*k<7&&!c.fixed)continue;
+      const col=S.block_colors[c.block]||'#999999';ctx.fillStyle=darkText(col)?'#fff':'#111';
+      ctx.fillText(c.ref,X(p[0]+c.ox),Y(p[1]+c.oy))}ctx.textBaseline='alphabetic'}
+  if($('t_dec').checked && !parked){
+    ctx.lineWidth=1.8;
+    for(const r of S.decoupling){
+      const cap=byRef[r.cap],ic=byRef[r.ic],pc=pos[r.cap],pi=pos[r.ic];if(!cap||!ic||!pc||!pi)continue;
+      let best=null,bd=1e18;
+      for(const pn of r.pins){const pd=ic.padMap[pn];if(!pd)continue;const w=worldPad(pi,pd);const d=Math.hypot(w[0]-pc[0],w[1]-pc[1]);if(d<bd){bd=d;best=w}}
+      if(!best)continue;
+      ctx.strokeStyle=bd>r.dmax?'#d62728':'#1a8f4d';
+      ctx.beginPath();ctx.moveTo(X(pc[0]),Y(pc[1]));ctx.lineTo(X(best[0]),Y(best[1]));ctx.stroke()}
+  }
+}
+
+function panel(){
+  if(!state)return;
+  $('phase').textContent=state.phase+(state.block?' — '+(S.block_labels[state.block]||state.block):'');
+  $('cycle').textContent=(state.cycle+1); $('elapsed').textContent=state.elapsed_s.toFixed(0)+' s';
+  const c=state.cost, set=(i,v)=>{$(i).textContent=c?v:'—'};
+  if(c){set('c_total',String(c.total));set('c_area',c.area+' mm²');set('c_hpwl',c.hpwl+' mm');
+    set('c_cross',c.crossings+' (vias ~'+c.vias+')');set('c_dec',c.decoupling+' mm');set('c_ov',c.overlap+' mm²')}
+  else for(const i of['c_total','c_area','c_hpwl','c_cross','c_dec','c_ov'])$(i).textContent='—';
+  const ok=$('c_ok'); ok.textContent=c?(c.feasible?'oui':'non'):'—'; ok.className=c?(c.feasible?'ok':'ko'):'';
+  $('msg').textContent=state.finished?'terminé (graine '+state.seed+')':'';
+}
+
+async function poll(){
+  try{
+    const n=S.n_strategies, got={};
+    await Promise.all([...Array(n).keys()].map(async i=>{try{got[i]=await jget('state_'+i+'.json')}catch(e){}}));
+    states=got;
+    const sel=$('strat');
+    if(sel.options.length!==n+1){const keep=sel.value||'auto';
+      sel.innerHTML='<option value="auto">auto : meilleur coût du moment</option>'+[...Array(n).keys()].map(i=>'<option value="'+i+'">graine '+i+'</option>').join('');
+      sel.value=keep}
+    let pick=null;
+    if(sel.value==='auto'){let bt=1e18;for(const i in got){const s=got[i],t=s.cost?s.cost.total:1e17;if(t<bt||pick===null){bt=t;pick=s}}}
+    else pick=got[sel.value]||null;
+    if(pick){state=pick;panel()}
+  }catch(e){$('msg').textContent='connexion perdue (calcul terminé ?)'}
+  setTimeout(poll,350);
+}
+function frame(){draw();requestAnimationFrame(frame)}
+
+(async function init(){
+  try{S=await jget('static.json')}catch(e){$('msg').textContent='static.json introuvable : lancer optimize avec --live';return}
+  comps=S.components;for(const c of comps){byRef[c.ref]=c;c.padMap={};for(const p of c.pads)c.padMap[p.n]=p}
+  netsList=Object.entries(S.nets).map(([name,pins])=>({name,pins}));
+  buildSlots();
+  $('legend').innerHTML=S.blocks.map(b=>'<div><span class="sw" style="background:'+S.block_colors[b]+'"></span>'+(S.block_labels[b]||b)+'</div>').join('')+
+    '<div><span class="sw" style="background-image:repeating-linear-gradient(45deg,#000 0 1px,#fff 1px 4px)"></span>fixe (verrouillé)</div>'+
+    '<div><span class="sw" style="background:#1a8f4d"></span>découplage dans la limite</div>'+
+    '<div><span class="sw" style="background:#d62728"></span>découplage hors limite</div>';
+  poll();frame();
+})();
+})();
+</script>
+</body>
+</html>

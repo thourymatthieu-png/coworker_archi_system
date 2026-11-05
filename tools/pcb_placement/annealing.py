@@ -10,6 +10,8 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 
 from .cost import CostBreakdown, CostWeights, is_better, total_cost
+from . import live
+from .incremental import IncrementalCost
 from .model import ALLOWED_ROTATIONS, Board, Net
 
 
@@ -46,7 +48,8 @@ def run_annealing(
         return total_cost(board, refs, nets, weights)
 
     rng = random.Random(config.seed)
-    current_cost = total_cost(board, refs, nets, weights)
+    ic = IncrementalCost(board, refs, nets, weights)   # cout incremental (cf. incremental.py)
+    current_cost = ic.current
     best_cost = current_cost
     best_snapshot = board.clone_positions()
 
@@ -60,6 +63,7 @@ def run_annealing(
         move_kind = rng.random()
         r = rng.choice(movable)
         comp = board.components[r]
+        moved = [r]
         if move_kind < config.move_translate_prob:
             std = max(t * config.translate_step_frac, 0.05)
             comp.x += rng.gauss(0, std)
@@ -69,26 +73,31 @@ def run_annealing(
         else:
             other = rng.choice(movable)
             if other != r:
+                moved.append(other)
                 oc = board.components[other]
                 comp.x, oc.x = oc.x, comp.x
                 comp.y, oc.y = oc.y, comp.y
                 comp.rotation, oc.rotation = oc.rotation, comp.rotation
 
-        new_cost = total_cost(board, refs, nets, weights)
+        new_cost = ic.propose(moved)
         delta = new_cost.total - current_cost.total
         accept = delta < 0
         if not accept and t > 1e-9:
             accept = rng.random() < math.exp(-delta / max(t, 1e-9))
 
         if accept:
+            ic.commit()
             current_cost = new_cost
             if is_better(new_cost, best_cost):
                 best_cost = new_cost
                 best_snapshot = board.clone_positions()
         else:
+            ic.discard()
             for ref, (x, y, rot) in before.items():
                 c = board.components[ref]
                 c.x, c.y, c.rotation = x, y, rot
+        live.tick(board, current_cost)
 
     board.restore_positions(best_snapshot)
-    return best_cost
+    # cout final exact (la grille de congestion incrementale differe legerement de la reference)
+    return total_cost(board, refs, nets, weights)

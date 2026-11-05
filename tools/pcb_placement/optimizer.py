@@ -11,10 +11,11 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
+from . import live
 from .config import EngineConfig
 from .cost import CostBreakdown, is_better
 from .hierarchy import optimize_board
-from .io_data import apply_constraints, load_board
+from .io_data import apply_constraints, apply_decoupling, load_board
 from .model import Board
 
 
@@ -37,7 +38,11 @@ def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progre
     board = load_board(extract_json_path)
     if constraints_path:
         apply_constraints(board, constraints_path)
+    if config.decoupling_file:
+        apply_decoupling(board, config.decoupling_file, config.decoupling_max_mm)
     weights = config.to_cost_weights()
+    if config.live_dir:
+        live.configure(config.live_dir, seed)
 
     best_cost: Optional[CostBreakdown] = None
     best_snapshot = None
@@ -47,6 +52,7 @@ def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progre
 
     for cycle in range(config.stopping.max_cycles):
         hcfg = config.to_hierarchy_config(seed=seed * 10_000 + cycle)
+        live.set_cycle(cycle)
         cost = optimize_board(board, weights, hcfg)
         history.append(CycleResult(cycle=cycle, cost=cost))
         print(f"{progress_prefix}graine {seed} cycle {cycle}: cout={cost.total:.1f} "
@@ -74,6 +80,8 @@ def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progre
         best_snapshot = board.clone_positions()
 
     board.restore_positions(best_snapshot)
+    live.set_phase("termine (meilleur cycle)", block=None, show_cost=True)
+    live.tick(board, best_cost, force=True, finished=True)
     return StrategyResult(seed=seed, best_cost=best_cost, positions=best_snapshot, history=history, elapsed_s=time.time() - t_start)
 
 
