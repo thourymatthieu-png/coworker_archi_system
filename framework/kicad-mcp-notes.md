@@ -342,6 +342,15 @@ prévient. À lancer à la fin d'une session de saisie, sur chaque feuille :
 ERC toujours à 0). Faire de même avec `kicad-cli sym upgrade lib_<projet>.kicad_sym` si la bibliothèque est
 signalée.
 
+## Image sur une page dédiée (synoptique) : `tools/kicad_add_image_sheet.py`
+
+KiCad n'importe que des images bitmap dans un schéma (pas de SVG). Méthode utilisée pour le synoptique de Boomrone :
+
+1. Dessin en SVG par un script du dépôt (`tools/gen_synoptique_boomrone.py <sortie.svg>`), qui reprend les repères réels du schéma (J1, U1 à U7, Q1 à Q8...).
+2. Rendu en PNG sans outil à installer : Edge en mode sans fenêtre, `msedge.exe --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=<L>,<H> --screenshot=<sortie.png> file:///<chemin>.svg` (fond blanc ; relire l'image avant import).
+3. `python tools/kicad_add_image_sheet.py <dossier_projet_kicad> <image.png>` crée la feuille A3 (image à 300 ppp, mise à l'échelle et centrée), ajoute sa case à la racine (premier emplacement libre) ; puis `python tools/kicad_build_root.py <dossier>` (qui conserve la case, la feuille n'ayant aucune broche). Idempotent : relancé, il ne remplace que l'image.
+4. Vérifier : `kicad-cli sch erc` (0 violation) et un export PDF de la hiérarchie (page 12 pour Boomrone). Le bloc `(image ...)` se met au format `(at cx cy) (scale s) (uuid) (data "base64"...)` ; l'échelle 1 = taille native à 300 ppp.
+
 ## Reprendre le travail sur un autre poste (checklist)
 
 1. Cloner le dépôt ; installer KiCad 10, Node.js 18+, Python 3.11+ ; refaire la section « Mise en route sur une nouvelle machine » plus haut (serveur `mixelpixx/KiCAD-MCP-Server`, venv basé sur le Python de KiCad, déclaration dans `~/.claude.json`, redémarrer la session).
