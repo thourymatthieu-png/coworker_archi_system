@@ -1,0 +1,1634 @@
+{
+  "avertissement": "Fichier d'essai des outils de placement, NON decisionnel. Aucune decision (DEC), aucun doute (DOU) ecrit dans les documents de methode ; les doutes sont dans cas_douteux ci-dessous. Contour 50 x 50 mm = essai, PAS une cote officielle (DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » reste ouvert). Toute valeur en mm ou en degres porte sa source ; sans source = null. Certitudes : « sur » (lu dans une fiche locale ou une decision), « a verifier » (source indirecte, fiche absente ou ecart), « hypothese » (proposition sans source). Fiches absentes : PMW3901MB et PB-03F. Chaque reference de composant existe dans la netlist de proj_boomrone.kicad_sch (controle par script).",
+  "pcb_lu": {
+    "source": "proj_boomrone.kicad_pcb (lecture seule par pcbnew, modifie le 2026-11-05 20:36) ; Edge.Cuts = rectangle (0,0)-(50,50) mm, essai, PAS une cote officielle (DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie », ouvert).",
+    "attention": "placement_constraints.json (modifie le 2026-11-05 19:59) et extract.json donnent d'AUTRES positions (M1..M4 a 45 deg dans les coins, U7 a (-8 ; 29,25) rotation 0 entierement hors carte). Les regles ci-dessous s'appuient sur le fichier .kicad_pcb, plus recent ; voir cas_douteux C-01.",
+    "pieces_verrouillees": {
+      "M1": {
+        "x_mm": 2.5,
+        "y_mm": 47.4,
+        "rot_deg": 90,
+        "pastilles": [
+          [
+            2.5,
+            47.4
+          ],
+          [
+            2.5,
+            41.6
+          ]
+        ],
+        "coin": "sud-ouest"
+      },
+      "M2": {
+        "x_mm": 2.5,
+        "y_mm": 8.4,
+        "rot_deg": 90,
+        "pastilles": [
+          [
+            2.5,
+            8.4
+          ],
+          [
+            2.5,
+            2.6
+          ]
+        ],
+        "coin": "nord-ouest"
+      },
+      "M3": {
+        "x_mm": 47.5,
+        "y_mm": 8.4,
+        "rot_deg": 90,
+        "pastilles": [
+          [
+            47.5,
+            8.4
+          ],
+          [
+            47.5,
+            2.6
+          ]
+        ],
+        "coin": "nord-est"
+      },
+      "M4": {
+        "x_mm": 47.5,
+        "y_mm": 47.4,
+        "rot_deg": 90,
+        "pastilles": [
+          [
+            47.5,
+            47.4
+          ],
+          [
+            47.5,
+            41.6
+          ]
+        ],
+        "coin": "sud-est"
+      },
+      "J1": {
+        "x_mm": 25.0,
+        "y_mm": 43.5,
+        "rot_deg": 0,
+        "emprise_mm": [
+          18.225,
+          37.25,
+          31.775,
+          51.775
+        ],
+        "debord_sud_mm": 1.775,
+        "pastilles": {
+          "1_GND": [
+            22.5,
+            38.5
+          ],
+          "2_VBATM": [
+            27.5,
+            38.5
+          ],
+          "3_calage": [
+            30.5,
+            48.5
+          ],
+          "4_calage": [
+            19.5,
+            48.5
+          ]
+        }
+      },
+      "U7": {
+        "x_mm": 9.0,
+        "y_mm": 25.0,
+        "rot_deg": 90,
+        "emprise_mm": [
+          -7.375,
+          16.25,
+          17.5,
+          33.75
+        ],
+        "plots_x_mm": "de 1,25 a 16,75 (rangees y=17 et y=33)",
+        "antenne_x_mm": "de -7,25 a 0,39 (empreinte lib_boomrone, silk y_local -16,25 a -8,61)",
+        "note": "le corps du module est SUR la carte (plots a x>=1,25) ; seule l'antenne deborde a l'ouest (7,25 mm sur 7,64)."
+      }
+    },
+    "autres_pieces": "toutes les autres empreintes sont a x>100 mm (non placees) dans le .kicad_pcb lu."
+  },
+  "zones": [
+    {
+      "id": "Z-01",
+      "type": "fonctionnelle",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "sous_bloc": "voie moteur 1 (M1, sud-ouest dans le .kicad_pcb)",
+      "composants": [
+        "M1",
+        "Q1",
+        "D1",
+        "C2",
+        "R3",
+        "R7"
+      ],
+      "zone_proposee": "grappe compacte au pied des pastilles M1 : Q1 et D1 contre les pastilles de M1 (nets Net-(D1-A) et VBATM), C2 en parallele sur les pastilles du moteur, R3 et R7 contre la grille de Q1 ; reste dans le coin de M1.",
+      "cote_mm": null,
+      "raison": "courant de crete 9,5 A sur la ligne moteurs (commutation a 24 kHz) : boucle moteur-MOSFET-masse et boucle de roue libre courtes ; pistes de puissance de 4 mm minimum.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB » (pistes de puissance 4 mm, polygones VBATM/masse, au moins 8 vias) ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (9,5 A en crete pendant 2 s).",
+      "certitude": "a verifier",
+      "note": "aucune distance en mm dans ces documents ; l'appartenance a la voie est certaine (netlist), la compacite est une proposition."
+    },
+    {
+      "id": "Z-02",
+      "type": "fonctionnelle",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "sous_bloc": "voie moteur 2 (M2, nord-ouest)",
+      "composants": [
+        "M2",
+        "Q2",
+        "D2",
+        "C3",
+        "R4",
+        "R8"
+      ],
+      "zone_proposee": "idem Z-01 au pied de M2.",
+      "cote_mm": null,
+      "raison": "idem Z-01.",
+      "source": "idem Z-01.",
+      "certitude": "a verifier",
+      "note": "voie identique a la voie 1 (voir symetrie_ou_repetition)."
+    },
+    {
+      "id": "Z-03",
+      "type": "fonctionnelle",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "sous_bloc": "voie moteur 3 (M3, nord-est)",
+      "composants": [
+        "M3",
+        "Q3",
+        "D3",
+        "C4",
+        "R5",
+        "R29"
+      ],
+      "zone_proposee": "idem Z-01 au pied de M3.",
+      "cote_mm": null,
+      "raison": "idem Z-01.",
+      "source": "idem Z-01.",
+      "certitude": "a verifier",
+      "note": "R29 est le rappel de grille de Q3 (numerotation hors suite, sans effet)."
+    },
+    {
+      "id": "Z-04",
+      "type": "fonctionnelle",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "sous_bloc": "voie moteur 4 (M4, sud-est)",
+      "composants": [
+        "M4",
+        "Q4",
+        "D4",
+        "C5",
+        "R6",
+        "R30"
+      ],
+      "zone_proposee": "idem Z-01 au pied de M4.",
+      "cote_mm": null,
+      "raison": "idem Z-01.",
+      "source": "idem Z-01.",
+      "certitude": "a verifier",
+      "note": "R30 est le rappel de grille de Q4."
+    },
+    {
+      "id": "Z-05",
+      "type": "fonctionnelle",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "sous_bloc": "reservoir de la ligne moteurs",
+      "composants": [
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "zone_proposee": "sur le tronc VBATM entre J1 et les quatre voies (cote J1 ou au centre de gravite des quatre voies : choix a trancher, cas_douteux C-09).",
+      "cote_mm": null,
+      "raison": "fournir les impulsions de courant de 24 kHz des quatre MOSFET ; 2 x 22 uF + 100 nF sur la ligne moteurs.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » (« 2 x 22 µF (1206, 25 V) + 100 nF sur la ligne moteurs »). Aucune consigne de position dans les documents.",
+      "certitude": "hypothese",
+      "note": "emplacement non source."
+    },
+    {
+      "id": "Z-06",
+      "type": "fonctionnelle",
+      "bloc": "DES-008 « Batterie, connecteur XT30 et entrée de la carte »",
+      "sous_bloc": "entree batterie et branche VBATL",
+      "composants": [
+        "J1",
+        "FB1",
+        "C8"
+      ],
+      "zone_proposee": "FB1 et C8 en tete de la branche VBATL, derriere le tronc VBATM issu de J1 (le courant des moteurs ne doit jamais traverser FB1) ; C8 entre FB1 et U5.",
+      "cote_mm": null,
+      "raison": "la ferrite n'est nominale que pour 1 A ; reservoir de 22 uF de l'entree du LDO.",
+      "source": "DES-008 « Batterie, connecteur XT30 et entrée de la carte » (« VBATL à travers la ferrite ... le courant des moteurs ne traverse jamais la ferrite », DEC-269 « Matériel : ferrite hors du chemin des moteurs, mesure en amont, rappels des sélections de bus » cité par le DES) ; DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » (22 uF complete le 1 uF C10).",
+      "certitude": "a verifier",
+      "note": "C8 pres de FB1 ou de U5 VIN : question deja posee dans decouplage.json (Q5)."
+    },
+    {
+      "id": "Z-07",
+      "type": "fonctionnelle",
+      "bloc": "DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »",
+      "sous_bloc": "regulateur 3,0 V",
+      "composants": [
+        "U5",
+        "C10",
+        "C11"
+      ],
+      "zone_proposee": "U5 avec C10 (VIN, broche 3) et C11 (VOUT, broche 2) ; garder du cuivre libre autour de U5 (dissipation 0,16 W a 4,2 V et 130 mA, SOT-23 sans cuivre : 40 a 55 K d'echauffement).",
+      "cote_mm": null,
+      "raison": "stabilite et echauffement du LDO.",
+      "source": "MCP1700.pdf (DS20001826C) p.4 (resistance thermique), p.10 (condensateur de sortie « as close to the LDO VOUT pin as is practical ») ; DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » (« acceptable avec un petit polygone de cuivre ») ; ARC-009 « Alimentation de la logique et mesure de la tension ».",
+      "certitude": "a verifier",
+      "note": "surface de cuivre non chiffree dans les sources."
+    },
+    {
+      "id": "Z-08",
+      "type": "fonctionnelle",
+      "bloc": "DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »",
+      "sous_bloc": "pont de mesure de la batterie",
+      "composants": [
+        "R20",
+        "R21",
+        "C12"
+      ],
+      "zone_proposee": "C12 contre la broche PA0 (U1 broche 8) ; R20 et R21 groupes avec C12, loin des noeuds de commutation (voir isolement I-01).",
+      "cote_mm": null,
+      "raison": "noeud a haute impedance (source 60 kohm) : le 100 nF a la masse est obligatoire car il fournit la charge de l'echantillonneur de l'ADC.",
+      "source": "DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » (impedance de source 60 kohm, C12 obligatoire) ; DOU-142 « Fuite d'entrée de l'ADC et marge de ±50 mV de la mesure de tension » ; DS_stm32g431c6.pdf (DS12589 Rev 6) p.132 (« decoupling capacitor on VDDA ... as close as possible to the chip », valable pour VDDA ; rien de tel pour PA0).",
+      "certitude": "a verifier",
+      "note": "aucune distance en mm ; proximite de C12 a PA0 deja signalee dans decouplage.json (Q9)."
+    },
+    {
+      "id": "Z-09",
+      "type": "fonctionnelle",
+      "bloc": "DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option »",
+      "sous_bloc": "microcontrôleur et SWD",
+      "composants": [
+        "U1",
+        "C27",
+        "C28",
+        "C29",
+        "C30",
+        "C31",
+        "C32",
+        "C33",
+        "C34",
+        "C35",
+        "R31",
+        "J2"
+      ],
+      "zone_proposee": "U1 en position centrale du cote haut, a distance courte des quatre blocs qu'il pilote (U2 SPI1, U4 SPI2, U3 I2C1, U7 UART, 4 grilles moteurs). Decouplage : voir decouplage.json.",
+      "cote_mm": null,
+      "raison": "reduire la longueur des liaisons SPI1 (5,3 MHz), SPI2, I2C1 (400 kHz) et des 4 PWM.",
+      "source": "DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option » ; DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (decouplage). Aucune source ne fixe la position de U1.",
+      "certitude": "hypothese",
+      "note": "proposition fondee sur la connectivite seulement."
+    },
+    {
+      "id": "Z-10",
+      "type": "fonctionnelle",
+      "bloc": "DES-003 « Raccordement de la centrale inertielle LSM6DSO »",
+      "sous_bloc": "centrale inertielle (face basse)",
+      "composants": [
+        "U2",
+        "C19",
+        "C20",
+        "C21",
+        "R24"
+      ],
+      "zone_proposee": "U2 au centre de la face basse ; C19, C20 (100 nF) sur les broches VDD 8 et VDDIO 5, C21 (10 uF) a proximite ; plan de masse non coupe sous U2.",
+      "cote_mm": null,
+      "raison": "centrale au centre du drone, equidistante des quatre moteurs ; masse continue.",
+      "source": "DES-003 « Raccordement de la centrale inertielle LSM6DSO » (« au centre de la face basse », « Pas de plan de masse coupé sous le composant ») ; ARC-003 « Centrale inertielle » ; DS_lsm6dso.pdf (DS12140 Rev 3) p.34 (100 nF « as near as possible to the supply pin »).",
+      "certitude": "sur",
+      "note": "le « centre » n'est pas defini en mm (centre geometrique de la carte, ou des quatre moteurs, ou du cadre : question C-02)."
+    },
+    {
+      "id": "Z-11",
+      "type": "fonctionnelle",
+      "bloc": "DES-004 « Raccordement du capteur de hauteur VL53L1X »",
+      "sous_bloc": "capteur de hauteur (face basse)",
+      "composants": [
+        "U3",
+        "C22",
+        "C23",
+        "C24",
+        "R25",
+        "R26",
+        "R27",
+        "R28"
+      ],
+      "zone_proposee": "U3 en face basse, fenetre optique dans une zone libre (voir capteurs et zones interdites ZI-02) ; C22 (4,7 uF) et un 100 nF contre AVDDVCSEL/AVSSVCSEL (broches 1 et 2), le second 100 nF sur AVDD (broche 11). Rappels I2C (R25, R26) et GPIO1/XSHUT (R27, R28) : libres (cote U3 ou cote U1).",
+      "cote_mm": null,
+      "raison": "fiche : condensateurs au plus pres des broches VCSEL.",
+      "source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.6 (figure 3 : « as close as possible to VL53L1X ») ; DES-004 « Raccordement du capteur de hauteur VL53L1X » ; ARC-004 « Capteur de hauteur à temps de vol ».",
+      "certitude": "sur",
+      "note": "position des rappels non sourcee."
+    },
+    {
+      "id": "Z-12",
+      "type": "fonctionnelle",
+      "bloc": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »",
+      "sous_bloc": "flux optique et regulateur 2,0 V (face basse pour U4)",
+      "composants": [
+        "U4",
+        "U6",
+        "C13",
+        "C14",
+        "C15",
+        "C16",
+        "C17",
+        "C18",
+        "R22",
+        "R23"
+      ],
+      "zone_proposee": "U4 en face basse, lentille a l'air libre ; U6 et ses condensateurs a cote (C13 entree, C14 sortie) ; C15/C16 sur VDD (broche 2), C17 sur VDDIO (broche 3), C18 sur VREG (broche 4) au plus pres de U4 ; R22, R23 libres.",
+      "cote_mm": null,
+      "raison": "la figure 8 de la fiche PixArt demande les condensateurs de VDD, VDDIO et VREG au plus pres des broches (selon ARC-005 « Capteur de flux optique »).",
+      "source": "ARC-005 « Capteur de flux optique » (« au plus près des broches ») ; DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V ». Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ : valeurs reprises de ARC-005 « Capteur de flux optique » (fiche PixArt v1.00 lue le 2026-10-29) et de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (fiche v1.5, releve du 2026-11-04) ; non verifiable localement, DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches ». Version ANGLAISE a deposer.",
+      "certitude": "a verifier",
+      "note": "valeurs des condensateurs encore en ecart avec la fiche (DOU-205 « PMW3901MB : condensateurs du schéma de référence de la fiche et valeur illisible de R1 », cité dans DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »)."
+    },
+    {
+      "id": "Z-13",
+      "type": "fonctionnelle",
+      "bloc": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »",
+      "sous_bloc": "plots de repli du flux optique",
+      "composants": [
+        "TP1",
+        "TP2",
+        "TP3",
+        "TP4",
+        "TP5",
+        "TP6"
+      ],
+      "zone_proposee": "six plots de 1,5 x 1,5 mm alignes au pas de 2,54 mm sur un bord de carte, relies aux reseaux du flux par des pistes de moins de 5 mm : ce qui impose aussi U4 pres de ce bord.",
+      "cote_mm": {
+        "plot_mm": [
+          1.5,
+          1.5
+        ],
+        "pas_mm": 2.54,
+        "piste_max_mm": 5
+      },
+      "raison": "souder, si besoin, la petite carte achetee de repli par six fils.",
+      "source": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (« Six plots de repli ... en bord de carte, ... pistes de moins de 5 mm ») ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (DEC-250 « Flux optique : corrections des relectures, plots de repli prévus dès la première carte » cité).",
+      "certitude": "a verifier",
+      "note": "le bord et la face ne sont pas indiques ; empreintes TestPoint_Pad_1.5x1.5mm dans le .kicad_pcb ; conflit possible avec le cone du capteur de hauteur si la face basse est choisie (C-06)."
+    },
+    {
+      "id": "Z-14",
+      "type": "fonctionnelle",
+      "bloc": "DES-010 « Circuit du bouton »",
+      "sous_bloc": "bouton",
+      "composants": [
+        "SW1",
+        "R1",
+        "R2",
+        "C1"
+      ],
+      "zone_proposee": "SW1 en face haute, accessible a la main sans retirer d'anneau ; R1, C1 (filtre) et R2 (rappel) pres de PB5 (U1 broche 42).",
+      "cote_mm": null,
+      "raison": "usage : appui de 1 s a 2 s (machine a etats).",
+      "source": "ARC-010 « Bouton » (« face haute, accessible sans retirer d'anneau ») ; DES-010 « Circuit du bouton ».",
+      "certitude": "sur",
+      "note": "l'acces depend de la place de la batterie (C-03)."
+    },
+    {
+      "id": "Z-15",
+      "type": "fonctionnelle",
+      "bloc": "DES-011 « Circuit du voyant RGB et du buzzer »",
+      "sous_bloc": "voyant RGB et buzzer",
+      "composants": [
+        "LED1",
+        "R9",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "Q5",
+        "Q6",
+        "Q7",
+        "BZ1",
+        "Q8",
+        "D5",
+        "R18",
+        "R19"
+      ],
+      "zone_proposee": "LED1 et BZ1 en face haute, sans rien au-dessus ; les trois MOSFET du voyant et leurs resistances groupes pres de LED1 ; Q8, D5 et R18, R19 pres de BZ1.",
+      "cote_mm": null,
+      "raison": "voyant visible de l'exterieur (angle de vue 120 deg), buzzer audible a 1 m.",
+      "source": "ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (face haute : bouton, voyant, buzzer, module BLE) ; SZYY1615RGB.pdf p.4 (viewing angle 2θ1/2 = 120 deg typ. a IF = 20 mA) ; ARC-011 « Voyant RGB et avertisseur sonore ». Fiche du buzzer SMD-9650-3327 absente du dossier : orifice sonore non connu.",
+      "certitude": "a verifier",
+      "note": "regroupement propose, rien dans les documents ne dit que ces pieces doivent etre voisines."
+    },
+    {
+      "id": "Z-16",
+      "type": "fonctionnelle",
+      "bloc": "DES-012 « Raccordement du module Bluetooth PB-03F »",
+      "sous_bloc": "module Bluetooth",
+      "composants": [
+        "U7",
+        "C36",
+        "C37",
+        "TP7",
+        "TP8",
+        "TP9",
+        "TP10"
+      ],
+      "zone_proposee": "U7 sur le bord ouest, antenne en debord ; C36 (10 uF) et C37 (100 nF) sur VDD (broche 8) du cote carte, hors de la zone d'antenne ; plots de repli TP7..TP10 (3,0 V, masse, TX, RX) accessibles.",
+      "cote_mm": null,
+      "raison": "antenne degagee, alimentation du module (crete > 200 mA conseillee par la fiche).",
+      "source": "DES-012 « Raccordement du module Bluetooth PB-03F » ; ARC-012 « Module radio Bluetooth à basse consommation ». Fiche PB-03F ABSENTE de projets/boomrone/Datasheets/ (seules E104-BT02.pdf et E104-BT02_EN.pdf, ancien module) : valeurs reprises de DES-012 « Raccordement du module Bluetooth PB-03F » (fiche « PB-03F Specification V1.0.1 », p.5, 10, 15, 16 selon le DES) ; non verifiable localement. Version ANGLAISE a deposer.",
+      "certitude": "a verifier",
+      "note": ""
+    },
+    {
+      "id": "ZI-01",
+      "type": "interdite",
+      "bloc": "DES-012 « Raccordement du module Bluetooth PB-03F »",
+      "sous_bloc": "antenne du PB-03F",
+      "composants": [
+        "U7"
+      ],
+      "faces": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "zone_proposee": "aucun cuivre, aucun composant, aucune piste, aucune pastille de test dans la zone d'antenne du module (et de part et d'autre, zone vide le long de l'antenne), sur les DEUX faces ; pas de batterie dessous.",
+      "cote_mm": {
+        "antenne_empreinte_mm": "7,64 x 16,0 (silk de l'empreinte lib_boomrone, y_local -16,25 a -8,61)",
+        "marge_autour_mm": null
+      },
+      "raison": "antenne sur le module ; le metal proche la detune.",
+      "source": "ARC-012 « Module radio Bluetooth à basse consommation » (« Antenne en dépassement de bord de carte, sans cuivre ni batterie dessous ») ; DES-012 « Raccordement du module Bluetooth PB-03F » (« antenne en dépassement du bord de carte ou zone vide le long de l'antenne, sans pièce métallique autour », fiche p.16) ; DOU-204 « PB-03F : empreinte de 24 x 16 mm, antenne et masse ». Fiche PB-03F ABSENTE de projets/boomrone/Datasheets/ (seules E104-BT02.pdf et E104-BT02_EN.pdf, ancien module) : valeurs reprises de DES-012 « Raccordement du module Bluetooth PB-03F » (fiche « PB-03F Specification V1.0.1 », p.5, 10, 15, 16 selon le DES) ; non verifiable localement. Version ANGLAISE a deposer.",
+      "certitude": "a verifier",
+      "note": "la marge au-dela de l'empreinte est inconnue : null tant que la fiche anglaise n'est pas deposee."
+    },
+    {
+      "id": "ZI-02",
+      "type": "interdite",
+      "bloc": "DES-004 « Raccordement du capteur de hauteur VL53L1X »",
+      "sous_bloc": "cones d'exclusion du VL53L1X",
+      "composants": [
+        "U3"
+      ],
+      "faces": [
+        "B.Cu (cote sol)"
+      ],
+      "zone_proposee": "sous U3 : deux cones a garder libres de toute piece mecanique : emetteur (EMT) et recepteur (RTN). Projection 2D sur la face basse : disque centre sur chaque ouverture, de rayon r(d) = r0 + d x tan(angle/2), d etant la profondeur sous le plan 'datum A' de la fiche.",
+      "cote_mm": {
+        "EMT": {
+          "angle_deg": 36.5,
+          "diametre_a_datum_A_mm": 0.84,
+          "ouverture_mm": 0.7,
+          "rayon_r0_mm": 0.42
+        },
+        "RTN": {
+          "angle_deg": 39.6,
+          "diametre_a_datum_A_mm": 1.08,
+          "ouverture_mm": 0.85,
+          "rayon_r0_mm": 0.54
+        },
+        "entraxe_ouvertures_mm": 3.0,
+        "hauteur_module_mm": "1,56 +/-0,04 (fig. 18) ; 1,50 repere sur la fig. 19",
+        "calcul_exemple": "piece de 3,08 mm de haut (U4, lentille comprise, selon DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V ») : d = 3,08 - 1,50 = 1,58 mm, rayon RTN = 0,54 + 1,58 x tan(19,8 deg) = 1,11 mm ; rayon EMT = 0,42 + 1,58 x tan(18,25 deg) = 0,94 mm (calcul, hauteur du datum A a verifier)."
+      },
+      "raison": "la fiche demande de garder ces cones libres de toute piece qui gene le fonctionnement.",
+      "source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.23 note 4 et figure 18 (ouvertures Ø0,70 EMT et Ø0,85 RTN, entraxe 3 +/-0,02) ; p.24 figure 19 (EMT exclusion cone 36,50 deg, Ø0,84 at datum A ; RTN exclusion cone 39,60 deg, Ø1,08 at datum A).",
+      "certitude": "sur (valeurs lues sur les figures) ; position exacte du datum A a verifier",
+      "note": "ECART : ARC-004 « Capteur de hauteur à temps de vol », DES-004 « Raccordement du capteur de hauteur VL53L1X » et DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB » parlent d'un cone de 27 deg (champ de vue du recepteur) ; les cones d'exclusion mecaniques de la fiche sont plus larges (36,5 et 39,6 deg)."
+    },
+    {
+      "id": "ZI-03",
+      "type": "interdite",
+      "bloc": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »",
+      "sous_bloc": "degagement optique du PMW3901MB",
+      "composants": [
+        "U4"
+      ],
+      "faces": [
+        "B.Cu (cote sol)"
+      ],
+      "zone_proposee": "cone de vue de 42 deg sous la lentille libre de toute piece ; degagement optique et plan de masse sous la lentille selon le gabarit de la figure 6 de la fiche ; acces a la main pour coller la lentille (colle sans degazage, sans toucher la fenetre).",
+      "cote_mm": {
+        "champ_de_vue_deg": 42,
+        "plage_de_travail_mm": "de 80 a l'infini",
+        "hauteur_boitier_mm": 3.08,
+        "gabarit_fig6_mm": null,
+        "acces_colle_mm": null
+      },
+      "raison": "capteur optique regardant le sol.",
+      "source": "ARC-005 « Capteur de flux optique » (42 deg, 80 mm a l'infini, gabarit figure 6) ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage » ; DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (3,08 mm avec L214-ZSZ). Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ : valeurs reprises de ARC-005 « Capteur de flux optique » (fiche PixArt v1.00 lue le 2026-10-29) et de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (fiche v1.5, releve du 2026-11-04) ; non verifiable localement, DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches ». Version ANGLAISE a deposer.",
+      "certitude": "a verifier",
+      "note": "gabarit et acces a la lentille : null (fiche absente)."
+    },
+    {
+      "id": "ZI-04",
+      "type": "interdite",
+      "bloc": "DES-011 « Circuit du voyant RGB et du buzzer »",
+      "sous_bloc": "voyant RGB",
+      "composants": [
+        "LED1"
+      ],
+      "faces": [
+        "F.Cu"
+      ],
+      "zone_proposee": "demi-espace libre au-dessus de LED1 (angle de vue 120 deg) : ni batterie, ni piece haute devant la LED.",
+      "cote_mm": {
+        "angle_de_vue_deg": 120
+      },
+      "raison": "effets lumineux perceptibles a 1 m.",
+      "source": "SZYY1615RGB.pdf p.4 (viewing angle 120 deg typ.) ; ARC-011 « Voyant RGB et avertisseur sonore ».",
+      "certitude": "a verifier",
+      "note": "hauteur libre non chiffree ; depend de la place de la batterie (C-03)."
+    },
+    {
+      "id": "ZI-05",
+      "type": "interdite",
+      "bloc": "DES-003 « Raccordement de la centrale inertielle LSM6DSO »",
+      "sous_bloc": "masse sous la centrale inertielle",
+      "composants": [
+        "U2"
+      ],
+      "faces": [
+        "B.Cu",
+        "F.Cu"
+      ],
+      "zone_proposee": "pas de decoupe du plan de masse sous U2 ; pas de piece lourde ou de trou de fixation contre U2 (contrainte mecanique qui deplace le zero-g).",
+      "cote_mm": null,
+      "raison": "stress mecanique sur la puce MEMS : le zero-g offset peut varier apres montage sur la carte ou sous contrainte.",
+      "source": "DES-003 « Raccordement de la centrale inertielle LSM6DSO » (masse non coupee) ; DS_lsm6dso.pdf (DS12140 Rev 3) p.15 (« Offset is to some extent a result of stress to the MEMS sensor ... may change after mounting ... or exposing it to extensive mechanical stress »).",
+      "certitude": "a verifier",
+      "note": "aucune distance ; la fiche renvoie a TN0018 pour l'empreinte et la soudure (p.141), non fournie."
+    }
+  ],
+  "isolements": [
+    {
+      "id": "I-01",
+      "groupe_bruyant": {
+        "nom": "commutation des moteurs",
+        "composants": [
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4",
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "C6",
+          "C7",
+          "C9"
+        ],
+        "reseaux": [
+          "Net-(D1-A)",
+          "Net-(D2-A)",
+          "Net-(D3-A)",
+          "Net-(D4-A)",
+          "VBATM"
+        ]
+      },
+      "groupe_sensible": {
+        "nom": "chaine de mesure de la batterie",
+        "composants": [
+          "R20",
+          "R21",
+          "C12",
+          "U1"
+        ],
+        "reseaux": [
+          "VBAT_SENSE"
+        ],
+        "note": "noeud VBAT_SENSE et broche PA0 (U1 broche 8) ; R20 est tire de VBATM, le risque est le couplage sur le noeud milieu"
+      },
+      "distance_min_mm": null,
+      "raison": "PWM 24 kHz avec des fronts de plusieurs ampères d'un cote ; de l'autre un noeud de 60 kohm lu a 12 bits (pas de 1,22 mV sur la batterie, incertitude visee +/-25 mV).",
+      "source": "DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » (pont 100/150 kohm 0,1 %, source 60 kohm, 0,73 mV par pas) ; ARC-009 « Alimentation de la logique et mesure de la tension » (+/-25 mV) ; DOU-142 « Fuite d'entrée de l'ADC et marge de ±50 mV de la mesure de tension » ; DS_stm32g431c6.pdf (DS12589 Rev 6) p.124 note 3 (injection de courant sur les entrees analogiques degrade la precision d'une autre voie). Aucune fiche ne donne de distance.",
+      "certitude": "hypothese",
+      "note": "regle de bonne pratique non chiffree dans les sources ; distance a fixer par l'utilisateur (C-05)."
+    },
+    {
+      "id": "I-02",
+      "groupe_bruyant": {
+        "nom": "commutation des moteurs",
+        "composants": [
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4",
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "C6",
+          "C7",
+          "C9"
+        ]
+      },
+      "groupe_sensible": {
+        "nom": "centrale inertielle",
+        "composants": [
+          "U2",
+          "C19",
+          "C20",
+          "C21",
+          "R24"
+        ],
+        "reseaux": [
+          "IMU_SCK",
+          "IMU_MOSI",
+          "IMU_MISO",
+          "IMU_CS",
+          "IMU_INT1"
+        ]
+      },
+      "distance_min_mm": null,
+      "raison": "couplage electrique sur la liaison SPI1 (5,3 MHz) ; le bruit de vibration mecanique des moteurs n'est pas un probleme de position de MOSFET mais de fixation de la carte.",
+      "source": "ARC-003 « Centrale inertielle » ; DOU-154 « Vibrations des moteurs sur la centrale inertielle posée sur la carte rigide » (vibrations : mousse de fixation, mesure a TI-013 « Boucle de contrôle sur potence »). Aucune fiche ne donne de distance.",
+      "certitude": "hypothese",
+      "note": "la position centrale de U2 (Z-10) l'eloigne deja des quatre coins moteurs."
+    },
+    {
+      "id": "I-03",
+      "groupe_bruyant": {
+        "nom": "commutation des moteurs et leurs fils",
+        "composants": [
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4",
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "C6",
+          "C7",
+          "C9"
+        ]
+      },
+      "groupe_sensible": {
+        "nom": "antenne du PB-03F",
+        "composants": [
+          "U7"
+        ],
+        "note": "zone d'antenne ZI-01"
+      },
+      "distance_min_mm": null,
+      "raison": "PWM 24 kHz et fronts rapides pres d'une antenne 2,4 GHz ; les fils des moteurs partent des pastilles M1 et M2 situees sur le meme bord ouest que l'antenne (dans le .kicad_pcb lu : M2 a y=2,6 a 8,4 ; M1 a y=41,6 a 47,4 ; antenne a y=16,25 a 33,75).",
+      "source": "ARC-012 « Module radio Bluetooth à basse consommation » ; DES-012 « Raccordement du module Bluetooth PB-03F » ; DOU-204 « PB-03F : empreinte de 24 x 16 mm, antenne et masse ». Fiche PB-03F ABSENTE de projets/boomrone/Datasheets/ (seules E104-BT02.pdf et E104-BT02_EN.pdf, ancien module) : valeurs reprises de DES-012 « Raccordement du module Bluetooth PB-03F » (fiche « PB-03F Specification V1.0.1 », p.5, 10, 15, 16 selon le DES) ; non verifiable localement. Version ANGLAISE a deposer.",
+      "certitude": "hypothese",
+      "note": "aucune source ne chiffre la distance ni ne dit que la commutation perturbe le module ; question C-05."
+    },
+    {
+      "id": "I-04",
+      "groupe_bruyant": {
+        "nom": "echauffement du LDO 3,0 V et des MOSFET moteurs",
+        "composants": [
+          "U5",
+          "Q1",
+          "Q2",
+          "Q3",
+          "Q4"
+        ],
+        "note": "U5 : 0,16 W a 4,2 V/130 mA ; Q1..Q4 : 0,14 a 0,41 W chacun a 2,4 A"
+      },
+      "groupe_sensible": {
+        "nom": "puce du flux optique (0 a 60 deg C selon la fiche v1.5)",
+        "composants": [
+          "U4"
+        ]
+      },
+      "distance_min_mm": null,
+      "raison": "la puce de flux fonctionne a 0..60 deg C ; DOU-166 « PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille » demande de fixer au routage la distance entre le regulateur et la puce, le cuivre et le comportement si la qualite du flux chute.",
+      "source": "DOU-166 « PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille » (« Distance entre le régulateur et la puce ... à fixer au routage ») ; DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (0 a 60 deg C, DEC-289 « Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1 ») ; DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » (0,16 W) ; DES-007 « Circuit de puissance des moteurs » ; AO3400A.pdf (Alpha & Omega) p.1 (RthJA 100 typ. / 125 max K/W sur 1 in2 cuivre 2 oz). Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ : valeurs reprises de ARC-005 « Capteur de flux optique » (fiche PixArt v1.00 lue le 2026-10-29) et de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (fiche v1.5, releve du 2026-11-04) ; non verifiable localement, DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches ». Version ANGLAISE a deposer.",
+      "certitude": "a verifier",
+      "note": "valeur de distance : null ; la fiche de la puce n'est pas disponible."
+    },
+    {
+      "id": "I-05",
+      "groupe_bruyant": {
+        "nom": "bloc voyant/buzzer (buzzer magnetique 2,7 kHz, 30 mA)",
+        "composants": [
+          "BZ1",
+          "Q8",
+          "D5"
+        ]
+      },
+      "groupe_sensible": {
+        "nom": "centrale inertielle (gyroscope MEMS)",
+        "composants": [
+          "U2"
+        ]
+      },
+      "distance_min_mm": null,
+      "raison": "vibration mecanique et acoustique du buzzer sur le gyroscope, a verifier ; ARC-011 « Voyant RGB et avertisseur sonore » : en vol les moteurs tournent et le buzzer est muet (« lumiere seule »), mais l'IMU sert aussi a l'immobilite au demarrage.",
+      "source": "ARC-011 « Voyant RGB et avertisseur sonore » ; ARC-003 « Centrale inertielle ». Aucune fiche (fiche du buzzer absente du dossier) ne donne de sensibilite ou de distance.",
+      "certitude": "hypothese",
+      "note": "regle SANS source, proposee pour memoire ; a ecarter si l'utilisateur ne veut pas de contrainte non sourcee (C-08)."
+    },
+    {
+      "id": "I-06",
+      "groupe_bruyant": {
+        "nom": "effort mecanique sur le connecteur XT30 (branchement a la main)",
+        "composants": [
+          "J1"
+        ]
+      },
+      "groupe_sensible": {
+        "nom": "centrale inertielle (zero-g sensible au stress de carte)",
+        "composants": [
+          "U2"
+        ]
+      },
+      "distance_min_mm": null,
+      "raison": "la flexion de la carte a la connexion de la batterie peut deplacer le zero-g ; le connecteur est en bord de carte et la centrale au centre.",
+      "source": "DS_lsm6dso.pdf (DS12140 Rev 3) p.15 (stress) ; XT30PW-M30.pdf (Amass) p.3 (« Do not use the connector under external force or stress ... do not use it as part of the enclosure or as a structural component ») ; ARC-008 « Batterie et connecteur débranchable ».",
+      "certitude": "a verifier",
+      "note": "reglage deja satisfait si U2 est au centre et J1 au bord ; pas de distance en mm."
+    }
+  ],
+  "capteurs": [
+    {
+      "id": "S-01",
+      "composant": "U3",
+      "nom": "VL53L1X (VL53L1CXV0FY/1, LGA-12)",
+      "bloc": "DES-004 « Raccordement du capteur de hauteur VL53L1X »",
+      "face": "B.Cu (face basse, regarde le sol)",
+      "face_source": "ARC-004 « Capteur de hauteur à temps de vol » ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage »",
+      "champ_de_vue_recepteur_deg": {
+        "valeur": "15 a 27 (diagonal), 27 en pleine ouverture",
+        "source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.4 tableau 2 (« Receiver FoV (diagonal FoV): programmable from 15 to 27 degrees »)"
+      },
+      "cones_exclusion": {
+        "EMT_deg": 36.5,
+        "RTN_deg": 39.6,
+        "source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.24 figure 19",
+        "ecart": "plus larges que le cone de 27 deg de ARC-004 « Capteur de hauteur à temps de vol »"
+      },
+      "zone_libre": "voir ZI-02 : sous le module, aucune piece mecanique dans les deux cones ; fenetre propre (flux sans lavage selon ARC-004 « Capteur de hauteur à temps de vol »).",
+      "orientation": {
+        "valeur": null,
+        "note": "aucune contrainte d'orientation dans la fiche ; le module est a ouvertures alignees sur son grand axe (entraxe 3,00 mm, fig. 18) : l'axe n'a pas d'effet optique connu. Lecture du centre optique : registre (p.12 : Xo, Yo +/-2 SPAD)."
+      },
+      "hauteur_de_montage": {
+        "valeur_mm": 20,
+        "source": "ARC-004 « Capteur de hauteur à temps de vol » ; DES-004 « Raccordement du capteur de hauteur VL53L1X » (capteur a 20 mm du plan de contact ; mesure fiable des 40 mm)"
+      },
+      "lentille": "pas de lentille ajoutee : optique integree au module (fiche p.12 : « includes a lens ») ; pas de verre de protection prevu dans ARC-004 « Capteur de hauteur à temps de vol ».",
+      "dimensions_module_mm": {
+        "valeur": "4,90 +/-0,05 x 2,50 +/-0,05 x 1,56 +/-0,04 (fig. 18) ; tableau 2 p.4 dit 4,4 x 2,5 x 1,56",
+        "note": "contradiction interne de la fiche sur la longueur (4,4 ou 4,9) ; l'empreinte du projet est a confronter a la fig. 18 / 19."
+      },
+      "alimentation_proximite": "voir decouplage.json (C22, C23, C24).",
+      "certitude": "sur (fiche locale lue)"
+    },
+    {
+      "id": "S-02",
+      "composant": "U4",
+      "nom": "PMW3901MB-TXQT (COB-28 6 x 6 mm)",
+      "bloc": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »",
+      "face": "B.Cu (face basse, regarde le sol)",
+      "face_source": "ARC-005 « Capteur de flux optique » ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage »",
+      "champ_de_vue_deg": {
+        "valeur": 42,
+        "source": "ARC-005 « Capteur de flux optique » (« angle de vue de 42° », fiche PixArt v1.00)"
+      },
+      "zone_libre": "voir ZI-03 ; plage de travail de 80 mm a l'infini ; colle de la lentille a la main : acces et tenue de la colle non chiffres.",
+      "orientation": {
+        "valeur": null,
+        "note": "orientation du repere du capteur (axes X/Y du flux) par rapport aux axes du drone : fiche absente ; a relever pour la matrice logicielle de la vitesse horizontale."
+      },
+      "hauteur_de_montage": {
+        "valeur_mm": 20,
+        "source": "ARC-004 « Capteur de hauteur à temps de vol » pour le ToF (meme face) ; pour U4 : DOU-166 « PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille » (hauteur avec lentille a dessiner) ; DOU-139 « Capteurs de hauteur et de flux : hauteur de montage et sols sans texture »",
+        "note": "valeur reprise du ToF par defaut : non confirmee pour U4"
+      },
+      "lentille": {
+        "reference": "L214-ZSZ (DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », fiche v1.5) ou LN03-ZSZ (ARC-005 « Capteur de flux optique ») : a confirmer",
+        "hauteur_boitier_mm": 3.08,
+        "pose": "collee a la main sur la puce posee par JLCPCB",
+        "source": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » ; DOU-164 « PMW3901MB : lentille, assemblage par JLCPCB et refusion de la puce »"
+      },
+      "plot_central": "plot de masse central soudé à la masse (obligatoire selon ARC-005 « Capteur de flux optique ») ; plan de masse sous la lentille selon figure 6 (valeur null).",
+      "temperature": {
+        "plage_deg_C": "0 a 60 (fiche v1.5, DEC-289 « Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1 ») ; 0 a 40 selon la premiere lecture",
+        "source": "DOU-166 « PMW3901MB : plage de température de 0 à 40 °C et hauteur de montage avec la lentille »"
+      },
+      "certitude": "a verifier (fiche locale absente : DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »)",
+      "fiche": "ABSENTE : demander la version anglaise"
+    },
+    {
+      "id": "S-03",
+      "composant": "U2",
+      "nom": "LSM6DSO (LSM6DSOTR, LGA-14 2,5 x 3 mm)",
+      "bloc": "DES-003 « Raccordement de la centrale inertielle LSM6DSO »",
+      "face": "B.Cu (face basse, au centre)",
+      "face_source": "ARC-003 « Centrale inertielle » ; DES-003 « Raccordement de la centrale inertielle LSM6DSO »",
+      "champ_de_vue": "sans objet (capteur inertiel) ; pas de cone optique.",
+      "zone_libre": "voir ZI-05 : masse non coupee sous le composant ; eviter les contraintes mecaniques (p.15 de la fiche).",
+      "orientation": {
+        "valeur": "puce face vers le bas ; matrice de passage = rotation de 180 deg autour de x par defaut (constante config_fixed.h) ; l'angle dans le plan de la carte n'est PAS fixe par les documents",
+        "source": "DES-003 « Raccordement de la centrale inertielle LSM6DSO » ; DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs »",
+        "question": "C-04"
+      },
+      "hauteur_de_montage": {
+        "valeur_mm": null,
+        "note": "sans objet pour la fonction ; le placement au centre (Z-10) rend le bras de levier nul par rapport au centre du drone si la carte est centree sur le cadre."
+      },
+      "position": "centre de la face basse (ARC-003 « Centrale inertielle », DES-003 « Raccordement de la centrale inertielle LSM6DSO »)",
+      "certitude": "sur"
+    }
+  ],
+  "bord_de_carte": [
+    {
+      "id": "B-01",
+      "composant": "J1",
+      "contrainte": "bord sud, en debord (corps du connecteur vers l'exterieur)",
+      "etat": "verrouille dans le .kicad_pcb a (25 ; 43,5), rotation 0, emprise y jusqu'a 51,775 : debord de 1,775 mm au sud",
+      "raison": "XT30 au bord du drone, accessible entre deux anneaux, debranchement a la main en moins de 10 s.",
+      "source": "ARC-008 « Batterie et connecteur débranchable » (« Connecteur au bord du drone, accessible malgré les anneaux ») ; DES-006 « Cadre, anneaux, moteurs et hélices » (« XT30 au bord accessible entre deux anneaux ») ; XT30PW-M30.pdf (Amass) p.3 (empreinte : 13,95 x 9,00 mm, pastilles de puissance a 5,00 mm, calage a 11,00 mm, hauteur de soudure 3,0 mm selon DES-008 « Batterie, connecteur XT30 et entrée de la carte »).",
+      "certitude": "sur pour le bord ; a verifier pour le sens d'accouplement (face de connexion vers le sud deduite de l'empreinte)",
+      "face": "corps cote haut, queues de soudure sortant de 3,0 mm cote bas (voir ZI-02 : eloigner les queues des cones du VL53L1X)"
+    },
+    {
+      "id": "B-02",
+      "composant": "U7",
+      "contrainte": "antenne en debord du bord ouest ; corps du module sur la carte",
+      "etat": "verrouille dans le .kicad_pcb a (9 ; 25), rotation 90 : emprise x de -7,375 a 17,5 ; plots de x=1,25 a 16,75 ; antenne de x=-7,25 a 0,39",
+      "raison": "antenne exposee, sans cuivre ni batterie dessous ; de l'autre cote le module est 24 x 16 mm.",
+      "source": "ARC-012 « Module radio Bluetooth à basse consommation » ; DES-012 « Raccordement du module Bluetooth PB-03F » ; DOU-204 « PB-03F : empreinte de 24 x 16 mm, antenne et masse ». Fiche PB-03F ABSENTE de projets/boomrone/Datasheets/ (seules E104-BT02.pdf et E104-BT02_EN.pdf, ancien module) : valeurs reprises de DES-012 « Raccordement du module Bluetooth PB-03F » (fiche « PB-03F Specification V1.0.1 », p.5, 10, 15, 16 selon le DES) ; non verifiable localement. Version ANGLAISE a deposer.",
+      "certitude": "a verifier",
+      "face": "F.Cu (face haute, ARC-013 « Carte électronique JLCPCB, câblage et assemblage »)",
+      "contradiction": "DOU-204 « PB-03F : empreinte de 24 x 16 mm, antenne et masse » (complement du 2026-11-05) dit que le module ENTIER deborde du bord ouest ; le .kicad_pcb lu place le corps du module sur la carte (C-01)."
+    },
+    {
+      "id": "B-03",
+      "composant": "M1",
+      "contrainte": "coin sud-ouest, pastilles traversantes pour deux fils de moteur",
+      "etat": "verrouille (2,5 ; 47,4) rot 90",
+      "raison": "moteurs aux quatre coins du cadre, fils soudes a la main.",
+      "source": "ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (« 8 fils des moteurs sur plots ») ; DES-006 « Cadre, anneaux, moteurs et hélices » ; DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » (complement du 2026-11-05 : coins imposes pour l'essai, pas une cote officielle).",
+      "certitude": "a verifier",
+      "face": "traversant"
+    },
+    {
+      "id": "B-04",
+      "composant": "M2",
+      "contrainte": "coin nord-ouest",
+      "etat": "verrouille (2,5 ; 8,4) rot 90",
+      "raison": "idem B-03",
+      "source": "idem B-03",
+      "certitude": "a verifier",
+      "face": "traversant"
+    },
+    {
+      "id": "B-05",
+      "composant": "M3",
+      "contrainte": "coin nord-est",
+      "etat": "verrouille (47,5 ; 8,4) rot 90",
+      "raison": "idem B-03",
+      "source": "idem B-03",
+      "certitude": "a verifier",
+      "face": "traversant"
+    },
+    {
+      "id": "B-06",
+      "composant": "M4",
+      "contrainte": "coin sud-est",
+      "etat": "verrouille (47,5 ; 47,4) rot 90",
+      "raison": "idem B-03",
+      "source": "idem B-03",
+      "certitude": "a verifier",
+      "face": "traversant"
+    },
+    {
+      "id": "B-07",
+      "composant": "SW1",
+      "contrainte": "face haute, accessible a la main ; pas de bord impose",
+      "raison": "bouton accessible sans retirer d'anneau.",
+      "source": "ARC-010 « Bouton » ; DES-010 « Circuit du bouton »",
+      "certitude": "sur pour la face, bord non exige",
+      "face": "F.Cu",
+      "note": "accessibilite dependante de la batterie (C-03)."
+    },
+    {
+      "id": "B-08",
+      "composant": "LED1",
+      "contrainte": "face haute, visible sans obstacle ; pas de bord impose",
+      "raison": "voyant RGB, angle de vue 120 deg.",
+      "source": "SZYY1615RGB.pdf p.4 ; ARC-011 « Voyant RGB et avertisseur sonore »",
+      "certitude": "a verifier",
+      "face": "F.Cu"
+    },
+    {
+      "id": "B-09",
+      "composant": "BZ1",
+      "contrainte": "face haute ; orifice sonore a degager (non connu)",
+      "raison": "buzzer audible a 1 m (60 dB estime).",
+      "source": "ARC-011 « Voyant RGB et avertisseur sonore » ; fiche du buzzer absente du dossier.",
+      "certitude": "a verifier",
+      "face": "F.Cu"
+    },
+    {
+      "id": "B-10",
+      "composant": "J2",
+      "contrainte": "bord de carte souhaitable pour brancher la sonde ST-LINK (en-tete 1 x 5, 12,7 mm de long) ; AUCUNE source n'impose le bord",
+      "raison": "en-tete soude a la main, hélices démontées pour la programmation.",
+      "source": "ARC-002 « Microcontrôleur et programmation par liaison SWD » ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (« En-tête SWD ... soudé à la main »). Position non imposee par les documents.",
+      "certitude": "hypothese",
+      "face": "F.Cu (corps), queues cote bas"
+    },
+    {
+      "id": "B-11",
+      "composant": [
+        "TP1",
+        "TP2",
+        "TP3",
+        "TP4",
+        "TP5",
+        "TP6"
+      ],
+      "contrainte": "alignes sur un bord de carte (plots de repli du flux)",
+      "raison": "souder une carte de repli par six fils.",
+      "source": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (« en bord de carte ») ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage »",
+      "certitude": "a verifier",
+      "face": "non precise",
+      "note": "voir Z-13."
+    },
+    {
+      "id": "B-12",
+      "composant": [
+        "TP7",
+        "TP8",
+        "TP9",
+        "TP10"
+      ],
+      "contrainte": "plots de repli du module BLE (3,0 V, masse, TX, RX) ; bord non precise",
+      "raison": "souder un autre module BLE serie si le PB-03F echoue.",
+      "source": "DES-012 « Raccordement du module Bluetooth PB-03F » (« Quatre pastilles de repli ») ; DOU-202 « PB-03F : circuit d'application, programmation du module et plots de test »",
+      "certitude": "hypothese",
+      "face": "non precise"
+    }
+  ],
+  "boucles_de_courant": [
+    {
+      "id": "L-01",
+      "nom": "voie moteur 1 : boucle de commutation",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M1",
+        "Q1",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "trajet": "VBATM (C6, C7, C9) -> pastille 1 de M1 -> pastille 2 de M1 = drain de Q1 -> source de Q1 -> GND -> C6/C7/C9",
+      "raison": "courant de crete 9,5 A (ligne) a 24 kHz : surface de boucle minimale, retour de masse direct sous la piste.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »",
+      "certitude": "sur pour la composition (netlist), a verifier pour le critere de longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-02",
+      "nom": "voie moteur 1 : boucle de roue libre",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M1",
+        "D1",
+        "C2"
+      ],
+      "trajet": "pastille 2 de M1 -> anode de D1 -> cathode de D1 -> pastille 1 de M1 (VBATM) ; C2 en parallele sur les pastilles",
+      "raison": "la diode SS34 reprend le courant du moteur quand Q1 se bloque : diode et C2 contre les pastilles du moteur.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "sur pour la composition, a verifier pour la longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-03",
+      "nom": "voie moteur 1 : boucle de grille",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "R3",
+        "R7",
+        "Q1"
+      ],
+      "trajet": "U1.30 (PA8, M1_G) -> R3 -> grille de Q1 ; R7 de la grille a la masse ; retour par la source de Q1",
+      "raison": "le rappel de 100 kohm doit decharger la grille au reset en moins de 1 ms ; 47 ohm x 630 pF = 30 ns.",
+      "source": "DES-007 « Circuit de puissance des moteurs » (calculs de controle) ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "a verifier",
+      "distance_max_mm": null,
+      "note": "piste de commande entre U1 et la voie : longueur non critique d'apres le DES, rappel et resistance pres de la grille par bonne pratique non sourcee."
+    },
+    {
+      "id": "L-04",
+      "nom": "voie moteur 2 : boucle de commutation",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M2",
+        "Q2",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "trajet": "VBATM (C6, C7, C9) -> pastille 1 de M2 -> pastille 2 de M2 = drain de Q2 -> source de Q2 -> GND -> C6/C7/C9",
+      "raison": "courant de crete 9,5 A (ligne) a 24 kHz : surface de boucle minimale, retour de masse direct sous la piste.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »",
+      "certitude": "sur pour la composition (netlist), a verifier pour le critere de longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-05",
+      "nom": "voie moteur 2 : boucle de roue libre",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M2",
+        "D2",
+        "C3"
+      ],
+      "trajet": "pastille 2 de M2 -> anode de D2 -> cathode de D2 -> pastille 1 de M2 (VBATM) ; C3 en parallele sur les pastilles",
+      "raison": "la diode SS34 reprend le courant du moteur quand Q2 se bloque : diode et C3 contre les pastilles du moteur.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "sur pour la composition, a verifier pour la longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-06",
+      "nom": "voie moteur 2 : boucle de grille",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "R4",
+        "R8",
+        "Q2"
+      ],
+      "trajet": "U1.31 (PA9, M2_G) -> R4 -> grille de Q2 ; R8 de la grille a la masse ; retour par la source de Q2",
+      "raison": "le rappel de 100 kohm doit decharger la grille au reset en moins de 1 ms ; 47 ohm x 630 pF = 30 ns.",
+      "source": "DES-007 « Circuit de puissance des moteurs » (calculs de controle) ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "a verifier",
+      "distance_max_mm": null,
+      "note": "piste de commande entre U1 et la voie : longueur non critique d'apres le DES, rappel et resistance pres de la grille par bonne pratique non sourcee."
+    },
+    {
+      "id": "L-07",
+      "nom": "voie moteur 3 : boucle de commutation",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M3",
+        "Q3",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "trajet": "VBATM (C6, C7, C9) -> pastille 1 de M3 -> pastille 2 de M3 = drain de Q3 -> source de Q3 -> GND -> C6/C7/C9",
+      "raison": "courant de crete 9,5 A (ligne) a 24 kHz : surface de boucle minimale, retour de masse direct sous la piste.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »",
+      "certitude": "sur pour la composition (netlist), a verifier pour le critere de longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-08",
+      "nom": "voie moteur 3 : boucle de roue libre",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M3",
+        "D3",
+        "C4"
+      ],
+      "trajet": "pastille 2 de M3 -> anode de D3 -> cathode de D3 -> pastille 1 de M3 (VBATM) ; C4 en parallele sur les pastilles",
+      "raison": "la diode SS34 reprend le courant du moteur quand Q3 se bloque : diode et C4 contre les pastilles du moteur.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "sur pour la composition, a verifier pour la longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-09",
+      "nom": "voie moteur 3 : boucle de grille",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "R5",
+        "R29",
+        "Q3"
+      ],
+      "trajet": "U1.32 (PA10, M3_G) -> R5 -> grille de Q3 ; R29 de la grille a la masse ; retour par la source de Q3",
+      "raison": "le rappel de 100 kohm doit decharger la grille au reset en moins de 1 ms ; 47 ohm x 630 pF = 30 ns.",
+      "source": "DES-007 « Circuit de puissance des moteurs » (calculs de controle) ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "a verifier",
+      "distance_max_mm": null,
+      "note": "piste de commande entre U1 et la voie : longueur non critique d'apres le DES, rappel et resistance pres de la grille par bonne pratique non sourcee."
+    },
+    {
+      "id": "L-10",
+      "nom": "voie moteur 4 : boucle de commutation",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M4",
+        "Q4",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "trajet": "VBATM (C6, C7, C9) -> pastille 1 de M4 -> pastille 2 de M4 = drain de Q4 -> source de Q4 -> GND -> C6/C7/C9",
+      "raison": "courant de crete 9,5 A (ligne) a 24 kHz : surface de boucle minimale, retour de masse direct sous la piste.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut » ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »",
+      "certitude": "sur pour la composition (netlist), a verifier pour le critere de longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-11",
+      "nom": "voie moteur 4 : boucle de roue libre",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "M4",
+        "D4",
+        "C5"
+      ],
+      "trajet": "pastille 2 de M4 -> anode de D4 -> cathode de D4 -> pastille 1 de M4 (VBATM) ; C5 en parallele sur les pastilles",
+      "raison": "la diode SS34 reprend le courant du moteur quand Q4 se bloque : diode et C5 contre les pastilles du moteur.",
+      "source": "DES-007 « Circuit de puissance des moteurs » ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "sur pour la composition, a verifier pour la longueur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-12",
+      "nom": "voie moteur 4 : boucle de grille",
+      "bloc": "DES-007 « Circuit de puissance des moteurs »",
+      "composants": [
+        "R6",
+        "R30",
+        "Q4"
+      ],
+      "trajet": "U1.33 (PA11, M4_G) -> R6 -> grille de Q4 ; R30 de la grille a la masse ; retour par la source de Q4",
+      "raison": "le rappel de 100 kohm doit decharger la grille au reset en moins de 1 ms ; 47 ohm x 630 pF = 30 ns.",
+      "source": "DES-007 « Circuit de puissance des moteurs » (calculs de controle) ; ARC-007 « Étage de puissance des moteurs coupés par défaut »",
+      "certitude": "a verifier",
+      "distance_max_mm": null,
+      "note": "piste de commande entre U1 et la voie : longueur non critique d'apres le DES, rappel et resistance pres de la grille par bonne pratique non sourcee."
+    },
+    {
+      "id": "L-13",
+      "nom": "entree batterie",
+      "bloc": "DES-008 « Batterie, connecteur XT30 et entrée de la carte »",
+      "composants": [
+        "J1",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "trajet": "J1 pastille 2 (VBATM) -> polygone VBATM -> C6, C7, C9 -> GND -> J1 pastille 1",
+      "raison": "tout le courant de la batterie (jusqu'a 9,5 A en crete) ; polygones pleins, 8 vias au moins.",
+      "source": "DES-008 « Batterie, connecteur XT30 et entrée de la carte » ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (alimentation de puissance : polygones pleins, pistes de 4 mm minimum, au moins 8 vias de 0,3 mm)",
+      "certitude": "a verifier",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-14",
+      "nom": "regulateur 3,0 V",
+      "bloc": "DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »",
+      "composants": [
+        "U5",
+        "C10",
+        "C11"
+      ],
+      "trajet": "C10 (VBATL-GND) -> U5 VIN/GND ; U5 VOUT -> C11 (+3V0-GND) ; retour commun a la broche 1 de U5",
+      "raison": "stabilite du LDO MCP1700 : condensateurs d'entree et de sortie au plus pres.",
+      "source": "MCP1700.pdf (DS20001826C) p.10 (« as close to the LDO VOUT pin as is practical ») ; DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »",
+      "certitude": "sur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-15",
+      "nom": "regulateur 2,0 V du flux",
+      "bloc": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »",
+      "composants": [
+        "U6",
+        "C13",
+        "C14"
+      ],
+      "trajet": "C13 (+3V0-GND) -> U6 VIN ; U6 VOUT -> C14 (+2V0-GND) ; masse commune",
+      "raison": "stabilite du XC6206 (CIN 1 uF, CL 1 uF a faible ESR selon la fiche citee par le DES).",
+      "source": "DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (fiche Torex ETR0305_004b p.1) ; XC6206.pdf p.1 (CIN, CL)",
+      "certitude": "a verifier",
+      "distance_max_mm": null,
+      "note": "C14 sur U6 VOUT ou sur U4 VDD : question Q4 de decouplage.json."
+    },
+    {
+      "id": "L-16",
+      "nom": "alimentation de la VCSEL du VL53L1X",
+      "bloc": "DES-004 « Raccordement du capteur de hauteur VL53L1X »",
+      "composants": [
+        "U3",
+        "C22",
+        "C23"
+      ],
+      "trajet": "C22 (4,7 uF) et un 100 nF entre AVDDVCSEL (broche 1) et AVSSVCSEL (broche 2)",
+      "raison": "impulsions de courant du laser.",
+      "source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.6 figure 3 (« as close as possible to VL53L1X »)",
+      "certitude": "sur",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-17",
+      "nom": "alimentation du module BLE",
+      "bloc": "DES-012 « Raccordement du module Bluetooth PB-03F »",
+      "composants": [
+        "U7",
+        "C36",
+        "C37"
+      ],
+      "trajet": "C36 (10 uF) et C37 (100 nF) entre VDD (broche 8) et GND (broche 15)",
+      "raison": "source de plus de 200 mA en crete conseillee.",
+      "source": "DES-012 « Raccordement du module Bluetooth PB-03F » (fiche PB-03F p.5, 6, 15, 16). Fiche PB-03F ABSENTE de projets/boomrone/Datasheets/ (seules E104-BT02.pdf et E104-BT02_EN.pdf, ancien module) : valeurs reprises de DES-012 « Raccordement du module Bluetooth PB-03F » (fiche « PB-03F Specification V1.0.1 », p.5, 10, 15, 16 selon le DES) ; non verifiable localement. Version ANGLAISE a deposer.",
+      "certitude": "a verifier",
+      "distance_max_mm": null
+    },
+    {
+      "id": "L-18",
+      "nom": "buzzer et roue libre",
+      "bloc": "DES-011 « Circuit du voyant RGB et du buzzer »",
+      "composants": [
+        "BZ1",
+        "D5",
+        "Q8"
+      ],
+      "trajet": "VBATM -> BZ1 -> drain de Q8 -> GND ; D5 (cathode VBATM, anode drain) en parallele sur BZ1",
+      "raison": "charge inductive de 30 mA.",
+      "source": "DES-011 « Circuit du voyant RGB et du buzzer » ; ARC-011 « Voyant RGB et avertisseur sonore » (diode « par précaution »)",
+      "certitude": "a verifier",
+      "distance_max_mm": null,
+      "note": "faible courant : priorite basse."
+    },
+    {
+      "id": "L-19",
+      "nom": "decouplage du microcontroleur",
+      "bloc": "DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option »",
+      "composants": [
+        "U1",
+        "C27",
+        "C28",
+        "C29",
+        "C30",
+        "C32",
+        "C33",
+        "C34",
+        "C35"
+      ],
+      "trajet": "voir decouplage.json (appariements C27..C35)",
+      "raison": "regle de decouplage deja fournie.",
+      "source": "decouplage.json ; DS_stm32g431c6.pdf (DS12589 Rev 6) p.68, p.132",
+      "certitude": "a verifier",
+      "distance_max_mm": null
+    }
+  ],
+  "symetrie_ou_repetition": {
+    "voies_moteur": {
+      "identiques": true,
+      "preuve": "netlist kicad-cli : meme motif par voie (M, Q AO3400A, D SS34, C 100 nF aux bornes du moteur, R 47 ohm de grille, R 100 kohm de rappel) ; source DES-007 « Circuit de puissance des moteurs » (« circuit d'une voie, identique pour les quatre moteurs »).",
+      "table": [
+        {
+          "voie": 1,
+          "moteur": "M1",
+          "mosfet": "Q1",
+          "diode": "D1",
+          "condensateur": "C2",
+          "r_grille": "R3",
+          "r_rappel": "R7",
+          "broche_U1": "30 (PA8)",
+          "net_grille": "M1_G"
+        },
+        {
+          "voie": 2,
+          "moteur": "M2",
+          "mosfet": "Q2",
+          "diode": "D2",
+          "condensateur": "C3",
+          "r_grille": "R4",
+          "r_rappel": "R8",
+          "broche_U1": "31 (PA9)",
+          "net_grille": "M2_G"
+        },
+        {
+          "voie": 3,
+          "moteur": "M3",
+          "mosfet": "Q3",
+          "diode": "D3",
+          "condensateur": "C4",
+          "r_grille": "R5",
+          "r_rappel": "R29",
+          "broche_U1": "32 (PA10)",
+          "net_grille": "M3_G"
+        },
+        {
+          "voie": 4,
+          "moteur": "M4",
+          "mosfet": "Q4",
+          "diode": "D4",
+          "condensateur": "C5",
+          "r_grille": "R6",
+          "r_rappel": "R30",
+          "broche_U1": "33 (PA11)",
+          "net_grille": "M4_G"
+        }
+      ],
+      "differences": [
+        "TP11 (M1_D, point de test sur le drain) n'existe que pour la voie 1",
+        "R29 et R30 hors suite de numerotation (cosmetique)",
+        "sens de rotation : moteurs 1 et 3 horaires, 2 et 4 antihoraires (DES-006 « Cadre, anneaux, moteurs et hélices ») : hélice de pas different, meme circuit ; polarite des pastilles identique d'apres le .kicad_pcb"
+      ],
+      "commun_aux_voies": [
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "consequence_placement": "un motif unique peut etre replique aux quatre coins par rotation de 0/90/180/270 deg (le moteur de placement ne fait que des multiples de 90 deg) ; le sens de lecture suit la position du moteur (pastille 1 = VBATM, pastille 2 = drain pour toutes les voies).",
+      "attention": "l'affectation M1..M4 -> coin differe entre placement_constraints.json et le .kicad_pcb (C-01)."
+    },
+    "autres_repetitions": [
+      {
+        "nom": "voyant RGB : trois voies R/V/B",
+        "composants": [
+          [
+            "Q5",
+            "R9",
+            "R12",
+            "R15"
+          ],
+          [
+            "Q6",
+            "R10",
+            "R13",
+            "R16"
+          ],
+          [
+            "Q7",
+            "R11",
+            "R14",
+            "R17"
+          ]
+        ],
+        "source": "DES-011 « Circuit du voyant RGB et du buzzer »",
+        "note": "meme circuit ; R15 = 120 ohm, R16 = R17 = 68 ohm (valeurs differentes)"
+      },
+      {
+        "nom": "100 nF du microcontroleur (4)",
+        "composants": [
+          "C27",
+          "C32",
+          "C33",
+          "C34"
+        ],
+        "source": "decouplage.json",
+        "note": "interchangeables sur VDD 24/36/48 et VREF+ 20 (une seule nappe +3V0 dans le schema)"
+      },
+      {
+        "nom": "1 uF de VDDA / VREF+",
+        "composants": [
+          "C30",
+          "C35"
+        ],
+        "source": "decouplage.json",
+        "note": "interchangeables"
+      },
+      {
+        "nom": "100 nF de l'IMU (2)",
+        "composants": [
+          "C19",
+          "C20"
+        ],
+        "source": "DES-003 « Raccordement de la centrale inertielle LSM6DSO »",
+        "note": "VDD 8 / VDDIO 5, interchangeables"
+      },
+      {
+        "nom": "100 nF du VL53L1X (2)",
+        "composants": [
+          "C23",
+          "C24"
+        ],
+        "source": "DES-004 « Raccordement du capteur de hauteur VL53L1X »",
+        "note": "dont un sur AVDD (ajout du projet)"
+      },
+      {
+        "nom": "rappels I2C",
+        "composants": [
+          "R25",
+          "R26"
+        ],
+        "source": "DES-004 « Raccordement du capteur de hauteur VL53L1X »",
+        "note": "SCL/SDA : meme valeur, nets distincts"
+      },
+      {
+        "nom": "rappels 10 kohm de CS et GPIO",
+        "composants": [
+          "R22",
+          "R24",
+          "R27",
+          "R28"
+        ],
+        "source": "DES-003 « Raccordement de la centrale inertielle LSM6DSO » ; DES-004 « Raccordement du capteur de hauteur VL53L1X » ; DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V »",
+        "note": "meme valeur, nets distincts"
+      }
+    ]
+  },
+  "faces": [
+    {
+      "composants": [
+        "U2",
+        "U3",
+        "U4"
+      ],
+      "face": "B.Cu (basse)",
+      "source": "ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (« face basse : centrale inertielle, capteur de hauteur et puce du flux optique (regardant le sol) ») ; DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »",
+      "certitude": "sur"
+    },
+    {
+      "composants": [
+        "SW1",
+        "LED1",
+        "BZ1",
+        "U7"
+      ],
+      "face": "F.Cu (haute)",
+      "source": "ARC-013 « Carte électronique JLCPCB, câblage et assemblage » (face haute : bouton, voyant, buzzer, module BLE)",
+      "certitude": "sur"
+    },
+    {
+      "composants": [
+        "U1",
+        "U5",
+        "U6",
+        "J1",
+        "J2"
+      ],
+      "face": "F.Cu (haute)",
+      "source": "DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB » (« face haute, bouton, voyant, buzzer, module Bluetooth, microcontrôleur, régulateurs, XT30 et en-tête SWD ») ; note : U6 est un regulateur ; ARC-013 « Carte électronique JLCPCB, câblage et assemblage » ne le dit pas explicitement",
+      "certitude": "a verifier"
+    },
+    {
+      "composants": [
+        "C19",
+        "C20",
+        "C21",
+        "C22",
+        "C23",
+        "C24",
+        "C15",
+        "C16",
+        "C17",
+        "C18"
+      ],
+      "face": "meme face que leur circuit integre, ou en face opposee juste en dessous",
+      "source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (« as close as possible to, or below, the appropriate pins on the underside of the PCB ») pour le microcontroleur ; par analogie pour les autres, NON source",
+      "certitude": "hypothese"
+    }
+  ],
+  "reseaux_critiques": [
+    {
+      "reseau": "I2C_SCL, I2C_SDA",
+      "composants": [
+        "U1",
+        "U3",
+        "R25",
+        "R26"
+      ],
+      "contrainte": "capacite du bus < 75 pF pour tenir 300 ns a 400 kHz avec 4,7 kohm (30 pF estimes)",
+      "longueur_max_mm": null,
+      "source": "DES-004 « Raccordement du capteur de hauteur VL53L1X » (calcul 0,8473 x 4,7 kohm x C) ; capacite lineique de la piste non donnee",
+      "certitude": "a verifier"
+    },
+    {
+      "reseau": "IMU_SCK, IMU_MOSI, IMU_MISO, IMU_CS",
+      "composants": [
+        "U1",
+        "U2"
+      ],
+      "contrainte": "SPI1 a 5,3125 MHz (limite 10 MHz de la fiche)",
+      "longueur_max_mm": null,
+      "source": "DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option » ; DS_lsm6dso.pdf (DS12140 Rev 3) p.12 (10 MHz)",
+      "certitude": "a verifier"
+    },
+    {
+      "reseau": "FLX_SCK, FLX_MOSI, FLX_MISO, FLX_CS",
+      "composants": [
+        "U1",
+        "U4"
+      ],
+      "contrainte": "SPI2 a 1,328 MHz (limite 2 MHz de la fiche citee)",
+      "longueur_max_mm": null,
+      "source": "DES-002 « Microcontrôleur : brochage, horloges, découplage et octets d'option » ; DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V ». Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ : valeurs reprises de ARC-005 « Capteur de flux optique » (fiche PixArt v1.00 lue le 2026-10-29) et de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » (fiche v1.5, releve du 2026-11-04) ; non verifiable localement, DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches ». Version ANGLAISE a deposer.",
+      "certitude": "a verifier"
+    },
+    {
+      "reseau": "VBAT_SENSE",
+      "composants": [
+        "R20",
+        "R21",
+        "C12",
+        "U1"
+      ],
+      "contrainte": "noeud a 60 kohm : piste courte, eloignee de la commutation",
+      "longueur_max_mm": null,
+      "source": "DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »",
+      "certitude": "a verifier"
+    }
+  ],
+  "cas_douteux": [
+    {
+      "id": "C-01",
+      "question": "Quelle geometrie des pieces verrouillees est la bonne ? placement_constraints.json (19:59) : M1..M4 a 45 deg dans les coins (M1 nord-ouest, M2 nord-est, M3 sud-est, M4 sud-ouest) et U7 a (-8 ; 29,25) rotation 0, entierement hors carte ; proj_boomrone.kicad_pcb (20:36) : M a x=2,5/47,5 et y=8,4/47,4 rotation 90 (M1 sud-ouest, M2 nord-ouest, M3 nord-est, M4 sud-est), U7 a (9 ; 25) rotation 90 avec le corps du module SUR la carte. DOU-204 « PB-03F : empreinte de 24 x 16 mm, antenne et masse » dit que le module entier deborde.",
+      "impact": "zones, isolements I-03, zone d'antenne ZI-01, affectation des voies aux coins"
+    },
+    {
+      "id": "C-02",
+      "question": "Ou est le « centre de la face basse » (DES-003 « Raccordement de la centrale inertielle LSM6DSO ») : centre de la carte, des quatre moteurs, ou du cadre ? Aucune cote en mm.",
+      "impact": "Z-10"
+    },
+    {
+      "id": "C-03",
+      "question": "Ou est la batterie (au-dessus, au-dessous, a cote de la carte) ? DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » : ni la place de la batterie ni son recouvrement ne sont dessines. Cela conditionne l'acces au bouton SW1, la visibilite de LED1, le son de BZ1 et l'antenne « sans batterie dessous ».",
+      "impact": "ZI-01, ZI-04, Z-14, Z-15"
+    },
+    {
+      "id": "C-04",
+      "question": "Orientation de U2 dans le plan : la matrice de passage au repere du drone est une constante de config_fixed.h ; faut-il imposer une rotation (0/90/180/270 deg) a U2, ou laisser le moteur choisir puis mettre a jour la matrice ? (DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs »)",
+      "impact": "S-03"
+    },
+    {
+      "id": "C-05",
+      "question": "Les fiches ne donnent aucune distance minimale pour les isolements I-01 a I-06. Voulez-vous fixer des valeurs d'essai (comme les 5 mm du decouplage, a marquer « valeur d'essai ») ou laisser le moteur sans contrainte d'eloignement ? Souhaitez-vous que les fils des moteurs M1/M2, qui partent du meme bord ouest que l'antenne, soient examines ?",
+      "impact": "I-01..I-06"
+    },
+    {
+      "id": "C-06",
+      "question": "Face et bord des plots de repli TP1..TP6 (flux) et TP7..TP10 (module BLE) : sur quel bord ? sur la face haute ou basse ? (la face basse porte les cones des capteurs)",
+      "impact": "Z-13, B-11, B-12"
+    },
+    {
+      "id": "C-07",
+      "question": "Fiches anglaises a deposer : PMW3901MB (champ de vue, figure 6 de degagement optique, hauteur avec lentille, acces pour la colle, orientation des axes, perturbation optique par le laser de 940 nm du VL53L1X) et PB-03F (dimensions de la zone d'antenne, cuivre sous le module, p.15-16).",
+      "impact": "ZI-01, ZI-03, S-02, I-03"
+    },
+    {
+      "id": "C-08",
+      "question": "Acceptez-vous des regles « hypothese » sans source de fiche (I-05 buzzer/IMU, Z-05 position des condensateurs de la ligne moteurs, Z-09 position du microcontroleur, B-10 SWD en bord) ou seulement les regles sourcees ?",
+      "impact": "I-05, Z-05, Z-09, B-10"
+    },
+    {
+      "id": "C-09",
+      "question": "C6, C7, C9 (reservoir VBATM) : pres de J1 (tete de ligne) ou au centre de gravite des quatre voies ?",
+      "impact": "Z-05, L-13"
+    },
+    {
+      "id": "C-10",
+      "question": "Les cones d'exclusion du VL53L1X sont de 36,5 deg (emetteur) et 39,6 deg (recepteur) dans la fiche (p.24), contre 27 deg dans ARC-004 « Capteur de hauteur à temps de vol », DES-004 « Raccordement du capteur de hauteur VL53L1X » et DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB » : voulez-vous que l'architecte rouvre ce point (non decide ici, aucune decision ecrite) ? Les pieces sous la carte plus hautes que le module (1,5 mm) a proximite de U3 sont a controler : queues de soudure du XT30 (3,0 mm), en-tete SWD, pastilles traversantes M1..M4, puce U4 avec lentille (3,08 mm).",
+      "impact": "ZI-02"
+    },
+    {
+      "id": "C-11",
+      "question": "Le moteur de placement n'a pas de notion de face (limite connue) : voulez-vous que ces regles soient traitees en 2D avec « face » en simple etiquette, ou attendre une gestion des deux faces ? Les composants de U2, U3, U4 sont sur la face basse, le reste sur la face haute.",
+      "impact": "faces, ZI-02, ZI-03, ZI-05"
+    },
+    {
+      "id": "C-12",
+      "question": "Pas des pastilles moteur : l'empreinte Motor_8520_2Pads_P5.8mm a un pas de 5,8 mm alors que le complement de DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » parle de 5,08 mm (~8 x 3 mm). Lequel est a retenir ?",
+      "impact": "B-03..B-06"
+    },
+    {
+      "id": "C-13",
+      "question": "Le corps du XT30 : la face d'accouplement est-elle bien celle du bord sud (deduite de l'empreinte : pastilles de puissance au nord, corps au sud) ? A confirmer sur le dessin de la fiche p.3 ou le modele 3D.",
+      "impact": "B-01"
+    }
+  ]
+}
