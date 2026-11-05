@@ -2568,3 +2568,12 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** image en bande basse de la racine (illisible) ; réorganisation des cases de la racine (touche des pages déjà validées).
 **Raison :** demande de l'utilisateur en chat, 2026-11-05 : « une page dédiée Synoptique » ; illustration de conception, pas un schéma de fabrication.
 **Doutes levés :** (aucun)
+
+### DEC-292 — Moteur autonome d'optimisation du placement PCB (hors KiCad)
+**Date :** 2026-11-05
+**Concerne :** DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »
+**Modifie :** nouveau paquet `tools/pcb_placement/` (modèle interne, partitionnement spectral + Kernighan-Lin, placement par forces dirigées, recuit simulé, fonction de coût surface/câblage/congestion/croisements/vias/accessibilité, hiérarchie à 5 niveaux, stratégies parallèles) et ligne de commande `tools/pcb_optimize_placement.py` (extract / optimize / apply) ; script compagnon `tools/kicad_apply_placement.py` (écrit uniquement sur une COPIE du `.kicad_pcb`, jamais l'original). Aucun ARC, REQ ni DES modifié.
+**Décision :** le placement des 107 composants de la carte Boomrone sera préparé par ce moteur (calcul entièrement hors KiCad/MCP, import/export seuls au contact de KiCad) plutôt que par l'outil MCP `suggest_placement` (force-directed seul, sans partitionnement ni recuit simulé, besoin d'une session KiCad active) ou par un ajustement manuel composant par composant. Validé sur l'extraction réelle du schéma Boomrone (instantané pris avant la remise à zéro du `.kicad_pcb` demandée ce même jour, essai mené hors dépôt) : 6 essais (2 stratégies x 3 cycles), 0 recouvrement sur les 6, surface retenue 4871 mm² (1,7x les ~2900 mm² d'origine), ~21,5 min de calcul total. Le `.kicad_pcb` du projet reste vide (remis à zéro plus tôt le même jour) : prochain pas à la main par l'utilisateur dans KiCad (Update PCB from Schematic), puis extract/optimize/apply.
+**Alternatives écartées :** `suggest_placement` (MCP KiCad) seul, pas de partitionnement ni recuit simulé, ne tourne pas hors session KiCad ; ajustement manuel composant par composant (lent, déjà écarté le 2026-11-05 pour ce même PCB, voir `framework/kicad-mcp-notes.md`).
+**Raison :** demande détaillée de l'utilisateur en chat, 2026-11-05 (cahier des charges en 11 points : partitionnement min-cut, placement par forces dirigées, recuit simulé, fonction de coût orientée routage, hiérarchie à 5 niveaux, stratégies parallèles, configuration, visualisation, intégration réelle au projet).
+**Doutes levés :** (aucun)
