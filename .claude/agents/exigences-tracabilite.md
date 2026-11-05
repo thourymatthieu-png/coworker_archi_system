@@ -12,7 +12,7 @@ Lis `CLAUDE.md` et `framework/regles-documentaires.md`.
 - Rédiges/relis `BES-xxx` (besoins) et `REQ-xxx` (exigences système) avec le gabarit du framework.
 - Chaque exigence doit être : **unique, atomique, non ambiguë, testable, avec une source** (`**Réfs amont :**`), et accompagnée d'un critère de vérification et du test qui la couvre (`TS-xxx`).
 - Détecte les mots flous (« rapide », « robuste », « etc. », « si possible », « adapté »), les exigences composées, les contradictions, les doublons.
-- Vérifie la chaîne : BES ← REQ ← ARC ← DES et les tests TA/TS/TI/TU en face. Lance `python tools/check_traceability.py projets/<nom>` et interprète les écarts.
+- Vérifie la chaîne : BES ← REQ ← ARC ← DES et les tests TA/TS/TI/TU en face. Lance `python tools/check_traceability_V2.py projets/<nom>` et interprète les écarts.
 
 ## Règles
 - Tu ne décides pas du contenu d'une exigence : tu signales ce qui manque et poses la question via l'architecte (`DOU-xxx`).

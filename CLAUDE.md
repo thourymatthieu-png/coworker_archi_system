@@ -104,11 +104,12 @@ python tools/kicad_place_fields.py <feuille>.kicad_sch                          
 python tools/kicad_add_items.py <feuille>.kicad_sch spec.json                  # fils, étiquettes hiérarchiques/locales, croix NC, jonctions en une fois
 python tools/kicad_build_root.py <dossier_projet_kicad>                         # page racine : cases, broches de feuille, étiquettes
 python tools/kicad_add_image_sheet.py <dossier_projet_kicad> <image.png>                # page dédiée contenant une image (synoptique) + case à la racine ; image générée par tools/gen_synoptique_boomrone.py
+python tools/pcb_optimize_placement.py optimize <extract.json> --out-dir <dossier> --config tools/pcb_placement/examples/config_parallele.json --decoupling <decouplage.json> --live   # placement PCB hors KiCad (voir tools/pcb_placement/README.md et TODO.md)
 kicad-cli sch erc <racine>.kicad_sch -o rapport.txt                             # ERC de toute la hiérarchie (objectif : 0 violation)
 kicad-cli sch upgrade <feuille>.kicad_sch                                       # format le plus récent (évite l'avertissement à l'ouverture)
 ```
 
-Le serveur MCP KiCad actuel est `mixelpixx/KiCAD-MCP-Server` ; l'ancien serveur (`kicad-eda-mcp`) et ses contournements (`tools/add_kicad_sheet.py`, `tools/fix_kicad_project_uuid.py`) sont obsolètes, gardés pour mémoire. Méthode, pièges et mise en route sur une nouvelle machine : `framework/kicad-mcp-notes.md` — **à relire sur tout nouveau poste** (la déclaration du serveur MCP dans `~/.claude.json` et les environnements Python sont locaux à chaque poste, pas dans ce dépôt).
+Seul **KiCad 10** est utilisé (tout ce qui concerne KiCad 9 est abandonné). Le serveur MCP KiCad actuel est `mixelpixx/KiCAD-MCP-Server` ; l'ancien serveur (`kicad-eda-mcp`) et ses contournements sont abandonnés et supprimés. Méthode, pièges et mise en route sur une nouvelle machine : `framework/kicad-mcp-notes.md` — **à relire sur tout nouveau poste** (la déclaration du serveur MCP dans `~/.claude.json` et les environnements Python sont locaux à chaque poste, pas dans ce dépôt).
 
 ## 10. Préférences de travail de l'utilisateur (à respecter sur tout poste)
 

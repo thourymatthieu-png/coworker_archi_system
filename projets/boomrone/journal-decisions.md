@@ -2577,3 +2577,12 @@ Format (exemple, non analysé) :
 **Alternatives écartées :** `suggest_placement` (MCP KiCad) seul, pas de partitionnement ni recuit simulé, ne tourne pas hors session KiCad ; ajustement manuel composant par composant (lent, déjà écarté le 2026-11-05 pour ce même PCB, voir `framework/kicad-mcp-notes.md`).
 **Raison :** demande détaillée de l'utilisateur en chat, 2026-11-05 (cahier des charges en 11 points : partitionnement min-cut, placement par forces dirigées, recuit simulé, fonction de coût orientée routage, hiérarchie à 5 niveaux, stratégies parallèles, configuration, visualisation, intégration réelle au projet).
 **Doutes levés :** (aucun)
+
+### DEC-293 — Composants EasyEDA : confiance accordée aux empreintes et symboles importés
+**Date :** 2026-11-05
+**Concerne :** DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB », DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-011 « Circuit du voyant RGB et du buzzer », DES-012 « Raccordement du module Bluetooth PB-03F »
+**Modifie :** aucun document ; les empreintes et symboles importés d'EasyEDA dans `lib_boomrone` sont conservés tels quels pour le placement et le routage.
+**Décision :** faire confiance à EasyEDA : empreinte du buzzer (9,0 x 9,0 mm) et symboles du PMW3901MB et du PB-03F non revérifiés avant le routage.
+**Alternatives écartées :** mesurer le buzzer et comparer les brochages broche par broche aux fiches avant le routage.
+**Raison :** instruction de l'utilisateur en chat, 2026-11-05 : « fait confiance a easyEDA ». Risque accepté : une erreur de cote ou de brochage ne serait vue qu'à l'aperçu DFM de JLCPCB ou à la réception de la carte.
+**Doutes levés :** DOU-206 « Buzzer SMD-9650-3327 : empreinte EasyEDA de 9,0 mm contre 9,6 mm de la nomenclature », DOU-207 « Symboles EasyEDA du PMW3901MB et du PB-03F : brochage à comparer aux fiches »

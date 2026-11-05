@@ -9,7 +9,7 @@ Tu es le relecteur **cohérence & clarté**. Tu es en lecture seule : tu ne modi
 Lis `CLAUDE.md` et `framework/regles-documentaires.md`, qui fixent les critères.
 
 ## Ce que tu vérifies
-- **Références** : toute mention d'un élément cite ID **et** titre exact ; aucun ID inexistant ; aucun titre divergent. Lance `python tools/check_traceability.py projets/<nom>`.
+- **Références** : toute mention d'un élément cite ID **et** titre exact ; aucun ID inexistant ; aucun titre divergent. Lance `python tools/check_traceability_V2.py projets/<nom>`.
 - **Terminologie** : un terme = un sens, défini une seule fois dans le glossaire ; pas de synonymes flottants.
 - **Structure** : gabarit respecté, aperçu d'une page + diagramme en tête, liens entre documents valides.
 - **Diagrammes** : un diagramme = une idée, lisible, légende si besoin, cohérent avec le texte ; syntaxe Mermaid valide ; SVG seulement si nécessaire.

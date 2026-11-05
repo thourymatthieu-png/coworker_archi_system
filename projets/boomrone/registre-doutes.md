@@ -1678,18 +1678,18 @@ Complément du 2026-10-28 (3e relecture de porte) : des paramètres de vol aberr
 **Décision liée :** DEC-289 « Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1 »
 
 ### DOU-206 — Buzzer SMD-9650-3327 : empreinte EasyEDA de 9,0 mm contre 9,6 mm de la nomenclature
-**Statut :** Ouvert
+**Statut :** Levé
 **Bloquant :** Non
 **Concerne :** DES-011 « Circuit du voyant RGB et du buzzer », DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB »
 **Question :** l'empreinte importée d'EasyEDA pour C42420997 s'appelle « BUZ-SMD_L9.0-W9.0_SMD-0955-42-27 » (corps de 9,0 x 9,0 mm, deux pastilles de 2,2 x 4,0 mm), alors que « Architecture » — `projets/boomrone/03-architecture.md` donne 9,6 x 9,6 x 5 mm pour le SMD-9650-3327. Les deux ne sont pas la même pièce ou une des données est fausse.
-**Réponse :** (à remplir) comparer avec la fiche du buzzer (absente du dossier des fiches) ou mesurer la pièce ; corriger l'empreinte ou la nomenclature avant le routage.
-**Décision liée :** DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page »
+**Réponse :** Levé le 2026-11-05 sur instruction de l'utilisateur en chat (« fait confiance a easyEDA ») : l'empreinte EasyEDA de 9,0 x 9,0 mm (C42420997) est conservée telle quelle pour le placement et le routage. Reste à reporter l'écart de cote dans la nomenclature de « Architecture » — `projets/boomrone/03-architecture.md` à la prochaine révision.
+**Décision liée :** DEC-293 « Composants EasyEDA : confiance accordée aux empreintes et symboles importés » ; DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page »
 
 ### DOU-207 — Symboles EasyEDA du PMW3901MB et du PB-03F : brochage à comparer aux fiches
-**Statut :** Ouvert
+**Statut :** Levé
 **Bloquant :** Non
 **Concerne :** DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DES-012 « Raccordement du module Bluetooth PB-03F »
 **Question :** les symboles du PMW3901MB (29 broches) et du PB-03F (22 broches) viennent d'EasyEDA ; leurs noms de broches concordent avec le texte de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V » et de DES-012 « Raccordement du module Bluetooth PB-03F », mais ils n'ont pas été comparés broche par broche aux fiches (la fiche du PMW3901MB n'est pas dans `projets/boomrone/Datasheets/`, voir DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »). La polarité des plots du XT30PW sur l'empreinte EasyEDA (« - » à gauche, « + » à droite) reste à confirmer : DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion ».
-**Réponse :** (à remplir) déposer les fiches et vérifier avant la commande de la carte.
-**Décision liée :** DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page »
+**Réponse :** Levé le 2026-11-05 sur instruction de l'utilisateur en chat (« fait confiance a easyEDA ») : les symboles EasyEDA du PMW3901MB et du PB-03F sont retenus sans comparaison broche par broche. Reste ouvert à part : la polarité des plots du XT30PW, suivie par DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion », et la fiche absente, DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches ».
+**Décision liée :** DEC-293 « Composants EasyEDA : confiance accordée aux empreintes et symboles importés » ; DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page »
 

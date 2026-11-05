@@ -88,7 +88,7 @@ SMD-9650-3327, découverts seulement pendant la saisie de ce bloc).
 ## Changement de serveur MCP (2026-11-04) : `kicad` = désormais `mixelpixx/KiCAD-MCP-Server`
 
 Comparaison de quatre serveurs MCP KiCad faite le 2026-11-04 (`framework/kicad-mcp-bug-report.md`) :
-l'ancien serveur `kicad` (paquet PyPI `kicad-eda-mcp`, section ci-dessous) et son concurrent
+l'ancien serveur `kicad` (paquet PyPI `kicad-eda-mcp`, abandonné) et son concurrent
 `kicad-pro` ont tous les deux un défaut de texte en miroir après une rotation à 180° ; deux serveurs
 sans ce défaut ont été trouvés (`mixelpixx/KiCAD-MCP-Server` et `mixelpixx/Konnect`), et
 `mixelpixx/KiCAD-MCP-Server` a été retenu pour rester maintenu en open source (MIT) — `Konnect` vient
@@ -96,8 +96,8 @@ d'un dépôt archivé, son successeur commercial `Konnect-EDA` n'a encore publi�
 
 **Les deux anciens serveurs (`kicad`/`kicad-eda-mcp` et `kicad-pro`/`kicad-mcp-pro`) ont été
 désinstallés** (venvs supprimés, entrées retirées de `.claude.json`). Tout ce qui suit dans ce
-document à propos du comportement d'un « serveur kicad » décrit ce **serveur abandonné**, gardé par
-écrit pour comparaison (section « Opérations cassées du serveur » et « Rotation des composants : …») —
+document à propos du comportement d'un « serveur kicad » décrit ce **serveur abandonné**, gardé pour
+comparaison (section « Rotation des composants : …») —
 pas un bug encore à craindre avec le serveur actuel. Les règles de lisibilité/placement (grille,
 symboles de puissance, vérification par rendu visuel) restent valables quel que soit le serveur.
 
@@ -128,14 +128,6 @@ symboles de puissance, vérification par rendu visuel) restent valables quel que
   ```bash
   C:\Python312\python.exe -m pip --python <venv>\Scripts\python.exe install -r <dossier cloné>/requirements.txt
   ```
-- Piège : **plusieurs versions de KiCad installées** (constaté : 9.0 et 10.0 côte à côte). Le serveur
-  ajoute en tête de `sys.path` les `site-packages` de *toutes* les installations trouvées
-  (`utils/platform_helper.py`, `get_kicad_python_paths`), la plus ancienne finissant en premier : les
-  paquets de KiCad 9 masquent ceux de KiCad 10 et le processus Python meurt au démarrage avec le même
-  message `no OPENSSL_Applink`, côté MCP : « Connection closed » dès le premier appel d'outil. Diagnostic :
-  lancer le serveur à la main (`node dist/index.js`, avec `KICAD_PYTHON`) et lire le log. Corrections
-  possibles : désinstaller l'ancienne version de KiCad, ou limiter la boucle sur `kicad_install_roots()`
-  à la première racine (la plus récente) dans `platform_helper.py` (vérifié sur une copie).
 - Déclarer le serveur dans `.claude.json` (clé `mcpServers.kicad`, machine-locale, pas dans ce
   dépôt) :
   ```json
@@ -148,59 +140,8 @@ symboles de puissance, vérification par rendu visuel) restent valables quel que
   ```
   Puis redémarrer la session Claude Code pour que les outils apparaissent.
 - Pas de variables `KICAD_SYMBOL_DIR`/`KICAD_FOOTPRINT_DIR` à poser pour ce serveur (c'était une
-  nécessité du serveur abandonné, voir ci-dessous) : `pcbnew`, via le Python embarqué, connaît déjà
+  nécessité du serveur abandonné) : `pcbnew`, via le Python embarqué, connaît déjà
   les bibliothèques de l'installation KiCad.
-
-## Ancien serveur « kicad » (`kicad-eda-mcp`, abandonné le 2026-11-04) — pour mémoire
-
-- Installer KiCad (testé avec KiCad 10).
-- Le serveur MCP `kicad` (outil `kicad_schematic_edit`, basé sur `kicad-sch-api`, pur Python) ne lit
-  pas le `sym-lib-table` de KiCad : il cherche seulement `KICAD_SYMBOL_DIR` / `KICAD9_SYMBOL_DIR` /
-  `KICAD8_SYMBOL_DIR` / `KICAD7_SYMBOL_DIR` (pas `KICAD10_SYMBOL_DIR`). Sans ces variables, les
-  symboles de base (`Device:R`, `Device:C`, `Switch:SW_Push`, `power:GND`, etc.) ne sont pas trouvés.
-
-## Opérations cassées du serveur (confirmé, pas de contournement côté serveur)
-
-- `add_label_to_pin` : non implémentée (« 'Schematic' object has no attribute 'add_label_to_pin' »).
-  Contournement : `add_wire_to_pin` (petit fil vers un point proche) puis `add_label` à ce point.
-- `get_net_for_pin` et `connectivity_check` : erreur interne systématique (« unhashable type: 'Net' »).
-  Contournement : s'appuyer sur `erc` / `schematic_quality_gate` / `schematic_connectivity_gate` et
-  une relecture manuelle du texte dans le `.kicad_sch` sauvegardé.
-- `add_rectangle` : échoue systématiquement (« can only concatenate str (not "int") to str »). Pas de
-  cadre de délimitation visuelle possible par ce biais ; se contenter d'un `add_text` en titre de bloc.
-- `add_sheet` : échoue systématiquement (« 'SheetManager' object has no attribute 'add' »). Impossible
-  de créer une feuille hiérarchique avec cette opération. **Contournement : `tools/add_kicad_sheet.py`**
-  (voir plus bas).
-- `add_with_pin_at` et `align_pin` : cassés (« missing positional argument », « unsupported operand
-  type(s) »). Contournement : `add_component` (positionnement par centre) puis calcul des broches par
-  un composant de test jetable (`add_wire_to_pin` vers un point arbitraire, lecture des coordonnées de
-  fil dans le fichier sauvegardé, suppression du composant de test) plutôt que par les offsets publiés
-  des bibliothèques.
-- Rotation des composants (`rotate_component`) : le comportement diffère d'un symbole à l'autre, pas
-  seulement la transposition (x, y) déjà documentée pour `Device:R`/`Switch:SW_Push` (voir plus bas).
-  Constaté sur DES-011 : `Transistor_FET:AO3400A` à 180° ne retourne que le signe de x (pas y) ;
-  `Device:Buzzer` à 180° retourne bien x ET y ; `Diode:SS34` à 90°/270° ne suit pas la même
-  transposition que les autres symboles testés. **Ne jamais présumer le comportement d'une rotation
-  pour un nouveau symbole : toujours vérifier par un composant de test jetable + lecture du fichier
-  avant de figer une disposition.**
-- Sous-feuilles (fichier de sous-feuille créé par `tools/add_kicad_sheet.py`) : chaque `save` via
-  `kicad_schematic_edit` réinitialise `(sheet_instances (path "/" ...))` à la racine vide au lieu de
-  `/<uuid_feuille>`, et chaque nouveau composant est écrit avec `(project "simple_circuit")` et un
-  chemin d'instance à un seul segment (`"/<uuid_du_fichier_sous-feuille>"`) au lieu de
-  `(project "<nom_du_projet>")` et `"/<uuid_racine>/<uuid_feuille>"` à deux segments. **Non corrigé par
-  `tools/fix_kicad_project_uuid.py`** (qui ne traite que l'UUID racine du fichier racine) : après toute
-  saisie dans une sous-feuille, relire le `.kicad_sch` de la sous-feuille et corriger à la main (ou par
-  un script dédié à écrire) le nom de `project` et le chemin `path` de chaque composant et du
-  `sheet_instances`, en comparant avec une sous-feuille déjà correcte (ex. `des-010-bouton.kicad_sch`).
-- `remove_label` : renvoie « Label not found » sur un `hierarchical_label` existant (UUID valide) —
-  semble ne pas gérer ce type de label. Contournement : éditer directement le `.kicad_sch`.
-- `kicad_workflow` `create_project` : génère un `.kicad_sch` avec un UUID racine à zéro
-  (`00000000-0000-0000-0000-000000000000`) incohérent avec le `.kicad_pro`, et un nom de projet
-  placeholder (`simple_circuit`) dans les blocs `instances` des composants. Résultat : KiCad affiche
-  le schéma comme vide (« pas de schématique chargée ») même si le fichier contient les composants.
-  **Contournement : `tools/fix_kicad_project_uuid.py` <dossier_projet_kicad> [--check]**, à lancer
-  juste après tout `create_project` (et après tout `create` en mémoire suivi d'un `save` vers un
-  fichier existant, qui régénère aussi un UUID à zéro).
 
 ## Rotation des composants : l'angle stocké n'est pas ce qu'on croit
 
@@ -316,37 +257,16 @@ coordonnées — toujours vérifier par un rendu visuel.** C'est la cause direct
 
 ## Feuilles hiérarchiques (une page par bloc)
 
-**Avec le serveur actuel (`mixelpixx/KiCAD-MCP-Server`), le script `tools/add_kicad_sheet.py`
-ci-dessous n'est plus nécessaire** : l'outil MCP `create_hierarchical_subsheet` crée le fichier de
-sous-feuille et l'insère dans le schéma parent en un seul appel (voir
-`framework/kicad-mcp-bug-report.md`, test comparatif « kicad-mixelpixx »). Le principe reste le même
-(un bloc = une page, labels hiérarchiques pour ce qui sort du bloc, vérification par rendu visuel) ;
-cette section décrit la méthode avec l'ancien serveur, gardée pour mémoire tant que la méthode avec
-le nouveau serveur n'est pas documentée ici après son premier usage réel.
-
-`tools/add_kicad_sheet.py <dossier_projet_kicad> --name "DES-xxx — Titre" --file des-xxx-titre.kicad_sch [--pin NOM:forme ...]`
-(forme = `input`/`output`/`bidirectional`/`tri_state`/`passive`, une par signal qui sort du bloc).
-
-1. Le script écrit le `(sheet ...)` dans le schéma racine, met à jour la clé `"sheets"` du
-   `.kicad_pro`, crée le fichier de sous-feuille (paysage A4 par défaut, `--paper A3` si besoin de
-   place), et affiche le chemin d'instance exact à utiliser dans les composants de la sous-feuille :
-   `(path "/<ROOT_UUID>/<SHEET_UUID>" (reference "...") (unit 1))`.
-2. Charger la **sous-feuille** (pas la racine) avec `kicad_schematic_edit` `load`, y saisir les
-   composants normalement, et poser un `hierarchical_label` (pas un `label` simple) pour chaque
-   signal destiné à rejoindre la broche de feuille créée à l'étape 1 (même nom que `--pin`).
-3. `kicad_schematic erc` sur le schéma **racine** : l'ERC suit la hiérarchie automatiquement.
-4. Vérifier visuellement (export SVG depuis la racine génère un fichier par page :
-   `<projet>.svg` pour la racine, `<projet>-<Nom de la feuille>.svg` pour chaque sous-feuille).
-
-Premier bloc fait ainsi : DES-010 « Circuit du bouton » (`des-010-bouton.kicad_sch`), la feuille
-racine (`proj_boomrone.kicad_sch`) sert de page d'index avec une case par bloc.
+Une page par bloc : `create_hierarchical_subsheet` (MCP) crée le fichier de sous-feuille et l'insère dans
+le schéma parent, puis `add_sheet_pin` côté racine pour chaque `hierarchical_label`. Labels hiérarchiques
+(pas des labels simples) pour ce qui sort du bloc ; ERC sur la racine (il suit la hiérarchie) ; vérification
+par rendu visuel. Le format cible est celui de **KiCad 10** uniquement.
 
 ## Serveur `mixelpixx/KiCAD-MCP-Server` : constats du premier usage (2026-11-04, proj_boomrone)
 
 - **Projet** : `create_project` puis `create_hierarchical_subsheet` (une page par bloc, A4 paysage par
   défaut) puis `add_sheet_pin` sur le schéma racine pour chaque `hierarchical_label` de la sous-feuille
-  (même nom, même sens). `fix_kicad_project_uuid.py` ne sert plus (format KiCad 10 non reconnu par le
-  script, et le bug d'UUID n'existe pas avec ce serveur).
+  (même nom, même sens). Le bug d'UUID du projet n'existe pas avec ce serveur.
 - **Rotation** : les positions de broches après rotation sont correctes (vérifier quand même avec
   `get_schematic_pin_locations` avant de câbler). Les textes Référence/Valeur d'un composant tourné à
   90° s'affichent à la verticale : régler l'angle du champ à 270 avec `set_schematic_component_property`
