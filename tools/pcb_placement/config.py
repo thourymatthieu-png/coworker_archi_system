@@ -34,6 +34,7 @@ class EngineConfig:
     weight_decoupling: float = 10.0       # poids par mm de depassement de la distance de decouplage
     decoupling_file: Optional[str] = None  # decouplage.json (condensateur -> broche d'alimentation) ; None = sans regle
     live_dir: Optional[str] = None        # dossier de suivi en direct (page web), None = desactive
+    rules_file: Optional[str] = None      # regles_actives.json (rotations verrouillees, proximites retenues)
     decoupling_max_mm: float = 5.0        # distance max par defaut quand une regle n'en donne pas (valeur de projet, pas de fiche)
 
     # --- Hierarchie (section 3) ---

@@ -25,7 +25,7 @@ import time
 sys.path.insert(0, os.path.dirname(__file__))
 
 from pcb_placement.config import EngineConfig  # noqa: E402
-from pcb_placement.io_data import apply_constraints, apply_decoupling, load_board, save_solution, load_solution_into  # noqa: E402
+from pcb_placement.io_data import apply_active_rules, apply_constraints, apply_decoupling, load_board, save_solution, load_solution_into  # noqa: E402
 from pcb_placement.optimizer import run_parallel_strategies, best_of  # noqa: E402
 from pcb_placement.visualize import save_comparison, format_report  # noqa: E402
 
@@ -106,6 +106,8 @@ def cmd_optimize(args: argparse.Namespace) -> None:
 
     if args.decoupling:
         config.decoupling_file = args.decoupling
+    if args.rules:
+        config.rules_file = args.rules
     if args.decoupling_max_mm is not None:
         config.decoupling_max_mm = args.decoupling_max_mm
 
@@ -116,6 +118,12 @@ def cmd_optimize(args: argparse.Namespace) -> None:
         info = apply_decoupling(board_before, config.decoupling_file, config.decoupling_max_mm)
         print(f"Decouplage : {info['rules']} regle(s) (distance par defaut {config.decoupling_max_mm} mm), "
               f"ignorees : {info['skipped'] or 'aucune'}")
+    if config.rules_file:
+        info_r = apply_active_rules(board_before, config.rules_file)
+        print(f"Regles actives : rotations verrouillees {info_r['rotations']}, "
+              f"{info_r['proximite']} regle(s) de proximite, {info_r['eloigner']} d'eloignement, "
+              f"{info_r['bord']} de bord ; sans distance (sans effet) : {info_r['sans_distance'] or 'aucune'} ; "
+              f"ignorees : {info_r['ignorees'] or 'aucune'}")
     live_server = start_live(args, config, board_before) if args.live else None
 
     t_start = time.time()
@@ -128,6 +136,8 @@ def cmd_optimize(args: argparse.Namespace) -> None:
         apply_constraints(board_after, args.constraints)
     if config.decoupling_file:
         apply_decoupling(board_after, config.decoupling_file, config.decoupling_max_mm)
+    if config.rules_file:
+        apply_active_rules(board_after, config.rules_file)
     board_after.restore_positions(best.positions)
 
     sol_path = os.path.join(args.out_dir, "best_solution.json")
@@ -207,6 +217,7 @@ def main() -> None:
     p_opt.add_argument("--live-dir", default=None, help="dossier des instantanes du suivi (defaut : <out-dir>/live)")
     p_opt.add_argument("--port", type=int, default=8765, help="port de la page de suivi (defaut 8765)")
     p_opt.add_argument("--live-hold-s", type=float, default=60.0, help="secondes pendant lesquelles la page reste servie apres le calcul")
+    p_opt.add_argument("--rules", default=None, help="regles_actives.json : rotations verrouillees et regles de proximite retenues par l'utilisateur")
     p_opt.add_argument("--decoupling", default=None, help="decouplage.json (condensateur -> broche d'alimentation) : ajoute une penalite de distance")
     p_opt.add_argument("--decoupling-max-mm", type=float, default=None, help="distance max de decouplage par defaut (mm), 5 par defaut")
     p_opt.add_argument("--constraints", default=None, help="Fichier JSON de contraintes mecaniques (contour de carte fixe, ancres, debords) - cf. README")

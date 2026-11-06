@@ -225,3 +225,74 @@ def apply_decoupling(board: Board, path: str, default_mm: float = 5.0) -> dict:
                       "dmax": float(dmax) if dmax is not None else float(default_mm)})
     board.decoupling_rules = rules
     return {"rules": len(rules), "skipped": skipped}
+
+
+def apply_active_rules(board: Board, path: str) -> dict:
+    """Charge les regles RETENUES par l'utilisateur (`regles_actives.json`) : rotations
+    verrouillees (composant libre en position, rotation imposee) et regles de proximite
+    (composant -> broches d'un autre composant, ou composant -> point de la carte), regles
+    `eloigner` (groupe bruyant / groupe sensible, distance minimale) et `bord` (composant contre
+    un bord du contour, cote facultatif), qui
+    s'ajoutent aux regles de decouplage deja chargees (meme penalite par mm de depassement).
+    Les references absentes de la carte sont ignorees et listees."""
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    skipped, locked, prox, eloig, bords = [], [], 0, 0, 0
+    for e in data.get("rotation_verrouillee", []):
+        c = board.components.get(e.get("ref"))
+        if c is None:
+            skipped.append(e.get("ref"))
+            continue
+        c.rotation = float(e.get("angle_deg", 0))
+        c.rotation_locked = True
+        locked.append(e["ref"])
+    ox = oy = None
+    if board.outline is not None:
+        ox = (board.outline[0] + board.outline[2]) / 2.0
+        oy = (board.outline[1] + board.outline[3]) / 2.0
+    for e in data.get("proximite", []):
+        a = e.get("a")
+        if a not in board.components:
+            skipped.append(a)
+            continue
+        rule = {"cap": a, "ic": None, "pins": [], "dmax": float(e["dmax_mm"])}
+        if e.get("cible_point") == "centre_carte":
+            if ox is None:
+                skipped.append(a)
+                continue
+            rule["point"] = [ox, oy]
+        else:
+            cible = e.get("cible")
+            if cible not in board.components:
+                skipped.append(a)
+                continue
+            rule["ic"] = cible
+            rule["pins"] = [str(p) for p in e.get("pins", [])]
+        board.decoupling_rules.append(rule)
+        prox += 1
+    sans_distance = []
+    for e in data.get("eloigner", []):
+        a = [r for r in e.get("groupe_a", []) if r in board.components]
+        b = [r for r in e.get("groupe_b", []) if r in board.components]
+        if e.get("dmin_mm") is None:      # distance sans source : regle documentee, sans effet
+            sans_distance.append(e.get("id", "?"))
+            continue
+        if not a or not b:
+            skipped.append(e.get("id", "?"))
+            continue
+        board.decoupling_rules.append({"kind": "eloigner", "id": e.get("id"), "a": a, "b": b,
+                                       "dmin": float(e["dmin_mm"])})
+        eloig += 1
+    for e in data.get("bord", []):
+        ref = e.get("ref")
+        if ref not in board.components or board.outline is None:
+            skipped.append(ref)
+            continue
+        if e.get("cote") not in (None, "ouest", "est", "nord", "sud"):
+            skipped.append(ref)
+            continue
+        board.decoupling_rules.append({"kind": "bord", "ref": ref, "cote": e.get("cote"),
+                                       "dmax": float(e.get("dmax_mm", 0.0))})
+        bords += 1
+    return {"rotations": locked, "proximite": prox, "eloigner": eloig, "bord": bords,
+            "sans_distance": sans_distance, "ignorees": skipped}

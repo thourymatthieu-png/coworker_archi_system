@@ -14876,7 +14876,7 @@
 	(footprint "lib_boomrone:COB-28_L6.0-W6.0-P0.65-TL-EP"
 		(layer "F.Cu")
 		(uuid "b16077b7-0ca6-4c59-a6a6-84388664ccac")
-		(at 127.07 125.045)
+		(at 142.8 120.65)
 		(property "Reference" "U4"
 			(at 0 -6.65 0)
 			(layer "F.SilkS")
@@ -20570,9 +20570,10 @@
 		)
 	)
 	(footprint "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
+		(locked yes)
 		(layer "F.Cu")
 		(uuid "ef82ef98-5e07-4e3e-aaf6-a99ce16a44f8")
-		(at 154.43 70.75)
+		(at 25 25)
 		(descr "LGA, 14 Pin (https://www.st.com/resource/en/datasheet/lsm6ds3tr-c.pdf)")
 		(tags "LGA NoLead")
 		(property "Reference" "U2"

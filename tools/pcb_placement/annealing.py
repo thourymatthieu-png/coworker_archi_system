@@ -69,7 +69,8 @@ def run_annealing(
             comp.x += rng.gauss(0, std)
             comp.y += rng.gauss(0, std)
         elif move_kind < config.move_translate_prob + config.move_rotate_prob:
-            comp.rotation = rng.choice(ALLOWED_ROTATIONS)
+            if not comp.rotation_locked:
+                comp.rotation = rng.choice(ALLOWED_ROTATIONS)
         else:
             other = rng.choice(movable)
             if other != r:
@@ -77,7 +78,8 @@ def run_annealing(
                 oc = board.components[other]
                 comp.x, oc.x = oc.x, comp.x
                 comp.y, oc.y = oc.y, comp.y
-                comp.rotation, oc.rotation = oc.rotation, comp.rotation
+                if not (comp.rotation_locked or oc.rotation_locked):
+                    comp.rotation, oc.rotation = oc.rotation, comp.rotation
 
         new_cost = ic.propose(moved)
         delta = new_cost.total - current_cost.total

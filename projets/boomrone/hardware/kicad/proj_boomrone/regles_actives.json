@@ -1,0 +1,119 @@
+{
+  "avertissement": "Regles RETENUES par l'utilisateur pour l'essai des outils de placement (reponses du 2026-11-05, voir regles_placement_reponses.md). Non decisionnel : aucune decision n'est ecrite dans les documents de methode. Les valeurs marquees 'valeur d'essai' ne viennent d'aucune fiche.",
+  "rotation_verrouillee": [
+    {
+      "ref": "U2",
+      "angle_deg": 0,
+      "source": "Reponse 4 de l'utilisateur (imposer 0 degre) ; DOU-167 « Orientation des axes de la centrale et sens de rotation des moteurs »"
+    }
+  ],
+  "proximite": [
+    {
+      "a": "U2",
+      "cible_point": "centre_carte",
+      "dmax_mm": 3.0,
+      "statut": "valeur d'essai",
+      "source": "DES-003 « Raccordement de la centrale inertielle LSM6DSO » (centre de la face basse) ; reponse 2 de l'utilisateur (centre de la carte) ; la tolerance de 3 mm est une valeur d'essai"
+    }
+  ],
+  "eloigner": [
+    {
+      "id": "I-01",
+      "groupe_a": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "groupe_b": [
+        "R20",
+        "R21",
+        "C12",
+        "U1"
+      ],
+      "dmin_mm": 8.0,
+      "statut": "valeur d'essai",
+      "source": "I-01 de regles_placement.json (commutation des moteurs -> chaine de mesure de la batterie), certitude 'hypothese' ; la distance de 8.0 mm est une valeur d'essai choisie par l'utilisateur le 2026-11-06, sans fiche."
+    },
+    {
+      "id": "I-02",
+      "groupe_a": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "groupe_b": [
+        "U2",
+        "C19",
+        "C20",
+        "C21",
+        "R24"
+      ],
+      "dmin_mm": 6.0,
+      "statut": "valeur d'essai",
+      "source": "I-02 de regles_placement.json (commutation des moteurs -> centrale inertielle), certitude 'hypothese' ; la distance de 6.0 mm est une valeur d'essai choisie par l'utilisateur le 2026-11-06, sans fiche."
+    },
+    {
+      "id": "I-03",
+      "groupe_a": [
+        "Q1",
+        "Q2",
+        "Q3",
+        "Q4",
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "C2",
+        "C3",
+        "C4",
+        "C5",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "C6",
+        "C7",
+        "C9"
+      ],
+      "groupe_b": [
+        "U7"
+      ],
+      "dmin_mm": 8.0,
+      "statut": "valeur d'essai",
+      "source": "I-03 de regles_placement.json (commutation des moteurs et leurs fils -> antenne du PB-03F), certitude 'hypothese' ; la distance de 8.0 mm est une valeur d'essai choisie par l'utilisateur le 2026-11-06, sans fiche."
+    }
+  ],
+  "bord": []
+}

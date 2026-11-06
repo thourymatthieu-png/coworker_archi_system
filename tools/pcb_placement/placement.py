@@ -128,7 +128,8 @@ def force_directed_layout(
 
         if try_rotations and it % 20 == 19:
             for r in movable:
-                _try_best_rotation(board, r)
+                if not board.components[r].rotation_locked:
+                    _try_best_rotation(board, r)
 
         temp = max(temp - cooling, 0.01)
 

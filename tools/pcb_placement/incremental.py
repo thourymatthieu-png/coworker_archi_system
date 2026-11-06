@@ -30,7 +30,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 import numpy as np
 
-from .cost import CostBreakdown, CostWeights, decoupling_excess
+from .cost import CostBreakdown, CostWeights, decoupling_excess, rule_refs
 from .model import Board, Net
 
 _RESYNC_EVERY = 1500   # commits entre deux recalculs complets (derive des flottants)
@@ -247,8 +247,8 @@ class IncrementalCost:
         self.dec = float(self.rule_val.sum())
         self.ref_rules: Dict[str, List[int]] = {}
         for k, r in enumerate(self.rules):
-            self.ref_rules.setdefault(r["cap"], []).append(k)
-            self.ref_rules.setdefault(r["ic"], []).append(k)
+            for ref in rule_refs(r):
+                self.ref_rules.setdefault(ref, []).append(k)
         self.current = self._breakdown(self.overlap, self.oob, self.area, self.wl, self.cong,
                                        self.crossings, self.access, self.dec)
 

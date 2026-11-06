@@ -298,6 +298,23 @@ de condensateurs equivalents acceptes). Poids `weight_decoupling` (10 par mm). F
 l'agent `electronique-hardware` a partir du schema et des fiches ; il porte la source et la
 certitude de chaque appariement. Sans l'option, aucun effet.
 
+### Regles `eloigner` et `bord` (`--rules regles_actives.json`)
+Deux regles de plus, meme unite et meme poids que le decouplage (mm de depassement x
+`weight_decoupling`), comptees dans « depassement des regles de proximite ». Elles n'ont d'effet
+que si le fichier en contient et si la distance est donnee : une distance `null` (sans source) est
+ignoree et listee (« sans distance »).
+```json
+"eloigner": [{"id": "I-01", "groupe_a": ["Q1", "D1"], "groupe_b": ["R20", "C12"], "dmin_mm": 10}],
+"bord":     [{"ref": "J2", "cote": "sud", "dmax_mm": 0.5}]
+```
+- `eloigner` : pour chaque paire (a, b), manque `max(0, dmin - ecart)`, ecart mesure entre les
+  boites d'encombrement ; somme sur toutes les paires.
+- `bord` : ecart entre la boite du composant et le bord du contour `Edge.Cuts` (le bord `cote`
+  parmi `ouest`, `est`, `nord`, `sud`, ou le plus proche si absent) au-dela de `dmax_mm` (0 par
+  defaut). Un composant qui deborde respecte la regle. Inutile pour une ancre verrouillee.
+- Non dessinees dans le suivi en direct (seul le decouplage l'est). Test sans placement :
+  `python tools/pcb_placement/tests/test_regles_eloigner_bord.py` (parite incrementale 0 ecart).
+
 ### Suivi en direct (`--live`)
 `optimize --live` ecrit des instantanes JSON (`live.py`) et sert `viewer/index.html` sur
 `http://127.0.0.1:8765` (option `--port`, pause apres le calcul `--live-hold-s`). La page montre le

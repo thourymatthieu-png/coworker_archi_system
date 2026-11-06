@@ -121,7 +121,7 @@ def _format_cost(c: CostBreakdown) -> str:
         f"- Penalite d'accessibilite des pastilles : {c.accessibility_penalty:.1f}\n"
         f"- Recouvrement residuel : {c.overlap_mm2:.4f} mm2\n"
         f"- Hors du contour de carte : {c.out_of_bounds_mm2:.4f} mm2\n"
-        f"- Depassement de distance de decouplage : {c.decoupling_mm:.2f} mm\n"
+        f"- Depassement des regles de proximite (decouplage, J1, centrale) : {c.decoupling_mm:.2f} mm\n"
         f"- Dispersion moyenne des blocs : {c.dispersion_mm:.1f} mm\n"
         f"- Faisable : {'OK' if c.feasible else 'VIOLATION'}\n"
         f"- Cout total pondere : {c.total:.1f}"

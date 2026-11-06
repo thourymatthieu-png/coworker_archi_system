@@ -75,7 +75,7 @@ def rigid_transform(board: Board, refs: List[str], dx: float, dy: float, rotate_
         ny = rx * sin_a + ry * cos_a
         comp.x = px + nx + dx
         comp.y = py + ny + dy
-        if rotate_deg:
+        if rotate_deg and not comp.rotation_locked:
             comp.rotation = (comp.rotation + rotate_deg) % 360
 
 
@@ -421,7 +421,8 @@ def run_global_annealing_with_block_moves(
                 comp.x += rng.gauss(0, std)
                 comp.y += rng.gauss(0, std)
             elif move_kind < sa_cfg.move_translate_prob + sa_cfg.move_rotate_prob:
-                comp.rotation = rng.choice(ALLOWED_ROTATIONS)
+                if not comp.rotation_locked:
+                    comp.rotation = rng.choice(ALLOWED_ROTATIONS)
             else:
                 other = rng.choice(movable)
                 if other != r:
@@ -429,7 +430,8 @@ def run_global_annealing_with_block_moves(
                     oc = board.components[other]
                     comp.x, oc.x = oc.x, comp.x
                     comp.y, oc.y = oc.y, comp.y
-                    comp.rotation, oc.rotation = oc.rotation, comp.rotation
+                    if not (comp.rotation_locked or oc.rotation_locked):
+                        comp.rotation, oc.rotation = oc.rotation, comp.rotation
 
         new_cost = ic.propose(moved)
         delta = new_cost.total - current.total

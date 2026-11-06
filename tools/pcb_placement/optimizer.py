@@ -15,7 +15,7 @@ from . import live
 from .config import EngineConfig
 from .cost import CostBreakdown, is_better
 from .hierarchy import optimize_board
-from .io_data import apply_constraints, apply_decoupling, load_board
+from .io_data import apply_active_rules, apply_constraints, apply_decoupling, load_board
 from .model import Board
 
 
@@ -40,6 +40,8 @@ def run_strategy(extract_json_path: str, config: EngineConfig, seed: int, progre
         apply_constraints(board, constraints_path)
     if config.decoupling_file:
         apply_decoupling(board, config.decoupling_file, config.decoupling_max_mm)
+    if config.rules_file:
+        apply_active_rules(board, config.rules_file)
     weights = config.to_cost_weights()
     if config.live_dir:
         live.configure(config.live_dir, seed)

@@ -23,6 +23,11 @@ decision ici (les decisions vont dans `journal-decisions.md`, apres accord de l'
   penalite progressive (poids de la contrainte croissant pendant le recuit) au lieu d'une remise
   en etat brutale ; ou meilleure pose des blocs pour partir presque faisable.
 
+## Fait le 2026-11-06
+- Regles `eloigner` et `bord` ajoutees au moteur (`--rules`), test de parite dans `tests/`. Non
+  lancees sur la carte : aucune distance sourcee dans le projet (isolements a `null`, reponse 5 ;
+  pas de bord impose, reponse 6 ; U7 et J1 sont deja des ancres).
+
 ## Suggestions a faire (par priorite)
 1. **Autres regles de placement, cas par cas** (fichier `regles_placement.json` par projet, une
    regle = un terme de cout, mise a jour incrementale) :

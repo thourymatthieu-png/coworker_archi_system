@@ -267,13 +267,74 @@ def accessibility_penalty(board: Board, refs: List[str], probe_mm: float = 1.5) 
     return penalty
 
 
+def rule_refs(rule: dict) -> List[str]:
+    """References des composants concernes par une regle (pour l'index du cout incremental)."""
+    kind = rule.get("kind")
+    if kind == "eloigner":
+        return list(rule["a"]) + list(rule["b"])
+    if kind == "bord":
+        return [rule["ref"]]
+    return [r for r in (rule.get("cap"), rule.get("ic")) if r]
+
+
+def _bbox_gap(a: tuple, b: tuple) -> float:
+    """Distance (mm) entre deux boites (xmin, ymin, xmax, ymax) ; 0 si elles se touchent ou se recouvrent."""
+    gx = max(b[0] - a[2], a[0] - b[2], 0.0)
+    gy = max(b[1] - a[3], a[1] - b[3], 0.0)
+    return math.hypot(gx, gy)
+
+
+def eloigner_excess(board: Board, rule: dict) -> float:
+    """Regle `eloigner` : somme, sur les paires (a dans groupe A, b dans groupe B), du manque de
+    distance `max(0, dmin - ecart)`, l'ecart etant mesure entre les boites d'encombrement (mm)."""
+    boxes = {}
+    for r in list(rule["a"]) + list(rule["b"]):
+        c = board.components.get(r)
+        if c is not None:
+            boxes[r] = c.world_bbox()
+    total = 0.0
+    for ra in rule["a"]:
+        if ra not in boxes:
+            continue
+        for rb in rule["b"]:
+            if rb in boxes and rb != ra:
+                total += max(0.0, rule["dmin"] - _bbox_gap(boxes[ra], boxes[rb]))
+    return total
+
+
+def bord_excess(board: Board, rule: dict) -> float:
+    """Regle `bord` : le composant doit toucher (a `dmax` mm pres) un bord du contour de carte,
+    ou le bord `cote` ("ouest", "est", "nord", "sud") s'il est donne. Un composant qui deborde
+    du bord respecte la regle (antenne, connecteur). 0 si pas de contour ou composant absent."""
+    comp = board.components.get(rule["ref"])
+    if comp is None or board.outline is None:
+        return 0.0
+    ox0, oy0, ox1, oy1 = board.outline
+    bx0, by0, bx1, by1 = comp.world_bbox()
+    gaps = {"ouest": bx0 - ox0, "est": ox1 - bx1, "nord": by0 - oy0, "sud": oy1 - by1}
+    cote = rule.get("cote")
+    gap = gaps[cote] if cote else min(gaps.values())
+    return max(0.0, gap - rule["dmax"])
+
+
 def decoupling_excess(board: Board, rule: dict) -> float:
     """Depassement (mm) de la distance max entre un condensateur de decouplage et la broche
     d'alimentation de son circuit integre : centre du condensateur -> broche la plus proche
     parmi `rule["pins"]` (plusieurs broches candidates pour un groupe de condensateurs
-    equivalents). 0 si le condensateur est assez proche, ou si la regle ne s'applique pas."""
+    equivalents). 0 si le condensateur est assez proche, ou si la regle ne s'applique pas.
+    Fonction commune a toutes les regles de proximite : selon `rule["kind"]`, delegue a
+    `eloigner_excess` ou `bord_excess` (meme unite, mm de depassement, meme poids)."""
+    kind = rule.get("kind")
+    if kind == "eloigner":
+        return eloigner_excess(board, rule)
+    if kind == "bord":
+        return bord_excess(board, rule)
     cap = board.components.get(rule["cap"])
-    ic = board.components.get(rule["ic"])
+    if cap is not None and rule.get("point"):
+        # proximite a un point de la carte (ex. centrale au centre de la carte)
+        cx, cy = cap.world_center()
+        return max(0.0, math.hypot(cx - rule["point"][0], cy - rule["point"][1]) - rule["dmax"])
+    ic = board.components.get(rule["ic"]) if rule.get("ic") else None
     if cap is None or ic is None:
         return 0.0
     cx, cy = cap.world_center()

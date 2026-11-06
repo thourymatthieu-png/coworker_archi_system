@@ -22,6 +22,10 @@ du rapport de l'agent.
 | 12 | Pas des pastilles moteur | **5,8 mm**, après rappel de DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page » | DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page » reste valable. Le « 5,08 mm » de l'essai du 5 novembre est périmé ; DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » n'est pas modifié. |
 | 13 | Côté d'accouplement du XT30 (J1) | **Vers le sud** | J1 reste au bord sud, le sud est le côté d'enfichage libre. DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion » reste ouvert pour le genre. |
 
+## Modifications du 2026-11-06 (toujours non décisionnelles)
+- **Réponse 9 retirée** : la règle d'essai « C6, C7, C9 près de J1 » est supprimée de `regles_actives.json` (demande de l'utilisateur). C6, C7 et C9 restent dans le groupe bruyant des isolements.
+- **Réponse 5 complétée (exception explicite)** : trois isolements activés avec des distances d'essai sans source de fiche : I-01 (commutation des moteurs → mesure de la batterie) 8 mm, I-02 (commutation des moteurs → centrale) 6 mm, I-03 (commutation des moteurs → antenne de U7) 8 mm. I-04, I-05 et I-06 restent sans effet.
+
 ## Contradictions relevées pendant les réponses
 - Question 12 : la première réponse (5,08 mm) contredisait DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page » ; l'utilisateur a confirmé
   5,8 mm après rappel. Aucune décision changée.

@@ -39,6 +39,7 @@ class Component:
     # (float) pour une ancre FIXE, jamais touchee par le moteur (cf. io_data.load_board).
     rotation: float = 0
     fixed: bool = False  # ancre mecanique dure : jamais deplace/tourne par le moteur
+    rotation_locked: bool = False  # position libre, mais rotation imposee (ex. centrale a 0 deg)
 
     def _local_corners(self) -> Tuple[Tuple[float, float], ...]:
         ox, oy = self.courtyard_offset_x, self.courtyard_offset_y

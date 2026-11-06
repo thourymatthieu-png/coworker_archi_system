@@ -128,7 +128,7 @@ def write_static(live_dir: str, board, n_strategies: int, block_colors: Dict[str
         "outline": list(board.outline) if board.outline else None,
         "n_strategies": n_strategies,
         "components": comps, "nets": nets,
-        "decoupling": board.decoupling_rules,
+        "decoupling": [r for r in board.decoupling_rules if not r.get("kind")],  # eloigner/bord : pas encore dessines
         "blocks": sorted(board.blocks()),
         "block_colors": block_colors, "block_labels": block_labels,
     }

@@ -151,9 +151,11 @@ function draw(){
   if($('t_dec').checked && !parked){
     ctx.lineWidth=1.8;
     for(const r of S.decoupling){
-      const cap=byRef[r.cap],ic=byRef[r.ic],pc=pos[r.cap],pi=pos[r.ic];if(!cap||!ic||!pc||!pi)continue;
+      const cap=byRef[r.cap],ic=r.ic?byRef[r.ic]:null,pc=pos[r.cap],pi=r.ic?pos[r.ic]:null;
+      if(!cap||!pc||(r.ic&&(!ic||!pi)))continue;
       let best=null,bd=1e18;
-      for(const pn of r.pins){const pd=ic.padMap[pn];if(!pd)continue;const w=worldPad(pi,pd);const d=Math.hypot(w[0]-pc[0],w[1]-pc[1]);if(d<bd){bd=d;best=w}}
+      if(r.point){best=r.point;bd=Math.hypot(r.point[0]-pc[0],r.point[1]-pc[1])}   // regle de proximite a un point
+      else for(const pn of r.pins){const pd=ic.padMap[pn];if(!pd)continue;const w=worldPad(pi,pd);const d=Math.hypot(w[0]-pc[0],w[1]-pc[1]);if(d<bd){bd=d;best=w}}
       if(!best)continue;
       ctx.strokeStyle=bd>r.dmax?'#d62728':'#1a8f4d';
       ctx.beginPath();ctx.moveTo(X(pc[0]),Y(pc[1]));ctx.lineTo(X(best[0]),Y(best[1]));ctx.stroke()}
