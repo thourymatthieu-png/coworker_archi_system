@@ -93,6 +93,24 @@ def start_live(args, config, board):
     return srv
 
 
+def cmd_groupes(args: argparse.Namespace) -> None:
+    """Phase 1 seule : petits groupes par bloc, une image par bloc (cf. pcb_placement/groupes_view.py)."""
+    from pcb_placement.groupes_view import run_groups_phase
+    config = EngineConfig.load(args.config) if args.config else EngineConfig()
+    report = run_groups_phase(args.extract_json, args.out_dir, max_group_size=config.max_group_size,
+                              seed=args.seed, decoupling_file=args.decoupling, rules_file=args.rules, config=config)
+    print(f"Rapport : {report}")
+
+
+def cmd_rectangles(args: argparse.Namespace) -> None:
+    """Phases 1 et 2 : petits groupes, puis rectangles de groupes poses sur la carte (rien d'ajuste)."""
+    from pcb_placement.groupes_view import run_rectangles_phase
+    config = EngineConfig.load(args.config) if args.config else EngineConfig()
+    img = run_rectangles_phase(args.extract_json, args.out_dir, max_group_size=config.max_group_size,
+                               seed=args.seed, decoupling_file=args.decoupling, rules_file=args.rules, config=config)
+    print(f"Image : {img}")
+
+
 def cmd_optimize(args: argparse.Namespace) -> None:
     os.makedirs(args.out_dir, exist_ok=True)
 
@@ -223,6 +241,24 @@ def main() -> None:
     p_opt.add_argument("--constraints", default=None, help="Fichier JSON de contraintes mecaniques (contour de carte fixe, ancres, debords) - cf. README")
     p_opt.add_argument("--no-parallel", action="store_true", help="Force l'execution sequentielle des strategies (debogage)")
     p_opt.set_defaults(func=cmd_optimize)
+
+    p_grp = sub.add_parser("groupes", help="Phase 1 seule : petits groupes par bloc, une image par bloc (rien d'assemble)")
+    p_grp.add_argument("extract_json")
+    p_grp.add_argument("--out-dir", required=True)
+    p_grp.add_argument("--config", default=None)
+    p_grp.add_argument("--seed", type=int, default=0)
+    p_grp.add_argument("--decoupling", default=None)
+    p_grp.add_argument("--rules", default=None)
+    p_grp.set_defaults(func=cmd_groupes)
+
+    p_rec = sub.add_parser("rectangles", help="Phases 1 et 2 : groupes puis rectangles de groupes poses sur la carte")
+    p_rec.add_argument("extract_json")
+    p_rec.add_argument("--out-dir", required=True)
+    p_rec.add_argument("--config", default=None)
+    p_rec.add_argument("--seed", type=int, default=0)
+    p_rec.add_argument("--decoupling", default=None)
+    p_rec.add_argument("--rules", default=None)
+    p_rec.set_defaults(func=cmd_rectangles)
 
     p_apply = sub.add_parser("apply", help="Ecrire la solution sur une COPIE du .kicad_pcb (besoin de pcbnew)")
     p_apply.add_argument("pcb_path")

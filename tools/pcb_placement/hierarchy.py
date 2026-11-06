@@ -10,6 +10,7 @@
 """
 from __future__ import annotations
 
+import contextlib
 import math
 import random
 from dataclasses import dataclass, field
@@ -19,7 +20,7 @@ import numpy as np
 
 from .annealing import AnnealingConfig, relevant_nets, run_annealing
 from .compaction import _Packer, compact
-from .cost import CostBreakdown, CostWeights, block_dispersion, is_better, total_cost
+from .cost import CostBreakdown, CostWeights, block_dispersion, is_better, rule_refs, total_cost
 from . import live
 from .incremental import IncrementalCost
 from .model import ALLOWED_ROTATIONS, Board
@@ -49,6 +50,8 @@ class HierarchyConfig:
     penalty_start: float = 0.03
     penalty_ramp_frac: float = 0.7
     rotation_probe_every: int = 15
+    group_restarts: int = 1   # essais independants par petit groupe (on garde le meilleur) ; 1 = un seul essai
+    decoupling_link_weight: float = 2.0   # poids de lien condensateur-circuit au partitionnement (0 = sans effet)
     seed: int = 0
 
 
@@ -79,14 +82,48 @@ def rigid_transform(board: Board, refs: List[str], dx: float, dy: float, rotate_
             comp.rotation = (comp.rotation + rotate_deg) % 360
 
 
+@contextlib.contextmanager
+def rules_within(board: Board, refs: List[str]):
+    """Limite temporairement les regles de proximite a celles dont TOUS les composants sont dans
+    `refs` : une regle vers un composant d'un autre groupe/bloc (pas encore place, position
+    quelconque) tirerait sinon le groupe vers un point sans sens (constat du 2026-11-06 : groupes
+    etires par le decouplage vers un circuit d'un autre groupe). Les regles `point` sont ignorees
+    a ce niveau. Elles s'appliquent de nouveau au niveau global."""
+    saved = board.decoupling_rules
+    s = set(refs)
+    board.decoupling_rules = [r for r in saved if not r.get("point") and all(x in s for x in rule_refs(r))]
+    try:
+        yield
+    finally:
+        board.decoupling_rules = saved
+
+
+def decoupling_links(board: Board, weight: float) -> list:
+    """Liens (condensateur, circuit, poids) tires des regles de decouplage, pour le partitionnement."""
+    if weight <= 0:
+        return []
+    return [(r["cap"], r["ic"], weight) for r in board.decoupling_rules if not r.get("kind") and r.get("ic")]
+
+
 def optimize_group(board: Board, refs: List[str], weights: CostWeights, cfg: HierarchyConfig, seed: int) -> CostBreakdown:
-    """Niveau 1+2 : place et polit un petit groupe de composants fortement connectes."""
-    force_directed_layout(board, refs, iterations=cfg.fd_iterations_group, seed=seed)
-    legalize(board, refs, min_clearance_mm=weights.min_clearance_mm)
-    sa_cfg = AnnealingConfig(**{**cfg.sa_group.__dict__, "seed": seed})
-    cost = run_annealing(board, refs, weights, sa_cfg)
-    legalize(board, refs, min_clearance_mm=weights.min_clearance_mm)
-    return cost
+    """Niveau 1+2 : place et polit un petit groupe de composants fortement connectes. Avec
+    `cfg.group_restarts` > 1, plusieurs essais independants et on garde le meilleur."""
+    best, best_snap = None, None
+    for k in range(max(1, cfg.group_restarts)):
+        s = seed * 31 + k
+        with rules_within(board, refs):
+            force_directed_layout(board, refs, iterations=cfg.fd_iterations_group, seed=s)
+            legalize(board, refs, min_clearance_mm=weights.min_clearance_mm)
+            sa_cfg = AnnealingConfig(**{**cfg.sa_group.__dict__, "seed": s})
+            cost = run_annealing(board, refs, weights, sa_cfg)
+            legalize(board, refs, min_clearance_mm=weights.min_clearance_mm)
+            cost = total_cost(board, refs, relevant_nets(board, refs), weights)
+        if best is None or is_better(cost, best):
+            best, best_snap = cost, {r: (board.components[r].x, board.components[r].y, board.components[r].rotation) for r in refs}
+    for r, (x, y, rot) in best_snap.items():
+        c = board.components[r]
+        c.x, c.y, c.rotation = x, y, rot
+    return best
 
 
 def assemble_rigid_groups(board: Board, groups: List[List[str]], weights: CostWeights, cfg: HierarchyConfig, seed: int) -> None:
@@ -230,7 +267,7 @@ def _attached_wirelength(board: Board, cluster: List[str], placed: set, nets) ->
 
 
 def assemble_blocks(board: Board, blocks_map: Dict[str, List[str]], weights: CostWeights,
-                    cfg: HierarchyConfig, seed: int) -> None:
+                    cfg: HierarchyConfig, seed: int, order_noise: float = 0.0) -> List[str]:
     """Niveau 4 (avec contour impose) : pose chaque bloc comme un RECTANGLE RIGIDE dans le
     contour, autour des pieces verrouillees, sans recouvrement. Remplace l'assemblage par
     forces dirigees (`assemble_rigid_groups`) qui empile les blocs les uns sur les autres puis
@@ -242,10 +279,14 @@ def assemble_blocks(board: Board, blocks_map: Dict[str, List[str]], weights: Cos
     pieces verrouillees comprises), avec la rotation d'ensemble (0/90/180/270) qui minimise le
     cablage vers l'existant. Seuls les composants LIBRES d'un bloc bougent (les verrouilles
     restent, ils servent d'obstacles). Un bloc qui ne tient nulle part est laisse a sa place et
-    signale ; `legalize` et le recuit global s'en occupent alors comme avant."""
+    signale ; `legalize` et le recuit global s'en occupent alors comme avant.
+
+    `order_noise` > 0 : l'ordre de pose (du plus grand au plus petit) est perturbe (aire x facteur
+    aleatoire dans [1 - bruit, 1 + bruit], graine `seed`) pour essayer plusieurs ordres. Renvoie
+    la liste des blocs qui n'ont trouve aucune place."""
     if board.outline is None:
         assemble_rigid_groups(board, list(blocks_map.values()), weights, cfg, seed)
-        return
+        return []
     rng = random.Random(seed)
     fixed_rects = []
     placed = set()
@@ -277,7 +318,7 @@ def assemble_blocks(board: Board, blocks_map: Dict[str, List[str]], weights: Cos
                 placed.add(r)
             continue
         x0, y0, x1, y1 = board.global_bbox(free)
-        clusters.append((b, free, (x1 - x0) * (y1 - y0)))
+        clusters.append((b, free, (x1 - x0) * (y1 - y0) * (1.0 + order_noise * (2.0 * rng.random() - 1.0))))
     clusters.sort(key=lambda t: t[2], reverse=True)
 
     unfit = []
@@ -332,6 +373,7 @@ def assemble_blocks(board: Board, blocks_map: Dict[str, List[str]], weights: Cos
     if unfit:
         print(f"ATTENTION : {len(unfit)} bloc(s) ne tiennent pas comme rectangle rigide dans le "
               f"contour : {unfit} (laisses a legalize et au recuit global)")
+    return unfit
 
 
 def _inter_group_wirelength(board: Board, refs: List[str], nets) -> float:
@@ -345,7 +387,7 @@ def optimize_block(board: Board, block: str, weights: CostWeights, cfg: Hierarch
     le bloc (les composants peuvent de nouveau bouger individuellement pour polir les
     jonctions entre groupes)."""
     refs = board.refs_in_block(block)
-    groups = partition_refs(refs, board.nets, cfg.max_group_size)
+    groups = partition_refs(refs, board.nets, cfg.max_group_size, decoupling_links(board, cfg.decoupling_link_weight))
     live.set_phase("groupes : forces dirigees puis recuit", block=block, show_cost=False)
     for gi, g in enumerate(groups):
         optimize_group(board, g, weights, cfg, seed=seed * 1000 + gi)
@@ -354,7 +396,8 @@ def optimize_block(board: Board, block: str, weights: CostWeights, cfg: Hierarch
     legalize(board, refs, min_clearance_mm=weights.min_clearance_mm)
     live.set_phase("recuit du bloc", block=block, show_cost=False)
     sa_cfg = AnnealingConfig(**{**cfg.sa_block.__dict__, "seed": seed})
-    cost = run_annealing(board, refs, weights, sa_cfg)
+    with rules_within(board, refs):
+        cost = run_annealing(board, refs, weights, sa_cfg)
     legalize(board, refs, min_clearance_mm=weights.min_clearance_mm)
     live.mark_done(block)
     return cost

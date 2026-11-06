@@ -17,7 +17,7 @@ import numpy as np
 from .model import Board, Net
 
 
-def build_weight_matrix(refs: List[str], nets: Dict[str, Net]) -> np.ndarray:
+def build_weight_matrix(refs: List[str], nets: Dict[str, Net], extra=None) -> np.ndarray:
     """Expansion en clique ponderee : un reseau de k pastilles ajoute un poids 1/(k-1) entre
     chaque paire de composants qu'il relie (evite qu'un gros bus domine le cout de coupe)."""
     idx = {r: i for i, r in enumerate(refs)}
@@ -35,6 +35,10 @@ def build_weight_matrix(refs: List[str], nets: Dict[str, Net]) -> np.ndarray:
                 ib = idx[members[b]]
                 w[ia, ib] += weight
                 w[ib, ia] += weight
+    for ra, rb, wt in (extra or ()):   # liens supplementaires (ex. condensateur de decouplage - circuit)
+        if ra in idx and rb in idx and ra != rb:
+            w[idx[ra], idx[rb]] += wt
+            w[idx[rb], idx[ra]] += wt
     return w
 
 
@@ -105,19 +109,19 @@ def _pair_cut_contrib(ref_in_a_slot: str, ref_in_b_slot: str, a: List[str], b: L
     return total
 
 
-def partition_refs(refs: List[str], nets: Dict[str, Net], max_group_size: int) -> List[List[str]]:
+def partition_refs(refs: List[str], nets: Dict[str, Net], max_group_size: int, extra=None) -> List[List[str]]:
     """Decoupe recursivement `refs` en groupes de taille <= max_group_size par bissection
     spectrale + raffinement KL. Retourne une liste de groupes (couverture complete, sans
     recouvrement)."""
     if len(refs) <= max_group_size:
         return [refs]
-    w_full = build_weight_matrix(refs, nets)
+    w_full = build_weight_matrix(refs, nets, extra)
     group_a, group_b = spectral_bisect(refs, w_full)
     group_a, group_b = kl_refine(refs, group_a, group_b, w_full)
     result = []
     for g in (group_a, group_b):
         if g:
-            result.extend(partition_refs(g, nets, max_group_size))
+            result.extend(partition_refs(g, nets, max_group_size, extra))
     return result
 
 

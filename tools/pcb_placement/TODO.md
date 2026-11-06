@@ -28,6 +28,46 @@ decision ici (les decisions vont dans `journal-decisions.md`, apres accord de l'
   lancees sur la carte : aucune distance sourcee dans le projet (isolements a `null`, reponse 5 ;
   pas de bord impose, reponse 6 ; U7 et J1 sont deja des ancres).
 
+## Etat au 2026-11-06 (soir) : placement par etapes, a reprendre
+
+Methode de travail retenue avec l'utilisateur : on valide **une etape a la fois sur image**, avant la suivante.
+1. **Phase 1, petits groupes par bloc** (VALIDEE par l'utilisateur, a garder telle quelle).
+2. **Phase 2, un rectangle rigide par groupe, poses sur la carte** (en cours, image a critiquer).
+3. **Phase 3, ajustement** (recuit : composants et groupes un par un) : pas encore refaite dans cette methode.
+
+Commandes (extraction d'abord, Python embarque KiCad, voir README) :
+```bash
+python tools/pcb_optimize_placement.py extract projets/boomrone/hardware/kicad/proj_boomrone/proj_boomrone.kicad_pcb --out-dir <dossier>
+python tools/pcb_optimize_placement.py groupes    <dossier>/extract.json --out-dir <dossier>/g  --config tools/pcb_placement/examples/config_parallele.json --decoupling projets/boomrone/hardware/kicad/proj_boomrone/decouplage.json --rules projets/boomrone/hardware/kicad/proj_boomrone/regles_actives.json   # phase 1 : une image par bloc
+python tools/pcb_optimize_placement.py rectangles <dossier>/extract.json --out-dir <dossier>/p2 --config ... --decoupling ... --rules ...                                                                                                    # phases 1 + 2 : phase2_rectangles.png
+```
+Code : `groupes_view.py` (phase 1 et 2, trous libres, refonte d'un groupe dans une boite), `hierarchy.py`.
+
+Fait aujourd'hui :
+- Regles `eloigner` et `bord` (voir README) ; `regles_actives.json` : U2 rotation 0 et centre (3 mm), isolements
+  I-01 (8 mm), I-02 (6 mm), I-03 (8 mm) en valeurs d'essai ; proximite C6/C7/C9-J1 retiree (choix de l'utilisateur).
+- Phase 1 corrigee : un groupe ne subit que les regles dont tous les composants sont dans le groupe
+  (`rules_within`, aussi pour le recuit de bloc) ; liens condensateur-circuit au partitionnement
+  (`decoupling_link_weight`, 2.0) ; `group_restarts` (6 essais par groupe dans la commande `groupes`, 1 par defaut
+  dans le pipeline complet). Constat : sans ces regles croisees, DES-009 passe de 92 a 47 mm2 d'emprise.
+- Phase 2 : 20 ordres de pose (`assemble_blocks(..., order_noise)`, retourne les groupes sans place) ; pour un
+  groupe sans place, recherche des plus grands trous libres (`free_rectangles`) et phase 1 refaite avec un but de
+  forme (`optimize_group_in_box`).
+
+Resultat de la phase 2 (carte 50 x 50 mm) : 15 groupes sur 16 poses ; **DES-011 g2** (Q5, Q6, Q7, R9 a R14, 65 mm2 de
+composants) ne tient pas : le seul trou assez grand fait 9,5 x 7,5 mm (71 mm2) et 30 essais n'ont pas donne de
+disposition sans recouvrement. Recouvrement residuel 63 mm2. La carte est remplie a 61 % par les composants.
+
+A faire ensuite (l'utilisateur doit choisir) :
+- DES-011 g2 : le couper en deux sous-groupes (Q5, Q6, Q7 / R9 a R14) et reessayer, ou passer a l'ajustement.
+- Critiquer l'image de la phase 2 (emplacement des groupes par rapport aux reseaux et aux regles ; `regles` = 119 mm de
+  depassement dans la meilleure disposition, plus que le plein pipeline : les groupes sont poses avant que les
+  regles de proximite globales agissent).
+- Phase 3 d'ajustement, puis `apply` sur une copie du PCB, relue dans KiCad.
+- Valider le plein pipeline avec les corrections de phase 1 (`rules_within` etc.) : comparer au dernier essai (cout
+  4694 ; meilleur precedent 4327), non refait.
+- Etat du PCB dans le depot : U2 verrouille en (25 ; 25) (fait par l'utilisateur), U4 deplace.
+
 ## Suggestions a faire (par priorite)
 1. **Autres regles de placement, cas par cas** (fichier `regles_placement.json` par projet, une
    regle = un terme de cout, mise a jour incrementale) :
