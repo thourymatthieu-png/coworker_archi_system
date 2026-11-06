@@ -1,0 +1,10 @@
+{
+ "par_type": {
+  "clearance": 14,
+  "silk_edge_clearance": 10,
+  "lib_footprint_issues": 9,
+  "lib_footprint_mismatch": 1
+ },
+ "non_connectes": 228,
+ "code_retour": 0
+}

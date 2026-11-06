@@ -3,6 +3,22 @@
 Notes de travail (mises a jour le 2026-11-05, soir). Ce n'est pas un document de methode : aucune
 decision ici (les decisions vont dans `journal-decisions.md`, apres accord de l'utilisateur).
 
+## 2026-11-06 (apres-midi) : banc comparatif des outils de placement - A LIRE EN PREMIER
+Veille en ligne puis banc de 6 pistes (un agent par piste), juge commun et resultats dans
+`projets/boomrone/hardware/kicad/proj_boomrone/_bench_placement/` (versionne en partie, ajoute avec `git add -f` :
+juge, entree, cartes placees et routees, metriques, rapports, scripts ; `PROTOCOLE.md`, `resultats/<piste>/RAPPORT.md`). Conclusions publiees en artefact (claude.ai/artifact/Qr6qJDKjEH11h5tco5z3Eh).
+Points cles, non decisionnels (aucune DEC) :
+- **Bug** : `tools/kicad_apply_placement.py` ecrit l'angle du modele tel quel ; le modele tourne en sens horaire,
+  KiCad en sens inverse -> toute piece tournee de 90 deg est retournee de 180 deg dans KiCad. Angle a ecrire :
+  `(2 * angle_lu_a_l_extraction - angle_modele) % 360`. NON corrige dans le depot (attente accord utilisateur).
+- Un placeur a regles de 279 lignes (`_bench_placement/outils_pistes/regles_simples/place.py`) bat le moteur :
+  valide, 23/23 decouplages < 5 mm, 97,4 % route (moteur corrige : 85,5 %), 17 s.
+- 4 empreintes ont des pastilles hors courtyard (BZ1 1,66 mm, U7 0,70, J1 0,24, LED1 0,11) : cause des
+  courts-circuits apres placement.
+- Le serveur MCP KiCad est en backend IPC : il agit sur la carte OUVERTE dans KiCad (piste MCP non mesuree).
+- Smart App Control bloque tout executable non signe compile sur ce poste (SA-PCB).
+- A trancher par l'utilisateur : geler moteur global + catalogue de decouplage ? (contredit le choix du 2026-11-06).
+
 ## Fait le 2026-11-05
 - Contour lu sur *Edge.Cuts*, ancres = empreintes verrouillees, debords exemptes automatiquement.
 - Cout incremental (`incremental.py`), parite 0 ecart, x45 par pas.

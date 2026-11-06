@@ -1,0 +1,607 @@
+{
+  "avertissement": "Fichier d'essai des outils de placement, non decisionnel. Source schema : netlist kicad-cli de proj_boomrone.kicad_sch et cablage des feuilles des-00x. Aucun DEC/DOU cree. Le schema ne rattache un condensateur a une broche d'alimentation precise que par fil direct (C10, C11, C13, C17, C18, C22, C29, C36, C37 ; C15/C16 sur le nom de reseau +2V0) ; les autres appariements viennent des DES, des valeurs et des fiches.",
+  "decouplage_proximite": [
+    {
+      "condensateur": "C27",
+      "valeur": "100nF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Quatre 100nF interchangeables pour trois broches VDD (24,36,48) et VREF+ (20) : fiche figure 16 p.68 (n x 100nF sur VDD ; 100nF+1uF sur VREF+) et DES-002 (3 x 100nF VDD + 100nF VREF+). Le schema KiCad ne rattache aucune de ces pastilles a une broche precise (une seule nappe +3V0). Indice non source : ordre d'implantation en x dans la feuille (C33,C32,C27 puis C34 a cote de C35).",
+      "broches_candidates": [
+        {
+          "nom": "VDD",
+          "num": "24"
+        },
+        {
+          "nom": "VDD",
+          "num": "36"
+        },
+        {
+          "nom": "VDD",
+          "num": "48"
+        },
+        {
+          "nom": "VREF+",
+          "num": "20"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C32",
+      "valeur": "100nF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Quatre 100nF interchangeables pour trois broches VDD (24,36,48) et VREF+ (20) : fiche figure 16 p.68 (n x 100nF sur VDD ; 100nF+1uF sur VREF+) et DES-002 (3 x 100nF VDD + 100nF VREF+). Le schema KiCad ne rattache aucune de ces pastilles a une broche precise (une seule nappe +3V0). Indice non source : ordre d'implantation en x dans la feuille (C33,C32,C27 puis C34 a cote de C35).",
+      "broches_candidates": [
+        {
+          "nom": "VDD",
+          "num": "24"
+        },
+        {
+          "nom": "VDD",
+          "num": "36"
+        },
+        {
+          "nom": "VDD",
+          "num": "48"
+        },
+        {
+          "nom": "VREF+",
+          "num": "20"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C33",
+      "valeur": "100nF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Quatre 100nF interchangeables pour trois broches VDD (24,36,48) et VREF+ (20) : fiche figure 16 p.68 (n x 100nF sur VDD ; 100nF+1uF sur VREF+) et DES-002 (3 x 100nF VDD + 100nF VREF+). Le schema KiCad ne rattache aucune de ces pastilles a une broche precise (une seule nappe +3V0). Indice non source : ordre d'implantation en x dans la feuille (C33,C32,C27 puis C34 a cote de C35).",
+      "broches_candidates": [
+        {
+          "nom": "VDD",
+          "num": "24"
+        },
+        {
+          "nom": "VDD",
+          "num": "36"
+        },
+        {
+          "nom": "VDD",
+          "num": "48"
+        },
+        {
+          "nom": "VREF+",
+          "num": "20"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C34",
+      "valeur": "100nF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Quatre 100nF interchangeables pour trois broches VDD (24,36,48) et VREF+ (20) : fiche figure 16 p.68 (n x 100nF sur VDD ; 100nF+1uF sur VREF+) et DES-002 (3 x 100nF VDD + 100nF VREF+). Le schema KiCad ne rattache aucune de ces pastilles a une broche precise (une seule nappe +3V0). Indice non source : ordre d'implantation en x dans la feuille (C33,C32,C27 puis C34 a cote de C35).",
+      "broches_candidates": [
+        {
+          "nom": "VDD",
+          "num": "24"
+        },
+        {
+          "nom": "VDD",
+          "num": "36"
+        },
+        {
+          "nom": "VDD",
+          "num": "48"
+        },
+        {
+          "nom": "VREF+",
+          "num": "20"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C28",
+      "valeur": "4.7uF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": "VDD (commun)",
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "4.7uF commun aux VDD (fiche figure 16 p.68 : '+1 x 4.7 uF', pas de broche precise). Candidates : VDD 24, 36, 48.",
+      "broches_candidates": [
+        {
+          "nom": "VDD",
+          "num": "24"
+        },
+        {
+          "nom": "VDD",
+          "num": "36"
+        },
+        {
+          "nom": "VDD",
+          "num": "48"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C29",
+      "valeur": "10nF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": "VDDA",
+      "broche_alimentation_num": "21",
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "sur",
+      "note": "10nF uniquement sur VDDA (figure 16 p.68 ; DES-002 'VDDA (21) 10 nF + 1 uF')."
+    },
+    {
+      "condensateur": "C30",
+      "valeur": "1uF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Un 1uF sur VDDA (21) et un 1uF sur VREF+ (20) (figure 16 p.68 ; DES-002) ; les deux 1uF sont identiques et les broches 20 et 21 sont voisines ; le schema ne distingue pas lequel va ou. Indice non source : C30 a cote de C29 (10nF, VDDA), C35 a cote de C34 (100nF, VREF+).",
+      "broches_candidates": [
+        {
+          "nom": "VDDA",
+          "num": "21"
+        },
+        {
+          "nom": "VREF+",
+          "num": "20"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C35",
+      "valeur": "1uF",
+      "circuit_integre": "U1",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_stm32g431c6.pdf (DS12589 Rev 6) p.68 (figure 16 et encadre Caution : placer 'as close as possible to, or below, the appropriate pins') ; p.132 (VDDA : 'as close as possible to the chip'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Un 1uF sur VDDA (21) et un 1uF sur VREF+ (20) (figure 16 p.68 ; DES-002) ; les deux 1uF sont identiques et les broches 20 et 21 sont voisines ; le schema ne distingue pas lequel va ou. Indice non source : C30 a cote de C29 (10nF, VDDA), C35 a cote de C34 (100nF, VREF+).",
+      "broches_candidates": [
+        {
+          "nom": "VDDA",
+          "num": "21"
+        },
+        {
+          "nom": "VREF+",
+          "num": "20"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C19",
+      "valeur": "100nF",
+      "circuit_integre": "U2",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_lsm6dso.pdf (DS12140 Rev 3) p.34 (figure 21 et texte : 'decoupling capacitors (C1, C2 = 100 nF ceramic) should be placed as near as possible to the supply pin'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Un 100nF sur VDD (8) et un sur VDDIO (5) (figure 21 p.34) ; identiques, appariement libre.",
+      "broches_candidates": [
+        {
+          "nom": "VDD",
+          "num": "8"
+        },
+        {
+          "nom": "VDDIO",
+          "num": "5"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C20",
+      "valeur": "100nF",
+      "circuit_integre": "U2",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_lsm6dso.pdf (DS12140 Rev 3) p.34 (figure 21 et texte : 'decoupling capacitors (C1, C2 = 100 nF ceramic) should be placed as near as possible to the supply pin'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Un 100nF sur VDD (8) et un sur VDDIO (5) (figure 21 p.34) ; identiques, appariement libre.",
+      "broches_candidates": [
+        {
+          "nom": "VDD",
+          "num": "8"
+        },
+        {
+          "nom": "VDDIO",
+          "num": "5"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C22",
+      "valeur": "4.7uF",
+      "circuit_integre": "U3",
+      "broche_alimentation_nom": "AVDDVCSEL",
+      "broche_alimentation_num": "1",
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.6 (figure 3 : 'Capacitors as close as possible to VL53L1X' ; note : 'Place the capacitors on the external supply AVDD as close as possible to the AVDDVCSEL and AVSSVCSEL module pins'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "sur",
+      "note": "4.7uF de la figure 3 p.6, vers AVDDVCSEL(1)/AVSSVCSEL(2) ; retour masse par la broche 2."
+    },
+    {
+      "condensateur": "C23",
+      "valeur": "100nF",
+      "circuit_integre": "U3",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.6 (figure 3 : 'Capacitors as close as possible to VL53L1X' ; note : 'Place the capacitors on the external supply AVDD as close as possible to the AVDDVCSEL and AVSSVCSEL module pins'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Un 100nF avec le 4.7uF au plus pres de AVDDVCSEL(1) (figure 3 p.6) ; l'autre sur AVDD(11) est un ajout du projet absent de la fiche (DES-004). Identiques, appariement libre.",
+      "broches_candidates": [
+        {
+          "nom": "AVDDVCSEL",
+          "num": "1"
+        },
+        {
+          "nom": "AVDD",
+          "num": "11"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C24",
+      "valeur": "100nF",
+      "circuit_integre": "U3",
+      "broche_alimentation_nom": null,
+      "broche_alimentation_num": null,
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "DS_vl53l1x.pdf (DS12385 Rev 8) p.6 (figure 3 : 'Capacitors as close as possible to VL53L1X' ; note : 'Place the capacitors on the external supply AVDD as close as possible to the AVDDVCSEL and AVSSVCSEL module pins'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Un 100nF avec le 4.7uF au plus pres de AVDDVCSEL(1) (figure 3 p.6) ; l'autre sur AVDD(11) est un ajout du projet absent de la fiche (DES-004). Identiques, appariement libre.",
+      "broches_candidates": [
+        {
+          "nom": "AVDDVCSEL",
+          "num": "1"
+        },
+        {
+          "nom": "AVDD",
+          "num": "11"
+        }
+      ],
+      "appariement_libre_dans_groupe": true
+    },
+    {
+      "condensateur": "C11",
+      "valeur": "4.7uF",
+      "circuit_integre": "U5",
+      "broche_alimentation_nom": "VOUT",
+      "broche_alimentation_num": "2",
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "MCP1700.pdf (DS20001826C) p.10 (3.2 : 'positive side of the output capacitor should be physically located as close to the LDO VOUT pin as is practical'). Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "sur",
+      "note": "Condensateur de sortie du MCP1700 (stabilite : 1uF ceramique mini, p.1 et 12 d'apres DES-009)."
+    },
+    {
+      "condensateur": "C10",
+      "valeur": "1uF",
+      "circuit_integre": "U5",
+      "broche_alimentation_nom": "VIN",
+      "broche_alimentation_num": "3",
+      "reseau": "/VBATL",
+      "distance_max_mm": null,
+      "distance_source": "MCP1700.pdf p.10 (3.3 : 'amount of capacitance required ... depends on the proximity of the input source capacitors') ; Aucune valeur numerique en mm dans la fiche.",
+      "certitude": "a verifier",
+      "note": "Condensateur d'entree du MCP1700 ; la fiche ne dit pas 'au plus pres' pour l'entree, seulement impedance de source faible. Appariement U5/VIN sur."
+    },
+    {
+      "condensateur": "C13",
+      "valeur": "1uF",
+      "circuit_integre": "U6",
+      "broche_alimentation_nom": "VIN",
+      "broche_alimentation_num": "3",
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "XC6206.pdf (Torex ETR0305_004b) p.1 (circuit type : CIN 1.0uF et CL 1.0uF ceramique) ; aucune consigne de placement ni distance dans la fiche.",
+      "certitude": "sur",
+      "note": "CIN du XC6206 ; relie par fil direct a U6 broche 3 dans le schema."
+    },
+    {
+      "condensateur": "C14",
+      "valeur": "2.2uF",
+      "circuit_integre": "U6",
+      "broche_alimentation_nom": "VOUT",
+      "broche_alimentation_num": "2",
+      "reseau": "/DES-005 Flux optique et regulateur 2V0/+2V0",
+      "distance_max_mm": null,
+      "distance_source": "XC6206.pdf (Torex ETR0305_004b) p.1 (circuit type : CIN 1.0uF et CL 1.0uF ceramique) ; aucune consigne de placement ni distance dans la fiche.",
+      "certitude": "a verifier",
+      "note": "CL du XC6206 d'apres DES-005 (2.2uF en sortie, compatible avec CL=1.0uF de la fiche). Le schema relie U6 VOUT et U4 VDD sur la meme nappe : l'association a U6 vient de DES-005 et de l'ordre d'implantation, pas du cablage."
+    },
+    {
+      "condensateur": "C15",
+      "valeur": "1uF",
+      "circuit_integre": "U4",
+      "broche_alimentation_nom": "VDD",
+      "broche_alimentation_num": "2",
+      "reseau": "/DES-005 Flux optique et regulateur 2V0/+2V0",
+      "distance_max_mm": null,
+      "distance_source": "Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ (DOU-185 'Fiche du capteur de flux PMW3901MB absente du dossier des fiches' ; DES-005 cite v1.5 figure 7 p.12 d'apres DEC-289 'Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1' mais le fichier n'est pas present). Non verifie.",
+      "certitude": "a verifier",
+      "note": "VDD du PMW3901MB : 1uF + 100nF d'apres DES-005 ; valeurs de la fiche plus grandes (2x22uF + 100nF) : DOU-205 'PMW3901MB : condensateurs du schema de reference de la fiche et valeur illisible de R1'."
+    },
+    {
+      "condensateur": "C16",
+      "valeur": "100nF",
+      "circuit_integre": "U4",
+      "broche_alimentation_nom": "VDD",
+      "broche_alimentation_num": "2",
+      "reseau": "/DES-005 Flux optique et regulateur 2V0/+2V0",
+      "distance_max_mm": null,
+      "distance_source": "Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ (DOU-185 'Fiche du capteur de flux PMW3901MB absente du dossier des fiches' ; DES-005 cite v1.5 figure 7 p.12 d'apres DEC-289 'Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1' mais le fichier n'est pas present). Non verifie.",
+      "certitude": "a verifier",
+      "note": "Voir C15."
+    },
+    {
+      "condensateur": "C17",
+      "valeur": "100nF",
+      "circuit_integre": "U4",
+      "broche_alimentation_nom": "VDDIO",
+      "broche_alimentation_num": "3",
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ (DOU-185 'Fiche du capteur de flux PMW3901MB absente du dossier des fiches' ; DES-005 cite v1.5 figure 7 p.12 d'apres DEC-289 'Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1' mais le fichier n'est pas present). Non verifie.",
+      "certitude": "a verifier",
+      "note": "Relie par fil direct a U4 broche 3 dans le schema."
+    },
+    {
+      "condensateur": "C18",
+      "valeur": "2.2uF",
+      "circuit_integre": "U4",
+      "broche_alimentation_nom": "VREG",
+      "broche_alimentation_num": "4",
+      "reseau": "Net-(U4-VREG)",
+      "distance_max_mm": null,
+      "distance_source": "Fiche PMW3901MB ABSENTE de projets/boomrone/Datasheets/ (DOU-185 'Fiche du capteur de flux PMW3901MB absente du dossier des fiches' ; DES-005 cite v1.5 figure 7 p.12 d'apres DEC-289 'Fiches du 2026-11-04 : PMW3901MB, ferrite, diode SS34, buzzer et VL53L1' mais le fichier n'est pas present). Non verifie.",
+      "certitude": "a verifier",
+      "note": "Seul condensateur du reseau VREG (certain par la netlist) ; la fonction VREG (sortie du regulateur interne) vient de DES-005, fiche absente."
+    },
+    {
+      "condensateur": "C36",
+      "valeur": "10uF",
+      "circuit_integre": "U7",
+      "broche_alimentation_nom": "VDD",
+      "broche_alimentation_num": "8",
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "Fiche PB-03F ABSENTE de projets/boomrone/Datasheets/ (seules E104-BT02.pdf et E104-BT02_EN.pdf, ancien module remplace par DEC-288). DES-012 cite 'PB-03F Specification V1.0.1' p.15 ('10uF + 100nF au plus pres de VDD') ; valeurs a fixer : DOU-202 'PB-03F : circuit d'application, programmation du module et plots de test'. Non verifie.",
+      "certitude": "a verifier",
+      "note": "Relie par fil direct a U7 broche 8."
+    },
+    {
+      "condensateur": "C37",
+      "valeur": "100nF",
+      "circuit_integre": "U7",
+      "broche_alimentation_nom": "VDD",
+      "broche_alimentation_num": "8",
+      "reseau": "+3V0",
+      "distance_max_mm": null,
+      "distance_source": "Fiche PB-03F ABSENTE de projets/boomrone/Datasheets/ (seules E104-BT02.pdf et E104-BT02_EN.pdf, ancien module remplace par DEC-288). DES-012 cite 'PB-03F Specification V1.0.1' p.15 ('10uF + 100nF au plus pres de VDD') ; valeurs a fixer : DOU-202 'PB-03F : circuit d'application, programmation du module et plots de test'. Non verifie.",
+      "certitude": "a verifier",
+      "note": "Relie par fil direct a U7 broche 8."
+    }
+  ],
+  "hors_decouplage_proximite": [
+    {
+      "condensateur": "C1",
+      "valeur": "10nF",
+      "reseau": "/BTN",
+      "categorie": "filtrage (antirebond, constante de temps avec 1 kohm)",
+      "raison": "DES-010 'Circuit du bouton' : filtre RC de PB5, aucune alimentation."
+    },
+    {
+      "condensateur": "C2",
+      "valeur": "100nF",
+      "reseau": "/VBATM - Net-(D1-A)",
+      "categorie": "antiparasite aux bornes du moteur M1",
+      "raison": "DES-007 'Circuit de puissance des moteurs' : 100nF aux bornes du moteur ; a placer pres des bornes de M1 / D1 / Q1, pas pres d'un circuit integre."
+    },
+    {
+      "condensateur": "C3",
+      "valeur": "100nF",
+      "reseau": "/VBATM - Net-(D2-A)",
+      "categorie": "antiparasite aux bornes du moteur M2",
+      "raison": "Idem C2 (M2 / D2 / Q2)."
+    },
+    {
+      "condensateur": "C4",
+      "valeur": "100nF",
+      "reseau": "/VBATM - Net-(D3-A)",
+      "categorie": "antiparasite aux bornes du moteur M3",
+      "raison": "Idem C2 (M3 / D3 / Q3)."
+    },
+    {
+      "condensateur": "C5",
+      "valeur": "100nF",
+      "reseau": "/VBATM - Net-(D4-A)",
+      "categorie": "antiparasite aux bornes du moteur M4",
+      "raison": "Idem C2 (M4 / D4 / Q4)."
+    },
+    {
+      "condensateur": "C6",
+      "valeur": "22uF 25V",
+      "reseau": "/VBATM",
+      "categorie": "reservoir de la ligne moteurs",
+      "raison": "DES-007 : '2 x 22 uF sur la ligne moteurs' ; aucun circuit integre (les AO3400A sont des MOSFET de puissance)."
+    },
+    {
+      "condensateur": "C7",
+      "valeur": "22uF 25V",
+      "reseau": "/VBATM",
+      "categorie": "reservoir de la ligne moteurs",
+      "raison": "Idem C6."
+    },
+    {
+      "condensateur": "C9",
+      "valeur": "100nF",
+      "reseau": "/VBATM",
+      "categorie": "decouplage de rail moteurs",
+      "raison": "DES-007 : 100nF sur la ligne moteurs, avec C6/C7."
+    },
+    {
+      "condensateur": "C8",
+      "valeur": "22uF 25V",
+      "reseau": "/VBATL",
+      "categorie": "reservoir en tete de VBATL (apres ferrite FB1)",
+      "raison": "DES-008 : 22uF en tete de VBATL ; DES-009 : complete le 1uF d'entree (C10) du MCP1700 U5. Voir cas douteux Q5."
+    },
+    {
+      "condensateur": "C12",
+      "valeur": "100nF",
+      "reseau": "/VBAT_SENSE",
+      "categorie": "filtrage / reservoir de charge de l'ADC (PA0)",
+      "raison": "DES-009 : 100nF a la masse obligatoire sur PA0 (U1 broche 8), pas une broche d'alimentation ; proximite de PA0 souhaitable mais aucune distance relevee dans les fiches lues (cas douteux Q9)."
+    },
+    {
+      "condensateur": "C31",
+      "valeur": "100nF",
+      "reseau": "/DES-002 Microcontroleur STM32G431/NRST",
+      "categorie": "filtrage de reset (NRST, U1 broche 7)",
+      "raison": "DES-002 : NRST 100nF a la masse (figure 27 p.117 d'apres DES-002), pas une alimentation (cas douteux Q9)."
+    },
+    {
+      "condensateur": "C21",
+      "valeur": "10uF",
+      "reseau": "+3V0",
+      "categorie": "reservoir local de la centrale (U2), ajout du projet",
+      "raison": "DES-003 : '10 uF commun (ajout du projet, absent de la fiche)' ; la fiche DS12140 p.34 ne le prevoit pas, donc aucune consigne de proximite ; candidat a un couplage lache avec U2 VDD(8)/VDDIO(5) si l'architecte le decide."
+    }
+  ],
+  "cas_douteux": [
+    {
+      "id": "Q1",
+      "condensateurs": [
+        "C27",
+        "C32",
+        "C33",
+        "C34"
+      ],
+      "circuit_integre": "U1",
+      "question": "Quel 100nF va sur quelle broche (VDD 24, 36, 48, VREF+ 20) ? Le schema KiCad ne distingue pas (une seule nappe +3V0) et les valeurs sont identiques : faut-il laisser l'optimiseur choisir l'appariement (electriquement equivalent) ou figer un appariement ?"
+    },
+    {
+      "id": "Q2",
+      "condensateurs": [
+        "C30",
+        "C35"
+      ],
+      "circuit_integre": "U1",
+      "question": "Quel 1uF sur VDDA (21) et lequel sur VREF+ (20) ? Equivalents, broches voisines : appariement libre acceptable ?"
+    },
+    {
+      "id": "Q3",
+      "condensateurs": [
+        "C28"
+      ],
+      "circuit_integre": "U1",
+      "question": "Le 4.7uF commun des VDD (fiche figure 16 p.68, sans position) doit-il etre contraint a une broche VDD precise ou seulement au voisinage du boitier ?"
+    },
+    {
+      "id": "Q4",
+      "condensateurs": [
+        "C14"
+      ],
+      "circuit_integre": "U6 (ou U4)",
+      "question": "C14 2.2uF est la sortie du XC6206 d'apres DES-005, mais U6 VOUT et U4 VDD sont sur la meme nappe +2V0 : le contraindre a U6 broche 2 ou a U4 broche 2 ? La fiche XC6206 ne donne aucune consigne de placement."
+    },
+    {
+      "id": "Q5",
+      "condensateurs": [
+        "C8"
+      ],
+      "circuit_integre": "U5 / FB1",
+      "question": "Le 22uF de VBATL doit-il rester pres de la ferrite FB1 / du connecteur (reservoir d'entree) ou pres de U5 VIN (3) ? DES-009 le dit complementaire de C10 ; MCP1700 p.10 parle de proximite des condensateurs d'entree sans valeur."
+    },
+    {
+      "id": "Q6",
+      "condensateurs": [
+        "C15",
+        "C16",
+        "C17",
+        "C18"
+      ],
+      "circuit_integre": "U4",
+      "question": "Fiche PMW3901MB absente de Datasheets/ : fournir la version ANGLAISE pour confirmer broches VDD(2)/VDDIO(3)/VREG(4), valeurs (ecart DOU-205) et consigne de proximite."
+    },
+    {
+      "id": "Q7",
+      "condensateurs": [
+        "C36",
+        "C37"
+      ],
+      "circuit_integre": "U7",
+      "question": "Fiche PB-03F absente de Datasheets/ : fournir la version ANGLAISE (Specification V1.0.1) pour confirmer le circuit d'application p.15 et la consigne 'au plus pres' ; valeurs encore a fixer (DOU-202)."
+    },
+    {
+      "id": "Q8",
+      "condensateurs": [
+        "tous du tableau decouplage_proximite"
+      ],
+      "circuit_integre": "tous",
+      "question": "Aucune fiche lue ne donne de distance maximale en mm (STM32 'as close as possible', LSM6DSO 'as near as possible', VL53L1X 'as close as possible', MCP1700 'as practical') : quelle distance cible l'utilisateur veut-il imposer a la penalite (valeur de projet, non sourcee) ? Les champs distance_max_mm sont donc null."
+    },
+    {
+      "id": "Q9",
+      "condensateurs": [
+        "C12",
+        "C31"
+      ],
+      "circuit_integre": "U1",
+      "question": "Ajouter une penalite de proximite aussi pour ces deux filtres (C12 pres de PA0 broche 8, C31 pres de NRST broche 7) ? Hors decouplage d'alimentation, aucune distance dans les fiches lues."
+    }
+  ]
+}

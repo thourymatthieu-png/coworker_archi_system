@@ -1,0 +1,233 @@
+{
+ "piste": "kicad_tools_cmaes_fd_long",
+ "carte": "C:\\Users\\quent\\Documents\\codes\\coworker_archi_system\\projets\\boomrone\\hardware\\kicad\\proj_boomrone\\_bench_placement\\resultats\\kicad_tools_cmaes_fd_long\\placee.kicad_pcb",
+ "statique": {
+  "faisable_moteur": false,
+  "recouvrement_mm2": 94.42,
+  "hors_contour_mm2": 2.07,
+  "hpwl_mm": 2567.0,
+  "arbre_couvrant_mm": 2559.9,
+  "croisements_chevelu": 1128,
+  "vias_estimes": 564,
+  "surface_englobante_mm2": 3199.8,
+  "dispersion_blocs_mm": 17.17,
+  "decouplage_n": 23,
+  "decouplage_hors_5mm": 22,
+  "decouplage_excès_total_mm": 403.92,
+  "decouplage_distance_moy_mm": 22.51,
+  "decouplage_detail": [
+   {
+    "cap": "C27",
+    "ic": "U1",
+    "d_mm": 42.73,
+    "dmax_mm": 5.0,
+    "excès_mm": 37.73
+   },
+   {
+    "cap": "C32",
+    "ic": "U1",
+    "d_mm": 26.93,
+    "dmax_mm": 5.0,
+    "excès_mm": 21.93
+   },
+   {
+    "cap": "C33",
+    "ic": "U1",
+    "d_mm": 3.86,
+    "dmax_mm": 5.0,
+    "excès_mm": 0.0
+   },
+   {
+    "cap": "C34",
+    "ic": "U1",
+    "d_mm": 20.11,
+    "dmax_mm": 5.0,
+    "excès_mm": 15.11
+   },
+   {
+    "cap": "C28",
+    "ic": "U1",
+    "d_mm": 16.95,
+    "dmax_mm": 5.0,
+    "excès_mm": 11.95
+   },
+   {
+    "cap": "C29",
+    "ic": "U1",
+    "d_mm": 23.3,
+    "dmax_mm": 5.0,
+    "excès_mm": 18.3
+   },
+   {
+    "cap": "C30",
+    "ic": "U1",
+    "d_mm": 42.72,
+    "dmax_mm": 5.0,
+    "excès_mm": 37.72
+   },
+   {
+    "cap": "C35",
+    "ic": "U1",
+    "d_mm": 38.48,
+    "dmax_mm": 5.0,
+    "excès_mm": 33.48
+   },
+   {
+    "cap": "C19",
+    "ic": "U2",
+    "d_mm": 13.59,
+    "dmax_mm": 5.0,
+    "excès_mm": 8.59
+   },
+   {
+    "cap": "C20",
+    "ic": "U2",
+    "d_mm": 19.37,
+    "dmax_mm": 5.0,
+    "excès_mm": 14.37
+   },
+   {
+    "cap": "C22",
+    "ic": "U3",
+    "d_mm": 17.56,
+    "dmax_mm": 5.0,
+    "excès_mm": 12.56
+   },
+   {
+    "cap": "C23",
+    "ic": "U3",
+    "d_mm": 34.2,
+    "dmax_mm": 5.0,
+    "excès_mm": 29.2
+   },
+   {
+    "cap": "C24",
+    "ic": "U3",
+    "d_mm": 22.87,
+    "dmax_mm": 5.0,
+    "excès_mm": 17.87
+   },
+   {
+    "cap": "C11",
+    "ic": "U5",
+    "d_mm": 30.0,
+    "dmax_mm": 5.0,
+    "excès_mm": 25.0
+   },
+   {
+    "cap": "C10",
+    "ic": "U5",
+    "d_mm": 23.09,
+    "dmax_mm": 5.0,
+    "excès_mm": 18.09
+   },
+   {
+    "cap": "C13",
+    "ic": "U6",
+    "d_mm": 20.13,
+    "dmax_mm": 5.0,
+    "excès_mm": 15.13
+   },
+   {
+    "cap": "C14",
+    "ic": "U6",
+    "d_mm": 5.23,
+    "dmax_mm": 5.0,
+    "excès_mm": 0.23
+   },
+   {
+    "cap": "C15",
+    "ic": "U4",
+    "d_mm": 30.08,
+    "dmax_mm": 5.0,
+    "excès_mm": 25.08
+   },
+   {
+    "cap": "C16",
+    "ic": "U4",
+    "d_mm": 5.27,
+    "dmax_mm": 5.0,
+    "excès_mm": 0.27
+   },
+   {
+    "cap": "C17",
+    "ic": "U4",
+    "d_mm": 20.83,
+    "dmax_mm": 5.0,
+    "excès_mm": 15.83
+   },
+   {
+    "cap": "C18",
+    "ic": "U4",
+    "d_mm": 20.56,
+    "dmax_mm": 5.0,
+    "excès_mm": 15.56
+   },
+   {
+    "cap": "C36",
+    "ic": "U7",
+    "d_mm": 8.07,
+    "dmax_mm": 5.0,
+    "excès_mm": 3.07
+   },
+   {
+    "cap": "C37",
+    "ic": "U7",
+    "d_mm": 31.85,
+    "dmax_mm": 5.0,
+    "excès_mm": 26.85
+   }
+  ],
+  "regles_excès_mm": {
+   "proximite U2": 0.0,
+   "I-01": 46.4,
+   "I-02": 28.21,
+   "I-03": 18.56
+  },
+  "integrite": {
+   "manquants": [],
+   "en_trop": [],
+   "ancres_bougees": [],
+   "verrous_perdus": [],
+   "faces_changees": [],
+   "u2_rotation_deg": 0.0,
+   "u2_rotation_ok": true,
+   "ancres_reference": [
+    "J1",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "U2",
+    "U7"
+   ]
+  },
+  "drc_par_type": {
+   "silk_over_copper": 76,
+   "silk_overlap": 68,
+   "courtyards_overlap": 34,
+   "clearance": 15,
+   "silk_edge_clearance": 14,
+   "copper_edge_clearance": 9,
+   "lib_footprint_issues": 9,
+   "shorting_items": 2,
+   "pth_inside_courtyard": 2,
+   "solder_mask_bridge": 2,
+   "lib_footprint_mismatch": 1
+  },
+  "drc_courtyard": 34,
+  "drc_defauts_placement": {
+   "courtyards_overlap": 34,
+   "shorting_items": 2,
+   "clearance": 1,
+   "copper_edge_clearance": 9,
+   "solder_mask_bridge": 2,
+   "pth_inside_courtyard": 2
+  },
+  "drc_defauts_total": 50,
+  "non_connectes_initial": 228,
+  "valide": false,
+  "valide_cuivre": false
+ },
+ "date_statique": "2026-11-06 14:14"
+}

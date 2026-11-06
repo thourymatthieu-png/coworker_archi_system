@@ -1,0 +1,552 @@
+{
+  "source_pcb": "C:\\Users\\quent\\Documents\\codes\\coworker_archi_system\\projets\\boomrone\\hardware\\kicad\\proj_boomrone\\_bench_placement\\resultats\\moteur_maison\\depart.kicad_pcb",
+  "positions": {
+    "C9": {
+      "x_mm": 12.8803,
+      "y_mm": 0.7703,
+      "rotation_deg": 180
+    },
+    "R4": {
+      "x_mm": 9.7248,
+      "y_mm": 10.0437,
+      "rotation_deg": 270
+    },
+    "TP11": {
+      "x_mm": 11.8303,
+      "y_mm": 39.5222,
+      "rotation_deg": 0
+    },
+    "Q8": {
+      "x_mm": 18.8352,
+      "y_mm": 24.3044,
+      "rotation_deg": 90
+    },
+    "Q5": {
+      "x_mm": 24.5274,
+      "y_mm": 9.0703,
+      "rotation_deg": 0
+    },
+    "R22": {
+      "x_mm": 32.5358,
+      "y_mm": 13.9421,
+      "rotation_deg": 270
+    },
+    "U6": {
+      "x_mm": 17.2243,
+      "y_mm": 3.0658,
+      "rotation_deg": 270
+    },
+    "R18": {
+      "x_mm": 12.8556,
+      "y_mm": 15.5234,
+      "rotation_deg": 180
+    },
+    "M3": {
+      "x_mm": 47.5,
+      "y_mm": 8.4,
+      "rotation_deg": 90.0
+    },
+    "R7": {
+      "x_mm": 10.6525,
+      "y_mm": 43.5149,
+      "rotation_deg": 270
+    },
+    "U1": {
+      "x_mm": 36.2862,
+      "y_mm": 22.1416,
+      "rotation_deg": 90
+    },
+    "R14": {
+      "x_mm": 21.6167,
+      "y_mm": 17.5452,
+      "rotation_deg": 270
+    },
+    "D1": {
+      "x_mm": 9.166,
+      "y_mm": 47.4176,
+      "rotation_deg": 0
+    },
+    "D3": {
+      "x_mm": 46.1196,
+      "y_mm": 14.1708,
+      "rotation_deg": 270
+    },
+    "R21": {
+      "x_mm": 16.1414,
+      "y_mm": 15.9234,
+      "rotation_deg": 180
+    },
+    "R31": {
+      "x_mm": 39.8958,
+      "y_mm": 32.8125,
+      "rotation_deg": 90
+    },
+    "R19": {
+      "x_mm": 21.5431,
+      "y_mm": 11.5214,
+      "rotation_deg": 270
+    },
+    "TP8": {
+      "x_mm": 18.6662,
+      "y_mm": 20.6995,
+      "rotation_deg": 0
+    },
+    "C29": {
+      "x_mm": 30.0605,
+      "y_mm": 23.3452,
+      "rotation_deg": 90
+    },
+    "C24": {
+      "x_mm": 23.3302,
+      "y_mm": 14.9115,
+      "rotation_deg": 180
+    },
+    "C28": {
+      "x_mm": 42.7678,
+      "y_mm": 17.0279,
+      "rotation_deg": 270
+    },
+    "U5": {
+      "x_mm": 22.9399,
+      "y_mm": 31.2849,
+      "rotation_deg": 90
+    },
+    "C34": {
+      "x_mm": 33.2952,
+      "y_mm": 29.7234,
+      "rotation_deg": 90
+    },
+    "C10": {
+      "x_mm": 19.9807,
+      "y_mm": 30.6769,
+      "rotation_deg": 90
+    },
+    "C11": {
+      "x_mm": 20.0233,
+      "y_mm": 34.5594,
+      "rotation_deg": 180
+    },
+    "TP1": {
+      "x_mm": 5.9931,
+      "y_mm": 2.6867,
+      "rotation_deg": 0
+    },
+    "C5": {
+      "x_mm": 37.9663,
+      "y_mm": 47.0398,
+      "rotation_deg": 90
+    },
+    "Q4": {
+      "x_mm": 42.8134,
+      "y_mm": 40.0628,
+      "rotation_deg": 180
+    },
+    "C18": {
+      "x_mm": 27.5055,
+      "y_mm": 8.9515,
+      "rotation_deg": 90
+    },
+    "C32": {
+      "x_mm": 38.6982,
+      "y_mm": 15.9119,
+      "rotation_deg": 180
+    },
+    "C21": {
+      "x_mm": 25.9845,
+      "y_mm": 17.3854,
+      "rotation_deg": 270
+    },
+    "C15": {
+      "x_mm": 35.255,
+      "y_mm": 4.905,
+      "rotation_deg": 180
+    },
+    "C4": {
+      "x_mm": 43.6933,
+      "y_mm": 2.3235,
+      "rotation_deg": 180
+    },
+    "U3": {
+      "x_mm": 38.4366,
+      "y_mm": 9.8883,
+      "rotation_deg": 270
+    },
+    "D2": {
+      "x_mm": 15.6897,
+      "y_mm": 37.3622,
+      "rotation_deg": 270
+    },
+    "C37": {
+      "x_mm": 17.8883,
+      "y_mm": 31.708,
+      "rotation_deg": 270
+    },
+    "J2": {
+      "x_mm": 43.688,
+      "y_mm": 30.7422,
+      "rotation_deg": 180
+    },
+    "C35": {
+      "x_mm": 30.1031,
+      "y_mm": 19.5002,
+      "rotation_deg": 270
+    },
+    "R20": {
+      "x_mm": 26.5822,
+      "y_mm": 30.1697,
+      "rotation_deg": 0
+    },
+    "TP10": {
+      "x_mm": 3.5405,
+      "y_mm": 13.9555,
+      "rotation_deg": 0
+    },
+    "C30": {
+      "x_mm": 28.2746,
+      "y_mm": 19.6963,
+      "rotation_deg": 270
+    },
+    "C36": {
+      "x_mm": 17.884,
+      "y_mm": 28.1072,
+      "rotation_deg": 270
+    },
+    "LED1": {
+      "x_mm": 2.3957,
+      "y_mm": 11.4171,
+      "rotation_deg": 0
+    },
+    "R28": {
+      "x_mm": 35.6423,
+      "y_mm": 14.1494,
+      "rotation_deg": 0
+    },
+    "TP6": {
+      "x_mm": 12.5511,
+      "y_mm": 3.6892,
+      "rotation_deg": 180
+    },
+    "Q7": {
+      "x_mm": 6.9413,
+      "y_mm": 13.3291,
+      "rotation_deg": 270
+    },
+    "Q3": {
+      "x_mm": 39.1942,
+      "y_mm": 3.9905,
+      "rotation_deg": 270
+    },
+    "C22": {
+      "x_mm": 41.1742,
+      "y_mm": 8.0684,
+      "rotation_deg": 270
+    },
+    "R30": {
+      "x_mm": 39.8262,
+      "y_mm": 40.2493,
+      "rotation_deg": 270
+    },
+    "C12": {
+      "x_mm": 27.0018,
+      "y_mm": 32.6906,
+      "rotation_deg": 90
+    },
+    "D4": {
+      "x_mm": 41.1348,
+      "y_mm": 45.8247,
+      "rotation_deg": 270
+    },
+    "SW1": {
+      "x_mm": 7.8643,
+      "y_mm": 6.1652,
+      "rotation_deg": 0
+    },
+    "R17": {
+      "x_mm": 9.2695,
+      "y_mm": 34.0945,
+      "rotation_deg": 0
+    },
+    "TP4": {
+      "x_mm": 21.5862,
+      "y_mm": 20.6936,
+      "rotation_deg": 270
+    },
+    "TP5": {
+      "x_mm": 31.8144,
+      "y_mm": 2.444,
+      "rotation_deg": 90
+    },
+    "TP7": {
+      "x_mm": 19.2312,
+      "y_mm": 17.7869,
+      "rotation_deg": 270
+    },
+    "C8": {
+      "x_mm": 33.321,
+      "y_mm": 39.7026,
+      "rotation_deg": 270
+    },
+    "TP2": {
+      "x_mm": 6.7928,
+      "y_mm": 9.6259,
+      "rotation_deg": 270
+    },
+    "C31": {
+      "x_mm": 43.8334,
+      "y_mm": 33.5881,
+      "rotation_deg": 180
+    },
+    "M4": {
+      "x_mm": 47.5,
+      "y_mm": 47.4,
+      "rotation_deg": 90.0
+    },
+    "C3": {
+      "x_mm": 12.4878,
+      "y_mm": 43.7684,
+      "rotation_deg": 270
+    },
+    "TP3": {
+      "x_mm": 42.7173,
+      "y_mm": 4.7318,
+      "rotation_deg": 270
+    },
+    "R10": {
+      "x_mm": 27.0326,
+      "y_mm": 36.2107,
+      "rotation_deg": 180
+    },
+    "C19": {
+      "x_mm": 26.013,
+      "y_mm": 21.176,
+      "rotation_deg": 90
+    },
+    "M1": {
+      "x_mm": 2.5,
+      "y_mm": 47.4,
+      "rotation_deg": 90.0
+    },
+    "C33": {
+      "x_mm": 30.3568,
+      "y_mm": 28.4516,
+      "rotation_deg": 180
+    },
+    "BZ1": {
+      "x_mm": 15.88,
+      "y_mm": 9.9661,
+      "rotation_deg": 0
+    },
+    "D5": {
+      "x_mm": 23.0826,
+      "y_mm": 1.9764,
+      "rotation_deg": 180
+    },
+    "C13": {
+      "x_mm": 9.3262,
+      "y_mm": 3.0102,
+      "rotation_deg": 180
+    },
+    "R12": {
+      "x_mm": 31.9032,
+      "y_mm": 4.9283,
+      "rotation_deg": 0
+    },
+    "TP9": {
+      "x_mm": 6.0692,
+      "y_mm": 34.8887,
+      "rotation_deg": 0
+    },
+    "R1": {
+      "x_mm": 28.6043,
+      "y_mm": 16.5474,
+      "rotation_deg": 180
+    },
+    "U4": {
+      "x_mm": 31.6402,
+      "y_mm": 8.9631,
+      "rotation_deg": 0
+    },
+    "J1": {
+      "x_mm": 25.0,
+      "y_mm": 43.5,
+      "rotation_deg": 0.0
+    },
+    "R6": {
+      "x_mm": 44.3735,
+      "y_mm": 46.5096,
+      "rotation_deg": 270
+    },
+    "R26": {
+      "x_mm": 43.1933,
+      "y_mm": 12.0409,
+      "rotation_deg": 270
+    },
+    "R29": {
+      "x_mm": 43.6338,
+      "y_mm": 7.7842,
+      "rotation_deg": 90
+    },
+    "R15": {
+      "x_mm": 10.1937,
+      "y_mm": 13.4812,
+      "rotation_deg": 90
+    },
+    "R13": {
+      "x_mm": 11.9621,
+      "y_mm": 34.8345,
+      "rotation_deg": 90
+    },
+    "C20": {
+      "x_mm": 24.0777,
+      "y_mm": 21.0225,
+      "rotation_deg": 90
+    },
+    "R16": {
+      "x_mm": 0.8606,
+      "y_mm": 14.0466,
+      "rotation_deg": 270
+    },
+    "R11": {
+      "x_mm": 21.6685,
+      "y_mm": 23.9092,
+      "rotation_deg": 90
+    },
+    "C17": {
+      "x_mm": 29.1821,
+      "y_mm": 3.8085,
+      "rotation_deg": 270
+    },
+    "C16": {
+      "x_mm": 26.229,
+      "y_mm": 5.5638,
+      "rotation_deg": 180
+    },
+    "C1": {
+      "x_mm": 20.4277,
+      "y_mm": 27.3185,
+      "rotation_deg": 0
+    },
+    "R5": {
+      "x_mm": 35.7046,
+      "y_mm": 8.2104,
+      "rotation_deg": 90
+    },
+    "R8": {
+      "x_mm": 9.2342,
+      "y_mm": 1.1686,
+      "rotation_deg": 180
+    },
+    "C7": {
+      "x_mm": 41.9289,
+      "y_mm": 36.8532,
+      "rotation_deg": 0
+    },
+    "Q1": {
+      "x_mm": 7.5807,
+      "y_mm": 43.1106,
+      "rotation_deg": 180
+    },
+    "C14": {
+      "x_mm": 26.9763,
+      "y_mm": 13.9269,
+      "rotation_deg": 90
+    },
+    "R24": {
+      "x_mm": 24.1597,
+      "y_mm": 17.5818,
+      "rotation_deg": 90
+    },
+    "C27": {
+      "x_mm": 27.9861,
+      "y_mm": 23.7516,
+      "rotation_deg": 90
+    },
+    "R23": {
+      "x_mm": 21.5564,
+      "y_mm": 7.8178,
+      "rotation_deg": 90
+    },
+    "C23": {
+      "x_mm": 41.3953,
+      "y_mm": 11.5757,
+      "rotation_deg": 90
+    },
+    "R3": {
+      "x_mm": 37.5641,
+      "y_mm": 37.1733,
+      "rotation_deg": 180
+    },
+    "R2": {
+      "x_mm": 24.4348,
+      "y_mm": 12.9697,
+      "rotation_deg": 0
+    },
+    "U2": {
+      "x_mm": 25.0,
+      "y_mm": 25.0,
+      "rotation_deg": 0.0
+    },
+    "C2": {
+      "x_mm": 7.6798,
+      "y_mm": 40.154,
+      "rotation_deg": 0
+    },
+    "M2": {
+      "x_mm": 2.5,
+      "y_mm": 8.4,
+      "rotation_deg": 90.0
+    },
+    "R27": {
+      "x_mm": 29.0056,
+      "y_mm": 13.786,
+      "rotation_deg": 90
+    },
+    "Q2": {
+      "x_mm": 35.075,
+      "y_mm": 1.905,
+      "rotation_deg": 270
+    },
+    "FB1": {
+      "x_mm": 33.199,
+      "y_mm": 44.6048,
+      "rotation_deg": 270
+    },
+    "Q6": {
+      "x_mm": 2.1473,
+      "y_mm": 35.5512,
+      "rotation_deg": 180
+    },
+    "R9": {
+      "x_mm": 22.3538,
+      "y_mm": 4.7665,
+      "rotation_deg": 180
+    },
+    "R25": {
+      "x_mm": 30.7658,
+      "y_mm": 13.7729,
+      "rotation_deg": 270
+    },
+    "U7": {
+      "x_mm": 9.0,
+      "y_mm": 25.0,
+      "rotation_deg": 90.0
+    },
+    "C6": {
+      "x_mm": 37.2542,
+      "y_mm": 41.6707,
+      "rotation_deg": 90
+    }
+  },
+  "metrics": {
+    "total_cost": 4694.516565430886,
+    "area_mm2": 3142.1737499999995,
+    "wirelength_mm": 1449.8505140017562,
+    "congestion": 579.8773314824276,
+    "crossings": 365,
+    "vias_estimate": 182,
+    "overlap_mm2": 0.0,
+    "feasible": true,
+    "seed_retenue": 0,
+    "temps_calcul_s": 454.35893988609314
+  }
+}

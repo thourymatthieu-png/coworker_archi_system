@@ -1,0 +1,29 @@
+{
+  "weight_area": 1.0,
+  "weight_wirelength": 0.5,
+  "weight_congestion": 0.3,
+  "weight_crossings": 0.4,
+  "weight_accessibility": 0.2,
+  "weight_vias": 0.6,
+  "min_clearance_mm": 0.3,
+  "overlap_penalty_weight": 1000.0,
+  "max_group_size": 25,
+  "fd_iterations_group": 300,
+  "fd_iterations_assembly": 150,
+  "sa_group_iterations": 1500,
+  "sa_group_t0": 8.0,
+  "sa_block_iterations": 2000,
+  "sa_block_t0": 10.0,
+  "sa_global_iterations": 3000,
+  "sa_global_t0": 1.5,
+  "sa_t_end": 0.05,
+  "block_move_prob": 0.4,
+  "stopping": {
+    "max_cycles": 2,
+    "no_improve_cycles": 1,
+    "time_budget_s": 600
+  },
+  "n_parallel_strategies": 10,
+  "n_candidates_per_cycle": 1,
+  "random_seed": 0
+}

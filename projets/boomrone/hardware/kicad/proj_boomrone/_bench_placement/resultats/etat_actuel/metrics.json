@@ -1,0 +1,242 @@
+{
+ "piste": "etat_actuel",
+ "carte": "C:\\Users\\quent\\Documents\\codes\\coworker_archi_system\\projets\\boomrone\\hardware\\kicad\\proj_boomrone\\_bench_placement\\resultats\\etat_actuel\\placee.kicad_pcb",
+ "statique": {
+  "faisable_moteur": false,
+  "recouvrement_mm2": 0.0,
+  "hors_contour_mm2": 942.0,
+  "hpwl_mm": 3796.7,
+  "arbre_couvrant_mm": 3436.5,
+  "croisements_chevelu": 452,
+  "vias_estimes": 226,
+  "surface_englobante_mm2": 22120.1,
+  "dispersion_blocs_mm": 6.79,
+  "decouplage_n": 23,
+  "decouplage_hors_5mm": 20,
+  "decouplage_excès_total_mm": 646.29,
+  "decouplage_distance_moy_mm": 33.03,
+  "decouplage_detail": [
+   {
+    "cap": "C27",
+    "ic": "U1",
+    "d_mm": 12.92,
+    "dmax_mm": 5.0,
+    "excès_mm": 7.92
+   },
+   {
+    "cap": "C32",
+    "ic": "U1",
+    "d_mm": 13.02,
+    "dmax_mm": 5.0,
+    "excès_mm": 8.02
+   },
+   {
+    "cap": "C33",
+    "ic": "U1",
+    "d_mm": 10.55,
+    "dmax_mm": 5.0,
+    "excès_mm": 5.55
+   },
+   {
+    "cap": "C34",
+    "ic": "U1",
+    "d_mm": 8.12,
+    "dmax_mm": 5.0,
+    "excès_mm": 3.12
+   },
+   {
+    "cap": "C28",
+    "ic": "U1",
+    "d_mm": 10.44,
+    "dmax_mm": 5.0,
+    "excès_mm": 5.44
+   },
+   {
+    "cap": "C29",
+    "ic": "U1",
+    "d_mm": 17.09,
+    "dmax_mm": 5.0,
+    "excès_mm": 12.09
+   },
+   {
+    "cap": "C30",
+    "ic": "U1",
+    "d_mm": 14.56,
+    "dmax_mm": 5.0,
+    "excès_mm": 9.56
+   },
+   {
+    "cap": "C35",
+    "ic": "U1",
+    "d_mm": 13.65,
+    "dmax_mm": 5.0,
+    "excès_mm": 8.65
+   },
+   {
+    "cap": "C19",
+    "ic": "U2",
+    "d_mm": 130.71,
+    "dmax_mm": 5.0,
+    "excès_mm": 125.71
+   },
+   {
+    "cap": "C20",
+    "ic": "U2",
+    "d_mm": 131.57,
+    "dmax_mm": 5.0,
+    "excès_mm": 126.57
+   },
+   {
+    "cap": "C22",
+    "ic": "U3",
+    "d_mm": 4.44,
+    "dmax_mm": 5.0,
+    "excès_mm": 0.0
+   },
+   {
+    "cap": "C23",
+    "ic": "U3",
+    "d_mm": 4.64,
+    "dmax_mm": 5.0,
+    "excès_mm": 0.0
+   },
+   {
+    "cap": "C24",
+    "ic": "U3",
+    "d_mm": 5.63,
+    "dmax_mm": 5.0,
+    "excès_mm": 0.63
+   },
+   {
+    "cap": "C11",
+    "ic": "U5",
+    "d_mm": 4.34,
+    "dmax_mm": 5.0,
+    "excès_mm": 0.0
+   },
+   {
+    "cap": "C10",
+    "ic": "U5",
+    "d_mm": 6.25,
+    "dmax_mm": 5.0,
+    "excès_mm": 1.25
+   },
+   {
+    "cap": "C13",
+    "ic": "U6",
+    "d_mm": 16.42,
+    "dmax_mm": 5.0,
+    "excès_mm": 11.42
+   },
+   {
+    "cap": "C14",
+    "ic": "U6",
+    "d_mm": 14.32,
+    "dmax_mm": 5.0,
+    "excès_mm": 9.32
+   },
+   {
+    "cap": "C15",
+    "ic": "U4",
+    "d_mm": 19.81,
+    "dmax_mm": 5.0,
+    "excès_mm": 14.81
+   },
+   {
+    "cap": "C16",
+    "ic": "U4",
+    "d_mm": 20.13,
+    "dmax_mm": 5.0,
+    "excès_mm": 15.13
+   },
+   {
+    "cap": "C17",
+    "ic": "U4",
+    "d_mm": 20.57,
+    "dmax_mm": 5.0,
+    "excès_mm": 15.57
+   },
+   {
+    "cap": "C18",
+    "ic": "U4",
+    "d_mm": 21.15,
+    "dmax_mm": 5.0,
+    "excès_mm": 16.15
+   },
+   {
+    "cap": "C36",
+    "ic": "U7",
+    "d_mm": 128.87,
+    "dmax_mm": 5.0,
+    "excès_mm": 123.87
+   },
+   {
+    "cap": "C37",
+    "ic": "U7",
+    "d_mm": 130.51,
+    "dmax_mm": 5.0,
+    "excès_mm": 125.51
+   }
+  ],
+  "regles_excès_mm": {
+   "proximite U2": 0.0,
+   "I-01": 0.72,
+   "I-02": 0.0,
+   "I-03": 2.6
+  },
+  "integrite": {
+   "manquants": [],
+   "en_trop": [],
+   "ancres_bougees": [],
+   "verrous_perdus": [],
+   "faces_changees": [],
+   "u2_rotation_deg": 0.0,
+   "u2_rotation_ok": true,
+   "ancres_reference": [
+    "J1",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "U2",
+    "U7"
+   ]
+  },
+  "drc_par_type": {
+   "clearance": 14,
+   "silk_edge_clearance": 10,
+   "lib_footprint_issues": 9,
+   "lib_footprint_mismatch": 1
+  },
+  "drc_courtyard": 0,
+  "drc_defauts_placement": {
+   "courtyards_overlap": 0,
+   "shorting_items": 0,
+   "clearance": 0,
+   "copper_edge_clearance": 0,
+   "solder_mask_bridge": 0,
+   "pth_inside_courtyard": 0
+  },
+  "drc_defauts_total": 0,
+  "non_connectes_initial": 228,
+  "valide": false,
+  "valide_cuivre": false
+ },
+ "date_statique": "2026-11-06 14:13",
+ "routage": {
+  "statut": "termine",
+  "duree_s": 29.3,
+  "passes_max": 3,
+  "non_connectes_avant": 228,
+  "non_connectes_apres": 10,
+  "proportion_routee": 0.956,
+  "longueur_pistes_mm": 3916.89,
+  "vias": 133,
+  "erreurs_drc_routage": {
+   "via_dangling": 15,
+   "clearance": 14,
+   "copper_edge_clearance": 13
+  }
+ },
+ "date_routage": "2026-11-06 13:36"
+}

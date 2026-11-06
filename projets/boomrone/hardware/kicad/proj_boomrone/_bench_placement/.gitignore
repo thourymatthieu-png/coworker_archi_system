@@ -1,0 +1,8 @@
+# Outils installés ou téléchargés par les agents (venv, sources clonées, compilations) : régénérables
+resultats/*/_outils/
+# Copie du projet préparée pour Quilter (régénérable, voir resultats/quilter/RAPPORT.md) et son archive
+resultats/quilter/paquet/
+# Verrous du banc (transitoires)
+verrous/
+# Caches Python
+__pycache__/

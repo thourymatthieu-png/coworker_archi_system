@@ -1,0 +1,756 @@
+{
+ "footprints": {
+  "C9": {
+   "x": 106.155,
+   "y": 97.995,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R4": {
+   "x": 110.165,
+   "y": 90.465,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP11": {
+   "x": 95.275,
+   "y": 96.375,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q8": {
+   "x": 121.605,
+   "y": 109.975,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q5": {
+   "x": 121.605,
+   "y": 96.625,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R22": {
+   "x": 121.155,
+   "y": 130.685,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "U6": {
+   "x": 125.615,
+   "y": 130.845,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R18": {
+   "x": 130.075,
+   "y": 103.185,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "M3": {
+   "x": 47.5,
+   "y": 8.4,
+   "rot": 90.0,
+   "locked": true,
+   "layer": "F.Cu"
+  },
+  "R7": {
+   "x": 110.165,
+   "y": 97.995,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "U1": {
+   "x": 129.415,
+   "y": 86.725,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R14": {
+   "x": 126.065,
+   "y": 108.205,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "D1": {
+   "x": 108.22,
+   "y": 70.775,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "D3": {
+   "x": 108.22,
+   "y": 79.875,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R21": {
+   "x": 139.095,
+   "y": 79.795,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R31": {
+   "x": 129.755,
+   "y": 79.795,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R19": {
+   "x": 130.075,
+   "y": 105.695,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP8": {
+   "x": 113.775,
+   "y": 106.575,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C29": {
+   "x": 125.745,
+   "y": 74.775,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C24": {
+   "x": 146.235,
+   "y": 100.675,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C28": {
+   "x": 125.745,
+   "y": 72.265,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "U5": {
+   "x": 143.555,
+   "y": 70.725,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C34": {
+   "x": 129.755,
+   "y": 74.775,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C10": {
+   "x": 139.095,
+   "y": 69.755,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C11": {
+   "x": 139.095,
+   "y": 72.265,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP1": {
+   "x": 124.935,
+   "y": 116.145,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C5": {
+   "x": 106.155,
+   "y": 95.485,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q4": {
+   "x": 114.695,
+   "y": 84.075,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C18": {
+   "x": 121.155,
+   "y": 128.175,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C32": {
+   "x": 129.755,
+   "y": 69.755,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C21": {
+   "x": 150.015,
+   "y": 74.775,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C15": {
+   "x": 121.155,
+   "y": 120.645,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C4": {
+   "x": 106.155,
+   "y": 92.975,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "U3": {
+   "x": 151.63,
+   "y": 96.59,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "D2": {
+   "x": 108.22,
+   "y": 75.325,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C37": {
+   "x": 114.005,
+   "y": 119.215,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "J2": {
+   "x": 121.445,
+   "y": 70.795,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C35": {
+   "x": 129.755,
+   "y": 77.285,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R20": {
+   "x": 139.095,
+   "y": 77.285,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP10": {
+   "x": 113.775,
+   "y": 113.675,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C30": {
+   "x": 125.745,
+   "y": 77.285,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C36": {
+   "x": 114.005,
+   "y": 116.705,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "LED1": {
+   "x": 125.525,
+   "y": 110.915,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R28": {
+   "x": 146.235,
+   "y": 110.715,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP6": {
+   "x": 132.035,
+   "y": 119.695,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q7": {
+   "x": 121.605,
+   "y": 105.525,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q3": {
+   "x": 114.695,
+   "y": 79.625,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C22": {
+   "x": 146.235,
+   "y": 95.655,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R30": {
+   "x": 114.175,
+   "y": 92.975,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C12": {
+   "x": 139.095,
+   "y": 74.775,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "D4": {
+   "x": 108.22,
+   "y": 84.425,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "SW1": {
+   "x": 144.625,
+   "y": 85.325,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R17": {
+   "x": 130.075,
+   "y": 100.675,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP4": {
+   "x": 128.485,
+   "y": 119.695,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP5": {
+   "x": 132.035,
+   "y": 116.145,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP7": {
+   "x": 113.775,
+   "y": 103.025,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C8": {
+   "x": 138.635,
+   "y": 131.565,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP2": {
+   "x": 124.935,
+   "y": 119.695,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C31": {
+   "x": 125.745,
+   "y": 79.795,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "M4": {
+   "x": 47.5,
+   "y": 47.4,
+   "rot": 90.0,
+   "locked": true,
+   "layer": "F.Cu"
+  },
+  "C3": {
+   "x": 106.155,
+   "y": 90.465,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP3": {
+   "x": 128.485,
+   "y": 116.145,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R10": {
+   "x": 126.065,
+   "y": 98.165,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C19": {
+   "x": 150.015,
+   "y": 69.755,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "M1": {
+   "x": 2.5,
+   "y": 47.4,
+   "rot": 90.0,
+   "locked": true,
+   "layer": "F.Cu"
+  },
+  "C33": {
+   "x": 129.755,
+   "y": 72.265,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "BZ1": {
+   "x": 137.155,
+   "y": 101.1,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "D5": {
+   "x": 136.15,
+   "y": 110.075,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C13": {
+   "x": 121.155,
+   "y": 115.625,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R12": {
+   "x": 126.065,
+   "y": 103.185,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "TP9": {
+   "x": 113.775,
+   "y": 110.125,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R1": {
+   "x": 139.095,
+   "y": 86.815,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "U4": {
+   "x": 142.8,
+   "y": 120.65,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "J1": {
+   "x": 25.0,
+   "y": 43.5,
+   "rot": 0.0,
+   "locked": true,
+   "layer": "F.Cu"
+  },
+  "R6": {
+   "x": 110.165,
+   "y": 95.485,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R26": {
+   "x": 146.235,
+   "y": 105.695,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R29": {
+   "x": 114.175,
+   "y": 90.465,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R15": {
+   "x": 130.075,
+   "y": 95.655,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R13": {
+   "x": 126.065,
+   "y": 105.695,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C20": {
+   "x": 150.015,
+   "y": 72.265,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R16": {
+   "x": 130.075,
+   "y": 98.165,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R11": {
+   "x": 126.065,
+   "y": 100.675,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C17": {
+   "x": 121.155,
+   "y": 125.665,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C16": {
+   "x": 121.155,
+   "y": 123.155,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C1": {
+   "x": 139.095,
+   "y": 84.305,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R5": {
+   "x": 110.165,
+   "y": 92.975,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R8": {
+   "x": 114.175,
+   "y": 87.955,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C7": {
+   "x": 96.325,
+   "y": 92.925,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q1": {
+   "x": 114.695,
+   "y": 70.725,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C14": {
+   "x": 121.155,
+   "y": 118.135,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R24": {
+   "x": 150.015,
+   "y": 77.285,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C27": {
+   "x": 125.745,
+   "y": 69.755,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R23": {
+   "x": 121.155,
+   "y": 133.195,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "C23": {
+   "x": 146.235,
+   "y": 98.165,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R3": {
+   "x": 110.165,
+   "y": 87.955,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R2": {
+   "x": 139.095,
+   "y": 89.325,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "U2": {
+   "x": 25.0,
+   "y": 25.0,
+   "rot": 0.0,
+   "locked": true,
+   "layer": "F.Cu"
+  },
+  "C2": {
+   "x": 106.155,
+   "y": 87.955,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "M2": {
+   "x": 2.5,
+   "y": 8.4,
+   "rot": 90.0,
+   "locked": true,
+   "layer": "F.Cu"
+  },
+  "R27": {
+   "x": 146.235,
+   "y": 108.205,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q2": {
+   "x": 114.695,
+   "y": 75.175,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "FB1": {
+   "x": 143.465,
+   "y": 131.145,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "Q6": {
+   "x": 121.605,
+   "y": 101.075,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R9": {
+   "x": 126.065,
+   "y": 95.655,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "R25": {
+   "x": 146.235,
+   "y": 103.185,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  },
+  "U7": {
+   "x": 9.0,
+   "y": 25.0,
+   "rot": 90.0,
+   "locked": true,
+   "layer": "F.Cu"
+  },
+  "C6": {
+   "x": 96.325,
+   "y": 89.575,
+   "rot": 0.0,
+   "locked": false,
+   "layer": "F.Cu"
+  }
+ },
+ "track_length_mm": 0.0,
+ "track_segments": 0,
+ "vias": 0
+}
