@@ -385,7 +385,7 @@ signalée.
 
 KiCad n'importe que des images bitmap dans un schéma (pas de SVG). Méthode (exemple : synoptique de Boomrone) :
 
-1. Dessin en SVG par un script du projet (`projets/<nom>/tools/`, ex. `projets/boomrone/tools/gen_synoptique_boomrone.py <sortie.svg>`), qui reprend les repères réels du schéma.
+1. Dessin en SVG par un script du projet (`projets/<nom>/tools/` ; exemple : le script `gen_synoptique_boomrone.py` du projet Boomrone), qui reprend les repères réels du schéma.
 2. Rendu en PNG sans outil à installer : Edge en mode sans fenêtre, `msedge.exe --headless --disable-gpu --hide-scrollbars --force-device-scale-factor=1 --window-size=<L>,<H> --screenshot=<sortie.png> file:///<chemin>.svg` (fond blanc ; relire l'image avant import).
 3. `python modules/kicad/tools/kicad_add_image_sheet.py <dossier_projet_kicad> <image.png>` crée la feuille A3 (image à 300 ppp, mise à l'échelle et centrée), ajoute sa case à la racine (premier emplacement libre) ; puis `python modules/kicad/tools/kicad_build_root.py <dossier>` (qui conserve la case, la feuille n'ayant aucune broche). Idempotent : relancé, il ne remplace que l'image.
 4. Vérifier : `kicad-cli sch erc` (0 violation) et un export PDF de la hiérarchie (relire la page de l'image). Le bloc `(image ...)` se met au format `(at cx cy) (scale s) (uuid) (data "base64"...)` ; l'échelle 1 = taille native à 300 ppp.

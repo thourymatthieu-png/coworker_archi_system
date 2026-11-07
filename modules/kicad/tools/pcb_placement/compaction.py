@@ -3,7 +3,7 @@ pour GARANTIR 0 chevauchement et 0 hors-contour par construction, plutot que de 
 le recuit + la legalisation (qui ne font que pousser localement et peuvent laisser des
 chevauchements residuels ou de grands vides, cf. retour utilisateur du 2026-11-05).
 
-Principe repris de l'essai precedent `projets/boomrone/tools/kicad_tetris_placement.py` (tasseur generique a
+Principe repris de l'essai precedent `kicad_tetris_placement.py` (script d'essai du projet Boomrone) (tasseur generique a
 points d'ancrage = coins des rectangles deja places) : ici integre au modele Board/Component
 du moteur (pas un script a part sur un JSON), et tient compte du contour de carte fixe
 (Board.outline) en plus des ancres fixes."""

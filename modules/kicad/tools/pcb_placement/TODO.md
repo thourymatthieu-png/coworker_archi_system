@@ -1,7 +1,7 @@
 # A faire - moteur de placement PCB (generique)
 
 Ameliorations du moteur, valables pour tout projet. L'etat du placement d'un projet donne est dans
-son dossier (ex. `projets/boomrone/hardware/kicad/proj_boomrone/placement-todo.md`). Les chiffres
+son dossier (ex. `placement-todo.md` dans le dossier KiCad du projet Boomrone). Les chiffres
 cites viennent de l'essai sur Boomrone (107 composants), a titre d'exemple.
 
 ## Suggestions (par priorite)

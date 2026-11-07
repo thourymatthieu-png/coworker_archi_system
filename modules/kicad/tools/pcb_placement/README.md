@@ -128,7 +128,7 @@ Le recuit simule + la legalisation (poussee locale) peuvent laisser des chevauch
 residuels si le budget d'iterations est insuffisant, ET laisser de grands vides (rien ne
 pousse activement a remplir l'espace - cf. retour utilisateur du 2026-11-05). Depuis cette
 version, une passe de **compactage deterministe** (bottom-left-fill, repris de l'essai
-`projets/boomrone/tools/kicad_tetris_placement.py`) tourne en fin de pipeline (`HierarchyConfig.use_compaction`,
+`kicad_tetris_placement.py`, script d'essai du projet Boomrone) tourne en fin de pipeline (`HierarchyConfig.use_compaction`,
 `True` par defaut) : chaque composant mobile est replace par tassement autour des ancres
 fixes et des composants deja poses, en respectant le contour si impose. **Garantit 0
 recouvrement et 0 hors-contour par construction** (tant qu'il y a physiquement la place),
