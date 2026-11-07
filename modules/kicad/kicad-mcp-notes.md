@@ -4,18 +4,18 @@
 
 ## Outils MCP « différés » : un agent peut croire un outil absent alors qu'il existe
 
-Constat du 2026-11-05 (exemple : préparation du PCB du projet Boomrone) : l'agent `electronique-hardware`
-a conclu qu'« aucun outil PCB dédié » n'était accessible et a tout fait par script Python
+Constat du 2026-11-05 (exemple : préparation du PCB du projet Boomrone) : l'agent qui manipulait KiCad
+(alors `electronique-hardware`, aujourd'hui `cao-kicad`) a conclu qu'« aucun outil PCB dédié » n'était accessible et a tout fait par script Python
 direct sur `pcbnew`. Cause réelle : la plateforme (pas KiCad, pas le serveur MCP) charge certains
 outils MCP en différé — leur schéma n'est disponible qu'après un appel `ToolSearch` avec
 `query: "select:<noms des outils>"`. Un appel direct avant ce chargement échoue
 (`InputValidationError`), ce qui peut laisser croire à tort que l'outil n'existe pas. Correction :
-l'agent a accès à `ToolSearch` et doit l'appeler en tout début de tâche PCB avant le premier
+l'agent `cao-kicad` a accès à `ToolSearch` et doit l'appeler en tout début de tâche PCB avant le premier
 `place_component`/`route_trace`/etc. Si ça se reproduit avec d'autres outils (schéma ou
 PCB), même diagnostic : vérifier `ToolSearch` avant de conclure à une absence d'outil.
 
 Ce document existe pour que ces constats survivent à un changement de machine ou de session
-(contrairement à la mémoire d'une session Claude Code, qui est locale). Lu par `electronique-hardware`
+(contrairement à la mémoire d'une session Claude Code, qui est locale). Lu par `cao-kicad`
 avant toute saisie de schéma KiCad, quand le module `kicad` est actif. Les constats propres à un
 projet vont dans les notes de ce projet (ex. `projets/<nom>/hardware/kicad/`).
 

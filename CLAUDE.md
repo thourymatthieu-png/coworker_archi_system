@@ -16,6 +16,7 @@ Langue : **français** (termes techniques usuels conservés).
 | Électronique / hardware | `.claude/agents/electronique-hardware.md` | Choix composants, interfaces, alimentation, CEM. |
 | Critique (avocat du diable) | `.claude/agents/critique.md` | Failles, hypothèses cachées, cas limites. |
 | Cohérence & clarté docs | `.claude/agents/coherence-clarte.md` | Terminologie, liens, lisibilité, diagrammes. |
+| Agents de module | `.claude/agents/<agent>.md`, décrits dans le README de leur module | Exécutent le travail propre à un outil (ex. `cao-kicad` : saisie du schéma et implantation dans KiCad), avec les seuls outils de ce module. Utilisés seulement si le module est actif. |
 | Vérificateur de sources | `.claude/agents/verificateur-sources.md` | Confronte chaque valeur technique écrite aux fiches techniques et catalogues ; aucune valeur inventée. |
 
 L'architecte est le seul à dialoguer avec l'utilisateur. Les autres agents rendent des **rapports structurés** (constat, gravité, proposition) à l'architecte, qui les présente.
@@ -106,7 +107,7 @@ Le framework sert à **tout projet embarqué** (électronique et logiciel). Il e
 
 ```
 CLAUDE.md                    noyau : cette charte
-.claude/agents/              noyau : les sept agents
+.claude/agents/              noyau : les sept agents ; plus les agents fournis par les modules (ex. cao-kicad)
 framework/                   noyau : règles, portes, procédure de modification, garde-fous des agents, listes de contrôle (checklists/), gabarits (templates/), historique
 tools/                       noyau : outils génériques (check_traceability_V2.py)
 modules/<module>/            savoir-faire optionnel : un outil (CAO...), un fabricant, une technologie
@@ -114,8 +115,8 @@ projets/<nom>/               documents d'un projet ; projet.md déclare ses modu
 projets/<nom>/tools/         scripts propres à ce projet
 ```
 
-- **Noyau** (`framework/`, `tools/`, `.claude/agents/`, ce fichier) : aucun nom de projet, de fabricant, de composant ni d'outil de CAO. Un exemple tiré d'un projet est marqué comme exemple. Seul `framework/historique.md` cite les projets d'où viennent les changements.
-- **Module** : un dossier `modules/<module>/` avec un `README.md` qui dit quand l'activer, ce que les agents doivent y lire, et ses scripts. Liste et règles : `modules/README.md`.
+- **Noyau** (`framework/`, `tools/`, `.claude/agents/`, ce fichier) : aucun nom de projet, de fabricant, de composant ni d'outil de CAO. Un exemple tiré d'un projet est marqué comme exemple. Seul `framework/historique.md` cite les projets d'où viennent les changements. Exception de rangement : un agent fourni par un module vit dans `.claude/agents/` (seul endroit où Claude Code charge les agents) ; il appartient à son module, qui le décrit.
+- **Module** : un dossier `modules/<module>/` avec un `README.md` qui dit quand l'activer, ce que les agents doivent y lire, ses scripts et, s'il en fournit un, son agent (outils limités à ceux du module). Liste et règles : `modules/README.md`.
 - **Projet** : `projets/<nom>/projet.md` (profil du projet) liste les modules actifs, la cible et la chaîne d'outils. **Tout agent lit `projet.md` puis le `README.md` de chaque module actif avant d'agir sur le projet.** Les règles d'un module ne s'appliquent qu'aux projets qui l'activent. Un choix qui n'est pas encore fait reste « à déterminer » dans `projet.md`, jamais une supposition ; une rubrique qui ne concerne pas le projet est « sans objet » (règles de remplissage : `framework/templates/projet.md`).
 - **Priorité des règles** : un module ajoute ou précise des règles, il n'assouplit jamais une règle du noyau (portes, doutes, décisions, références). Une décision du projet (`DEC-xxx`) peut écarter une règle de module en le disant explicitement. Deux modules qui se contredisent : la question est posée à l'utilisateur (`DOU-xxx`).
 - Un script écrit pour un seul projet va dans `projets/<nom>/tools/` ; il ne rejoint un module que s'il est rendu générique (aucune donnée du projet écrite en dur).

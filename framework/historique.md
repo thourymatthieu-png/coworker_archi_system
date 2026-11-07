@@ -31,4 +31,4 @@ flowchart LR
 
 **Règles nouvelles à valider à l'usage** : les règles du module `fabrication-jlcpcb` (relevé de stock avant la porte architecture, règles de fabrication sourcées) et les seuils de taille de l'outil (30 lignes ou 3 000 caractères par élément, 15 lignes ou 1 500 caractères par décision) sont des propositions issues de Boomrone ; à ajuster après le prochain projet.
 
-**Reste ouvert** : l'agent `electronique-hardware` hérite de tous les outils de la session (liste `tools:` retirée pour ne plus nommer les outils KiCad dans le noyau) ; choix à confirmer par l'utilisateur.
+**Agents de module** (choix de l'utilisateur, « Séparer en deux agents ») : `electronique-hardware` garde les seuls outils de base et conçoit et relit ; le module `kicad` fournit l'agent `cao-kicad`, avec une liste blanche de 117 outils KiCad sans export de fabrication, qui saisit le schéma et implante la carte. Un module peut ainsi apporter son agent sans nommer d'outil dans le noyau.

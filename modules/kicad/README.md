@@ -1,6 +1,6 @@
 # Module `kicad` — saisie de schéma et implantation de carte avec KiCad 10
 
-> **Aperçu** : méthode, scripts et pièges pour concevoir une carte avec KiCad 10 piloté par le serveur MCP `mixelpixx/KiCAD-MCP-Server`. Utilisé par `electronique-hardware` quand `projet.md` active ce module.
+> **Aperçu** : méthode, scripts et pièges pour concevoir une carte avec KiCad 10 piloté par le serveur MCP `mixelpixx/KiCAD-MCP-Server`. Appliqué par l'agent du module, `cao-kicad`, quand `projet.md` active ce module ; `electronique-hardware` fournit la conception détaillée et relit le résultat.
 
 ```mermaid
 flowchart LR
@@ -11,6 +11,9 @@ flowchart LR
     P --> D["DRC à 0 + rendu visuel"]
     D --> F["Fichiers de fabrication (accord séparé)"]
 ```
+
+## Agent du module
+`cao-kicad` (`.claude/agents/cao-kicad.md`) : saisie du schéma et implantation de la carte, avec une liste blanche d'outils `mcp__kicad__*` qui exclut les exports de fabrication. Il part des DES validés, s'arrête sur toute valeur manquante, et rend la main après chaque feuille ou bloc pour validation de l'utilisateur et relecture par `electronique-hardware`.
 
 ## Quand l'activer
 La carte du projet est dessinée avec **KiCad 10** (seule version prise en charge : tout ce qui concernait KiCad 9 et l'ancien serveur `kicad-eda-mcp` est abandonné).

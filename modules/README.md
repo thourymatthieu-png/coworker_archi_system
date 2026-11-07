@@ -13,7 +13,7 @@ flowchart LR
 
 | Module | Pour quoi | README |
 |---|---|---|
-| `kicad` | Schéma et implantation de carte avec KiCad 10 (serveur MCP, scripts, moteur de placement) | `modules/kicad/README.md` |
+| `kicad` | Schéma et implantation de carte avec KiCad 10 (serveur MCP, scripts, moteur de placement) ; agent `cao-kicad` | `modules/kicad/README.md` |
 | `fabrication-jlcpcb` | Carte fabriquée et assemblée par JLCPCB avec des composants LCSC | `modules/fabrication-jlcpcb/README.md` |
 
 ## Activer un module
@@ -23,6 +23,7 @@ Ajouter son nom à la ligne « Modules actifs » de `projets/<nom>/projet.md`, p
 Un module est créé quand un savoir-faire servira à plusieurs projets. Il contient :
 - `README.md` avec les sections : **Quand l'activer**, **À lire avant d'agir**, **Règles** ou **Méthode**, **Conditions de porte** (ce que le module exige à chaque porte du V ; l'architecte les ajoute à la liste de contrôle de la porte), **Vérifications**, **Scripts** (s'il en a), **Prérequis du poste** (ou un renvoi vers les notes qui les donnent) ;
 - ses scripts dans `modules/<module>/tools/` ;
+- s'il le faut, **un agent** qui exécute le travail propre à l'outil avec les seuls outils de ce module (liste blanche dans son en-tête `tools:`, sans les actions irréversibles comme les exports de fabrication). Il est rangé dans `.claude/agents/<agent>.md` (seul endroit où Claude Code charge les agents) et décrit dans le README du module ; il s'arrête si le module n'est pas actif dans `projet.md`. Les experts du noyau conçoivent et relisent, l'agent du module exécute ;
 - ses notes de retour d'expérience (bugs, contournements), pour qu'elles survivent au changement de machine.
 
 Règle : un module ne contient **aucune donnée d'un projet** (références de composants, dimensions, tables écrites en dur). Un exemple tiré d'un projet est marqué comme exemple. Ce qui ne sert qu'à un projet va dans `projets/<nom>/`.
