@@ -1,0 +1,42 @@
+{
+  "des-008-batterie-xt30.kicad_sch": [
+    0,
+    0
+  ],
+  "des-009-regulateur-pont.kicad_sch": [
+    1,
+    0
+  ],
+  "des-010-bouton.kicad_sch": [
+    2,
+    0
+  ],
+  "des-011-voyant-buzzer.kicad_sch": [
+    3,
+    0
+  ],
+  "des-003-centrale-inertielle.kicad_sch": [
+    0,
+    1
+  ],
+  "des-005-flux-optique.kicad_sch": [
+    1,
+    1
+  ],
+  "des-004-capteur-hauteur.kicad_sch": [
+    2,
+    1
+  ],
+  "des-012-module-bluetooth.kicad_sch": [
+    3,
+    1
+  ],
+  "des-007-puissance-moteurs.kicad_sch": [
+    0,
+    2
+  ],
+  "des-002-microcontroleur.kicad_sch": [
+    1,
+    2
+  ]
+}

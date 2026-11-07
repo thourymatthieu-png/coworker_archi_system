@@ -16,6 +16,7 @@ Langue : **français** (termes techniques usuels conservés).
 | Électronique / hardware | `.claude/agents/electronique-hardware.md` | Choix composants, interfaces, alimentation, CEM. |
 | Critique (avocat du diable) | `.claude/agents/critique.md` | Failles, hypothèses cachées, cas limites. |
 | Cohérence & clarté docs | `.claude/agents/coherence-clarte.md` | Terminologie, liens, lisibilité, diagrammes. |
+| Vérificateur de sources | `.claude/agents/verificateur-sources.md` | Confronte chaque valeur technique écrite aux fiches techniques et catalogues ; aucune valeur inventée. |
 
 L'architecte est le seul à dialoguer avec l'utilisateur. Les autres agents rendent des **rapports structurés** (constat, gravité, proposition) à l'architecte, qui les présente.
 
@@ -45,26 +46,41 @@ Chaque niveau descendant a son niveau de test en face, **défini en même temps 
 
 ## 3. Portes de validation
 
-Une phase ne se termine que par une **porte** :
+Une phase ne se termine que par une **porte**. Procédure détaillée et liste de contrôle par porte : `framework/portes.md`. En résumé :
 
-1. L'agent concerné termine les documents de la phase.
-2. Les relecteurs (`critique`, `coherence-clarte`, plus `exigences-tracabilite` pour la traçabilité) produisent leurs rapports.
-3. L'architecte présente la synthèse à l'utilisateur.
-4. Aucun doute **bloquant** ne doit rester ouvert (voir §4).
-5. L'utilisateur donne un **accord explicite** ; l'architecte l'inscrit dans le journal de décisions.
+1. L'agent concerné termine les documents de la phase et fait son autocontrôle.
+2. Les relecteurs (`critique`, `coherence-clarte`, `exigences-tracabilite` ; `verificateur-sources` dès qu'un document cite des valeurs de composants) écrivent leur rapport dans `projets/<nom>/revues/` (gabarit `framework/templates/revues/gabarit-revue.md`). L'architecte ne réécrit pas un rapport.
+3. **Chaque constat reçoit un sort écrit** : corrigé, doute ouvert (`DOU-xxx`), rejeté avec sa raison, ou risque accepté par l'utilisateur (`DEC-xxx`). Un constat sans sort empêche la porte.
+4. Aucun doute **bloquant** ne reste ouvert (voir §4) ; `python tools/check_traceability_V2.py projets/<nom> --gate --phase <phase>` rend OK ; les conditions de porte des modules actifs sont remplies.
+5. L'architecte présente la synthèse (nombre de constats par gravité et leur sort, décisions déléguées, doutes ouverts avec leur échéance, risques acceptés) ; l'utilisateur donne un **accord explicite** ; l'architecte l'inscrit dans le journal de décisions, passe les éléments de la phase à « Validé », vérifie avec `--porte-franchie <phase>` et pose l'étiquette git `gate-<n>-<phase>-passed`.
 
 Les relecteurs interviennent aussi à la demande de l'utilisateur entre deux portes.
 
+**Modifier un élément déjà validé** (y compris d'une phase amont, découverte en aval) : procédure `framework/procedure-modification.md` — analyse d'impact, mise à jour de tous les documents concernés dans le même lot, relecture de l'écart, décision de l'utilisateur. Une mention du type « en cas de divergence, tel document prévaut » est interdite : le document amont est corrigé.
+
 ## 4. Doutes : tout doute est pointé et dissipé
 
-- Tout agent qui détecte un doute, une ambiguïté ou une hypothèse l'inscrit dans `registre-doutes.md` du projet (`DOU-xxx`) : statut, bloquant oui/non, question, réponse, décision liée.
-- Un doute n'est « Levé » que si la réponse est écrite et, le cas échéant, une décision `DEC-xxx` la consigne.
-- **Un doute bloquant ouvert empêche de franchir la porte.**
+- Tout agent qui détecte un doute, une ambiguïté ou une hypothèse l'inscrit dans `registre-doutes.md` du projet (`DOU-xxx`) : statut, bloquant oui/non, échéance, question, réponse, décisions liées.
+- Un doute n'est « Levé » que si la réponse est écrite, avec sa source, et, le cas échéant, une décision `DEC-xxx` la consigne.
+- **Un doute bloquant ouvert empêche de franchir la porte**, à partir de la porte nommée dans son échéance s'il en a une (ex. un doute qui ne peut être levé que par une mesure sur prototype bloque la porte « systeme », pas les précédentes) ; sans échéance, il bloque toutes les portes.
+- **Un doute est bloquant** s'il touche la sécurité des personnes ou du matériel, la faisabilité d'une exigence « Essentiel », une interface entre blocs ou entre matériel et logiciel, ou s'il coûterait nettement plus cher à corriger après la porte qu'avant. L'agent qui l'ouvre propose ; l'architecte présente le classement à l'utilisateur, qui peut le changer.
+- **Un doute non bloquant a une échéance** : la porte où il doit être levé, nommée par sa phase (scénarios, besoins, exigences, architecture, conception) pour que l'outil la contrôle ; un jalon ultérieur (essais, implémentation) est écrit en toutes lettres. Échéance atteinte = doute à lever ou à passer bloquant.
 - Ne jamais combler un trou par une supposition silencieuse : poser la question à l'utilisateur via l'architecte.
+- **Faits techniques et sources** : toute valeur tirée d'un composant, d'une norme ou d'un catalogue (tension, courant, broche, temps, dimension, stock, prix) cite sa source sous la forme `[document, version, page]` ou `[catalogue, date du relevé]`. Une valeur écrite de mémoire est marquée `(à vérifier)` et liée à un `DOU-xxx`. Aucune valeur `(à vérifier)` ne passe la porte « conception détaillée » dans un élément « Validé ». Format détaillé : `framework/regles-documentaires.md`.
 
 ## 5. Autonomie
 
-Les agents **rédigent, ils ne décident pas**. Toute décision d'architecture ou d'exigence est prise par l'utilisateur, après que l'architecte a exposé les options, leurs avantages et inconvénients, et sa recommandation. Chaque décision est consignée dans `journal-decisions.md` (`DEC-xxx` : décision, alternatives, raison).
+Les agents **rédigent, ils ne décident pas**. Toute décision d'architecture ou d'exigence est prise par l'utilisateur, après que l'architecte a exposé les options, leurs avantages et inconvénients, et sa recommandation. Chaque décision est consignée dans `journal-decisions.md` (`DEC-xxx` : décision, alternatives, raison, décidé par ; l'outil refuse la porte si « Décidé par » manque).
+
+**Délégation.** L'utilisateur peut demander à l'architecte de rédiger une phase sans lui poser chaque question. La délégation est encadrée par trois niveaux ; chacun autorise seulement ce qui est écrit sur sa ligne :
+
+| Niveau | Ce que l'architecte peut faire | Exemples |
+|---|---|---|
+| D0 — rédaction | Rédiger, reformuler, structurer ; aucun choix technique | Mise au gabarit, diagrammes, traçabilité |
+| D1 — choix réversible | Trancher un choix local et réversible, consigné en `DEC-xxx` avec « Décidé par : délégation D1 » | Nom d'un module logiciel, valeur d'un composant passif sourcée, découpage d'une feuille |
+| D2 — choix structurant | **Jamais délégué** : options et recommandation présentées à l'utilisateur ; s'ils sont nombreux (ex. valeurs d'exigences), en un tableau où chaque ligne a sa recommandation, que l'utilisateur accepte en bloc ou ligne par ligne | Composant principal, architecture, valeur d'exigence, sécurité, périmètre, fabricant, outil |
+
+À la porte, la synthèse liste toutes les décisions « délégation D1 » de la phase, avec une ligne chacune ; l'utilisateur peut en reprendre n'importe laquelle. Une délégation vaut pour une phase et se consigne en `DEC-xxx` avec son niveau.
 
 **Contradiction entre décisions :** quand une réponse de l'utilisateur contredit une décision ou une réponse antérieure, l'architecte ne tranche pas seul : il repose la question, rappelle ce que l'utilisateur avait répondu, dit précisément ce qui est en contradiction (DEC/DOU/SCN avec ID et titre) et demande s'il veut changer sa réponse.
 
@@ -82,37 +98,46 @@ Définition d'un élément : un titre de niveau 3 `### REQ-012 — Titre`, suivi
 
 ## 7. Clarté des documents
 
-Règles détaillées : `framework/regles-documentaires.md`. En résumé : un aperçu d'une page avec un diagramme au début de chaque document, un glossaire unique, un gabarit identique par phase, une idée = un diagramme, Mermaid par défaut (SVG si Mermaid ne suffit pas).
+Règles détaillées : `framework/regles-documentaires.md`. En résumé : un aperçu de 5 lignes avec un diagramme au début de chaque document, un glossaire unique, un gabarit identique par phase, une idée = un diagramme, Mermaid par défaut (SVG si Mermaid ne suffit pas).
 
-## 8. Structure du dépôt
+## 8. Structure du dépôt : noyau, modules, projets
+
+Le framework sert à **tout projet embarqué** (électronique et logiciel). Il est découpé en trois couches :
 
 ```
-.claude/agents/            les six agents
-framework/                 règles documentaires et gabarits (templates/)
-tools/check_traceability_V2.py  vérification de traçabilité et des doutes (phase par phase)
-tools/kicad_*.py             saisie et mise en page des schémas KiCad (voir §9)
-projets/<nom>/             documents d'un projet (copiés depuis framework/templates)
+CLAUDE.md                    noyau : cette charte
+.claude/agents/              noyau : les sept agents
+framework/                   noyau : règles, portes, procédure de modification, garde-fous des agents, listes de contrôle (checklists/), gabarits (templates/), historique
+tools/                       noyau : outils génériques (check_traceability_V2.py)
+modules/<module>/            savoir-faire optionnel : un outil (CAO...), un fabricant, une technologie
+projets/<nom>/               documents d'un projet ; projet.md déclare ses modules actifs
+projets/<nom>/tools/         scripts propres à ce projet
 ```
 
-Nouveau projet : copier `framework/templates/` dans `projets/<nom>/`, puis lancer l'architecte.
+- **Noyau** (`framework/`, `tools/`, `.claude/agents/`, ce fichier) : aucun nom de projet, de fabricant, de composant ni d'outil de CAO. Un exemple tiré d'un projet est marqué comme exemple. Seul `framework/historique.md` cite les projets d'où viennent les changements.
+- **Module** : un dossier `modules/<module>/` avec un `README.md` qui dit quand l'activer, ce que les agents doivent y lire, et ses scripts. Liste et règles : `modules/README.md`.
+- **Projet** : `projets/<nom>/projet.md` (profil du projet) liste les modules actifs, la cible et la chaîne d'outils. **Tout agent lit `projet.md` puis le `README.md` de chaque module actif avant d'agir sur le projet.** Les règles d'un module ne s'appliquent qu'aux projets qui l'activent. Un choix qui n'est pas encore fait reste « à déterminer » dans `projet.md`, jamais une supposition ; une rubrique qui ne concerne pas le projet est « sans objet » (règles de remplissage : `framework/templates/projet.md`).
+- **Priorité des règles** : un module ajoute ou précise des règles, il n'assouplit jamais une règle du noyau (portes, doutes, décisions, références). Une décision du projet (`DEC-xxx`) peut écarter une règle de module en le disant explicitement. Deux modules qui se contredisent : la question est posée à l'utilisateur (`DOU-xxx`).
+- Un script écrit pour un seul projet va dans `projets/<nom>/tools/` ; il ne rejoint un module que s'il est rendu générique (aucune donnée du projet écrite en dur).
+
+Nouveau projet : étapes dans `README.md` (« Démarrer un projet »). La copie de `framework/templates/` apporte aussi `revues/gabarit-revue.md` (modèle à recopier pour chaque rapport) ; les dossiers `Datasheets/`, `tools/`, `hardware/`, `firmware/` sont créés quand le projet en a besoin.
 
 ## 9. Vérification
 
 ```bash
-python tools/check_traceability_V2.py projets/<nom> --gate --phase conception   # traçabilité et doutes (phase : scenarios, besoins, exigences, architecture, conception...)
-python tools/kicad_place_fields.py <feuille>.kicad_sch                          # place les textes référence/valeur selon le type de symbole (+ avertit des pas trop serrés)
-python tools/kicad_add_items.py <feuille>.kicad_sch spec.json                  # fils, étiquettes hiérarchiques/locales, croix NC, jonctions en une fois
-python tools/kicad_build_root.py <dossier_projet_kicad>                         # page racine : cases, broches de feuille, étiquettes
-python tools/kicad_add_image_sheet.py <dossier_projet_kicad> <image.png>                # page dédiée contenant une image (synoptique) + case à la racine ; image générée par tools/gen_synoptique_boomrone.py
-python tools/pcb_optimize_placement.py optimize <extract.json> --out-dir <dossier> --config tools/pcb_placement/examples/config_parallele.json --decoupling <decouplage.json> --live   # placement PCB hors KiCad (voir tools/pcb_placement/README.md et TODO.md)
-kicad-cli sch erc <racine>.kicad_sch -o rapport.txt                             # ERC de toute la hiérarchie (objectif : 0 violation)
-kicad-cli sch upgrade <feuille>.kicad_sch                                       # format le plus récent (évite l'avertissement à l'ouverture)
+python tools/check_traceability_V2.py projets/<nom> --gate --phase <phase>        # avant une porte (phase : scenarios, besoins, exigences, architecture, conception)
+python tools/check_traceability_V2.py projets/<nom> --porte-franchie <phase>      # après l'accord : éléments passés à « Validé »
+python -m unittest discover -s tools/tests                                      # tests de l'outil (après toute modification de l'outil)
 ```
 
-Seul **KiCad 10** est utilisé (tout ce qui concerne KiCad 9 est abandonné). Le serveur MCP KiCad actuel est `mixelpixx/KiCAD-MCP-Server` ; l'ancien serveur (`kicad-eda-mcp`) et ses contournements sont abandonnés et supprimés. Méthode, pièges et mise en route sur une nouvelle machine : `framework/kicad-mcp-notes.md` — **à relire sur tout nouveau poste** (la déclaration du serveur MCP dans `~/.claude.json` et les environnements Python sont locaux à chaque poste, pas dans ce dépôt).
+L'outil classe ses constats en erreurs (échec toujours), écarts (échec en mode porte : champs, doutes sans échéance, relectures sans sort, valeurs « (à vérifier) » validées…) et avertissements (taille, contenu périmé), à lire à chaque porte.
 
-## 10. Préférences de travail de l'utilisateur (à respecter sur tout poste)
+Les vérifications propres à un outil ou à une technologie (ERC, DRC, scripts de CAO...) sont décrites dans le `README.md` du module concerné.
+
+## 10. Préférences de travail de l'utilisateur (à respecter sur tout poste et tout projet)
 
 - **Fiches techniques en anglais** : si une fiche est en chinois, demander une version anglaise.
-- **Automatiser les réglages répétitifs** : quand un réglage manuel se répète (ex. position des textes d'un schéma KiCad), écrire ou enrichir un script du dépôt plutôt que corriger à la main, et l'améliorer à chaque correction.
-- **Schémas KiCad : une page à la fois**, validée par l'utilisateur dans KiCad avant la suivante ; pièces douteuses : bibliothèque EasyEDA/LCSC ; ne rien commiter sans accord.
+- **Automatiser les réglages répétitifs** : quand un réglage manuel se répète, écrire ou enrichir un script (du module si le réglage est générique, du projet sinon) plutôt que corriger à la main, et l'améliorer à chaque correction.
+- **Un bloc à la fois** pour les livrables graphiques (page de schéma, étape de placement) : validation de l'utilisateur dans l'outil avant le suivant.
+- **Ne rien commiter sans accord** de l'utilisateur.
+- Les préférences propres à un outil sont dans le `README.md` de son module.

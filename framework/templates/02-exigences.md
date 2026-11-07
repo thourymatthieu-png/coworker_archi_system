@@ -13,7 +13,7 @@ flowchart LR
 
 ## Exigences
 
-Chaque exigence est unique, atomique, non ambiguë et testable.
+Chaque exigence suit « Liste de contrôle des exigences » — `framework/checklists/exigences.md` (9 critères, tournures EARS).
 
 Format d'une exigence (exemple, non analysé) :
 
@@ -25,7 +25,7 @@ Format d'une exigence (exemple, non analysé) :
 **Énoncé :** Le système doit … (verbe d'action, valeur mesurable, condition ; toute valeur non décidée par l'utilisateur est marquée « provisoire »).
 **Priorité :** Essentiel | Important | Souhaitable (la plus haute des priorités des besoins cités)
 **Vérification :** méthode (essai, mesure, inspection), test système TS-001 « Titre du test », moyen.
-**Statut :** Proposé | Validé | Abandonné (renvoi vers l'exigence qui la remplace)
+**Statut :** Proposé | Validé | Modifié | Abandonné (renvoi vers l'exigence qui la remplace)
 ```
 
 <!-- Ajouter les exigences ci-dessous, au même format, en dehors des blocs de code. -->

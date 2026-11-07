@@ -14,3 +14,6 @@ projets/*/Datasheets/
 
 # Réglages d affichage locaux de KiCad (propres à chaque poste)
 *.kicad_prl
+
+# Cache Python
+__pycache__/

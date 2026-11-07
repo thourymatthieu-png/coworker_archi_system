@@ -1,7 +1,7 @@
 # Réponses de l'utilisateur sur les règles de placement (essai des outils)
 
 Notes de travail du 2026-11-05, **non décisionnelles** : phase de test des outils de placement
-(`tools/pcb_placement/`). Aucune de ces réponses n'est inscrite dans `journal-decisions.md` ni dans
+(`modules/kicad/tools/pcb_placement/`). Aucune de ces réponses n'est inscrite dans `journal-decisions.md` ni dans
 `registre-doutes.md` ; elles servent à régler le moteur. Fichier de règles proposé par l'agent
 `electronique-hardware` : `regles_placement.json` (même dossier). Les numéros de question sont ceux
 du rapport de l'agent.
@@ -18,7 +18,7 @@ du rapport de l'agent.
 | 8 | Règles « hypothèse » I-05, Z-05, Z-09, B-10 | **Seulement les règles sourcées** | Ces 4 règles restent documentées, non appliquées. |
 | 9 | Réservoir C6, C7, C9 du rail VBATM | **Près de J1 (tête de ligne)** | Règle d'essai demandée explicitement. **À noter** : c'est une règle sans source de fiche, exception voulue à la réponse 8 (qui avait écarté Z-05, de même nature) ; à confirmer si l'on veut la généraliser. |
 | 10 | Cônes d'exclusion du VL53L1X (36,5° et 39,6°) contre les 27° du projet | **Pas de zone interdite pour l'instant** | Aucune zone interdite. Fait vérifié (DS12385 figure 19, page 24) : cônes d'exclusion mécaniques « RTN » 39,6° (Ø1,08 mm) et « EMT » 36,5° (Ø0,84 mm), plus larges que le champ de vue optique de 27° (page 4) retenu par ARC-004 « Capteur de hauteur à temps de vol », DES-004 « Raccordement du capteur de hauteur VL53L1X » et DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB ». À présenter à l'architecte plus tard. |
-| 11 | Faces haute et basse | **2D pour l'instant, faces plus tard** | Le moteur traite tout sur une couche ; la face reste une étiquette. Gestion des deux faces : suggestion dans `tools/pcb_placement/TODO.md`. |
+| 11 | Faces haute et basse | **2D pour l'instant, faces plus tard** | Le moteur traite tout sur une couche ; la face reste une étiquette. Gestion des deux faces : suggestion dans `projets/boomrone/hardware/kicad/proj_boomrone/placement-todo.md`. |
 | 12 | Pas des pastilles moteur | **5,8 mm**, après rappel de DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page » | DEC-290 « Schéma KiCad proj_boomrone : bibliothèque locale, feuilles hiérarchiques, validation page par page » reste valable. Le « 5,08 mm » de l'essai du 5 novembre est périmé ; DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » n'est pas modifié. |
 | 13 | Côté d'accouplement du XT30 (J1) | **Vers le sud** | J1 reste au bord sud, le sud est le côté d'enfichage libre. DOU-155 « Connecteur XT30 : genre côté carte et surtension à la connexion » reste ouvert pour le genre. |
 
