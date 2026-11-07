@@ -8,7 +8,7 @@ Veille en ligne puis banc de 6 pistes (un agent par piste), juge commun et resul
 `projets/boomrone/hardware/kicad/proj_boomrone/_bench_placement/` (versionne en partie, ajoute avec `git add -f` :
 juge, entree, cartes placees et routees, metriques, rapports, scripts ; `PROTOCOLE.md`, `resultats/<piste>/RAPPORT.md`). Conclusions publiees en artefact (claude.ai/artifact/Qr6qJDKjEH11h5tco5z3Eh).
 Points cles, non decisionnels (aucune DEC) :
-- **Bug** : `tools/kicad_apply_placement.py` ecrit l'angle du modele tel quel ; le modele tourne en sens horaire,
+- **Bug** : `modules/kicad/tools/kicad_apply_placement.py` ecrit l'angle du modele tel quel ; le modele tourne en sens horaire,
   KiCad en sens inverse -> toute piece tournee de 90 deg est retournee de 180 deg dans KiCad. Angle a ecrire :
   `(2 * angle_lu_a_l_extraction - angle_modele) % 360`. NON corrige dans le depot (attente accord utilisateur).
 - Un placeur a regles de 279 lignes (`_bench_placement/outils_pistes/regles_simples/place.py`) bat le moteur :

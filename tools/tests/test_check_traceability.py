@@ -136,6 +136,14 @@ class CheckTraceability(unittest.TestCase):
     def test_reference_sans_titre(self):
         self.check(expect_ok=False, contains="cité sans titre", ts_amont="REQ-001")
 
+    def test_dossier_de_travail_ignore(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = build(tmp)
+            (p / "_banc").mkdir()
+            (p / "_banc" / "notes.md").write_text("Copie figée : voir REQ-001 et DES-999.\n", encoding="utf-8")
+            code, out = run(p, "--gate", "--phase", "exigences")
+            self.assertEqual(code, 0, out)
+
     def test_titre_ancien_dans_une_revue_tolere(self):
         self.check(sort="corrigé dans REQ-001 « Ancien titre »")
 

@@ -98,6 +98,10 @@ flowchart LR
 
 Le lien s'écrit dans la ligne `**Réfs amont :**` de l'élément du bas (ex. dans `ARC-003`, on cite le `REQ` dont il dérive ; dans `TS-005`, le `REQ` vérifié). Une décision n'est jamais dans les « Réfs amont » d'un REQ, ARC, DES ou test : elle va dans « Décisions liées ».
 
+## Dossiers de travail
+
+Un dossier dont le nom commence par `_` (ex. `_bench_placement/`, `_essais/`) contient des essais, des bancs ou des copies figées d'outils ; l'outil de traçabilité ne l'analyse pas. Il ne contient jamais un document de phase ni un rapport de relecture : ce qui doit être relu ou tracé est rangé ailleurs.
+
 ## Chemins de documents
 
 Citer un document : « Architecture » — `projets/<nom>/03-architecture.md`.

@@ -14,6 +14,7 @@ Trois niveaux de constats :
   sort, valeurs « (à vérifier) » en conception détaillée, tests non exécutés... Font échouer avec --gate.
 - AVERTISSEMENTS : éléments trop longs, contenu peut-être périmé, doutes bloquants à une porte future.
   Ne font jamais échouer ; à lire à chaque porte.
+Les dossiers dont le nom commence par « _ » (essais, bancs, copies figées) ne sont pas analysés.
 --phase limite les contrôles à la phase atteinte. --porte-franchie exige en plus que les éléments
 des phases franchies soient « Validé » (à lancer après l'accord de porte).
 """
@@ -159,6 +160,8 @@ def parse(project):
     elements, mentions, reviews, review_files = {}, [], [], []
     for path in sorted(project.rglob("*.md")):
         rel = path.relative_to(project).as_posix()
+        if any(part.startswith("_") for part in rel.split("/")[:-1]):
+            continue  # dossier de travail (essais, bancs, copies figées) : hors documents du projet
         lines = clean_lines(path.read_text(encoding="utf-8-sig"))
         current = None
         for n, line in enumerate(lines, 1):
