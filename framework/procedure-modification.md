@@ -1,6 +1,6 @@
 # Procédure de modification d'un élément validé
 
-> **Aperçu** : comment modifier un élément déjà « Validé » (SCN, BES, REQ, ARC, DES ou test) sans laisser d'incohérence entre les niveaux du V. S'applique aussi quand un problème découvert en aval (fiche technique, indisponibilité d'un composant, test KO) remet en cause un niveau amont.
+> **Aperçu** : comment modifier un élément déjà « Validé » (SCN, BES, REQ, ARC, DES ou test) sans laisser d'incohérence entre les niveaux du V. S'applique aussi quand un problème découvert en aval (fiche technique, indisponibilité d'un composant, test KO) remet en cause un niveau amont. L'architecte la déroule avec la skill `/modification <ID>`.
 
 ```mermaid
 flowchart LR

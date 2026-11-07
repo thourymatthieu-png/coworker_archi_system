@@ -1,6 +1,6 @@
 # Portes de validation
 
-> **Aperçu** : procédure commune à toutes les portes du V, puis liste de contrôle propre à chaque porte. Une porte n'est franchie que si **toutes** les cases de sa liste sont cochées et que l'utilisateur donne son accord explicite. L'architecte déroule cette liste ; il ne la résume pas.
+> **Aperçu** : procédure commune à toutes les portes du V, puis liste de contrôle propre à chaque porte. Une porte n'est franchie que si **toutes** les cases de sa liste sont cochées et que l'utilisateur donne son accord explicite. L'architecte déroule cette liste avec la skill `/porte <phase>` ; il ne la résume pas.
 
 ```mermaid
 flowchart LR

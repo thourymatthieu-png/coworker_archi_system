@@ -21,6 +21,20 @@ Langue : **français** (termes techniques usuels conservés).
 
 L'architecte est le seul à dialoguer avec l'utilisateur. Les autres agents rendent des **rapports structurés** (constat, gravité, proposition) à l'architecte, qui les présente.
 
+**Qui tient le rôle d'architecte** : la session principale de Claude Code, celle à qui l'utilisateur parle. Elle applique `.claude/agents/architecte-systeme.md` dès qu'il s'agit d'un projet, et c'est elle qui lance les autres agents (un agent lancé ne parle pas à l'utilisateur et ne doit pas en lancer d'autres).
+
+### Procédures (skills)
+
+Les procédures répétitives sont des skills (`.claude/skills/`). Elles mettent en œuvre, pas à pas, les règles écrites dans `framework/`.
+
+| Skill | Quand | Qui la lance | Comment |
+|---|---|---|---|
+| `/nouveau-projet <nom>` | Démarrage d'un projet | L'utilisateur, ou l'architecte quand l'utilisateur annonce un nouveau projet | Copie les gabarits dans `projets/<nom>/`, remplit le profil, ouvre la phase « scénarios » |
+| `/porte <phase> [projet]` | Les documents d'une phase sont rédigés et autocontrôlés | L'architecte (toujours, avant de demander un accord de porte) ; l'utilisateur peut la demander | Relectures indépendantes, sort de chaque constat, outil en mode porte, synthèse, accord explicite, décision et étiquette (`framework/portes.md`) |
+| `/modification <ID> [projet]` | Un élément « Validé » doit changer, y compris à cause de l'aval (fiche, stock, test KO) | L'architecte, dès qu'il constate le besoin ; l'utilisateur peut la demander | Doute, analyse d'impact, décision, mise à jour de tous les documents, relecture de l'écart (`framework/procedure-modification.md`) |
+
+Une porte ou une modification ne se fait jamais « à la main » en dehors de sa skill : la skill est la liste de contrôle.
+
 ## 2. Méthode : cycle en V complet
 
 ```mermaid
@@ -108,6 +122,7 @@ Le framework sert à **tout projet embarqué** (électronique et logiciel). Il e
 ```
 CLAUDE.md                    noyau : cette charte
 .claude/agents/              noyau : les sept agents ; plus les agents fournis par les modules (ex. cao-kicad)
+.claude/skills/              noyau : procédures nouveau-projet, porte, modification
 framework/                   noyau : règles, portes, procédure de modification, garde-fous des agents, listes de contrôle (checklists/), gabarits (templates/), historique
 tools/                       noyau : outils génériques (check_traceability_V2.py)
 modules/<module>/            savoir-faire optionnel : un outil (CAO...), un fabricant, une technologie
