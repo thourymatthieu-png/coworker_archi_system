@@ -11,14 +11,12 @@
             "id": "b2ee19d3f5954978",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "projets/boomrone/04-conception-detaillee.md",
-                "mode": "source",
-                "source": false
+                "file": "projets/boomrone/simulation/figures/fig1_batterie_moteurs.png"
               },
-              "icon": "lucide-file",
-              "title": "04-conception-detaillee"
+              "icon": "lucide-image",
+              "title": "fig1_batterie_moteurs"
             }
           }
         ]
@@ -190,6 +188,11 @@
   },
   "active": "b2ee19d3f5954978",
   "lastOpenFiles": [
+    "projets/boomrone/simulation/figures/fig2_psrr.png",
+    "projets/boomrone/simulation/figures/fig1b_phase_pwm.png",
+    "projets/boomrone/simulation/figures/fig1_batterie_moteurs.png",
+    "projets/boomrone/04-conception-detaillee.md",
+    "projets/boomrone/05-plans-de-test.md",
     "projets/boomrone/schemas/des-012-module-bluetooth.svg",
     "projets/boomrone/schemas/des-011-voyant-buzzer.svg",
     "projets/boomrone/schemas/des-010-bouton.svg",
@@ -198,10 +201,7 @@
     "projets/boomrone/schemas/des-007-puissance-moteurs.svg",
     "projets/boomrone/schemas/des-005-flux-optique-regulateur-2v0.svg",
     "projets/boomrone/schemas/des-004-capteur-hauteur.svg",
-    "projets/boomrone/schemas/des-003-centrale-inertielle.svg",
-    "projets/boomrone/schemas/des-002-microcontroleur.svg",
     "projets/boomrone/00-scenarios.md",
-    "projets/boomrone/schemas/des-001-blocs-et-reseaux.svg",
     "projets/boomrone/releve-fiches-techniques.md",
     "projets/boomrone/consignes-emploi.md",
     "projets/boomrone/schemas",
@@ -216,8 +216,6 @@
     "projets/boomrone/00-glossaire.md",
     "projets/boomrone/registre-doutes.md.tmp.16552.f324508f9bf9",
     "projets/boomrone/registre-doutes.md.tmp.16552.5fac04d27f7d",
-    "projets/boomrone/05-plans-de-test.md",
-    "projets/boomrone/04-conception-detaillee.md",
     "projets/boomrone/03-architecture.md",
     "projets/README.md"
   ]
