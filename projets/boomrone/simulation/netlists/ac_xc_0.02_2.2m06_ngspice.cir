@@ -1,0 +1,28 @@
+* AC xc esr=0.02 cout=2.2e-06
+Vin vin 0 3 AC 1
+XU vin vo 0 XC6206
+Co vo cx 2.2e-06
+Resr cx 0 0.02
+Rl vo 0 222.222
+* LDO comportemental XC6206 (voir sim_boomrone.py) : ro=1580.86 ohm, rdo=3.5 ohm, vref=0.802656 V
+.subckt XC6206 vin vout gnd
+Iq vin gnd 1e-06
+Rro vin vout 1580.86
+Vref ref gnd 0.802656
+Efb fbd gnd vout gnd 0.4
+Vz fbd fbn 0
+Eea ea1 gnd ref fbn 6.3
+Rp ea1 ea 1k
+Cp ea gnd 1.59155e-10
+Rg ea ea2 1k
+Cg ea2 gnd 5.30516e-11
+Bp vin vout I=max(0,min(0.5*v(ea2),(v(vin)-v(vout))/3.5))
+.ends XC6206
+
+.ac dec 60 10 10Meg
+.control
+run
+wrdata ac_xc_0.02_2.2m06_ngspice.txt v(vo) v(vin)
+quit
+.endc
+.end

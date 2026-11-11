@@ -1,0 +1,25 @@
+* AC mcp esr=2.0 cout=4.7e-06
+Vin vin 0 3.2
+XU vin vo 0 fbd fbn MCP1700
+Co vo cx 4.7e-06
+Resr cx 0 2
+Rl vo 0 23.0769
+Vinj inj 0 0 AC 1
+Cinj inj fbn 1G
+* LDO comportemental MCP1700 (voir sim_boomrone.py) : ro=120.991 ohm, rdo=0.712 ohm, vref=1.23943 V
+.subckt MCP1700 vin vout gnd fbd fbn
+Iq vin gnd 1.6e-06
+Rro vin vout 120.991
+Vref ref gnd 1.23943
+Efb fbd gnd vout gnd 0.4
+Lbrk fbd fbn 1G
+Eea ea1 gnd ref fbn 6.3
+Rp ea1 ea 1k
+Cp ea gnd 1.59155e-10
+Rg ea ea2 1k
+Cg ea2 gnd 5.30516e-11
+Bp vin vout I=max(0,min(0.5*v(ea2),(v(vin)-v(vout))/0.712))
+.ends MCP1700
+
+.ac dec 60 10 10Meg
+.end

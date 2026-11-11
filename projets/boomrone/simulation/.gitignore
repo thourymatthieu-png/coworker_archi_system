@@ -1,0 +1,3 @@
+resultats/
+netlists/*.log
+__pycache__/

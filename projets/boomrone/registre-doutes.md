@@ -546,6 +546,51 @@ Les doutes levés sont déplacés dans l'archive en bas de ce fichier : on ne le
 **Réponse :** (à remplir) dessin de l'implantation (DES-013 « Implantation, routage et fichiers de fabrication pour JLCPCB ») et pesée du module reçu. Non bloquant. Complément du 2026-11-05 (essai du moteur de placement PCB) : l'utilisateur a précisé en chat que le module U7 entier (pas seulement l'antenne) déborde du bord ouest du contour testé (50 x 50 mm, voir DOU-162 « Implantation mécanique de la carte, du connecteur et de la batterie » pour la contradiction avec les 40 x 35 mm d'ARC-013 « Carte électronique JLCPCB, câblage et assemblage », à confirmer). Reste ouvert.
 **Décision liée :** DEC-288 « Module radio : PB-03F à la place du E104-BT02 indisponible chez JLCPCB »
 
+### DOU-208 — Phase des quatre sorties PWM de TIM1 : en phase ou décalées de 90°
+**Statut :** Ouvert
+**Bloquant :** Non
+**Échéance :** implémentation
+**Concerne :** ARC-007 « Étage de puissance des moteurs coupés par défaut », DES-007 « Circuit de puissance des moteurs », DES-021 « Pilotes des moteurs, du voyant, du buzzer et de la liaison série »
+**Question :** la conception ne dit pas la phase relative des quatre sorties de TIM1 ; sur un même compteur elles sont en phase par défaut. La simulation SPICE (« Rapport de simulation SPICE » — `projets/boomrone/simulation/rapport-simulation-spice.html`, cas 1) donne sur la ligne moteurs VBATM 0,51 V crête-à-crête d'ondulation à 24 kHz en stationnaire avec des PWM en phase, contre 0,06 V avec un décalage de 90° entre voies ; le courant de la batterie passe de 10,5 à 2,5 A crête-à-crête. L'ondulation ne gêne pas l'ADC (filtre de 6 ms du pont de mesure, DES-009 « Régulateur de 3,0 V et pont de mesure de la tension »), mais elle sollicite les condensateurs de la ligne et le régulateur de 3,0 V. Faut-il décaler les phases, et TIM1 le permet-il (décalage des comparaisons ou mode centré) sans perdre la résolution du rapport cyclique de DES-026 « Contrôle de l'attitude et de la hauteur, mixeur et conversion en rapport cyclique » ?
+**Réponse :** (à remplir) ondulation chiffrée avec un modèle de moteur en hypothèse (1 Ω, 25 µH, voir DOU-211 « Paramètres et modèles de la simulation SPICE : moteur, diode, ferrite et boucle des régulateurs ») : à confirmer par la mesure au banc ; le choix, s'il modifie DES-021 « Pilotes des moteurs, du voyant, du buzzer et de la liaison série », est une décision D2 de l'utilisateur après exposé des options.
+**Décision liée :**
+
+### DOU-209 — Marge de décrochage du régulateur de 3,0 V en crête et effondrement de +3V0 dans le cas pessimiste
+**Statut :** Ouvert
+**Bloquant :** Non
+**Échéance :** essais sur prototype
+**Concerne :** ARC-009 « Alimentation de la logique et mesure de la tension », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension », REQ-012 « Coupure sur sous-tension de la batterie », DOU-135 « Faisabilité conjointe de la poussée, de la masse de 100 g, du capteur de hauteur, de la fabrication à la main et de la batterie »
+**Question :** la simulation (« Rapport de simulation SPICE » — `projets/boomrone/simulation/rapport-simulation-spice.html`, cas 2) montre, avec les chiffres du bilan de « Architecture » : (1) à la crête de 9,5 A, VBATL descend à 3,12 V et, avec le décrochage maximal garanti du MCP1700 (350 mV à 250 mA, fiche DS20001826C p. 3), +3V0 tombe à 2,97 V en moyenne et 2,95 V au creux, soit environ 60 mV de marge sur les 2,91 V visés par DES-009 « Régulateur de 3,0 V et pont de mesure de la tension » ; (2) dans le cas pessimiste du bilan (7,5 A, 110 mΩ), VBATL descend à 2,68 V, le régulateur décroche et +3V0 vaut 2,77 V en moyenne avec un creux à 2,62 V et 0,33 V d'ondulation : le microcontrôleur serait en réinitialisation en vol. Les seuils d'armement et de coupure restent ceux de DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version ». Le régulateur de repli ME6211C30M5G-N (décrochage à relever dans sa fiche) est-il à préférer, et le repli R1 + R2 de DEC-229 « Faisabilité conjointe : bilan, verdict marginal, mesures au banc avant la commande de la carte » est-il à déclencher ?
+**Réponse :** (à remplir) mesure de la résistance interne de la batterie, du courant de crête et du creux de VBATL au banc avant la commande de la carte ; relever le décrochage du ME6211 dans sa fiche. Non bloquant seulement parce que DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version » a déjà accepté ce risque pour la première version ; à reclasser bloquant si le banc donne plus de 60 mΩ.
+**Décision liée :** DEC-253 « Seuils de batterie conservés, sans mesures au banc pour la première version »
+
+### DOU-210 — Creux de +2V0 à l'impulsion de 70 mA de la mise sous tension du capteur de flux
+**Statut :** Ouvert
+**Bloquant :** Non
+**Échéance :** essais sur prototype
+**Concerne :** DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », DOU-165 « Flux optique : alimentation en 2,0 V, valeurs de fiche et mise sous tension »
+**Question :** la simulation (« Rapport de simulation SPICE » — `projets/boomrone/simulation/rapport-simulation-spice.html`, cas 3) donne, pour l'impulsion de 70 mA pendant 100 µs de DES-005 « Raccordement du flux optique PMW3901MB et régulateur de 2,0 V », un creux de +2V0 de 2,000 V à 1,952 V (−2,4 %), hors des 1,96 à 2,04 V de précision du XC6206P202MR-G. Ce creux dépend d'un modèle de boucle en hypothèse (DOU-211 « Paramètres et modèles de la simulation SPICE : moteur, diode, ferrite et boucle des régulateurs ») et la fiche du PMW3901MB (alimentation minimale à la mise sous tension) n'est pas dans le dossier (DOU-185 « Fiche du capteur de flux PMW3901MB absente du dossier des fiches »). Le capteur supporte-t-il ce creux, et la capacité de sortie de 2,2 µF suffit-elle ?
+**Réponse :** (à remplir) mesure de +2V0 à l'oscilloscope sur prototype à la mise sous tension du capteur ; lire l'alimentation minimale du PMW3901MB dans sa fiche ; modèle SPICE ou courbe de charge dynamique du XC6206 si disponible. Non bloquant.
+**Décision liée :**
+
+### DOU-211 — Paramètres et modèles de la simulation SPICE : moteur, diode, ferrite et boucle des régulateurs
+**Statut :** Ouvert
+**Bloquant :** Non
+**Échéance :** essais sur prototype
+**Concerne :** DES-007 « Circuit de puissance des moteurs », DES-008 « Batterie, connecteur XT30 et entrée de la carte », DES-009 « Régulateur de 3,0 V et pont de mesure de la tension », DES-014 « Feuille de calcul du bilan de masse, de poussée et d'autonomie »
+**Question :** le « Rapport de simulation SPICE » — `projets/boomrone/simulation/rapport-simulation-spice.html`, § 6, liste les valeurs d'entrée sans source (« HYP ») : résistance et inductance du moteur 8520 (1 Ω et 25 µH, DOU-190 « Fiche du moteur 8520 absente du dossier des fiches : courant de calage »), diode SS34 (Is, N, Rs, Cj), résistance de la ferrite (DOU-186 « Fiche de la ferrite BLM18PG121SN1D absente du dossier des fiches »), front de grille de 65 ns, ESR des condensateurs, et la dynamique de boucle des deux régulateurs au-delà de 100 Hz (gain de boucle 1,26 S, pôles à 1 et 3 MHz). Les chiffres du rapport ne valent que pour ces hypothèses ; les écarts entre cas sont plus fiables que les valeurs absolues. Aucune valeur ne doit entrer dans un élément « Validé » tant qu'elle n'est pas remplacée par une valeur sourcée.
+**Réponse :** (à remplir) remplacer chaque hypothèse par une valeur de fiche, un modèle SPICE du fabricant (Microchip pour le MCP1700, Torex pour le XC6206, à chercher) ou une mesure au banc, puis relancer `projets/boomrone/simulation/sim_boomrone.py`. Non bloquant : la simulation est un contrôle, aucune exigence ni aucun élément de conception n'en dépend.
+**Décision liée :**
+
+### DOU-212 — Outil de simulation SPICE à retenir pour le cadre : ngspice, LTspice ou les deux
+**Statut :** Ouvert
+**Bloquant :** Non
+**Échéance :** implémentation
+**Concerne :** `modules/README.md` (liste des modules), « Rapport de simulation SPICE » — `projets/boomrone/simulation/rapport-simulation-spice.html`
+**Question :** les deux outils donnent le même résultat sur les trois cas (rapport, § 1) : ondulation lissée de 0,509 V dans chacun, rejet d'ondulation identique à 10⁻⁵ dB près. LTspice est plus rapide (environ 1,5 fois) et s'installe en une commande ; ngspice est libre, portable (Linux, intégration continue) mais s'installe à la main sur ce poste sans droits administrateur (paquets MSYS2). Les scripts du projet sont dans `projets/boomrone/simulation/`. Faut-il en faire un module `modules/spice/` du cadre (rendu générique, sans donnée du projet écrite en dur), avec quel outil par défaut ?
+**Réponse :** (à remplir) choix d'outil et de périmètre : décision D2 de l'utilisateur après exposé des options (jamais déléguée), à consigner en `DEC-xxx` ; les règles du cadre veulent qu'un script ne rejoigne un module que s'il est rendu générique.
+**Décision liée :**
+
 <!-- Ajouter les nouveaux doutes ci-dessus, avant ce marqueur, au même format, en dehors des blocs de code. -->
 
 ## Archive — doutes levés

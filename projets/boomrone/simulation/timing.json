@@ -1,0 +1,194 @@
+{
+ "cas1_vol_ngspice": {
+  "s": 1.9,
+  "rc": 0
+ },
+ "cas1_vol_LTspice": {
+  "s": 1.6,
+  "rc": 0
+ },
+ "cas1_vol_dec_ngspice": {
+  "s": 2.0,
+  "rc": 0
+ },
+ "cas1_vol_dec_LTspice": {
+  "s": 1.6,
+  "rc": 0
+ },
+ "cas1_crete_ngspice": {
+  "s": 2.0,
+  "rc": 0
+ },
+ "cas1_crete_LTspice": {
+  "s": 1.6,
+  "rc": 0
+ },
+ "cas1_pess_ngspice": {
+  "s": 1.9,
+  "rc": 0
+ },
+ "cas1_pess_LTspice": {
+  "s": 1.6,
+  "rc": 0
+ },
+ "cas1_demarrage_ngspice": {
+  "s": 4.6,
+  "rc": 0
+ },
+ "cas1_demarrage_LTspice": {
+  "s": 2.9,
+  "rc": 0
+ },
+ "cas2_vol_ngspice": {
+  "s": 2.5,
+  "rc": 0
+ },
+ "cas2_vol_LTspice": {
+  "s": 1.8,
+  "rc": 0
+ },
+ "cas2_crete_ngspice": {
+  "s": 2.5,
+  "rc": 0
+ },
+ "cas2_crete_LTspice": {
+  "s": 1.8,
+  "rc": 0
+ },
+ "cas2_demarrage_ngspice": {
+  "s": 5.9,
+  "rc": 0
+ },
+ "cas2_demarrage_LTspice": {
+  "s": 3.5,
+  "rc": 0
+ },
+ "cas3_vol_ngspice": {
+  "s": 3.0,
+  "rc": 0
+ },
+ "cas3_vol_LTspice": {
+  "s": 2.1,
+  "rc": 0
+ },
+ "ac_mcp_test_0.02_1m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_test_0.02_1m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_mcp_0.02_4.7m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_0.02_4.7m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_xc_0.02_2.2m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_xc_0.02_2.2m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_mcp_loop_0.005_4.7m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_loop_0.005_4.7m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_mcp_loop_0.1_4.7m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_loop_0.1_4.7m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_mcp_loop_0.5_4.7m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_loop_0.5_4.7m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_mcp_loop_1_4.7m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_loop_1_4.7m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_mcp_loop_2_4.7m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_loop_2_4.7m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_xc_loop_0.005_2.2m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_xc_loop_0.005_2.2m06_LTspice": {
+  "s": 0.5,
+  "rc": 0
+ },
+ "ac_xc_loop_2_2.2m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_xc_loop_2_2.2m06_LTspice": {
+  "s": 0.6,
+  "rc": 0
+ },
+ "ac_mcp_0.02_1m06_ngspice": {
+  "s": 0.0,
+  "rc": 0
+ },
+ "ac_mcp_0.02_1m06_LTspice": {
+  "s": 0.6,
+  "rc": 0
+ },
+ "cas1_vol_fin_ngspice": {
+  "s": 8.0,
+  "rc": 0
+ },
+ "cas1_crete_fin_ngspice": {
+  "s": 7.9,
+  "rc": 0
+ },
+ "cas2_crete_dromax_ngspice": {
+  "s": 2.5,
+  "rc": 0
+ },
+ "cas2_demarrage_dromax_ngspice": {
+  "s": 6.1,
+  "rc": 0
+ },
+ "cas1_vol_fin_LTspice": {
+  "s": 4.3,
+  "rc": 0
+ },
+ "cas1_crete_fin_LTspice": {
+  "s": 4.7,
+  "rc": 0
+ },
+ "cas2_crete_dromax_LTspice": {
+  "s": 2.0,
+  "rc": 0
+ },
+ "cas2_demarrage_dromax_LTspice": {
+  "s": 3.8,
+  "rc": 0
+ }
+}
