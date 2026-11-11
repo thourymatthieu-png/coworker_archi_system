@@ -186,8 +186,9 @@
       "bases:Créer une nouvelle base": false
     }
   },
-  "active": "b2ee19d3f5954978",
+  "active": "e32401813d8df115",
   "lastOpenFiles": [
+    "projets/boomrone/simulation/LISEZMOI.md",
     "projets/boomrone/simulation/figures/fig2_psrr.png",
     "projets/boomrone/simulation/figures/fig1b_phase_pwm.png",
     "projets/boomrone/simulation/figures/fig1_batterie_moteurs.png",
@@ -200,7 +201,6 @@
     "projets/boomrone/schemas/des-008-batterie-xt30-entree.svg",
     "projets/boomrone/schemas/des-007-puissance-moteurs.svg",
     "projets/boomrone/schemas/des-005-flux-optique-regulateur-2v0.svg",
-    "projets/boomrone/schemas/des-004-capteur-hauteur.svg",
     "projets/boomrone/00-scenarios.md",
     "projets/boomrone/releve-fiches-techniques.md",
     "projets/boomrone/consignes-emploi.md",
